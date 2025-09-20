@@ -4,6 +4,7 @@
 - **Primary UX:** macOS native app (SwiftUI/Catalyst) acting as the main IDE shell.
 - **Secondary UX:** Optional IRIX-native UI for on-box editing using Motif; deferred until macOS client stabilizes.
 - **Editor Engine:** Leverage the open-source TextMate grammar system or Tree-sitter for syntax highlighting, wrapped in the SwiftUI client; interoperable backend service for headless usage.
+- **IRIX UI Styling:** Any native IRIX components must follow Motif/Indigo Magic conventions to match existing system UX patterns.
 
 ## Remote Workflow
 - **Transport:** OpenSSH with reusable host profiles (leveraging existing `octane` configuration). All remote operations tunnel through SSH for file operations, builds, and debugging.
