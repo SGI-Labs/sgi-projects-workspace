@@ -1,0 +1,10 @@
+# Sample configuration for irix-build CLI.
+host: octane
+user: mario
+local_source_dir: ~/sgi/projects/irix-automation/irix_demo_local
+remote_source_dir: ~/src/irix_demo
+remote_bin_dir: ~/src/irix_demo/bin
+default_target: hello_irix
+default_sources:
+  - hello_irix.c
+  - cpu_count.c

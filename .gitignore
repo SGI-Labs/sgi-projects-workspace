@@ -1,6 +1,10 @@
 .DS_Store
+__pycache__/
+*.pyc
 irix_demo_local/
 nekoware_mirror/
+!projects/irix-automation/irix_demo_local/
+projects/irix-automation/.venv/
 # BMAD (local only)
 .bmad-core/
 .bmad-*/

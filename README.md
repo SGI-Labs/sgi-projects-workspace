@@ -1,21 +1,32 @@
-IRIX System Monitor
-===================
+# SGI Projects Workspace
 
-This sample ViewKit application provides a minimalist IRIX system monitor window implemented with Motif widgets. It refreshes every five seconds (or on demand via the Refresh button) to display the hostname, OS release, hardware type, CPU count, and total/available physical memory.
+This repository hosts multiple SGI-related efforts. The root stays lightweight—projects live under `projects/`, and shared assets sit under `resources/`.
 
-Project layout
---------------
-- `src/SystemInfoWindow.h` and `src/SystemInfoWindow.cpp` implement a `VkSimpleWindow` subclass that builds the UI, fetches system information, and manages the periodic update timer.
-- `src/main.cpp` wires up the ViewKit application object and shows the window.
-- `Makefile` targets the IRIX MIPSpro `CC` compiler by default and links against ViewKit/Motif/X11.
+## Current Projects
+- `projects/irix-automation/` – Python-based automation that syncs, builds, and runs IRIX demos via SSH.
 
-Building on IRIX
-----------------
-1. Ensure the ViewKit (`libVk`), Motif (`libXm`), and X11 development headers/libraries are installed. The default install on IRIX 6.5 already provides these under `/usr/include` and `/usr/lib32`.
-2. Adjust the `INCLUDES`/`LIBPATHS` variables in the Makefile if your headers and libraries live outside the defaults (the placeholder `/Volumes/irix-include` mirrors the development headers in this workspace).
-3. Run `make` to produce the `irix_system_monitor` executable.
+When adding a new project, create a peer directory under `projects/` that mirrors the same structure: `docs/`, `tools/`, `tests/`, and `archive/` as needed.
 
-Runtime notes
--------------
-- The window schedules periodic refreshes only while it is visible; hiding or closing it stops the timer cleanly.
-- CPU and memory statistics now try multiple kernel queries (`sysconf`, `sysmp`) and always fail gracefully. Values are formatted automatically in MB or GB depending on size.
+## Directory Map
+```
+/
+├── projects/
+│   └── irix-automation/
+│       ├── docs/            # Architecture, stories, PRD shards, QA outputs
+│       ├── tools/           # Implementation code (e.g., irix_build CLI)
+│       ├── tests/           # Test suites mirroring tools/
+│       ├── archive/         # Deprecated experiments retained for reference
+│       └── irix_demo_local/ # Sample C sources synced to the IRIX host
+├── resources/
+│   └── nekoware_mirror/     # Shared SGI software mirror
+├── AGENTS.md
+├── Makefile                 # Shared utility targets
+└── README.md                # (this file)
+```
+
+## Getting Started with irix-automation
+1. Review `projects/irix-automation/docs/architecture/index.md` for the current architectural snapshot.
+2. Stories awaiting implementation live under `projects/irix-automation/docs/stories/`.
+3. When developing, place new modules in `projects/irix-automation/tools/`, mirror tests in `projects/irix-automation/tests/`, and update the architecture shards as needed.
+
+The original IRIX system monitor sample has been archived in `projects/irix-automation/archive/legacy-desktop-demo/` for historical reference.
