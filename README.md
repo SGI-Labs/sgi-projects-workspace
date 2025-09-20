@@ -4,6 +4,7 @@ This repository hosts multiple SGI-related efforts. The root stays lightweight�
 
 ## Current Projects
 - `projects/irix-automation/` – Python-based automation that syncs, builds, and runs IRIX demos via SSH.
+- `projects/irix-ide/` – Future IDE initiative; currently in discovery with PRD and epic drafts.
 
 When adding a new project, create a peer directory under `projects/` that mirrors the same structure: `docs/`, `tools/`, `tests/`, and `archive/` as needed.
 
