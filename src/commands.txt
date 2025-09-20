@@ -1,0 +1,5 @@
+   ssh-keygen -t dsa -f $HOME/.ssh/id_dsa -P 
+   scp $HOME/.ssh/id_dsa.pub user@othermachine:/usr/people/username 
+   cat id_dsa.pub >> $HOME/.ssh/authorized_keys2
+   chmod 0600 $HOME/.ssh/authorized_keys2
+   ssh -i $HOME/.ssh/id_dsa othermachine
