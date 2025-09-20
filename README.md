@@ -18,4 +18,4 @@ Building on IRIX
 Runtime notes
 -------------
 - The window schedules periodic refreshes only while it is visible; hiding or closing it stops the timer cleanly.
-- On systems where `sysconf(_SC_NPROC_ONLN)` or the page-count queries are unavailable, the app falls back to showing `unknown` for those values.
+- CPU and memory statistics now try multiple kernel queries (`sysconf`, `sysmp`) and always fail gracefully. Values are formatted automatically in MB or GB depending on size.

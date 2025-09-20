@@ -5,16 +5,21 @@
 #include <Xm/PushB.h>
 
 #include <sys/utsname.h>
+#ifdef __sgi
+#include <sys/sysmp.h>
+#endif
 #include <unistd.h>
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
 SystemInfoWindow::SystemInfoWindow(const char *name)
     : VkSimpleWindow(name),
       _infoLabel(0),
       _refreshButton(0),
-      _timerId(0)
+      _timerId(0),
+      _pageSize(-1)
 {
     setTitle("IRIX System Monitor");
     setIconName("IRIX Monitor");
@@ -61,6 +66,11 @@ SystemInfoWindow::SystemInfoWindow(const char *name)
     XmStringFree(refreshLabel);
 
     XtAddCallback(_refreshButton, XmNactivateCallback, &SystemInfoWindow::refreshCB, (XtPointer)this);
+
+    _pageSize = safeSysconf(_SC_PAGESIZE);
+    if (_pageSize <= 0) {
+        _pageSize = 4096;
+    }
 
     updateInfo();
 }
@@ -110,40 +120,35 @@ void SystemInfoWindow::updateInfo()
         hostname[sizeof(hostname) - 1] = '\0';
     }
 
-    long cpuCount = sysconf(_SC_NPROC_ONLN);
-    long physPages = -1;
-    long availPages = -1;
+    long cpuCount = safeSysconf(_SC_NPROC_ONLN);
+#ifdef MP_NPROCS
+    if (cpuCount <= 0) {
+        cpuCount = safeSysmp(MP_NPROCS);
+    }
+#endif
 
+    long physPages = -1;
 #ifdef _SC_PHYS_PAGES
-    physPages = sysconf(_SC_PHYS_PAGES);
+    physPages = safeSysconf(_SC_PHYS_PAGES);
 #endif
+
+    long availPages = -1;
 #ifdef _SC_AVPHYS_PAGES
-    availPages = sysconf(_SC_AVPHYS_PAGES);
+    availPages = safeSysconf(_SC_AVPHYS_PAGES);
 #endif
-    long pageSize = sysconf(_SC_PAGESIZE);
 
     char cpuText[32];
     if (cpuCount > 0) {
-        sprintf(cpuText, "%ld", cpuCount);
+        snprintf(cpuText, sizeof(cpuText), "%ld", cpuCount);
     } else {
-        strcpy(cpuText, "unknown");
+        strncpy(cpuText, "unknown", sizeof(cpuText));
+        cpuText[sizeof(cpuText) - 1] = '\0';
     }
 
     char memTotal[64];
     char memAvail[64];
-    if (physPages > 0 && pageSize > 0) {
-        double total = (double)physPages * (double)pageSize / (1024.0 * 1024.0);
-        sprintf(memTotal, "%.1f MB", total);
-    } else {
-        strcpy(memTotal, "unknown");
-    }
-
-    if (availPages > 0 && pageSize > 0) {
-        double avail = (double)availPages * (double)pageSize / (1024.0 * 1024.0);
-        sprintf(memAvail, "%.1f MB", avail);
-    } else {
-        strcpy(memAvail, "unknown");
-    }
+    formatMemoryString(physPages, _pageSize, memTotal, sizeof(memTotal));
+    formatMemoryString(availPages, _pageSize, memAvail, sizeof(memAvail));
 
     time_t now = time(0);
     char timeStamp[64];
@@ -151,26 +156,27 @@ void SystemInfoWindow::updateInfo()
     if (local) {
         strftime(timeStamp, sizeof(timeStamp), "%c", local);
     } else {
-        strcpy(timeStamp, "unknown");
+        strncpy(timeStamp, "unknown", sizeof(timeStamp));
+        timeStamp[sizeof(timeStamp) - 1] = '\0';
     }
 
     char buffer[512];
-    sprintf(buffer,
-            "Last update: %s\n"
-            "Host: %s\n"
-            "System: %s %s\n"
-            "Hardware: %s\n"
-            "CPUs online: %s\n"
-            "Physical memory: %s\n"
-            "Available memory: %s",
-            timeStamp,
-            hostname[0] ? hostname : "unknown",
-            uts.sysname[0] ? uts.sysname : "unknown",
-            uts.release[0] ? uts.release : "unknown",
-            uts.machine[0] ? uts.machine : "unknown",
-            cpuText,
-            memTotal,
-            memAvail);
+    snprintf(buffer, sizeof(buffer),
+             "Last update: %s\n"
+             "Host: %s\n"
+             "System: %s %s\n"
+             "Hardware: %s\n"
+             "CPUs online: %s\n"
+             "Physical memory: %s\n"
+             "Available memory: %s",
+             timeStamp,
+             hostname[0] ? hostname : "unknown",
+             uts.sysname[0] ? uts.sysname : "unknown",
+             uts.release[0] ? uts.release : "unknown",
+             uts.machine[0] ? uts.machine : "unknown",
+             cpuText,
+             memTotal,
+             memAvail);
 
     XmString text = XmStringCreateLtoR(buffer, XmFONTLIST_DEFAULT_TAG);
     XtVaSetValues(_infoLabel, XmNlabelString, text, NULL);
@@ -185,6 +191,51 @@ void SystemInfoWindow::scheduleRefresh()
     }
 
     _timerId = XtAppAddTimeOut(context, 5000, &SystemInfoWindow::timerCB, (XtPointer)this);
+}
+
+long SystemInfoWindow::safeSysconf(int name) const
+{
+    errno = 0;
+    long value = sysconf(name);
+    if (value == -1 && errno != 0) {
+        return -1;
+    }
+    return value;
+}
+
+long SystemInfoWindow::safeSysmp(int command) const
+{
+#ifdef __sgi
+    errno = 0;
+    long value = sysmp(command, 0);
+    if (value < 0 && errno != 0) {
+        return -1;
+    }
+    return value;
+#else
+    (void)command;
+    return -1;
+#endif
+}
+
+void SystemInfoWindow::formatMemoryString(long pages, long pageSize, char *buffer, size_t bufferSize) const
+{
+    if (bufferSize == 0) {
+        return;
+    }
+
+    if (pages > 0 && pageSize > 0) {
+        double totalMB = (double)pages * (double)pageSize / (1024.0 * 1024.0);
+        if (totalMB >= 1024.0) {
+            double totalGB = totalMB / 1024.0;
+            snprintf(buffer, bufferSize, "%.2f GB", totalGB);
+        } else {
+            snprintf(buffer, bufferSize, "%.1f MB", totalMB);
+        }
+    } else {
+        strncpy(buffer, "unknown", bufferSize);
+        buffer[bufferSize - 1] = '\0';
+    }
 }
 
 void SystemInfoWindow::refreshCB(Widget, XtPointer clientData, XtPointer)

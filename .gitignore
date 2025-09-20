@@ -1,3 +1,6 @@
 .DS_Store
 irix_demo_local/
 nekoware_mirror/
+# BMAD (local only)
+.bmad-core/
+.bmad-*/
