@@ -18,3 +18,4 @@ _Update this list as discovery progresses._
 - Design metrics collection for workflow success criteria (build times, debug attach latency).
 - Evaluate replacing rsync polling with filesystem notifications (e.g., FSEvents) for lower sync latency.
 - Define error-handling and retry strategies for remote build command failures (network, compiler).
+- Capture terminal screenshots (sync/build/log output) and add them to user guides for onboarding.

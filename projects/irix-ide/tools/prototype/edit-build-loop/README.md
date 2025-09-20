@@ -13,6 +13,7 @@ Lightweight proof-of-concept demonstrating the core macOS ↔ IRIX workflow for 
 - `config.sample.yml` – template configuration; copy to `config.yml` and edit
 - `sync_loop.py` – runs `rsync` to mirror local changes to the remote host
 - `remote_build.py` – invokes the remote build command and streams output
+- `scp_sync.py` – fallback transfer using `scp` when rsync is unavailable on IRIX
 - `README.md` – this guide
 
 ## Setup
@@ -29,9 +30,9 @@ Sync files once:
 ```bash
 python sync_loop.py --config config.yml
 ```
-Watch and sync continuously every `poll_interval` seconds:
+Watch and sync continuously every `poll_interval` seconds (add `--timeout` to stop automatically):
 ```bash
-python sync_loop.py --config config.yml --watch
+python sync_loop.py --config config.yml --watch --timeout 10
 ```
 Run remote build:
 ```bash
@@ -39,9 +40,29 @@ python remote_build.py --config config.yml
 ```
 Override build command ad-hoc:
 ```bash
-python remote_build.py --config config.yml --command "cd ~/src/irix_ide_prototype && cc -o bin/hello src/hello.c"
+python remote_build.py --config config.yml --command "cd ~/src/irix_ide_prototype && mkdir -p bin && cc -o bin/hello src/hello.c"
 ```
 Add `--dry-run` to preview commands without executing.
+
+Fallback transfer when rsync is unavailable on IRIX:
+```bash
+python scp_sync.py --config config.yml
+```
+
+## Sample Metrics
+Measured on macOS ➜ IRIX (Octane) using the sample project:
+
+| Workflow                       | Command                                                                                       | Duration |
+|--------------------------------|------------------------------------------------------------------------------------------------|----------|
+| Single sync run                | `/usr/bin/time -p python sync_loop.py --config config.yml`                                     | ~0.44 s |
+| Remote build (with mkdir)      | `/usr/bin/time -p python remote_build.py --config config.yml --command "cd ~/... && cc ..."` | ~0.70 s |
+| Continuous sync (watch)        | `python sync_loop.py --config config.yml --watch --timeout 5` (two cycles)                    | ~5 s total |
+
+Use these as baseline numbers; capture new timings whenever network/host conditions change.
+
+## Screenshot Capture Guidance
+- For documentation, capture Terminal output showing sync/build runs and the resulting binary execution on IRIX.
+- Store PNG screenshots under `projects/irix-ide/docs/user-guides/screenshots/` and reference them in the PRD or user guides as visuals.
 
 ## Validation Checklist
 - After syncing, verify files appear under the remote directory.

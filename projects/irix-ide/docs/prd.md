@@ -51,6 +51,13 @@ Deliver a modern, reliable IDE experience tailored to SGI IRIX developers, combi
 **Assumptions:** gdbserver or equivalent available on IRIX; network ports reachable and secured.
 
 ## Workflow Goals
+## Prototype Metrics (Initial)
+- Single sync run (sample project): ~0.44 s (rsync via `/usr/nekoware/bin/rsync`).
+- Remote build compile (hello.c): ~0.70 s (includes `mkdir -p bin`).
+- Continuous watch run (two cycles, 5s timeout): ~5 s total.
+
+Screenshots of these runs should be stored under `projects/irix-ide/docs/user-guides/screenshots/` once captured.
+
 - Ensure the macOS IDE offers turnkey support for remote editing, build, and debugging pipelines targeting IRIX hosts.
 - Maintain visual continuity on IRIX by following Motif/Indigo Magic styling guidelines for any native components.
 ## Key Questions
