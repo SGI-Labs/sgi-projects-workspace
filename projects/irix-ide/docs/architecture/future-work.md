@@ -16,3 +16,5 @@ _Update this list as discovery progresses._
 - Detail macOS IDE features explicitly aimed at assisting IRIX development workflows (remote tooling, code insights).
 - Validate performance impact of continuous sync on large repositories.
 - Design metrics collection for workflow success criteria (build times, debug attach latency).
+- Evaluate replacing rsync polling with filesystem notifications (e.g., FSEvents) for lower sync latency.
+- Define error-handling and retry strategies for remote build command failures (network, compiler).

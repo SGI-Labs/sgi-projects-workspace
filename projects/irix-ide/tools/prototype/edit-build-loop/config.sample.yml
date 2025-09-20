@@ -1,0 +1,9 @@
+# Sample configuration for the IRIX IDE remote edit/build prototype
+host: octane
+user: mario
+identity_file: ~/.ssh/irix_rsa
+local_dir: ./sample-project
+remote_dir: ~/src/irix_ide_prototype
+build_command:
+  - "cd ~/src/irix_ide_prototype && cc -o bin/hello src/hello.c"
+poll_interval: 3.0
