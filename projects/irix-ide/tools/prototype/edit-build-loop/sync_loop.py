@@ -11,10 +11,11 @@ from config_loader import PrototypeConfig, load_config
 
 
 RSYNC_FLAGS = ["-r", "-t"]
+REMOTE_RSYNC = "/usr/nekoware/bin/rsync"
 
 
 def run_rsync(cfg: PrototypeConfig, dry_run: bool, delete: bool) -> int:
-    cmd = ["rsync", *RSYNC_FLAGS]
+    cmd = ["rsync", "--rsync-path", REMOTE_RSYNC, *RSYNC_FLAGS]
     if delete:
         cmd.append("--delete")
     if cfg.identity_file:
@@ -30,15 +31,19 @@ def run_rsync(cfg: PrototypeConfig, dry_run: bool, delete: bool) -> int:
     if result.returncode != 0:
         print(
             "[sync] rsync failed. If the remote host only has legacy rsync, "
-            "consider installing GNU rsync (e.g., via nekoware) or using a fallback.""
+            "consider installing GNU rsync (e.g., via Nekoware) or using the scp fallback."
         )
     return result.returncode
 
 
-def watch_loop(cfg: PrototypeConfig, dry_run: bool, delete: bool) -> None:
-    print("[sync] Watching for changes. Press Ctrl+C to stop." )
+def watch_loop(cfg: PrototypeConfig, dry_run: bool, delete: bool, timeout: float | None) -> None:
+    print("[sync] Watching for changes. Press Ctrl+C to stop.")
+    start = time.time()
     try:
         while True:
+            if timeout is not None and time.time() - start > timeout:
+                print("[sync] Watch mode timeout reached; stopping.")
+                break
             code = run_rsync(cfg, dry_run, delete)
             if code != 0:
                 print(f"[sync] rsync exited with code {code}. Retrying in {cfg.poll_interval}s")
@@ -53,6 +58,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--watch", action="store_true", help="Continuously sync at the configured interval")
     parser.add_argument("--dry-run", action="store_true", help="Preview rsync commands without transferring files")
     parser.add_argument("--delete", action="store_true", help="Mirror deletions to the remote host (requires compatible rsync)")
+    parser.add_argument("--timeout", type=float, help="Maximum seconds to run in watch mode before stopping")
     return parser.parse_args()
 
 
@@ -69,7 +75,7 @@ def main() -> int:
         return 1
 
     if args.watch:
-        watch_loop(cfg, args.dry_run, args.delete)
+        watch_loop(cfg, args.dry_run, args.delete, args.timeout)
         return 0
 
     return run_rsync(cfg, args.dry_run, args.delete)
