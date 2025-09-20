@@ -19,3 +19,7 @@ _Update this list as discovery progresses._
 - Evaluate replacing rsync polling with filesystem notifications (e.g., FSEvents) for lower sync latency.
 - Define error-handling and retry strategies for remote build command failures (network, compiler).
 - Capture terminal screenshots (sync/build/log output) and add them to user guides for onboarding.
+- Validate implementation plan for resilience analytics events (ensure macOS client exposes required hooks).
+- Determine if additional IRIX-native iconography needs bespoke assets beyond the current kit.
+- Explore approach for localizing resilience microcopy while preserving concise banner copy.
+- Replace polling-based `rsync` sync loop with filesystem notifications (FSEvents) for lower latency once Swift service stabilizes.
