@@ -14,3 +14,5 @@ _Update this list as discovery progresses._
 - Prototype remote debugging workflow using gdbserver on IRIX with a macOS front-end.
 - Validate Motif/Indigo Magic style guidelines for any IRIX-native IDE components.
 - Detail macOS IDE features explicitly aimed at assisting IRIX development workflows (remote tooling, code insights).
+- Validate performance impact of continuous sync on large repositories.
+- Design metrics collection for workflow success criteria (build times, debug attach latency).
