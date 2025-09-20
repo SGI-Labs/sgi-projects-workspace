@@ -4,3 +4,4 @@ nekoware_mirror/
 # BMAD (local only)
 .bmad-core/
 .bmad-*/
+AGENTS.md

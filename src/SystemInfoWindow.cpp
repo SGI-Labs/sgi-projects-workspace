@@ -3,6 +3,7 @@
 #include <Xm/Form.h>
 #include <Xm/Label.h>
 #include <Xm/PushB.h>
+#include <Xm/RowColumn.h>
 
 #include <sys/utsname.h>
 #ifdef __sgi
@@ -48,19 +49,30 @@ SystemInfoWindow::SystemInfoWindow(const char *name)
         XmNwidth, 360,
         NULL);
 
+    Widget controls = XtVaCreateManagedWidget(
+        "controls", xmRowColumnWidgetClass, form,
+        XmNorientation, XmHORIZONTAL,
+        XmNpacking, XmPACK_TIGHT,
+        XmNspacing, 8,
+        XmNbottomAttachment, XmATTACH_FORM,
+        XmNleftAttachment, XmATTACH_FORM,
+        XmNrightAttachment, XmATTACH_FORM,
+        XmNbottomOffset, 12,
+        XmNleftOffset, 12,
+        XmNrightOffset, 12,
+        NULL);
+
+    XtVaSetValues(_infoLabel,
+                  XmNbottomAttachment, XmATTACH_WIDGET,
+                  XmNbottomWidget, controls,
+                  XmNbottomOffset, 12,
+                  NULL);
+
     XmString refreshLabel = XmStringCreateLocalized((char*)"Refresh");
 
     _refreshButton = XtVaCreateManagedWidget(
-        "refresh", xmPushButtonWidgetClass, form,
+        "refresh", xmPushButtonWidgetClass, controls,
         XmNlabelString, refreshLabel,
-        XmNtopAttachment, XmATTACH_WIDGET,
-        XmNtopWidget, _infoLabel,
-        XmNtopOffset, 18,
-        XmNleftAttachment, XmATTACH_FORM,
-        XmNleftOffset, 12,
-        XmNbottomAttachment, XmATTACH_FORM,
-        XmNbottomOffset, 12,
-        XmNwidth, 120,
         NULL);
 
     XmStringFree(refreshLabel);
