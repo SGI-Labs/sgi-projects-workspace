@@ -10,29 +10,36 @@ from pathlib import Path
 from config_loader import PrototypeConfig, load_config
 
 
-def run_rsync(cfg: PrototypeConfig, dry_run: bool) -> int:
-    cmd = [
-        "rsync",
-        "-az",
-        "--delete",
-    ]
-    if dry_run:
-        cmd.append("--dry-run")
+RSYNC_FLAGS = ["-r", "-t"]
+
+
+def run_rsync(cfg: PrototypeConfig, dry_run: bool, delete: bool) -> int:
+    cmd = ["rsync", *RSYNC_FLAGS]
+    if delete:
+        cmd.append("--delete")
     if cfg.identity_file:
         cmd.extend(["-e", f"ssh -i {cfg.identity_file}"])
     cmd.append(str(cfg.local_dir) + "/")
     cmd.append(cfg.remote_target)
 
-    print("[sync]", " ".join(cmd))
+    print("[sync]", " ".join(cmd) + (" --dry-run" if dry_run else ""))
+    if dry_run:
+        return 0
+
     result = subprocess.run(cmd, check=False)
+    if result.returncode != 0:
+        print(
+            "[sync] rsync failed. If the remote host only has legacy rsync, "
+            "consider installing GNU rsync (e.g., via nekoware) or using a fallback.""
+        )
     return result.returncode
 
 
-def watch_loop(cfg: PrototypeConfig, dry_run: bool) -> None:
-    print("[sync] Watching for changes. Press Ctrl+C to stop.")
+def watch_loop(cfg: PrototypeConfig, dry_run: bool, delete: bool) -> None:
+    print("[sync] Watching for changes. Press Ctrl+C to stop." )
     try:
         while True:
-            code = run_rsync(cfg, dry_run)
+            code = run_rsync(cfg, dry_run, delete)
             if code != 0:
                 print(f"[sync] rsync exited with code {code}. Retrying in {cfg.poll_interval}s")
             time.sleep(cfg.poll_interval)
@@ -45,6 +52,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--config", default="config.sample.yml", help="Path to prototype config YAML")
     parser.add_argument("--watch", action="store_true", help="Continuously sync at the configured interval")
     parser.add_argument("--dry-run", action="store_true", help="Preview rsync commands without transferring files")
+    parser.add_argument("--delete", action="store_true", help="Mirror deletions to the remote host (requires compatible rsync)")
     return parser.parse_args()
 
 
@@ -61,10 +69,10 @@ def main() -> int:
         return 1
 
     if args.watch:
-        watch_loop(cfg, args.dry_run)
+        watch_loop(cfg, args.dry_run, args.delete)
         return 0
 
-    return run_rsync(cfg, args.dry_run)
+    return run_rsync(cfg, args.dry_run, args.delete)
 
 
 if __name__ == "__main__":
