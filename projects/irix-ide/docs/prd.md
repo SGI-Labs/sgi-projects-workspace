@@ -51,6 +51,21 @@ Deliver a modern, reliable IDE experience tailored to SGI IRIX developers, combi
 **Assumptions:** gdbserver or equivalent available on IRIX; network ports reachable and secured.
 
 ## Workflow Goals
+- Maintain sub-30s turnaround for remote edit-build loops with actionable diagnostics.
+- Preserve session resilience—automatic retries and offline editing must prevent work loss.
+- Provide visibility across hosts, builds, and debugging sessions directly within the macOS client.
+## UI Navigation & State Flows
+- Primary navigation follows a left-rail workspace shell (`Dashboard`, `Editor`, `Remote Hosts`, `Build & Logs`, `Debugger`, `Settings`).
+- State transitions for remote workflows (bootstrap, edit/build loop, debugging) are documented with Mermaid diagrams in `projects/irix-ide/docs/front-end-spec.md`.
+- Recovery flows (connection drop → retry → offline queue → resolved) are captured in annotated wireframes under `projects/irix-ide/docs/user-guides/screenshots/` and the journey map `projects/irix-ide/design/journey-maps/remote-recovery-journey.md`.
+- Mobile/tablet views are out of scope; desktop adaptation guidance lives in the front-end spec.
+
+## UI/UX Stylistic Guidelines
+- macOS client follows dark-theme palette (`color.bg.surface` `#1E1E1E`, accent `#4C6EF5`) with SF Pro typography; IRIX-native overlays adopt Indigo Magic accents (`#6699CC`) and Motif spacing (6px/12px).
+- Status pills, banners, and undo toasts use resilience tokens documented in `projects/irix-ide/design/system/resilience-design-tokens.md`.
+- Icons sourced from the resilience kit (`projects/irix-ide/design/system/iconography-kit.md`) ensure parity between macOS and IRIX visuals.
+- Motion defaults: 200 ms ease-in-out for banners/toasts, 120 ms for pill transitions (see design tokens file).
+
 ## Prototype Metrics (Initial)
 - Single sync run (sample project): ~0.44 s (rsync via `/usr/nekoware/bin/rsync`).
 - Remote build compile (hello.c): ~0.70 s (includes `mkdir -p bin`).

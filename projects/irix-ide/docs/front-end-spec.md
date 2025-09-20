@@ -25,6 +25,7 @@ This document defines the user experience goals, information architecture, user 
 #### Change Log
 | Date       | Version | Description                                    | Author |
 |------------|---------|------------------------------------------------|--------|
+| 2025-09-21 | 0.2     | Added recovery state guidance and IRIX tokens  | Sally  |
 | 2025-09-20 | 0.1     | Initial UI/UX specification drafted            | Sally  |
 
 ## Information Architecture (IA)
@@ -117,6 +118,17 @@ flowchart TD
 
 ### Widget Inventory
 - Status Pills (sync/build state), Host cards, Collapsible panels, Log viewer (virtualized list), Terminal embed, Toast notifications, Progress bars, Toggle switches for auto build/debug options.
+- Destructive action confirmation sheet (two-step modal with summary of impact, secondary "Cancel" default, optional checkbox to suppress for session).
+- Undo toast with countdown (5s default) for recoverable destructive actions (deploy, kill process) and inline "View Details" link.
+- Offline banner pattern with iconography matching status pills, contextual actions (`Retry`, `Work Offline`, `Switch Host`).
+
+### State Handling & Recovery
+- **Connection States:** Status pill variants for `Connected`, `Degraded`, `Reconnecting`, `Offline`; degraded/offline states pin to the global header and mirror in the status bar.
+- **Host Drop:** Inline banner appears in active workspace with summary (`Lost connection to octane`), primary action `Retry`, secondary `Switch Host`, tertiary link to troubleshooting sheet.
+- **Retry Policy:** Automatic retry attempts 3x with exponential backoff; each attempt updates banner copy (`Retrying… (2 of 3)`), and success collapses banner with a "Resolved" toast.
+- **Offline Editing:** Editor enters pending mode with file tabs showing unsynced badge, command palette surfaces `Queue Sync` action; Build/Deploy buttons disable with tooltip `Unavailable offline`.
+- **Sync Conflicts:** Modal summarizes conflicting files, provides diff preview, and lets user choose `Keep Local`, `Keep Remote`, or `Open Merge Tool`.
+- **Diagnostics Continuity:** When log streaming pauses, show skeleton loader plus `Reconnect Logs` action; if reconnection fails, convert to persistent banner in Build & Logs view.
 
 ### Form/Command Interactions
 - Host profile form with validation (SSH key path, preferred rsync binary, remote directory). Inline hints for Motif styling requirements.
@@ -141,6 +153,13 @@ flowchart TD
 | Surface | `#2C2C2E` | Panels/cards |
 | Text Primary | `#F2F2F7` | High contrast on dark backgrounds |
 | Text Secondary | `#8E8E93` | Muted descriptive text |
+
+#### IRIX UI Tokens
+- **Accent:** `#6699CC` (Indigo Magic blue) applied to primary buttons, focus outlines, and active tabs when rendering natively on IRIX.
+- **Window Chrome:** `#1F2A38` header bars with `#95C8D8` divider lines to match Motif-era depth cues.
+- **Control Density:** Default padding 6px vertical / 12px horizontal, checkbox/radio set to 18px with square corners, and button corner radius locked at 2px.
+- **Shadow Treatment:** 1px inset `#0F141D` plus 2px outer `rgba(17, 26, 38, 0.35)` to mimic IRIX widget embossing.
+- **Disabled State:** `#7F8A99` text/icons on `#4F5B66` surfaces with 60% opacity overlays to preserve contrast.
 
 ### Typography
 | Style | Size | Weight | Line Height |
@@ -168,19 +187,13 @@ flowchart TD
 - **Testing Strategy:** Automated axe scans per build; manual audits with VoiceOver and keyboard-only navigation before release milestones.
 
 ## Responsiveness Strategy
-### Breakpoints
-| Breakpoint | Min Width | Max Width | Target Devices |
-|------------|-----------|-----------|----------------|
-| Mobile | 360 px | 599 px | iPhone, small Android phones |
-| Tablet | 600 px | 1023 px | iPad, Surface Go |
-| Desktop | 1024 px | 1439 px | Standard MacBook/desktop |
-| Wide | 1440 px | - | External monitors, dual-screen setups |
-
-### Adaptation Patterns
-- **Layout Changes:** Collapsible navigation on mobile/tablet, multi-column panels on desktop/wide.
-- **Navigation Changes:** Bottom tab bar on mobile; persistent left rail on desktop.
-- **Content Priority:** Logs and diagnostics condense to accordions on smaller screens; primary actions float.
-- **Interaction Changes:** Touch-friendly controls on mobile; hover tooltips only on desktop.
+### Desktop Adaptation
+- **Display Targets:** macOS desktops/laptops (≥1280px) and IRIX workstations with X11/Motif shells.
+- **Window Management:** Support resizable panes down to 1024px viewport width; below 1280px truncate secondary panels with slide-in drawers.
+- **Density Modes:** Default compact layout for macOS; optional comfortable mode on IRIX to mirror Motif spacing rules.
+- **Navigation Behavior:** Persistent left rail with collapse-to-icon at ≤1366px; no bottom tab patterns.
+- **Content Priority:** Logs and diagnostics use progressive disclosure drawers rather than responsive accordions.
+- **Interaction Considerations:** Hover/keyboard affordances only; touch targets remain ≥36px for stylus use but mobile-specific gestures are out of scope.
 
 ## Animation & Micro-interactions
 - **Motion Principles:** Subtle, purpose-driven, easing curves that respect platform conventions (macOS standard ease-in-out, 200ms).

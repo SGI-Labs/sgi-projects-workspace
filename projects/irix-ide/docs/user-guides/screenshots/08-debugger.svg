@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1280"
+   height="720"
+   viewBox="0 0 1280 720"
+   version="1.1"
+   id="svg58"
+   sodipodi:docname="08-debugger.svg"
+   inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs58" />
+  <sodipodi:namedview
+     id="namedview58"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.1555556"
+     inkscape:cx="440.48077"
+     inkscape:cy="230.19231"
+     inkscape:window-width="1472"
+     inkscape:window-height="837"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg58" />
+  <rect
+     width="1280"
+     height="720"
+     fill="#0F0F10"
+     id="rect1" />
+  <rect
+     x="0"
+     y="0"
+     width="1280"
+     height="64"
+     fill="#2C2C2E"
+     id="rect2" />
+  <rect
+     x="0"
+     y="64"
+     width="220"
+     height="656"
+     fill="#1E1E1E"
+     id="rect3" />
+  <rect
+     x="220"
+     y="64"
+     width="1060"
+     height="656"
+     fill="#2C2C2E"
+     id="rect4" />
+  <text
+     x="32"
+     y="40"
+     font-family="SF Pro Display, Inter, sans-serif"
+     font-size="22"
+     fill="#F2F2F7"
+     id="text4">IRIX IDE – Debugger</text>
+  <text
+     x="40"
+     y="104"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="16"
+     fill="#8E8E93"
+     id="text5">Dashboard</text>
+  <text
+     x="40"
+     y="152"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="16"
+     fill="#8E8E93"
+     id="text6">Editor</text>
+  <text
+     x="40"
+     y="200"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="16"
+     fill="#8E8E93"
+     id="text7">Remote Hosts</text>
+  <text
+     x="40"
+     y="248"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="16"
+     fill="#8E8E93"
+     id="text8">Build  Logs</text>
+  <rect
+     x="16"
+     y="268"
+     width="188"
+     height="40"
+     rx="12"
+     fill="#2C2C2E"
+     id="rect8" />
+  <text
+     x="40"
+     y="296"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="16"
+     fill="#F2F2F7"
+     id="text9">Debugger</text>
+  <text
+     x="40"
+     y="344"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="16"
+     fill="#8E8E93"
+     id="text10">Settings</text>
+  <rect
+     x="244"
+     y="88"
+     width="1012"
+     height="56"
+     rx="14"
+     fill="#1F1F21"
+     id="rect10" />
+  <text
+     x="268"
+     y="123"
+     font-family="SF Pro Display, Inter, sans-serif"
+     font-size="24"
+     fill="#F2F2F7"
+     id="text11">▶</text>
+  <text
+     x="312"
+     y="123"
+     font-family="SF Pro Display, Inter, sans-serif"
+     font-size="24"
+     fill="#8E8E93"
+     id="text12">⏸</text>
+  <text
+     x="356"
+     y="123"
+     font-family="SF Pro Display, Inter, sans-serif"
+     font-size="24"
+     fill="#8E8E93"
+     id="text13">⏭</text>
+  <text
+     x="444"
+     y="122"
+     font-family="'SF Pro Text', Inter, sans-serif"
+     font-size="16px"
+     fill="#8e8e93"
+     id="text15">Breakpoint: main.cpp:125</text>
+  <rect
+     x="244"
+     y="156"
+     width="607.1999999999999"
+     height="512"
+     rx="18"
+     fill="#1F1F21"
+     id="rect15" />
+  <rect
+     x="244.86539"
+     y="153.40384"
+     width="58.384617"
+     height="512"
+     rx="21.89423"
+     fill="#19191b"
+     id="rect16"
+     style="stroke-width:1.10288" />
+  <rect
+     x="304.11539"
+     y="295.03845"
+     width="526.31537"
+     height="28"
+     fill="#27334a"
+     id="rect17"
+     style="stroke-width:0.970151" />
+  <text
+     x="274"
+     y="184"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text17">121</text>
+  <text
+     x="308"
+     y="184"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text18">int state = getConnectionState();</text>
+  <text
+     x="274"
+     y="216"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text19">122</text>
+  <text
+     x="308"
+     y="216"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text20">if (state == State::Degraded) {</text>
+  <text
+     x="274"
+     y="248"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text21">123</text>
+  <text
+     x="308"
+     y="248"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text22">    scheduleRetry(hostId);</text>
+  <text
+     x="274"
+     y="280"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text23">124</text>
+  <text
+     x="308"
+     y="280"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text24">    logDebug(&quot;Retry scheduled&quot;);</text>
+  <circle
+     cx="266.32693"
+     cy="307.83655"
+     r="6"
+     fill="#ff3b30"
+     id="circle24" />
+  <text
+     x="274"
+     y="312"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#F2F2F7"
+     id="text25">125</text>
+  <text
+     x="308"
+     y="312"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text26">    waitForRetry(attempt);</text>
+  <text
+     x="274"
+     y="344"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text27">126</text>
+  <text
+     x="308"
+     y="344"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text28">}</text>
+  <text
+     x="274"
+     y="376"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text29">127</text>
+  <text
+     x="308"
+     y="376"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text30">renderStatus(state);</text>
+  <text
+     x="274"
+     y="408"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text31">128</text>
+  <text
+     x="308"
+     y="408"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text32">// TODO: add analytics hook</text>
+  <text
+     x="274"
+     y="440"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text33">129</text>
+  <text
+     x="274"
+     y="472"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text34">130</text>
+  <text
+     x="274"
+     y="504"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text35">131</text>
+  <text
+     x="274"
+     y="536"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text36">132</text>
+  <text
+     x="274"
+     y="568"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text37">133</text>
+  <text
+     x="274"
+     y="600"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text38">134</text>
+  <text
+     x="274"
+     y="632"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text39">135</text>
+  <text
+     x="274"
+     y="664"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="12"
+     fill="#8E8E93"
+     id="text40">136</text>
+  <rect
+     x="875.1999999999999"
+     y="156"
+     width="380.80000000000007"
+     height="140"
+     rx="16"
+     fill="#1F1F21"
+     id="rect41" />
+  <text
+     x="895.1999999999999"
+     y="188"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text42">Threads</text>
+  <text
+     x="895.1999999999999"
+     y="216"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text43">Main Thread</text>
+  <text
+     x="895.1999999999999"
+     y="242"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text44">Worker Sync</text>
+  <text
+     x="895.1999999999999"
+     y="268"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text45">Retry Watcher</text>
+  <rect
+     x="875.1999999999999"
+     y="316"
+     width="380.80000000000007"
+     height="160"
+     rx="16"
+     fill="#1F1F21"
+     id="rect45" />
+  <text
+     x="895.1999999999999"
+     y="348"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text46">Call Stack</text>
+  <text
+     x="895.1999999999999"
+     y="376"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#F2F2F7"
+     id="text47">retryLoop()</text>
+  <text
+     x="895.1999999999999"
+     y="402"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text48">evaluateHealth()</text>
+  <text
+     x="895.1999999999999"
+     y="428"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text49">main()</text>
+  <rect
+     x="875.1999999999999"
+     y="496"
+     width="380.80000000000007"
+     height="160"
+     rx="16"
+     fill="#1F1F21"
+     id="rect49" />
+  <text
+     x="895.1999999999999"
+     y="528"
+     font-family="SF Pro Text, Inter, sans-serif"
+     font-size="14"
+     fill="#8E8E93"
+     id="text50">Watch Expressions</text>
+  <text
+     x="895.1999999999999"
+     y="556"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#F2F2F7"
+     id="text51">state = State::Reconnecting</text>
+  <text
+     x="895.1999999999999"
+     y="582"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#F2F2F7"
+     id="text52">attempt = 2</text>
+  <text
+     x="895.1999999999999"
+     y="608"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#F2F2F7"
+     id="text53">hostId = octane</text>
+  <text
+     x="895.1999999999999"
+     y="634"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#F2F2F7"
+     id="text54">backoffMs = 1200</text>
+  <rect
+     x="244"
+     y="548"
+     width="1012"
+     height="120"
+     rx="18"
+     fill="#1F1F21"
+     id="rect54" />
+  <text
+     x="268"
+     y="580"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#8E8E93"
+     id="text55">[gdb] break retryLoop</text>
+  <text
+     x="268"
+     y="604"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#8E8E93"
+     id="text56">[gdb] continue</text>
+  <text
+     x="268"
+     y="628"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#F2F2F7"
+     id="text57">Breakpoint 1, retryLoop (state=Reconnecting) at main.cpp:125</text>
+  <text
+     x="268"
+     y="652"
+     font-family="SF Mono, JetBrains Mono, monospace"
+     font-size="13"
+     fill="#F2F2F7"
+     id="text58">[gdb] print state</text>
+</svg>

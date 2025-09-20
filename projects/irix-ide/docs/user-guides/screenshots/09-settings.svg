@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns='http://www.w3.org/2000/svg' width='1280' height='720' viewBox='0 0 1280 720'>
+
+<rect width='1280' height='720' fill='#0F0F10' />
+<rect x='0' y='0' width='1280' height='64' fill='#2C2C2E' />
+<rect x='0' y='64' width='220' height='656' fill='#1E1E1E' />
+<rect x='220' y='64' width='1060' height='656' fill='#2C2C2E' />
+
+<text x='32' y='40' font-family='SF Pro Display, Inter, sans-serif' font-size='22' fill='#F2F2F7'>IRIX IDE – Settings</text>
+<text x='40' y='104' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#8E8E93'>Dashboard</text>
+<text x='40' y='152' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#8E8E93'>Editor</text>
+<text x='40' y='200' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#8E8E93'>Remote Hosts</text>
+<text x='40' y='248' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#8E8E93'>Build & Logs</text>
+<text x='40' y='296' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#8E8E93'>Debugger</text>
+<rect x='16' y='316' width='188' height='40' rx='12' fill='#2C2C2E' />
+<text x='40' y='344' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#F2F2F7'>Settings</text>
+<text x='252' y='120' font-family='SF Pro Display, Inter, sans-serif' font-size='22' fill='#F2F2F7'>Settings</text>
+<rect x='252' y='150' width='996' height='120' rx='16' fill='#222226' />
+<text x='268' y='186' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#F2F2F7'>Profile</text>
+<text x='268' y='214' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Name: Alex Rivera</text>
+<text x='268' y='238' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>SSH Key Path: ~/.ssh/irix_id_rsa</text>
+<text x='268' y='262' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Default Host: octane</text>
+<rect x='252' y='300' width='996' height='120' rx='16' fill='#222226' />
+<text x='268' y='336' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#F2F2F7'>Preferences</text>
+<text x='268' y='364' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Theme: Dark</text>
+<text x='268' y='388' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Auto Sync: Enabled</text>
+<text x='268' y='412' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Undo Window: 5s</text>
+<rect x='252' y='450' width='996' height='120' rx='16' fill='#222226' />
+<text x='268' y='486' font-family='SF Pro Text, Inter, sans-serif' font-size='16' fill='#F2F2F7'>Notifications</text>
+<text x='268' y='514' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Build Alerts: On</text>
+<text x='268' y='538' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Host Degradation: On</text>
+<text x='268' y='562' font-family='SF Pro Text, Inter, sans-serif' font-size='14' fill='#8E8E93'>Deploy Summary: Email</text>
+</svg>

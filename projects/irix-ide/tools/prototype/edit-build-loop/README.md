@@ -6,7 +6,7 @@ Lightweight proof-of-concept demonstrating the core macOS ↔ IRIX workflow for 
 - macOS environment with Python 3.11+ and `rsync`
 - SSH access to an IRIX host (e.g., `octane`) with key-based auth per architecture tech stack
 - Sample project directory (see `sample-project/` suggestion below)
-- Optional: create a Python virtualenv and install `PyYAML` (`pip install pyyaml`)
+- Python dependencies installed: `pip install -r requirements.txt`
 
 ## Files
 - `config_loader.py` – shared YAML loader
@@ -23,6 +23,7 @@ Lightweight proof-of-concept demonstrating the core macOS ↔ IRIX workflow for 
    cp config.sample.yml config.yml
    ```
 2. Populate `config.yml` with your SSH host, user, identity file, local project directory, and desired remote path.
+   - Relative paths (for example `./sample-project`) are resolved against the directory containing `config.yml`, so the scripts can be executed from any working directory.
 3. Prepare a simple project (for example `sample-project/src/hello.c`). Ensure directories exist on the remote host.
 
 ## Usage

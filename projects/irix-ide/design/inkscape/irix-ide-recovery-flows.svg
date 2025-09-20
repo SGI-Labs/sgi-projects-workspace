@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="2000"
+   height="1200"
+   viewBox="0 0 2000 1200"
+   inkscape:version="1.3"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   sodipodi:docname="irix-ide-recovery-flows.svg">
+  <rect width="2000" height="1200" fill="#0F0F10"/>
+  <text x="40" y="40" font-family="SF Pro Display, Inter, sans-serif" font-size="32" fill="#F2F2F7">IRIX IDE Recovery States (Desktop)</text>
+  <text x="40" y="70" font-family="SF Pro Text, Inter, sans-serif" font-size="18" fill="#8E8E93">Open this SVG in Inkscape to edit or export. Colors use the spec palette.</text>
+  <rect x="40" y="80" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="60" y="120" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Editor – Connected</text>
+  <text x="60" y="158" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Status: Connected</text>
+  <text x="60" y="186" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Build/Deploy enabled</text>
+  <text x="60" y="214" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Logs streaming normally</text>
+  <rect x="420" y="80" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="440" y="120" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Editor – Host Drop</text>
+  <text x="440" y="158" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Status: Degraded</text>
+  <text x="440" y="186" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Banner shows host loss</text>
+  <text x="440" y="214" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Controls disabled</text>
+  <rect x="800" y="80" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="820" y="120" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Editor – Retrying</text>
+  <text x="820" y="158" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Status: Reconnecting</text>
+  <text x="820" y="186" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Retry count visible</text>
+  <text x="820" y="214" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Progress bar mirrors attempts</text>
+  <rect x="1180" y="80" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="1200" y="120" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Editor – Offline Queue</text>
+  <text x="1200" y="158" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Status: Offline</text>
+  <text x="1200" y="186" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Unsynced badge on tabs</text>
+  <text x="1200" y="214" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Queue Sync &amp; Work Offline</text>
+  <rect x="1560" y="80" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="1580" y="120" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Editor – Resolved</text>
+  <text x="1580" y="158" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Status: Restored</text>
+  <text x="1580" y="186" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Controls re-enabled</text>
+  <text x="1580" y="214" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">• Toast links to logs</text>
+  <rect x="40" y="440" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="60" y="480" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Build Logs – Reconnect</text>
+  <text x="60" y="518" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Retry banner persists</text>
+  <text x="60" y="546" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Reconnect Logs CTA</text>
+  <text x="60" y="574" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Skeleton log list paused</text>
+  <rect x="420" y="440" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="440" y="480" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Deploy – Confirmation</text>
+  <text x="440" y="518" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Two-step modal summary</text>
+  <text x="440" y="546" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Rollback prep checklist</text>
+  <text x="440" y="574" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Cancel default focus</text>
+  <rect x="800" y="440" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="820" y="480" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Deploy – Undo Window</text>
+  <text x="820" y="518" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Undo toast 5s countdown</text>
+  <text x="820" y="546" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">View Details for diff</text>
+  <text x="820" y="574" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Action reversible briefly</text>
+  <rect x="1180" y="440" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="1200" y="480" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Sync Conflict Modal</text>
+  <text x="1200" y="518" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Diff preview inline</text>
+  <text x="1200" y="546" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Keep Local/Remote/Merge</text>
+  <text x="1200" y="574" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Guides offline recovery</text>
+  <rect x="1560" y="440" width="320" height="220" rx="16" ry="16" fill="#1E1E1E" stroke="#4C6EF5" stroke-width="2"/>
+  <text x="1580" y="480" font-family="SF Pro Display, Inter, sans-serif" font-size="22" fill="#F2F2F7">Debugger – Reconnecting</text>
+  <text x="1580" y="518" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Retry banner pinned</text>
+  <text x="1580" y="546" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Call stack paused copy</text>
+  <text x="1580" y="574" font-family="SF Pro Text, Inter, sans-serif" font-size="16" fill="#D1D1D6">Resume on attach</text>
+</svg>

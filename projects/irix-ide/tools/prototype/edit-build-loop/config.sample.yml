@@ -1,4 +1,5 @@
 # Sample configuration for the IRIX IDE remote edit/build prototype
+# Relative paths such as `local_dir` resolve against this file's directory.
 host: octane
 user: mario
 identity_file: ~/.ssh/irix_rsa
