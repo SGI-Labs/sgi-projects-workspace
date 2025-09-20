@@ -1,0 +1,47 @@
+schema: 1
+story: '1.2'
+story_title: 'Define IRIX IDE Personas & Workflows'
+gate: PASS
+status_reason: 'PRD personas/workflows meet acceptance criteria; only advisory improvements remain.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2025-09-20T06:17:01Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 100
+expires: '2025-10-04T00:00:00Z'
+
+evidence:
+  tests_reviewed: 0
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'Workflows rely on SSH-secure channels; no new attack surface introduced.'
+  performance:
+    status: PASS
+    notes: 'Latency targets captured; further measurement deferred to prototypes.'
+  reliability:
+    status: PASS
+    notes: 'Future improvements capture exception-path planning.'
+  maintainability:
+    status: PASS
+    notes: 'Documentation structured for ongoing updates; improvements logged.'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Add extensibility-focused persona to PRD when plugin roadmap matures.'
+      refs:
+        - 'projects/irix-ide/docs/prd.md'
+    - action: 'Document failure/rollback steps in workflow narratives.'
+      refs:
+        - 'projects/irix-ide/docs/prd.md'
+    - action: 'Plan telemetry hooks to measure workflow success metrics.'
+      refs:
+        - 'projects/irix-ide/docs/prd.md'
