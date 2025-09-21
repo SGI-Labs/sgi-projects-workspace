@@ -9,3 +9,9 @@ projects/irix-automation/.venv/
 .bmad-core/
 .bmad-*/
 AGENTS.md
+# Local mount aliases to Octane NFS shares
+Desktop/
+dumpster/
+public_html/
+test/
+outfile.gif
