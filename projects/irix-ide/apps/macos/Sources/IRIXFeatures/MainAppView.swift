@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 import IRIXServices
 import IRIXDesignSystem
 
@@ -26,11 +27,14 @@ public struct MainAppView: View {
                 detailView(for: viewModel.selectedSection)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(DesignTokens.ColorPalette.backgroundSurface)
-                StatusBarView(connectionState: viewModel.connectionState, latestBuild: viewModel.builds.first)
+            StatusBarView(connectionState: viewModel.connectionState, latestBuild: viewModel.builds.first)
                     .padding(DesignTokens.Spacing.md)
-            }
-            .background(DesignTokens.ColorPalette.backgroundBase)
         }
+        .background(DesignTokens.ColorPalette.backgroundBase)
+        .sheet(isPresented: $viewModel.shouldPromptHostSetup) {
+            HostSetupPrompt(configFileURL: viewModel.configFileURL)
+        }
+    }
     }
 
     @ViewBuilder
@@ -64,6 +68,34 @@ public struct MainAppView: View {
         case .debugger: return "ladybug"
         case .settings: return "gearshape"
         }
+    }
+}
+
+private struct HostSetupPrompt: View {
+    let configFileURL: URL?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: DesignTokens.Spacing.lg) {
+            Text("Configure IRIX Host")
+                .font(.title.weight(.semibold))
+            Text("We couldn't find a valid remote host configuration. Update your `config.yml` (or set `IRIX_IDE_CONFIG`) to point at an accessible IRIX machine, then relaunch the app.")
+                .foregroundColor(DesignTokens.ColorPalette.textMuted)
+            if let url = configFileURL {
+                Text("Current config: \(url.path)")
+                    .font(.footnote)
+                    .foregroundColor(DesignTokens.ColorPalette.textMuted)
+            }
+            Button("Open Configuration Guide") {
+                if let url = configFileURL {
+                    NSWorkspace.shared.open(url)
+                } else if let docsURL = URL(string: "https://github.com/SGI-Labs/sgi-projects-workspace") {
+                    NSWorkspace.shared.open(docsURL)
+                }
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding(DesignTokens.Spacing.xl)
+        .frame(minWidth: 420)
     }
 }
 

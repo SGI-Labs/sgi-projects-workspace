@@ -19,7 +19,9 @@ struct IRIXIDEApp: App {
             buildService: buildService,
             hostService: hostService,
             analyticsService: analytics,
-            workspaceConfig: configuration.workspaceConfig
+            workspaceConfig: configuration.workspaceConfig,
+            requiresHostSetup: configuration.requiresHostSetup,
+            configFileURL: configuration.configFileURL
         )
         _viewModel = StateObject(wrappedValue: AppViewModel(dependencies: dependencies))
     }
@@ -39,6 +41,8 @@ private struct AppConfiguration {
     let syncService: SyncService
     let buildService: BuildService
     let hostService: HostService
+    let requiresHostSetup: Bool
+    let configFileURL: URL?
 
     static func load() -> AppConfiguration {
         let environment = ProcessInfo.processInfo.environment
@@ -54,9 +58,16 @@ private struct AppConfiguration {
 
         let configuration: WorkspaceConfig
         var initialState: ConnectionState = .connected
+        var requiresHostSetup = false
+        var configURLUsed: URL? = nil
         if let url = defaultCandidates.first(where: { FileManager.default.fileExists(atPath: $0.path) }),
            let loaded = try? ConfigLoader.load(from: url) {
             configuration = loaded
+            configURLUsed = url
+            if loaded.remoteHost.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                requiresHostSetup = true
+                initialState = .offline(reason: "No remote host configured")
+            }
         } else {
             let fallbackProject = baseURL
             configuration = WorkspaceConfig(
@@ -69,6 +80,7 @@ private struct AppConfiguration {
                 buildCommands: ["echo 'No build command configured'"]
             )
             initialState = .offline(reason: "Using fallback configuration")
+            requiresHostSetup = true
         }
 
         let syncService = RsyncSyncService(initialState: initialState)
@@ -79,7 +91,9 @@ private struct AppConfiguration {
             workspaceConfig: configuration,
             syncService: syncService,
             buildService: buildService,
-            hostService: hostService
+            hostService: hostService,
+            requiresHostSetup: requiresHostSetup,
+            configFileURL: configURLUsed
         )
     }
 }

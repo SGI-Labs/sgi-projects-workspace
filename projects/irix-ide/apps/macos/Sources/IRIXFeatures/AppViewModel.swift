@@ -21,13 +21,17 @@ public final class AppViewModel: ObservableObject {
         public var hostService: HostService
         public var analyticsService: AnalyticsService
         public var workspaceConfig: WorkspaceConfig
+        public var requiresHostSetup: Bool
+        public var configFileURL: URL?
 
-        public init(syncService: SyncService, buildService: BuildService, hostService: HostService, analyticsService: AnalyticsService, workspaceConfig: WorkspaceConfig) {
+        public init(syncService: SyncService, buildService: BuildService, hostService: HostService, analyticsService: AnalyticsService, workspaceConfig: WorkspaceConfig, requiresHostSetup: Bool, configFileURL: URL?) {
             self.syncService = syncService
             self.buildService = buildService
             self.hostService = hostService
             self.analyticsService = analyticsService
             self.workspaceConfig = workspaceConfig
+            self.requiresHostSetup = requiresHostSetup
+            self.configFileURL = configFileURL
         }
     }
 
@@ -38,6 +42,8 @@ public final class AppViewModel: ObservableObject {
     @Published public private(set) var liveLogLines: [String] = []
     @Published public private(set) var latestError: String?
     @Published public var selectedHostID: IRIXServices.Host.ID?
+    @Published public var shouldPromptHostSetup: Bool
+    public let configFileURL: URL?
 
     private let dependencies: Dependencies
     private var hostRefreshTask: Task<Void, Never>?
@@ -45,6 +51,8 @@ public final class AppViewModel: ObservableObject {
 
     public init(dependencies: Dependencies) {
         self.dependencies = dependencies
+        self.shouldPromptHostSetup = dependencies.requiresHostSetup
+        self.configFileURL = dependencies.configFileURL
         Task { await self.bootstrap() }
     }
 
@@ -151,6 +159,7 @@ public final class AppViewModel: ObservableObject {
         hosts = refreshed
         guard !refreshed.isEmpty else {
             selectedHostID = nil
+            shouldPromptHostSetup = true
             return
         }
 
@@ -160,5 +169,6 @@ public final class AppViewModel: ObservableObject {
         }
 
         selectedHostID = refreshed.first?.id
+        shouldPromptHostSetup = false
     }
 }
