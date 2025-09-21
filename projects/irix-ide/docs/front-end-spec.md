@@ -25,6 +25,7 @@ This document defines the user experience goals, information architecture, user 
 #### Change Log
 | Date       | Version | Description                                    | Author |
 |------------|---------|------------------------------------------------|--------|
+| 2025-09-22 | 0.3     | Added screen blueprints and state transitions  | James  |
 | 2025-09-21 | 0.2     | Added recovery state guidance and IRIX tokens  | Sally  |
 | 2025-09-20 | 0.1     | Initial UI/UX specification drafted            | Sally  |
 
@@ -56,6 +57,57 @@ graph TD
 **Secondary Navigation:** Contextual tabs within each area (e.g., Editor → Open Files / Search / Git; Build & Logs → Queue / History / Metrics). Breadcrumbs for multi-level areas like Remote Hosts (`Remote Hosts > octane > Processes`).
 
 **Breadcrumb Strategy:** Display at top of content pane for nested resources (host detail, log drill-down). Breadcrumb items are interactive and keyboard navigable.
+
+## Screen Blueprints
+### Workspace Shell & Project Explorer
+- **Layout:** Left rail houses the workspace shell with project selector, quick host switcher, and collapsible project explorer tree. A tabbed secondary panel shows Git status, search, or outline depending on context.
+- **States:** Connection banner anchors immediately above the editor canvas; project explorer badges reflect sync state (`Synced`, `Queued`, `Conflict`).
+- **Interactions:** Command palette (`⌘P`) jumps between projects/recent files; context menu exposes project-level actions (sync, build, open terminal).
+- **Wireframes:** `docs/user-guides/screenshots/01-editor-host-drop.svg`, `docs/user-guides/screenshots/02-editor-offline.svg` capture connected vs. offline states with explorer callouts.
+
+### Editor & Diffing Surface
+- **Layout:** Central code editor with split-pane diff toggle, diagnostics gutter, and inline task list for TODO/FIXME. Footer stack surfaces sync/build telemetry and active host pill.
+- **States:** Offline mode disables destructive actions and shows unsynced badge in tab strip; diagnostics drawer auto-expands on failed build.
+- **Interactions:** Inline quick-fix menu for diagnostics, jump-to-symbol palette, and keyboard shortcuts for toggling diff view.
+- **Wireframes:** `docs/user-guides/screenshots/03-deploy-confirmation.svg`, `docs/user-guides/screenshots/04-sync-conflict.svg` highlight confirmation and conflict flows layered over the editor.
+
+### Build & Logs Console
+- **Layout:** Split view showing build queue table on the left and selected build log stream on the right. Metrics ribbon on top provides duration, warnings, and last success indicators.
+- **States:** Streaming mode uses skeleton placeholders during reconnect; failure state pins actionable badges with links back to impacted files.
+- **Interactions:** Users can pin builds, copy logs, jump to diagnostics, and filter by host/project across sessions.
+- **Wireframes:** `docs/user-guides/screenshots/07-build-logs.svg` illustrates success vs. failure annotations and reconnect affordances.
+
+### Remote Host Management
+- **Layout:** Hosts list with health pill, role, and quick actions; right pane drills into selected host (process list, storage, recent commands). Secondary tabs expose credentials and automation hooks.
+- **States:** Health colors map to connection telemetry (`Connected`, `Degraded`, `Offline`). Pending retries surface timer and cancel controls.
+- **Interactions:** Inline onboarding for new hosts, mass actions for start/stop services, and activity feed summarizing recent sync/deploy events.
+- **Wireframes:** `docs/user-guides/screenshots/05-remote-hosts.svg` and `docs/user-guides/screenshots/06-dashboard-overview.svg` cover overview and deep-dive modes.
+
+### Settings & Operational Panels
+- **Layout:** Sidebar with preference categories (Profile, Key Bindings, Appearance, Notifications). Detail pane exposes form fields with inline validation and preview toggles for theme adjustments.
+- **States:** Mac vs. IRIX variants share structure but adopt platform-specific tokens and padding. Advanced settings gated behind disclosure to reduce noise.
+- **Interactions:** Live preview for theme changes, import/export workspace profile, and warning banners for unsafe configurations.
+- **Wireframes:** `docs/user-guides/screenshots/09-settings.svg` frames category navigation and validation treatments.
+
+## State Transitions & Remote Resilience
+```mermaid
+stateDiagram-v2
+    [*] --> Connected
+    Connected --> Degraded: Packet loss / heartbeat > threshold
+    Degraded --> Reconnecting: Auto retry (3 attempts)
+    Reconnecting --> Connected: Host responds
+    Reconnecting --> Offline: Retry exhaustion
+    Offline --> OfflineEditing: User continues locally
+    OfflineEditing --> Conflict: Host reconnect with divergent file
+    Conflict --> Connected: Merge/resolve
+    Connected --> Deploying: User triggers deploy
+    Deploying --> Connected: Success + undo toast
+    Deploying --> Conflict: Failed deploy / rollback
+```
+
+- **Navigation Hooks:** Status pill drives quick navigation to Remote Hosts during `Degraded`/`Offline` states; command palette surfaces retry/queue actions.
+- **Activity Logging:** Each transition posts to the activity feed (Dashboard) to preserve audit trail for downstream analytics.
+- **Accessibility Notes:** Banner text and state colors pass contrast requirements; all transitions announce via macOS accessibility notifications.
 
 ## User Flows
 ### Flow 1: Project Bootstrap (Mac → IRIX)

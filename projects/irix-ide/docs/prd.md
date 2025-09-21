@@ -59,12 +59,15 @@ Deliver a modern, reliable IDE experience tailored to SGI IRIX developers, combi
 - State transitions for remote workflows (bootstrap, edit/build loop, debugging) are documented with Mermaid diagrams in `projects/irix-ide/docs/front-end-spec.md`.
 - Recovery flows (connection drop → retry → offline queue → resolved) are captured in annotated wireframes under `projects/irix-ide/docs/user-guides/screenshots/` and the journey map `projects/irix-ide/design/journey-maps/remote-recovery-journey.md`.
 - Mobile/tablet views are out of scope; desktop adaptation guidance lives in the front-end spec.
+- Screen blueprints with layout callouts for Workspace Shell, Project Explorer, Editor, Build & Logs, Remote Hosts, and Settings are centralized in `projects/irix-ide/docs/front-end-spec.md#screen-blueprints` with corresponding SVGs under `projects/irix-ide/docs/user-guides/screenshots/`.
+- Remote resilience state transitions (Connected → Degraded → Reconnecting → Offline) are standardized via the state chart in `projects/irix-ide/docs/front-end-spec.md#state-transitions--remote-resilience` to align engineering and QA with expected UI cues.
 
 ## UI/UX Stylistic Guidelines
 - macOS client follows dark-theme palette (`color.bg.surface` `#1E1E1E`, accent `#4C6EF5`) with SF Pro typography; IRIX-native overlays adopt Indigo Magic accents (`#6699CC`) and Motif spacing (6px/12px).
 - Status pills, banners, and undo toasts use resilience tokens documented in `projects/irix-ide/design/system/resilience-design-tokens.md`.
 - Icons sourced from the resilience kit (`projects/irix-ide/design/system/iconography-kit.md`) ensure parity between macOS and IRIX visuals.
 - Motion defaults: 200 ms ease-in-out for banners/toasts, 120 ms for pill transitions (see design tokens file).
+- Wireframe references (`01-editor-host-drop.svg` → `05-remote-hosts.svg`, `07-build-logs.svg`, `09-settings.svg`) establish baseline spacing, typography, and component states for engineering handoff.
 
 ## Prototype Metrics (Initial)
 - Single sync run (sample project): ~0.44 s (rsync via `/usr/nekoware/bin/rsync`).
