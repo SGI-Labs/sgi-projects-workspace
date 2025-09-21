@@ -13,8 +13,10 @@ projects/irix-ide/
 │   ├── stories/
 │   ├── qa/
 │   └── user-guides/
+├── apps/
+│   ├── macos/                  # SwiftUI workspace shell
+│   └── irix/                   # Motif/X11 workspace shell (new)
 ├── tools/
-│   ├── client/                 # macOS SwiftUI app
 │   ├── services/               # Rust/Python backend services
 │   └── remote/                 # IRIX shell scripts and helpers
 ├── tests/
@@ -26,7 +28,8 @@ projects/irix-ide/
 ```
 
 ## Rules
-- Keep macOS-specific code under `tools/client/`.
+- Keep macOS-specific UI code under `apps/macos/`.
+- Place IRIX Motif-specific UI code under `apps/irix/`.
 - Place cross-platform services under `tools/services/` with language-specific subfolders.
 - Maintain strict separation between production code and prototypes (move old experiments to `archive/`).
 - Document any new directories in this file to keep the team aligned.

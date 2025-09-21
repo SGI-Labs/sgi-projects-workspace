@@ -1,0 +1,8 @@
+! Auto-generated from tokens.sample.json (motif profile)
+IRIXIDE*background:            #4F5B66
+IRIXIDE*surfaceBackground:     #2C2C2E
+IRIXIDE*focusColor:            #6699CC
+IRIXIDE*spacing.marginMedium:  12
+IRIXIDE*radius.small:          2
+IRIXIDE*fontList:              -*-helvetica-medium-r-normal-*-22-*
+IRIXIDE*icon.warningPixmap:    @assets/warning.xbm

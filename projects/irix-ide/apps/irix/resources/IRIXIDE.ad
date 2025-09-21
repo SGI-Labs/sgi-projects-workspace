@@ -1,0 +1,39 @@
+! Motif resource bindings for IRIX IDE shell
+IRIXIDE*color.bg.base:            #4F5B66
+IRIXIDE*color.bg.surface:         #1E1E1E
+IRIXIDE*color.bg.panel:           #2C2C2E
+IRIXIDE*color.focus.accent:       #6699CC
+IRIXIDE*color.text.primary:       #F2F2F7
+IRIXIDE*color.text.secondary:     #8E8E93
+IRIXIDE*color.status.success:     #34C759
+IRIXIDE*color.status.warning:     #FFD60A
+IRIXIDE*color.status.danger:      #FF3B30
+IRIXIDE*color.status.offline:     #FF9500
+IRIXIDE*color.status.irixaccent:  #6699CC
+
+IRIXIDE*fontList:                 -*-helvetica-medium-r-normal-*-15-*
+IRIXIDE*XmLabel*fontList:         -*-helvetica-bold-r-normal-*-15-*
+IRIXIDE*navColumn*fontList:       -*-helvetica-medium-r-normal-*-14-*
+IRIXIDE*queueList*fontList:       -*-helvetica-medium-r-normal-*-13-*
+IRIXIDE*editorView*fontList:      -*-courier-medium-r-normal-*-13-*
+IRIXIDE*logList*fontList:         -*-helvetica-medium-r-normal-*-13-*
+IRIXIDE*statusBar*fontList:       -*-helvetica-bold-r-normal-*-13-*
+IRIXIDE*statusEntry*fontList:     -*-helvetica-bold-r-normal-*-13-*
+
+IRIXIDE*XmList*spacing:           4
+IRIXIDE*XmList*foreground:        #F2F2F7
+IRIXIDE*XmList*background:        #1E1E1E
+
+IRIXIDE*XmPushButton*highlightThickness: 0
+IRIXIDE*XmPushButton*shadowThickness:    1
+IRIXIDE*XmPushButton*foreground:         #F2F2F7
+IRIXIDE*XmPushButton*background:         #2C2C2E
+IRIXIDE*XmPushButton*armColor:          #6699CC
+
+IRIXIDE*statusEntry*borderWidth:        0
+IRIXIDE*statusEntry*marginWidth:        8
+IRIXIDE*statusEntry*marginHeight:       4
+
+IRIXIDE*navFrame*shadowThickness:       1
+IRIXIDE*activityFrame*shadowThickness:  1
+IRIXIDE*editorFrame*shadowThickness:    1

@@ -1,0 +1,19 @@
+! Auto-generated from tokens.sample.json (motif profile)
+IRIXIDE*color.bg.base:            #4F5B66
+IRIXIDE*color.bg.surface:            #1E1E1E
+IRIXIDE*color.bg.panel:            #2C2C2E
+IRIXIDE*color.focus.accent:            #6699CC
+IRIXIDE*color.text.primary:            #F2F2F7
+IRIXIDE*color.text.secondary:            #8E8E93
+IRIXIDE*color.status.success:            #34C759
+IRIXIDE*color.status.warning:            #FFD60A
+IRIXIDE*color.status.danger:            #FF3B30
+IRIXIDE*color.status.offline:            #FF9500
+IRIXIDE*color.status.irixaccent:            #6699CC
+IRIXIDE*spacing.s4:       12
+IRIXIDE*radius.sm:          2
+IRIXIDE*font.heading.lg:     -*-helvetica-medium-r-normal-*-28-*
+IRIXIDE*font.heading.md:     -*-helvetica-medium-r-normal-*-22-*
+IRIXIDE*font.body.base:     -*-helvetica-medium-r-normal-*-15-*
+IRIXIDE*font.body.monosm:     -*-courier-medium-r-normal-*-13-*
+IRIXIDE*icon.warning:    @assets/warning.xbm

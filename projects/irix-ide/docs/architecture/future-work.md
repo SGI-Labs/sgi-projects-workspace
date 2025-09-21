@@ -23,3 +23,7 @@ _Update this list as discovery progresses._
 - Determine if additional IRIX-native iconography needs bespoke assets beyond the current kit.
 - Explore approach for localizing resilience microcopy while preserving concise banner copy.
 - Replace polling-based `rsync` sync loop with filesystem notifications (FSEvents) for lower latency once Swift service stabilizes.
+- Investigate shared component abstractions so macOS SwiftUI and Motif/X11 shells can consume a single design token source of truth _(see `projects/irix-ide/docs/architecture/shared-design-tokens-spike.md` for spike plan)._ 
+- Validate feasibility of real-time host telemetry streaming required by the Remote Hosts blueprint (health pills, retry timers, activity feed).
+- Assess accessibility tooling needed to announce resilience state transitions consistently across macOS (VoiceOver) and IRIX (screen readers/AT not yet identified).
+- Integrate the Motif UI shell (`apps/irix`) with live data sources once backend services stabilize (project lists, sync queue, build telemetry).
