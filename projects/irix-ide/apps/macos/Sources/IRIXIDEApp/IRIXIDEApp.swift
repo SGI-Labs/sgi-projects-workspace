@@ -73,7 +73,7 @@ private struct AppConfiguration {
 
         let syncService = RsyncSyncService(initialState: initialState)
         let buildService = SSHBuildService(config: configuration)
-        let hostService = StubHostService(config: configuration)
+        let hostService = SSHHostService(config: configuration)
 
         return AppConfiguration(
             workspaceConfig: configuration,

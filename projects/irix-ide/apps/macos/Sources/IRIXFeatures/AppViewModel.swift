@@ -39,10 +39,17 @@ public final class AppViewModel: ObservableObject {
     @Published public private(set) var latestError: String?
 
     private let dependencies: Dependencies
+    private var hostRefreshTask: Task<Void, Never>?
+    private var buildRefreshTask: Task<Void, Never>?
 
     public init(dependencies: Dependencies) {
         self.dependencies = dependencies
         Task { await self.bootstrap() }
+    }
+
+    deinit {
+        hostRefreshTask?.cancel()
+        buildRefreshTask?.cancel()
     }
 
     public func select(section: WorkspaceSection) {
@@ -69,6 +76,10 @@ public final class AppViewModel: ObservableObject {
                     await MainActor.run {
                         self.liveLogLines.append(line.trimmingCharacters(in: .whitespacesAndNewlines))
                     }
+                }
+                let refreshedBuilds = await dependencies.buildService.loadRecentBuilds()
+                await MainActor.run {
+                    self.builds = refreshedBuilds
                 }
             } catch {
                 await MainActor.run {
@@ -98,6 +109,38 @@ public final class AppViewModel: ObservableObject {
                     if let hostId = self.hosts.first?.id {
                         analytics.track(.connectionStatusChanged(state, hostId: hostId))
                     }
+                }
+            }
+        }
+
+        startHostRefreshLoop()
+        startBuildRefreshLoop()
+    }
+
+    private func startHostRefreshLoop() {
+        hostRefreshTask?.cancel()
+        let interval = max(5.0, dependencies.workspaceConfig.pollInterval)
+        let hostService = dependencies.hostService
+        hostRefreshTask = Task {
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: UInt64(interval * 1_000_000_000))
+                let refreshed = await hostService.loadHosts()
+                await MainActor.run {
+                    self.hosts = refreshed
+                }
+            }
+        }
+    }
+
+    private func startBuildRefreshLoop() {
+        buildRefreshTask?.cancel()
+        let buildService = dependencies.buildService
+        buildRefreshTask = Task {
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 30_000_000_000)
+                let refreshed = await buildService.loadRecentBuilds()
+                await MainActor.run {
+                    self.builds = refreshed
                 }
             }
         }
