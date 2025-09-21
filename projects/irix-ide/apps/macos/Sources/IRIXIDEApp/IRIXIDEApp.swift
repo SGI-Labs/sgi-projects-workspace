@@ -42,7 +42,7 @@ private struct AppConfiguration {
     let buildService: BuildService
     let hostService: HostService
     let requiresHostSetup: Bool
-    let configFileURL: URL?
+    let configFileURL: URL
 
     static func load() -> AppConfiguration {
         let environment = ProcessInfo.processInfo.environment
@@ -59,7 +59,7 @@ private struct AppConfiguration {
         let configuration: WorkspaceConfig
         var initialState: ConnectionState = .connected
         var requiresHostSetup = false
-        var configURLUsed: URL? = nil
+        var configURLUsed = baseURL.appendingPathComponent("config.yml")
         if let url = defaultCandidates.first(where: { FileManager.default.fileExists(atPath: $0.path) }),
            let loaded = try? ConfigLoader.load(from: url) {
             configuration = loaded

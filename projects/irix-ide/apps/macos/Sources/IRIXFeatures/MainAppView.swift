@@ -85,17 +85,33 @@ private struct HostSetupPrompt: View {
                     .font(.footnote)
                     .foregroundColor(DesignTokens.ColorPalette.textMuted)
             }
-            Button("Open Configuration Guide") {
-                if let url = configFileURL {
-                    NSWorkspace.shared.open(url)
-                } else if let docsURL = URL(string: "https://github.com/SGI-Labs/sgi-projects-workspace") {
-                    NSWorkspace.shared.open(docsURL)
+            HStack {
+                Button("Open Config File") {
+                    openConfigFile()
                 }
+                .buttonStyle(.borderedProminent)
+
+                Button("View Setup Guide") {
+                    if let docsURL = URL(string: "https://github.com/SGI-Labs/sgi-projects-workspace/blob/main/projects/irix-ide/docs/prd.md#core-workflows") {
+                        NSWorkspace.shared.open(docsURL)
+                    }
+                }
+                .buttonStyle(.bordered)
             }
-            .buttonStyle(.borderedProminent)
         }
         .padding(DesignTokens.Spacing.xl)
         .frame(minWidth: 420)
+    }
+
+    private func openConfigFile() {
+        guard let url = configFileURL else { return }
+        let manager = FileManager.default
+        if !manager.fileExists(atPath: url.path) {
+            let projectPath = url.deletingLastPathComponent().path
+            let template = "# IRIX IDE configuration\nproject_path: \(projectPath)\nremote_host: \nremote_user: \(NSUserName())\nremote_path: ~/irix\nidentity_file: \npoll_interval: 5\nbuild_commands:\n  - echo 'Add build commands here'\n"
+            try? template.write(to: url, atomically: true, encoding: .utf8)
+        }
+        NSWorkspace.shared.open(url)
     }
 }
 
