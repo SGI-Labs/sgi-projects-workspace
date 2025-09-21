@@ -26,7 +26,7 @@ public struct MainAppView: View {
                 detailView(for: viewModel.selectedSection)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(DesignTokens.ColorPalette.backgroundSurface)
-                StatusBarView(connectionState: viewModel.connectionState)
+                StatusBarView(connectionState: viewModel.connectionState, latestBuild: viewModel.builds.first)
                     .padding(DesignTokens.Spacing.md)
             }
             .background(DesignTokens.ColorPalette.backgroundBase)

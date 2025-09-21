@@ -46,7 +46,7 @@ public actor SSHBuildService: BuildService {
 
     public func loadRecentBuilds() async -> [BuildSummary] {
         [
-            BuildSummary(label: "Latest build", status: .succeeded, startedAt: Date().addingTimeInterval(-300), duration: 28)
+            BuildSummary(label: "Latest build", status: .succeeded, hostName: config.remoteHost, startedAt: Date().addingTimeInterval(-300), duration: 28, triggeredBy: config.remoteUser)
         ]
     }
 

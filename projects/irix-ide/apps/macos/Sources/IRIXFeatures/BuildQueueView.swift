@@ -30,22 +30,32 @@ public struct BuildQueueView: View {
     }
 
     private var buildTable: some View {
-        VStack(alignment: .leading, spacing: DesignTokens.Spacing.md) {
-            ForEach(builds) { build in
+        Table(builds) {
+            TableColumn("Build") { build in
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
                     Text(build.label)
                         .foregroundColor(DesignTokens.ColorPalette.textPrimary)
-                    Text(statusLabel(for: build.status))
+                    Text(build.triggeredBy ?? "manual")
                         .font(.caption)
-                        .foregroundColor(statusColor(for: build.status))
+                        .foregroundColor(DesignTokens.ColorPalette.textMuted)
                 }
-                .padding(DesignTokens.Spacing.md)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(DesignTokens.ColorPalette.backgroundPanel)
-                .clipShape(RoundedRectangle(cornerRadius: DesignTokens.Radius.medium, style: .continuous))
+            }
+            TableColumn("Host") { build in
+                Text(build.hostName ?? "—")
+            }
+            TableColumn("Status") { build in
+                StatusBadge(state: statusToConnectionStatus(build.status))
+            }
+            TableColumn("Started") { build in
+                Text(relativeTime(from: build.startedAt))
+                    .foregroundColor(DesignTokens.ColorPalette.textMuted)
+            }
+            TableColumn("Duration") { build in
+                Text(durationLabel(for: build))
+                    .foregroundColor(DesignTokens.ColorPalette.textMuted)
             }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: 320)
     }
 
     private var logPanel: some View {
@@ -62,36 +72,59 @@ public struct BuildQueueView: View {
             }
             ScrollView {
                 VStack(alignment: .leading, spacing: DesignTokens.Spacing.xs) {
-                    ForEach(logLines, id: \.self) { line in
+                    ForEach(logLines.indices, id: \.self) { index in
+                        let line = logLines[index]
                         Text(line)
                             .font(.system(.footnote, design: .monospaced))
-                            .foregroundColor(DesignTokens.ColorPalette.textMuted)
+                            .foregroundColor(colorForLogLine(line))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 .padding(DesignTokens.Spacing.md)
             }
-            .frame(width: 260, height: 320)
+            .frame(width: 320, height: 320)
             .background(DesignTokens.ColorPalette.backgroundPanel)
             .clipShape(RoundedRectangle(cornerRadius: DesignTokens.Radius.medium, style: .continuous))
         }
     }
 
-    private func statusLabel(for status: BuildSummary.Status) -> String {
+    private func statusToConnectionStatus(_ status: BuildSummary.Status) -> ConnectionState {
         switch status {
-        case .queued: return "Queued"
-        case .running: return "Running"
-        case .succeeded: return "Succeeded"
-        case .failed: return "Failed"
+        case .queued:
+            return .degraded
+        case .running:
+            return .reconnecting(attempt: 1, maxAttempts: 1)
+        case .succeeded:
+            return .connected
+        case .failed:
+            return .offline(reason: "Build failed")
         }
     }
 
-    private func statusColor(for status: BuildSummary.Status) -> Color {
-        switch status {
-        case .queued: return DesignTokens.ColorPalette.textMuted
-        case .running: return DesignTokens.ColorPalette.accent
-        case .succeeded: return DesignTokens.ColorPalette.success
-        case .failed: return DesignTokens.ColorPalette.danger
+    private func durationLabel(for build: BuildSummary) -> String {
+        if let duration = build.duration {
+            return String(format: "%.0fs", duration)
         }
+        if build.status == .running {
+            let interval = Date().timeIntervalSince(build.startedAt)
+            return String(format: "%.0fs", interval)
+        }
+        return "—"
+    }
+
+    private func relativeTime(from date: Date) -> String {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .short
+        return formatter.localizedString(for: date, relativeTo: Date())
+    }
+
+    private func colorForLogLine(_ line: String) -> Color {
+        if line.localizedCaseInsensitiveContains("error") || line.localizedCaseInsensitiveContains("fail") {
+            return DesignTokens.ColorPalette.danger
+        }
+        if line.localizedCaseInsensitiveContains("warning") {
+            return DesignTokens.ColorPalette.warning
+        }
+        return DesignTokens.ColorPalette.textMuted
     }
 }

@@ -34,15 +34,25 @@ public struct BuildSummary: Identifiable, Equatable, Sendable {
     public let id: UUID
     public var label: String
     public var status: Status
+    public var hostName: String?
     public var startedAt: Date
     public var duration: TimeInterval?
+    public var triggeredBy: String?
 
-    public init(id: UUID = UUID(), label: String, status: Status, startedAt: Date, duration: TimeInterval?) {
+    public init(id: UUID = UUID(),
+                label: String,
+                status: Status,
+                hostName: String? = nil,
+                startedAt: Date,
+                duration: TimeInterval?,
+                triggeredBy: String? = nil) {
         self.id = id
         self.label = label
         self.status = status
+        self.hostName = hostName
         self.startedAt = startedAt
         self.duration = duration
+        self.triggeredBy = triggeredBy
     }
 }
 
