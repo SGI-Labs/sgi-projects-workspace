@@ -37,6 +37,7 @@ public final class AppViewModel: ObservableObject {
     @Published public private(set) var builds: [BuildSummary] = []
     @Published public private(set) var liveLogLines: [String] = []
     @Published public private(set) var latestError: String?
+    @Published public var selectedHostID: IRIXServices.Host.ID?
 
     private let dependencies: Dependencies
     private var hostRefreshTask: Task<Void, Never>?
@@ -61,7 +62,7 @@ public final class AppViewModel: ObservableObject {
             await dependencies.hostService.retryConnection(for: host)
             let updatedHosts = await dependencies.hostService.loadHosts()
             await MainActor.run {
-                self.hosts = updatedHosts
+                self.updateHosts(updatedHosts)
             }
             dependencies.analyticsService.track(.connectionRetryStarted(hostId: host.id, attempt: 1, maxAttempts: 3))
         }
@@ -97,7 +98,7 @@ public final class AppViewModel: ObservableObject {
             connectionState = .offline(reason: error.localizedDescription)
         }
 
-        hosts = await dependencies.hostService.loadHosts()
+        updateHosts(await dependencies.hostService.loadHosts())
         builds = await dependencies.buildService.loadRecentBuilds()
 
         let syncStream = dependencies.syncService.connectionState
@@ -126,7 +127,7 @@ public final class AppViewModel: ObservableObject {
                 try? await Task.sleep(nanoseconds: UInt64(interval * 1_000_000_000))
                 let refreshed = await hostService.loadHosts()
                 await MainActor.run {
-                    self.hosts = refreshed
+                    self.updateHosts(refreshed)
                 }
             }
         }
@@ -144,5 +145,20 @@ public final class AppViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    private func updateHosts(_ refreshed: [IRIXServices.Host]) {
+        hosts = refreshed
+        guard !refreshed.isEmpty else {
+            selectedHostID = nil
+            return
+        }
+
+        if let selectedHostID,
+           refreshed.contains(where: { $0.id == selectedHostID }) {
+            return
+        }
+
+        selectedHostID = refreshed.first?.id
     }
 }

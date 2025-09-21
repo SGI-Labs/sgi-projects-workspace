@@ -41,7 +41,7 @@ public struct MainAppView: View {
         case .editor:
             PlaceholderView(title: "Editor", message: "Remote editing surface integrates with sync service (upcoming story).")
         case .remoteHosts:
-            HostsView(hosts: viewModel.hosts) { host in
+            HostsView(hosts: viewModel.hosts, selectedHostID: $viewModel.selectedHostID) { host in
                 viewModel.retry(host: host)
             }
         case .buildLogs:
