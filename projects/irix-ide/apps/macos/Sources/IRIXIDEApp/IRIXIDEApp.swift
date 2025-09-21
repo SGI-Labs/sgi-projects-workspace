@@ -47,6 +47,8 @@ private struct AppConfiguration {
     static func load() -> AppConfiguration {
         let environment = ProcessInfo.processInfo.environment
         let configPath = environment["IRIX_IDE_CONFIG"]
+        let additionalHostsRaw = environment["IRIX_IDE_ADDITIONAL_HOSTS"] ?? ""
+        let hasAdditionalHosts = !additionalHostsRaw.split(separator: ",").filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }.isEmpty
 
         let baseURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
         let defaultCandidates = [
@@ -64,7 +66,7 @@ private struct AppConfiguration {
            let loaded = try? ConfigLoader.load(from: url) {
             configuration = loaded
             configURLUsed = url
-            if loaded.remoteHost.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            if loaded.remoteHost.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && !hasAdditionalHosts {
                 requiresHostSetup = true
                 initialState = .offline(reason: "No remote host configured")
             }
@@ -80,7 +82,7 @@ private struct AppConfiguration {
                 buildCommands: ["echo 'No build command configured'"]
             )
             initialState = .offline(reason: "Using fallback configuration")
-            requiresHostSetup = true
+            requiresHostSetup = !hasAdditionalHosts
         }
 
         let syncService = RsyncSyncService(initialState: initialState)

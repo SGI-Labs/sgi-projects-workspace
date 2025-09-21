@@ -159,16 +159,17 @@ public final class AppViewModel: ObservableObject {
         hosts = refreshed
         guard !refreshed.isEmpty else {
             selectedHostID = nil
-            shouldPromptHostSetup = true
+            shouldPromptHostSetup = dependencies.requiresHostSetup
             return
         }
 
         if let selectedHostID,
            refreshed.contains(where: { $0.id == selectedHostID }) {
+            shouldPromptHostSetup = dependencies.requiresHostSetup && !refreshed.contains(where: { !$0.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
             return
         }
 
         selectedHostID = refreshed.first?.id
-        shouldPromptHostSetup = false
+        shouldPromptHostSetup = dependencies.requiresHostSetup && !refreshed.contains(where: { !$0.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty })
     }
 }
