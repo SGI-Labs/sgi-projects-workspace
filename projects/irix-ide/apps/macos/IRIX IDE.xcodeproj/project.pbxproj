@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DD7DC8D52E7FB00B0083F8F6 /* IRIXDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = DD7DC7D22E80BB3C0083F8F6 /* IRIXDesignSystem */; };
+		DD7DC8D62E7FB00B0083F8F6 /* IRIXFeatures in Frameworks */ = {isa = PBXBuildFile; productRef = DD7DC7D32E80BB3C0083F8F6 /* IRIXFeatures */; };
+		DD7DC8D72E7FB00B0083F8F6 /* IRIXServices in Frameworks */ = {isa = PBXBuildFile; productRef = DD7DC7D42E80BB3C0083F8F6 /* IRIXServices */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		DD7DC7AC2E7FAA2A0083F8F6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -35,16 +41,6 @@
 			path = "IRIX IDE";
 			sourceTree = "<group>";
 		};
-		DD7DC7AE2E7FAA2A0083F8F6 /* IRIX IDETests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "IRIX IDETests";
-			sourceTree = "<group>";
-		};
-		DD7DC7B82E7FAA2A0083F8F6 /* IRIX IDEUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "IRIX IDEUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +48,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD7DC7D52E80BB4A0083F8F6 /* IRIXDesignSystem in Frameworks */,
-				DD7DC7D62E80BB4A0083F8F6 /* IRIXFeatures in Frameworks */,
-				DD7DC7D72E80BB4A0083F8F6 /* IRIXServices in Frameworks */,
+				DD7DC8D72E7FB00B0083F8F6 /* IRIXServices in Frameworks */,
+				DD7DC8D62E7FB00B0083F8F6 /* IRIXFeatures in Frameworks */,
+				DD7DC8D52E7FB00B0083F8F6 /* IRIXDesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,8 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				DD7DC79E2E7FAA290083F8F6 /* IRIX IDE */,
-				DD7DC7AE2E7FAA2A0083F8F6 /* IRIX IDETests */,
-				DD7DC7B82E7FAA2A0083F8F6 /* IRIX IDEUITests */,
 				DD7DC79D2E7FAA290083F8F6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -136,9 +130,6 @@
 			dependencies = (
 				DD7DC7AD2E7FAA2A0083F8F6 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				DD7DC7AE2E7FAA2A0083F8F6 /* IRIX IDETests */,
-			);
 			name = "IRIX IDETests";
 			packageProductDependencies = (
 			);
@@ -158,9 +149,6 @@
 			);
 			dependencies = (
 				DD7DC7B72E7FAA2A0083F8F6 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				DD7DC7B82E7FAA2A0083F8F6 /* IRIX IDEUITests */,
 			);
 			name = "IRIX IDEUITests";
 			packageProductDependencies = (
@@ -202,7 +190,7 @@
 			mainGroup = DD7DC7932E7FAA290083F8F6;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				DD7DC7D12E80BB350083F8F6 /* IRIX IDE Package */,
+				DD7DC7D12E80BB350083F8F6 /* XCLocalSwiftPackageReference "." */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DD7DC79D2E7FAA290083F8F6 /* Products */;
@@ -630,16 +618,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		DD7DC7D12E80BB350083F8F6 /* IRIX IDE Package */ = {
+		DD7DC7D12E80BB350083F8F6 /* XCLocalSwiftPackageReference "." */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ".";
+			relativePath = .;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DD7DC7D22E80BB3C0083F8F6 /* IRIXDesignSystem */ = {isa = XCSwiftPackageProductDependency; package = DD7DC7D12E80BB350083F8F6 /* IRIX IDE Package */; productName = IRIXDesignSystem; };
-		DD7DC7D32E80BB3C0083F8F6 /* IRIXFeatures */ = {isa = XCSwiftPackageProductDependency; package = DD7DC7D12E80BB350083F8F6 /* IRIX IDE Package */; productName = IRIXFeatures; };
-		DD7DC7D42E80BB3C0083F8F6 /* IRIXServices */ = {isa = XCSwiftPackageProductDependency; package = DD7DC7D12E80BB350083F8F6 /* IRIX IDE Package */; productName = IRIXServices; };
+		DD7DC7D22E80BB3C0083F8F6 /* IRIXDesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD7DC7D12E80BB350083F8F6 /* XCLocalSwiftPackageReference "." */;
+			productName = IRIXDesignSystem;
+		};
+		DD7DC7D32E80BB3C0083F8F6 /* IRIXFeatures */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD7DC7D12E80BB350083F8F6 /* XCLocalSwiftPackageReference "." */;
+			productName = IRIXFeatures;
+		};
+		DD7DC7D42E80BB3C0083F8F6 /* IRIXServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD7DC7D12E80BB350083F8F6 /* XCLocalSwiftPackageReference "." */;
+			productName = IRIXServices;
+		};
 /* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD7DC7942E7FAA290083F8F6 /* Project object */;
