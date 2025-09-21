@@ -9,6 +9,18 @@ let package = Package(
         .macOS(.v13)
     ],
     products: [
+        .library(
+            name: "IRIXDesignSystem",
+            targets: ["IRIXDesignSystem"]
+        ),
+        .library(
+            name: "IRIXServices",
+            targets: ["IRIXServices"]
+        ),
+        .library(
+            name: "IRIXFeatures",
+            targets: ["IRIXFeatures"]
+        ),
         .executable(
             name: "IRIXIDEApp",
             targets: ["IRIXIDEApp"]
