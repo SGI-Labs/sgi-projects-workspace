@@ -1,0 +1,21 @@
+TYPE IRIXIDEApp
+    MATCH       tag == 0x0DE1DE;
+    LEGEND      IRIX IDE
+    SUPERTYPE   Executable
+
+    CMD OPEN    if [ $ARGC -ge 2 ]; then $LEADER $REST; else launch -m "$LEADER expects at least one project file." -c "$LEADER"; fi
+    CMD ALTOPEN winterm -H -t "IRIX IDE" -c "$LEADER $REST"
+    CMD DROP    if [ $ARGC -ge 2 ]; then $TARGET $SELECTED; else launch -m "$TARGET requires at least one dropped item." -c "$TARGET $SELECTED"; fi
+    CMD PRINT   routeprint -g -t $LEADERTYPE $LEADER $REST
+
+    MENUCMD     "Launch IRIX IDE"        $LEADER
+    MENUCMD     "Launch in Debug Mode"  $LEADER --debug $REST
+
+    ICON {
+        if (opened) {
+            include("/Volumes/Irix/usr/lib/filetype/iconlib/generic.exec.open.fti");
+        } else {
+            include("/Volumes/Irix/usr/lib/filetype/iconlib/generic.exec.closed.fti");
+        }
+        include("irix_ide_overlay.fti");
+    }

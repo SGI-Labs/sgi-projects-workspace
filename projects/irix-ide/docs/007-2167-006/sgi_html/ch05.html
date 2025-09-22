@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 5. Data Exchange on the IRIX Interactive Desktop</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt01.html" title="Part I. Integrating With the IRIX Interactive Desktop"><link rel="previous" href="ch04.html" title="Chapter 4. IRIX Interactive Desktop Services"><link rel="next" href="pt02.html" title="Part II. Interface Components"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 5. Data Exchange on the IRIX Interactive Desktop</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><th width="60%" align="center">Part I. Integrating With the IRIX Interactive Desktop</th><td width="20%" align="right"> <a accesskey="n" href="pt02.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5472588"></a>Chapter 5. <a name="id15852"></a>Data Exchange on the IRIX Interactive Desktop</h2></div></div>
+<p>The IRIX Interactive Desktop enables users to transfer data between applications. There are two types of transfers from the user's point of view. <a name="idch05.xchange1"></a><a name="idch05.xchange2"></a><i>Copy</i> takes data specified in the source application and creates a duplicate in the destination application. <i>Move</i> removes the data specified in the source application and places it in the destination application. The source and destination applications can be the same application.</p>
+<p>This chapter covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#id27430">&#8220;Supporting the Clipboard Transfer Model&#8221;</a> explains what users expect when performing operations using theusing &#8220;Cut,&#8221; &#8220;Copy,&#8221; and &#8220;Paste&#8221; entries in the Edit menu.</p>
+</li>
+<li><p><a href="ch05.html#id61999">&#8220;Supporting the Primary Transfer Model&#8221;</a> describes the expected behavior when users select data and copy it using the left and middle mouse buttons.</p>
+</li>
+<li><p><a href="ch05.html#id80633">&#8220;Data Types Supported for Inter-Application Transfer&#8221;</a> lists those data types that users can transfer between applications.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5472706"></a><a name="id27430"></a>Supporting the Clipboard Transfer Model</h2></div></div>
+<p>In the clipboard transfer model, users move or copy a selection using the &#8220;Cut,&#8221; &#8220;Copy,&#8221; and &#8220;Paste&#8221; entries from the Edit menu. If your application contains data that users will want to transfer to other applications or across separate instantiations of your application, your application should support the clipboard transfer model described in this section. Note that this model is a subset of the clipboard transfer model described in Section 4.3 of the <a name="idch05.xchange3"></a><a name="idch05.xchange4"></a><a name="idch05.xchange5"></a><a name="idch05.xchange6"></a><a name="idch05.xchange7"></a><i>OSF/Motif Style Guide</i>. For information on implementing clipboard transfer, see &quot;Implementing the Clipboard Transfer Model&quot; in Chapter 7, &#8220;Interapplication Data Exchange,&#8221; of the <i>IRIX Interactive Desktop Integration Guide</i>. For more information on the layout of the Edit menu, the behaviors of each entry, and keyboard accelerators, see <a href="ch08.html#id94339">&#8220;Edit Menu&#8221; in Chapter 8</a>.</p>
+<p>In a typical clipboard transfer, the user selects data in an application window and initiates a move or copy transfer operation by choosing &#8220;Cut&#8221; or &#8220;Copy&#8221; from the window's Edit menu. The source application then takes ownership of the clipboard atom replacing the prior owner (if there was one). The user completes the transfer by choosing &#8220;Paste&#8221; from the Edit menu in the destination application. The destination application then moves or copies the data associated with the clipboard to this destination. When the transfer is complete, the newly pasted data is not selected or highlighted. For more information on selection techniques, see <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>. </p>
+<p>Note that clipboard data is nonpersistent. If a user quits the application that currently owns the clipboard, the data associated with the clipboard atom is lost. Only one application can own the clipboard atom at any given time. For persistent media storage use the IRIX Interactive Desktop MediaWarehouse. For more information, see the <a name="idch05.xchange8"></a><i>IRIX Interactive Desktop MediaWarehouse User's Guide</i>.</p>
+<p><a href="ch05.html#id54884">Figure 5-1</a> illustrates clipboard transfer using the SoundEditor application. In the figure, there are two instantiations of the application; the window on the left is the source and the one on the right is the destination. Note that the clipboard atom in the figure is only a representation and doesn't actually appear. In this example, the user selects a region of sound in the source window and chooses &#8220;Copy&#8221; from the Edit menu in that window. The source instantiation of SoundEditor takes ownership of the clipboard atom. When the user chooses &#8220;Paste&#8221; from the Edit menu in the destination window, the data associated with the clipboard is inserted into the destination sound file at the insertion cursor (the vertical black line). Note that after the &#8220;Paste&#8221; operation, the SoundEditor application doesn't select or highlight the newly pasted data.</p>
+<p><div class="figure"><p><a name="id5472933"></a><b>Figure 5-1. <a name="id54884"></a><a name="idch05.xchange9"></a>Clipboard Transfer Example </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch05.xchange-1.gif" alt="Figure 5-1 Clipboard Transfer Example " height="480" width="751"></td></tr></table></div></div><br>
+</p>
+<p>The clipboard operates independently of the primary selection described in the next section, <a name="idch05.xchange10"></a><a name="idch05.xchange11"></a><a href="ch05.html#id61999">&#8220;Supporting the Primary Transfer Model.&#8221;</a> When a user chooses &#8220;Cut&#8221; or &#8220;Copy&#8221; from an Edit menu, that application takes ownership of the clipboard but the primary selection remains unchanged. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5472992"></a><a name="id61999"></a>Supporting the Primary Transfer Model</h2></div></div>
+<p>In the primary transfer model, users select the data for transfer using the left mouse button and copy the data to the destination application using the middle mouse button. If your application contains data that users will want to transfer to other applications or across separate instantiations of your application, your application should support the primary transfer model described in this section. Note that this model is a subset of the primary transfer model described in Section 4.3 of the <a name="idch05.xchange12"></a><a name="idch05.xchange13"></a><a name="idch05.xchange14"></a><a name="idch05.xchange15"></a><i>OSF/Motif Style Guide</i>. For information on implementing primary transfer, see &quot;Implementing the Primary Transfer Model&quot; in Chapter 7, &#8220;Interapplication Data Exchange,&#8221; of the <i>IRIX Interactive Desktop Integration Guide</i>. </p>
+<p>In the <a name="idch05.xchange16"></a><a name="idch05.xchange17"></a><i>primary transfer model</i>, when a user begins a selection in an application, that application takes ownership of the primary selection atom, replacing the previous owner if there was one. This selection is referred to as the <i>primary selection</i>. The user can then copy the primary selection to a destination application by moving the pointer to the destination window (making it the active window) and clicking the middle mouse button. At this point, the destination application copies the primary selection data to this destination. Note that the data is pasted at the position of the pointer, not at the insertion cursor. Also note that when the copy is complete, the newly pasted data isn't selected or highlighted. For more information on selection techniques, see <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>. </p>
+<p><a href="ch05.html#id30841">Figure 5-2</a> through <a href="ch05.html#id68897">Figure 5-3</a> illustrate primary selection and transfer using the SoundEditor application. <a href="ch05.html#id30841">Figure 5-2</a> illustrates making a primary selection. The user creates a selection by dragging with the left mouse button across a range of sound data. As soon as the user begins this selection, SoundEditor takes ownership of the primary selection atom. This selection is then referred to as the primary selection.</p>
+<p><div class="figure"><p><a name="id5473183"></a><b>Figure 5-2. <a name="id30841"></a><a name="idch05.xchange18"></a>Primary Selection Example </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch05.xchange-2.gif" alt="Figure 5-2 Primary Selection Example " height="268" width="620"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch05.html#id68897">Figure 5-3</a> shows the source and destination windows just prior to a primary transfer. <a href="ch05.html#id97951">Figure 5-4</a> shows the source and destination windows after the transfer. Note that when the user clicks the middle mouse button, the primary selection is inserted at the pointer location rather than at the insertion cursor. Also note that after the transfer operation, the SoundEditor application doesn't select or highlight the newly pasted data and the primary selection doesn't change.</p>
+<p><div class="figure"><p><a name="id5473260"></a><b>Figure 5-3. <a name="id68897"></a>Primary Transfer Example: Before Transfer</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch05.xchange-3.gif" alt="Figure 5-3 Primary Transfer Example: Before Transfer" height="314" width="695"></td></tr></table></div></div><br>
+
+<div class="figure"><p><a name="id5473285"></a><b>Figure 5-4. <a name="id97951"></a><a name="idch05.xchange19"></a>Primary Transfer Example: After Transfer</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch05.xchange-4.gif" alt="Figure 5-4 Primary Transfer Example: After Transfer" height="311" width="696"></td></tr></table></div></div><br>
+</p>
+<p>In general, when your application loses the primary selection, it should keep its current selection highlighted. When a user has selections highlighted in more than one window at a time, the most recent selection is always the primary selection. This is consistent with the <a name="idch05.xchange20"></a><a name="idch05.xchange21"></a><i>persistent always selection</i> model discussed in Section 4.2 in the <i>OSF/Motif Style Guide</i>. Exceptions to this guideline are those applications that use selection only for primary transfer&#8212;for example, the <i>winterm</i> Unix shell window. The only reason for users to select text in a shell window is to transfer that text using the primary transfer mechanism. In this case, when the <i>winterm</i> window loses the primary selection, the highlighting is removed. This is referred to as <i>nonpersistent selection</i> in Section 4.2 in the <i>OSF/Motif Style Guide</i>. For guidelines on selection in general, see <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>.</p>
+<p>If the user returns the keyboard focus to a window with a highlighted, superseded primary selection, the application should allow the user to reinstate the highlighted selection as the primary selection by pressing &lt;Alt-Insert&gt;. In addition to supporting this key combination, you can also add the entry &#8220;Promote&#8221; to the Edit menu for the application window. Make the &#8220;Promote&#8221; menu entry active only when your application has a selection which is not the primary selection. (For details of placing this item in the Edit menu, see <a name="idch05.xchange22"></a><a name="idch05.xchange23"></a><a name="idch05.xchange24"></a><a href="ch08.html#id94339">&#8220;Edit Menu&#8221; in Chapter 8</a>.) </p>
+<p>Note that when a user begins to modify a selection, such as adding elements to it, it's considered to be a new selection. In this case, your application needs to reassert ownership of the primary selection if your application doesn't currently own it.</p>
+<p>The primary selection operates independently of the clipboard, as described in the previous section, <a name="idch05.xchange25"></a><a name="idch05.xchange26"></a><a href="ch05.html#id27430">&#8220;Supporting the Clipboard Transfer Model.&#8221;</a> When the user makes a selection, that selection becomes the primary selection&#8212;there's no effect on the contents of the clipboard. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5473510"></a><a name="id80633"></a>Data Types Supported for Inter-Application Transfer</h2></div></div>
+<p>Applications can use the atom names for both clipboard and primary transfer of the corresponding types of data. A few atom names are listed in <a name="idch05.xchange27"></a><a href="ch05.html#id75072">Table 5-1</a>; the tables in Chapter 7, &#8220;Interapplication Data Exchange,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i> provide a complete list. If you want users to be able to transfer data from your application to other applications, you need to be able to export the data. If your application is to receive data from other applications, it must be able to import the data. For complete details of implementing both clipboard and primary data transfer, see Chapter 7, &#8220;Interapplication Data Exchange,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>.</p>
+<div class="table"><p><a name="id5473566"></a><b>Table 5-1. <a name="id75072"></a>  Data Types Supported for Inter-Application Transfer</b></p>
+<table summary="  Data Types Supported for Inter-Application Transfer" border="1"><colgroup><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Target Format Atom Name</p>
+</th><th scope="col" valign="top"><p>Nature of Data</p>
+</th><th scope="col" valign="top"><p>What Target Receives</p>
+</th><th scope="col" valign="top"><p>Receiving Application 
+Requirements</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>INVENTOR</p>
+</td><td valign="top"><p>3D, generated by 
+Inventor</p>
+</td><td valign="top"><p>Inventor data (Scene 
+Graph)</p>
+</td><td valign="top"><p>Ability to read Inventor data</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_RGB_IMAGE_FILENAME</p>
+</td><td valign="top"><p>color image in <i>rgb</i> 
+format</p>
+</td><td valign="top"><p>rgb file name</p>
+</td><td valign="top"><p>Ability to use <i>rgb</i> files</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_RGB_IMAGE</p>
+</td><td valign="top"><p>color image in <i>rgb</i> 
+format</p>
+</td><td valign="top"><p>stream of rgb data</p>
+</td><td valign="top"><p>Ability to use <i>rgb</i> files</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_AUDIO_FILENAME</p>
+</td><td valign="top"><p>sound data</p>
+</td><td valign="top"><p>audio file name</p>
+</td><td valign="top"><p>SGI audio file library 
+<tt>libaudiofile</tt></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_AUDIO</p>
+</td><td valign="top"><p>sound data</p>
+</td><td valign="top"><p>stream of audio data</p>
+</td><td valign="top"><p>SGI audio file library 
+<tt>libaudiofile</tt></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_MOVIE_FILENAME</p>
+</td><td valign="top"><p>movie data</p>
+</td><td valign="top"><p>movie file name</p>
+</td><td valign="top"><p>SGI Movie library <tt>libmovie</tt></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_MOVIE</p>
+</td><td valign="top"><p>movie data</p>
+</td><td valign="top"><p>stream of movie data</p>
+</td><td valign="top"><p>SGI Movie library <tt>libmovie</tt></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>STRING</p>
+</td><td valign="top"><p>text encoded as ISO <br>
+Latin 1</p>
+</td><td valign="top"><p>textual data</p>
+</td><td valign="top"><p>Ability to read text encoded as 
+ISO Latin 1</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>COMPOUND_TEXT</p>
+</td><td valign="top"><p>compound text</p>
+</td><td valign="top"><p>textual data formatted as 
+compound text</p>
+</td><td valign="top"><p>Ability to read compound text</p>
+</td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5474075"></a>Data Exchange Guidelines</h2></div></div>
+<p><span class="bold"><b><a name="idch05.xchange28"></a></b></span><span class="bold"><b>If your application contains data that users may wish to transfer to other applications or across separate instantiations of your application . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Support the Clipboard Transfer Model using the &#8220;Cut,&#8221; &#8220;Copy,&#8221; and &#8220;Paste&#8221; entries in the Edit menu. In this model, the clipboard is a global entity that's shared by all applications. Your application shouldn't use these entries to refer to a clipboard that's private to your application.</p>
+</li>
+<li><p>When supporting the Clipboard Transfer Model, don't select or highlight newly pasted data after a &#8220;Paste&#8221; operation.</p>
+</li>
+<li><p>Support the Primary Transfer Model. Assert ownership of the primary selection when the user begins to make a selection. Insert data at the location of the pointer when the user clicks the middle mouse button (which isn't necessarily at the insertion cursor).</p>
+</li>
+<li><p>When supporting the Primary Transfer Model, don't select or highlight newly transferred data after a transfer operation.</p>
+</li>
+<li><p>Use <i>persistent always selection</i> highlighting (keep the current selection highlighted even when your application loses the primary selection), unless the only action that can be performed on the selection is to copy the data using primary data transfer. In this case, use nonpersistent selection highlighting&#8212;that is, remove the selection highlight when the selection is no longer the primary selection.</p>
+</li>
+<li><p>When supporting the Primary Transfer Model, if the current active window has a selection that isn't the primary selection, reinstate this selection as the primary selection if the user presses &lt;Alt-Insert&gt;. Additionally, you can include a &#8220;Promote&#8221; entry in the Edit menu to perform the same function.</p>
+</li>
+<li><p>When supporting the Primary Transfer Model, when the user begins to modify a selection, such as adding elements to it, reassert ownership of the primary selection if your application does not currently own it.</p>
+</li>
+<li><p>When supporting both Clipboard Transfer and Primary Transfer, keep the primary selection independent from the clipboard. When the user begins to make a selection in your application, assert ownership of the primary selection but do not change the ownership of the clipboard. When the user chooses &#8220;Cut&#8221; or &#8220;Copy&#8221; from an Edit menu in your application, assert ownership of the clipboard but do not change the ownership of the primary selection.</p>
+</li>
+</ul></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="pt02.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 4. IRIX Interactive Desktop Services </td><td width="20%" align="center"> </td><td width="40%" align="right">Part II. Interface Components </td></tr></table></div></body></html>

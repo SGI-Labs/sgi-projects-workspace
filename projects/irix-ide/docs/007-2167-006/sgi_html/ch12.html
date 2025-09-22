@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 12. Introduction to 3D Style Guidelines</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt03.html" title="Part III. 3D Style Guidelines"><link rel="previous" href="pt03.html" title="Part III. 3D Style Guidelines"><link rel="next" href="ch13.html" title="Chapter 13. Interactive Viewing of 3D Objects"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 12. Introduction to 3D Style Guidelines</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="pt03.html">Prev</a> </td><th width="60%" align="center">Part III. 3D Style Guidelines</th><td width="20%" align="right"> <a accesskey="n" href="ch13.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5497262"></a>Chapter 12. <a name="id48696"></a>Introduction to 3D Style Guidelines</h2></div></div>
+<p>A developer designing a user interface for a 3D application has to resolve some issues that don't arise in 2D user interface design. 3D applications have to provide easy and intuitive interaction in three dimensions with a 2D pointing device. Also, because users of 3D applications often need convenient access to all sides of the objects they view, many applications need to offer more than one way to view or edit scenes or objects. <a name="idch12.3Dintro1"></a></p>
+<p>This chapter provides general information that's useful for designing a 3D application that is consistent and behaves in ways that users expect. It covers these topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#id67648">&#8220;Making 3D Functionality Available&#8221;</a> provides general guidelines for mapping functionality to the mouse buttons and for using modifier keys.</p>
+</li>
+<li><p><a href="ch12.html#id75279">&#8220;Pointer Shapes for 3D Functions&#8221;</a> discusses the appropriate pointer shapes for some common functionality in 3D applications.</p>
+</li>
+<li><p><a href="ch12.html#id93714">&#8220;Resizing the 3D Viewing Window&#8221;</a> describes how the contents of the 3D viewing window changes as the user resizes the window.</p>
+</li>
+</ul></div><p>Because of their general nature, the guidelines discussed in this chapter are especially relevant if you can't find a guideline for a specific situation and therefore need to extend existing guidelines.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5497383"></a><a name="id67648"></a>Making 3D Functionality Available</h2></div></div>
+<p>A 3D user interface designer typically has to make 3D functionality easily available within the constraints of a 2D input device and standard keyboard. This section provides an overview of two primary ways of doing this:<a name="idch12.3Dintro2"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#id54266">&#8220;Designing Mouse Input for 3D Applications&#8221;</a></p>
+</li>
+<li><p><a href="ch12.html#id94371">&#8220;Using Modifier Keys in 3D Applications&#8221;</a></p>
+</li>
+</ul></div><p>Guidelines for specific cases, for example, use of modifier keys during viewing, are discussed in detail in later chapters, where applicable. </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5497441"></a><a name="id54266"></a>Designing Mouse Input for 3D Applications</h3></div></div>
+<p>The section <a href="ch01.html#id39080">&#8220;Mouse and Keyboard Hardware&#8221; in Chapter 1</a> discusses the rules for mouse input that apply in 2D applications. They can be summarized as follows:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The left mouse button provides basic functionality such as selecting and dragging objects.</p>
+</li>
+<li><p>The middle mouse button is reserved for primary copy and paste operations and for advanced user shortcuts, which are also accessible through some more obvious interface. </p>
+</li>
+<li><p>The right mouse button is reserved for popup menus. </p>
+</li>
+</ul></div><p>The same is true in a 3D application:<a name="idch12.3Dintro3"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>The most important functionality is mapped to the left mouse button. For example, if viewing is the user's primary task, the left mouse button provides access to viewing functionality such as navigating through a scene. If editing is the primary task, the left mouse button provides access to editing functionality such as selecting and manipulating objects.<a name="idch12.3Dintro4"></a></p>
+<p>Modifier keys used in conjunction with the left mouse button provide additional functionality. For example, if the user is performing free translation (the default), no modifier keys are required. For constrained translation along one axis, the user has to hold down both the left mouse button and the &lt;Shift&gt; key. See <a href="ch15.html#id68038">&#8220;Free and Constrained 3D Manipulation&#8221; in Chapter 15</a>. </p>
+</li>
+<li><p>The middle mouse button is reserved for primary copy and paste operations and for advanced user shortcuts, which are also accessible through some more obvious interface. <a name="idch12.3Dintro5"></a></p>
+</li>
+<li><p>The right mouse button is reserved for popup menus which provide access to important functionality. See <a name="idch12.3Dintro6"></a><a href="ch08.html#id62260">&#8220;Popup Menus&#8221; in Chapter 8</a>.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5497636"></a><a name="id94371"></a>Using Modifier Keys in 3D Applications</h3></div></div>
+<p>Using modifier keys allows you to map additional functionality to the left mouse button. Each modifier key extends the available direct manipulation functionality in a consistent way without compromising the functionality of the other mouse buttons. This consistency helps users learn when to use each modifier key. <a name="idch12.3Dintro7"></a><a href="ch12.html#id14985">Table 12-1</a> lists the &#8220;3D definitions&#8221; for the &lt;Shift&gt;, &lt;Ctrl&gt;, &lt;Alt&gt;, and &lt;Esc&gt; keys. <a name="idch12.3Dintro8"></a><a name="idch12.3Dintro9"></a><a name="idch12.3Dintro10"></a><a name="idch12.3Dintro11"></a></p>
+<div class="table"><p><a name="id5497686"></a><b>Table 12-1. <a name="id14985"></a>Use of Modifier Keys in a 3D Application</b></p>
+<table summary="Use of Modifier Keys in a 3D Application" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Key</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Shift</p>
+</td><td valign="top"><p>Constrains or unconstrains the default behavior for the left mouse button. For example, 
+shifts from the default unconstrained translation in two dimensions to constrained axial 
+translation in one dimension, or from the default constrained rotation in two dimensions 
+to unconstrained free rotation in three dimensions. (See <a href="ch15.html#id24672">Chapter 15, &#8220;Manipulating 3D 
+Objects,&#8221;</a> for how the &lt;Shift&gt; key modifies the default translate, rotate, and scale 
+behaviors.) </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Ctrl</p>
+</td><td valign="top"><p>Provides an alternate behavior that isn't thought of as constraining or unconstraining the 
+default behavior for the left mouse button. For example, if users drag a translation plane 
+using the left mouse button, the object moves along the plane (the default behavior). If 
+users hold down the &lt;Ctrl&gt; key while performing the same drag operation, the object 
+moves perpendicular to the plane. (See <a href="ch15.html#id24672">Chapter 15, &#8220;Manipulating 3D Objects,&#8221;</a> for how 
+the &lt;Ctrl&gt; key modifies the default translate, rotate, and scale behaviors.)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Alt</p>
+</td><td valign="top"><p>Provides access to a view overlay as long as the &lt;Alt&gt; key is pressed. Returns the user to 
+the previous mode when the &lt;Alt&gt; key is released. (See <a href="ch13.html#id23130">&#8220;View Overlay&#8221; in Chapter 13</a>.)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Esc</p>
+</td><td valign="top"><p>Performs mode switches, for example from view mode to edit mode. Note that this use of 
+the &lt;Esc&gt; key is consistent with the <i>OSF/Motif Style Guide,</i> which recommends using 
+&lt;Esc&gt; to cancel an operation. In effect, you are canceling (exiting) one mode and entering 
+another. (See <a href="ch13.html#id72813">&#8220;Separate View and Edit Modes&#8221; in Chapter 13</a>.) </p>
+</td></tr></tbody></table></div><p>If your application uses the &lt;Shift&gt; key to constrain or unconstrain actions and uses the &lt;Ctrl&gt; key for alternate behavior, make the combination of the two available where it makes sense. </p>
+<p>For example, the &lt;Shift&gt; key constrains scaling to enlarge or shrink the object in only one dimension rather than the default uniform scaling operation (enlarging or shrinking the object simultaneously in all three dimensions). The &lt;Ctrl&gt; key provides the alternate behavior of scaling around the opposite scaling handle rather than the default behavior of scaling around the center. Using the &lt;Shift&gt; and &lt;Ctrl&gt; keys in combination allows the user to perform constrained scaling around the opposite plane. (See <a href="ch15.html#id78136">&#8220;Scaling 3D Objects&#8221; in Chapter 15</a>.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5498004"></a><a name="id12818"></a>Basic 3D Interface Design Guidelines</h3></div></div>
+<p><span class="bold"><b>To provide mouse functionality that matches user's expectations in a 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Assign primary functionality to the left mouse button. </p>
+</li>
+<li><p>Use modifier keys in conjunction with the left mouse button to make additional functionality available. </p>
+</li>
+<li><p>Reserve the middle mouse button for primary copy and paste operations and to provide access to advanced user shortcuts that are also accessible via a more obvious user interface. </p>
+</li>
+<li><p>Reserve the right mouse button for popup menus. </p>
+</li>
+</ul></div><p><span class="bold"><b>When deciding on the use of modifier keys in a 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the &lt;Shift&gt; key to constrain or unconstrain the default behavior of the left mouse button.</p>
+</li>
+<li><p>Use the &lt;Ctrl&gt; key to allow alternate behaviors that aren't thought of as constraining or unconstraining the default behavior assigned to the left mouse button. </p>
+</li>
+<li><p>Use &lt;Shift&gt; and &lt;Ctrl&gt; together where it makes sense to provide alternate behavior that's also constrained or unconstrained. </p>
+</li>
+<li><p>Reserve the &lt;Alt&gt; key for a view overlay (see <a href="ch13.html#id23130">&#8220;View Overlay&#8221; in Chapter 13</a>). </p>
+</li>
+<li><p>Reserve the &lt;Esc&gt; key for mode switches, for example, switching from view mode to edit mode.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5498176"></a><a name="id75279"></a>Pointer Shapes for 3D Functions</h2></div></div>
+<p>General guidelines for pointer feedback for all applications in the IRIX Interactive Desktop environment are discussed in <a name="idch12.3Dintro12"></a><a href="ch11.html#id15568">&#8220;Pointer Shapes and Colors&#8221; in Chapter 11</a>. This section discusses additional pointer shapes specifically designed for 3D applications.</p>
+<p>Using the correct pointer feedback is crucial in a 3D application because users typically need to work with a great variety of functions, and these functions are often accessed using the left mouse button in conjunction with modifier keys. To help users recognize which function they are currently accessing and to help them learn the mapping between modifier keys and available functions, display standard pointer shapes whenever the user accesses common 3D functions. <a href="ch12.html#id22627">Table 12-2</a> provides an overview of the common 3D functions and associated pointers; it includes references to the relevant sections in later chapters. See <a href="ch13.html#id83685">Table 13-1</a> for an overview of 3D viewing functions and the associated user interface. </p>
+<div class="table"><p><a name="id5498271"></a><b>Table 12-2. <a name="id22627"></a>Pointers for 3D Functionality</b></p>
+<table summary="Pointers for 3D Functionality" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Pointer</p>
+</th><th scope="col" valign="top"><p>Function</p>
+</th><th scope="col" valign="top"><p>Purpose</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/tumble_cursor.gif" height="35" width="37"></td></tr></table></div>
+</p>
+</td><td valign="top"><p><br>
+Tumbling <a name="idch12.3Dintro13"></a></p>
+</td><td valign="top"><p><br>
+User is rotating a scene in view mode. See <a href="ch13.html#id90557">&#8220;Tumbling&#8221; in Chapter 13</a>.</p>
+<p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/dolly_cursor.gif" height="28" width="34"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Dollying<br>
+<br>
+<a name="idch12.3Dintro14"></a></p>
+</td><td valign="top"><p>User is moving a scene closer or farther away in view mode. See 
+<a href="ch13.html#id34136">&#8220;Dollying&#8221; in Chapter 13</a>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/pan_cursor.gif" height="35" width="35"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Panning <br>
+<br>
+<a name="idch12.3Dintro15"></a></p>
+</td><td valign="top"><p>User is moving a scene up, down, left, or right without rotating it. User is 
+in view mode. See <a href="ch13.html#id97362">&#8220;Panning&#8221; in Chapter 13</a>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/walk_cursor.gif" height="31" width="45"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Roaming<br>
+<br>
+</p>
+</td><td valign="top"><p>User is moving through a fixed scene as if walking or flying. User can 
+view objects but not edit them. See <a href="ch13.html#id82935">&#8220;Roaming&#8221; in Chapter 13</a>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/tilt_cursor.gif" height="38" width="43"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Tilting <br>
+<br>
+<a name="idch12.3Dintro16"></a></p>
+</td><td valign="top"><p>User is tilting head up or down in a scene without moving through the 
+scene. User is in view mode. See <a href="ch13.html#id61562">&#8220;Tilting&#8221; in Chapter 13</a>. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/sidle_cursor.gif" height="33" width="38"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Sidling <a name="idch12.3Dintro17"></a></p>
+<p> </p>
+<p> </p>
+</td><td valign="top"><p>User is sidestepping to the right or left in the scene being viewed or is 
+moving up or down as if on an elevator. User is in view mode. See 
+<a href="ch13.html#id43061">&#8220;Sidling&#8221; in Chapter 13</a>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/seek_cursor.gif" height="29" width="34"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Seeking </p>
+<p> </p>
+</td><td valign="top"><p>User selects an object or target in view mode, and is then automatically 
+moved closer to that object with each click. See <a href="ch13.html#id88303">&#8220;Seeking&#8221; in Chapter 13</a>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/edit_cursor.gif" height="26" width="31"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>Editing<a name="idch12.3Dintro18"></a></p>
+</td><td valign="top"><p>User can select and manipulate objects, for example, translate, rotate, 
+and/or scale them. See <a href="ch13.html#id62811">&#8220;Viewing and Editing in 3D Applications&#8221; in 
+Chapter 13</a>. This is also the &#8220;default&#8221; pointer shape when no special 
+function is taking place.</p>
+</td></tr></tbody></table></div><br><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5498835"></a><a name="id67224"></a>Pointer Feedback Guidelines for 3D Applications</h3></div></div>
+<p><span class="bold"><b>To help users stay oriented while working in your 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard pointer shapes to indicate specific 3D functionality. Display these pointers whenever the user accesses that functionality. </p>
+</li>
+<li><p>Use the standard pointers used in 2D applications as needed (for example, the watch pointer to indicate an operation is in progress).</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5498875"></a><a name="id93714"></a>Resizing the 3D Viewing Window</h2></div></div>
+<p>When users resize the viewing window in a 3D application, its contents changes based on whether or not the resize operation keeps the same aspect ratio: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the user keeps the same aspect ratio, the contents of the window stays the same but the scene in the viewing area gets proportionally bigger or smaller depending on whether the user made the window bigger or smaller. </p>
+</li>
+<li><p>If the user changes the aspect ratio, the size of the objects in the scene stays the same but more of the scene becomes visible when the user makes the window bigger and less of the scene is visible when the user makes the window smaller.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5498914"></a>Guidelines for Resizing Windows in 3D Applications</h3></div></div>
+<p><span class="bold"><b>When designing the resizing operation for the viewing windows in your 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the user resizes the window and keeps its same aspect ratio, make the scene in the viewing area of the window proportionally bigger or smaller based on the resize action. </p>
+</li>
+<li><p>If the user resizes the window and changes its aspect ratio during the resize operation, display more or less of the scene being displayed based on the resize action, but don't change the size of the objects in the scene. </p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="pt03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch13.html">Next</a></td></tr><tr><td width="40%" align="left">Part III. 3D Style Guidelines </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 13. Interactive Viewing of 3D Objects </td></tr></table></div></body></html>

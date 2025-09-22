@@ -1,0 +1,694 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 9. Providing Online Help With SGIHelp</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch08.html" title="Chapter 8. Monitoring Changes to Files and Directories"><link rel="next" href="ch10.html" title="Chapter 10. Handling Users' System Preferences"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 9. Providing Online Help With SGIHelp</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch08.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch10.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE60030-PARENT"></a>Chapter 9. Providing Online Help With SGIHelp</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-0"></a>
+<a class="indexterm" name="IT09.SGIHelp-1"></a>
+<a class="indexterm" name="IT09.SGIHelp-2"></a>
+<a class="indexterm" name="IT09.SGIHelp-3"></a>
+This chapter describes how to use the Silicon Graphics online help system, SGIHelp, to deliver the online help for your product. It describes how to prepare the help and integrate it into your application. It contains the following sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE86080-PARENT" title="Overview of SGIHelp">&#8220;Overview of SGIHelp&#8221;</a> provides an overview of the help system.</p>
+</li>
+<li><p><a href="ch09.html#LE34967-PARENT" title="The SGIHelp Interface">&#8220;The SGIHelp Interface&#8221;</a> describes the SGIHelp API.</p>
+</li>
+<li><p><a href="ch09.html#LE58688-PARENT" title="Implementing Help in an Application">&#8220;Implementing Help in an Application&#8221;</a> provides some examples of implementing online help in an application.</p>
+</li>
+<li><p><a href="ch09.html#LE73995-PARENT" title="Application Helpmap Files">&#8220;Application Helpmap Files&#8221;</a> describes the format and use of application helpmap files.</p>
+</li>
+<li><p><a href="ch09.html#LE67544-PARENT" title="Writing the Online Help">&#8220;Writing the Online Help&#8221;</a> describes how to write the source files containing your application's online help.</p>
+</li>
+<li><p><a href="ch09.html#LE81424-PARENT" title="Producing the Final Product">&#8220;Producing the Final Product&#8221;</a> describes how to compile your help files into viewable form and package them for installation on your users' systems.</p>
+</li>
+<li><p><a href="ch09.html#LE36112-PARENT" title="Bibliography of SGML References">&#8220;Bibliography of SGML References&#8221;</a> list additional references.</p>
+</li>
+</ul></div><p>The section &#8220;Online Help&#8221; in Chapter 4
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides interface and content guidelines for adding online help to your application.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE86080-PARENT"></a>Overview of SGIHelp</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-4"></a>
+The SGIHelp system consists of a help viewer, a help library and include file, help document files, and optional application helpmap files. This section describes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE78532-PARENT" title="The Help Viewer">&#8220;The Help Viewer&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE69702-PARENT" title="The SGIHelp Library and Include File">&#8220;The SGIHelp Library and Include File&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE28277-PARENT" title="Help Document Files">&#8220;Help Document Files&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE73361-PARENT" title="Application Helpmap Files">&#8220;Application Helpmap Files&#8221;</a> </p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>To develop online help for your application, you must install the <span class="bold"><b>insight_dev</b></span> product, which contains the SGIHelp library and include file, help generation tools, examples, and templates.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE78532-PARENT"></a>The Help Viewer</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-5"></a>
+The SGIHelp viewer, <tt>sgihelp</tt>(1), also referred to as the <span class="bold"><b>help server</b></span>, displays help text in easy-to-use browsing windows. <a href="ch09.html#id5214946" title="Figure 9-1. The Help Viewer">Figure 9-1</a> shows an example of a help window. <a class="indexterm" name="IT09.SGIHelp-6"></a>
+<a class="indexterm" name="IT09.SGIHelp-7"></a>
+</p>
+<p><div class="figure"><a name="id5214946"></a><p><a name="id5214946"></a><b>Figure 9-1. The Help Viewer</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/09.SGIHelp-1.gif" alt="The Help Viewer" height="339" width="406"></td></tr></table></div></div><br>
+</p>
+<p><tt>sgihelp</tt> can also display an index of all help topics available in a help document and allow the user to select a particular topic from the list. <a href="ch09.html#id5215003" title="Figure 9-2. The Help Index Window">Figure 9-2</a> shows an example of a help index.</p>
+<p><div class="figure"><a name="id5215003"></a><p><a name="id5215003"></a><b>Figure 9-2. The Help Index Window</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/09.SGIHelp-2.gif" alt="The Help Index Window" height="332" width="375"></td></tr></table></div></div><br>
+</p>
+<p><tt>sgihelp</tt> is a separate application that gets started automatically whenever an application makes a help request. Neither users nor your application should ever need to explicitly start <tt>sgihelp</tt>. After the user closes all help windows, <tt>sgihelp</tt> remains running in the background for a few minutes. If it receives no other help requests within that time, it automatically exits. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE69702-PARENT"></a>The SGIHelp Library and Include File</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-8"></a>
+<a class="indexterm" name="IT09.SGIHelp-9"></a>
+The Silicon Graphics help library, <tt>libhelpmsg</tt>, handles communication with the help server. <tt>libhelpmsg</tt> depends on the <tt>libX11</tt> library. Be sure to specify <tt>&#8211;lhelpmsg</tt> before <tt>&#8211;lX11</tt> in the compilation or linking command.</p>
+<p>For example, to compile a file <tt>hellohelp.c++</tt> to produce the executable <span class="bold"><b>hellohelp</b></span>, you would enter:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<b><tt>CC -o hellohelp hellohelp.c++ -lhelpmsg -lX11</tt></b> 
+</pre></td></tr></table><p>You must include <tt>&lt;helpapi/HelpBroker.h&gt;</tt> in any source file that accesses online help. Both the library and include file were developed in C, and can be used with either the C or C++ programming languages.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE28277-PARENT"></a>Help Document Files</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-10"></a>
+Help document files contain the actual help text in Standard Generalized Markup Language (SGML) format. In addition to text, help documents can contain graphics and hypertext links to other help topics.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE73361-PARENT"></a>Application Helpmap Files</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-11"></a>
+Application helpmap files are optional; an application can request specific help topics directly. Applications helpmap files provide a level of indirection that allows you to structure your help presentation independently of your application code. The SGIHelp library also uses helpmaps to make it easier for you to implement context-sensitive help in your application.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>You must provide a helpmap for your application if you want a help index.
+</td></tr></table><hr noshade="noshade"></div><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE34967-PARENT"></a>The SGIHelp Interface</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-12"></a>
+This section describes the functions you use to access the help server from your application:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE83049-PARENT" title="Initializing the Help Session">&#8220;Initializing the Help Session&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#LE20950-PARENT" title="Displaying a Help Topic">&#8220;Displaying a Help Topic&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE51771-PARENT" title="Displaying the Help Index">&#8220;Displaying the Help Index&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE83049-PARENT"></a>Initializing the Help Session</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-13"></a>
+Before calling any other help functions, your application must first call <tt>SGIHelpInit()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int SGIHelpInit (Display *<i>display</i>, char *<i>appClass</i>, char *<i>separator</i>);
+</pre></td></tr></table><br><div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>display</i></span></td><td width="10"> </td><td><p>The application's Display structure.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>appClass</i></span></td><td width="10"> </td><td><p>The application's class name. Use the same name as you provide to <tt>XtAppInitialize()</tt>.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>separator</i></span></td><td width="10"> </td><td><p>The separator character used by the application to separate the widget hierarchy when a context-sensitive help request is made. At this time, you must use the period ( . ).</p>
+
+</td></tr></table></div><p><tt>SGIHelpInit()</tt> does not start or communicate with the help server process; it simply initializes data structures for the other SGIHelp functions. <tt>SGIHelpInit()</tt> returns 1 on success, and 0 on failure.</p>
+<p><a href="ch09.html#LE99466-PARENT" title="Example 9-1. Initializing a Help Session Using SGIHelpInit()">Example 9-1</a> shows an example of how to use <tt>SGIHelpInit()</tt>.</p>
+<div class="example"><a name="LE99466-PARENT"></a><p><a name="LE99466-PARENT"></a><b>Example 9-1. Initializing a Help Session Using <tt>SGIHelpInit()</tt></b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;Xm/Xm.h&gt;
+#include &lt;helpapi/HelpBroker.h&gt;
+ 
+void main ( int argc, char **argv )
+{
+    Widget       mainWindow; /* Main window shell widget */
+    XtAppContext app;        /* An application context,
+                              * needed by Xt
+                              */
+    int          status;     /* Return status */
+ 
+    /* ... */
+ 
+    mainWindow = XtAppInitialize ( &amp;app, &quot;MyApp&quot;, NULL, 0, 
+                                   &amp;argc, argv, NULL,
+                                   NULL, 0 );
+ 
+    /* Initialize the help session */
+ 
+    status = SGIHelpInit( XtDisplay(mainWindow),
+                          &quot;MyApp&quot;, &quot;.&quot; );
+ 
+    /* ... */
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE20950-PARENT"></a>Displaying a Help Topic</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-14"></a>
+To request display of a help topic from within your application, call <tt>SGIHelpMsg()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int SGIHelpMsg (char *<i>key</i>, char *<i>book</i>, char *<i>userData</i>);
+</pre></td></tr></table><br><div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>key</i></span></td><td width="10"> </td><td><p>Specifies either 1) the ID of a particular help topic in a help document, or 2) a widget hierarchy.</p>
+<p>If you provide a help ID, the help server displays the help topic identified in the help document specified by the <i>book</i> argument. You must provide a help book name in this case. See <a href="ch09.html#LE67544-PARENT" title="Writing the Online Help">&#8220;Writing the Online Help&#8221;</a> for an explanation of help IDs.</p>
+<p>If you provide a widget hierarchy, the help server looks in the application's helpmap file to find a mapping. If it doesn't find an exact match, it uses a fallback algorithm to determine which is the &#8220;closest&#8221; hierarchy found. Typically you use this technique to provide context-sensitive help. See <a href="ch09.html#LE73995-PARENT" title="Application Helpmap Files">&#8220;Application Helpmap Files&#8221;</a> for more information about the helpmap file.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>book</i></span></td><td width="10"> </td><td><p>Gives the <span class="bold"><b>short name</b></span> of the help document containing the application's help information. See <a href="ch09.html#LE67544-PARENT" title="Writing the Online Help">&#8220;Writing the Online Help&#8221;</a> for a description of help document short names.</p>
+<p>If you set this to NULL or asterisk (*), the help server looks in the application's helpmap file for the book name. In this case, a helpmap file must exist. See <a href="ch09.html#LE73995-PARENT" title="Application Helpmap Files">&#8220;Application Helpmap Files&#8221;</a> for more information about the helpmap file.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>userData</i></span></td><td width="10"> </td><td><p>Reserved for future use. You should always set this field to NULL.</p>
+
+</td></tr></table></div><p>If a copy of the help server is not already running, <tt>SGIHelpMsg()</tt> automatically starts the server. <tt>SGIHelpMsg()</tt> returns 1 on success, and 0 on failure.</p>
+<p><a href="ch09.html#LE76756-PARENT" title="Example 9-2. Requesting a Specific Help Topic Using SGIHelpMsg()">Example 9-2</a> shows an example of using <tt>SGIHelpMsg()</tt> to display the help topic identified by the help ID &#8220;help_save_button&#8221; in the help document with the short name &#8220;MyAppHelp.&#8221;</p>
+<div class="example"><a name="LE76756-PARENT"></a><p><a name="LE76756-PARENT"></a><b>Example 9-2. Requesting a Specific Help Topic Using <tt>SGIHelpMsg()</tt></b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;helpapi/HelpBroker.h&gt;
+ 
+/* Assume initialization of help session is complete */
+ 
+/*
+ * This call displays the help topic with a key of
+ * &quot;help_save_button&quot; (found in the &quot;HelpId=&quot; field).
+ * It will look for this section in the help document
+ * &quot;MyAppHelp&quot;.
+ */
+ 
+status = SGIHelpMsg( &quot;help_save_button&quot;, &quot;MyAppHelp&quot;, NULL );
+</pre></td></tr></table><br></div><p><a href="ch09.html#LE73018-PARENT" title="Example 9-3. Requesting a Help Topic for a Widget Using SGIHelpMsg()">Example 9-3</a> shows an example of using <tt>SGIHelpMsg()</tt> to request help given a widget hierarchy. In this case, the application must have a helpmap file, and the help file must contain an entry mapping the given hierarchy to a help topic for this call to succeed.</p>
+<div class="example"><a name="LE73018-PARENT"></a><p><a name="LE73018-PARENT"></a><b>Example 9-3. Requesting a Help Topic for a Widget Using <tt>SGIHelpMsg()</tt></b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;helpapi/HelpBroker.h&gt;
+ 
+/* Assume initialization of help session is complete */
+ 
+/*
+ * This call displays the help topic specified by the
+ * mapping for the widget hierarchy
+ * &quot;MyApp.mainWindow.controlPane.searchButton&quot;
+ * as given in the application's helpmap file.
+ */
+ 
+status = SGIHelpMsg( &quot;MyApp.mainWindow.controlPane&quot;,
+                     NULL, NULL );
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE51771-PARENT"></a>Displaying the Help Index</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-15"></a>
+The <tt>SGIHelpIndexMsg()</tt> call causes the help server to look for the application's helpmap file and to display the Help Index window:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int SGIHelpIndexMsg (char *<i>key</i>, char *<i>book</i>);
+</pre></td></tr></table><br><div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>key</i></span></td><td width="10"> </td><td><p>You should always set this field to NULL or &#8220;index.&#8221;</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>book</i></span></td><td width="10"> </td><td><p>Reserved for future use. You should always set this field to NULL.</p>
+
+</td></tr></table></div><p>The index displays all the help topics in the helpmap file in the order they appear in the file. You must have a helpmap file for this call to work properly. See <a href="ch09.html#LE73995-PARENT" title="Application Helpmap Files">&#8220;Application Helpmap Files&#8221;</a> for more information about the helpmap file. <tt>SGIHelpIndexMsg()</tt> returns 1 on success, and 0 on failure.</p>
+<p><a href="ch09.html#LE12291-PARENT" title="Example 9-4. Displaying a Help Index Using SGIHelpIndexMsg() ">Example 9-4</a> shows an example of how to use <tt>SGIHelpIndexMsg()</tt>.</p>
+<div class="example"><a name="LE12291-PARENT"></a><p><a name="LE12291-PARENT"></a><b>Example 9-4. Displaying a Help Index Using <tt>SGIHelpIndexMsg()</tt> </b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* Assume initialization of help session is complete */
+ 
+/*
+ * This call will look in the application's helpmap
+ * file for a list of topics to display to the user in
+ * sgihelp's index window.
+ */
+ 
+status = SGIHelpIndexMsg( &quot;index&quot;, NULL );
+</pre></td></tr></table><br></div><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE58688-PARENT"></a>Implementing Help in an Application</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-16"></a>
+The section &#8220;Types of Online Help&#8221; in Chapter 4
+ of the <i>IRIX Interactive User Interface Guidelines</i> describes the user interfaces to online help that your application should provide. In summary, these services are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Help menus in all application windows with menu bars</p>
+</li>
+<li><p><b>Help</b> buttons in all applications without menu bars</p>
+</li>
+<li><p>Context-sensitive help available through both the help menus and the <b><tt>&lt;Shift+F1&gt;</tt></b> keyboard accelerator.</p>
+</li>
+</ul></div><p>This section contains specific suggestions for implementing these help interfaces to your application:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE44432-PARENT" title="Constructing a Help Menu">&#8220;Constructing a Help Menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE82226-PARENT" title="Implementing a Help Button">&#8220;Implementing a Help Button&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE31270-PARENT" title="Providing Context-Sensitive Help">&#8220;Providing Context-Sensitive Help&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE44432-PARENT"></a>Constructing a Help Menu</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-17"></a>
+For those windows in your application with a menu bar, you should provide a Help menu. &#8220;Providing Help through a Help Menu&#8221; in Chapter 4
+ of the <i>IRIX Interactive User Interface Guidelines</i> recommends that the following entries appear in the Help menu:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">&#8220;Click for Help&#8221;</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Provides context-sensitive help. This option should also use the <b><tt>&lt;Shift+F1&gt;</tt></b> keyboard accelerator. When a user selects &#8220;Click for Help,&#8221; the cursor should turn into a question mark (?). The user can then move the cursor over an item or area of interest and click. Your application should then display a help topic describing the purpose of the item or area.</p>
+<p><a href="ch09.html#LE31270-PARENT" title="Providing Context-Sensitive Help">&#8220;Providing Context-Sensitive Help&#8221;</a> provides detailed instructions for implementing context-sensitive help.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">&#8220;Overview&#8221;</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Displays overview information. The main primary window should provide an overview of the application. For other windows, this option should appear as &#8220;Overview for <i>&lt;window name&gt;</i>&#8221; and provide an overview of the current window only.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">A list of topics and tasks</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>This section should contain a list of topics and tasks that the user can perform in your application. When the user selects one of the options, your application should display a help topic for that item. To reduce the size of this section, you can move some of the tasks to submenus.</p>
+<p>You can hard code the entries in this section or, if you have a helpmap file for your application, you can parse the helpmap and dynamically create the task and subtask entries.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">&#8220;Index&#8221;</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Displays Help Index window for the application. You must have an application helpmap file to support this option.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">&#8220;Keys &amp; Shortcuts&#8221;</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Displays the application's accelerator keys, keyboard shortcuts, and other actions in the application.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">&#8220;Product Information&#8221;</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Displays a dialog box showing the name, version, and any copyright information or other related data for your application. Typically, you should present this information using an IRIS IM dialog rather than using online help.</p>
+
+</td></tr></table></div><p>Separators are added automatically. See the program listing in <a href="apc.html#LE82258-PARENT" title="Example C-4. Help Source File for Example Program">Example C-4</a> for an example of creating a Help menu.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE82226-PARENT"></a>Implementing a Help Button</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-18"></a>
+For those windows in your application that don't contain a menu bar, you should provide a <b>Help</b> button. <a href="ch09.html#LE86304-PARENT" title="Example 9-5. Providing a Help Button">Example 9-5</a> shows how you can use the SGIHelp API to communicate with the help server from a pushbutton within your application. &#8220;Providing Help Through a Help Button&#8221; in Chapter 4 of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for when to implement a <b>Help</b> button.</p>
+<div class="example"><a name="LE86304-PARENT"></a><p><a name="LE86304-PARENT"></a><b>Example 9-5. Providing a Help Button</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* required include file for direct communication with help server */
+#include &lt;helpapi/HelpBroker.h&gt;
+#include &lt;Xm/Xm.h&gt;
+ 
+/* ... */
+ 
+/* initialize help server information */
+SGIHelpInit(display, &quot;MyWindowApp&quot;, &quot;.&quot;);
+ 
+...
+ 
+/* create help pushbutton for your window */
+Widget helpB = XmCreatePushButton(parent, &quot;helpB&quot;, NULL, 0);
+XtManageChild(helpB);
+ 
+  XtAddCallback(helpB, XmNactivateCallback,
+                (XtCallbackProc)helpCB, (XtPointer)NULL);
+/* ... */
+ 
+/* help callback */
+void helpCB(Widget w, XtPointer clientData, XtPointer callData)
+{
+                /*
+                 * communicate with the help server; developer
+                 * may wish to pass the &quot;key&quot; in as part of the
+                 * callback's callData parameter...
+                 */
+                SGIHelpMsg(&quot;key&quot;, &quot;book&quot;, NULL);
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE31270-PARENT"></a>Providing Context-Sensitive Help</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-19"></a>
+<a class="indexterm" name="IT09.SGIHelp-20"></a>
+To provide context-sensitive help from within your application, you need to write code that tracks the cursor and interrogates the widget hierarchy. Additionally, you need to make a mapping between what the user has clicked, and the help card that's displayed.</p>
+<p>The best way to provide the mapping is with the application helpmap file. The SGIHelp library provides a fallback algorithm for finding help topics that simplifies the process mapping widgets to topics. If the help system can't find an exact match to the widget string in the helpmap file, it drops the last widget from the string and tries again. The help system reiterates this process until it finds a match in the helpmap file. This eliminates the need to explicitly map a help topic for every widget in your application. Instead you can map a help topic to a higher-level manager widget and have that topic mapped to all of its descendent widgets as well.</p>
+<p>For more information on the structure of application helpmap files, see <a href="ch09.html#LE73995-PARENT" title="Application Helpmap Files">&#8220;Application Helpmap Files&#8221;</a>.</p>
+<p><a href="ch09.html#LE56968-PARENT" title="Example 9-6. Implementing Context-Sensitive Help">Example 9-6</a> shows the code used to implement context-sensitive help in the example program listed in <a href="apc.html#LE82258-PARENT" title="Example C-4. Help Source File for Example Program">Example C-4</a>, which simply installs <tt>clickForHelpCB()</tt> as the callback function for the &#8220;Click for Help&#8221; option of the Help menu. As long as you create a helpmap file for your application, you can use this routine as listed in your application as well.</p>
+<div class="example"><a name="LE56968-PARENT"></a><p><a name="LE56968-PARENT"></a><b>Example 9-6. Implementing Context-Sensitive Help</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+void clickForHelpCB(Widget wid, XtPointer clientData, XtPointer callData)
+{
+     static Cursor cursor = NULL;
+     static char path[512], tmp[512];
+     Widget shell, result, w;
+  
+     strcpy(path, &quot;&quot;);
+     strcpy(tmp,  &quot;&quot;);
+ 
+/* 
+ * create a question-mark cursor 
+ */
+     if(!cursor)
+         cursor = XCreateFontCursor(XtDisplay(wid), XC_question_arrow);
+ 
+     XmUpdateDisplay(_mainWindow);
+ 
+/* 
+ * get the top-level shell for the window 
+ */
+     shell = _mainWindow;
+     while (shell &amp;&amp; !XtIsShell(shell)) {
+            shell = XtParent(shell);
+     }
+ 
+/*
+ * modal interface for selection of a component;
+ * returns the widget or gadget that contains the pointer
+ */
+     result = XmTrackingLocate(shell, cursor, FALSE);
+ 
+     if( result ) {
+         w = result;
+ 
+/* 
+ * get the widget hierarchy; separate with a '.';
+ * this also puts them in top-down vs. bottom-up order.
+ */
+         do {
+              if( XtName(w) ) {
+                  strcpy(path, XtName(w));
+ 
+                  if( strlen(tmp) &gt; 0 ) {
+                      strcat(path, &quot;.&quot;);
+                      strcat(path, tmp);
+                  }
+ 
+                  strcpy(tmp, path);
+              }
+ 
+              w = XtParent(w);
+         } while (w != NULL &amp;&amp; w != shell);
+ 
+         /*
+          * send msg to the help server-widget hierarchy;
+          *      OR
+          * provide a mapping to produce the key to be used
+          *
+          * In this case, we'll let the sgihelp process do
+          * the mapping for us, with the use of a helpmap file
+          *
+          * Note that parameter 2, the book name, can be found
+          * from the helpmap file as well. The developer need
+          * not hard-code it, if a helpmap file is present for
+          * the application. 
+          *
+          */
+          if( strlen(path) &gt; 0 ) {
+                SGIHelpMsg(path, NULL, NULL);
+          }
+     }
+}
+</pre></td></tr></table><br></div><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE73995-PARENT"></a>Application Helpmap Files</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-21"></a>
+<a class="indexterm" name="IT09.SGIHelp-22"></a>
+Application helpmap files provide a level of indirection that allows you to structure your help presentation independently of your application code. </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE40507-PARENT" title="Helpmap File Conventions">&#8220;Helpmap File Conventions&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE41266-PARENT" title="Helpmap File Format">&#8220;Helpmap File Format&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE10425-PARENT" title="Widget Hierarchies in the Helpmap File">&#8220;Widget Hierarchies in the Helpmap File&#8221;</a> </p>
+</li>
+</ul></div><p>You don't have to create a helpmap for your application, but doing so gives you the following benefits:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Your application can display a Help Index window, allowing users to select a particular topic directly from the list.</p>
+</li>
+<li><p>You can write the code that generates your application's Help menu to create the &#8220;list of topics and tasks&#8221; options dynamically from the helpmap. You can then add and restructure your task help without recompiling your application. See <a href="ch09.html#LE44432-PARENT" title="Constructing a Help Menu">&#8220;Constructing a Help Menu&#8221;</a> for details on the Help menu's list of topics.</p>
+</li>
+<li><p>Your application's Help menu can launch a browser and access a URL on the World Wide Web. See <a href="ch09.html#LE82992-PARENT" title="Example of Helpmap Entry to Access a Web Browser">&#8220;Example of Helpmap Entry to Access a Web Browser&#8221;</a> for more information.</p>
+</li>
+<li><p>You can provide context-sensitive without hard-coding in your source code a help topic to each widget. The SGIHelp library provides a fallback algorithm for finding help topics that simplifies the process mapping widgets to topics. If the help system can't find an exact match to the widget string in the helpmap file, it drops the last widget from the string and tries again. The help system reiterates this process until it finds a match in the helpmap file. This eliminates the need to explicitly map a help topic for every widget in your application. Instead you can map a help topic to a higher-level manager widget and have that topic mapped to all of its descendent widgets as well. See <a href="ch09.html#LE31270-PARENT" title="Providing Context-Sensitive Help">&#8220;Providing Context-Sensitive Help&#8221;</a> for information on implementing context-sensitive help in your application.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE40507-PARENT"></a>Helpmap File Conventions</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-23"></a>
+Helpmap files are ASCII text files. The name of your application helpmap file must be <i>&#8220;appClass</i>.helpmap&#8221;, where <i>appClass</i> is your application's class name as provided in your application's call to <tt>SGIHelpInit()</tt>. See <a href="ch09.html#LE83049-PARENT" title="Initializing the Help Session">&#8220;Initializing the Help Session&#8221;</a> for more information on <tt>SGIHelpInit()</tt>.</p>
+<p>If you create a helpmap file for your application, you must create a subdirectory named <tt>help</tt> in the directory containing your help document and put all of your document's figures in that subdirectory. See <a href="ch09.html#LE29476-PARENT" title="Preparing to Build the Online Help">&#8220;Preparing to Build the Online Help&#8221;</a> for more information.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE41266-PARENT"></a>Helpmap File Format</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-24"></a>
+Each entry, or <span class="bold"><b>help topic</b></span>, in a helpmap consists of a single line containing at least six fields, each field separated by semicolons:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<i>type</i>;<i>book</i>;<i>title</i>;<i>level</i>;<i>helpID</i>;<i>widget-hierarchy</i>[;<i>widget-hierarchy</i> &#8230;]
+</pre></td></tr></table><br><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5217048"></a>Helpmap Fields</h4></div></div>
+<p>All fields are required for each entry. Their purpose is as follows:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>type</i></span></td><td width="10"> </td><td><p>The type of help topic. Its value can be:</p>
+<div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr valign="top"><td scope="row" valign="top"><p>0</p>
+</td><td valign="top"><p>A context-sensitive topic.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>1</p>
+</td><td valign="top"><p>The overview topic.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>2</p>
+</td><td valign="top"><p>A task-oriented entry that could show up in the 
+&#8220;list of topics and tasks&#8221; area of the Help menu. 
+See <a href="ch09.html#LE44432-PARENT" title="Constructing a Help Menu">&#8220;Constructing a Help Menu&#8221;</a></p>
+<p> for 
+details on the Help menu's list of topics.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>3</p>
+</td><td valign="top"><p>The Keys and Shortcuts topic.</p>
+</td></tr></tbody></table></div><br>
+</td></tr><tr valign="top"><td><span class="term"><i>book</i></span></td><td width="10"> </td><td><p>The name of the help document that contains this help topic. Help topics can reside in different books. Each individual help topic can point to only one help book.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>title</i></span></td><td width="10"> </td><td><p>The title of the help topic. This appears in the Help Index window. If your application parses the helpmap file to generate the &#8220;list of topics and tasks&#8221; area of the Help menu, you can use this as the label for the menu option.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>level</i></span></td><td width="10"> </td><td><p>A number determining the topic level. A value of 0 indicates a main topic, a value of 1 a sub-topic, a value of 2 a sub-sub-topic, and so forth. This produces an expandable/collapsible outline of topics for the Help Index window.</p>
+<p>If your application parses the helpmap file to generate the &#8220;list of topics and tasks&#8221; area of the Help menu, you can also use these values to construct &#8220;roll-over&#8221; submenus as part of a Help menu.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>helpID</i></span></td><td width="10"> </td><td><p>The unique ID, as specified by the &#8220;HelpID&#8221; attribute, of the specific help topic in the help document.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>widget-hierarchy</i></span></td><td width="10"> </td><td><p>One or more fully-qualified widget specifications for use with context-sensitive help. You can provide multiple specifications, delimited by semicolons, to associate different areas with the same topics.</p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5217327"></a>Examples of Helpmap Entries</h4></div></div>
+<p>For example, the following entry in <tt>Swpkg.helpmap</tt> specifies the overview topic:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+1;IndigoMagic_IG;Overview;0;Overview;Swpkg.swpkg.overview
+</pre></td></tr></table><p>The following entries from <tt>Swpkg.helpmap</tt> specify several context-sensitive help topics. In this case, the first entry appears as a main topic in the Help Index window and the next three appear as sub-topics:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+0;Swpkg_UG;Using the swpkg Menus;0;menu.bar;Swpkg.swpkg.menuBar
+0;Swpkg_UG;The File Menu;1;menu.bar.file;Swpkg.swpkg.menuBar.File
+0;Swpkg_UG;The View menu;1;menu.bar.view;Swpkg.swpkg.menuBar.View
+0;Swpkg_UG;The Help menu;1;menu.bar.help;Swpkg.swpkg.menuBar.helpMenu
+</pre></td></tr></table><p>The following shows a more complex hierarchy from <tt>Swpkg.helpmap</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+2;Swpkg_UG;Tagging Files;0;tag.files.worksheet;Swpkg.swpkg
+2;Swpkg_UG;Selecting Product Files;1;file.browser;Swpkg.swpkg.view.viewPanedWindow.viewForm.\
+ leftForm.filesBody.addBody.FileListAdd.selectionGrid
+0;Swpkg_UG;Setting the Browsing Directory;2;file.browser.dirfield;Swpkg.swpkg.view.\
+ viewPanedWindow.viewForm.leftForm.filesBody.addBody.FileListAdd.directoryLabel;Swpkg.swpkg.\
+ view.viewPanedWindow.viewForm.leftForm.filesBody.addBody.FileListAdd.directoryTextField
+0;Swpkg_UG;Selecting Files From the File List;2;file.browser.filelist;Swpkg.swpkg.view.\
+ viewPanedWindow.viewForm.leftForm.filesBody.addBody.FileListAdd.scrolledWindow.filesList;\
+ Swpkg.swpkg.view.viewPanedWindow.viewForm.leftForm.filesBody.addBody.FileListAdd.\
+ scrolledWindow.VertScrollBar
+</pre></td></tr></table><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The backslashes (\) indicate linewraps; they do not actually appear in the helpmap file. Each helpmap entry must be a single line.
+</td></tr></table><hr noshade="noshade"></div><p>In the example above, the first entry is a task-oriented topic (2 in the <i>type</i> field). <tt>swpkg</tt> parses the helpmap file to create its Help menu, so &#8220;Tagging Files&#8221; appears as a selection. The second entry is also a task-oriented topic. It's a sub-topic of the first entry and appears in a submenu off the &#8220;Tagging Files&#8221; selection. The last two entries are marked as context-sensitive only (0 in the <i>type</i> field). These entries don't appear anywhere in the application's Help menu, but they do appear as sub-sub-topics in the Help Index window. Also note that the last two entries have two widget specifications, providing context-sensitive help for two different widgets.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The order of the entries in the application helpmap file determines the order in which help topics appear in the Help Index window.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE82992-PARENT"></a>Example of Helpmap Entry to Access a Web Browser</h4></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-25"></a>
+<a class="indexterm" name="IT09.SGIHelp-26"></a>
+<a class="indexterm" name="IT09.SGIHelp-27"></a>
+<a class="indexterm" name="IT09.SGIHelp-28"></a>
+<a class="indexterm" name="IT09.SGIHelp-29"></a>
+<a class="indexterm" name="IT09.SGIHelp-30"></a>
+You can put an entry into a helpmap file to launch a Web browser and access a URL. An example entry in the showcase <tt>helpmap</tt> file looks like this:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+2;HREF=http://www.sgi.com/Products/SGIHelp_Hub/Showcase_3.3.2.html;\
+Showcase Web Page;0;showcase_web;Showcase3D.showcase2;ShowcaseUG;\
+About Gizmos;0;about_gizmo;Showcase3D.showcase
+</pre></td></tr></table><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The backslashes (\) indicate linewraps; do not actually enter them in the helpmap file. Each helpmap entry must be a single line.
+</td></tr></table><hr noshade="noshade"></div><p>When SGIhelp encounters this type of entry, it uses a Web browser such as Netscape (or $WEBBROWSER) to show the URL specified by the entry. </p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE10425-PARENT"></a>Widget Hierarchies in the Helpmap File</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-31"></a>
+<a class="indexterm" name="IT09.SGIHelp-32"></a>
+At least one widget hierarchy must accompany every point in the application helpmap file. That one (default) point should be set to &#8220;<i>application_classname</i>.<i>top-level_shell</i>&#8221;.</p>
+<p>Note that the application class name must always be the first component of a widget hierarchy string. All widget ID's within the string must be delimited by a period ( . ).</p>
+<p>Widget hierarchies can be as fine-grained as you wish to make them. A fall-back algorithm is in place (to go to the closest available entry) when the user clicks a widget in context-sensitive help mode. For example, suppose your application includes a row or set of buttons. When the user asks for help on a button, you pass that widget string to SGIHelp. If the widget string is not found in the mappings, the last widget is dropped off the string (in this case, the widget ID for the button itself). The new string is compared to all available mappings. This loop continues until something is found. At the very least, you should fall back to an &#8220;Overview&#8221; card.</p>
+<p>To get a sample widget hierarchy (help message) from an application, you can run the SGIHelp help server process in debug mode. Before doing this, you need to add the SGIHelp API call, <tt>SGIHelpMsg()</tt>, to your application and implement context-sensitive help. Make sure that you send a widget hierarchy string for the &#8220;key&#8221; parameter in the <tt>SGIHelpMsg()</tt> call. (See &#8220;Providing Context-Sensitive Help within an Application&#8221; and &#8220;Understanding Available Calls&#8221; for details on this call.)</p>
+<p>To get a sample widget hierarchy from an application that implements context-sensitive help, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Bring up a shell.</p>
+</li>
+<li><p>Make sure the help server process isn't running. Type:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>/etc/killall sgihelp</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Type the following to make the help server process run in the foreground in debug mode:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>/usr/sbin/sgihelp -f -debug</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Run your application, and then choose &#8220;Click for Help&#8221; from the help menu. The cursor should change into a question mark (?), or whatever cursor you've implemented for context sensitive help.</p>
+</li>
+<li><p>Click a widget or an area of the application.</p>
+</li>
+<li><p>Check the shell from which SGIHelp is being run. You should see a line such as:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+REQUEST= client=&quot;Overview&quot; command=&quot;view&quot; book=&quot;&quot; 
+   keyvalue=&quot;DesksOverview.MainView.Frame.viewport.Bboard&quot;
+   separator=&quot;.&quot; user_data=&quot;&quot;
+</pre></td></tr></table><p>The &#8220;keyvalue&#8221; field contains the widget hierarchy that you can add to the helpmap file. Remember to add the application class name to the front of the string. For the example above, the full widget hierarchy string would be:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+Overview.DesksOverview.MainView.Frame.viewport.Bboard 
+</pre></td></tr></table><br></li>
+</ol></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE67544-PARENT"></a>Writing the Online Help</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-33"></a>
+<a class="indexterm" name="IT09.SGIHelp-34"></a>
+<a class="indexterm" name="IT09.SGIHelp-35"></a>
+This section describes how you prepare the online help document. It provides an explanation of the standard format you must use, as well as the steps you take to actually prepare the file. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE49493-PARENT" title="Overview of Help Document Files">&#8220;Overview of Help Document Files&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE39625-PARENT" title="Viewing the Sample Help Document Files">&#8220;Viewing the Sample Help Document Files&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE26529-PARENT" title="Creating a Help Document File">&#8220;Creating a Help Document File&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#LE29476-PARENT" title="Preparing to Build the Online Help">&#8220;Preparing to Build the Online Help&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE23960-PARENT" title="Building the Online Help">&#8220;Building the Online Help&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#LE68072-PARENT" title="Finding and Correcting Build Errors">&#8220;Finding and Correcting Build Errors&#8221;</a></p>
+</li>
+</ul></div><p>For guidelines on structuring and writing your online help text, see &#8220;Writing Online Help Content for SGIHelp&#8221; in Chapter 4
+ of the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE49493-PARENT"></a>Overview of Help Document Files</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-36"></a>
+Help document files contain the actual help text in <span class="bold"><b>Standard Generalized Markup Language</b></span> (SGML) format. When you write the online help for your product, you need to embed SGML tags to describe the structure of your document.</p>
+<p><a class="indexterm" name="IT09.SGIHelp-37"></a>
+The file <tt>/usr/share/Insight/XHELP/samples/sampleDoc/sample.sgm</tt> is an example of a file with embedded SGML tags. (<a href="apc.html#LE61943-PARENT" title="Example C-1. An Example of a Help Source File">Example C-1</a> also lists this file.) Notice the tags surrounded by angle brackets (&lt;&gt;). These tags describe how each item fits into the structure of the overall document. For example, a paragraph might be tagged as a list item, and a word within that paragraph may be tagged as a command.</p>
+<p><a class="indexterm" name="IT09.SGIHelp-38"></a>
+The <span class="bold"><b>Document Type Definition</b></span> (DTD) outlines the tagging rules for your online documentation. In other words, it specifies which SGML tags are allowed, and in what combination or sequence. The file <tt>/usr/share/Insight/XHELP/dtd/XHELP.dtd</tt> lists the legal structure for your online help.</p>
+<p>A DTD can be difficult to read, so you might instead want to look at the file <tt>/usr/share/Insight/XHELP/samples/XHELP_elements/XHELP_elements.sgm</tt>, which lists the legal elements in a help document and describes when to use them in your documents. (<a href="apc.html#LE39308-PARENT" title="Example C-2. A Description of the Elements Defined by the Help DTD">Example C-2</a> also lists this file.)</p>
+<p>For a more complete understanding of SGML, refer to the bibliography in <a href="ch09.html#LE36112-PARENT" title="Bibliography of SGML References">&#8220;Bibliography of SGML References&#8221;</a>. It lists several of the many books on SGML.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE39625-PARENT"></a>Viewing the Sample Help Document Files</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-39"></a>
+Before beginning to write your own help documents, you might find it helpful to examine the source of the sample help documents and then view resulting online versions. You can compile and view the help documents in Insight. To do so, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Go to a directory in which you want to build the sample help book.</p>
+</li>
+<li><p>Copy the necessary directories and files by entering:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cp -r /usr/share/Insight/XHELP/samples</tt></b> <b><tt>.</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Enter: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd samples/sampleDoc</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Build the file <tt>sample.sgm</tt> by entering:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make help</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>To view this file, enter:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>iiv -b . -v sample</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Change to the <tt>exampleApp</tt> directory by entering:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd ../exampleApp</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Build the file <tt>exampleAppXmHelp.sgm</tt> by entering:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make help</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>To view this file, enter:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>iiv -b . -v exampleAppXmHelp</tt></b> 
+</pre></td></tr></table><br></li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE26529-PARENT"></a>Creating a Help Document File</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-40"></a>
+To create the help document file for your application:</p>
+<div class="orderedlist"><ol type="1"><li><p>Create a new directory for the online help, then go to this directory.</p>
+</li>
+<li><p>Create a text file and name the file &#8220;<tt>title</tt>.sgm&#8221;, where <i>title</i> is one word that identifies the online help.</p>
+</li>
+<li><p>Write the online help.</p>
+</li>
+</ol></div><p>You can include figures as described in the example help documents. If your document contains figures, create a subdirectory named either <tt>figures</tt> or <tt>online</tt> in your help document directory and put all of your document's figures in that subdirectory.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE29476-PARENT"></a>Preparing to Build the Online Help</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-41"></a>
+<a class="indexterm" name="IT09.SGIHelp-42"></a>
+<a class="indexterm" name="IT09.SGIHelp-43"></a>
+<a class="indexterm" name="IT09.SGIHelp-44"></a>
+After writing your online help you must <span class="bold"><b>build</b></span> it, similarly to the way you compile a program. When you build the online help, you transform the raw SGML file into a viewable, online document. To get started, you need to create two files: a Makefile and a spec file. </p>
+<p>The Makefile specifies:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>the name of file that contains the online help</p>
+</li>
+<li><p>the name you want to assign to the help book</p>
+</li>
+<li><p>the version number of the product</p>
+</li>
+</ul></div><p>The spec file specifies:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>the title of your product</p>
+</li>
+<li><p>the official release and version numbers</p>
+</li>
+<li><p>other information that is used when you create the final, installable images</p>
+</li>
+</ul></div><p>To create these files, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Go to the directory that contains the online help file.</p>
+</li>
+<li><p>Copy <tt>/usr/share/Insight/XHELP/templates/Makefile_xhelp</tt> by typing:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<b><tt>cp /usr/share/Insight/XHELP/templates/Makefile_xhelp Makefile</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Copy <tt>/usr/share/Insight/XHELP/templates/spec_xhelp</tt> by typing:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<b><tt>cp /usr/share/Insight/XHELP/templates/spec_xhelp spec</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Edit the Makefile:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Next to the label TITLE, type the name of the file that contains the online help.</p>
+</li>
+<li><p>Next to the label FULL_TITLE, type the name you want to assign to the help book. This name can contain several words, and is used only if you decide to display the help as a &#8220;book&#8221; on the Insight bookshelf.</p>
+</li>
+<li><p>Next to the label VERSION, type the version number for the product.</p>
+</li>
+<li><p>Next to the label HIDDEN, remove the comment character (#) if you want the online help to appear as a book on an Insight bookshelf. Change this if you want users to be able to browse the help information using Insight, and not just from within your application.</p>
+</li>
+</ul></div></li>
+<li><p>Edit the spec file:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Replace the string ${RELEASE} with the release number for the product. This should match what you've entered in the Makefile for the VERSION.</p>
+</li>
+<li><p>Replace the string &lt;ProductName&gt; with a one-word name for the product.</p>
+</li>
+<li><p>Replace the string &lt;Shortname&gt; with the TITLE you specified in the Makefile.</p>
+</li>
+<li><p>Replace the string &lt;SHORTNAME&gt; with the TITLE you specified in the Makefile. Capitalize all letters.</p>
+</li>
+<li><p>Replace the string &lt;SHORTNAME_HELP&gt; with the TITLE followed by &#8220;_HELP&#8221;.</p>
+</li>
+<li><p>Replace the string &lt;Book title&gt; with the FULL_TITLE you      specified in the Makefile.</p>
+</li>
+</ul></div></li>
+</ol></div><p>Once you have edited these files, the directory containing your help document should contain:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>your help document</p>
+</li>
+<li><p>the <tt>Makefile</tt></p>
+</li>
+<li><p>the <tt>spec</tt> file</p>
+</li>
+<li><p>if you included figures in your help document, a subdirectory named either <tt>figures</tt> or <tt>online</tt> containing all of the figures</p>
+</li>
+<li><p>if you created a helpmap file for you application, a subdirectory named <tt>help</tt> containing the helpmap file</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE23960-PARENT"></a>Building the Online Help</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-45"></a>
+<a class="indexterm" name="IT09.SGIHelp-46"></a>
+Once you have written the online help and done the preparation described in <a href="ch09.html#LE29476-PARENT" title="Preparing to Build the Online Help">&#8220;Preparing to Build the Online Help&#8221;</a>, you can build and view the online help. To do so, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Go to the directory that contains the online help files.</p>
+</li>
+<li><p>Enter: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make help</tt></b> 
+</pre></td></tr></table><p>If the help is formatted properly, the online help will build. You should see a file called <tt>booklist.txt</tt> and a directory called <tt>books</tt>.</p>
+<p>If the SGML file contains errors, you will see them displayed in the shell window. See <a href="ch09.html#LE68072-PARENT" title="Finding and Correcting Build Errors">&#8220;Finding and Correcting Build Errors&#8221;</a> for details.</p>
+</li>
+<li><p>View the book by typing</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>iiv -b . -v </tt></b><i>title</i> 
+</pre></td></tr></table><p>Where <i>title</i> is the value of TITLE from the Makefile.</p>
+</li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE68072-PARENT"></a>Finding and Correcting Build Errors</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-47"></a>
+<a class="indexterm" name="IT09.SGIHelp-48"></a>
+<a class="indexterm" name="IT09.SGIHelp-49"></a>
+The SGML tags come in pairs. Each pair contains an opening tag and a closing tag, and the tag applies to everything between the opening tag and the closing tag. If you use these tags incorrectly, you'll get error messages when you build the help file. The most common errors are the result of misspelled tag names, mismatched end tags, or tags used out of sequence.</p>
+<p>Some examples of common error messages are:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+mkhelperror: not authorized to add tag 'PAR', ignoring content.
+</pre></td></tr></table><p>This error appears if you specify an invalid tag. In this case, the invalid tag is &#8220;PAR.&#8221; The valid tag name is &#8220;PARA.&#8221;</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+mkhelperror: Start-tag for 'HELPLABEL' is not valid in this context.
+mkhelp  Location:  Line       37 of entity '#DOCUMENT'
+Context:   'hor point for the link
+syntax.&lt;/&gt;&amp;#RS;&lt;/HelpTopic&gt;&amp;#RS;&amp;#RS;&lt;Helplabel&gt;'...
+             '&lt;Anchor Id=&quot;AI003&quot;&gt;Using Notes, Warnings or Tips Within a P'
+     FQGI:      DOCHELP
+</pre></td></tr></table><p>This error message occurs when the parser sees a tag it isn't expecting. In this case it found a HELPLABEL that was not preceded by a HELPTOPIC start tag. The error message specifies the line number of the error (37), the context in the file, and the Fully Qualified Generic Identifier (FQGI) of the context. You can probably ignore the FQGI; it describes where the error occurs within the SGML structure.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+mkhelperror: No 'WARNING' is open, so an end-tag for it is not valid.
+The last one was closed at line 46.
+mkhelp  Location:  Line       46 of entity '#DOCUMENT'
+Context:   '&lt;warning&gt;Missing open para. This is a
+warning.&lt;/&gt;&lt;/warning&gt;'...
+             '&amp;#RS;&lt;note&gt;&lt;para&gt;For your information, this is a note.&lt;/&gt;&lt;/note'
+   FQGI:      DOCHELP,DESCRIPTION,PARA,PARA
+</pre></td></tr></table><p>This message can occur if you close items with the generic end tag, &lt;/&gt;. In this case, the &lt;/&gt; closes the &lt;warning&gt; because the start tag for &lt;para&gt; is missing. This may occur if you leave out a start tag or accidentally spell it incorrectly.</p>
+<p>If you want additional information about the errors, use the command <tt>make verify</tt>. It produces a more detailed error log. </p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE81424-PARENT"></a>Producing the Final Product</h2></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-50"></a>
+<a class="indexterm" name="IT09.SGIHelp-51"></a>
+This section describes how to package your online help as a subsystem that users can install using Software Manager (<tt>swmgr</tt>), the Silicon Graphics software installation utility. <a class="indexterm" name="IT09.SGIHelp-52"></a>
+Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#LE62065-PARENT" title="Creating the Installable Subsystem">&#8220;Creating the Installable Subsystem&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE77482-PARENT" title="Incorporating the Help Subsystem into a Product With a Custom Installation Script">&#8220;Incorporating the Help Subsystem into a Product With a Custom Installation Script&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#LE17461-PARENT" title="Incorporating the Help Subsystem into an Installable Product">&#8220;Incorporating the Help Subsystem into an Installable Product&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE62065-PARENT"></a>Creating the Installable Subsystem</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-53"></a>
+After you've finished writing and building your online help, you need to package it so that users can install it with the rest of your product. To do so:</p>
+<div class="orderedlist"><ol type="1"><li><p>Go to the directory that contains the online help.</p>
+</li>
+<li><p>Enter: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make images</tt></b> 
+</pre></td></tr></table><p>This produces a directory called <tt>images</tt>. This directory contains all of the files you need to let users install the online help using Software Manager.</p>
+</li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE17461-PARENT"></a>Incorporating the Help Subsystem into an Installable Product</h3></div></div>
+<p>If you use the Software Packager utility (<tt>swpkg</tt>) to package your product so that users can install it using Software Manager, you need to merge the online help subsystem with the rest of your product. Consult the <i>Software Packager User's Guide</i> for detailed instructions for using <tt>swpkg</tt>.</p>
+<p>You don't need to use <tt>swpkg</tt> to create spec or IDB files for your online help subsystem. By following the instructions in <a href="ch09.html#LE29476-PARENT" title="Preparing to Build the Online Help">&#8220;Preparing to Build the Online Help&#8221;</a>, you created the spec file. The process of building your online help, described in <a href="ch09.html#LE23960-PARENT" title="Building the Online Help">&#8220;Building the Online Help&#8221;</a> automatically created an IDB file and tagged the files; set the permissions and destinations; and assigned the necessary attributes. The online help build tools use &#8220;/&#8221; as the Source and Destination Tree Root directories when generating the IDB file. (The <i>Software Packager User's Guide</i> defines all of these terms.)</p>
+<p>If you've not already created the spec and IDB files for the rest of your product using <tt>swpkg</tt>, you can use <tt>swpkg</tt> to open the existing help subsystem spec and IDB files, and expand them as needed to handle the rest of your product. Consult the <i>Software Packager User's Guide</i> for instructions.</p>
+<p>If you've already created the spec and IDB files for your product, you can merge the help subsystem with the existing files as described in &#8220;Combining Existing Products Into a Single Product&#8221; in Chapter 7 of the <i>Software Packager User's Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE77482-PARENT"></a>Incorporating the Help Subsystem into a Product With a Custom Installation Script</h3></div></div>
+<p><a class="indexterm" name="IT09.SGIHelp-54"></a>
+<a class="indexterm" name="IT09.SGIHelp-55"></a>
+If you don't use <tt>swpkg</tt> to package your product for installation with Software Manager, do one of the following.</p>
+<div class="itemizedlist"><ul type="disc"><li><p>If users install your product using the <tt>tar</tt> command, have them use <tt>tar</tt> to copy the online help images as well. After copying the images, the user needs to type: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+# <b><tt>inst -af &lt;</tt></b><i>inst_product</i><b><tt>&gt;</tt></b> 
+</pre></td></tr></table><p>where <i>inst_product</i> is the location of the images.</p>
+</li>
+<li><p>If you've created a script, enhance the script so that it extracts all of the help images onto disk, and then invokes the command:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+# <b><tt>inst -af &lt;</tt></b><i>inst_product</i><b><tt>&gt; </tt></b><b><tt></tt></b>
+</pre></td></tr></table><p>where <i>inst_product</i> is the location of the images. </p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE36112-PARENT"></a>Bibliography of SGML References</h2></div></div>
+<div class="orderedlist"><ol type="1"><li><p><a class="indexterm" name="IT09.SGIHelp-56"></a>
+<a class="indexterm" name="IT09.SGIHelp-57"></a>
+*SoftQuad, Inc. <i>The SGML Primer. SoftQuad's Quick Reference       Guide to the Essentials of the Standard: The SGML Needed for Reading a DTD and Marked-Up Documents and Discussing Them Reasonably</i>. Version 2.0. Toronto: SoftQuad Inc., May 1991. 36 pages. Available from SoftQuad Inc.; 56 Aberfoyle Crescent, Suite 810; Toronto, Ontario; Canada M8X 2W4; TEL: +1 (416) 239-4801; FAX: +1 (416) 239-7105.</p>
+</li>
+<li><p>Bryan, Martin. <i>SGML: An Author's Guide to the Standard Generalized Markup Language</i>. Wokingham/Reading/New York: Addison-Wesley, 1988. ISBN: 0-201-17535-5 (pbk); LC CALL NO: QA76.73.S44 B79 1988. 380 pages. A highly detailed and useful manual explaining and illustrating features of ISO 8879. The book: (1) shows how to analyze the inherent structure of a document; (2) illustrates a wide variety of markup tags; (3) shows how to design your own tag set; (4) is copiously illustrated with practical examples; (5) covers the full range of SGML features. Technical and non-technical authors, publishers, typesetters and users of desktop publishing systems will find this book a valuable tutorial on the use of SGML and a comprehensive reference to the standard. It assumes no prior knowledge of computing or typography on the part of its readers.</p>
+</li>
+<li><p>Goldfarb, Charles F. <i>The SGML Handbook</i>. Edited and with a foreword by Yuri Rubinsky. Oxford: Oxford University Press, 1990. ISBN: 0-19-853737-1. 688 pages.   This volume contains the full annotated text of ISO 8879 (with amendments), authored by IBM Senior Systems Analyst and acknowledged &#8220;father of SGML,&#8221; Charles Goldfarb. The book was itself produced from SGML input using a DTD which is a variation of the &#8220;ISO.general&#8221; sample DTD included in the annexes to ISO 8879. The SGML Handbook includes: (1) the up-to-date amended full text of ISO 8879, extensively annotated, cross-referenced, and indexed; (2) a detailed structured overview of SGML, covering every concept; (3) additional tutorial and reference material; and (4) a unique &#8220;push- button access system&#8221; that provides paper hypertext links between the standard, annotations, overview, and tutorials. </p>
+</li>
+<li><p>Herwijnen, Eric van. <i>Practical SGML</i>. Dordrecht/Hingham, MA: Wolters Kluwer Academic Publishers. 200 pages. ISBN: 0-7923- 0635-X. The book is designed as a &#8220;practical SGML survival-kit for SGML users (especially authors) rather than developers,&#8221; and itself constitutes an experiment in SGML publishing. The book provides a practical and painless introduction to the essentials of SGML, and an overview of some SGML applications. See the reviews by (1) Carol Van Ess-Dykema in Computational Linguistics 17/1 (March 1991) 110-116, and (2) Deborah A. Lapeyre in <i>&lt;TAG&gt;</i> 16 (October 1990) 12-14.</p>
+</li>
+<li><p>Smith, Joan M.; Stutely, Robert S. <i>SGML: The Users' Guide to ISO 8879</i>. Chichester/New York: Ellis Horwood/Halsted, 1988. 173 pages. ISBN: 0-7458-0221-4 (Ellis Horwood) and ISBN: 0-470-21126-1 (Halsted). LC CALL NO: QA76.73.S44 S44 1988.   The book (1) supplies a list of some 200 syntax productions, in numerical and alphabetical sequence; (2) gives a combined abbreviation list; (3) includes highly useful subject indices to ISO 8879 and its annexes; (4) supplies graphic representations for the ISO 8879 character entities; and (5) lists SGML keywords and reserved names. An overview of the book may be found in the SGML Users' Group Newsletter 9 (August 1988).</p>
+</li>
+<li><p>ISO 8879:1986. <i>Information Processing</i>&#8212;<i>Text and Office System</i>&#8212;<i>Standard Generalized Markup Language (SGML)</i>. International Organization for Standardization. Ref. No. ISO 8879:1986 (E). Geneva/New York, 1986. A subset of SGML became a US FIPS (Federal Information Processing Standard) in 1988. The British Standards Institution adopted SGML as a national standard (BS 6868) in 1987, and in 1989 SGML was adopted by the CEN/CENELEC Standards Committees as a European standard, #28879. Australia has dual numbered versions of ISO 8879 SGML and ISO 9069 SDIF (AS 3514&#8212;SGML 1987; AS 3649&#8212;1990 SDIF).</p>
+</li>
+<li><p>ISO 8879:1986 / A1:1988 (E). <i>Information Processing</i>&#8212;<i>Text and Office Systems</i>&#8212;<i>Standard Generalized Markup Language (SGML), Amendment 1</i>. Published 1988-07-01. Geneva: International Organization for Standardization, 1988. </p>
+</li>
+</ol></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch08.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch10.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 8. Monitoring Changes to Files and Directories </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 10. Handling Users' System Preferences </td></tr></table></div></body></html>

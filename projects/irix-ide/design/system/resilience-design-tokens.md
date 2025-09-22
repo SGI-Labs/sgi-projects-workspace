@@ -51,7 +51,7 @@ Canonical tokens for the remote recovery UI surfaces. Keep values in sync with `
 | `motion.duration.fast` | 120 ms | Status pill transitions, button hover |
 | `motion.duration.base` | 200 ms | Banners slide in/out, toast entry |
 | `motion.duration.slow` | 320 ms | Confirmation sheet expand, modal fade |
-| `motion.easing.standard` | cubic-bezier(0.4, 0.0, 0.2, 1) | Default easing, matches macOS |
+| `motion.easing.standard` | cubic-bezier(0.4, 0.0, 0.2, 1) | Default easing for IRIX overlays |
 | `motion.easing.decelerate` | cubic-bezier(0.0, 0.0, 0.2, 1) | Retry progress completion |
 | `motion.easing.accelerate` | cubic-bezier(0.4, 0.0, 1, 1) | Banner exit on success |
 

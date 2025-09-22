@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix H. Standard Menu Resources</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="apg.html" title="Appendix G. Using GoldenGate Data Conversion Services"><link rel="next" href="ix01.html" title="Index"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix H. Standard Menu Resources</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apg.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ix01.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE21714-PARENT"></a>Appendix H. Standard Menu Resources</h2></div></div>
+<p><a class="indexterm" name="ITH.menuResources-0"></a>
+<a class="indexterm" name="ITH.menuResources-1"></a>
+This appendix provides examples of standard menu resources including:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="aph.html#LE74041-PARENT" title="Common Menu Bar Resources">&#8220;Common Menu Bar Resources&#8221;</a> </p>
+</li>
+<li><p><a href="aph.html#LE40617-PARENT" title="Standard File Menu Resources">&#8220;Standard File Menu Resources&#8221;</a> </p>
+</li>
+<li><p><a href="aph.html#LE25646-PARENT" title="Standard Edit Menu Resources">&#8220;Standard Edit Menu Resources&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE74041-PARENT"></a>Common Menu Bar Resources</h2></div></div>
+<p><a class="indexterm" name="ITH.menuResources-2"></a>
+<a class="indexterm" name="ITH.menuResources-3"></a>
+The following code defines the common menu bar resources.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Common Menu Bar Resources                                      !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! Standard Menubar 
+! File Selected Edit View Tools Options Help
+
+! &lt;your_widget_name_goes_here&gt;
+
+*&lt;file&gt;.labelString:          File
+*&lt;file&gt;.mnemonic:             F
+
+*&lt;selected&gt;.labelString:      Selected
+*&lt;selected&gt;.mnemonic:         S
+
+*&lt;edit&gt;.labelString:          Edit
+*&lt;edit&gt;.mnemonic:             E
+
+*&lt;view&gt;.labelString:         View
+*&lt;view&gt;.mnemonic:            V
+
+*&lt;tools&gt;.labelString:        Tools
+*&lt;tools&gt;.mnemonic:           T
+
+*&lt;options&gt;.labelString:      Options
+*&lt;options&gt;.mnemonic:         O
+
+*&lt;help&gt;.labelString:         Help
+*&lt;help&gt;.mnemonic:            H 
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE40617-PARENT"></a>Standard File Menu Resources</h2></div></div>
+<p><a class="indexterm" name="ITH.menuResources-4"></a>
+<a class="indexterm" name="ITH.menuResources-5"></a>
+The following code defines the standard file menu resources.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Standard File Menu Resources                                   !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+*&lt;new&gt;.labelString:          New
+*&lt;new&gt;.mnemonic:             N
+*&lt;new&gt;.acceleratorText:      Ctrl+N
+*&lt;new&gt;.accelerator:          Ctrl&lt;Key&gt;N
+
+*&lt;open&gt;.labelString:         Open...
+*&lt;open&gt;.mnemonic:            O
+*&lt;open&gt;.acceleratorText:     Ctrl+O
+*&lt;open&gt;.accelerator:         Ctrl&lt;Key&gt;O
+
+*&lt;reopen&gt;.labelString:       Reopen
+*&lt;reopen&gt;.mnemonic:          R
+
+*&lt;import&gt;.labelString:       Import
+*&lt;import&gt;.mnemonic:          I
+
+*&lt;save&gt;.labelString:         Save
+*&lt;save&gt;.mnemonic:            S
+*&lt;save&gt;.acceleratorText:     Ctrl+S
+*&lt;save&gt;.accelerator:         Ctrl&lt;Key&gt;S
+
+*&lt;saveas&gt;.labelString:       Save As...
+*&lt;saveas&gt;.mnemonic:          A
+
+*&lt;revert&gt;.labelString:       Revert
+*&lt;revert&gt;.mnemonic:          v
+
+*&lt;print&gt;.labelString:        Print...
+*&lt;print&gt;.mnemonic:           P
+*&lt;print&gt;.acceleratorText:    Ctrl+P
+*&lt;print&gt;.accelerator:        Ctrl&lt;Key&gt;P
+
+*&lt;close&gt;.labelString:        Close
+*&lt;close&gt;.mnemonic:           C
+*&lt;close&gt;.acceleratorText:    Ctrl+W
+*&lt;close&gt;.accelerator:        Ctrl&lt;Key&gt;W
+
+*&lt;exit&gt;.labelString:         Exit
+*&lt;exit&gt;.mnemonic:            x
+*&lt;exit&gt;.acceleratorText:     Ctrl+Q
+*&lt;exit&gt;.accelerator:         Ctrl&lt;Key&gt;Q 
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE25646-PARENT"></a>Standard Edit Menu Resources</h2></div></div>
+<p><a class="indexterm" name="ITH.menuResources-6"></a>
+<a class="indexterm" name="ITH.menuResources-7"></a>
+The following code defines the standard edit menu resources.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Standard Edit Menu Resources                                   !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+*&lt;undo&gt;.labelString:         Undo
+*&lt;undo&gt;.mnemonic:            U
+*&lt;undo&gt;.acceleratorText:     Ctrl+Z
+*&lt;undo&gt;.accelerator:         Ctrl&lt;Key&gt;Z
+
+*&lt;redo&gt;.labelString:         Redo
+*&lt;redo&gt;.mnemonic:            R
+*&lt;redo&gt;.acceleratorText:     Shift+Ctrl+Z
+*&lt;redo&gt;.accelerator:         Shift&lt;Key&gt;Ctrl&lt;Key&gt;Z
+
+*&lt;cut&gt;.labelString:          Cut
+*&lt;cut&gt;.mnemonic:             t
+*&lt;cut&gt;.acceleratorText:      Ctrl+X
+*&lt;cut&gt;.accelerator:          Ctrl&lt;Key&gt;X
+
+*&lt;copy&gt;.labelString:         Copy
+*&lt;copy&gt;.mnemonic:            C
+*&lt;copy&gt;.acceleratorText:     Ctrl+C
+*&lt;copy&gt;.accelerator:         Ctrl&lt;Key&gt;C
+
+*&lt;paste&gt;.labelString:        Paste
+*&lt;paste&gt;.mnemonic:           P
+*&lt;paste&gt;.acceleratorText:    Ctrl+V
+*&lt;paste&gt;.accelerator:        Ctrl&lt;Key&gt;V
+
+*&lt;clear&gt;.labelString:        Clear
+*&lt;clear&gt;.mnemonic:           e
+
+*&lt;delete&gt;.labelString:       Delete
+*&lt;delete&gt;.mnemonic:          D
+
+*&lt;select&gt;.labelString:       Select All
+*&lt;select&gt;.mnemonic:          A
+*&lt;select&gt;.acceleratorText:   Ctrl+A
+*&lt;select&gt;.accelerator:       Ctrl&lt;Key&gt;A
+
+*&lt;deselect&gt;.labelString:     Deselect All
+*&lt;deselect&gt;.mnemonic:        l
+*&lt;deselect&gt;.acceleratorText: Shift+Ctrl+A
+*&lt;deselect&gt;.accelerator:     Shift&lt;Key&gt;Ctrl&lt;Key&gt;A
+
+*&lt;promote&gt;.labelString:      Promote
+*&lt;promote&gt;.mnemonic:         m
+*&lt;promote&gt;.acceleratorText:  Alt+Insert
+*&lt;promote&gt;.accelerator:      Alt&lt;Key&gt;Insert&lt;Key&gt;
+
+*&lt;colorEdit&gt;.labelString:    Color Editor...
+*&lt;colorEdit&gt;.mnemonic:       o 
+</pre></td></tr></table><p>
+</div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apg.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ix01.html">Next</a></td></tr><tr><td width="40%" align="left">Appendix G. Using GoldenGate Data Conversion Services </td><td width="20%" align="center"> </td><td width="40%" align="right">Index </td></tr></table></div></body></html>

@@ -1,24 +1,24 @@
 # IRIX IDE UI/UX Specification
 
 ## Introduction
-This document defines the user experience goals, information architecture, user flows, and visual design specifications for the IRIX Integrated Development Environment (IDE). It serves as the foundation for visual design and frontend development, ensuring a cohesive and user-centered experience across macOS and IRIX touchpoints.
+This document defines the user experience goals, information architecture, user flows, and visual design specifications for the IRIX Integrated Development Environment (IDE). It serves as the foundation for visual design and frontend development within the native IRIX Motif environment.
 
 ### Overall UX Goals & Principles
 #### Target User Personas
-- **Mac-First IDE Operator:** Wants fast iteration from macOS while targeting IRIX hosts; expects real-time feedback, low-friction host switching, and modern editor ergonomics.
 - **IRIX On-Box Maintainer:** Performs maintenance directly on IRIX systems; needs Motif/Indigo Magic visual continuity, dependable terminal integration, and visibility into host state.
+- **IRIX Systems Engineer:** Balances development with operational duties, requiring dashboards for builds, telemetry, and automation tasks.
 - **Team Lead / Reviewer (secondary):** Oversees builds/debug sessions and depends on dashboards, logs, and audit trails.
 
 #### Usability Goals
-- Onboard a new macOS IDE operator to a remote project in under **5 minutes**.
-- Deliver remote build feedback within **30 seconds** of saving a file.
-- Support context switching (host, project) without loss of work; recovery flows must restore sessions automatically.
+- Onboard a new IRIX maintainer to the IDE in under **5 minutes** using native Toolchest integration and desktop icons.
+- Deliver build and sync feedback within **30 seconds** of an edit to maintain confidence in remote workflows.
+- Support context switching (host, project) without loss of work; recovery flows must restore sessions automatically across 4Dwm desks.
 - Provide consistent affordances for destructive operations (deploy, kill process) including confirmations and undo states.
 
 #### Design Principles
 1. **Remote Clarity First** – Always show connection status, active host, and sync/build state prominently.
 2. **Progressive Complexity** – Start with simplified views, revealing advanced panels (plugins, perf metrics) as the user opts in.
-3. **Platform Resonance** – Native macOS patterns for the desktop client; Motif/Indigo Magic when rendering on IRIX to maintain trust.
+3. **Platform Resonance** – Embrace Motif/Indigo Magic idioms, pointer shapes, and spacing so the IDE feels native to IRIX.
 4. **Actionable Feedback** – Every remote action (sync, build, debug) returns clear outcomes with links to affected files.
 5. **Resilient Workflows** – Network-aware designs that surface reconnection, retry, and offline guidance gracefully.
 
@@ -62,7 +62,7 @@ graph TD
 ### Workspace Shell & Project Explorer
 - **Layout:** Left rail houses the workspace shell with project selector, quick host switcher, and collapsible project explorer tree. A tabbed secondary panel shows Git status, search, or outline depending on context.
 - **States:** Connection banner anchors immediately above the editor canvas; project explorer badges reflect sync state (`Synced`, `Queued`, `Conflict`).
-- **Interactions:** Command palette (`⌘P`) jumps between projects/recent files; context menu exposes project-level actions (sync, build, open terminal).
+- **Interactions:** Command palette (for example, `Ctrl+P`) jumps between projects/recent files; context menu exposes project-level actions (sync, build, open terminal).
 - **Wireframes:** `docs/user-guides/screenshots/01-editor-host-drop.svg`, `docs/user-guides/screenshots/02-editor-offline.svg` capture connected vs. offline states with explorer callouts.
 
 ### Editor & Diffing Surface
@@ -85,7 +85,7 @@ graph TD
 
 ### Settings & Operational Panels
 - **Layout:** Sidebar with preference categories (Profile, Key Bindings, Appearance, Notifications). Detail pane exposes form fields with inline validation and preview toggles for theme adjustments.
-- **States:** Mac vs. IRIX variants share structure but adopt platform-specific tokens and padding. Advanced settings gated behind disclosure to reduce noise.
+- **States:** Panels share structure across IDE modules and adopt Motif tokens and padding. Advanced settings gated behind disclosure to reduce noise.
 - **Interactions:** Live preview for theme changes, import/export workspace profile, and warning banners for unsafe configurations.
 - **Wireframes:** `docs/user-guides/screenshots/09-settings.svg` frames category navigation and validation treatments.
 
@@ -107,23 +107,20 @@ stateDiagram-v2
 
 - **Navigation Hooks:** Status pill drives quick navigation to Remote Hosts during `Degraded`/`Offline` states; command palette surfaces retry/queue actions.
 - **Activity Logging:** Each transition posts to the activity feed (Dashboard) to preserve audit trail for downstream analytics.
-- **Accessibility Notes:** Banner text and state colors pass contrast requirements; all transitions announce via macOS accessibility notifications.
+- **Accessibility Notes:** Banner text and state colors pass contrast requirements; all transitions announce via Motif accessibility hooks (audible bell + status strip message).
 
 ## User Flows
-### Flow 1: Project Bootstrap (Mac → IRIX)
+### Flow 1: Project Bootstrap (IRIX Workspace)
 ```mermaid
 flowchart TD
-    start([Start]) --> selectHost{Select IRIX host?}
-    selectHost -->|No| createProfile[Create Host Profile]
-    createProfile --> selectHost
-    selectHost -->|Yes| chooseTemplate[Choose Project Template]
-    chooseTemplate --> generateRemote[Generate Remote Skeleton]
-    generateRemote --> syncInitial[Sync Initial Files]
-    syncInitial --> verifyPermissions[Verify Remote Permissions]
-    verifyPermissions --> configureLocal[Configure Local Manifest]
-    configureLocal --> finish([Ready to Edit])
+    start([Start]) --> chooseTemplate[Choose Project Template]
+    chooseTemplate --> initWorkspace[Initialize Workspace in IRIX home]
+    initWorkspace --> configureToolchain[Configure Toolchain Paths]
+    configureToolchain --> registerIcons[Register Desktop Icons]
+    registerIcons --> verifyPermissions[Verify Project Permissions]
+    verifyPermissions --> finish([Ready to Edit])
 ```
-- **Edge cases:** Permission failure leads to guided troubleshooting sheet (link to knowledge base). Missing toolchain prompts suggestions (install steps, contact admin).
+- **Edge cases:** Permission failure leads to guided troubleshooting sheet (link to knowledge base). Missing toolchain prompts install steps or escalation to system administration.
 
 ### Flow 2: Remote Edit & Build Loop
 ```mermaid
@@ -145,7 +142,7 @@ flowchart TD
 ```mermaid
 flowchart TD
     startDebug[Select Debug Configuration] --> launchServer[Launch gdbserver on IRIX]
-    launchServer --> attachClient[Attach macOS Debug UI]
+    launchServer --> attachClient[Attach IRIX Debug UI]
     attachClient --> setBreakpoints[Set Breakpoints]
     setBreakpoints --> runProgram[Start Program]
     runProgram --> breakHit{Breakpoint Hit?}
@@ -195,16 +192,15 @@ flowchart TD
 ### Color Palette
 | Usage | Value | Notes |
 |-------|-------|-------|
-| Primary | `#0A84FF` | macOS accent for selection and primary CTAs |
-| Secondary | `#4C6EF5` | Complementary blue for secondary actions |
-| Success | `#34C759` | Build success indicators |
-| Warning | `#FFD60A` | Pending/at-risk states |
-| Danger | `#FF3B30` | Failing builds, destructive actions |
-| Background (macOS) | `#1E1E1E` | Dark default editor theme |
-| Background (IRIX panels) | `#4F5B66` | Indigo Magic-inspired slate |
-| Surface | `#2C2C2E` | Panels/cards |
+| Primary | `#6699CC` | Indigo Magic accent for primary actions |
+| Secondary | `#5E6B7A` | Panel chrome and secondary controls |
+| Success | `#94D55A` | Build success indicators |
+| Warning | `#FFD454` | Pending/at-risk states |
+| Danger | `#FF6B6B` | Failing builds, destructive actions |
+| Background | `#4F5B66` | Motif desktop base |
+| Surface | `#3B4654` | Dialogs, cards, and explorers |
 | Text Primary | `#F2F2F7` | High contrast on dark backgrounds |
-| Text Secondary | `#8E8E93` | Muted descriptive text |
+| Text Secondary | `#D0D8E2` | Muted descriptive text |
 
 #### IRIX UI Tokens
 - **Accent:** `#6699CC` (Indigo Magic blue) applied to primary buttons, focus outlines, and active tabs when rendering natively on IRIX.
@@ -221,10 +217,10 @@ flowchart TD
 | H3 | 18 px | Medium | 24 px |
 | Body | 15 px | Regular | 22 px |
 | Small | 13 px | Regular | 18 px |
-- Primary typeface: **SF Pro** on macOS; fallback **Helvetica Neue**. IRIX-native screens use **Helvetica** with Motif padding.
+- Primary typeface: **Helvetica** family, matching IRIX Motif defaults; monospaced elements use **Courier**.
 
 ### Iconography
-- **Icon Library:** SF Symbols for macOS client; custom monochrome icons styled after Indigo Magic for IRIX overlays.
+- **Icon Library:** Monochrome Indigo Magic icon set with magic-carpet executable treatment per IRIX UI guidelines.
 - **Usage Guidelines:** Pair icons with labels in navigation; maintain 24px size with 16px padding; ensure contrast on dark backgrounds.
 
 ### Spacing & Layout
@@ -240,30 +236,30 @@ flowchart TD
 
 ## Responsiveness Strategy
 ### Desktop Adaptation
-- **Display Targets:** macOS desktops/laptops (≥1280px) and IRIX workstations with X11/Motif shells.
-- **Window Management:** Support resizable panes down to 1024px viewport width; below 1280px truncate secondary panels with slide-in drawers.
-- **Density Modes:** Default compact layout for macOS; optional comfortable mode on IRIX to mirror Motif spacing rules.
-- **Navigation Behavior:** Persistent left rail with collapse-to-icon at ≤1366px; no bottom tab patterns.
+- **Display Targets:** IRIX workstations running 4Dwm with resolutions ≥1280×1024; ensure usability down to 1024×768 for legacy displays.
+- **Window Management:** Support resizable panes; when space constrained, collapse secondary panels into Motif drawers while preserving keyboard access.
+- **Density Modes:** Default spacing follows Motif 6px/12px rules with optional high-density mode for power users.
+- **Navigation Behavior:** Persistent left rail with collapse-to-icon at ≤1366px; avoid bottom tab patterns inconsistent with 4Dwm.
 - **Content Priority:** Logs and diagnostics use progressive disclosure drawers rather than responsive accordions.
-- **Interaction Considerations:** Hover/keyboard affordances only; touch targets remain ≥36px for stylus use but mobile-specific gestures are out of scope.
+- **Interaction Considerations:** Hover/keyboard affordances only; touch gestures out of scope. Ensure pointer themes follow IRIX guidelines.
 
 ## Animation & Micro-interactions
-- **Motion Principles:** Subtle, purpose-driven, easing curves that respect platform conventions (macOS standard ease-in-out, 200ms).
+- **Motion Principles:** Subtle, purpose-driven easing aligned with IRIX animation guidance (200ms ease-in-out for banners/toasts).
 - **Key Animations:**
   - **Sync Status Pulse:** 300ms fade/pulse when sync completes.
   - **Build Progress Bar:** Linear fill with color transition based on state (queued → running → success/fail).
   - **Terminal Expand/Collapse:** 200ms height easing for log panels.
 
 ## Performance Considerations
-- **Goals:** Initial workspace load < 2.5s on macOS; interaction response < 150ms; maintain 60 FPS for editor scrolling and animations.
+- **Goals:** Initial workspace load < 2.5s on IRIX workstations; interaction response < 150ms; maintain 60 FPS for editor scrolling and animations where hardware permits.
 - **Design Strategies:** Lazy-load heavy panels (logs, debugger); cache remote summaries; optimize diff rendering by chunking changes.
 
 ## Next Steps
 ### Immediate Actions
 1. Review specification with product, engineering, and QA stakeholders.
-2. Produce high-fidelity mockups in Figma referencing this document.
-3. Begin component inventory for frontend architecture handoff.
-4. Schedule usability validation with representative macOS and IRIX users.
+2. Produce repository-managed high-fidelity mockups per `projects/irix-ide/docs/hifi-mockup-plan.md`, storing sources/exports under `projects/irix-ide/docs/user-guides/mockups/`.
+3. Maintain the canonical component library using `projects/irix-ide/docs/front-end-component-inventory.md` while preparing design system handoff.
+4. Schedule usability validation with representative IRIX operators and QA analysts.
 
 ### Design Handoff Checklist
 - [x] All user flows documented

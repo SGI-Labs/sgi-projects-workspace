@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 6. Customizing Your Application's Minimized Windows</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch05.html" title="Chapter 5. Window, Session, and Desk Management"><link rel="next" href="ch07.html" title="Chapter 7. Interapplication Data Exchange"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 6. Customizing Your Application's Minimized Windows</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch07.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE87269-PARENT"></a>Chapter 6. Customizing Your Application's Minimized Windows</h2></div></div>
+<p><a class="indexterm" name="IT06.Minimized-0"></a>
+<a class="indexterm" name="IT06.Minimized-1"></a>
+Users can minimize (stow) your application's window on the Desktop, by clicking the minimize button in the top right corner of the window frame or by selecting &#8220;Minimize&#8221; from the Window Menu. <a class="indexterm" name="IT06.Minimized-2"></a>
+<a class="indexterm" name="IT06.Minimized-3"></a>
+<a class="indexterm" name="IT06.Minimized-4"></a>
+When a window is minimized, it is replaced by a 100 x 100 pixel representation with an identifying label of 13 characters or less. <a class="indexterm" name="IT06.Minimized-5"></a>
+This is referred to as the <span class="bold"><b>minimized</b></span> or <span class="bold"><b>stowed</b></span> window. (It is also commonly called an icon, but this document uses the term minimized window to prevent confusing it with the Desktop icon.)</p>
+<p>This chapter explains how to put the image of your choice on a minimized window. It contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch06.html#LE35430-PARENT" title="Some Different Sources for Minimized Window Images">&#8220;Some Different Sources for Minimized Window Images&#8221;</a> discusses different sources from which you can generate a minimize icon picture.</p>
+</li>
+<li><p><a href="ch06.html#LE61992-PARENT" title="Creating a Minimized Window Image: The Basic Steps">&#8220;Creating a Minimized Window Image: The Basic Steps&#8221;</a> gives a step-by-step explanation of how to customize your minimize icon.</p>
+</li>
+<li><p><a href="ch06.html#LE69741-PARENT" title="Setting the Minimized Window Label">&#8220;Setting the Minimized Window Label&#8221;</a> describes how to set the label of your minimized window.</p>
+</li>
+<li><p><a href="ch06.html#LE89721-PARENT" title="Changing the Minimized Window Image">&#8220;Changing the Minimized Window Image&#8221;</a> mentions some special considerations if you want to change the image in your minimized window while your application is running.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE35430-PARENT"></a>Some Different Sources for Minimized Window Images</h2></div></div>
+<p><a class="indexterm" name="IT06.Minimized-6"></a>
+<a class="indexterm" name="IT06.Minimized-7"></a>
+<a class="indexterm" name="IT06.Minimized-8"></a>
+You can make a minimized window image out of any image that you can display on your workstation monitor. This means that you can create a picture using <tt>showcase</tt> or the drawing/painting tool of your choice, or you can scan in a picture, or you can use the <tt>capture</tt> tool to capture of some portion of your application. You can even have an artist design your minimized window for you. &#8220;Choosing an Image for Your Minimized Window&#8221; in Chapter 3
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides some guidelines for designing minimized window images.</p>
+<p><a href="ch06.html#id5206154" title="Figure 6-1. Minimized Window Image Examples">Figure 6-1</a> shows some different minimized window images that were created in different ways. From left to right: the top row shows a scanned-in photograph, a <tt>mediarecorder</tt> snapshot of the application itself, a scanned-in photograph that was altered with <tt>imp</tt>, and scanned-in line art; the bottom row shows a drawing representing the application, scanned-in line art, and two artist-designed images.</p>
+<p><div class="figure"><a name="id5206154"></a><p><a name="id5206154"></a><b>Figure 6-1. Minimized Window Image Examples</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/stow.icons.gif" alt="Minimized Window Image Examples" height="235" width="437"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE61992-PARENT"></a>Creating a Minimized Window Image: The Basic Steps</h2></div></div>
+<p><a class="indexterm" name="IT06.Minimized-9"></a>
+<a class="indexterm" name="IT06.Minimized-10"></a>
+<a class="indexterm" name="IT06.Minimized-11"></a>
+It's important for users to be able to easily identify your application's windows when they are minimized, so you should define a specific image and label for each primary and support window in your application. For guidelines on selecting minimize images, see &#8220;Choosing an Image for Your Minimized Window&#8221; in Chapter 3
+ of the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+<p>To make a minimized window image for your application:</p>
+<div class="orderedlist"><ol type="1"><li><p>Create an RGB image. If your image is already in RGB format, then all you have to do is resize the image to an appropriate size (look at the setting of the <span class="bold"><b>iconImageMaximum</b></span> resource in <tt>4Dwm</tt> to see the maximum size of the stow icon, currently 85x67). See <a href="ch06.html#LE65843-PARENT" title="Resizing the RGB Image Using imgworks">&#8220;Resizing the RGB Image Using imgworks&#8221;</a> for instructions on resizing the image.</p>
+<p>If your image is not in RGB format, you must convert it to RGB. One way to do this is to use the Media Recorder tool to obtain your image. See <a href="ch06.html#LE94162-PARENT" title="Using mediarecorder to Get an RGB Format Image">&#8220;Using mediarecorder to Get an RGB Format Image&#8221;</a> for instructions.</p>
+</li>
+<li><p>Scale the image to the correct size. See <a href="ch06.html#LE65843-PARENT" title="Resizing the RGB Image Using imgworks">&#8220;Resizing the RGB Image Using imgworks&#8221;</a> for instructions.</p>
+</li>
+<li><p>Name the image file. The filename should consist of two parts: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>The application class name (technically, the <span class="bold"><b>res_name</b></span> field of the WM_CLASS property). You can determine the class name by using <span class="bold"><b>xprop</b></span> on your application window and looking at the WM_CLASS property. </p>
+</li>
+<li><p>The<tt> .icon</tt> suffix. </p>
+</li>
+</ul></div><p>This gives you a name of the form <tt>res_name.icon</tt>. For example, if your application's name is &#8220;chocolate,&#8221; the name of your image file should be:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+chocolate.icon
+</pre></td></tr></table><br></li>
+<li><p>Put the file in the <tt>/usr/lib/images</tt> directory.</p>
+</li>
+</ol></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE94162-PARENT"></a>Using <span class="bold"><b>mediarecorder </b></span>to Get an RGB Format Image</h3></div></div>
+<p>You can use the <tt>mediarecorder </tt>tool to capture an image on the screen. To invoke <tt>mediarecorder</tt>, enter:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>mediarecorder</tt></b> 
+</pre></td></tr></table><p>An example of the <tt>mediarecorder </tt>tool is shown in <a href="ch06.html#id5206468" title="Figure 6-2. The mediarecorder Tool">Figure 6-2</a>. </p>
+<p><div class="figure"><a name="id5206468"></a><p><a name="id5206468"></a><b>Figure 6-2. The mediarecorder Tool</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/06.Minimized-2.gif" alt="The mediarecorder Tool" height="294" width="387"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE79617-PARENT"></a>Taking a Screen Snapshot With mediarecorder</h4></div></div>
+<p>You can create a new image file of your minimized window by taking a snapshot of it on the screen.</p>
+<div class="orderedlist"><ol type="1"><li><p>Display the desired image on the screen. </p>
+</li>
+<li><p>Click the Image menu button and choose &#8220;Still Image from Screen.&#8221;</p>
+</li>
+<li><p>Choose one of the following from the &#8220;Still Image from Screen&#8221; rollover menu:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Select Area...: Allows you to hold down the left mouse button and drag out a selection outline to mark the area you wish to record. </p>
+</li>
+<li><p>Window Area...: Allows you to select a particular window on the screen to record. When you choose this menu item, the cursor changes to resemble a camera. To choose a window to record, simply click inside of it.</p>
+</li>
+</ul></div><p>A dashed outline appears on the screen: the space inside the outline is what will be captured. </p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>To <span class="bold"><b>cancel</b></span> any selection, position the cursor over an edge of the selection outline and click the right mouse button. To bring the selection outline back once it is cancelled, select Edit menu and choose &#8220;Show Selection Frame.&#8221;
+</td></tr></table><hr noshade="noshade"></div><br></li>
+<li><p>Open the Tasks menu, choose Image, and select Screen Snapshot from the Image rollover menu. The snapshot adjusts the capturing file format and frame size so that they are ideally suited for a screen snapshot.</p>
+<div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>Once you choose Screen Snapshot, you can view those specific settings by selecting &#8220;Show Task Settings&#8221; from the Tasks menu.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+<li><p>After you select the area, click the Record button.</p>
+<p>If you have the Clip Bin open, the image filename appears in the clip bin as soon as the snapshot has been taken.</p>
+<p>Your file is given a default name and saved in the directory from which you launched Media Recorder. </p>
+</li>
+<li><p>To see the image, click the Play button.</p>
+<p>If the image looks good, then you're ready to resize it. See <a href="ch06.html#LE65843-PARENT" title="Resizing the RGB Image Using imgworks">&#8220;Resizing the RGB Image Using imgworks&#8221;</a> for instructions.</p>
+</li>
+</ol></div><p>See the <tt>mediarecorder(1)</tt> reference page for more information about using <tt>mediarecorder</tt>. The <tt>mediarecorder</tt> is described fully in the <i>Digital Media Tools Guide</i>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE65843-PARENT"></a>Resizing the RGB Image Using <tt>imgworks</tt></h3></div></div>
+<p><a class="indexterm" name="IT06.Minimized-12"></a>
+<a class="indexterm" name="IT06.Minimized-13"></a>
+<a class="indexterm" name="IT06.Minimized-14"></a>
+<a class="indexterm" name="IT06.Minimized-15"></a>
+You can use<tt> imgworks</tt> to resize your RGB image to the appropriate size for a minimized window image. <a class="indexterm" name="IT06.Minimized-16"></a>
+<a class="indexterm" name="IT06.Minimized-17"></a>
+<a class="indexterm" name="IT06.Minimized-18"></a>
+<a class="indexterm" name="IT06.Minimized-19"></a>
+<a class="indexterm" name="IT06.Minimized-20"></a>
+The maximum size is determined by the value of the <span class="bold"><b>iconImageMaximum</b></span> resource in <tt>4Dwm</tt>, which is currently 85x67. </p>
+<p><a class="indexterm" name="IT06.Minimized-21"></a>
+<a class="indexterm" name="IT06.Minimized-22"></a>
+To find the <tt>imgworks</tt> icon, select &#8220;File QuickFind&#8221; from the Find toolchest. When the QuickFind window appears, type:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<b><tt>imgworks</tt></b> 
+</pre></td></tr></table><p>into the text field. The <tt>imgworks</tt> icon appears in the drop pocket. Drag the icon to the Desktop and drop it. Then run <tt>imgworks</tt> by double-clicking the icon.</p>
+<p>To resize your image using <tt>imgworks</tt>, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Open your image file by selecting &#8220;Open&#8221; from the File menu and selecting your file from the Image Works: Open Image&#8230; window. Your image appears in the main window.</p>
+</li>
+<li><p>To scale the image, select &#8220;Scale&#8230;&#8221; from the Transformations menu. The Image Works: Scale window appears.</p>
+</li>
+<li><p>Scale the image by typing in an appropriate scale factor. The dimensions of the new image (in pixels) are listed in the Scale window.</p>
+</li>
+<li><p>When you're happy with the dimensions listed in the Scale window, click the <b>Apply</b> button. The resized image appears in the main window. Save it by selecting &#8220;Save&#8221; from the File menu.</p>
+</li>
+</ol></div><p>Refer to the <tt>imgworks(1)</tt> reference page for more information on <tt>imgworks</tt>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE69741-PARENT"></a>Setting the Minimized Window Label</h2></div></div>
+<p><a class="indexterm" name="IT06.Minimized-23"></a>
+<a class="indexterm" name="IT06.Minimized-24"></a>
+<a class="indexterm" name="IT06.Minimized-25"></a>
+<a class="indexterm" name="IT06.Minimized-26"></a>
+<a class="indexterm" name="IT06.Minimized-27"></a>
+By default, the <span class="bold"><b>4Dwm</b></span> window manager reuses the title bar label for the minimized window label. To explicitly set the label of the minimized window, change the value of the window's <span class="bold"><b>XmNiconName</b></span> resource. For example, in your application's <tt>/usr/lib/X11/app-defaults</tt> file, type:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+appname*iconName: myApp
+</pre></td></tr></table><p>&#8220;Labeling a Minimized Window&#8221; in Chapter 3
+ in the <i>IRIX Interactive Desktop User Interface Guidelines</i> lists guidelines for choosing a label. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE89721-PARENT"></a>Changing the Minimized Window Image</h2></div></div>
+<p><a class="indexterm" name="IT06.Minimized-28"></a>
+<a class="indexterm" name="IT06.Minimized-29"></a>
+Your application can also change its minimized window's image while it is running (for example, to indicate application status) by setting the window's <span class="bold"><b>XmNiconWindow</b></span> resource. However, it can be very difficult to handle color images without causing visual and colormap conflicts. If you decide to change the image, the image you install should:</p>
+<div class="orderedlist"><ol type="1"><li><p>Use the default visual.</p>
+</li>
+<li><p>Use the existing colormap without creating any new colors (preferably, your image should use only the first 16 colors in the colormap). This potentially implies dithering or color quantization of your image.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The <tt>4Dwm</tt> window manager automatically handles your application's initial minimized window image (that is, the image automatically loaded from the <tt>/usr/lib/images</tt> directory at application start-up). If you don't want to change this image while your application is running, your application doesn't need to do anything to support displaying the image properly. 
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ol></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch07.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 5. Window, Session, and Desk Management </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 7. Interapplication Data Exchange </td></tr></table></div></body></html>

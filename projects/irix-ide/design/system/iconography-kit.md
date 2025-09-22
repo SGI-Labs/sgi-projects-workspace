@@ -7,7 +7,7 @@ Defines key icons required for connection feedback, recovery actions, and destru
 | Name | Purpose | Notes |
 |------|---------|-------|
 | `icon-connection` | Displays current connection status alongside status pill | Change fill color per state (success/warning/danger) |
-| `icon-retry` | Inline button for manual retry | Rotating arrow, matches macOS SF Symbol `arrow.clockwise` |
+| `icon-retry` | Inline button for manual retry | Rotating arrow; Motif pixmap variant `icons/retry.xbm` |
 | `icon-offline` | Indicates queued offline edits | Combine plug + slash motif, referenced in offline badge |
 | `icon-host` | Represents remote host machine | Outline of workstation; used in host list and banners |
 | `icon-warning` | Highlights destructive or cautionary messages | Triangle variant mirroring Indigo Magic style |

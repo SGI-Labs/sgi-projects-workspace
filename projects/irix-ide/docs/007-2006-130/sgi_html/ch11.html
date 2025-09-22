@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 11. Creating Desktop Icons: An Overview</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt02.html" title="Part II. Creating Desktop Icons"><link rel="previous" href="pt02.html" title="Part II. Creating Desktop Icons"><link rel="next" href="ch12.html" title="Chapter 12. Using IconSmith"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 11. Creating Desktop Icons: An Overview</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="pt02.html">Prev</a> </td><th width="60%" align="center">Part II. Creating Desktop Icons</th><td width="20%" align="right"> <a accesskey="n" href="ch12.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE69723-PARENT"></a>Chapter 11. Creating Desktop Icons: An Overview</h2></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-0"></a>
+<a class="indexterm" name="IT11.Overview.Icons-1"></a>
+This chapter offers an overview of the <a class="indexterm" name="IT11.Overview.Icons-2"></a>
+basic steps for creating IRIX Interactive Desktop icons and <a class="indexterm" name="IT11.Overview.Icons-3"></a>
+adding them to the Icon Catalog. If you don't feel you need much background information, you can skip to the <a class="indexterm" name="IT11.Overview.Icons-4"></a>
+brief list of instructions provided in <a href="ch11.html#LE91887-PARENT" title="Checklist for Creating an Icon">&#8220;Checklist for Creating an Icon&#8221;</a>.</p>
+<p><a class="indexterm" name="IT11.Overview.Icons-5"></a>
+This chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch11.html#LE56002-PARENT" title="About IRIX Interactive Desktop Icons">&#8220;About IRIX Interactive Desktop Icons&#8221;</a> briefly discusses the IRIX Interactive Desktop and lists what kinds of icons you'll need to provide for your application.</p>
+</li>
+<li><p><a href="ch11.html#LE91887-PARENT" title="Checklist for Creating an Icon">&#8220;Checklist for Creating an Icon&#8221;</a> lists the basic steps for drawing, programming, compiling, and installing an icon.</p>
+</li>
+<li><p><a href="ch11.html#LE68942-PARENT" title="Creating an Icon: The Basic Steps Explained in Detail">&#8220;Creating an Icon: The Basic Steps Explained in Detail&#8221;</a> explains each of the basic icon creation steps in more detail.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Minimized windows, which represent running applications, aren't Desktop icons. To learn how to customize the image on a minimized window, refer to <a href="ch06.html" title="Chapter 6. Customizing Your Application's Minimized Windows">Chapter 6, &#8220;Customizing Your Application's Minimized Windows&#8221;</a>.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE56002-PARENT"></a>About IRIX Interactive Desktop Icons</h2></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-6"></a>
+<a class="indexterm" name="IT11.Overview.Icons-7"></a>
+Files on the Desktop are represented by icons. Users can manipulate these icons to run applications, print documents, and perform other actions. &#8220;How Users Interact With Desktop Icons&#8221; in Chapter 1
+ of the <i>IRIX Interactive User Interface Guidelines</i> describes some of the common user interactions.</p>
+<p><a class="indexterm" name="IT11.Overview.Icons-8"></a>
+The Desktop displays different icons to represent the different types of files. For example, the default icon for binary executables is the &#8220;magic carpet,&#8221; and the default icon for plain text files is a stack of pages.</p>
+<p><a class="indexterm" name="IT11.Overview.Icons-9"></a>
+When you create your own application, by default the Desktop uses an appropriate &#8220;generic&#8221; icon to represent the application and its associated data files (for example, the magic carpet icon for the executable and the stack of pages icon for text files). You can also design your own custom icons to promote product identity and to indicate associated files. <a class="indexterm" name="IT11.Overview.Icons-10"></a>
+For example, the custom ShowCase icons over a <tt>generic.exec.closed.fti</tt> and a <tt>generic.exec.open.fti</tt> look like this:</p>
+<p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/showcase.gif" height="154" width="248"></td></tr></table></div>
+
+</p>
+<p>Another advantage of creating custom icons is that you can <span class="bold"><b>program</b></span> them to perform certain actions when users interact with them on the Desktop. For example, you can program a custom data file icon so that when a user opens it, the Desktop launches your application and opens the data file.</p>
+<p><a class="indexterm" name="IT11.Overview.Icons-11"></a>
+<a class="indexterm" name="IT11.Overview.Icons-12"></a>
+The Desktop determines which icon to display for a <a class="indexterm" name="IT11.Overview.Icons-13"></a>
+particular file by finding a matching <span class="bold"><b>file type</b></span>. A file type consists of a set of <span class="bold"><b>File Typing Rules</b></span> (FTRs) that describe which files belong to the file type and how that type's icon looks and acts on the Desktop.</p>
+<p>The Desktop reads FTRs from compiled versions of special text files called <span class="bold"><b>FTR files</b></span>. An FTR file is a file in which one or more file types are defined (typically, you define more than one file type in a single file). FTR files can also contain <span class="bold"><b>print conversion rules</b></span>, which define any special filters needed to print given file types. <a href="ch13.html" title="Chapter 13. File Typing Rules">Chapter 13, &#8220;File Typing Rules&#8221;</a>, discusses the syntax of FTRs, and <a href="ch14.html" title="Chapter 14. Printing From the Desktop">Chapter 14, &#8220;Printing From the Desktop&#8221;</a>, discusses print conversion rules.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE91887-PARENT"></a>Checklist for Creating an Icon</h2></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-14"></a>
+<a class="indexterm" name="IT11.Overview.Icons-15"></a>
+<a class="indexterm" name="IT11.Overview.Icons-16"></a>
+To provide a comprehensive Desktop icon interface for your application:</p>
+<div class="orderedlist"><ol type="1"><li><p><span class="bold"><b>Tag your application. </b></span>You need to tag the application with its own unique identification number so that the Desktop has a way of matching the application with the corresponding FTRs. See <a href="ch11.html#LE46561-PARENT" title="Step One: Tagging Your Application">&#8220;Step One: Tagging Your Application&#8221;</a> for instructions.</p>
+</li>
+<li><p><span class="bold"><b>Draw a picture of your icon</b></span>. Create a distinctive Desktop icon to help users distinguish your application from other applications on the Desktop. Optionally, create an icon for the data files associated with your application. Use the <span class="bold"><b>IconSmith</b></span> application to draw your icons. IconSmith allows you to draw an icon and then convert it into the icon description language used by the Desktop. IconSmith is the only tool you can use to create an icon picture. For guidelines on designing icons, see the <i>IRIX Interactive User Interface Guidelines</i>. For information on how to use IconSmith, see <a href="ch12.html" title="Chapter 12. Using IconSmith">Chapter 12, &#8220;Using IconSmith&#8221;</a>.</p>
+</li>
+<li><p><span class="bold"><b>Program your icon.</b></span> Create the FTRs to define your icons' Desktop interaction. <a href="ch13.html" title="Chapter 13. File Typing Rules">Chapter 13, &#8220;File Typing Rules&#8221;</a>, describes FTRs in detail. Before programming your icon, think about what users expect from the application and, with that in mind, decide how you want the icon to behave within the Desktop. Before you make these decisions, read the icon programming guidelines in &#8220;Defining the Behavior of Icons With FTRs&#8221; in Chapter 2 of the <i>IRIX Interactive User Interface Guidelines</i>. In particular:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Program your Desktop icon to run your application with the most useful options. Include instructions for launching your application when the user opens the icon; opens the icon while holding down the <b><tt>&lt;Alt&gt;</tt></b> key; and drags and drops other icons on the application icon.</p>
+</li>
+<li><p>If there are several useful combinations of options that users may want to use when invoking your application, you can incorporate them into a Desktop menu. (These Desktop menu items appear only when the icon is selected.) Users can then select the menu item that corresponds to the behavior they want&#8212;without having to memorize a lot of option flags.</p>
+</li>
+<li><p>Where appropriate, provide <span class="bold"><b>print conversion</b></span> <span class="bold"><b>rules</b></span> that describe how to convert a data file for printing into a type recognized by the Desktop. To print output, users can then just select the appropriate data file icon and choose &#8220;Print&#8221; from the Desktop menu rather than having to remember specialized filter information. <a href="ch14.html" title="Chapter 14. Printing From the Desktop">Chapter 14, &#8220;Printing From the Desktop&#8221;</a>, describes print conversion rules.</p>
+</li>
+</ul></div></li>
+<li><p><span class="bold"><b>Compile the source files.</b></span> Compile the <tt>.ftr </tt>files into an <tt>.otr</tt> file. In particular, the <tt>desktop.otr</tt> file contains the compiled source for existing FTRs. For more information on<tt> .otr</tt> files, see <a href="ch11.html#LE52367-PARENT" title="Step Four: Compiling the Source Files">&#8220;Step Four: Compiling the Source Files&#8221;</a>.</p>
+</li>
+<li><p><span class="bold"><b>Add your application to the Icon Catalog.</b></span> This makes it easier for your users to locate your icon in the Icon Catalog and helps maintain a consistent look for your application in the Desktop. <a href="ch11.html#LE78197-PARENT" title="Step Five: Installing Your Application in the Icon Catalog">&#8220;Step Five: Installing Your Application in the Icon Catalog&#8221;</a> explains how to do this.</p>
+</li>
+<li><p><span class="bold"><b>Restart the Desktop. </b></span>You can view your changes after you restart the Desktop. <a href="ch11.html#LE74717-PARENT" title="Step Six: Restarting the Desktop">&#8220;Step Six: Restarting the Desktop&#8221;</a> explains how to restart the Desktop.</p>
+</li>
+<li><p><span class="bold"><b>Update your installation process.</b></span> If you want to install your application on other Silicon Graphics workstations, include in your installation all of the files that you created in the preceding steps. Silicon Graphics recommends you use <tt>swpkg</tt> to package your files for installation. See the <i>Software Packager User's Guide</i> for information for instructions on using <tt>swpkg</tt>. See <a href="ch11.html#LE21525-PARENT" title="Step Seven: Updating Your Installation Process">&#8220;Step Seven: Updating Your Installation Process&#8221;</a> for guidelines.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>You cannot create your own device, host, or people icons. These are special icons used by the Desktop and can currently be created only by Silicon Graphics.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE68942-PARENT"></a>Creating an Icon: The Basic Steps Explained in Detail</h2></div></div>
+<p>This section describes in detail each of the basic steps listed in <a href="ch11.html#LE91887-PARENT" title="Checklist for Creating an Icon">&#8220;Checklist for Creating an Icon&#8221;</a>. The steps are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch11.html#LE46561-PARENT" title="Step One: Tagging Your Application">&#8220;Step One: Tagging Your Application&#8221;</a> </p>
+</li>
+<li><p><a href="ch11.html#LE75048-PARENT" title="Step Two: Drawing a Picture of Your Icon">&#8220;Step Two: Drawing a Picture of Your Icon&#8221;</a> </p>
+</li>
+<li><p><a href="ch11.html#LE17054-PARENT" title="Step Three: Programming Your Icon">&#8220;Step Three: Programming Your Icon&#8221;</a></p>
+</li>
+<li><p><a href="ch11.html#LE52367-PARENT" title="Step Four: Compiling the Source Files">&#8220;Step Four: Compiling the Source Files&#8221;</a></p>
+</li>
+<li><p><a href="ch11.html#LE78197-PARENT" title="Step Five: Installing Your Application in the Icon Catalog">&#8220;Step Five: Installing Your Application in the Icon Catalog&#8221;</a></p>
+</li>
+<li><p><a href="ch11.html#LE74717-PARENT" title="Step Six: Restarting the Desktop">&#8220;Step Six: Restarting the Desktop&#8221;</a></p>
+</li>
+<li><p><a href="ch11.html#LE21525-PARENT" title="Step Seven: Updating Your Installation Process">&#8220;Step Seven: Updating Your Installation Process&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE46561-PARENT"></a>Step One: Tagging Your Application</h3></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-17"></a>
+<a class="indexterm" name="IT11.Overview.Icons-18"></a>
+<a class="indexterm" name="IT11.Overview.Icons-19"></a>
+The first step is to tag the application or shell script with its own unique identification number so that the Desktop has a way of matching the application with the corresponding FTRs. The easiest way to tag your application is to use the <tt>tag</tt> command. In order to use <tt>tag</tt>, your application must be an executable or a shell script, and you must have write and execute permissions for the file.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>You do not tag data or configuration files used by your application. Instead, you provide rules as described in <a href="ch13.html#LE56776-PARENT" title="Matching Files Without the tag Command">&#8220;Matching Files Without the tag Command&#8221;</a><a href="ch13.html#LE56776-PARENT"> in Chapter 13</a> to identify these files.
+</td></tr></table><hr noshade="noshade"></div><p>If your application does meet the criteria for using the <tt>tag</tt> command, then select a tag number from your block of registered tag numbers. If you do not have a block of registered tag numbers, you can get one by calling 415/933-TAGS or sending an e-mail request to Silicon Graphics at this mail address:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+desktoptags@sgi.com
+</pre></td></tr></table><p>After Silicon Graphics sends you a block of registered tag numbers, use the <tt>tag</tt>(1) command to assign one to your application. To do this, change to the directory containing your application and enter:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>tag</tt></b> <i>tagnumber</i> <i>filename</i> 
+</pre></td></tr></table><p>where <i>tagnumber</i> is the number you assign to the application and <i>filename</i> is the name of the application. </p>
+<p>For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+% /usr/sbin/tag 0X0101011 myapp
+</pre></td></tr></table><p>For more detailed information on the <tt>tag</tt> command, see the <tt>tag(1)</tt> reference page.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE75048-PARENT"></a>Step Two: Drawing a Picture of Your Icon</h3></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-20"></a>
+<a class="indexterm" name="IT11.Overview.Icons-21"></a>
+The next step is to create the picture for your icon. An icon picture generally consists of a unique <span class="bold"><b>badge</b></span> plus a generic component (for example, the &#8220;magic carpet&#8221; designating executables). The badge is the part of the icon picture that appears in front of the generic component and that uniquely identifies your application. The generic components are pre-drawn and installed by default when you install the IRIX Interactive Desktop environment.</p>
+<p>&#8220;Designing the Appearance of Icons&#8221; in Chapter 2
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for drawing your icon images. If possible, consult with a designer or graphics artist to produce an attractive, descriptive icon. <a href="ch12.html" title="Chapter 12. Using IconSmith">Chapter 12, &#8220;Using IconSmith&#8221;</a>, describes exactly how to draw such an icon. Save the badge in a file called <tt>&lt;IconName&gt;.fti</tt>, where <i>IconName</i> is any name you choose. Choose a meaningful name (such as the name of the application or data format). If you have separate pictures representing the open and closed states of the icon, it's a good idea to name them <tt>&lt;IconName&gt;.open.fti</tt> and <tt>&lt;IconName&gt;.closed.fti</tt>, respectively.</p>
+<p>After drawing your badge with IconSmith (described in <a href="ch12.html" title="Chapter 12. Using IconSmith">Chapter 12, &#8220;Using IconSmith&#8221;</a><span class="bold"><b>) </b></span>save the picture&#8212;the filename should end in <tt>.fti</tt>&#8212;and put the saved file in the correct directory. The appropriate directory depends on where you put your FTR files:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>If you put your FTR (<span class="bold"><b>.</b></span><tt>ftr</tt>) files in the<tt> /usr/lib/filetype/install</tt> directory (where you typically should install your FTR files), then put your badge (<span class="bold"><b>.</b></span><tt>fti</tt>) files in the <tt>/usr/lib/filetype/install/iconlib</tt> directory.</p>
+</li>
+<li><p>If you put your FTR files in one of the other directories listed in <a href="apf.html" title="Appendix F. FTR File Directories">Appendix F, &#8220;FTR File Directories&#8221;</a>, then put your badge file in a subdirectory of that directory. Name the subdirectory <tt>iconlib</tt> if the subdirectory doesn't already exist.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE17054-PARENT"></a>Step Three: Programming Your Icon</h3></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-22"></a>
+<a class="indexterm" name="IT11.Overview.Icons-23"></a>
+<a class="indexterm" name="IT11.Overview.Icons-24"></a>
+Programming an icon means creating a file type. <a class="indexterm" name="IT11.Overview.Icons-25"></a>
+Each file type consists of a set of file typing rules, each of which defines some aspect of the look or behavior of the icon. Your file type includes rules that name the file type, and tells the Desktop where to find the associated icon files, what to do when users double-click the icon, and so on. <a href="ch13.html" title="Chapter 13. File Typing Rules">Chapter 13, &#8220;File Typing Rules&#8221;</a>, describes how to create the FTR file that defines your file type. &#8220;Defining the Behavior of Icons With FTRs&#8221; in Chapter 2 of the <i>IRIX Interactive User Interface Guidelines</i> describes the types of behaviors your icons should support.</p>
+<p>(This section assumes that you are writing your FTRs completely from scratch. You may prefer instead to modify an existing file type. To learn how to find the FTRs for an existing icon, see <a href="ch11.html#LE80328-PARENT" title="Add the FTRs: An Alternate Method">&#8220;Add the FTRs: An Alternate Method&#8221;</a>.)</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE89793-PARENT"></a>Where to Put FTR Files</h4></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-26"></a>
+Most FTR files that are not created at Silicon Graphics belong in the <tt>/usr/lib/filetype/install</tt> directory. There are also specific FTR directories set aside for site administration. For a list of all FTR directories, see <a href="apf.html" title="Appendix F. FTR File Directories">Appendix F, &#8220;FTR File Directories&#8221;</a>.</p>
+<p>If you want to have a look at some existing FTR files, check out the <tt>/usr/lib/filetype/install</tt> directory.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE58709-PARENT"></a>Naming FTR Files</h4></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-27"></a>
+<a class="indexterm" name="IT11.Overview.Icons-28"></a>
+If you have an existing FTR file, you can add the new file type to this file. Otherwise, you need to create a new FTR file, which you should name according to the standard naming convention for application vendors' FTR files. The convention is:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+vendor-name[.application-name].ftr
+</pre></td></tr></table><p>where <span class="bold"><b>vendor-name</b></span> is the name of your company and <span class="bold"><b>application-name</b></span> is the name of your application.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5222891"></a>Name the File Type</h4></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-29"></a>
+<a class="indexterm" name="IT11.Overview.Icons-30"></a>
+Each file type must have a unique name. To help insure that your file type name is unique, base it as closely as possible on your application name. </p>
+<p>As an extra check, you can search for your file type name in the <tt>/usr/lib/filetype</tt> directory, to make sure that the name is not already in use:</p>
+<div class="orderedlist"><ol type="1"><li><p>Change to the <tt>/usr/lib/filetype</tt> directory:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd /usr/lib/filetype</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p><b><tt>Search for the file type name:</tt></b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep &quot;</tt></b><i>your_name_here</i><b><tt>&quot; */*.ftr</tt></b> 
+</pre></td></tr></table><p>where <i>your_name_here</i> is the name you've selected for your file type.</p>
+</li>
+</ol></div><p>If you find another file type of the name you have chosen, pick a new name.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5223013"></a>Add the FTRs</h4></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-31"></a>
+<a class="indexterm" name="IT11.Overview.Icons-32"></a>
+<a class="indexterm" name="IT11.Overview.Icons-33"></a>
+<a class="indexterm" name="IT11.Overview.Icons-34"></a>
+To create a file type, either add the file type definition to an existing FTR file or create a new FTR file. You can define all the necessary file types for your application in a single FTR file.</p>
+<p>Each file type definition<span class="bold"><b> must</b></span> include the following rules: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>the TYPE rule, to tell the Desktop that you are declaring and naming a new type (the TYPE rule must go on the first line of each filetype definition)&#8212;a type is a unique type of icon, such as an email icon. For example, the file <tt>myftrs.ftr</tt> contains two filetypes:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TYPE FOO
+MATCH ...
+TYPE FOO2
+MATCH ...
+</pre></td></tr></table><br></li>
+<li><p>the LEGEND rule, to provide a text description when users view icons as a list</p>
+</li>
+<li><p>the MATCH rule, to allow the Desktop to match files with the corresponding file type</p>
+</li>
+<li><p>the ICON rule, to tell the Desktop how to draw the icon to use for this file type</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The TYPE, LEGEND, and other rules are typically referred to as &#8220;rules,&#8221; and the entire set of rules defining a single file type is called a &#8220;filetype,&#8221; or an &#8220;FTR.&#8221; 
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><p>In addition to these basic components, you can add other rules as necessary for each different filetype you define. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE80328-PARENT"></a>Add the FTRs: An Alternate Method</h4></div></div>
+<p>If you don't want to write the file type from scratch, you can modify an existing file type.</p>
+<p>The first step is to choose a file type that produces icon behavior similar to what you want from your new file type (that is, does the same thing when you double-click the icon, acts the same way when you drop the icon on another icon, and so on.)</p>
+<p>To find the set of FTRs that define the file type for the an icon, first locate the icon on the Desktop. If the icon isn't already on the Desktop select &#8220;File QuickFind&#8221; from the Find toolchest and use the Find an Icon window to find the icon. (When the icon appears in the drop pocket, drag it onto the Desktop.</p>
+<p>Select the icon by clicking the left mouse button on it, then hold down the right mouse button to get the Desktop menu. When the menu appears, select the &#8220;Get Info&#8221; menu item. A window appears. In the window, look at the line labeled, &#8220;Type.&#8221; </p>
+<p>For example, if you'd selected the <tt>jot</tt> icon, the line would read:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+Type: jot text editor
+</pre></td></tr></table><p>The string &#8220;jot text editor&#8221; is produced by the LEGEND rule. You can use this string to find the FTR that defines the <tt>jot</tt> file type. To do this, open a shell and follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Change to the <tt>/usr/lib/filetype</tt> directory</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd /usr/lib/filetype</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Search for &#8220;jot text editor&#8221;</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep &quot;jot text editor&quot; */*.ftr</tt></b> 
+</pre></td></tr></table><br></li>
+</ol></div><p>The system responds with this line:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+system/sgiutil.ftr: LEGEND   :308:jot text editor
+</pre></td></tr></table><p>This line tells you that the <tt>jot</tt> FTR is in the<tt> /usr/lib/filetype/system</tt> directory in a file named <tt>sgiutil.ftr</tt>. The <tt>:308:</tt> is to allow the jot LEGEND to be localized (translated into languages other than English). The <tt>308</tt> refers to line number 308 in the <tt>uxsgidesktop</tt> message catalog. See the <tt>gettxt(1)</tt> reference page for a description of how to use such message files. If you only intend to ship your application in English speaking countries, you can omit the line number designation (for example, <tt>:308:</tt>) from your filetype.</p>
+<p>Now you can open the <tt>sgiutil.ftr</tt> file using the text editor of your choice, and search for the &#8220;jot text editor&#8221; string again. This shows exactly where the<tt> jot</tt> FTR is in the <tt>sgiutil.ftr</tt> file.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b> If the <tt>jot</tt> file type did not have its own icon, this search would not give you the filename.
+</td></tr></table><hr noshade="noshade"></div><p>Now you can go to the file with the <tt>jot</tt> FTR and copy it into the FTR file for your new file type. Then rename and modify the copied FTR to fit your new file type, as described in <a href="ch11.html#LE17054-PARENT" title="Step Three: Programming Your Icon">&#8220;Step Three: Programming Your Icon&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5223411"></a>An Example File Type</h4></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-35"></a>
+<a class="indexterm" name="IT11.Overview.Icons-36"></a>
+<a class="indexterm" name="IT11.Overview.Icons-37"></a>
+Here is an example of a simple file type:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TYPE ScrimShaw
+    MATCH        tag  == 0x00001005;
+    LEGEND       the scrimshaw drawing program
+    SUPERTYPE    Executable
+    CMD OPEN     $LEADER 
+    CMD ALTOPEN  launch -c $LEADER
+    ICON {
+           if (opened) {
+               include(&quot;../iconlib/generic.exec.open.fti&quot;);
+        } else {
+               include(&quot;../iconlib/generic.exec.closed.fti&quot;);
+         }
+         include(&quot;/iconlib/scrimshaw.fti&quot;);
+    }
+</pre></td></tr></table><p><a class="indexterm" name="IT11.Overview.Icons-38"></a>
+<a class="indexterm" name="IT11.Overview.Icons-39"></a>
+<a class="indexterm" name="IT11.Overview.Icons-40"></a>
+<a class="indexterm" name="IT11.Overview.Icons-41"></a>
+<a class="indexterm" name="IT11.Overview.Icons-42"></a>
+<a class="indexterm" name="IT11.Overview.Icons-43"></a>
+<a class="indexterm" name="IT11.Overview.Icons-44"></a>
+Here's a brief description of what each of these lines does:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The first line contains the TYPE rule, which you use to name the file type. In this case, the file type is named, <span class="bold"><b>ScrimShaw</b></span>. Always place the TYPE rule on the first line of your FTR. The TYPE rule is described in <a href="ch13.html#LE10863-PARENT" title="Naming File Types: The TYPE Rule">&#8220;Naming File Types: The TYPE Rule&#8221;</a><a href="ch13.html#LE10863-PARENT"> in Chapter 13</a>.</p>
+</li>
+<li><p>The second line contains the MATCH rule. Use the MATCH rule to tell the Desktop which files belong to this file type. In this example, we are just writing in the identification (tag) number that we have already assigned to the executable. The MATCH rule is described in <a href="ch13.html#LE98067-PARENT" title="Matching File Types With Applications: The MATCH Rule">&#8220;Matching File Types With Applications: The MATCH Rule&#8221;</a><a href="ch13.html#LE98067-PARENT"> in Chapter 13</a>.</p>
+</li>
+<li><p>The third line contains the LEGEND rule. Use this rule to provide a brief descriptive phrase for the file type. This phrase appears when users view a directory in list form. It also appears when users select the &#8220;Get File Info&#8221; item from the Desktop pop-up menu. In this case, the descriptive phrase is &#8220;the scrimshaw drawing program.&#8221; The LEGEND rule is described in <a href="ch13.html#LE15180-PARENT" title="Adding a Descriptive Phrase: The LEGEND Rule">&#8220;Adding a Descriptive Phrase: The LEGEND Rule&#8221;</a><a href="ch13.html#LE15180-PARENT"> in Chapter 13</a>. </p>
+</li>
+<li><p>The fourth line contains the SUPERTYPE rule. Use this rule to name a file type superset for your FTR. In this example, the SUPERSET is &#8220;Executable.&#8221; The SUPERTYPE rule is described in <a href="ch13.html#LE27184-PARENT" title="Categorizing File Types: The SUPERTYPE Rule">&#8220;Categorizing File Types: The SUPERTYPE Rule&#8221;</a><a href="ch13.html#LE27184-PARENT"> in Chapter 13</a>.</p>
+</li>
+<li><p>The fifth line contains the CMD OPEN rule. This rule tells the Desktop what to do when users double-click the icon. In this example, double-clicking the icon opens the scrimshaw application. The $LEADER variable is a Desktop variable, usually set to the full name of the first selected icon. The Desktop variables are listed and defined in <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a>. The CMD OPEN rule is described in <a href="ch13.html#LE33157-PARENT" title="Programming Open Behavior: The CMD OPEN Rule">&#8220;Programming Open Behavior: The CMD OPEN Rule&#8221;</a><a href="ch13.html#LE33157-PARENT"> in Chapter 13</a>.</p>
+</li>
+<li><p>The sixth line contains the CMD ALTOPEN rule. This rule tells the Desktop what to do when users double-click the icon while holding down the <b><tt>&lt;Alt&gt;</tt></b> key. In this example, the Desktop runs<tt> launch</tt>(1), which brings up a small dialog window containing a single text field, so that users can type in command-line arguments to the scrimshaw executable. Again, $LEADER is a Desktop variable (variables are listed in Appendix B). For more information on the <tt>launch</tt> command, see the <tt>launch(1)</tt> reference page. The CMD ALTOPEN rule is described in <a href="ch13.html#LE33173-PARENT" title="Programming Alt-Open Behavior: The CMD ALTOPEN Rule">&#8220;Programming Alt-Open Behavior: The CMD ALTOPEN Rule&#8221;</a><a href="ch13.html#LE33173-PARENT"> in Chapter 13</a>. </p>
+</li>
+<li><p>The final lines contain the ICON rule. These lines tell the Desktop where to find the generic components (open and closed) as well as the unique application-specific badge. The generic components together with the badge comprise the scrimshaw icon appearance. Note that this rule combines the generic component for open and closed executables with the unique &#8220;scrimshaw&#8221; badge that identifies it as a distinctive application. The ICON rule is described in <a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a><a href="ch13.html#LE35039-PARENT"> in Chapter 13</a>.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE52367-PARENT"></a>Step Four: Compiling the Source Files</h3></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-45"></a>
+<a class="indexterm" name="IT11.Overview.Icons-46"></a>
+<a class="indexterm" name="IT11.Overview.Icons-47"></a>
+<a class="indexterm" name="IT11.Overview.Icons-48"></a>
+<a class="indexterm" name="IT11.Overview.Icons-49"></a>
+<a class="indexterm" name="IT11.Overview.Icons-50"></a>
+The Desktop compiles FTR source files into files called<tt> .otr</tt> files. These files are in the <tt>/usr/lib/filetype</tt> directory.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Users can create personal <tt>desktop.otr</tt> files. See <tt>/usr/lib/filetype/Makefile.personal</tt> and <i>Desktop User's Guide</i> for information about how to create and use personal desktop icons. 
+</td></tr></table><hr noshade="noshade"></div><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The <tt>.ctr</tt> files are obsolete as of IRIX release 6.3.
+</td></tr></table><hr noshade="noshade"></div><p>Any time you add or change FTRs (or print conversion rules) you must recompile the <tt>.otr</tt> files by following these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Change to the <tt>/usr/lib/filetype</tt> directory:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd /usr/lib/filetype</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Become superuser:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<b><tt>% su </tt></b>
+</pre></td></tr></table><br></li>
+<li><p>Recompile the files:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+# <b><tt>make -u</tt></b> 
+</pre></td></tr></table><br></li>
+</ol></div><p>(If you don't use the <span class="bold"><b>-u</b></span> option when you make the files, some of your changes may not take effect.) </p>
+<p>To activate the new FTRs, quit and restart the Desktop. For instructions on restarting the Desktop, see <a href="ch11.html#LE74717-PARENT" title="Step Six: Restarting the Desktop">&#8220;Step Six: Restarting the Desktop&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE78197-PARENT"></a>Step Five: Installing Your Application in the Icon Catalog</h3></div></div>
+<p><a class="indexterm" name="IT11.Overview.Icons-51"></a>
+<a class="indexterm" name="IT11.Overview.Icons-52"></a>
+<a class="indexterm" name="IT11.Overview.Icons-53"></a>
+<a class="indexterm" name="IT11.Overview.Icons-54"></a>
+<a class="indexterm" name="IT11.Overview.Icons-55"></a>
+It's easy to add your icon to the icon catalog. Just install a symbolic link to your application in the <tt>/usr/lib/desktop/iconcatalog/C/Applications </tt>directory.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The <tt>iconbookedit</tt> command is obsolete as of IRIX release 6.3. 
+</td></tr></table><hr noshade="noshade"></div><p>Then, add the install rule in your Makefile. For example, enter:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/etc/install -idb myIdbTag -F \
+/usr/lib/desktop/iconcatalog/pages/C/Applications -lns /usr/sbin/myapp MyApp 
+</pre></td></tr></table><p>where <tt>C</tt> is the $LANG environment variable, <tt>Applications</tt> is the page on which the icon will appear in the icon catalog, and <tt>MyApp</tt> is the name to appear under your icon in the icon catalog (the name can be different from the name of the executable). </p>
+<p>Another example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/etc/install -idb myIdbTag -F /usr/lib/desktop/iconcatalog/pages/C/WebTools \
+-lns /usr/sbin/mywebapp MyWebApp
+</pre></td></tr></table><p>In this example, the application, <tt>mywebapp</tt>, will appear on the <tt>WebTools</tt> icon catalog page, with the name <tt>MyWebApp</tt> under the icon.</p>
+<p>For additional information, see &#8220;Making Application Icons Accessible&#8221; in Chapter 2
+ of the <i>IRIX Interactive User Interface Guidelines</i>, which describes the Icon Catalog and how to select the appropriate page of the Icon Catalog for your application.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE74717-PARENT"></a>Step Six: Restarting the Desktop</h3></div></div>
+<p>To view your changes <a class="indexterm" name="IT11.Overview.Icons-56"></a>
+and additions, you must restart the Desktop. To restart the Desktop, first kill it by typing:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>/usr/lib/desktop/telldesktop quit</tt></b> 
+</pre></td></tr></table><p>Then, restart the Desktop by selecting &#8220;In my Home Directory&#8221; from the Access Files menu on the Desktop toolchest.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE21525-PARENT"></a>Step Seven: Updating Your Installation Process</h3></div></div>
+<p>Silicon Graphics recommends you use <tt>swpkg</tt> to package your files for installation.The <i>Software Packager User's Guide</i> describes how to package your application for installation.</p>
+<p><span class="bold"><b>Your installation process must:</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Tag the executables it produces (<a href="ch11.html#LE46561-PARENT" title="Step One: Tagging Your Application">&#8220;Step One: Tagging Your Application&#8221;</a> explains how to tag executables). Put the tag in the <tt>Makefile</tt> before the command that installs your application in the appropriate directory. For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TAG = 0x000010741
+
+$(TARGET): $(OBJECTS)
+        $(C++) $(C++FLAGS) $(OBJECTS) $(LDFLAGS) -o $@
+        $(TOOLROOT)/usr/sbin/tag $(TAG) $(TARGET)
+</pre></td></tr></table><br></li>
+<li><p>Copy<span class="bold"><b> .fti </b></span>and<span class="bold"><b> .ftr</b></span> files to the appropriate directories (<a href="ch11.html#LE89793-PARENT" title="Where to Put FTR Files">&#8220;Where to Put FTR Files&#8221;</a> and <a href="ch12.html#LE77527-PARENT" title="Where to Install Your Completed Icon">&#8220;Where to Install Your Completed Icon&#8221;</a><a href="ch12.html#LE77527-PARENT"> in Chapter 12</a> explain which directories these files belong in). With <tt>swpkg</tt>, you can do this by setting the appropriate destination directory and destination filename for each file, using the Edit Permissions and Destinations worksheet. See Chapter 5, &#8220;Editing Permissions and Destinations,&#8221; in the <i>Software Packager User's Guide</i> for instructions.</p>
+</li>
+<li><p>Invoke <tt>make</tt> in<tt> /usr/lib/filetype</tt> to update the Desktop's database (<a href="ch11.html#LE52367-PARENT" title="Step Four: Compiling the Source Files">&#8220;Step Four: Compiling the Source Files&#8221;</a> explains how to update the database). With <tt>swpkg</tt>, you can do this using the <tt>exitop</tt> attribute from the Add Attributes worksheet. Set up the <tt>exitop</tt> attribute to run the <tt>make</tt> command. See Chapter 6, &#8220;Adding Attributes,&#8221; in the <i>Software Packager User's Guide</i> for instructions.</p>
+</li>
+<li><p>Add your icon to the Icon Catalog, creating a symbolic link in the <tt>/usr/lib/desktop/iconcatalog/C/Applications</tt> directory. See <a href="ch11.html#LE78197-PARENT" title="Step Five: Installing Your Application in the Icon Catalog">&#8220;Step Five: Installing Your Application in the Icon Catalog&#8221;</a> for instructions.</p>
+</li>
+</ul></div><p>See the<tt> make(1)</tt>, <tt>sh(1)</tt>, and <tt>tag(1)</tt> reference pages for more information on these commands.</p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="pt02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch12.html">Next</a></td></tr><tr><td width="40%" align="left">Part II. Creating Desktop Icons </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 12. Using IconSmith </td></tr></table></div></body></html>

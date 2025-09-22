@@ -1,26 +1,26 @@
 # Tech Stack Proposal
 
 ## Client Experience
-- **Primary UX:** macOS native app (SwiftUI/Catalyst) acting as the main IDE shell.
-- **Secondary UX:** Optional IRIX-native UI for on-box editing using Motif; deferred until macOS client stabilizes.
-- **Editor Engine:** Leverage the open-source TextMate grammar system or Tree-sitter for syntax highlighting, wrapped in the SwiftUI client; interoperable backend service for headless usage.
-- **IRIX UI Styling:** Any native IRIX components must follow Motif/Indigo Magic conventions to match existing system UX patterns.
+- **Primary UX:** IRIX native Motif application built on IRIS IM and 4Dwm conventions.
+- **Editor Engine:** Integrate an extensible text component (e.g., Xaw/Motif-based editor or custom widget) with syntax highlighting powered by Tree-sitter or ctags backends compiled for IRIX.
+- **IRIX UI Styling:** All surfaces adopt Indigo Magic palettes, magic-carpet iconography, and Motif spacing guidelines outlined in the IRIX Interactive Desktop manuals.
 
-## Remote Workflow
-- **Transport:** OpenSSH with reusable host profiles (leveraging existing `octane` configuration). All remote operations tunnel through SSH for file operations, builds, and debugging.
-- **Sync Layer:** rsync or custom incremental sync module to mirror project directories between macOS and IRIX.
-- **Build Orchestration:** Command queue targeting MIPSPro, cross-compilers, or containerized toolchains (future) with streaming logs back to the client.
-- **Debugging:** Remote gdb or SGI-specific debugging tools wrapped via CLI to deliver interactive sessions within the IDE.
+## Workflow Services
+- **Transport:** OpenSSH with reusable host profiles; all remote operations (sync, builds, debugging) tunnel through SSH.
+- **Sync Layer:** rsync or scp fallback modules running natively on IRIX, with queueing and conflict detection for offline scenarios.
+- **Build Orchestration:** Command queue targeting MIPSPro and other IRIX toolchains; stream logs back to the client via pipes with line-delimited JSON metadata.
+- **Debugging:** Remote gdb or SGI debugger integration using CLI wrappers that feed breakpoint and variable events into the Motif UI.
 
 ## Extensibility
-- **Plugin Runtime:** Python-based plugin host for quick iteration; embed a Python interpreter in the macOS client to load language/services plugins (linting, formatting, custom build steps).
-- **Configuration:** YAML-based project manifests describing build targets, sync paths, and remote hosts.
+- **Plugin Runtime:** Python-based plugin host embedded in the IRIX client to support linting, formatting, and custom build steps without recompiling the UI.
+- **Configuration:** YAML-based project manifests describing build targets, sync paths, telemetry cadence, and remote hosts.
 
 ## Persistence & Data
-- **Local Metadata:** SQLite or Core Data on macOS to track project settings, connections, and recent files.
-- **Remote Services:** Minimal footprint; rely on existing IRIX filesystem and add lightweight helper scripts as needed.
+- **Local Metadata:** Lightweight SQLite (if available) or structured flat files to track project settings, connections, and recent files on IRIX.
+- **Remote Services:** Minimal footprint—augmented by helper scripts deployed to hosts for telemetry, queue inspection, and log retrieval.
 
 ## Observability
-- Structured logging from both client and remote operations (JSON logs). Future plan to integrate with SGI monitoring dashboards.
+- Structured logging (JSON or syslog-compatible) from both client and remote operations with hooks for SGI monitoring dashboards.
+- Telemetry endpoints publish host health, retry attempts, and build metrics consumable by the Remote Hosts and Dashboard views.
 
 _This tech stack will be refined after prototype spikes and stakeholder validation._

@@ -1,0 +1,1186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix G. Using GoldenGate Data Conversion Services</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="apf.html" title="Appendix F. FTR File Directories"><link rel="next" href="aph.html" title="Appendix H. Standard Menu Resources"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix G. Using GoldenGate Data Conversion Services</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apf.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="aph.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE41465-PARENT"></a>Appendix G. Using GoldenGate Data Conversion Services</h2></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-0"></a>
+<a class="indexterm" name="ITG.Data.conversion-1"></a>
+<a class="indexterm" name="ITG.Data.conversion-2"></a>
+<a class="indexterm" name="ITG.Data.conversion-3"></a>
+<a class="indexterm" name="ITG.Data.conversion-4"></a>
+<a class="indexterm" name="ITG.Data.conversion-5"></a>
+This appendix describes how to use the GoldenGate data conversion services. <a class="indexterm" name="ITG.Data.conversion-6"></a>
+It covers these topics: <a class="indexterm" name="ITG.Data.conversion-7"></a>
+<a class="indexterm" name="ITG.Data.conversion-8"></a>
+<a class="indexterm" name="ITG.Data.conversion-9"></a>
+<a class="indexterm" name="ITG.Data.conversion-10"></a>
+<a class="indexterm" name="ITG.Data.conversion-11"></a>
+</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE97872-PARENT" title="Converting Data Using the GoldenGate Data Conversion Service">&#8220;Converting Data Using the GoldenGate Data Conversion Service&#8221;</a> explains how to use the converters provided.</p>
+</li>
+<li><p><a href="apg.html#LE66520-PARENT" title="Compiling and Linking Your Program with GoldenGate">&#8220;Compiling and Linking Your Program with GoldenGate&#8221;</a> describes the header file to use when compiling and linking a program. </p>
+</li>
+<li><p><a href="apg.html#LE61988-PARENT" title="Writing Converters for the GoldenGate Data Conversion Service">&#8220;Writing Converters for the GoldenGate Data Conversion Service&#8221;</a> explains how to customize your own converters. <a class="indexterm" name="ITG.Data.conversion-12"></a>
+</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE97872-PARENT"></a>Converting Data Using the GoldenGate Data Conversion Service</h2></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-13"></a>
+This section describes how you can use the GoldenGate data <a class="indexterm" name="ITG.Data.conversion-14"></a>
+conversion service in your application. Specifically, it explains:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE15075-PARENT" title="Overview of the Conversion Process">&#8220;Overview of the Conversion Process&#8221;</a> describes the steps involved in converting data using GoldenGate.</p>
+</li>
+<li><p><a href="apg.html#LE27143-PARENT" title="Selecting a Converter ">&#8220;Selecting a Converter &#8221;</a> describes how to select a converter by querying the converter registry and setting up the conversion context.</p>
+</li>
+<li><p><a href="apg.html#LE31875-PARENT" title="Using GoldenGate to Convert Data">&#8220;Using GoldenGate to Convert Data&#8221;</a> describes how to initialize the conversion pipeline, send data through it, and clean up after the conversion.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE15075-PARENT"></a>Overview of the Conversion Process</h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-15"></a>
+<a class="indexterm" name="ITG.Data.conversion-16"></a>
+To convert data <a class="indexterm" name="ITG.Data.conversion-17"></a>
+using GoldenGate, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>Choose a converter.</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Obtain a list of converters that read the source format and write the target format.</p>
+</li>
+<li><p>Create a conversion context structure and set conversion parameters.</p>
+</li>
+<li><p>Evaluate the list of converters to determine which one is best suited for the current conversion.</p>
+</li>
+</ul></div></li>
+<li><p>Convert data.</p>
+<p>There are two methods of converting data, depending on whether the data is in a stream or in a file.</p>
+<p>Converting Stream Data</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Initialize the selected converter.</p>
+</li>
+<li><p>Send data through the converter and read results back.</p>
+</li>
+<li><p>Clean up resources by destroying the conversion context.</p>
+</li>
+</ul></div><p>Converting Data Files</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Call the file conversion function.</p>
+</li>
+<li><p>Clean up resources by destroying the conversion context.</p>
+</li>
+</ul></div></li>
+</ol></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE29775-PARENT"></a>The Converter Registry</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-18"></a>
+<a class="indexterm" name="ITG.Data.conversion-19"></a>
+<a class="indexterm" name="ITG.Data.conversion-20"></a>
+GoldenGate maintains a list of available converters in the <span class="bold"><b>converter registry</b></span>. This registry contains an entry for each converter, specifying characteristics such as the type of input data it takes and the type of output data it produces. To find out if there are any converters that will convert from format &#8220;A&#8221; to format &#8220;B,&#8221; you can query the registry.</p>
+<p>GoldenGate returns a list of converters that take the specified input and produce the specified output. You can be as specific as you like when querying the registry, to ensure that only relevant converters are listed. You should also use the query to eliminate inappropriate categories of converter, such as those of type <tt>StreamToStream</tt> if you are converting a file. If the list contains more than one converter, you may need to evaluate the converters to see which one best meets your needs. Even if the list contains only one converter, you should evaluate it to make sure it can handle your conversion request. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5245822"></a>Creating a Conversion Context</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-21"></a>
+To communicate with a converter, you must create a <span class="bold"><b>conversion context</b></span>. The conversion context is a data object that stores conversion parameters. The conversion context is passed to subsequent library calls that set input and output parameters, evaluate converters, initialize the conversion pipeline, and move data through it.</p>
+<p>Once you have created a conversion context and specified the desired conversion parameters, you can evaluate the list of converters you obtained when you queried the registry. For example, suppose you want to convert from one audio format to another and change the sample rate at the same time. Querying the registry returns a list of converters that will convert between the specified input and output formats. To determine if any of these converters will perform the desired sample rate conversion, you have to create a conversion context, set the desired parameters (including input and output sample rate) and then evaluate the individual converters.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5245901"></a>Evaluating a Converter </h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-22"></a>
+It's best to evaluate a converter before you invoke it to perform a conversion. You do this for the following reasons:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Evaluation gives the converter an opportunity to inspect your data parameters. Some converters will have more functionality than others, even though their input and output types are the same. A well-designed converter will know just by looking at parameters whether it can do the conversion.</p>
+</li>
+<li><p>Conversion is typically an expensive operation. If your attempt to convert fails, you can still choose a different converter and try again, but you could have avoided lost time by trying a converter that can accept your specific request.</p>
+</li>
+</ul></div><p>Depending on your needs, you can select the first converter on the list that passes the evaluation stage, or evaluate the whole list and use your own rules to choose between those that pass.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE86616-PARENT"></a>Converting Data In a File or Stream</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-23"></a>
+Once you determine the converter to use, the final stage depends on whether you are converting data in a file or a stream. </p>
+<p>If you are converting a stream, initialize a conversion pipeline that reads your stream and passes back results as they are available. Then you send all your data through the pipeline and read the results until you see the end of stream marker for the pipeline. At this point, terminate the pipeline. This causes GoldenGate to clean up data structures it keeps for maintaining a stream conversion.</p>
+<p>If you are converting a file, the procedure is simpler. You call a single GoldenGate function to perform the operation, and wait for results. If necessary you can provide a callback function that will notify you when results become available. This allows you to service other events going on in your application during what may be a long conversion.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE27143-PARENT"></a>Selecting a Converter </h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-24"></a>
+This section describes how to select a converter by querying the converter registry and setting up the conversion context. Specifically, this section covers:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE62783-PARENT" title="Querying the Converter Registry">&#8220;Querying the Converter Registry&#8221;</a>, which explains how to obtain a list of possible converters.</p>
+</li>
+<li><p><a href="apg.html#LE60733-PARENT" title="Setting Up the Conversion Context">&#8220;Setting Up the Conversion Context&#8221;</a>, which describes how to create a conversion context.</p>
+</li>
+<li><p><a href="apg.html#LE87840-PARENT" title="Evaluating Converters">&#8220;Evaluating Converters&#8221;</a>, which explains how to find a converter that performs the specified conversion.</p>
+</li>
+<li><p><a href="apg.html#LE25846-PARENT" title="Getting Converter Details">&#8220;Getting Converter Details&#8221;</a>, which describes how to get a description of a converter.</p>
+</li>
+<li><p><a href="apg.html#LE49475-PARENT" title="Converter Return Status Values ">&#8220;Converter Return Status Values &#8221;</a>, which lists return status values. </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE62783-PARENT"></a>Querying the Converter Registry</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-25"></a>
+<a class="indexterm" name="ITG.Data.conversion-26"></a>
+To query the converter registry, you specify a set of constraints. Each constraint consists of an attribute (such as input format), a value for the attribute, and a comparison operator. For example, you can ask for a converter that has input format equal to &#8220;AIFF_FILE,&#8221; and version number greater than 2. Use the <tt>SgCvtSetQueryConstraint()</tt> function to fill in an array of <tt>SgCvtQueryConstraint</tt> structures, then pass the array to the <tt>SgCvtQueryRegistry()</tt> function. The following code fragment demonstrates a simple query that locates converters capable of converting AIFF_FILE to WAVE_FILE:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtQueryConstraint constraints[2];
+SgCvtStatus status;
+SgCvtConverterId *converters;
+int num_constraints, num_converters;
+SgCvtRegistry registry = NULL;
+status = SgCvtSetQueryConstraint(constraints[0],
+         SG_CVT_ATTR_INPUT_TYPE, &quot;AIFF_FILE&quot;, SG_CVT_OP_EQ);
+status = SgCvtSetQueryConstraint(constraints[1],
+         SG_CVT_ATTR_OUTPUT_TYPE, &quot;WAVE_FILE&quot;, SG_CVT_OP_EQ);
+num_constraints = 2;
+status = SgCvtQueryRegistry(constraints, num_constraints,
+            &amp;registry, &amp;converters, &amp;num_converters);
+</pre></td></tr></table><p>The <tt>SgCvtQueryRegistry()</tt> function returns an array of <span class="bold"><b>converter IDs</b></span> that can be used to identify the individual converters. </p>
+<p>The <i>registry</i> argument specifies the GoldenGate converter registry to be queried. During this call, the registry is located on disk (<tt>/var/GoldenGate/ConverterRegistry</tt> by default), and its contents parsed to find a converter that matches your requirements. </p>
+<p>The first time you call <tt>SgCvtQueryRegistry</tt>, specify registry as NULL as in the previous example, which causes this lookup. When you have finished converting, you can either call <tt>SgCvtFreeRegistry</tt> to release the resources that GoldenGate may have cached after reading the file, or you can re-use the value returned in registry for subsequent queries, avoiding the overhead of looking up the file. </p>
+<p>If you choose to free the registry between queries, your program will always have the latest information, even if the registry changes while your program is running. If you choose to re-use the registry handle, you have no control over whether or not GoldenGate will re-parse the registry. It will try to use its cache first. If for any reason the cache is invalid, GoldenGate may at its discretion rebuild it by reading the disk-based registry again. </p>
+<p>The converters argument returns an array of matching converter IDs, of which the first <i>num_converters</i> are valid and matched the query. You should free this array when you are finished using it, using <tt>free</tt>(3). </p>
+<p><a class="indexterm" name="ITG.Data.conversion-27"></a>
+<a href="apg.html#id5246309" title="Table G-1. Converter Attributes">Table G-1</a> lists the attributes you can query.</p>
+<div class="table"><a name="id5246309"></a><p><a name="id5246309"></a><b>Table G-1. Converter Attributes</b></p>
+<table summary="Converter Attributes" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Attribute Name</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_NAME</p>
+</td><td valign="top"><p>Converter name</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_INPUT_FORMAT</p>
+</td><td valign="top"><p>Input format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_OUTPUT_FORMAT</p>
+</td><td valign="top"><p>Output format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_IO_METHOD</p>
+</td><td valign="top"><p>StreamToStream or FileToFile</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_INPUT_LABEL</p>
+</td><td valign="top"><p>Input format, human readable version</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_OUTPUT_LABEL</p>
+</td><td valign="top"><p>Output format, human readable version</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_VENDOR</p>
+</td><td valign="top"><p>Vendor's name</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_VERSION</p>
+</td><td valign="top"><p>Vendor's version information</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SG_CVT_ATTR_DESCRIPTION</p>
+</td><td valign="top"><p>Description of converter</p>
+</td></tr></tbody></table></div><p>Most of the time, you'll be interested in the input format and output format attributes. <a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a><a href="ch07.html#LE11667-PARENT"> in Chapter 7</a> lists common data formats. Other attributes may be useful when listing converters for users. For example, if you want the user to choose between two converters that perform the same conversion, you can display the vendor names and version numbers. </p>
+<p><a class="indexterm" name="ITG.Data.conversion-28"></a>
+<a href="apg.html#id5246575" title="Table G-2. Query Operators">Table G-2</a> lists the operators you can use in your query. </p>
+<div class="table"><a name="id5246575"></a><p><a name="id5246575"></a><b>Table G-2. Query Operators</b></p>
+<table summary="Query Operators" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Operator</p>
+</th><th scope="col" valign="top"><p>Symbol</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>equal to</p>
+</td><td valign="top"><p>SG_CVT_OP_EQ</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>not equal to</p>
+</td><td valign="top"><p>SG_CVT_OP_NE</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>less than</p>
+</td><td valign="top"><p>SG_CVT_OP_LT</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>less than or equal to</p>
+</td><td valign="top"><p>SG_CVT_OP_LE</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>greater than</p>
+</td><td valign="top"><p>SG_CVT_OP_GT</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>greater than or equal to</p>
+</td><td valign="top"><p>SG_CVT_OP_GE</p>
+</td></tr></tbody></table></div><p>Note that if more than one constraint is specified on a single attribute, a logical AND is implied. For example, you can select a range of version numbers by setting &#8220;version greater than or equal to one&#8221; as one constraint and &#8220;version less than or equal to three&#8221; as a second constraint.</p>
+<p><tt>SgCvtQueryConstraint</tt> can return the following status value:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded. </p>
+
+</td></tr></table></div><p><tt>SgCvtQueryRegistry</tt> can return the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_FAILURE</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Could not find the registry, or failed to parse it. Most likely when the default registry has been edited to add new converters, and a syntax error introduced. You may also be loading the wrong file. Make sure that if there is a file called ConverterRegistry on your path, it is a valid registry using the CDF syntax. Also make sure the CVT_REGISTRY_OVERRIDE variable is not set. </p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE60733-PARENT"></a>Setting Up the Conversion Context</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-29"></a>
+Before you can evaluate or use a converter, you must create a conversion context and set parameters governing the conversion. Use the <tt>SgCvtCreateConversionContext()</tt> function to create a conversion context:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus
+SgCvtCreateConversionContext(SgCvtConversionContext *context)
+</pre></td></tr></table><p><tt>SgCvtCreateConversionContext</tt> can return the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_NOMEM</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Insufficient memory to allocate a context. </p>
+
+</td></tr></table></div><p>Next, set any digital media parameters that affect your conversion by calling <tt>SgCvtSetContextInfo</tt>. </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus SgCvtSetContextInfo
+    (
+    SgCvtConversionContext    context,
+    unsigned long             valuemask,
+    SgCvtContextInfo          *context_data
+    );
+</pre></td></tr></table><p>where</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>context</i> </span></td><td width="10"> </td><td><p>specifies the context you created with <tt>SgCvtCreateConversionContext</tt> </p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>valuemask</i> </span></td><td width="10"> </td><td><p>specifies which fields in the <tt>SgCvtContextInfo</tt> structure are being set in the context. This is specified as any of the following OR'ed together:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<tt>SG_CVT_INFO_INPUT_PARAMS</tt>
+<tt>SG_CVT_INFO_OUTPUT_PARAMS</tt>
+<tt>SG_CVT_INFO_META_PARAMS</tt>
+<tt>SG_CVT_INFO_INPUT_FILE</tt>
+<tt>SG_CVT_INFO_INPUT_HOST</tt>
+<tt>SG_CVT_INFO_OUTPUT_FILE</tt>
+<tt>SG_CVT_INFO_OUTPUT_HOST</tt>
+</pre></td></tr></table><br>
+</td></tr><tr valign="top"><td><span class="term"> <i>context_data</i> </span></td><td width="10"> </td><td><p>specifies the values being set</p>
+
+</td></tr></table></div><p><tt>SgCvtSetContextInfo</tt> can return the following status value:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded. </p>
+
+</td></tr></table></div><p>See the <i>IRIS Media Libraries Programming Guide</i> for information on setting <tt>DMparams</tt>. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE87840-PARENT"></a>Evaluating Converters</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-30"></a>
+<a class="indexterm" name="ITG.Data.conversion-31"></a>
+To evaluate a converter, call <tt>SgCvtEvaluateConverter()</tt>: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus 
+SgCvtEvaluateConverter(SgCvtConverterId converter_id, 
+                       SgCvtConversionContext context
+                       DMparams **output_params)
+</pre></td></tr></table><p>where</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>converter_id</i></span></td><td width="10"> </td><td><p>is a converter ID returned by the <tt>SgCvtQueryRegistry()</tt> function</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>context</i></span></td><td width="10"> </td><td><p>is a valid conversion context obtained from <tt>SgCvtCreateConversionContext()</tt> </p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>output_params</i></span></td><td width="10"> </td><td><p>returns the output of the request. Converters may set these parameters, even though they accept the request.</p>
+
+</td></tr></table></div><p><tt>SgCvtEvaluateConverter()</tt> can return the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_ACCEPT </span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The converter can perform the conversion specified by the conversion context. </p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_REJECT</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The converter can't perform the requested conversion.</p>
+
+</td></tr></table></div><p>When evaluating a converter returns a status of SG_CVT_E_ACCEPT, you should take one final step before calling the converter. You should inspect the <i>output_params</i> argument, which returns a <tt>DMparams</tt> list describing the result that the converter will produce. If your program has very strict requirements, this will help protect you if the converter has accepted the request but cannot honor what it considers a minor parameter, or if you passed a parameter it could not understand.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE25846-PARENT"></a>Getting Converter Details</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-32"></a>
+If your program needs to display information about available converters, or do other processing based on the data stored about a converter in the converter registry, call <tt>SgCvtGetConverterAttributes()</tt> to get a description of it. The function prototype for <tt>SgCvtGetConverterAttributes()</tt> is shown below.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus 
+SgCvtGetConverterAttributes(SgCvtConverterId converter_id,
+                           unsigned long converter_attr_mask,
+                           SgCvtConverterAttrs *attributes)
+</pre></td></tr></table><p>When you are finished using the fields of the <tt>SgCvtConverterAttrs</tt> structure, you should free the string attributes and the structure itself (if you allocated it dynamically) using <tt>free</tt>(3C).</p>
+<p><tt>SgCvtGetConverterAttributes</tt> can return the following status value:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE31875-PARENT"></a>Using GoldenGate to Convert Data</h3></div></div>
+<p>This section describes the different methods you can use to convert data. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE61772-PARENT" title="Converting Data Using File Converters ">&#8220;Converting Data Using File Converters &#8221;</a></p>
+</li>
+<li><p><a href="apg.html#LE85174-PARENT" title="Converting Data Using Stream Data Converters ">&#8220;Converting Data Using Stream Data Converters &#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE61772-PARENT"></a>Converting Data Using File Converters </h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-33"></a>
+Your file-based data is always converted using the function <tt>SgCvtConvertFileToFile</tt>. Before you call it however, you need to decide whether you want the function to block while the conversion is going on, or return immediately and let you know later that the conversion is complete.</p>
+<p>In many cases blocking mode is sufficient, and it is much simpler to use if your program is not naturally event driven. However, if your application has a GUI, you may prefer non-blocking mode because it allows your event loop to keep running while conversion is going on. When conversion is complete, you are notified through a callback function that you supply, and you can use the converted data.</p>
+<p>Both modes are invoked using <tt>SgCvtConvertFileToFile</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef void (*SgCvtCallback)(SgCvtConversionContext context,
+                              void *client_data,
+                              void *callback_data);
+     
+SgCvtStatus SgCvtConvertFileToFile
+        (
+         SgCvtConversionContext   context,
+         SgCvtConverterId         converter_id,
+         char                     *input_file,
+         char                     *output_file,
+         unsigned long            callback_mask,
+         SgCvtCallback            callback,
+         void                     *client_data
+         );
+</pre></td></tr></table><p>where</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>context</i> </span></td><td width="10"> </td><td><p>the conversion context, holding the I/O filenames and parameters</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>converter_id</i> </span></td><td width="10"> </td><td><p>the converter ID, returned by <tt>SgCvtQueryConverter</tt></p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>input_file</i></span></td><td width="10"> </td><td><p>pathname of input file. You must have read permission.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>output_file</i> </span></td><td width="10"> </td><td><p>pathname of output file. You must have write permission.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>callback_mask</i></span></td><td width="10"> </td><td><p>mask indicating when callback should be called. It should be some logical combination of the following values:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SG_CVT_CB_FLAG_CONVERSION_DONE
+      (after completion)
+SG_CVT_CB_FLAG_STAGE_DONE
+      (after each stage if multi-stage pipeline)
+</pre></td></tr></table><br>
+</td></tr><tr valign="top"><td><span class="term"><i>callback</i></span></td><td width="10"> </td><td><p>specifies the callback function</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>client_data</i></span></td><td width="10"> </td><td><p>a pointer to application-defined data structure that will be passed to the callback when invoked</p>
+
+</td></tr></table></div><p>If specified, the callback argument is the address of the function to call when conditions specified by the <i>callback_mask</i> arise. If the callback function is not specified, or the mask is zero, the function executes in blocking mode.</p>
+<p><tt>SgCvtConvertFileToFile</tt> can return the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_BAD_CONVERTER_TYPE</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The converter was not registered as FileToFile IO method.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_READ_FAILED</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The input file could not be read. It may be missing, or the permissions are insufficient for reading.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_WRITE_FAILED</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The output file could not be written. This can happen if the user does not have write permission for the target directory, or if the supplied pathname was invalid. </p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE85174-PARENT"></a>Converting Data Using Stream Data Converters </h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-34"></a>
+<a class="indexterm" name="ITG.Data.conversion-35"></a>
+<a class="indexterm" name="ITG.Data.conversion-36"></a>
+To convert data using your specified converter, you must initialize the conversion pipeline, and then send the data through. After reading the last block of converted data, clean up by destroying the conversion context to free the resources associated with the pipeline. This section covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE27136-PARENT" title="Initializing the Pipeline">&#8220;Initializing the Pipeline&#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE39159-PARENT" title="Sending and Receiving Data">&#8220;Sending and Receiving Data&#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE75494-PARENT" title="Cleaning Up">&#8220;Cleaning Up&#8221;</a> </p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE27136-PARENT"></a>Initializing the Pipeline</h4></div></div>
+<p>Prepare the converter to receive data by calling <tt>SgCvtInitializePipeline()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus 
+SgCvtInitializePipeline(SgCvtConversionContext context,
+                        SgCvtConverterId  converter_id)
+</pre></td></tr></table><p>where</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>context</i></span></td><td width="10"> </td><td><p>is a valid conversion context obtained from <tt>SgCvtCreateConversionContext()</tt></p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>converter_id</i></span></td><td width="10"> </td><td><p>is a converter ID returned by the SgCvtQueryRegistry() function</p>
+
+</td></tr></table></div><p><tt>SgCvtInitializePipeline</tt> can return the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_FAILURE</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The context or its contents is bad or one of the subprocesses required to host a converter function could not be launched.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_BAD_CONVERTER_TYPE</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The converter was not registered as StreamToStream. Converters that are designed to work with streaming data advertise themselves as using the StreamToStream method of I/O in the registry.</p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE39159-PARENT"></a>Sending and Receiving Data</h4></div></div>
+<p>You may send and receive arbitrarily sized blocks of data, so use a block size that is convenient. </p>
+<p>Send data to the converter using <tt>SgCvtSendData()</tt>. The function prototype for <tt>SgCvtSendData()</tt> is shown below:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus  SgCvtSendData(
+    SgCvtConversionContext context,
+    void                   *data,
+    size_t                 length,
+    DMparams               *params,
+    boolean_t              canwait
+)
+</pre></td></tr></table><p>where</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>context</i></span></td><td width="10"> </td><td><p>is a valid conversion context</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>data</i></span></td><td width="10"> </td><td><p>is a pointer to the data block to be converted</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>length</i></span></td><td width="10"> </td><td><p>is the length of the data block</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>params</i></span></td><td width="10"> </td><td><p>is a <tt>DMparams</tt> structure describing the data to be converted</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>canwait</i></span></td><td width="10"> </td><td><p>is a boolean value that indicates what the function should do if it cannot send the data immediately. If you specify B_TRUE, <tt>SgCvtSendData()</tt> will block until it can send the data to the conversion pipeline. If you specify B_FALSE, <tt>SgCvtGetData()</tt> will return immediately with a status of SG_CVT_E_AGAIN. This status indicates that you should try again. </p>
+
+</td></tr></table></div><p><tt>SgCvtSendData</tt> can return with the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_FAILURE</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>An I/O error occurred while trying to send data through the pipe connecting two pipeline components.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_AGAIN</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Required resources were temporarily unavailable. The caller should retry later.</p>
+
+</td></tr></table></div><p>Read data from the converter using <tt>SgCvtGetData()</tt>. The function prototype for <tt>SgCvtGetData()</tt> is shown below:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus  SgCvtGetData(
+    SgCvtConversionContext context,
+    size_t                 buf_len,
+    void                   *buffer,
+    size_t                 *length_returned,
+    DMparams               **params_returned,
+    boolean_t              canwait
+)
+</pre></td></tr></table><p>where</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>context</i></span></td><td width="10"> </td><td><p>is a valid conversion context</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>buf_len</i></span></td><td width="10"> </td><td><p>specifies the size of buffer</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>buffer</i></span></td><td width="10"> </td><td><p>is a pointer to a pre-allocated buffer of at least <i>buf_len</i> bytes.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>length_returned</i></span></td><td width="10"> </td><td><p>is the actual length of the returned data (this may be less than <i>bytes_requested</i> if non-blocking mode is specified, or if the converter encounters end-of-stream) <tt>SgCvtGetData</tt></p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>params_returned</i></span></td><td width="10"> </td><td><p>is a <tt>DMparams</tt> structure describing the converted data.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>canwait</i></span></td><td width="10"> </td><td><p>is a boolean value that indicates what the function should do if no data is available. If you specify B_TRUE, <tt>SgCvtGetData()</tt> will block until data becomes available from the conversion pipeline. If you specify B_FALSE, <tt>SgCvtGetData()</tt> will return immediately with a status of SG_CVT_E_QUEUE_EMPTY. This status indicates that you should try again. </p>
+
+</td></tr></table></div><p><tt>SgCvtGetData</tt> can return the following status values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_FAILURE</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>An I/O error occurred while trying to read data from the pipe connecting two pipeline components.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_AGAIN</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Required resources were temporarily unavailable. The caller should retry later.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_END_OF_STREAM</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded, and the end of the data has been reached.</p>
+
+</td></tr></table></div><p>The non-blocking mode of <tt>SgCvtSendData()</tt> and <tt>SgCvtGetData()</tt> allows programs to continue working on other tasks (such as handling events from a graphical interface) while waiting to send data to or read data from the conversion pipeline.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE75494-PARENT"></a>Cleaning Up</h4></div></div>
+<p>When you've sent the last of the data to the converter, call <tt>SgCvtSendEndOfStream()</tt> to indicate the end of the data. After you've read the last of the converted data, free the resources associated with the conversion context by calling <tt>SgCvtDestroyConversionContext()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgCvtStatus SgCvtSendEndOfStream(
+    SgCvtConversionContext context
+);
+
+SgCvtStatus  SgCvtDestroyConversionContext(
+    SgCvtConversionContext context
+)
+</pre></td></tr></table><p>If you need to terminate the conversion process before reaching the end of the data, call <tt>SgCvtDestroyConversionContext()</tt>.</p>
+<p><tt>SgCvtSendEndOfStream</tt> can return the following status value:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr></table></div><p><tt>SgCvtDestroyConversionContext</tt> can return the following status value:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SG_CVT_E_SUCCESS</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The operation succeeded.</p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE49475-PARENT"></a>Converter Return Status Values </h4></div></div>
+<p><a href="apg.html#id5248729" title="Table G-3.  Converter Return Status Values ">Table G-3</a> lists converter functions and their return status values. </p>
+<div class="table"><a name="id5248729"></a><p><a name="id5248729"></a><b>Table G-3.  Converter Return Status Values </b></p>
+<table summary=" Converter Return Status Values " border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Function</p>
+</th><th scope="col" valign="top"><p>Return Value</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>SgCvtSetQueryConstraint</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtQueryRegistry</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_FAILURE</p>
+</td><td valign="top"><p>Could not find the registry, or 
+failed to parse it. Most likely 
+when the default registry has 
+been edited to add new 
+converters, and a syntax error 
+introduced. You may also be 
+loading the wrong file. Make 
+sure that if there is a file called 
+ConverterRegistry on your 
+path, it is a valid registry using 
+the converter description file 
+syntax. Also make sure the 
+CVT_REGISTRY_OVERRIDE 
+variable is not set.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtGetConverterAttributes</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtCreateConversionContext</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_NOMEM</p>
+</td><td valign="top"><p>Insufficient memory to allocate 
+a context.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtDestroyConversionContext</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtSetContextInfo</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtGetContextInfo</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtEvaluateConverter </p>
+</td><td valign="top"><p>SG_CVT_E_ACCEPT</p>
+</td><td valign="top"><p>The converter can perform the 
+requested conversion.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_REJECT</p>
+</td><td valign="top"><p>The converter cannot perform 
+the requested conversion.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtInitializePipeline</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_FAILURE</p>
+</td><td valign="top"><p>The context or its contents is bad 
+or one of the subprocesses 
+required to host a converter 
+function could not be launched.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_BAD_<br>
+
+CONVERTER_TYPE</p>
+</td><td valign="top"><p>The converter was not 
+registered as StreamToStream. 
+Converters that are designed to 
+work with streaming data 
+advertise themselves as using 
+the StreamToStream method of 
+I/O in the registry.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtTerminatePipeline</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtSendData</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_FAILURE</p>
+</td><td valign="top"><p>An I/O error occurred while 
+trying to send data through the 
+pipe connecting two pipeline 
+components.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_AGAIN</p>
+</td><td valign="top"><p>The required resources were 
+temporarily unavailable. The 
+caller should retry later.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtGetData</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_FAILURE</p>
+</td><td valign="top"><p>An I/O error occurred while 
+trying to read data from the pipe 
+connecting two pipeline 
+components.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_AGAIN</p>
+</td><td valign="top"><p>The required resources were 
+temporarily unavailable. The 
+caller should retry later.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_END_OF_<br>
+
+STREAM</p>
+</td><td valign="top"><p>The operation succeeded, and 
+the end of the data has been 
+reached.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtSendEndOfStream</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtEncodeParams</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtDecodeParams</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_NOMEM</p>
+</td><td valign="top"><p>Insufficient memory to allocate 
+structures.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtFreeEncodedParams</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_FAILURE</p>
+</td><td valign="top"><p>The data could not be decoded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtConvertFileToFile</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_BAD_<br>
+
+CONVERTER_TYPE </p>
+</td><td valign="top"><p>The converter was not 
+registered as FileToFile I/O 
+method.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_READ_<br>
+
+FAILED</p>
+</td><td valign="top"><p>The input file could not be read. 
+It may be missing, or the 
+permissions are insufficient for 
+reading.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_WRITE_<br>
+
+FAILED</p>
+</td><td valign="top"><p>The output file could not be 
+written. This can happen if the 
+user does not have write 
+permission for the target 
+directory, or if the supplied 
+pathname was invalid.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtGetFileSelectionTarget</p>
+</td><td valign="top"><p>SG_CVT_E_SUCCESS</p>
+</td><td valign="top"><p>The operation succeeded.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_UNKNOWN
+_<br>
+
+TYPE</p>
+</td><td valign="top"><p>The file type could not be 
+determined.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_NO_TARGE
+T</p>
+</td><td valign="top"><p>The selection target for the type 
+of file could not be determined, 
+or there is none.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>SG_CVT_E_FAILURE</p>
+</td><td valign="top"><p>The operation could not be 
+performed for another reason, 
+such as the underlying file 
+typing database library could 
+not be accessed, or the database 
+itself was corrupt or missing.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SgCvtIsPipeline</p>
+</td><td valign="top"><p>B_TRUE</p>
+</td><td valign="top"><p>The translator is a multi-stage 
+pipeline.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+</td><td valign="top"><p>B_FALSE</p>
+</td><td valign="top"><p>The translator is a single-stage 
+converter. </p>
+</td></tr></tbody></table></div><br></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE66520-PARENT"></a>Compiling and Linking Your Program with GoldenGate</h2></div></div>
+<p>To compile and link your <a class="indexterm" name="ITG.Data.conversion-37"></a>
+<a class="indexterm" name="ITG.Data.conversion-38"></a>
+<a class="indexterm" name="ITG.Data.conversion-39"></a>
+<a class="indexterm" name="ITG.Data.conversion-40"></a>
+<a class="indexterm" name="ITG.Data.conversion-41"></a>
+<a class="indexterm" name="ITG.Data.conversion-42"></a>
+program, you need to include the header file <tt>SgCvt.h</tt> and include the library <tt>libcvt</tt> in your link line.</p>
+<p>An example of a simple GoldenGate program follows. It includes the required header file, enumerates the registered converters, and prints their input and output labels.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;SgCvt.h&gt;
+main(int argc, char **argv)
+{
+    SgCvtRegistry         registry = NULL;
+    int                   n=0;
+    SgCvtStatus           s;
+    SgCvtConverterId      *cvtrs;
+    int                   ncvtrs;
+
+    s = SgCvtQueryRegistry(NULL, 0, &amp;registry, &amp;cvtrs, &amp;ncvtrs);
+    for (n=0; n&lt;ncvtrs; n++) {
+            SgCvtConverterAttrs attrs;
+
+            SgCvtGetConverterAttributes(cvtrs[n],
+                 SG_CVT_ATTR_FLAG_INPUT_LABEL |
+                 SG_CVT_ATTR_FLAG_OUTPUT_LABEL,
+                 &amp;attrs);
+
+            printf(&#8220;%d %25s -&gt; %s\n&#8221;,
+                 n+1, attrs.input_label, attrs.output_label);
+
+            free(attrs.input_label);
+            free(attrs.output_label);
+     }
+
+     SgCvtFreeRegistry(registry);
+}
+</pre></td></tr></table><p>The following <tt>Makefile</tt> illustrates the compile and link requirements for this program.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#
+# Makefile for GoldenGate Listing sample program
+#
+CC      =       cc
+TARGET  =       gg_listing
+SOURCES =       $(TARGET).
+
+INCLUDES=       -I/usr/include/convert
+
+REQLIBS =       -lcvt
+all:
+        $(CC) -o $(TARGET) $(INCLUDES) $(SOURCES) $(REQLIBS)
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE61988-PARENT"></a>Writing Converters for the GoldenGate Data Conversion Service</h2></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-43"></a>
+<a class="indexterm" name="ITG.Data.conversion-44"></a>
+<a class="indexterm" name="ITG.Data.conversion-45"></a>
+This section describes how to write converters that can integrate with GoldenGate and become available to any component that is aware of GoldenGate. The following information assumes that you are familiar with the interfaces described in <a href="apg.html#LE97872-PARENT" title="Converting Data Using the GoldenGate Data Conversion Service">&#8220;Converting Data Using the GoldenGate Data Conversion Service&#8221;</a>. Both converters and applications use many of the functions and data structures.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5249944"></a>Overview of the Converter Writing Process</h3></div></div>
+<p>Creating a GoldenGate data converter involves writing the converter and building the DSO, then testing, registering, and installing the converter. The topics below describe:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE66083-PARENT" title="Writing Converter Code">&#8220;Writing Converter Code&#8221;</a> explains how to write the code that converts the data, or choose an existing command that you want to make available through the conversion service.</p>
+</li>
+<li><p><a href="apg.html#LE44009-PARENT" title="Building a DSO">&#8220;Building a DSO&#8221;</a> describes how to create a Dynamic Shared Object (DSO) and write a registry entry using converter description file syntax.</p>
+</li>
+<li><p><a href="apg.html#LE53923-PARENT" title="Testing Your Converter">&#8220;Testing Your Converter&#8221;</a> explains how to test your converter.</p>
+</li>
+<li><p><a href="apg.html#LE67307-PARENT" title="Registering Your Converter">&#8220;Registering Your Converter&#8221;</a> describes how to register your converter to make it available to GoldenGate clients. </p>
+</li>
+<li><p><a href="apg.html#LE81851-PARENT" title="Installing Your Converter ">&#8220;Installing Your Converter &#8221;</a> lists the library location for converter DSOs. </p>
+</li>
+</ul></div><p><a href="apg.html#LE96157-PARENT" title="Some Sample Converters">&#8220;Some Sample Converters&#8221;</a> shows annotated code for two converters. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE66083-PARENT"></a>Writing Converter Code</h3></div></div>
+<p>This section describes how to write converter code and includes the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE95827-PARENT" title="Implementing Your Converter - Handling Evaluation Requests">&#8220;Implementing Your Converter - Handling Evaluation Requests&#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE24054-PARENT" title="Implementing Your Converter - Handling Conversion Requests">&#8220;Implementing Your Converter - Handling Conversion Requests&#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE83154-PARENT" title="Input and Output Formats">&#8220;Input and Output Formats&#8221;</a></p>
+</li>
+<li><p><a href="apg.html#LE31930-PARENT" title="Process Blocking ">&#8220;Process Blocking &#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE41367-PARENT" title="Programming Constraints">&#8220;Programming Constraints&#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE30794-PARENT" title="Example of a Simple Stream Converter">&#8220;Example of a Simple Stream Converter&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE95827-PARENT"></a>Implementing Your Converter - Handling Evaluation Requests</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-46"></a>
+<a class="indexterm" name="ITG.Data.conversion-47"></a>
+When the operation field of the <tt>SgCvtConverterData</tt> structure passed to your converter is equal to SG_CVT_REQ_EVALUATE, your converter should inspect the input, output, and meta parameters held in the conversion context and determine whether or not it can satisfy the request, without actually performing conversion.</p>
+<p>If your converter can satisfy the request, it should set the <tt>status_return</tt> field of the <tt>SgCvtConverterData</tt> structure to SG_CVT_E_ACCEPT before returning. Otherwise it should set <tt>status_return</tt> to SG_CVT_E_REJECT.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE24054-PARENT"></a>Implementing Your Converter - Handling Conversion Requests</h4></div></div>
+<p>When the operation field of the <tt>SgCvtConverterData</tt> structure is equal to SG_CVT_REQ_CONVERT, your converter must extract the necessary information from the <tt>SgCvtConverterData</tt> structure it is passed, and perform the conversion if possible.   If conversion is successful, it should return with the <tt>status_return</tt> field set to SG_CVT_E_SUCCESS, and if it is unsuccessful, the <tt>status_return</tt> field should be set to either SG_CVT_E_FAILURE or a more specific error code if appropriate (see the error codes available in <tt>SgCvt.h</tt>).</p>
+<p>How the converter is implemented depends on whether you are writing the conversion code yourself, or simply using an existing command-line converter.</p>
+<p>If you are creating a &#8220;wrapper&#8221; to make an existing UNIX command available through the GoldenGate conversion service, the procedure is quite straightforward.</p>
+<p>In this case, your converter is a function that gathers the input and output requirements from its arguments, and executes the external UNIX command (for instance, by calling the <tt>system</tt>(2) function). </p>
+<p>Your function should do as much checking as possible to ensure that the external command can work. For instance, you should verify that the command is installed before calling it, and that you have execute permission.</p>
+<p>Also check for appropriate permissions to read input files and write output files, in the case of file converters. If you detect an error before calling the command, return an error status in the status field of the data argument.</p>
+<p>For example, the code below shows a FileToFile converter that wraps an existing UNIX command <tt>rtf2html</tt>. You will find other fully annotated examples at the end of this section.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;libgen.h&gt;
+#include &lt;SgCvt.h&gt;
+
+void RtfToHtml(void *arg)
+{
+   SgCvtConverterData *data = (SgCvtConverterData *) arg;
+   SgCvtContextInfo ctx_info;
+   char cmd[BUFSIZ];
+   int sys_status = 0;
+   char *xlator_path;
+
+   /* Evaluation - just accept for this example */
+   if (data-&gt;operation == SG_CVT_REQ_EVALUATE) {
+      data-&gt;status_return = SG_CVT_E_ACCEPT;
+      return;
+   }
+   
+   /* Conversion */
+
+   /* depends on `rtf2html' command being available */
+   xlator_path = pathfind(getenv (&#8220;PATH&#8221;), &#8220;rtf2html&#8221;, &#8220;rx&#8221;);
+   if (xlator_path == NULL) {
+      data-&gt;status_return = SG_CVT_E_MISSING_COMMAND;
+      return;
+   }
+
+   (void) SgCvtGetContextInfo(data-&gt;context,
+                SG_CVT_INFO_INPUT_FILE          |
+                SG_CVT_INFO_OUTPUT_FILE,
+                &amp;ctx_info);
+
+   /* cmd syntax is `rtf2html inputfile outputfile'
+   sprintf(cmd, &#8220;%s %s %s 2&gt; /dev/null&#8221;, xlator_path, 
+           ctx_info.input_file, ctx_info.output_file);
+
+   sys_status = system(cmd);
+
+   data-&gt;status_return =
+      sys_status ? SG_CVT_E_FAILURE : SG_CVT_E_SUCCESS;
+
+   return;
+}
+</pre></td></tr></table><p>Notice that GoldenGate passes the necessary information to a converter by reference. The <tt>SgCvtConverterData</tt> structure is the mechanism for this. It is defined as follows:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef struct {
+        SgCvtRequestType        operation;
+        SgCvtConversionContext  context;
+        DMparams                *output_params;
+        SgCvtStatus             status_return;
+} SgCvtConverterData;
+</pre></td></tr></table><p>If your converter does not use an external command to translate the data, but does the conversion itself, the structure of the converter function is essentially the same.</p>
+<p>You still use the <tt>SgCvtConverterData</tt> structure to communicate with GoldenGate. Between extracting the necessary arguments from the structure and returning from the function, you just call your own functions that do the conversion.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE83154-PARENT"></a>Input and Output Formats</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-48"></a>
+<a class="indexterm" name="ITG.Data.conversion-49"></a>
+Your converter should use standardized names for its input and output types wherever possible. This is important because applications are written to request data by a particular name. If your converter uses a different name for the same data format, GoldenGate will not find your converter and the conversion may fail.</p>
+<p>See <a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a><a href="ch07.html#LE11667-PARENT"> in Chapter 7</a> for the data formats supported by the default Silicon Graphics converters.</p>
+<p>You can also use your own data format names. However, the name your application uses must match the name you registered so GoldenGate ca l find the converter. However, if you use your own data format names, it is unlikely that other applications will be able to take advantage of your converter. Do this only if the format name is well understood among all the applications you intend to cooperate with.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE31930-PARENT"></a>Process Blocking </h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-50"></a>
+<a class="indexterm" name="ITG.Data.conversion-51"></a>
+<a class="indexterm" name="ITG.Data.conversion-52"></a>
+<a class="indexterm" name="ITG.Data.conversion-53"></a>
+You can use <tt>SgCvtGetData()</tt> and <tt>SgCvtSendData()</tt> in either blocking or non-blocking mode, depending on your requirements. Both modes are described in <a href="apg.html#LE61772-PARENT" title="Converting Data Using File Converters ">&#8220;Converting Data Using File Converters &#8221;</a>.</p>
+<p>If your converter needs to return immediately to do other work, such as tracking activity on an I/O device, you should set the <i>canwait</i> argument to these functions to B_FALSE. If the conversion pipeline is not ready for an immediate read or write operation, the call will return immediately with a status value indicating that nothing happened and that you should try the same operation again. For additional information on the <i>canwait</i> argument, see <a href="apg.html#LE39159-PARENT" title="Sending and Receiving Data">&#8220;Sending and Receiving Data&#8221;</a>. </p>
+<p>If <tt>SgCvtSendData()</tt> cannot send data immediately and <i>canwait</i> is B_FALSE, it returns SG_CVT_E_AGAIN. This indicates that your data has not been sent, and you should try the operation again, using the same data.</p>
+<p><tt>SgCvtGetData()</tt> returns SG_CVT_E_QUEUE_EMPTY if there is no data immediately available and <i>canwait</i> is B_FALSE. You should try the operation again later.</p>
+<p>If your converter has no other I/O requirements, you can simplify your code slightly by setting the <i>canwait</i> argument to B_TRUE. You should use this option by default, because it can eliminate redundant context switching to your idling converter, and improve system performance.</p>
+<p>There are two categories of converter: FileToFile and StreamToStream.</p>
+<p>A FileToFile converter uses the input and output file attributes of the conversion context to get its input and save its output, as shown in the example above.</p>
+<p>A StreamToStream converter follows this general procedure after extracting the required parameters from the context:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Fetch a block of input data using <tt>SgCvtGetData</tt></p>
+</li>
+<li><p>Convert the data to the new format</p>
+</li>
+<li><p>Send converted data back to GoldenGate</p>
+</li>
+</ul></div><p>The converter repeats these steps until it receives a status of SG_CVT_E_END_OF_STREAM from <tt>SgCvtGetData</tt>, and it successfully sends all the converted data. Then it calls <tt>SgCvtSendEndOfStream</tt> to tell GoldenGate it is finished converting, and finally it returns.</p>
+<p>The functions used for stream conversion are the same ones used by applications to work with conversion streams:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>To fetch input and output parameters to be used in the conversion, use <tt>SgCvtGetContextInfo</tt>.</p>
+</li>
+<li><p>To fetch a block on data for conversion, use <tt>SgCvtGetData</tt>.</p>
+</li>
+<li><p>To send a block of converted data back to GOldenGate, use <tt>SgCvtSendData</tt>.</p>
+</li>
+<li><p>To break your connection to the stream and tell GoldenGate your converter is finished, use <tt>SgCvtSendEndOfStream</tt>.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE41367-PARENT"></a>Programming Constraints</h4></div></div>
+<p>Keep in mind the following constraints when writing converters:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>You must not use libraries that are unsafe for threads. For instance, you should not use Motif or other GUI libraries that are not &#8220;multi-thread-safe.&#8221;</p>
+</li>
+<li><p>You should be careful if installing global event handlers, such as timers and signal handlers, if they override those that may already be installed by the host application. The safest policy is to avoid this altogether.</p>
+</li>
+<li><p>Where possible, you should avoid intentionally locking system resources such as physical memory blocks by using low-level UNIX calls or device drivers, because this can result in deadlock.</p>
+</li>
+<li><p>Your code should be reentrant. This means it should not rely on global state between calls, because it is possible for more than one instance of your converter to be running at the same time.</p>
+</li>
+</ul></div><p>Converters are free to choose the size of the data blocks they read and write. GoldenGate writes into the buffer that your converter supplies during a <tt>SgCvtGetData()</tt> call. Your converter must allocate and free this buffer space as necessary. During a <tt>SgCvtSendData()</tt> call, your converter again supplies a buffer of data. The <tt>SgCvtSendData()</tt> call does not alter your buffer. If the call returns SG_CVT_E_SUCCESS to indicate that your data has been sent, or SG_CVT_E_FAILURE to indicate a general failure, free the buffer or re-use it as appropriate. If the call returns SG_CVT_E_AGAIN (you passed B_FALSE as the <span class="bold"><b>canwait</b></span> argument) your data has not been sent, and you should retain it to try again later.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE30794-PARENT"></a>Example of a Simple Stream Converter</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-54"></a>
+<a class="indexterm" name="ITG.Data.conversion-55"></a>
+<a class="indexterm" name="ITG.Data.conversion-56"></a>
+<a class="indexterm" name="ITG.Data.conversion-57"></a>
+The following <a class="indexterm" name="ITG.Data.conversion-58"></a>
+example shows a simple stream converter. It expects a stream of ASCII text characters, and outputs the stream with any uppercase characters replaced by their lowercase equivalents.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;SgCvt.h&gt;
+#include &lt;dmedia/dm_params.h&gt;
+
+void CvtToLower
+        (
+        void *arg
+        )
+{
+   SgCvtConverterData *data = (SgCvtConverterData *) arg;
+   SgCvtStatus s;
+   char buf[BUFSIZ];
+   size_t nreq = BUFSIZ;
+   unsigned int len=0;
+   int start = 0;
+   int i;
+
+   /* Evaluation */
+   if (data-&gt;operation == SG_CVT_REQ_EVALUATE) {
+
+        /*
+         * In less trivial converters, we would check for
+         * valid params in the context, but in this case all
+         * we're doing is byte translation, so we can always
+         * say yes.
+         */
+
+        data-&gt;status_return = SG_CVT_E_ACCEPT;
+        return;
+   }
+
+   /*
+    * Conversion Loop.  A similar construct will appear in
+    * all streaming converters.  The model is fetch data,
+    * convert it and forward it, until we have forwarded the
+    * end of stream, then jump out the loop.
+    */
+   for (;;) {
+
+      s = SgCvtGetData(data-&gt;context, nreq, buf, &amp;len, NULL, B_TRUE);
+      if (s == SG_CVT_E_FAILURE) {
+         fprintf(stderr, &#8220;converter: failed to get data\n&#8221;);
+         return;
+      }
+
+      if (s == SG_CVT_E_END_OF_STREAM) {
+        SgCvtSendEndOfStream(data-&gt;context);
+        break;
+      }
+
+      /*** start converter-specific part ***/
+
+      for (i=0; i&lt;len; i++)
+         buf[i] = tolower(buf[i]);
+
+      /*** end converter-specific part ***/
+
+      s = SgCvtSendData(data-&gt;context, (void *)buf,
+                       len, NULL, B_TRUE);
+
+      if (s == SG_CVT_E_FAILURE) {
+         fprintf(stderr, &#8220;converter: failed to get data\n&#8221;);
+         return;
+      }
+      start += (len);
+   }
+   /*
+    * When we get here, this converter's work
+    * is complete.  Others in the same pipeline may
+    * still be running, but that's irrelevant to us.
+    * We simply return.  If we were invoked in a dedicated
+    * sproc &#8220;thread&#8221;, which is always the case for
+    * streaming converters, this terminates it.
+    */
+
+   return;
+}
+</pre></td></tr></table><p>Note the above comment about other converters: <tt>Others in the same pipeline may still be running</tt>. It is important to remember that your converter is almost always invoked as a subprocess of the application. <a href="apg.html#LE41367-PARENT" title="Programming Constraints">&#8220;Programming Constraints&#8221;</a> lists some considerations when writing converter code.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE44009-PARENT"></a>Building a DSO</h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-59"></a>
+<a class="indexterm" name="ITG.Data.conversion-60"></a>
+<a class="indexterm" name="ITG.Data.conversion-61"></a>
+<a class="indexterm" name="ITG.Data.conversion-62"></a>
+<a class="indexterm" name="ITG.Data.conversion-63"></a>
+GoldenGate converters reside in Dynamic Shared Object (DSO) libraries.</p>
+<p>After you have written and tested your conversion function by calling it directly from a test program, you are ready package it as a GoldenGate converter.</p>
+<p>This section covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apg.html#LE59553-PARENT" title="Creating a DSO For Your Converter">&#8220;Creating a DSO For Your Converter&#8221;</a> </p>
+</li>
+<li><p><a href="apg.html#LE79942-PARENT" title="Creating a Converter Description File">&#8220;Creating a Converter Description File&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE59553-PARENT"></a>Creating a DSO For Your Converter</h4></div></div>
+<p>Create a DSO for your converter. A simple <tt>Makefile</tt> (below) for the previous example, <a href="apg.html#LE30794-PARENT" title="Example of a Simple Stream Converter">&#8220;Example of a Simple Stream Converter&#8221;</a>, illustrates the compilation and linkage requirements for a GoldenGate DSO.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#
+# Makefile for GoldenGate Sample Converter DSO
+#
+CVTR = CvtToLower
+all:
+     cc -c -I/usr/include/convert $(CVTR).c   
+     ld -no_unresolved -o libUserCvtrs.so -shared $(CVTR).o
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE79942-PARENT"></a>Creating a Converter Description File</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-64"></a>
+<a class="indexterm" name="ITG.Data.conversion-65"></a>
+<a class="indexterm" name="ITG.Data.conversion-66"></a>
+After you compile your converter, you must create a <span class="bold"><b>converter description file</b></span> that identifies your converter to GoldenGate. You use this file to test your converter, and intimately to register it with GoldenGate. A simple example for the <tt>CvtToLower</tt> converter follows.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#
+# Lowercase Text Stream
+#
+Converter {
+        Name:           &#8220;CvtToLower&#8221;
+        IOMethod:       StreamToStream
+        Input:          &#8220;MIXEDCASE&#8221;
+        InputLabel:     &#8220;ASCII bytes, any case&#8221;
+        Output:         &#8220;LOWERCASE&#8221;
+        OutputLabel:    &#8220;ASCII bytes, lower case&#8221;
+        Vendor:         &#8220;SGI (Sample)&#8221;
+        Version:        &#8220;1.0&#8221;
+        Description:    &#8220;Lowercases chars in input stream&#8221;
+        DSO:            &#8220;/usr/people/fred/libFredsCvtrs.so&#8221;
+        Function:       &#8220;CvtToLower&#8221;
+}
+</pre></td></tr></table><p>Make sure the DSO field is set to the full pathname for the DSO you have built.</p>
+<p>The grammar of the converter description file is fairly simple. Three types of statements exist; they are identified by the keywords <span class="bold"><b>Parameter</b></span>, <span class="bold"><b>Converter</b></span>, and <span class="bold"><b>Pipeline</b></span>. <a href="apg.html#id5251404" title="Table G-4. Converter Description File Statements">Table G-4</a> defines the statements. </p>
+<div class="table"><a name="id5251404"></a><p><a name="id5251404"></a><b>Table G-4. Converter Description File Statements</b></p>
+<table summary="Converter Description File Statements" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Statement</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>Parameter</b></span> statement</p>
+</td><td valign="top"><p>Defines a single parameter</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>Converter</b></span> statement</p>
+</td><td valign="top"><p>Describes a converter and may include Parameter statements</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>Pipeline</b></span> statement</p>
+</td><td valign="top"><p>Defines a series of converters to be used together, and may 
+contain both Converter and Parameter statements</p>
+</td></tr></tbody></table></div><p>Some example descriptions follow. The easiest way to write a converter description file is to copy an existing one. You can use these examples, or copy entries from the default registry file, <tt>/var/GoldenGate/ConverterRegistry</tt>.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#
+# Lowercase Text Stream
+#
+Converter {
+        Name:           &#8220;CvtToLower&#8221;
+        IOMethod:       StreamToStream
+        Input:          &#8220;MIXEDCASE&#8221;
+        InputLabel:     &#8220;ASCII bytes, any case&#8221;
+        Output:         &#8220;LOWERCASE&#8221;
+        OutputLabel:    &#8220;ASCII bytes, lower case&#8221;
+        Vendor:         &#8220;SGI (Sample)&#8221;
+        Version:        &#8220;1.0&#8221;
+        Description:    &#8220;Lowercases chars in input stream&#8221;
+        DSO:            &#8220;/usr/people/fred/libFredsCvtrs.so&#8221;
+        Function:       &#8220;CvtToLower&#8221;
+}
+
+#
+# Windows BMP to XWD
+# 
+Converter {
+        Name:           &#8220;BMP_FILE_TO_XWD_FILE&#8221;
+        IOMethod:       FileToFile
+        Input:          &#8220;BMP_FILE&#8221;
+        InputLabel:     &#8220;BMP_FILE&#8221;
+        Output:         &#8220;XWD_FILE&#8221;
+        OutputLabel:    &#8220;XWD_FILE&#8221;
+        Vendor:         &#8220;SGI&#8221;
+        Version:        &#8220;1.0&#8221;
+        Description:    &#8220;BMP_FILE to XWD_FILE&#8221;
+        DSO:            &#8220;libcvt_SGI.so&#8221;
+        Function:       &#8220;xwdout&#8221;
+}
+
+#
+# Windows BMP to Compuserv GIF-89, through JPEG (JFIF)
+# This isn't necessary, since the default converters
+# can go directly to GIF 89 from BMP, but it illustrates the # Pipeline syntax for chaining converters together.
+Pipeline {
+        Name:           &#8220;BMP_FILE_TO_GIF_89_FILE&#8221;
+        IOMethod:       FileToFile
+        Input:          &#8220;BMP_FILE&#8221;
+        InputLabel:     &#8220;Windows BMP&#8221;
+        Output:         &#8220;GIF_89_FILE&#8221;
+        OutputLabel:    &#8220;Compuserve GIF&#8221;
+        Vendor:         &#8220;SGI&#8221;
+        Version:        &#8220;1.0&#8221;
+        Description:    &#8220;Windows BMP to GIF, via JPG&#8221;
+   Converter {
+        Name:           &#8220;BMP_FILE_TO_JFIF_FILE&#8221;
+        IOMethod:       FileToFile
+        Input:          &#8220;BMP_FILE&#8221;
+        InputLabel:     &#8220;BMP_FILE&#8221;
+        Output:         &#8220;JFIF_FILE&#8221;
+        OutputLabel:    &#8220;JFIF_FILE&#8221;
+        Vendor:         &#8220;SGI&#8221;
+        Version:        &#8220;1.0&#8221;
+        Description:    &#8220;BMP_FILE to JFIF_FILE&#8221;
+        DSO:            &#8220;libcvt_SGI.so&#8221;
+        Function:       &#8220;jfifout&#8221;
+   }
+   Converter {
+        Name:           &#8220;JFIF_FILE_TO_GIF_89_FILE&#8221;
+        IOMethod:       FileToFile
+        Input:          &#8220;JFIF_FILE&#8221;
+        InputLabel:     &#8220;JFIF_FILE&#8221;
+        Output:         &#8220;GIF_89_FILE&#8221;
+        OutputLabel:    &#8220;GIF_89_FILE&#8221;
+        Vendor:         &#8220;SGI&#8221;
+        Version:        &#8220;1.0&#8221;
+        Description:    &#8220;BMP_FILE to GIF_89_FILE&#8221;
+        DSO:            &#8220;libcvt_SGI.so&#8221;
+        Function:       &#8220;gifout&#8221;
+   }
+}
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE53923-PARENT"></a>Testing Your Converter</h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-67"></a>
+<a class="indexterm" name="ITG.Data.conversion-68"></a>
+<a class="indexterm" name="ITG.Data.conversion-69"></a>
+<a class="indexterm" name="ITG.Data.conversion-70"></a>
+To test your converter, first verify that your converter description file is valid and does not cause the GoldenGate built-in registry parser to fail.</p>
+<p>Set the environment variable CVT_REGISTRY_OVERRIDE to the full pathname of the converter description file you just created:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+setenv CVT_REGISTRY_OVERRIDE /usr/people/fred/my_registry.cdf
+</pre></td></tr></table><p>Then run a test program that will exercise the parser. The <tt>gg_query</tt> demo program that comes with GoldenGate is good for this. Find it in <tt>/usr/share/src/GoldenGate</tt> (if you haven't already done so, install the demo programs from your IRIX distribution media). Copy the demo programs to your own directory, go into the <tt>Query</tt> subdirectory, and type <b><tt>make</tt></b>.   Then execute the <tt>gg_query</tt> program. The output should look like this:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Converter (CvtToLower):
+        method: Stream To Stream
+        input:  MIXEDCASE (ASCII bytes, any case)
+        output: LOWERCASE (ASCII bytes, lower case)
+        vendor: SGI (Sample)
+        version:        1.0
+        descr.: Lowercases chars in input stream
+        DSOname:        /usr/people/fred/libFredsCvtrs.so
+        Function:       CvtToLower
+</pre></td></tr></table><p>If you see an error message, go back and check that your converter description file is valid, checking especially that all string values are properly quoted. Also check that the GoldenGate software is properly installed by unsetting the CVT_REGISTRY_OVERRIDE variable and re-executing the <tt>gg_query</tt> program. It should list the default converters installed on the system (over 100 of these exist).</p>
+<p>Once the test runs successfully, you are ready to try executing your converter. You can use your own program, or the demo programs in the ConvertFile and ConvertStream directories to do this. Each program prints a help message describing its arguments if you run it with no arguments.</p>
+<p>After you are satisfied that your converter works when executed via GoldenGate, you are ready to make it available to other applications on the system.   Unset the CVT_REGISTRY_OVERRIDE variable; you are finished unit-testing your converter.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE67307-PARENT"></a>Registering Your Converter</h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-71"></a>
+<a class="indexterm" name="ITG.Data.conversion-72"></a>
+<a class="indexterm" name="ITG.Data.conversion-73"></a>
+<a class="indexterm" name="ITG.Data.conversion-74"></a>
+To register your converter, you must add your converter description file to the system registry. </p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5251901"></a>The System Registry </h4></div></div>
+<p>The system registry is a text file that uses the same syntax as your converter description file. Just edit the file <tt>/var/GoldenGate/ConverterRegistry</tt> (you must be a privileged user to do this) and add your entry wherever you like. </p>
+<p>Look at the attributes of the converters already registered. If there are potential clashes with your converter, you may wish to insert your converter closer to the beginning of the registry. Some applications may decide to convert using the first converter they find that appears to satisfy their requirements, rather than evaluating the alternatives. If you want to make sure this kind of application executes your converter rather than another one that could do that same conversion, insert your entry closer to the beginning of the file.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5251933"></a>Some Registry Syntax Details</h4></div></div>
+<p>The most important fields are those that the service uses to locate the executable converter module: the <tt>DSO</tt> name and the <tt>Function</tt> name. The other fields are primarily for display by administration tools, and for applications to query the registry. The <i>Input</i> and <i>Output</i> fields are strings that must exactly match the format names that applications will use to search for converters. For instance, where there are naming conventions such as ICCCM target names, these should be used exactly. </p>
+<p>See <a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a><a href="ch07.html#LE11667-PARENT"> in Chapter 7</a> for a list of standard input and output formats supported by the default converters supplied with GoldenGate.</p>
+<p>Parameters can be one of two types: Constraint or Programmable.</p>
+<p><span class="bold"><b>Constraint parameters</b></span> are used to specify constant values for a data attribute in the description file. When you see a constraint parameter, it means that this converter always sets the corresponding data attribute to the stored value, overriding its current value in the input.</p>
+<p><span class="bold"><b>Programmable parameters</b></span> are used to specify parameters that are set at runtime based upon the requested input and output parameters. Programmable parameters are used to pass a runtime parameter to one of the stages of a pipeline. For example, if you have a two-stage pipeline designed to scale an SGI image to an arbitrary size, then convert it to JPEG, you want to pass one of the output parameters (the required output size) to the first stage of the converter. You do this by specifying a programmable parameter for the first stage. </p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE81851-PARENT"></a>Installing Your Converter </h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-75"></a>
+<a class="indexterm" name="ITG.Data.conversion-76"></a>
+<a class="indexterm" name="ITG.Data.conversion-77"></a>
+<a class="indexterm" name="ITG.Data.conversion-78"></a>
+Make sure your installation copies the DSO containing your converter to the standard location for converter DSOs: <tt>/usr/lib/convert</tt>. If you install your library there, you can use a relative DSO name in your converter description file. If you install anywhere else, you must use a full path name in the registry to ensure that the service will find your converter. </p>
+<p>See the GoldenGate Release Notes (type <b><tt>relnotes</tt></b> <b><tt>goldengate</tt></b>) for information about installation.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE96157-PARENT"></a>Some Sample Converters</h3></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-79"></a>
+<a class="indexterm" name="ITG.Data.conversion-80"></a>
+<a class="indexterm" name="ITG.Data.conversion-81"></a>
+<a class="indexterm" name="ITG.Data.conversion-82"></a>
+This section presents annotated sample code for two different converters: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>The first example, <a href="apg.html#LE68810-PARENT" title="A Simple StreamToStream Converter - UpperCase">&#8220;A Simple StreamToStream Converter - UpperCase&#8221;</a>, directly modifies data flowing through it.</p>
+</li>
+<li><p>The second example, <a href="apg.html#LE71684-PARENT" title="A FileToFile Converter - UNIX Man Page File to HTML File">&#8220;A FileToFile Converter - UNIX Man Page File to HTML File&#8221;</a>, illustrates two techniques. First it serves as a basic template for FileToFile converters, and second it shows how you can wrap an external IRIX command to make it available as a GoldenGate converter. </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE68810-PARENT"></a>A Simple StreamToStream Converter - UpperCase</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-83"></a>
+<a class="indexterm" name="ITG.Data.conversion-84"></a>
+<a class="indexterm" name="ITG.Data.conversion-85"></a>
+<a class="indexterm" name="ITG.Data.conversion-86"></a>
+This type of converter can often offer the best performance in many circumstances, because all the knowledge of the conversion operation is in the converter itself, and because it typically does not need to access the filesystem to achieve conversion. It is appropriate when the data format is naturally streamable, such as ASCII text or other self-identifying or raw data.</p>
+<p>The converter used in this example performs a simple mapping of mixed-case text to uppercase text. The converter-specific parts are clearly marked. These are the lines that you will replace with your own task-specific conversion code. The remainder is boilerplate code that can be re-used in many different converters.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* converter function */
+void UpperCase
+(
+    void *arg
+)
+{
+    SgCvtConverterData *data = (SgCvtConverterData *) arg;
+    SgCvtStatus s;
+</pre></td></tr></table><p>The next 2 lines are somewhat task-specific. Your converter should use a buffer size appropriate to the data type and the task. Careful selection of a buffer size will yield better performance in many cases. For instance, if your converters needs to operate on audio or movie &#8220;frames,&#8221; then you may choose to read and write buffers that represent whole numbers of frames.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    char buf[BUFSIZ];
+    size_t nreq = BUFSIZ;
+
+    unsigned int len=0;
+    int start = 0;
+    int i;
+</pre></td></tr></table><p>The next part is the Evaluation section. Our converter operates on a byte stream: if a byte represents a lower-case character in the current locale, we are going to uppercase it. Otherwise it passes through untouched. It is appropriate for this converter to accept any stream; it does not need to evaluate parameters.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    /* Evaluation */
+    if (data-&gt;operation == SG_CVT_REQ_EVALUATE) {
+        data-&gt;status_return = SG_CVT_E_ACCEPT;
+        return;
+    }
+</pre></td></tr></table><p>The following loop does the conversion, one block at a time. The loop terminates when the end of stream is detected. </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    /* Conversion */
+    for (;;) {
+
+        s = SgCvtGetData(data-&gt;context, nreq, buf, &amp;len,
+                         NULL, B_TRUE);
+
+        if (s == SG_CVT_E_END_OF_STREAM) {
+            SgCvtSendEndOfStream(data-&gt;context);
+            break;
+        }
+</pre></td></tr></table><p>These two lines show the entire task-specific code requirements for the uppercase text converter. Your converter will substitute its own conversion-specific code for these lines. The model is the same in each case; the converter generates a buffer to be sent from the buffer it has received, by applying a specific conversion algorithm. </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+        for (i=0; i&lt;len; i++)
+            buf[i] = toupper(buf[i]);
+</pre></td></tr></table><p>When the new buffer has been generated, your converter sends it into the pipeline. In this example, the data was converted in place. Sometimes that is not possible, because the converted data will not fit in the original buffer. In these cases, your converter may allocate, populate, send, then free a dynamic buffer each time through the loop.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+        s = SgCvtSendData(data-&gt;context, (void *)buf, len,
+                          NULL, B_TRUE);
+
+        start += (len);
+    }
+</pre></td></tr></table><p>After sending all the converted data, and calling SgCvtSendEndOfStream, your converter can return. You should always set the <tt>status_return</tt> field.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    data-&gt;status_return = SG_CVT_E_SUCCESS;
+    return;
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE71684-PARENT"></a>A FileToFile Converter - UNIX Man Page File to HTML File</h4></div></div>
+<p><a class="indexterm" name="ITG.Data.conversion-87"></a>
+<a class="indexterm" name="ITG.Data.conversion-88"></a>
+<a class="indexterm" name="ITG.Data.conversion-89"></a>
+<a class="indexterm" name="ITG.Data.conversion-90"></a>
+Often, to convert data from one application into a form usable by another, you need to save the data to a file in one format, convert it using an IRIX command-line translator program, then open the new file using the application you want to use.</p>
+<p>Applications using components that are integrated with GoldenGate can eliminate the intermediate end-user steps. The same external translator command can be packaged as a GoldenGate converter and invoked automatically on behalf of the user.</p>
+<p>It is quite straightforward to integrate an existing IRIX command with GoldenGate. Your main task is to write a function that the service can invoke, which constructs from its parameters a command line for the translator program. </p>
+<p>The converter described here provides GoldenGate access to a command named <tt>man2html</tt>, which converts <tt>troff</tt> source files for UNIX man pages into HTML files that can be viewed using a Web browser. It can be used by a CGI script that implements an online help system for remote users running Web browsers.</p>
+<p>The command itself takes one argument: the input file name. It writes its output to stdout. The job of our converter is to make this interface look like any other GoldenGate converter.</p>
+<p>Converter functions always require the <tt>SgCvt.h</tt> header file and always have the have the same calling convention: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;libgen.h&gt;
+#include &lt;SgCvt.h&gt;
+void ManToHtml(void *arg)
+{
+</pre></td></tr></table><p>First, cast the data argument to the right type.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    SgCvtConverterData *data = (SgCvtConverterData *) arg;
+</pre></td></tr></table><p>Then, define some other local variables. Most of these are the same in every converter of this type that you write.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    SgCvtStatus s;
+    SgCvtContextInfo ctx_info;
+    char cmd[BUFSIZ];
+    int sys_status = 0;
+    char *cmdpath;
+</pre></td></tr></table><p>Next, handle converter evaluation requests. This <tt>c</tt>onverter is very simplistic: there are no parameters, and it just ACCEPTs the request. In real converters, always provide proper evaluation of any parameters, especially if it is expensive for the application to try the conversion and fail. </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    /* Evaluation */
+    if (data-&gt;operation == SG_CVT_REQ_EVALUATE) {
+        data-&gt;status_return = SG_CVT_E_ACCEPT;
+        return;
+    }
+</pre></td></tr></table><p>The remaining code handles conversion requests. Note that it is never reached unless the caller requests conversion because the evaluate section has its own return statement.</p>
+<p>The first thing to do is check that the program you are wrapping is installed and that you can execute it.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    /* conversion */
+    cmdpath = pathfind(getenv (&#8220;PATH&#8221;), &#8220;man2html&#8221;, &#8220;rx&#8221;);
+    if (cmdpath == NULL) {
+        data-&gt;status_return = SG_CVT_E_MISSING_COMMAND;
+        return;
+    }
+</pre></td></tr></table><p>Then, extract the input and output filenames from the conversion context.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    (void) SgCvtGetContextInfo(data-&gt;context,
+        SG_CVT_INFO_INPUT_FILE   |
+        SG_CVT_INFO_OUTPUT_FILE,
+        &amp;ctx_info);
+</pre></td></tr></table><p>At this point you know everything needed to construct the command you are going to execute. You use the UNIX <tt>system</tt>(2) call to execute the conversion, so the next step is to create the command line.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    sprintf(cmd, &#8220;%s %s &gt; %s 2&gt; /dev/null&#8221;, cmdpath,
+         ctx_info.input_file, ctx_info.output_file);
+</pre></td></tr></table><p>Finally, execute the command, and set the return status to indicate whether it worked before returning.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    sys_status = system(cmd);
+    data-&gt;status_return =
+        sys_status ? SG_CVT_E_FAILURE : SG_CVT_E_SUCCESS;
+
+    return;
+}
+</pre></td></tr></table><p>Note that your converter is normally run as a subprocess of the invoking application. You should not call <tt>exit</tt>(2) to terminate your converter; you should simply return, allowing GoldenGate and the operating system to take care of managing conversion threads. </p>
+</div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apf.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="aph.html">Next</a></td></tr><tr><td width="40%" align="left">Appendix F. FTR File Directories </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix H. Standard Menu Resources </td></tr></table></div></body></html>

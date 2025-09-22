@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 1. Getting the Right Look and Feel: An Overview</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="next" href="ch02.html" title="Chapter 2. Getting the IRIX Interactive Desktop Look"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1. Getting the Right Look and Feel: An Overview</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="pt01.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch02.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE69734-PARENT"></a>Chapter 1. Getting the Right Look and Feel: An Overview</h2></div></div>
+<p>This chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch01.html#LE70187-PARENT" title="About the IRIX Interactive Desktop Look and Feel">&#8220;About the IRIX Interactive Desktop Look and Feel&#8221;</a> briefly explains the basics of the IRIX Interactive Desktop look and feel and tells you where to find more detailed information.</p>
+</li>
+<li><p><a href="ch01.html#LE81063-PARENT" title="Getting the Right Look and Feel: The Basic Steps">&#8220;Getting the Right Look and Feel: The Basic Steps&#8221;</a> briefly lists the basic steps for getting the right look and feel and tells you which chapter covers each step.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE70187-PARENT"></a>About the IRIX Interactive Desktop Look and Feel</h2></div></div>
+<p><a class="indexterm" name="IT01.Overview.IM-0"></a>
+<a class="indexterm" name="IT01.Overview.IM-1"></a>
+<a class="indexterm" name="IT01.Overview.IM-2"></a>
+<a class="indexterm" name="IT01.Overview.IM-3"></a>
+<a class="indexterm" name="IT01.Overview.IM-4"></a>
+<a class="indexterm" name="IT01.Overview.IM-5"></a>
+One of the most important things you can do to integrate your application into the IRIX Interactive Desktop environment is to get the right look and feel. <a class="indexterm" name="IT01.Overview.IM-6"></a>
+<a class="indexterm" name="IT01.Overview.IM-7"></a>
+<a class="indexterm" name="IT01.Overview.IM-8"></a>
+This look and feel is largely based on IRIS IM, the SGI port of the industry-standard OSF/Motif toolkit. In particular, the look and feel is based on an enhanced version of IRIS IM and on the <tt>4Dwm</tt> window manager (the SGI <tt>mwm</tt>-based window manager). The <i>IRIX Interactive User Interface Guidelines</i> explains the differences between the IRIX Interactive Desktop look and feel and the OSF/Motif look and feel.</p>
+<p>Users have certain expectations of how applications appear and behave in the IRIX Interactive Desktop environment, and by meeting these expectations, you make your application much easier and more pleasant to use. The chapters in this part of the manual explain how to set up your application to provide the IRIX Interactive Desktop look and feel. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE81063-PARENT"></a>Getting the Right Look and Feel: The Basic Steps</h2></div></div>
+<p><a class="indexterm" name="IT01.Overview.IM-9"></a>
+<a class="indexterm" name="IT01.Overview.IM-10"></a>
+To provide the correct look and feel for your application, be sure to: </p>
+<div class="orderedlist"><ol type="1"><li><p><span class="bold"><b>Recompile with libXm</b></span> (the IRIS IM version that ships with IRIX 5.3 or later)<span class="bold"><b>.</b></span> If your application uses an earlier version of IRIS IM, recompile to make sure that it runs correctly. See the <i>IRIS IM Release Notes</i> for information on the differences between the current and previous versions of IRIS IM.</p>
+</li>
+<li><p><span class="bold"><b>Use the IRIX Interactive Desktop enhanced appearance.</b></span> Turn on the <span class="bold"><b>IRIX Interactive Desktop &#8220;look,&#8221;</b></span> which enhances the appearance of standard IRIS IM widgets and gadgets. See <a href="ch02.html" title="Chapter 2. Getting the IRIX Interactive Desktop Look">Chapter 2, &#8220;Getting the IRIX Interactive Desktop Look&#8221;</a>, for instructions.</p>
+</li>
+<li><p><span class="bold"><b>Use schemes.</b></span> The schemes mechanism is a simple method for providing user-selectable default colors and fonts for your application. For more information on Schemes, see <a href="ch03.html" title="Chapter 3. Using Schemes">Chapter 3, &#8220;Using Schemes&#8221;</a>.</p>
+</li>
+<li><p><span class="bold"><b>Use the new and extended widgets (optional).</b></span> SGI provides some new IRIS IM widgets, extensions of some existing widgets, and some mixed-model programming widgets (for use with IRIS GL and OpenGL). For more information, see <a href="ch04.html" title="Chapter 4. Using the SGI Enhanced Widgets">Chapter 4, &#8220;Using the SGI Enhanced Widgets&#8221;</a>.</p>
+</li>
+<li><p><span class="bold"><b>Set resources for correct window, session, and desks management.</b></span> By setting a few important resources, you insure that your application includes the windowing, session management, and desks features that users expect. For instructions, refer to <a href="ch05.html" title="Chapter 5. Window, Session, and Desk Management">Chapter 5, &#8220;Window, Session, and Desk Management&#8221;</a>.</p>
+</li>
+<li><p><span class="bold"><b>Customize minimized icons.</b></span> SGI provides tools that allow you to easily provide your own look for minimize icons (icons for minimized windows). The tools for creating minimized windows are discussed in <a href="ch06.html" title="Chapter 6. Customizing Your Application's Minimized Windows">Chapter 6, &#8220;Customizing Your Application's Minimized Windows&#8221;</a>. </p>
+</li>
+<li><p><span class="bold"><b>Implement interapplication data exchange.</b></span> Interapplication data exchange lets users cut and paste information between your application and other applications. For more information, see <a href="ch07.html" title="Chapter 7. Interapplication Data Exchange">Chapter 7, &#8220;Interapplication Data Exchange&#8221;</a>..</p>
+</li>
+<li><p><span class="bold"><b>Provide online help.</b></span> SGI provides an online help system for integrating help with your application. <a href="ch09.html" title="Chapter 9. Providing Online Help With SGIHelp">Chapter 9, &#8220;Providing Online Help With SGIHelp&#8221;</a>, describes how to use the online help system.</p>
+</li>
+<li><p><span class="bold"><b>Monitor changes to the filesystem (optional).</b></span> SGI provides a File Alteration Monitor (FAM) that your application can use to monitor the filesystem. <a href="ch08.html" title="Chapter 8. Monitoring Changes to Files and Directories">Chapter 8, &#8220;Monitoring Changes to Files and Directories&#8221;</a>, explains how to use FAM.</p>
+</li>
+</ol></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="pt01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch02.html">Next</a></td></tr><tr><td width="40%" align="left">Part I. Getting the Right Look and Feel </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 2. Getting the IRIX Interactive Desktop Look </td></tr></table></div></body></html>

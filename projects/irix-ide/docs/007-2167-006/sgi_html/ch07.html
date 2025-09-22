@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 7. Focus, Selection, and Drag and Drop</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt02.html" title="Part II. Interface Components"><link rel="previous" href="ch06.html" title="Chapter 6. Application Windows"><link rel="next" href="ch08.html" title="Chapter 8. Menus"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 7. Focus, Selection, and Drag and Drop</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><th width="60%" align="center">Part II. Interface Components</th><td width="20%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5477609"></a>Chapter 7. <a name="id63208"></a>Focus, Selection, and Drag and Drop</h2></div></div>
+<p>Users can interact with your application through three general mechanisms, which are discussed in the following sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#id50040">&#8220;Keyboard Focus and Navigation&#8221;</a> discusses how your application should allow users to direct keyboard input to specific components. It also discusses how certain components should be controlled from the keyboard. </p>
+</li>
+<li><p><a href="ch07.html#id59818">&#8220;Selection&#8221;</a> discusses various models for allowing users to select data in your application.</p>
+</li>
+<li><p><a href="ch07.html#id83927">&#8220;Drag and Drop&#8221;</a> discusses how users expect to directly manipulate text and other objects in your application by dragging them with the mouse.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5477726"></a><a name="id50040"></a>Keyboard Focus and Navigation</h2></div></div>
+<p>Keyboard input allows users to enter data into text fields and to control other components in your application. The keyboard focus policy determines which component in which window receives the keyboard input. Only one component in one window receives input from the keyboard at any given time; this component has the keyboard focus (also called <a name="idch07.focus1"></a><a name="idch07.focus2"></a><a name="idch07.focus3"></a><a name="idch07.focus4"></a><a name="idch07.focus5"></a><i>input focus</i>). For example, if a button has the keyboard focus and the user presses the Space bar on the keyboard, the button is activated. The process of moving the keyboard focus is called <i>navigation</i>. <i>Keyboard navigation</i> allows the user to navigate among components in a window using only the keyboard rather than having to manipulate the mouse (or other pointing device). </p>
+<p>As described in <a name="idch07.focus6"></a><a name="idch07.focus7"></a><a href="ch03.html#id59672">&#8220;Keyboard Focus Across Windows&#8221; in Chapter 3</a>, the IRIX Interactive Desktop environment uses one policy for moving the keyboard focus among components within a window and a different policy for moving the keyboard focus between windows. When moving the keyboard focus among components within a window, your application should use an explicit focus policy. In other words, the user clicks a mouse button or presses a key to move the keyboard focus to a new component in the active window. In contrast, <tt>4Dwm</tt>, the window manager for the IRIX Interactive Desktop, uses implicit focus across windows: the window directly underneath the pointer receives keyboard input (that is, it's the <i>active window</i>). Note that users can't navigate among windows using the keyboard when using <tt>4Dwm</tt> in its default configuration.</p>
+<p>This section discusses keyboard focus and navigation among components in the active window and includes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#id86870">&#8220;Keyboard Focus Policy and Navigation Within a Window&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#id17698">&#8220;Keyboard Focus and Navigation Guidelines&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5477932"></a><a name="id86870"></a>Keyboard Focus Policy and Navigation Within a Window</h3></div></div>
+<p>Only one component in the active window has the keyboard focus at any given time. Your application should use <i>explicit</i> focus (as opposed to implicit focus) within a window; in other words, the user must explicitly select the component that receives the keyboard input. Your application should support the models described in this section for navigating to specific components in a window and for using the keyboard to activate these components.</p>
+<p>Within the active window, the component with the keyboard focus is visually identified by the location cursor. The location cursor isn't necessarily a cursor in the traditional sense of a text cursor. It gives the user visual feedback as to which component receives the keyboard input. Each standard component described in <a name="idch07.focus8"></a><a href="ch09.html#id95140">Chapter 9, &#8220;Controls,&#8221;</a> has its own method for displaying a location cursor when the component has keyboard focus. For example, the location cursor used to indicate that a specific radio button has the keyboard focus is a simple box, as shown in <a href="ch07.html#id15861">Figure 7-1</a>. </p>
+<p><div class="figure"><p><a name="id5477998"></a><b>Figure 7-1. <a name="id15861"></a>Location Cursor Example</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch07.focus-1.gif" alt="Figure 7-1 Location Cursor Example" height="91" width="395"></td></tr></table></div></div><br>
+</p>
+<p>Keyboard activation and keyboard navigation are strongly linked: if a user can activate or control a component from the keyboard, the user should also be able to navigate to that component from within the window using the keyboard. This enables the user to perform the task without having to frequently switch between using the mouse and keyboard.</p>
+<p>Section 2.2 in the <i>OSF/Motif Style Guide</i> states that &#8220;all application functionality must be available from the keyboard alone.&#8221; This includes navigating among windows, navigating among components in a window, and activating components. By default, users will be able to navigate to and control all components in a window except for those that aren't traversable or don't accept input (for example, labels and separators). </p>
+<p>Since all Silicon Graphics systems include a mouse, it's not as critical to provide access to all functionality from the keyboard alone when programming for Silicon Graphics systems. Just keep in mind that some users use alternate input devices that rely on having functions available from the keyboard. At a minimum, your application should let users do the following from the keyboard:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>navigate between editable text fields in a window</p>
+</li>
+<li><p>enter data into editable text fields</p>
+</li>
+<li><p>select data in a text field (see <a href="ch07.html#id59818">&#8220;Selection&#8221;</a> later in this chapter and <a href="ch09.html#id36229">&#8220;Text Fields&#8221; in Chapter 9</a>)</p>
+</li>
+<li><p>navigate to a list component (see <a href="ch09.html#id72866">&#8220;Lists&#8221; in Chapter 9</a>)</p>
+</li>
+<li><p>select data in a list (see <a href="ch07.html#id59818">&#8220;Selection&#8221;</a> later in this chapter and <a href="ch09.html#id72866">&#8220;Lists&#8221; in Chapter 9</a>)</p>
+</li>
+<li><p>navigate among all types of menus (pull-down, popup, and option menus) and their entries (see <a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221; in Chapter 8</a>)</p>
+</li>
+<li><p>activate menu entries (see <a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221; in Chapter 8</a>)</p>
+</li>
+<li><p>scroll any scrollable component (see <a href="ch09.html#id33826">&#8220;Scrollbars&#8221; in Chapter 9</a>)</p>
+</li>
+<li><p>activate the default button in a dialog if there is one (see <a href="ch10.html#id32754">&#8220;Standard Dialog Actions&#8221; in Chapter 10</a>)</p>
+</li>
+<li><p>use mnemonics for all menu titles and menu entries in the pull-down menus (see <a href="ch08.html#id62421">&#8220;Choosing Mnemonics&#8221; in Chapter 8</a>)</p>
+</li>
+<li><p>use keyboard accelerators for frequently used entries in the pull-down menus, such as &#8220;Cut,&#8221; &#8220;Copy,&#8221; and &#8220;Paste&#8221; in the Edit menu (see <a href="ch08.html#id75819">&#8220;Choosing Keyboard Accelerators&#8221; in Chapter 8</a>)</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5478379"></a><a name="id74637"></a>Keyboard Navigation</h4></div></div>
+<p>This section discusses guidelines for moving the focus to a different component in the window using the keyboard. (The<i> OSF/Motif Style Guide</i> refers to this as <i>component navigation</i>.) Each window is divided into fields, where a field can be an individual control (for example, a text input field) or a group of controls (such as a group of radio buttons). By default, the fields that can accept the keyboard focus are ordered, in general, from upper left to lower right. If a window has multiple <i>panes</i>, the focus moves by default through the fields in the topmost (or leftmost) pane, then the fields in the next pane, and so on, until it wraps back to the beginning. </p>
+<p>In some cases, you may have to modify the default order in which components are navigated from the keyboard. For example, when a window first becomes active, the component that should have the keyboard focus is the one that the user is most likely to want to interact with using the keyboard. This isn't necessarily the component in the upper left-hand corner. Also, when a user returns the keyboard focus to a window that was previously the active window, the keyboard focus should return to where it was when the user moved the focus out of that window.</p>
+<p>By default, users can cycle through the fields in order using the &lt;Tab&gt; key. They also can use the arrow keys to move the keyboard focus among the individual components in the current field. For example, in the Add Printer window, shown in <a href="ch07.html#id44860">Figure 7-2</a>, a user can use &lt;Tab&gt; to move keyboard focus from the first field (&#8220;New Printer Name&#8221;) to the second field (&#8220;Connection Type&#8221;). Once in the second field, the user can move keyboard focus between the radio buttons using the directional arrow keys. </p>
+<p><div class="figure"><p><a name="id5478466"></a><b>Figure 7-2. <a name="id44860"></a>Components and Fields</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch07.focus-2.gif" alt="Figure 7-2 Components and Fields" height="377" width="423"></td></tr></table></div></div><br>
+</p>
+<p>By default, the following keyboard commands are used for navigating within a window. In addition, as discussed in <a name="idch07.focus9"></a><a name="idch07.focus10"></a><a name="idch07.focus11"></a><a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221; in Chapter 8</a>, &lt;Shift&gt;-&lt;F10&gt; should move the location cursor to a popup menu if one is available for the current context. </p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">&lt;Tab&gt;<a name="idch07.focus12"></a></span></td><td width="10"> </td><td><p>Moves the location cursor to the next field that can accept the keyboard focus, unless the current field is a multi-line editable text field. In this case it simply inserts a tab character.</p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;Ctrl&gt;-&lt;Tab&gt;<a name="idch07.focus13"></a></span></td><td width="10"> </td><td><p>Always moves the location cursor to the next field that can accept the keyboard focus.</p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;Shift&gt;-&lt;Tab&gt;<a name="idch07.focus14"></a></span></td><td width="10"> </td><td><p>Moves the location cursor to the previous field that can accept the keyboard focus.</p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;Ctrl&gt;-&lt;Shift&gt;-&lt;Tab&gt;<a name="idch07.focus15"></a></span></td><td width="10"> </td><td><p><br>
+Always moves the location cursor to the previous field that can accept the keyboard focus.</p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;down arrow&gt;<a name="idch07.focus16"></a></span></td><td width="10"> </td><td><p>Moves the location cursor within a field forward (or down) to the next component that can receive the keyboard focus, eventually wrapping back to the first component. If the components are in a matrix, &lt;down arrow&gt; moves down through a column and then proceeds to the top of the next column to the right. </p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;up arrow&gt;<a name="idch07.focus17"></a></span></td><td width="10"> </td><td><p>Moves the location cursor within a field opposite to the direction of the &lt;down arrow&gt; to the next component that can receive the keyboard focus. Eventually it wraps back to the last component.</p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;right arrow&gt;<a name="idch07.focus18"></a></span></td><td width="10"> </td><td><p>Moves the location cursor within a field to the next component to the right that can receive the keyboard focus, eventually wrapping back to the first component. If the components are in a matrix, &lt;right arrow&gt; moves across an entire row and then proceeds to the row below. </p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;left arrow&gt;<a name="idch07.focus19"></a></span></td><td width="10"> </td><td><p>Moves the location cursor within a field opposite to the direction of the &lt;right arrow&gt; to the next component that can receive the keyboard focus. Eventually it wraps back to the last component.</p>
+
+</td></tr><tr valign="top"><td><span class="term">&lt;F10&gt;<a name="idch07.focus20"></a></span></td><td width="10"> </td><td><p>Moves the location cursor to the leftmost menu in the menu bar if there is one. If a menu is already displayed, &lt;F10&gt; closes the menu and returns the location cursor to where it was previously. (See <a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221; in Chapter 8</a>.)</p>
+
+</td></tr></table></div><p>Because the keys listed above are used for navigating among components, don't use them for other purposes. However, there's an exception to this rule: the arrow keys can be used to control a component that's the only component in its field. For this reason, each editable text field, list, scrollbar or sash is by default placed in its own field. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5478848"></a>Mouse Navigation</h4></div></div>
+<p>To move the keyboard focus in the current active window using the mouse, users put the pointer over a specific component and click the left mouse button. The keyboard focus moves to the selected component, if you've allowed that component to accept keyboard focus, and typically performs some action or selects some data. For example, clicking the left mouse button on a pushbutton activates the pushbutton, as well as moves keyboard focus to the pushbutton. Clicking the left mouse button in an editable text field moves keyboard focus to the text field and places the insertion point in the text field at the pointer location. If users want to move the keyboard focus to a component using the mouse without activating that component, they can position the pointer over the component, then hold down the &lt;Ctrl&gt; key while clicking the left mouse button.<a name="idch07.focus21"></a></p>
+<p>By default, certain components do not grab the keyboard focus when activated using the mouse. These include scrollbars, sashes, any other component that's used only to change the size or location of other elements, and any components that you've designated as being unable to accept keyboard focus. If the user uses the mouse to activate any of these components, it's activated and the keyboard focus stays where it was. </p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5478906"></a><a name="id17698"></a>Keyboard Focus and Navigation Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing keyboard focus and navigation for your application windows . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use explicit focus for navigating among components within a window.</p>
+</li>
+<li><p>Support at least the minimum required functionality from the keyboard, such as navigating to and entering data into editable text fields, using mnemonics and keyboard accelerators to access menu entries, and scrolling any scrollable component. Keep in mind that some users use alternate input devices that rely on having functions available from the keyboard.</p>
+</li>
+<li><p>When the window becomes active for the first time, give focus to the component that the user is most likely to want to interact with using the keyboard. When a user returns the keyboard focus to a window that was previously the active window, return the keyboard focus to where it was when the user moved the focus out of that window.</p>
+</li>
+<li><p>Put each component that requires the use of arrow keys to control it in its own field. The following components are by default put in fields of their own: editable text fields, lists, scrollbars, and sashes.</p>
+</li>
+<li><p>Don't use the default keyboard navigation keys for other purposes. These keys are &lt;Tab&gt;, &lt;Ctrl&gt;-&lt;Tab&gt;, &lt;Shift&gt;-&lt;Tab&gt;, &lt;Ctrl&gt;-&lt;Shift&gt;-&lt;Tab&gt;, the arrow keys, &lt;F10&gt;, &lt;Shift&gt;-&lt;F10&gt;, and &lt;Ctrl&gt; in combination with a left mouse button click.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5479008"></a><a name="id59818"></a>Selection</h2></div></div>
+<p>IRIS IM is based on the object-action model of direct manipulation. This means that a user must first select an object or group of objects, then choose an action to perform on that data. Users typically select data by clicking the left mouse button (to select a single object) or by dragging with the left mouse button (to select a range of objects). The selection is completed when the mouse button is released. Making a selection shouldn't automatically perform any operation on that selection. When users select data in an application window, that data should be highlighted in some way so that when they pick an action, they'll know which chunk of data that action is being applied to. <a name="idch07.focus22"></a><a name="idch07.focus23"></a></p>
+<p>At any time, there's one selection that's the <i>primary selection</i>. This is the last selection explicitly started by the user and is used to copy data between applications. For details on supporting the primary transfer model in your application, see <a href="ch05.html#id61999">&#8220;Supporting the Primary Transfer Model&#8221; in Chapter 5</a>. </p>
+<p>This section describes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#id46912">&#8220;Selection Models&#8212;What Can Be Selected and How To Select It&#8221;</a></p>
+</li>
+<li><p><a href="ch07.html#id93501">&#8220;Highlighting a Selection&#8221;</a></p>
+</li>
+<li><p><a href="ch07.html#id71910">&#8220;Multiple Collections in One Application Window&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5479137"></a><a name="id46912"></a>Selection Models&#8212;What Can Be Selected and How To Select It</h3></div></div>
+<p>The data in an application window is divided into <a name="idch07.focus24"></a><i>collections</i>. A collection is a group of related elements that share a selection model. There are four basic selection models described in the <i>OSF/Motif Style Guide</i>:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>In the <a name="idch07.focus25"></a><i>single selection</i> model, only one element in the collection can be selected at any given time. For example, a color palette usually allows you to pick only one color at a time. </p>
+</li>
+<li><p>The <a name="idch07.focus26"></a><i>browse selection</i> model is essentially the same as the single selection model, except that it allows users to browse through the available elements by dragging with the left mouse button. The list of available schemes in the Schemes control panel is an example of this model.</p>
+</li>
+<li><p>In the <a name="idch07.focus27"></a><i>range selection</i> model, more than one element in the collection can be selected at any given time, but these elements must be next to each other. Text is usually selected in this fashion&#8212;a user can select any number of contiguous characters in a piece of text.</p>
+</li>
+<li><p>In the <a name="idch07.focus28"></a><i>discontiguous selection</i> model, more than one element in the collection can be selected at any given time, and these elements don't have to be next to each other. An example of this model is a list of files that allows a user to select multiple files.</p>
+</li>
+</ul></div><p>Note that the <a name="idch07.focus29"></a><i>OSF/Motif Style Guide</i> also describes a fifth selection model, <i>multiple selection</i>. Your application shouldn't use this model because it uses mouse actions for adding and removing selected elements that are different from other mouse actions. Eliminating these inconsistent mouse actions for selection makes it much easier for users to learn how to select data.</p>
+<p>Each collection of data in your application should support the mouse and keyboard actions for selecting and deselecting data listed in <a name="idch07.focus30"></a><a href="ch07.html#id65350">Table 7-1</a>, depending on which of the above models it supports. By default, the IRIS IM list component supports the browse selection model, and the IRIS IM text component supports the range selection model.</p>
+<div class="table"><p><a name="id5479324"></a><b>Table 7-1. <a name="id65350"></a> Selection Actions and Results</b></p>
+<table summary=" Selection Actions and Results" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Action</p>
+</th><th scope="col" valign="top"><p>Model</p>
+</th><th scope="col" valign="top"><p>Result</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Click on an element in the collection</p>
+</td><td valign="top"><p>All</p>
+</td><td valign="top"><p>The element is selected, and any elements in the collection that were 
+previously selected are deselected. The location cursor is moved to the 
+selected element.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag through a range of data in the 
+collection</p>
+</td><td valign="top"><p>Browse</p>
+</td><td valign="top"><p>As the user moves the pointer over each element in the collection, that 
+element becomes selected and all other elements in the collection are 
+deselected. When the user releases the left mouse button, the element 
+currently under the pointer remains the selected item, and the location 
+cursor is moved to this element.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag through a range of data in the 
+collection</p>
+</td><td valign="top"><p>Range and 
+discontiguous</p>
+</td><td valign="top"><p>Any elements in the collection that were previously selected are 
+deselected, and an <i>anchor</i> is set on the element or at the location where 
+the left mouse button was pressed. While the user continues to drag the 
+mouse, all elements between the anchor and the current location of the 
+pointer are selected. When the user releases the mouse button, the 
+current selection is set to all the elements between the anchor and the 
+location of the pointer when the mouse button was released.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Shift&gt;-click on an element or 
+&lt;Shift&gt;-drag through a range of 
+elements in a collection</p>
+</td><td valign="top"><p>Range or 
+discontiguous</p>
+</td><td valign="top"><p>The anchor is left in place, and the current selection is modified using 
+one of three models for extending a range described in Section 4.1.4 of 
+the <i>OSF/Motif Style Guide</i>. The preferred model is the <i>balance beam</i> 
+model, which is also the default for the IRIS IM text component.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Ctrl&gt;-click on an element in the 
+collection</p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>The selection state of the element is toggled, and the anchor and 
+location cursor are moved to that element.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Ctrl&gt; drag through a range of data 
+in the collection</p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>The selection state of the range of elements is toggled based on the 
+<i>anchor toggle</i> model described in the<i> OSF/Motif Style Guide</i>, section<i> </i>4.1.5. 
+That is, you pick the element in the range that is closest to the anchor 
+and set all of the elements in the range to the inverse of the selection 
+state of this element.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Click outside of the selection (but 
+not on any element in a collection 
+that requires at least one element to 
+be selected at any given time)</p>
+</td><td valign="top"><p>All </p>
+</td><td valign="top"><p>All elements are deselected.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>When all of the data in a collection is 
+selected, click anywhere inside the 
+collection</p>
+</td><td valign="top"><p>Range and 
+discontiguous</p>
+</td><td valign="top"><p>All elements are deselected.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Esc&gt; while in the process of 
+making a selection in any collection 
+of data.</p>
+</td><td valign="top"><p>All</p>
+</td><td valign="top"><p>The current selection action is cancelled, and all user input is ignored 
+until the user has released all keys and buttons. The selection state is 
+returned to its previous state.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Ctrl&gt;-&lt;/&gt; when the collection has 
+keyboard focus</p>
+</td><td valign="top"><p>Range and 
+discontiguous</p>
+</td><td valign="top"><p>All elements in the collection are selected. The anchor is placed at the 
+beginning of the collection. The location cursor remains unchanged.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Ctrl&gt;-&lt;\&gt; when the collection has 
+keyboard focus</p>
+</td><td valign="top"><p>Range and 
+discontiguous</p>
+</td><td valign="top"><p>All elements in the collection are deselected. The location cursor 
+remains at its current position, and the anchor is moved to where the 
+location cursor is.</p>
+</td></tr></tbody></table></div><p>When users select data in a component that can be scrolled, the component should support automatic scrolling&#8212;that is, if the data being selected is in a scrollable component and the user drags the pointer out of the data display region while still holding down the mouse button, the data should scroll in the direction of the pointer and should continue to be selected. Note that this behavior is automatically supported in the IRIS IM list and text components.</p>
+<p>The mouse and keyboard actions described above represent a subset of those defined in the <i>OSF/Motif</i> <i>Style Guide</i>, which requires that all functionality be available from the keyboard. The <i>OSF/Motif</i> <i>Style Guide</i> describes specific keyboard actions to select individual elements, select a range of data, and modify the data selected. If you determine that users will want to access any of this functionality in your application using the keyboard, see Section 4.1.6 of the <i>OSF/Motif</i> <i>Style Guide</i> for details on supporting keyboard selection. Note that keyboard selection is automatically supported in IRIS IM list and text components.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5479902"></a><a name="id93501"></a>Highlighting a Selection</h3></div></div>
+<p>When the user initiates and continues to add to a selection, your application should visually highlight the currently selected data. In addition, while the data in the collection is being adjusted, the currently selected data should always be highlighted to show users what would be selected if they were to release the mouse button immediately. Selections should remain highlighted, even when the window containing that selection is no longer the active window. The <a name="idch07.focus31"></a><a name="idch07.focus32"></a><i>OSF/Motif Style Guide</i> refers to this as <i>persistent always</i> highlighting. This is the best type of selection highlighting to use when implicit focus is used for moving the keyboard focus across windows (implicit focus is the default for 4Dwm, as explained in <a href="ch03.html#id59672">&#8220;Keyboard Focus Across Windows&#8221; in Chapter 3</a>).</p>
+<p>Use persistent always highlighting except when the only reason a user can make a selection is to transfer that data using the primary transfer model and the user cannot perform any other actions on this data. (The primary transfer model is discussed in <a name="idch07.focus33"></a><a href="ch05.html#id61999">&#8220;Supporting the Primary Transfer Model&#8221; in Chapter 5</a>.) For this type of data, your application should use <i>nonpersistent</i> highlighting, which means that the selection is highlighted only when it's the primary selection. When this data is no longer the primary selection, the currently selected data is no longer highlighted and the current selection is set to empty.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5480017"></a><a name="id71910"></a>Multiple Collections in One Application Window</h3></div></div>
+<p>This section describes some common ways that multiple collections of data might interact in a single application window. There are three basic scenarios for using multiple collections in the same window:<a name="idch07.focus34"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>The user can select data in only one collection at a time.</p>
+</li>
+<li><p>The user can select data in more than one collection at a time, and any given mouse, keyboard, or menu command applies to only one of the collections.</p>
+</li>
+<li><p>The user can select data in more than one collection at a time, and some mouse, keyboard, or menu commands can be applied to more than one of the collections.</p>
+</li>
+</ul></div><p>If the user can select data in only one collection at a time, deselect the previous selection whenever the user makes a new selection in any of the collections. If the user can select data in more than one collection at a time, and any given mouse, keyboard, or menu command applies to only one of the collections, don't do anything special. Since each action can be applied only to one collection, it's obvious which collection to apply it to. For mouse, keyboard, or menu commands that can be applied to more than one of the collections, apply the operation to the collection that most recently had a selection made in it. (See <a href="ch07.html#id50040">&#8220;Keyboard Focus and Navigation&#8221;</a> earlier in this chapter.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5480114"></a>Selection Guidelines</h3></div></div>
+<p><span class="bold"><b>For each collection of data . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use one of the four recommended selection models&#8212;single selection, browse selection, range selection, or discontiguous selection. Don't use the multiple selection model.</p>
+</li>
+<li><p>Automatically scroll the data as the user drags the pointer out of the scrollable data display region.</p>
+</li>
+<li><p>Determine if your users will need to create or modify a selection using the keyboard. If so, then support the keyboard actions defined in Section 4.1.6 of the <i>OSF/Motif Style Guide</i>. (These actions are automatically supported if you use the IRIS IM list or text components.)</p>
+</li>
+</ul></div><p><span class="bold"><b>When highlighting a selection . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Update the highlighting continuously as the user initiates and extends the selection.</p>
+</li>
+<li><p>Use persistent always highlighting, unless the only reason a user can select this data is to transfer it using the primary transfer model. In this case, use nonpersistent highlighting.</p>
+</li>
+</ul></div><p><span class="bold"><b>When managing multiple collections of data in a single window . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Deselect the previous selection whenever the user makes a new selection in any of the collections for cases where the user can select data in only one collection at a time. </p>
+</li>
+<li><p>Apply the operation to the collection that most recently had a selection made in it when the user can select data in more than one collection at a time and there are mouse, keyboard, or menu commands that can be applied to more than one of the collections.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5480224"></a><a name="id83927"></a>Drag and Drop</h2></div></div>
+<p>Direct manipulation, or <a name="idch07.focus35"></a><i>drag and drop</i>, describes an interface in which the user moves icons on the desktop or in application windows in order to perform various actions on the objects represented by the icons. Some typical uses for drag and drop include the following:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Moving an object from one place to another by dragging the object with the mouse and dropping it on a target. For example, to move a file from one directory to another, the user drags the icon representing the file and drops it on the folder icon representing the new directory location.</p>
+</li>
+<li><p>Making a reference to the object in the new location. For example, to add an online book to the personal bookshelf in IRIS Insight, the user drags an icon representing an online book from the main bookshelf to the personal bookshelf. This creates a reference to that book on the personal bookshelf in addition to the reference on the main bookshelf.</p>
+</li>
+<li><p>Performing some operation on the item being dragged. For example, a user can print a file by dragging the icon that represents the file onto a printer icon.</p>
+</li>
+</ul></div><p>If the user presses &lt;Esc&gt; during a drag and drop operation, the operation should be cancelled, and both the object and the target should be left as they were before the operation was initiated.</p>
+<p>This section covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#id43408">&#8220;Two Models of Drag and Drop&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#id77130">&#8220;Pointers for Drag Operations&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5480384"></a><a name="id43408"></a>Two Models of Drag and Drop</h3></div></div>
+<p>Two models for drag and drop exist, one recommended for use with text, and the other recommended for use with other objects.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5480399"></a><a name="id47539"></a>Drag and Drop for Non-Text Objects</h4></div></div>
+<p>The most common model for drag and drop found in applications requires the user to select and drag the object using the left mouse button. This is the preferred model for implementing drag and drop of non-text objects; it reinforces the direct manipulation model of controlling objects directly using the left mouse button. The two most common scenarios for this are the following:<a name="idch07.focus36"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>The user initiates dragging the object by positioning the cursor over the object, pressing with the left mouse button and dragging the mouse. Pressing the left mouse button in this case selects the object. Dragging the mouse drags the object. (Note that if the pointer is over two different elements that can be dragged, the topmost element should be the one selected and dragged.) Releasing the mouse button drops the object on the target below the pointer location. </p>
+</li>
+<li><p>The user selects one or more objects in a collection using the left mouse button. The user then positions the pointer anywhere over the selection, presses the left mouse button, and drags the mouse to drag the object(s). As with the above scenario, when the user releases the mouse button, the object is dropped on the target below the pointer location. Note that in this case, if users positions the pointer outside of the selection and begins dragging with the left mouse button, they're indicating that they want to make a new selection. See <a href="ch07.html#id59818">&#8220;Selection&#8221;</a> earlier in this chapter.</p>
+</li>
+</ul></div><p>For either of the above scenarios, after a drop the target should determine both the format of the data and whether the user meant to perform a move or a copy operation. In some cases, dropping the object might simply mean that the object should be moved to a new location in the same component. In the case where the drop is in the same component, after the drop the data should remain selected. For example, the user can move files around in a Directory View window using drag and drop. In other cases, dragging an object onto a target means that the object should be copied to the target so that the target can perform some operation on it. For example, when the user drags a file onto a printer icon, the file is translated into an appropriate format and sent to the printer.</p>
+<p>To make drag and drop of file objects easy to include in your application, IRIX Interactive Desktop includes a file finder component, which provides a drop pocket (see <a name="idch07.focus37"></a><a href="ch07.html#id45317">Figure 7-3</a>). If the user drops a file icon in the drop pocket, the text field updates to show the pathname of the file represented by the icon. If the user types in the field, the icon in the drop pocket changes to show the new choice. For guidelines on when to use this type of control in your application, see <a href="ch09.html#id43846">&#8220;File Finder&#8221; in Chapter 9</a>.</p>
+<p><div class="figure"><p><a name="id5480555"></a><b>Figure 7-3. <a name="id45317"></a>File Finder Component</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch07.focus-3.gif" alt="Figure 7-3 File Finder Component" height="82" width="247"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5480580"></a>Drag and Drop for Text</h4></div></div>
+<p>Drag and drop can also be implemented using the middle mouse button. Use this model of drag and drop for transferring text rather than the model described in the previous section because the left mouse button is so heavily used for selection in text.<a name="idch07.focus38"></a></p>
+<p>In this case, the user selects a region of text to be dragged using the selection techniques described in <a href="ch07.html#id59818">&#8220;Selection,&#8221;</a> earlier in this chapter. Then the user positions the pointer over the selected text region and drags the text with the middle mouse button. When the user releases the middle mouse button, the text is dropped on the target under the pointer. By default, all text (including labels) can be dragged using the middle mouse button. You may want to turn off drag and drop for some of the text in your application if users will never need to drag it (for example, labels).</p>
+<p>For additional details of implementing drag and drop of text, see Sections 4.3.4 and 6.2.5 in the <i>OSF/Motif</i> <i>Style Guide</i>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5480637"></a><a name="id77130"></a>Pointers for Drag Operations</h3></div></div>
+<p>When selecting and dragging are integrated into the left mouse button, use the standard arrow cursor for simplicity. When drag and drop is implemented using the middle mouse button (typically for dragging text), replace the standard pointer with a <a name="idch07.focus39"></a><i>drag icon</i>. This reinforces to users that they're using the middle mouse button to perform a drag and drop operation. The design of drag icons is discussed in Section 6.2.5.1 of the <br>
+<i>OSF/Motif</i> <i>Style Guide</i>. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5480696"></a>Drag and Drop Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing drag and drop for your application . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Cancel a drag and drop operation if the user presses &lt;Esc&gt;, and leave both the object and the target as they were before the operation was initiated.</p>
+</li>
+<li><p>Use the left mouse button for both selecting and dragging non-text objects. Use the standard cursor in this case.</p>
+</li>
+<li><p>Use the middle mouse button for dragging text, and replace the cursor with a drag icon when the text is being dragged.</p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 6. Application Windows </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 8. Menus </td></tr></table></div></body></html>

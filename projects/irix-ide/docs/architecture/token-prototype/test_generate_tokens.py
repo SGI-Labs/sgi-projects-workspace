@@ -16,13 +16,7 @@ class GenerateTokensTests(unittest.TestCase):
     def setUp(self):
         self.tokens = gen.load_tokens(TOKEN_JSON)
 
-    def test_generate_swift_contains_expected_tokens(self):
-        swift = gen.generate_swift(self.tokens)
-        self.assertIn('static let bgBase', swift)
-        self.assertIn('static let textPrimary', swift)
-        self.assertIn('Font.custom("SF Pro Display", size: 28)', swift)
-
-    def test_generate_motif_contains_overrides(self):
+    def test_generate_motif_contains_expected_tokens(self):
         motif = gen.generate_motif(self.tokens)
         self.assertIn('IRIXIDE*color.bg.base:            #4F5B66', motif)
         self.assertIn('IRIXIDE*spacing.s4:       12', motif)
@@ -38,23 +32,23 @@ class GenerateTokensTests(unittest.TestCase):
     def test_main_generates_files(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             tmp = Path(tmpdir)
-            swift_out = tmp / "Tokens.test.swift"
             motif_out = tmp / "IRIXIDE.test.ad"
+            json_out = tmp / "tokens.test.json"
             args = [
                 "generate_tokens.py",
                 "--source",
                 str(TOKEN_JSON),
-                "--swift-out",
-                str(swift_out),
                 "--motif-out",
                 str(motif_out),
+                "--json-out",
+                str(json_out),
             ]
             with mock.patch.object(sys, "argv", args):
                 gen.main()
-            self.assertTrue(swift_out.exists())
             self.assertTrue(motif_out.exists())
-            self.assertGreater(swift_out.stat().st_size, 0)
+            self.assertTrue(json_out.exists())
             self.assertGreater(motif_out.stat().st_size, 0)
+            self.assertGreater(json_out.stat().st_size, 0)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>About This Guide</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="previous" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="next" href="pt01.html" title="Part I. Integrating With the IRIX Interactive Desktop"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">About This Guide</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="pt01.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="preface"><div class="titlepage"><div><h2 class="title"><a name="id5384587"></a><a name="id30361"></a>About This Guide</h2></div></div>
+<p>This guide is written for developers of software products used on Silicon Graphics workstations, including software engineers, graphical user interface designers, usability specialists, and others involved in the design process. It contains guidelines to help you design products that are consistent with other applications and that integrate seamlessly into the IRIX Interactive Desktop. The result of this consistency and integration is that your products work the way end users expect them to work; consequently, end users find your products easier to learn and use. </p>
+<p>Using this guide, you learn how to design user interfaces for Silicon Graphics applications. There are also specific examples of what is and isn't appropriate and why. Note that the guidelines discussed in this guide are just that&#8212;guidelines, not rules; they're designed to apply to the majority of applications, but there will certainly be anomalous applications for which these guidelines don't make sense.</p>
+<p>Developers using this guide are expected to be programming with the IRIS IM user interface toolkit. IRIS IM is the Silicon Graphics port of the industry-standard OSF/Motif user interface toolkit for use on Silicon Graphics computers. The IRIX Interactive Desktop guidelines encourage compliance with the OSF/Motif guidelines described in <i>OSF/Motif Style Guide, Release 1.2</i>, so you should be familiar with the OSF/Motif manual before reading this one. In addition, the IRIX Interactive Desktop guidelines clarify and elaborate on many OSF/Motif style issues; they recommend many value-added extensions and improvements to the OSF/Motif style that don't conflict with the basic OSF/Motif interface. Following the recommendations in this guide will help ensure that your software product provides all of the functionality and ease of use designed into the IRIX Interactive Desktop.</p>
+<p>One focus of this guide is how your application should look and feel on the IRIX Interactive Desktop when you're finished creating it&#8212;that is, how users will expect to be able to interact with your application. The implementation details of how to achieve this look and feel are covered in the <i>OSF/Motif Programmer's Guide</i> and the <i>IRIX Interactive Desktop Integration Guide</i>. </p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5439412"></a>What This Guide Contains</h2></div></div>
+<p>This guide has three parts, which are described in the following sections. For your convenience, this guide is available online so that you can search it using the IRIS InSight Viewer. This guide is also available on the World Wide Web.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5439424"></a>Part One: Integrating With the IRIX Interactive Desktop</h3></div></div>
+<p>The first part of this guide describes how users expect to be able to interact with your application from the IRIX Interactive Desktop; it contains these chapters: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch01.html#id73752">Chapter 1, &#8220;Overview of the IRIX Interactive Desktop,&#8221;</a> sets the context for Part One; it gives you an overview of the desktop environment in which users encounter your application and describes the mouse and keyboard hardware provided with Silicon Graphics systems.</p>
+</li>
+<li><p><a href="ch02.html#id94988">Chapter 2, &#8220;Icons,&#8221;</a> describes how to design your application and file icons so that they're meaningful, they properly reflect their state (such as selected or open), and they behave appropriately for user actions such as double-click and drag-and-drop. It also describes how to make your application icon accessible so that users can interact with your application through the desktop tools, such as the Icon Catalog and the Find an Icon tool. </p>
+</li>
+<li><p><a href="ch03.html#id42750">Chapter 3, &#8220;Windows in the IRIX Interactive Desktop Environment,&#8221;</a> defines the various categories of windows and describes the IRIX Interactive Desktop look for your application's windows. This look is an enhanced version of IRIS IM and includes pre-packaged color and font schemes. The chapter also covers the expected behaviors that your application's windows should support&#8212;such as sizing, moving, and minimizing windows, managing the keyboard focus across windows, interacting with desks, and responding to session management.</p>
+</li>
+<li><p><a href="ch04.html#id43344">Chapter 4, &#8220;IRIX Interactive Desktop Services,&#8221;</a> explains how your application can take advantage of several services provided by the IRIX Interactive Desktop, such as Software Manager, SGIHelp, the IRIS InSight online documentation viewer, and global desktop settings. </p>
+</li>
+<li><p><a href="ch05.html#id15852">Chapter 5, &#8220;Data Exchange on the IRIX Interactive Desktop,&#8221;</a> describes the data transfer models that your application should support. It also lists the data types supported for data exchange in the IRIX Interactive Desktop environment.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5439583"></a>Part Two: Interface Components</h3></div></div>
+<p>The second part of this guide describes the individual components of an application, such as windows, menus, controls, and dialogs. Part Two contains these chapters:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch06.html#id71076">Chapter 6, &#8220;Application Windows,&#8221;</a> discusses the different types of windows, how your application should combine them, what elements are appropriate for primary and support windows, and how these elements should be arranged. </p>
+</li>
+<li><p><a href="ch07.html#id63208">Chapter 7, &#8220;Focus, Selection, and Drag and Drop,&#8221;</a> discusses three general mechanisms by which users interact with your application: keyboard focus (within a window), selection, and drag and drop.</p>
+</li>
+<li><p><a href="ch08.html#id98597">Chapter 8, &#8220;Menus,&#8221;</a> describes the kinds of menus your application can use (pull-down, popup, and option menus), how users display, traverse, activate, and close these menus, and how to design menus and menu items for your application.</p>
+</li>
+<li><p><a href="ch09.html#id95140">Chapter 9, &#8220;Controls,&#8221;</a> describes controls that are supported in the standard OSF/Motif environment (such as push buttons, lists, and scrollbars) and those that are unique to the IRIX Interactive Desktop environment (such as thumbwheels and dials). Each description consists of a general description of the control, and guidelines for when to use the control, how to label the control, and how the control should behave. </p>
+</li>
+<li><p><a href="ch10.html#id30192">Chapter 10, &#8220;Dialogs,&#8221;</a> defines the standard types of dialogs and discusses when to use them. It also discusses how to design application-specific dialogs.</p>
+</li>
+<li><p><a href="ch11.html#id58675">Chapter 11, &#8220;User Feedback,&#8221;</a> describes various types of feedback users expect your application to provide. It also tells you when to use each of the standard pointer shapes and provides guidelines for designing your own pointer shapes.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5385415"></a>Part Three: Designing 3D Applications</h3></div></div>
+<p>The third part of this guide provides user interface guidelines specifically for 3D applications. These guidelines address design issues that are not relevant in a 2D context. In addition, 3D applications should also follow the guidelines described in the first two parts of this guide. Part Three contains these chapters:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#id48696">Chapter 12, &#8220;Introduction to 3D Style Guidelines,&#8221;</a> provides an overview of general 3D user interface design guidelines.</p>
+</li>
+<li><p><a href="ch13.html#id49713">Chapter 13, &#8220;Interactive Viewing of 3D Objects,&#8221;</a> first discusses inspection and navigation, which are the two approaches to viewing, and the associated viewing functions users expect. It then considers some trade-offs designers commonly have to make: Making both viewing and editing available in an intuitive way, deciding on single-viewport or multi-viewport viewing, and dealing with scene fidelity vs. speed.</p>
+</li>
+<li><p><a href="ch14.html#id35617">Chapter 14, &#8220;Selection in 3D Applications,&#8221;</a> provides recommendations for designing the selection interface of a 3D application. It builds on the selection models discussed in Chapter 7, &#8220;Focus, Selection, and Drag and Drop&#8221;. </p>
+</li>
+<li><p><a href="ch15.html#id24672">Chapter 15, &#8220;Manipulating 3D Objects,&#8221;</a> provides recommendations for designing the translation, rotation, and scaling user interface of a 3D application. </p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5385525"></a>Appendix</h3></div></div>
+<p><a href="apa.html#id12454">Appendix A, &#8220;Summary of Guidelines,&#8221;</a> provides a checklist that you can use to determine whether your product follows the IRIX Interactive Desktop user interface guidelines. This checklist contains all of the individual guidelines that appear throughout the guide. </p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5385546"></a>What You Should Know Before Reading This Guide</h2></div></div>
+<p>This guide assumes that you understand the concepts and terminology used with computers whose user interface is based on the X Window System and OSF/Motif. It also assumes that you're familiar with the <i>OSF/Motif Style Guide, Release 1.2</i>; the material presented in this guide enhances and clarifies information presented in that manual. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5385564"></a>Suggestions for Further Reading</h2></div></div>
+<p>The programming details of how to implement the style guidelines described in this guide are described in the following books, all of which are available online through IRIS InSight:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>IRIX Interactive Desktop Integration Guide</i></p>
+</li>
+<li><p><i>Software Packager User's Guide</i></p>
+</li>
+<li><p><i>Topics in IRIX Programming</i></p>
+</li>
+<li><p><i>OSF/Motif Programmer's Guide</i></p>
+</li>
+<li><p><i>OSF/Motif Reference Manual</i></p>
+</li>
+<li><p><i>The X Window System, Volume 1: Xlib Programming Manual</i></p>
+</li>
+<li><p><i>The X Window System, Volume 4: X Toolkit Intrinsics Programming Manual</i></p>
+</li>
+</ul></div><p>In addition, you may want to take a look at <i>Desktop Users Guide </i>(also an online manual), which explains how users interact with the IRIX Interactive Desktop. </p>
+<p>If you're new to creating 3D applications, either in general or on Silicon Graphics systems, you'll find the following books useful:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Foley, J.D., A. van Dam, S. Feiner, and J.F. Hughes. <i>Computer Graphics Principles and Practice</i>, second edition. Reading, Massachusetts: Addison-Wesley Publishing Co., 1990. (This book is the classic introductory text to 3D programming.)</p>
+</li>
+<li><p>Kalwick, David. <i>3D Graphics Tips, Tricks, and Techniques</i>. Chestnut Hill, Massachusetts: Academic Press, Inc. 1996. (This book defines the many 3D graphics terms and explains how to create 3D graphics using existing software applications rather than writing your own code.) </p>
+</li>
+<li><p>Wernecke, Josie, <i>The Inventor Mentor</i>. Reading, Massachusetts: Addison-Wesley Publishing Co., 1994. (This book provides basic information on programming with Open Inventor. It includes detailed program examples in C++ and describes key aspects of the Open Inventor toolkit, including its 3D scene database.)</p>
+</li>
+</ul></div><p>Finally, you may want to refer to additional references that describe user interface design:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Brown, C. Marlin &#8220;Lin.&#8221; <i>Human-Computer Interface Design Guidelines</i>. Norwood, New Jersey: Ablex Publishing Corporation, 1989. (This book presents general user interface guidelines.)</p>
+</li>
+<li><p>Laurel, Brenda, ed. <i>The Art of Human-Computer Interface Design</i>. Reading, Massachusetts: Addison-Wesley Publishing Co., 1990. (This book addresses future directions in user interface design.)</p>
+</li>
+<li><p>Mayhew, Deborah J. <i>Principles and Guidelines in Software User Interface Design</i> Englewood Cliffs, New Jersey: Prentice-Hall, Inc., 1992. (This book covers the overall design process and presents general user interface guidelines.)</p>
+</li>
+<li><p>Norman, Donald A. <i>The Design of Everyday Things</i>. Reading, Massachusetts: Addison-Wesley Publishing Co., 1991. (This book uses examples of commonly used products to illustrate why good design is necessary.)</p>
+</li>
+<li><p>Shneiderman, Ben. <i>Designing the User Interface: Strategies for Effective Human-Computer Interaction</i>, second edition. Reading, Massachusetts: Addison-Wesley Publishing Co., 1992. (This book presents general user interface guidelines.)</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5383816"></a>Conventions Used in This Guide</h2></div></div>
+<p>In this guide, the following conventions act as visual cues for different types of information.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5383826"></a>Style Guidelines</h3></div></div>
+<div class="itemizedlist"><ul type="disc"><li><p>This icon indicates a guideline that summarizes the preceding discussion. The guidelines appear at the end of each main section; a complete list is provided in <a href="apa.html#id12454">Appendix A, &#8220;Summary of Guidelines.&#8221;</a></p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5383848"></a>Font Conventions</h3></div></div>
+<p>The typographical conventions used in this guide include: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>Bold text </b></span>indicates that a term is a data type, a keyword, an X or IRIS IM widget name, a function, a command-line option, or an X resource.</p>
+</li>
+<li><p><i>Italic</i> <i>text</i> indicates that a term is a file name, a button name, a variable, an IRIX command, or a document title.</p>
+</li>
+<li><p><tt>Screen type</tt> indicates screen displays and code examples.</p>
+</li>
+<li><p><b><tt>Bold screen type</tt></b> indicates user input and nonprinting keyboard keys.</p>
+</li>
+<li><p>&#8220;Quoted text&#8221; indicates menu items.</p>
+</li>
+<li><p>Angle brackets indicate special keys, as in &lt;Ctrl&gt;.</p>
+</li>
+<li><p>Regular text is used for menu and window names.</p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="pt01.html">Next</a></td></tr><tr><td width="40%" align="left">IRIX® Interactive Desktop
+User Interface Guidelines </td><td width="20%" align="center"> </td><td width="40%" align="right">Part I. Integrating With the IRIX Interactive Desktop </td></tr></table></div></body></html>

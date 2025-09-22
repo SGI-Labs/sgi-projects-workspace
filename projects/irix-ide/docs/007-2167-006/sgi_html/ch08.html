@@ -1,0 +1,632 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 8. Menus</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt02.html" title="Part II. Interface Components"><link rel="previous" href="ch07.html" title="Chapter 7. Focus, Selection, and Drag and Drop"><link rel="next" href="ch09.html" title="Chapter 9. Controls"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Menus</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><th width="60%" align="center">Part II. Interface Components</th><td width="20%" align="right"> <a accesskey="n" href="ch09.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5480743"></a>Chapter 8. <a name="id98597"></a>Menus</h2></div></div>
+<p>Menus allow users to browse through options, settings, and commands available in your application. A well-organized set of menus shows users what your application can do and makes it easy to locate particular functions. This chapter describes the kinds of menus your application should use and how menus and menu items should be organized, in these sections:<a name="idch08.menus1"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#id56383">&#8220;Types of Menus&#8221;</a> defines the three types of menus that your application can use: pull-down, popup, and option menus.</p>
+</li>
+<li><p><a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221;</a> describes the default IRIS IM model for accessing menus with the mouse and the keyboard, with two additions that your application should support.</p>
+</li>
+<li><p><a href="ch08.html#id42408">&#8220;The Menu Bar and Pull-Down Menus&#8221;</a> discusses how to design pull-down menus (which include cascading, or nested, menus). </p>
+</li>
+<li><p><a href="ch08.html#id62260">&#8220;Popup Menus&#8221;</a> discusses how to design popup menus.</p>
+</li>
+</ul></div><p>Option menus are discussed only briefly in this chapter; they're covered in detail in <a href="ch09.html#id68004">&#8220;Option Buttons&#8221; in Chapter 9</a>.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5480898"></a><a name="id56383"></a>Types of Menus</h2></div></div>
+<p>IRIX Interactive Desktop supports three types of menus, all of which are defined in the <a name="idch08.menus2"></a><a name="idch08.menus3"></a><i>OSF/Motif Style Guide</i>: pull-down menus, popup menus, and option menus. This section discusses these menu types:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#id29699">&#8220;Pull Down Menus&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id85425">&#8220;Popup Menus&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id38296">&#8220;Option Menus&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5480989"></a><a name="id29699"></a>Pull Down Menus</h3></div></div>
+<p>Of the three types, pull-down menus are the most frequently used. Most applications have a menu bar, which is a collection of pull-down menus. <a href="ch08.html#id49505">Figure 8-1</a> shows a typical menu bar.</p>
+<p><div class="figure"><p><a name="id5481014"></a><b>Figure 8-1. <a name="id49505"></a>Menu Bar</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-1.gif" alt="Figure 8-1 Menu Bar" height="45" width="379"></td></tr></table></div></div><br>
+</p>
+<p>Each pull-down menu is represented in the menu bar by its title. A user can display a menu by pressing the left mouse button on the menu title. <a href="ch08.html#id30057">Figure 8-2</a> shows a typical pull-down menu. </p>
+<p><div class="figure"><p><a name="id5481055"></a><b>Figure 8-2. <a name="id30057"></a>Pull-Down Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-2.gif" alt="Figure 8-2 Pull-Down Menu" height="220" width="163"></td></tr></table></div></div><br>
+</p>
+<p>Pull-down menus can include submenus, or <a name="idch08.menus4"></a><i>cascading menus</i>. A menu entry for a cascading menu is indicated by an arrowhead next to the entry, as shown in <a href="ch08.html#id68665">Figure 8-3</a>. Pull-down menus are discussed in detail in <a href="ch08.html#id42408">&#8220;The Menu Bar and Pull-Down Menus&#8221;</a> later in this chapter.</p>
+<p><div class="figure"><p><a name="id5481165"></a><b>Figure 8-3. <a name="id68665"></a>Cascading Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-8.gif" alt="Figure 8-3 Cascading Menu" height="181" width="482"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5481190"></a><a name="id85425"></a>Popup Menus</h3></div></div>
+<p>Unlike pull-down menus, popup menus are not represented by a title on the screen. A user displays a popup menu by pressing the right mouse button. The contents of the popup menu depend on where the mouse pointer is located when the button is pushed. <a name="idch08.menus5"></a><a href="ch08.html#id73864">Figure 8-4</a> shows a popup menu. Popup menus are discussed in detail in <a href="ch08.html#id62260">&#8220;Popup Menus&#8221;</a> later in this chapter.</p>
+<p><div class="figure"><p><a name="id5481232"></a><b>Figure 8-4. <a name="id73864"></a>Popup Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-3.gif" alt="Figure 8-4 Popup Menu" height="121" width="140"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5481276"></a><a name="id38296"></a>Option Menus</h3></div></div>
+<p>Option menus allow the user to select a single option from a list of options. An option menu appears as a button marked with a horizontal bar, as shown in <a name="idch08.menus6"></a><a href="ch08.html#id33895">Figure 8-5</a>. </p>
+<p><div class="figure"><p><a name="id5481346"></a><b>Figure 8-5. <a name="id33895"></a>Option Menu Button</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-5.gif" alt="Figure 8-5 Option Menu Button" height="47" width="124"></td></tr></table></div></div><br>
+</p>
+<p>The option button is labelled with the currently selected option. When a user presses the left mouse button over the option button, the option menu is displayed, as shown in <a href="ch08.html#id45752">Figure 8-6</a>. If the user selects a different option from this menu, the label on the button updates to reflect this new value.</p>
+<p><div class="figure"><p><a name="id5481389"></a><b>Figure 8-6. <a name="id45752"></a>An Open Option Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-6.gif" alt="Figure 8-6 An Open Option Menu" height="163" width="125"></td></tr></table></div></div><br>
+</p>
+<p>Entries in an option menu represent mutually exclusive values of a parameter. They shouldn't be used for actions. Guidelines for using option buttons and option menus are discussed in <a href="ch09.html#id68004">&#8220;Option Buttons&#8221; in Chapter 9</a>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5481452"></a><a name="id19797"></a>Menu Traversal and Activation</h2></div></div>
+<p>Pull-down, popup, and option menus should use the default IRIS IM model for menu traversal and activation, with two additions. This model is defined in the <a name="idch08.menus7"></a><i>OSF/Motif Style Guide</i>, Chapter 3, and summarized below. The two additional guidelines are also described in the following paragraphs. </p>
+<p>Pull-down menus use mnemonics and keyboard accelerators for traversal and activation; these techniques are described in the next section, <a href="ch08.html#id42408">&#8220;The Menu Bar and Pull-Down Menus.&#8221;</a></p>
+<p>With the default model, users can use either the mouse or the keyboard to display, traverse, activate, and close menus. This section describes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#id82410">&#8220;Using the Mouse to Manipulate Menus&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id11989">&#8220;Using the Keyboard to Manipulate Menus&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5481562"></a><a name="id82410"></a>Using the Mouse to Manipulate Menus</h3></div></div>
+<p>With the mouse, users have the additional choice of manipulating menus in either a <i>spring-loaded</i> or a <i>posted</i> manner.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5481583"></a>Spring-Loaded Manner</h4></div></div>
+<p>To display a pull-down or option menu in a spring-loaded manner, the user positions the pointer over the menu and presses the left mouse button. To display a popup menu in a spring-loaded manner, the user positions the pointer in an area of the window that has a popup menu associated with it and presses the right mouse button. The user traverses any of these menus by moving the pointer over the menu entries while continuing to hold the mouse button. <a name="idch08.menus8"></a></p>
+<p>If the pointer is over a menu entry when the user releases the mouse button, that entry is activated and the menu is removed. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5481632"></a>Posted Manner</h4></div></div>
+<p>To display a menu in a posted manner, the user positions the mouse pointer over the menu or over the appropriate area of the window and clicks the appropriate mouse button (left for pull-down and option menus, right for popup). The menu is then displayed with the location cursor on the first available menu entry (that is, the first non-disabled entry). To activate one of the menu entries, the user positions the pointer over the appropriate entry and clicks the left mouse button. <a name="idch08.menus9"></a></p>
+<p>To remove the menu, the user clicks the left mouse button anywhere outside the menu. For popup menus, the user can click either the left or right mouse buttons to select an entry or remove the menu.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5481662"></a>Mouse Click</h4></div></div>
+<p>In addition to supporting this default model for manipulating spring-loaded and posted menus with the mouse, make sure your application handles the mouse click that closes a posted menu as follows: Even though this click is passed on to the underlying application window, your application should ignore this click so that users don't lose selections they've made in the window just because they display and close menus. </p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5481680"></a><a name="id11989"></a>Using the Keyboard to Manipulate Menus</h3></div></div>
+<p>By default, in IRIS IM, users can also display, traverse, activate, and close menus using the keyboard:<a name="idch08.menus10"></a></p>
+<div class="orderedlist"><ol type="1"><li><p>To display pull-down menus, users first press &lt;F10&gt; to move the keyboard focus to the leftmost menu in the menu bar and then press the down arrow key. To display an option menu, users first move keyboard focus to the option menu button and then press the space bar. <a name="idch08.menus11"></a></p>
+</li>
+<li><p>Once a menu is displayed, the user can use the up arrow and down arrow keys to traverse a menu. Similarly, the user can use the left arrow and right arrow keys to move from menu to menu across the menu bar. <a name="idch08.menus12"></a></p>
+</li>
+<li><p>Once a menu is displayed, pressing &lt;Enter&gt; or the space bar activates the item under the location cursor, closes the menu, and returns the keyboard focus to where it was before the menu was displayed.<a name="idch08.menus13"></a></p>
+</li>
+<li><p>Pressing &lt;Esc&gt; while a menu is displayed closes the menu and returns the keyboard focus to where it was before the menu was displayed. Pull-down menus can also be closed by pressing &lt;F10&gt;.<a name="idch08.menus14"></a><a name="idch08.menus15"></a></p>
+</li>
+</ol></div><p>In addition to supporting this default model for manipulating menus with the keyboard, your application should allow &lt;Shift&gt;&lt;F10&gt; to display a popup menu if one is available and move the keyboard focus to the first available entry in the menu. Pressing &lt;Shift&gt;&lt;F10&gt; again should close the popup menu and return the keyboard focus to where it was before &lt;Shift&gt;&lt;F10&gt; was pressed originally. This behavior is recommended in the <a name="idch08.menus16"></a><i>OSF/Motif Style Guide</i> (where &lt;Shift&gt;&lt;F10&gt; is described as the substitute for the &lt;Menu&gt; key), but it isn't supported by default in IRIS IM.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5481845"></a>Menu Traversal and Activation Guidelines</h3></div></div>
+<p><span class="bold"><b>In general, when designing traversal and activation for your menus . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Allow users to activate and traverse the menus using the default IRIS IM behaviors for mouse and keyboard actions.</p>
+</li>
+<li><p>If a user closes a menu by clicking somewhere outside of the menu, make sure the application ignores this click so that users don't lose selections they've made in the window just because they display and close menus.</p>
+</li>
+<li><p>Allow users to display and close popup menus using the key combination &lt;Shift&gt;&lt;F10&gt;. When &lt;Shift&gt;&lt;F10&gt; displays a popup menu, the location cursor should be on the first available menu entry. When &lt;Shift&gt;&lt;F10&gt; closes the menu, the keyboard focus should be returned to where it was before the menu was displayed.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5481915"></a><a name="id42408"></a>The Menu Bar and Pull-Down Menus</h2></div></div>
+<p>In most cases, each of an application's primary windows has a menu bar as described in <a name="idch08.menus17"></a><a href="ch06.html#id93559">&#8220;Menu Bars in Primary Windows&#8221; in Chapter 6</a>. Users should be able to access most of an application's functions through its menu bars. This makes it easy for users to see what functions are available to them. This section describes the menu bar and pull-down menus:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#id12088">&#8220;Standard Menus&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id67010">&#8220;What to Put in the Pull-Down Menus&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id62421">&#8220;Choosing Mnemonics&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id75819">&#8220;Choosing Keyboard Accelerators&#8221;</a></p>
+</li>
+<li><p><a href="ch08.html#id19592">&#8220;Disabling Menu Entries&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id23392">&#8220;Dynamic Menu Entries&#8221;</a> </p>
+</li>
+</ul></div><p>Each menu bar contains several pull-down menus. Each pull-down menu is represented in the menu bar by its title and contains entries that are either an action, a label for a cascading menu, or a separator, as shown in <a href="ch08.html#id42142">Figure 8-7</a>. Also as shown, the cascading menus contain additional actions. See <a href="ch08.html#id67010">&#8220;What to Put in the Pull-Down Menus&#8221;</a> for more information about the content of pull-down menus. </p>
+<p><div class="figure"><p><a name="id5482090"></a><b>Figure 8-7. <a name="id42142"></a>Elements of a Pull-Down Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-11.gif" alt="Figure 8-7 Elements of a Pull-Down Menu" height="181" width="488"></td></tr></table></div></div><br>
+</p>
+<p>Users interact with pull-down menus according to the model described in the previous section, <a name="idch08.menus18"></a><a name="idch08.menus19"></a><a href="ch08.html#id19797">&#8220;Menu Traversal and Activation.&#8221;</a> In addition, users can access menu entries using mnemonics, which are the underlined characters in the menu titles and on menu entries (see <a href="ch08.html#id42142">Figure 8-7</a>). </p>
+<p>To access a menu using a mnemonic, a user moves the pointer into the application window, then holds down the &lt;Alt&gt; key while pressing the character key that matches the underlined character in the menu title. For example, to display the Catapult menu shown in <a href="ch08.html#id42142">Figure 8-7</a>, the user holds down the &lt;Alt&gt; key and presses the &#8220;c&#8221; key. Then, to select a projectile from the Projectiles cascading menu, the user presses the &#8220;p&#8221; key to display the Projectiles cascading menu, and then presses &#8220;p&#8221; again to select &#8220;Piano.&#8221; Note that mnemonics are always activated without the &lt;Shift&gt; key, even if the underlined character happens to be uppercase. Choosing appropriate mnemonics is discussed in more detail in <a href="ch08.html#id62421">&#8220;Choosing Mnemonics&#8221;</a> later in this chapter.</p>
+<p>Menu entries that represent frequently used actions can have keyboard accelerators, as shown in <a name="idch08.menus20"></a><a name="idch08.menus21"></a><a href="ch08.html#id42142">Figure 8-7</a>. These keyboard accelerators are displayed in the menu next to the action and are typically a combination of the &lt;Ctrl&gt; key and one other key. To initiate a menu action using a keyboard accelerator, a user moves the pointer over the window to make it the active window and then presses the key combination shown in the menu entry. For example, instead of selecting &#8220;Fire catapult&#8221; from the Catapult menu in <a href="ch08.html#id42142">Figure 8-7</a>, a user could fire the catapult by holding down the &lt;Ctrl&gt; key and pressing the &#8220;f&#8221; key. When to use keyboard accelerators and how to choose ones which are appropriate are discussed in more detail in the <a href="ch08.html#id75819">&#8220;Choosing Keyboard Accelerators&#8221;</a> section later in this chapter.</p>
+<p>A menu entry that's followed by an ellipsis (such as the &#8220;Select target...&#8221; entry shown in <a name="idch08.menus22"></a><a href="ch08.html#id42142">Figure 8-7</a>) brings up a dialog that requests more information from the user before any action is performed. When to use an ellipsis in a menu entry is discussed in more detail later in this chapter in <a href="ch08.html#id87916">&#8220;Naming Menu Entries in the Pull-Down Menus.&#8221;</a> Menu entries that aren't currently available are disabled. This is usually shown by graying out the menu entry, as discussed in <a href="ch08.html#id19592">&#8220;Disabling Menu Entries.&#8221;</a></p>
+<p>When designing the menu bar and its pull-down menus for your application, start with the standard menus described in the next section, <a href="ch08.html#id12088">&#8220;Standard Menus.&#8221;</a> Then, modify these standard menus to fit your specific application, using the guidelines in the section <a href="ch08.html#id67010">&#8220;What to Put in the Pull-Down Menus.&#8221;</a></p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5482419"></a><a name="id12088"></a>Standard Menus</h3></div></div>
+<p>Your application needs its own customized set of menus and menu entries; however, use the standard set as the starting point for the overall menu structure. Standard menus include:<a name="idch08.menus23"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#id38726">&#8220;File Menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id36212">&#8220;Selected Menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id94339">&#8220;Edit Menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id26586">&#8220;View Menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id70020">&#8220;Tools menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id61709">&#8220;Options menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id26412">&#8220;Help menu&#8221;</a> </p>
+</li>
+</ul></div><p>All of the menu entries discussed in this chapter are optional; many of them are appropriate for most applications (but there are always exceptions), and some entries are generally less common than others. For example, &#8220;Print&#8221; is a fairly common entry for the &#8220;File&#8221; menu, but printing doesn't generally make sense for audio applications. &#8220;Import&#8221; is another entry for the &#8220;File&#8221; menu, but it's less common than &#8220;Print.&#8221; <a href="ch08.html#id78135">Figure 8-8</a> shows a menu bar with all of the standard menus (in the correct order) and their mnemonics. This menu bar includes all of the menus defined in the MenuBar reference page of Chapter 9 in the <i>OSF/Motif Style Guide</i>, plus an additional menu, Tools, which is defined in the IRIX Interactive Desktop environment. The standard menus are described in the following sections. </p>
+<p><div class="figure"><p><a name="id5482622"></a><b>Figure 8-8. <a name="id78135"></a>Standard Menus for Menu Bars</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-10.gif" alt="Figure 8-8 Standard Menus for Menu Bars" height="45" width="487"></td></tr></table></div></div><br>
+</p>
+<p>Note that for each of the standard menu entries described in the following sections, mnemonics are represented by the underlined character in the entry label. This label also includes an ellipsis if the entry should include them. The entries are listed in the order in which they should appear in menus, and entries that are likely to be less common are indicated. Keyboard accelerators, if they exist, are listed in the description of the specific menu entry (<a href="ch08.html#id64434">Table 8-3</a> lists standard keyboard accelerators). Appropriate places for separators are shown in the figures depicting the standard menus. Situations where a menu entry should be disabled are included in the description of the menu entry if applicable. Also, the keyboard shortcuts are shown as they should be displayed in the menus (for example, &lt;Ctrl&gt;-s is shown as &#8220;Ctrl+S&#8221;).</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5482700"></a><a name="id38726"></a>File Menu</h4></div></div>
+<p>The File menu contains entries for actions that are performed on files, such as &#8220;Open,&#8221; &#8220;Save,&#8221; and &#8220;Print,&#8221; and on the application as a whole, such as &#8220;Exit.&#8221; <a name="idch08.menus24"></a><a href="ch08.html#id20202">Figure 8-9</a> shows the standard File menu with the most common entries; note that its mnemonic is &#8220;F.&#8221; These standard entries, as well as a few other less common ones (&#8220;Reopen,&#8221; &#8220;Import,&#8221; and &#8220;Revert&#8221;), are described in <a href="ch08.html#id43365">Table 8-1</a> in the order in which they should appear in the menu. All of these entries should behave as defined by the File Menu reference page in the <i>OSF/Motif Style Guide</i>, Chapter 9, except as noted in the table. Note that &#8220;New,&#8221; &#8220;Open,&#8221; &#8220;Close,&#8221; and &#8220;Exit&#8221; should display a dialog as described in <a href="ch10.html#id91359">&#8220;Invoking Dialogs&#8221; in Chapter 10</a> if there are unsaved changes to the current document.</p>
+<p><div class="figure"><p><a name="id5482813"></a><b>Figure 8-9. <a name="id20202"></a>The Standard File Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-7.gif" alt="Figure 8-9 The Standard File Menu" height="220" width="163"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch08.html#id43365">Table 8-1</a> lists each File menu entry, its mnemonic, OSF/Motif behavior, IRIX Interactive Desktop additions and exceptions, and keyboard accellator. </p>
+<div class="table"><p><a name="id5482871"></a><b>Table 8-1. <a name="id43365"></a> File Menu Entries</b></p>
+<table summary=" File Menu Entries" border="1"><colgroup><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Menu Entry 
+and Mnemonic</p>
+</th><th scope="col" valign="top"><p>OSF/Motif Behavior</p>
+</th><th scope="col" valign="top"><p>IRIX Interactive Desktop Additions and Exceptions</p>
+</th><th scope="col" valign="top"><p>Keyboard 
+Accelerator</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>New<a name="idch08.menus25"></a></p>
+</td><td valign="top"><p>Creates a new, empty 
+file.</p>
+</td><td valign="top"><p>If your application allows more than one document window to be open 
+at a time, it should create a new, empty document window; if the current 
+document window is already empty, the action should have no effect. 
+For more information on designing applications that support multiple 
+open documents, see <a href="ch06.html#id27980">&#8220;Standard Application Models&#8221; in Chapter 6</a>. If 
+your application requires more information before creating a new 
+document (for example, the user must select a template), this action may 
+display a dialog to request the information. In this case, the entry label 
+should be followed by an ellipsis.</p>
+</td><td valign="top"><p>Ctrl+N</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Open<a name="idch08.menus26"></a></p>
+</td><td valign="top"><p>Brings up a dialog, 
+allowing the user to 
+choose an existing file to 
+open.</p>
+</td><td valign="top"><p>If your application allows more than one document window to be open 
+at a time, it should create a new document window to display the 
+specified file; however, if the current document window is already 
+empty, the file should be displayed in the current document window. 
+This new document window shouldn't be a separate instantiation of the 
+application.</p>
+</td><td valign="top"><p>Ctrl+O</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Reopen<a name="idch08.menus27"></a><sup></sup>
+<sup>[<a name="id5483080" href="#ftn.id5483080">a</a>]</sup><sup></sup></p>
+</td><td valign="top"><p>Not defined.</p>
+</td><td valign="top"><p>&#8220;Reopen&#8221; allows a user to return to a file that had been previously 
+opened by the application. Choosing &#8220;Reopen&#8221; should display a 
+cascading menu of previously opened files; you might choose to limit 
+the length of this list to a maximum of 10 entries. (You should disable 
+this entry if there are no previously opened files&#8212;for example, if this is 
+the first time the user has launched the application.) If there are unsaved 
+changes to the current file, your application should display a dialog that 
+asks the user whether to save or discard the changes (see <a href="ch10.html#id61823">&#8220;Invoking 
+Dialogs When Manipulating Files&#8221; in Chapter 10</a>).</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch08.menus28"></a></p>
+
+Import<p><sup>a</sup></p>
+</td><td valign="top"><p>Not defined.</p>
+</td><td valign="top"><p>&#8220;Import&#8221; allows a user to read an existing data file into the current 
+application. This entry can display the IRIX Interactive Desktop file 
+selection dialog (in which case it should be displayed with an ellipsis), 
+and the application should automatically determine the type of the file 
+after it's selected. (See <a href="ch10.html#id52846">&#8220;Types and Modes of Dialogs&#8221; in Chapter 10</a> for 
+details on the IRIX Interactive Desktop file selection dialog.) 
+Alternatively, this entry can use a cascading menu to display the types 
+of data that your application allows users to import. Each of these 
+entries should be followed by an ellipsis and display the file selection 
+dialog to allow the user to specify the specific file to import. Follow this 
+entry with a separator.</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch08.menus29"></a></p>
+
+Save<p> </p>
+</td><td valign="top"><p>Saves the current file.</p>
+</td><td valign="top"><p>Although some applications disable this entry when there are no 
+changes to be saved, your application should never disable this entry (as 
+described in <a href="ch08.html#id19592">&#8220;Disabling Menu Entries&#8221;</a>).</p>
+</td><td valign="top"><p>Ctrl+S</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Save As...<a name="idch08.menus30"></a></p>
+</td><td valign="top"><p>Brings up a dialog and 
+saves the current file 
+with a new name. Also 
+closes the previous file 
+and opens the new one.</p>
+</td><td valign="top"><p>If the current document already has a filename, that filename should be 
+the default value in the file selection dialog. </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Revert<a name="idch08.menus31"></a><sup>a</sup></p>
+</td><td valign="top"><p>Not defined.</p>
+</td><td valign="top"><p>&#8220;Revert&#8221; allows a user to undo all changes made to the current file since 
+the last time the user saved it. (This entry should be disabled if there are 
+no unsaved changes.) Your application should display a warning dialog 
+before executing this action, as described in <a href="ch10.html#id61823">&#8220;Invoking Dialogs When 
+Manipulating Files&#8221; in Chapter 10</a>. </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch08.menus32"></a></p>
+
+Print<p> </p>
+</td><td valign="top"><p>Prints the current file.</p>
+</td><td valign="top"><p>If choosing &#8220;Print&#8221; brings up a dialog to allow the user to select from a 
+list of all available printers, it should be followed by an ellipsis. If the 
+keyboard accelerator is used to activate this entry, the print job should 
+be sent to the default printer.</p>
+</td><td valign="top"><p>Ctrl+P</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Close<a name="idch08.menus33"></a></p>
+</td><td valign="top"><p>Closes a window and its 
+associated support 
+windows and dialogs, 
+without quitting the 
+current application.</p>
+</td><td valign="top"><p>&#8220;Close&#8221; should be provided on co-primary windows and on support 
+windows if they have menu bars. It shouldn't be provided on the main 
+primary window. (See <a href="ch06.html#id91745">&#8220;Window Types&#8221; in Chapter 6</a> for definitions of 
+these window types and <a href="ch03.html#id85826">&#8220;Window Decorations and the Window Menu&#8221; 
+in Chapter 3</a> for details on the &#8220;Close&#8221; entry.) Applications that follow 
+the &#8220;Multiple Document, No Visible Main&#8221; model should exit the 
+application when the last co-primary window is closed. (See <a href="ch06.html#id96208">&#8220;&#8220;Multiple 
+Document, No Visible Main&#8221; Application Model&#8221; in Chapter 6</a>.)</p>
+</td><td valign="top"><p>Ctrl+W</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Exit<a name="idch08.menus34"></a></p>
+</td><td valign="top"><p>Closes all windows for 
+the application and 
+quits the application.</p>
+</td><td valign="top"><p>&#8220;Exit&#8221; should always be provided in the main primary window. If users 
+are likely to want to exit your application from a specific co-primary 
+window in the application, that window should include an &#8220;Exit&#8221; entry 
+in the leftmost menu, in addition to a &#8220;Close&#8221; entry. (See <a href="ch03.html#id85826">&#8220;Window 
+Decorations and the Window Menu&#8221; in Chapter 3</a> for details on when to 
+use &#8220;Exit&#8221; and &#8220;Close.&#8221;)</p>
+</td><td valign="top"><p>Ctrl+Q</p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="4"><div class="footnote"><p><sup>[<a name="ftn.id5483080" href="#id5483080">a</a>] </sup>These entries are probably less common than the others. </p>
+</div></td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5483627"></a><a name="id36212"></a>Selected Menu</h4></div></div>
+<p>The Selected menu contains application-specific actions that are performed on the currently selected objects. For example, Directory View windows on the IRIX Interactive Desktop display icons representing files. Each Directory View window has a Selected menu that allows users to perform actions on the selected files, such as &#8220;Open,&#8221; &#8220;Print,&#8221; and &#8220;Remove.&#8221; (Note that since actions in the Selected menu act on the selected data while actions in the File menu act on the entire file of data, the same entry&#8212;&#8220;Print,&#8221; for example&#8212;can mean something different in the two menus.) The Selected menu should not contain editing actions such as &#8220;Cut&#8221; since these should be in the Edit menu. Use &#8220;S&#8221; as the mnemonic for the Selected menu.<a name="idch08.menus35"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5483700"></a><a name="id94339"></a>Edit Menu</h4></div></div>
+<p>The Edit menu contains actions that transfer data to or from the clipboard, actions that modify the current selection, and &#8220;Undo.&#8221; It contains actions for both the clipboard data exchange model (&#8220;Cut,&#8221; &#8220;Copy,&#8221; and &#8220;Paste&#8221;) and for the primary data exchange model (&#8220;Promote&#8221;). Both of these data exchange models are described in <a name="idch08.menus36"></a><a href="ch05.html#id15852">Chapter 5, &#8220;Data Exchange on the IRIX Interactive Desktop.&#8221;</a> <a href="ch08.html#id26733">Figure 8-10</a> shows the most common entries in the standard Edit menu; use &#8220;E&#8221; as its mnemonic. </p>
+<p><div class="figure"><p><a name="id5483773"></a><b>Figure 8-10. <a name="id26733"></a>The Standard Edit Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-9.gif" alt="Figure 8-10 The Standard Edit Menu" height="236" width="408"></td></tr></table></div></div><br>
+</p>
+<p>These standard entries, as well as a few other less common ones (&#8220;Clear,&#8221; &#8220;Promote,&#8221; and &#8220;Color Editor&#8221;), are described in <a href="ch08.html#id84101">Table 8-2</a> in the order in which they should appear in the menu. Make sure that all of these entries behave as defined in the Edit Menu reference page in Chapter 9 of the <i>OSF/Motif Style Guide</i>, except as noted in the table.</p>
+<div class="table"><p><a name="id5483819"></a><b>Table 8-2. <a name="id84101"></a>  <i>	</i>Standard Edit Menu Entries</b></p>
+<table summary="  	Standard Edit Menu Entries" border="1"><colgroup><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Menu Entry and 
+Mnemonic</p>
+</th><th scope="col" valign="top"><p>OSF/Motif Behavior</p>
+</th><th scope="col" valign="top"><p>IRIX Interactive Desktop Additions and Exceptions</p>
+</th><th scope="col" valign="top"><p>Keyboard 
+Accelerator</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Undo [action]<a name="idch08.menus37"></a></p>
+</td><td valign="top"><p>Reverses the effect of a previous action. 
+The &#8220;Undo&#8221; action may apply to 
+actions that the user accomplishes 
+without using the menus&#8212;typing text, 
+for example.</p>
+</td><td valign="top"><p>At a minimum, your application should be able to undo 
+all of the actions in the Edit menu. If an undo action will 
+change the data significantly and can't be undone, you 
+should display a warning dialog explaining that the 
+change can't be undone and ask for confirmation. See 
+<a href="ch10.html#id52846">&#8220;Types and Modes of Dialogs&#8221; in Chapter 10</a> for 
+information on warning dialogs. The &#8220;Undo&#8221; entry 
+should be disabled if the last change cannot be undone 
+or if there are no changes.</p>
+<p>If your application has only a single-level undo (that is, 
+it can undo only the most recent action), after the user 
+selects &#8220;Undo,&#8221; the &#8220;Undo&#8221; entry should be changed to 
+&#8220;Redo [action].&#8221; If the user selects &#8220;Redo&#8221; the 
+application should reverse the effects of the previous 
+&#8220;Undo,&#8221; and toggle the menu entry back to &#8220;Undo 
+[action].&#8221; If your application has multiple-level undo 
+(that is, it can undo a series of actions), you should 
+provide a separate &#8220;Redo&#8221; menu entry. Typically, 
+applications don't allow users to undo beyond the saved 
+version of the file; if your application does, you should 
+display a warning dialog.</p>
+</td><td valign="top"><p>Ctrl+Z</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Redo [action]<a name="idch08.menus38"></a></p>
+</td><td valign="top"><p>Not defined.</p>
+</td><td valign="top"><p>&#8220;Redo&#8221; reverses the effect of a previous &#8220;Undo&#8221; action. 
+It is useful to have a separate &#8220;Redo&#8221; entry if your 
+application has multiple-level undo. Like &#8220;Undo,&#8221; the 
+&#8220;Redo&#8221; entry should indicate the action that will be 
+redone (for example, &#8220;Redo Cut,&#8221; &#8220;Redo Paste&#8221;). If you 
+provide a &#8220;Redo&#8221; command, place it after the Undo 
+entry and follow it with a separator. </p>
+</td><td valign="top"><p>Shift+Ctrl
++Z</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Cut<a name="idch08.menus39"></a></p>
+</td><td valign="top"><p>Removes the selected data from the 
+application window to the clipboard.</p>
+</td><td valign="top"><p>The &#8220;Cut&#8221; entry should be disabled if there's nothing 
+currently selected in the window. </p>
+</td><td valign="top"><p>Ctrl+X</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Copy<a name="idch08.menus40"></a></p>
+</td><td valign="top"><p>Copies the selected data to the 
+clipboard without removing it from <br>
+the application window.</p>
+</td><td valign="top"><p>The &#8220;Copy&#8221; entry should be disabled if there's nothing 
+currently selected in the window. </p>
+</td><td valign="top"><p>Ctrl+C</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Paste<a name="idch08.menus41"></a></p>
+</td><td valign="top"><p>Copies the contents of the clipboard 
+into the application window.</p>
+</td><td valign="top"><p>If there's nothing currently on the clipboard available to 
+be pasted, display a dialog saying there's nothing 
+available. See <a href="ch10.html#id91359">&#8220;Invoking Dialogs&#8221; in Chapter 10</a>.</p>
+</td><td valign="top"><p>Ctrl+V</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Delete<a name="idch08.menus42"></a></p>
+</td><td valign="top"><p>Removes the selected data from the 
+application window.</p>
+</td><td valign="top"><p>The &#8220;Delete&#8221; entry should be disabled if there's nothing 
+currently selected in the window.</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Select All<a name="idch08.menus43"></a></p>
+</td><td valign="top"><p>Selects all of the elements in a 
+component of the application window.</p>
+</td><td valign="top"><p>The mnemonic for &#8220;Select All&#8221; is &#8220;A.&#8221;</p>
+</td><td valign="top"><p>Ctrl+A</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Deselect All<a name="idch08.menus44"></a></p>
+</td><td valign="top"><p>Deselects all of the elements in a 
+component of the application window.</p>
+</td><td valign="top"><p>The &#8220;Deselect All&#8221; entry should be disabled if there's 
+nothing currently selected in the window. The 
+mnemonic for &#8220;Deselect All&#8221; is &#8220;l.&#8221;</p>
+</td><td valign="top"><p>Shift+Ctrl
++A</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Clear<a name="idch08.menus45"></a><sup></sup>
+<sup>[<a name="id5484392" href="#ftn.id5484392">a</a>]</sup><sup></sup></p>
+</td><td valign="top"><p>Same as &#8220;Delete,&#8221; except that the 
+remaining data isn't reorganized to fill 
+in the space left by the cleared data.</p>
+</td><td valign="top"><p>If you provide a &#8220;Clear&#8221; command, place it before the 
+&#8220;Delete&#8221; entry. The &#8220;Clear&#8221; entry should be disabled if 
+there's nothing currently selected in the window.</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Pro<a name="idch08.menus46"></a></p>
+
+mote<p><sup>a</sup></p>
+</td><td valign="top"><p>Promotes the current selection to the 
+primary selection.</p>
+</td><td valign="top"><p>&#8220;Promote&#8221; should be included if it can be difficult or 
+time-consuming to recreate a selection in your 
+application, and if your application supports the 
+primary transfer model described in <a href="ch05.html#id61999">&#8220;Supporting the 
+Primary Transfer Model&#8221; in Chapter 5</a>. Disable this 
+entry when there's no current selection or when the 
+current selection is already the primary selection; it 
+should be enabled only when the application window 
+has a selection that isn't currently the primary selection. 
+See <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a> for information on 
+selections. The mnemonic for &#8220;Promote&#8221; is &#8220;m.&#8221;</p>
+</td><td valign="top"><p>Alt+ Insert</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>C<a name="idch08.menus47"></a></p>
+
+olor Editor...<p><sup>a</sup></p>
+</td><td valign="top"><p>Not defined.</p>
+</td><td valign="top"><p>Choosing &#8220;Color Editor&#8221; invokes the IRIX Interactive 
+Desktop color chooser, which allows the user to select 
+colors. (See <a href="ch06.html#id84245">&#8220;A Specific Standard Support Window: The 
+IRIX Interactive Desktop Color Chooser&#8221; in Chapter 6</a>.)</p>
+</td><td valign="top"><p> </p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="4"><div class="footnote"><p><sup>[<a name="ftn.id5484392" href="#id5484392">a</a>] </sup>These entries are probably less common than the others. </p>
+</div></td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5484592"></a><a name="id26586"></a>View Menu</h4></div></div>
+<p>The View menu contains entries for application-specific actions that change the user's view of the current data but that don't change the actual data. <a name="idch08.menus48"></a></p>
+<p>For example, if your application window has several panes of information, the View menu could provide the user with a way to turn each individual pane on or off. Group together the entries representing the individual panes, and provide a checkbox in front of each one indicating whether the pane is currently being displayed or not. (See <a href="ch06.html#id69664">&#8220;Splitting Primary Windows Into Panes&#8221; in Chapter 6</a> for information on multiple-pane windows. You can find more information on menu checkboxes in <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus.&#8221;</a>) </p>
+<p>Other entries in the View menu can adjust the scale of the view (zoom in and zoom out), display support elements (such as rulers and grid lines), and hide or display certain parts of the data. Use &#8220;V&#8221; as the mnemonic for the View menu. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5484678"></a><a name="id70020"></a>Tools menu</h4></div></div>
+<p>The Tools menu contains application-specific entries that allow the user to open support windows for manipulating the data in the parent primary window. For example, a desktop publishing package might have separate support windows that provide special controls for editing graphics, tables, and mathematical equations; access to these support windows would be placed in the Tools menu. See <a name="idch08.menus49"></a><a href="ch06.html#id30905">&#8220;Support Windows&#8221; in Chapter 6</a> for a discussion of support windows. Use &#8220;T&#8221; as the mnemonic for the Tools menu.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5484715"></a><a name="id61709"></a>Options menu</h4></div></div>
+<p>The Options menu contains application-specific entries that allow the user to customize the application. For example, a multi-window application might have entries in the Options menu to allow the user to set preferences such as which windows should come up by default when the application is started, and whether window sizes and positions should be saved between sessions. Use &#8220;O&#8221; as the mnemonic for the Options menu.<a name="idch08.menus50"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5484747"></a><a name="id26412"></a>Help menu</h4></div></div>
+<p>The Help menu contains entries for actions that provide several different kinds of help information to the user. All application windows that have a menu bar should contain a Help menu. Its mnemonic is &#8220;H.&#8221; The standard entries for the Help menu are discussed in <a name="idch08.menus51"></a><a href="ch04.html#id31568">&#8220;Providing Help through a Help Menu&#8221; in Chapter 4</a>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5484814"></a><a name="id67010"></a>What to Put in the Pull-Down Menus</h3></div></div>
+<p>Make sure your application's pull-down menus include the standard menu entries that are relevant to your application, plus the application-specific entries you need to represent your application's core functionality. The previous section, <a name="idch08.menus52"></a><a href="ch08.html#id12088">&#8220;Standard Menus,&#8221;</a> describes when and how to use the standard entries; this section presents guidelines for application-specific modifications and additions to the standard menus. </p>
+<p>As you decide which standard entries to include in your application, consider each of these entries on a case-by-case basis. For example, you almost certainly need an &#8220;Exit&#8221; entry, but it's possible that none of the other standard File menu entries make sense for your application, including the &#8220;File&#8221; menu title itself. </p>
+<p>Users often learn the functionality of a new application by scanning the menus to see what actions are available and by browsing the online help. Also, when users want to perform some action, they usually look first for that action in the pull-down menus. Thus, make all simple, frequent actions accessible from the pull-down menus. <a name="idch08.menus53"></a></p>
+<p>Be sure to include actions for performing basic operations (such as &#8220;Cut,&#8221; &#8220;Paste,&#8221; or &#8220;Save&#8221;), for setting the value of an attribute (for example, make selected text bold, or turn grid lines on or off), for online help, and for &#8220;Undo&#8221; (particularly if users can perform actions that destroy or significantly change their data). If this important functionality is hidden in a dialog, users won't easily discover it. (See <a href="ch10.html#id30192">Chapter 10, &#8220;Dialogs&#8221;</a> for details on when to use dialogs.) Also, don't include more than 10-12 entries in a menu or users will have trouble scanning it; make sure that all of your entries fit on the screen at one time because Motif doesn't support scrolling menus.</p>
+<p>Actions that are accomplished using buttons in primary windows should be repeated in the pull-down menus because they're probably the most frequently accessed actions. Including them in the menus gives users one place to look for all actions and allows you to assign keyboard accelerators and mnemonics that are clearly shown in the menu entries. <a name="idch08.menus54"></a></p>
+<p>Provide users with the option of using the keyboard for frequently used actions rather than restricting them to pointing-and-clicking on buttons. In addition, all simple actions should have an associated menu command even if there's a direct manipulation method or mouse double-click shortcut available for accomplishing the task. Providing menu commands avoids hidden functionality, and helps those users who have difficulty performing double-clicks. </p>
+<p>If you think that your users need constant access to a group of actions, make these actions available in your application's support window. As a second choice, you can use a tear-off menu as described in the <a name="idch08.menus55"></a><a name="idch08.menus56"></a><i>OSF/Motif Style Guide</i>, section 6.2.3. Support windows are designed to include groups of controls that the user might want to use continuously. Support windows allow for a more flexible layout of controls than tear-off menus do, and support windows can contain all kinds of components, such as labels and text input fields, not just push buttons. (See <a href="ch06.html#id30905">&#8220;Support Windows&#8221; in Chapter 6</a> for information on designing support windows.) Make sure that users can access such support windows as well as co-primary windows from the menu bar of their parent window. Make sure that these windows have an appropriate titlebar. </p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5484990"></a><a name="id90029"></a>Naming Menus in the Menu Bar</h4></div></div>
+<p>Use one-word (capitalized) titles in all menus in the menu bar since users may interpret a second word as a separate menu title. Use entire words for menu titles rather than abbreviations. Don't use bitmaps as menu titles. Use the standard titles for menus (for example, File and Edit) if they're applicable to your application, but don't use a standard title if you're changing the standard definition. (See <a name="idch08.menus57"></a><a href="ch08.html#id12088">&#8220;Standard Menus&#8221;</a> for standard menu titles and their definitions.) </p>
+<p>The leftmost menu contains actions that operate on a logical unit of data for the application; it's generally titled &#8220;File&#8221; because most applications read and write data files. However, if your application doesn't manipulate data files, the leftmost menu should reflect the unit of data that the user expects to operate on. For example, the Search tool's leftmost menu is called Page because the application doesn't manipulate data files, but it does offer several different pages that define search categories. </p>
+<p>If your application does read and write data files but the word &#8220;File&#8221; might be confusing to users, choose a more appropriate title for the leftmost menu. For example, in MediaMail, a group of documents (mail messages) are stored in a single file referred to as a mail folder. The leftmost menu in the main window is named &#8220;Folder&#8221; to make it clear that it contains actions that apply to the entire folder of messages rather than to individual messages. If the menu were named &#8220;File,&#8221; it might not be clear whether the &#8220;Open&#8221; entry opened a message or a mail folder. Similarly, you can change the names of other standard menus to make them more meaningful. The second menu in the main window of MediaMail is named &#8220;Message&#8221; because all operations in that menu are performed on the selected messages. This menu could have been called the Selected menu, but &#8220;Message&#8221; makes it clear what the menu entries act on.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5485093"></a><a name="id87916"></a>Naming Menu Entries in the Pull-Down Menus</h4></div></div>
+<p>As with menu names in the menu bar, use the standard names for menu entries within pull-down menus if they're applicable to your application; don't use a standard name if you're changing the standard definition. (See <a name="idch08.menus58"></a><a href="ch08.html#id12088">&#8220;Standard Menus.&#8221;</a>) Menu entries should be capitalized using the same rules for capitalizing book titles: capitalize the first word and other non-articles, but don't capitalize articles unless they're the first word. Generally, a menu entry should be one of the following:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>A verb&#8212;such as &#8220;Cut,&#8221; &#8220;Copy,&#8221; or &#8220;Delete.&#8221; </p>
+</li>
+<li><p>A value for a parameter, when the action is to set the parameter to that specific value. For instance, IRIS Showcase has a &#8220;Grids&#8221; cascading menu with entries corresponding to grid sizes such as &#8220;1/8 inch&#8221; and &#8220;1/4 inch.&#8221;</p>
+</li>
+<li><p>An attribute name, when the action is to assign some entity that attribute&#8212;such as whether shapes are drawn filled or unfilled.</p>
+</li>
+<li><p>A window name, if the menu entry brings up a co-primary, support, or dialog window. For example, a Directory View window has a menu entry for setting permissions. This entry brings up a dialog named &#8220;Permissions,&#8221; so the menu entry is also named &#8220;Permissions,&#8221; rather than &#8220;Set Permissions.&#8221;</p>
+</li>
+<li><p>The name of a cascading menu (see <a href="ch08.html#id53348">&#8220;Using Cascading Menus&#8221;</a> later in this chapter).</p>
+</li>
+</ul></div><p>If none of these categories applies, choose a one- or two-word phrase that indicates clearly what action will be taken. Include the name of the object that will be acted on if it's needed for clarity. For example, &#8220;New,&#8221; generally indicates that a new data file will be created. If your application doesn't create data files, the menu entry for creating a new entity should be &#8220;New <i>object</i>&#8221; such as &#8220;New Folder&#8221; (Directory View windows) or &#8220;New Page&#8221; (Icon Catalog). Don't use abbreviations in menu entries.</p>
+<p>You can use graphic labels for menus entries, but keep in mind that graphic labels are often unclear. They work best when used along with a text label, and typically there's not enough room for both graphic and text labels in a menu entry. For those cases where graphics are better descriptions than text (for example, when showing bitmaps or textures), you should probably include these options in a tool palette either as individual buttons or as entries in an option menu. See <a href="ch09.html#id18668">&#8220;Pushbuttons&#8221;</a> and <a href="ch09.html#id68004">&#8220;Option Buttons&#8221; in Chapter 9</a> for more information about these alternatives.</p>
+<p>If the entry is something that toggles its state, use one of the following alternatives: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Toggle the menu entry name to indicate the action that will be taken if the user selects this entry. For example, a menu entry &#8220;Show Grid&#8221; indicates that the grid isn't currently shown and that choosing this item will display it. If the user chooses this item, the grid is displayed and the entry should toggle to &#8220;Hide Grid.&#8221;<a name="idch08.menus59"></a></p>
+</li>
+<li><p>Choose a menu entry name that clearly indicates what action will be taken, place a checkbox indicator next to the menu entry, and use the checkbox to indicate whether or not the action has been taken. For example, the menu entry &#8220;Italics&#8221; with a checkmark next to it indicates that the current font is an Italic one; the same entry with no checkmark indicates that the current font isn't Italic. (For more details on the use of checkboxes in menus, see <a name="idch08.menus60"></a><a name="idch08.menus61"></a><a name="idch08.menus62"></a><a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus&#8221;</a> later in this chapter.) </p>
+</li>
+<li><p>If the entry belongs to a group of related entries, all of which toggle their states, place checkbox indicators next to each of them. The entry names should be nouns or attributes that clearly imply their actions (and these names should remain constant rather than toggling). And separate the entire group from other menu items by separator lines. (See <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus.&#8221;</a>)</p>
+</li>
+</ul></div><p>A menu entry should be followed by an ellipsis if it brings up a dialog for the purpose of requesting more information from the user before performing the action. The ellipsis does <a name="idch08.menus63"></a><a name="idch08.menus64"></a><i>not</i> simply mean that the menu entry displays a dialog. For example, the &#8220;Save As...&#8221; menu entry brings up a dialog that asks the user to enter additional necessary information before the action can be performed. &#8220;Help,&#8221; on the other hand, brings up a dialog that contains the information that the user requested.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5485487"></a>Ordering Menus and Menu Entries in the Pull-Down Menus</h4></div></div>
+<p>Use the order described in <a name="idch08.menus65"></a><a name="idch08.menus66"></a><a href="ch08.html#id12088">&#8220;Standard Menus&#8221;</a> for standard menus in the menu bar and their entries. If you need to create additional menus for your application, place them between the View and Tools menus. If you need to change the name of one of the standard menus (as discussed earlier in <a href="ch08.html#id90029">&#8220;Naming Menus in the Menu Bar&#8221;</a>), leave this menu in the same order as if it had the standard name. For example, in MediaMail the File menu is renamed Folder and the Selected menu is renamed Message, but Folder is still the leftmost menu and Message is still next to the Folder menu.</p>
+<p>Within menus, organize entries into logical groups. If one of your application-specific menu entries is logically related to one of the standard menu entries, place it near that standard entry. If this isn't a good fit, create new menus that group the entries according to function. For example, the Directory View window has an Arrange menu that contains different options for arranging the file icons displayed in the window. Within the logical groups, first place entries in the order in which they need to be used. For example, in the Edit menu, &#8220;Copy&#8221; is before &#8220;Paste&#8221; because the user must do a &#8220;Copy&#8221; operation before doing a &#8220;Paste.&#8221; Secondarily, order them by frequency of use, placing the more frequently used entries closer to the top of the menu. In any case, be sure that when you use &#8220;Close&#8221; and &#8220;Exit,&#8221; they're always at the end of the leftmost menu, whether or not this menu is named File.</p>
+<p>When creating logical groups of entries, use separators to define the groups, but avoid overusing separators because they can make it difficult to scan the entries. Two situations where separators are especially useful are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Groups where only one of the entries can be selected at any one time</p>
+</li>
+<li><p>Groups whose entries represent multiple attributes that can be applied to a single object </p>
+</li>
+</ul></div><p>As described later in <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus,&#8221;</a> also use radio buttons in the first case and checkboxes in the second.</p>
+<p>If the menu contains entries that can be determined only when the user launches the application (for example, a menu listing plug-in modules), alphabetize the entries. If this alphabetized group appears in a menu that contains other entries, place the group at the end of a menu and use a separator between it and the preceding entries.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5485633"></a><a name="id53348"></a>Using Cascading Menus</h4></div></div>
+<p>As you're organizing your menus, you can use cascading menus, but don't use more than a single level. If you think you need more than one level of cascading menus, try adding a new menu instead, especially if you have numerous items in the cascading menus. If you have only a few items, consider creating groups of items by using separators, rather than putting them in separate cascading menus. <a name="idch08.menus67"></a></p>
+<p>In general, try to limit your use of cascading menus since users tend to scan only the top-level menus when they're looking for a specific function or trying to learn the functionality of the application. When naming a cascading menu, use a name that suggests what it contains so that users know what functions they're likely to find. For example, in an early version of IRIS Showcase, the grid was under a cascading menu named &#8220;Editing Options&#8221; in the Edit menu, and users often weren't able to find it. Now, the different grid sizes are under a cascading menu named &#8220;Grids&#8221; in the View menu.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5485679"></a><a name="id67896"></a>Using Radio Buttons and Checkboxes in Pull-Down Menus</h4></div></div>
+<p>If a user can select only one of a group of menu items at any one time, provide a radio button next to each item in the group, and allow only one radio button to be active at any given time. For example, the radio buttons in  allow the user to choose exactly one type of tea at a time, because if you ordered two cups of tea at a time the second one would get cold before you could drink it. Use separator lines to separate a set of radio buttons from other entries in the menu.<a name="idch08.menus68"></a><a name="idch08.menus69"></a><a name="idch08.menus70"></a></p>
+<p><div class="figure"><p><a name="id5485714"></a><b>Figure 8-11. <a name="id86773"></a>Radio buttons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-12.gif" alt="Figure 8-11 Radio buttons" height="102" width="145"></td></tr></table></div></div><br>
+</p>
+<p>If a user can select several of a group of related menu items at any one time, provide a checkbox next to each item in the group, and show the active entries with checkmarks. These items typically represent attributes of an object, more than one of which can be applied to the object. For example, the checkboxes in  allow the user to select milk or sugar, or both, or neither. Use separator lines to separate a set of checkboxes from other entries in the menu. </p>
+<p><div class="figure"><p><a name="id5485831"></a><b>Figure 8-12. <a name="id13601"></a>Checkboxes</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-13.gif" alt="Figure 8-12 Checkboxes" height="69" width="76"></td></tr></table></div></div><br>
+</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5485877"></a><a name="id62421"></a>Choosing Mnemonics</h3></div></div>
+<p>You need to choose single-character mnemonics for any menus or menu entries you create. Each of the menus in the menu bar should have a unique mnemonic, as should each of the entries within any specific menu. Use the standard mnemonics for standard menu titles and entries, as described earlier in <a name="idch08.menus71"></a><a name="idch08.menus72"></a><a href="ch08.html#id12088">&#8220;Standard Menus.&#8221;</a> You can use a standard mnemonic for a different entry if you're not using that standard entry.</p>
+<p>If possible, use the first character in the label for the mnemonic. If two menu titles&#8212;or two entries in the same menu&#8212;have the same first character, use the first character for the mnemonic of the menu title or entry that will be used most frequently. For example, &#8220;Save&#8221; is used more frequently than &#8220;Save As...&#8221;, so &#8220;Save&#8221; has the mnemonic &#8220;S&#8221; and &#8220;Save As...&#8221; has the mnemonic &#8220;A.&#8221; </p>
+<p>When the first character can't be used as the mnemonic, try to pick a consonant in the name that's strongly associated with the word (such as &#8220;x&#8221; for Maximize in the Window menu). If no such consonant exists, choose the first available vowel (such as &#8220;a&#8221; for Raise in the Window menu). Note that the mnemonic chosen can be an uppercase or lowercase character in the label, but it must be case insensitive for activation (that is, users don't need to hold down the &lt;Shift&gt; key).</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5485955"></a><a name="id75819"></a>Choosing Keyboard Accelerators</h3></div></div>
+<p>Use the keyboard accelerators for the standard menu entries as described in <a name="idch08.menus73"></a><a name="idch08.menus74"></a><a href="ch08.html#id12088">&#8220;Standard Menus&#8221;</a>; don't use any of the standard accelerators for application-specific entries, even if you're not using those standard entries. For menu entries you create, provide keyboard accelerators only for the most commonly used actions, not for every menu entry in every pull-down menu. </p>
+<p>In most cases, use the &lt;Ctrl&gt; key and a character for a keyboard accelerator. To avoid conflicts with mnemonics, don't use the &lt;Alt&gt; key rather than &lt;Ctrl&gt;. To make accelerators easier to remember, choose a character that's associated with the menu entry. For example, the standard keyboard accelerators include &lt;Ctrl-c&gt; for &#8220;Copy&#8221; and &lt;Ctrl-s&gt; for &#8220;Save,&#8221; and the Directory View window uses &lt;Ctrl-i&gt; for &#8220;Get Info.&#8221; <a href="ch08.html#id64434">Table 8-3</a> lists the standard keyboard accelerators. </p>
+<div class="table"><p><a name="id5486023"></a><b>Table 8-3. <a name="id64434"></a>  Keyboard Accelerators</b></p>
+<table summary="  Keyboard Accelerators" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Menu Entry and Mnemonic</p>
+</th><th scope="col" valign="top"><p>Keyboard Accelerator</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>New</p>
+</td><td valign="top"><p>Ctrl+N</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Open</p>
+</td><td valign="top"><p>Ctrl+O</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Save</p>
+</td><td valign="top"><p>Ctrl+S</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Print</p>
+</td><td valign="top"><p>Ctrl+P</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Get Info</p>
+</td><td valign="top"><p>Ctrl+I</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Close</p>
+</td><td valign="top"><p>Ctrl+W</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Exit</p>
+</td><td valign="top"><p>Ctrl+Q</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Undo [action]</p>
+</td><td valign="top"><p>Ctrl+Z</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Redo [action]</p>
+</td><td valign="top"><p>Shift+Ctrl+Z</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Cut</p>
+</td><td valign="top"><p>Ctrl+X</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Copy</p>
+</td><td valign="top"><p>Ctrl+C</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Paste</p>
+</td><td valign="top"><p>Ctrl+V</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Select All</p>
+</td><td valign="top"><p>Ctrl+A</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Deselect All</p>
+</td><td valign="top"><p>Shift+Ctrl+A</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Promote</p>
+</td><td valign="top"><p>Alt+Insert</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Click for Help</p>
+</td><td valign="top"><p>Shift+F1</p>
+</td></tr></tbody></table></div><p>If a pair of menu entries that both require keyboard accelerators, and one entry reverses the results of the other, their keyboard accelerators should be related. Choose a character that's associated with the more frequently used entry (so that its accelerator is &lt;Ctrl-<i>character</i>&gt;), and add &lt;Shift&gt; to create the other accelerator (so that its accelerator is &lt;Shift-Ctrl-<i>character</i>&gt;, where <i>character</i> is the same for both accelerators). For example, the keyboard accelerator for Undo is &lt;Ctrl-z&gt;, and the keyboard accelerator for Redo is &lt;Shift-Ctrl-z&gt;. In general, avoid using multiple modifier keys such as &lt;Shift-Ctrl-<i>character&gt;</i>, except for this situation.</p>
+<p>Note that any keyboard accelerator that involves a lowercase character should be shown in the menu as &#8220;Ctrl+<i>uppercase_character</i>&#8221; (for example, &lt;Ctrl-s&gt; should be displayed as &#8220;Ctrl+S&#8221;). This is because uppercase characters are easier to read in the menus. If the accelerator involves an uppercase character, display it as &#8220;Shift+Ctrl+<i>uppercase_character</i>&#8221; (for example, &lt;Ctrl-S&gt; should be displayed as &#8220;Shift+Ctrl+S&#8221;).</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5486495"></a><a name="id19592"></a>Disabling Menu Entries</h3></div></div>
+<p>As discussed in <a name="idch08.menus75"></a><a href="ch08.html#id12088">&#8220;Standard Menus,&#8221;</a> disable menu entries that aren't currently available (they become grayed out). See the next section, <a href="ch08.html#id23392">&#8220;Dynamic Menu Entries,&#8221;</a> for discussion of the rare cases in which menu entries can be removed from the menu when they're unavailable. </p>
+<p>In general, disabling entries when selecting them would give the user an error message. For example, if a menu entry works on a selection (such as &#8220;Cut&#8221; and &#8220;Copy&#8221;), disable it if there's no current selection. If selecting the menu entry would result in no action at all (not even an error message), do not disable the menu entry. As an example, choosing &#8220;Save&#8221; from the File menu saves the current document; if the document hasn't been edited, selecting &#8220;Save&#8221; has no real effect, but there's no need to display an error message, so never disable this menu entry.</p>
+<p>Never disable menu entries that launch modeless dialogs. If the dialog isn't applicable when it's launched, disable the OK and Apply buttons on the dialog rather than disabling the menu entry that launches the dialog. Suppose the user launches the dialog and the current context of the application is such that the dialog isn't applicable. Because the dialog is modeless, the user should be able to change the state of the application after the dialog has been launched to put the application in a state where the dialog is now applicable. In contrast, menu entries that launch modal dialogs should be disabled if the dialog isn't currently applicable because the user must dismiss the modal dialog before changing the state of the application. So, if the modal dialog isn't applicable when it's launched, the user has no way to change the state of the application to get it in a state where the dialog would be applicable. See <a href="ch10.html#id54825">&#8220;Dialog Modes&#8221; in Chapter 10</a> for a discussion of modal and modeless dialogs.</p>
+<p>Don't include always-disabled menu entries whose action isn't available in the current version of your application, so that users don't waste time looking for a way to enable the entry. For example, if your application doesn't provide a tutorial, don't include a disabled menu entry for &#8220;Tutorial&#8221; in the Help menu. Instead, just leave this entry out of the Help menu. If a feature requires certain hardware configurations, don't disable its menu entry; instead, have it display an information dialog stating why the feature isn't available.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5486657"></a><a name="id23392"></a>Dynamic Menu Entries</h3></div></div>
+<p>Dynamic menu entries are strongly discouraged, especially when less than four such entries exist. If you have only a few entries that aren't always available, put them in the menu and disable them when they aren't available. You can use dynamic menu entries in those rare cases when almost everything in a menu can change. For example, the <a name="idch08.menus76"></a><tt>grelnotes</tt> program has a Chapter menu that has entries for each chapter in the current set of release notes. When the user loads a new set of release notes, the entries in the Chapter menu are changed to reflect the new chapter titles. Unless a more obvious ordering is suggested by the content of the entries (for example, the order of chapters), alphabetize the entries in a dynamic menu.</p>
+<p>Dynamic menu entries are discouraged because they make it hard for users to learn what entries are in each of the menus since they're visible only when the application is in a specific state. Users are likely to assume that certain functions aren't available when they don't see menu entries for them as they're scanning your application's menus for the first time. Users might not realize that they must first get the application in a particular state before they can even see the action. Even when users work with your application for a while, they may not look for certain actions in the menus because they think they've already seen the full contents of the menus, which never included the action that they now want. Also, users become accustomed to the spatial positions of items in menus&#8212;for example, &#8220;Cut&#8221; is always the second item in the Edit menu&#8212;and will be frustrated if these positions change.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5486729"></a>Pull-Down Menu Guidelines</h3></div></div>
+<p><span class="bold"><b>In general, when designing pull-down menus in a menu bar . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Be sure that users can access most of your application's functionality from the menu entries. At a minimum, make sure that the core functionality can be accessed from the menus.</p>
+</li>
+<li><p>Don't include more than a 10-12 entries in a menu and make sure that all of your entries can fit on the screen at one time.</p>
+</li>
+<li><p>Provide mnemonics for all menus and menu entries. In most cases, the mnemonic should be either the first character of the name or, if there's a conflict, a character that's strongly associated with and included in the name. Use standard mnemonics for standard menus and entries.</p>
+</li>
+<li><p>Limit the use of tear-off menus. Instead, use support windows for groups of controls that users might want to use continuously.</p>
+</li>
+</ul></div><p><span class="bold"><b>When selecting specific menus and entries for an application window . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard menus and menu entries as the basis for the overall design of the menu structure. Include all standard menus and entries that are applicable to your application.</p>
+</li>
+<li><p>Include a Help menu as the rightmost menu.</p>
+</li>
+<li><p>Include an &#8220;Undo&#8221; menu entry, particularly if users can perform actions that destroy or significantly change their dataÞ.</p>
+</li>
+<li><p>Include an &#8220;Exit&#8221; menu entry for all main windows and for co-primary windows if users will want to completely exit the application from that co-primary window.</p>
+</li>
+<li><p>Include a &#8220;Close&#8221; menu entry for all co-primary windows and support windows that have menu bars. Don't provide a &#8220;Close&#8221; entry for main windows.</p>
+</li>
+<li><p>Include menu entries that repeat the functionality of any pushbuttons on the primary window.</p>
+</li>
+<li><p>Include menu entries for actions that are accomplished using a direct manipulation method or a mouse shortcut such as double-clicking.</p>
+</li>
+<li><p>Include menu entries for accessing all primary and support windows that are children of the current window.</p>
+</li>
+<li><p>Don't include entries for functions that aren't available for the current version of your application.</p>
+</li>
+</ul></div><p><span class="bold"><b>When naming menus . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use entire one-word titles for menus rather than abbreviations.</p>
+</li>
+<li><p>Use the standard titles for menus (for example, File and Edit) if they're applicable, but change the standard title if this will make the function more clear. </p>
+</li>
+<li><p>Don't use a standard menu title if you're changing the standard definition.</p>
+</li>
+</ul></div><p><span class="bold"><b>When naming menu entries . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard names for standard menu entries, but don't use a standard name for a menu entry that doesn't support the standard behavior.</p>
+</li>
+<li><p>Each entry name should be an action word, the value of a parameter, an attribute name, the name of a cascading menu, or the name of a co-primary, support, or dialog window. Don't use more than two words (except for task-oriented Help menu entries), and avoid using graphic labels for menus entries unless the graphics make the functionality more clear.</p>
+</li>
+<li><p>Choose descriptive names that help users learn the functionality of the application. For cascading menus, choose a name that clearly implies the contents of the menu.</p>
+</li>
+<li><p>Add a word if necessary to be sure the entry clearly indicates what entity will be acted upon. For example, you might use &#8220;New <i>object</i>&#8221; such as &#8220;New Folder&#8221; or &#8220;New Page&#8221; rather than just &#8220;New.&#8221;</p>
+</li>
+<li><p>If a menu entry toggles its state, use a checkbox and leave the menu entry name the same for the different states (&#8220;Italics&#8221;). If this won't be clear, toggle the name so that it indicates what action will be taken if the menu entry is selected (&#8220;Show Grid,&#8221; &#8220;Hide Grid&#8221;).</p>
+</li>
+<li><p>Capitalize the menu entry using the same rules as capitalizing book titles.</p>
+</li>
+<li><p>Use entire words rather than abbreviations. </p>
+</li>
+<li><p>Display an ellipsis (...) after menu entries that bring up a dialog that requests more information from the user. Don't use ellipses if the dialog simply brings up information that the user requested (for example, a Help dialog).</p>
+</li>
+</ul></div><p><span class="bold"><b>When ordering menus and menu entries . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Place the standard menus in the standard order (File, Selected, Edit, View, Tools, Options, Help), even if you have renamed any of these menus. Place any new menus between the View and Tools menus.</p>
+</li>
+<li><p>Place standard menu entries in the standard order. &#8220;Close&#8221; and &#8220;Exit&#8221; are always at the end of the leftmost menu whether or not this menu is named File.</p>
+</li>
+<li><p>Group menu entries logically. If a new menu entry is related to one of the standard menu entries, place it near that standard menu entry.</p>
+</li>
+<li><p>Place items in the menu first according to the order they will be used, and second according to their frequency of use (with more frequently used items closer to the top of the menu).</p>
+</li>
+<li><p>Alphabetize entries that can be determined only when the user launches the application. If this alphabetized group appears in a menu that contains other entries, place the group at the end of a menu and use a separator between it and the preceding entries.</p>
+</li>
+<li><p>Use radio buttons for mutually exclusive menu entries, and checkboxes for a group of related menu entries, any number of which can be selected at any one time.</p>
+</li>
+<li><p>Use separators when necessary to group items&#8212;for example, to set off a group of related entries that use radio buttons or checkboxes.</p>
+</li>
+<li><p>Limit the use of cascading menus. Never use more than one level of cascading menus.</p>
+</li>
+</ul></div><p><span class="bold"><b>When selecting keyboard accelerators for menu entries . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use standard keyboard accelerators for standard menu entries; don't use any of the standard accelerators for your own entries, even if you're not using those standard entries. </p>
+</li>
+<li><p>Provide keyboard accelerators for the most frequently used menu entries. Don't provide accelerators for all menu entries.</p>
+</li>
+<li><p>Use the key combination &lt;Ctrl&gt;<i>character</i>. Don't use the key combination &lt;Alt&gt;<i>character</i> because this conflicts with mnemonics.</p>
+</li>
+<li><p>For pairs of menu entries where one entry reverses the results of the other entry (&#8220;Undo&#8221; and &#8220;Redo&#8221;), use &lt;Ctrl&gt;<i>character</i> for the most frequently used entry and &lt;Shift&gt;&lt;Ctrl&gt;<i>character</i> for the other entry where <i>character</i> is the same for both accelerators.</p>
+</li>
+<li><p>Display all characters in keyboard accelerators as uppercase (for example, display &lt;Ctrl&gt;s as &#8220;Ctrl+S&#8221;). For keyboard accelerators that involve uppercase characters, show the &lt;Shift&gt; key as part of the keyboard accelerator (for example, display &lt;Ctrl&gt;S as &#8220;Shift+Ctrl+S&#8221;).</p>
+</li>
+</ul></div><p><span class="bold"><b>When deciding when to disable menu entries . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If selecting the menu entry in the current context would give the user an error message, show the menu entry as disabled (dimmed). </p>
+</li>
+<li><p>Avoid using dynamic entries. Rather than removing an entry when it's temporarily unavailable, include it and disable it as appropriate.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5487265"></a><a name="id62260"></a>Popup Menus</h2></div></div>
+<p>Use popup menus to provide a quick way for users to access the most commonly used functions in the associated work are. This section covers:<a name="idch08.menus77"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#id21804">&#8220;What to Put in Popup Menus&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#id48056">&#8220;Disabling Popup Menu Entries&#8221;</a> </p>
+</li>
+</ul></div><p>For example, you might provide a popup menu containing &#8220;Cut,&#8221; &#8220;Copy,&#8221; &#8220;Paste,&#8221; and &#8220;Delete&#8221; in a text application. Never allow popup menus to be the sole access to functions because these menus are hidden. Instead, popup entries typically represent the most commonly used actions from the application window's pull-down menus. (See <a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221;</a> for a description of how users interact with popup menus.)</p>
+<p>At most, provide a different popup menu for each main area of your application's window (that is, for each main field or pane). Note that this differs from the <i>OSF/Motif Style Guide</i>, which allows the availability and content of popup menus to vary depending on the element under the pointer or the selection state of the element. </p>
+<p>Provide one set of entries in the popup menu, and enable and disable each of them as appropriate, instead of following the OSF/Motif model. With one set of entries, users will become familiar with the popup entries more quickly and won't be confused when entries are sometimes unavailable (see <a href="ch08.html#id23392">&#8220;Dynamic Menu Entries&#8221;</a> for discussion of how dynamic entries can be confusing to users). </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5487401"></a><a name="id21804"></a>What to Put in Popup Menus</h3></div></div>
+<p>For each popup menu, include a title followed by a separator and the individual menu entries (see <a name="idch08.menus78"></a><a href="ch08.html#id25877">Figure 8-13</a>). The title should be the name of the application or, if the application has more than one popup menu, it should describe the purpose of the menu. Since the entries typically repeat entries found in the pull-down menus, display titles similarly: in the same order, and with the same or very similar names as in the pull-down menu. Include ellipses and keyboard accelerators if they're included in the corresponding entry in the pull-down menu, but don't show mnemonics in popup menus.</p>
+<p><div class="figure"><p><a name="id5487440"></a><b>Figure 8-13. <a name="id25877"></a>Popup Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch08.menus-4.gif" alt="Figure 8-13 Popup Menu" height="121" width="140"></td></tr></table></div></div><br>
+</p>
+<p>Popup menus generally don't have entries that require radio buttons or checkboxes since these are rarely common enough actions to be included in a popup menu. If you do need to include these kinds of entries in a popup menu, separate them from the rest of the entries with separators and include the radio buttons or checkboxes. See <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus&#8221;</a> for more information. Popup menus shouldn't contain cascading menus, nor should they be tear-off menus.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5487488"></a><a name="id48056"></a>Disabling Popup Menu Entries</h3></div></div>
+<p>As with pull-down menu entries, if one of the entries in a popup menu is unavailable for selection in the current context, disable that menu entry. Don't, however, remove it from the menu.<a name="idch08.menus79"></a></p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5487530"></a>Popup Menu Guidelines</h3></div></div>
+<p><span class="bold"><b>When choosing when a popup menu should appear . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>At most, provide a different popup menu for each main area (that is main field or main pane) of the window. Don't change the availability of a popup menu based on what graphical element the pointer is over or based on the selection state of any of the graphical elements.</p>
+</li>
+</ul></div><p><span class="bold"><b>When deciding what to include in a popup menu . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Include entries for the most commonly used functions from the pull-down menus, and use the same names in the same order as they're displayed in the pull-down menus.</p>
+</li>
+<li><p>Avoid entries that require checkboxes or radio buttons. These are typically not the most commonly used menu functions.</p>
+</li>
+<li><p>Don't make menu entries the sole access to these functions.</p>
+</li>
+<li><p>Don't change the content of the menu based on what graphical element the pointer is over, or based on the selection state or contents of this element. Instead, put all entries in the popup menu for the main area of the window, then enable and disable entries as appropriate. </p>
+</li>
+<li><p>Don't include cascading menus and don't use tear-off menus.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying the contents of the popup menu . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Include a title that's either the name of the application, or if the application has more than one popup menu, that describes the purpose of the menu. </p>
+</li>
+<li><p>Use only one separator, which goes between the title and the individual menu entries.</p>
+</li>
+<li><p>Show ellipses and keyboard accelerators if these are shown in the corresponding pull-down menu entry, but don't show mnemonics.</p>
+</li>
+</ul></div><p>If selecting the menu entry in the current context would give the user an error message, show the menu entry as disabled (dimmed). Don't remove the menu entry when it's temporarily unavailable. <a name="idch08.menus80"></a><span class="bold"><b></b></span></p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch09.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 7. Focus, Selection, and Drag and Drop </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 9. Controls </td></tr></table></div></body></html>

@@ -1,0 +1,1 @@
+<BOOK NAME="IIDsktp_IG" ALIAS="IRIX Interactive Desktop Integration Guide" SGITYPE="sgi_html" SGIVERSION="007-2006-130" SGIBKADDR="techpubs@sgi.com" SGIGROUP="HTML">

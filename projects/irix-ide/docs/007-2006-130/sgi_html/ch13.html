@@ -1,0 +1,681 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 13. File Typing Rules</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt02.html" title="Part II. Creating Desktop Icons"><link rel="previous" href="ch12.html" title="Chapter 12. Using IconSmith"><link rel="next" href="ch14.html" title="Chapter 14. Printing From the Desktop"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 13. File Typing Rules</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch12.html">Prev</a> </td><th width="60%" align="center">Part II. Creating Desktop Icons</th><td width="20%" align="right"> <a accesskey="n" href="ch14.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE36003-PARENT"></a>Chapter 13. File Typing Rules</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-0"></a>
+<a class="indexterm" name="IT13.FTRs-1"></a>
+<a class="indexterm" name="IT13.FTRs-2"></a>
+The Desktop uses file typing rules (FTRs) to evaluate all files that are presented within the Desktop. This chapter describes each of the file typing rules in detail, and offers suggestions for good file typing style and strategies. &#8220;Defining the Behavior of Icons With FTRs&#8221; in Chapter 2
+ in <i>IRIX Interactive User Interface Guidelines</i> describes the behaviors your icon should support.</p>
+<p>This chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch13.html#LE10520-PARENT" title="A Table of the FTRs With Descriptions">&#8220;A Table of the FTRs With Descriptions&#8221;</a> provides a reference table listing the FTRs along with brief descriptions.</p>
+</li>
+<li><p><a href="ch13.html#LE10863-PARENT" title="Naming File Types: The TYPE Rule">&#8220;Naming File Types: The TYPE Rule&#8221;</a> describes the TYPE rule, used to name a file typ. </p>
+</li>
+<li><p><a href="ch13.html#LE27184-PARENT" title="Categorizing File Types: The SUPERTYPE Rule">&#8220;Categorizing File Types: The SUPERTYPE Rule&#8221;</a> describes the SUPERTYPE rule, used to categorize file types.</p>
+</li>
+<li><p><a href="ch13.html#LE98067-PARENT" title="Matching File Types With Applications: The MATCH Rule">&#8220;Matching File Types With Applications: The MATCH Rule&#8221;</a> describes the MATCH rule, used to match the application with the corresponding file type.</p>
+</li>
+<li><p><a href="ch13.html#LE92689-PARENT" title="Matching Non-Plain Files: The SPECIALFILE Rule">&#8220;Matching Non-Plain Files: The SPECIALFILE Rule&#8221;</a> describes the SPECIALFILE rule, used to match non-plain files.</p>
+</li>
+<li><p><a href="ch13.html#LE15180-PARENT" title="Adding a Descriptive Phrase: The LEGEND Rule">&#8220;Adding a Descriptive Phrase: The LEGEND Rule&#8221;</a> describes the LEGEND rule, used to provide a brief phrase describing the application or data file.</p>
+</li>
+<li><p><a href="ch13.html#LE85210-PARENT" title="Setting FTR Variables: The SETVAR Rule">&#8220;Setting FTR Variables: The SETVAR Rule&#8221;</a> describes how to set variables that affect the way your icon behaves.</p>
+</li>
+<li><p><a href="ch13.html#LE33157-PARENT" title="Programming Open Behavior: The CMD OPEN Rule">&#8220;Programming Open Behavior: The CMD OPEN Rule&#8221;</a> describes the CMD OPEN rule, used to define what happens when users open the icon.</p>
+</li>
+<li><p><a href="ch13.html#LE33173-PARENT" title="Programming Alt-Open Behavior: The CMD ALTOPEN Rule">&#8220;Programming Alt-Open Behavior: The CMD ALTOPEN Rule&#8221;</a> describes the CMD ALTOPEN rule, used to define what happens when users double-click your icon while pressing the <b><tt>&lt;Alt&gt;</tt></b> key.</p>
+</li>
+<li><p><a href="ch13.html#LE91613-PARENT" title="Programming Drag and Drop Behavior: The CMD DROP and DROPIF Rules">&#8220;Programming Drag and Drop Behavior: The CMD DROP and DROPIF Rules&#8221;</a> describes the CMD DROP rule, used to define what happens when a user drags another icon and drops it on top of your application's icon.</p>
+</li>
+<li><p><a href="ch13.html#LE45038-PARENT" title="Mapping Names: The MAP Rule">&#8220;Mapping Names: The MAP Rule&#8221;</a> describes the MAP rule, used to specify a list of all mappings from the desktop name space. </p>
+</li>
+<li><p><a href="ch13.html#LE40547-PARENT" title="Programming Print Behavior: The CMD PRINT Rule">&#8220;Programming Print Behavior: The CMD PRINT Rule&#8221;</a> describes the CMD PRINT rule, used to tell the Desktop what to do when a user selects your icon, then selects &#8220;Print&#8221; from the Desktop popup menu.</p>
+</li>
+<li><p><a href="ch13.html#LE31739-PARENT" title="Adding Menu Items: The MENUCMD Rule">&#8220;Adding Menu Items: The MENUCMD Rule&#8221;</a> describes the MENUCMD rule, used to add menu items to the Desktop menu</p>
+</li>
+<li><p><a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a> describes how to tell the Desktop where to find the file(s) containing the picture(s) of the icon for a file type</p>
+</li>
+<li><p><a href="ch13.html#LE88324-PARENT" title="Creating a File Type: An Example">&#8220;Creating a File Type: An Example&#8221;</a> provides a detailed example of how to program an icon.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE10520-PARENT"></a>A Table of the FTRs With Descriptions</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-3"></a>
+<a href="ch13.html#id5231061" title="Table 13-1.  Rules That Appear in a Filetype Definition">Table 13-1</a> lists the rules that appear in a filetype definition along with brief descriptions.</p>
+<div class="table"><a name="id5231061"></a><p><a name="id5231061"></a><b>Table 13-1.  Rules That Appear in a Filetype Definition</b></p>
+<table summary=" Rules That Appear in a Filetype Definition" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Rules </p>
+</th><th scope="col" valign="top"><p>Function </p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>TYPE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT13.FTRs-4"></a>
+Declares a new type. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-5"></a>
+SUPERTYPE</p>
+</td><td valign="top"><p>Tells the Desktop to treat the file as a subset of another type under 
+certain circumstances.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-6"></a>
+MATCH</p>
+</td><td valign="top"><p>Lets the Desktop determine if a file is of the declared type.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-7"></a>
+SPECIALFILE</p>
+</td><td valign="top"><p>Tells the Desktop to use the file typing rule only on non-plain files.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-8"></a>
+LEGEND</p>
+</td><td valign="top"><p>Provides a text description of the file type.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-9"></a>
+SETVAR</p>
+</td><td valign="top"><p>Sets variables that affect the operation of your icon.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-10"></a>
+CMD OPEN</p>
+</td><td valign="top"><p>Defines a series of actions that occur when a user double-clicks the 
+mouse on an icon or selects &#8220;open&#8221; from the main menu.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-11"></a>
+CMD ALTOPEN</p>
+</td><td valign="top"><p>Defines a series of actions that occur when a user alt-double-clicks 
+the mouse on an icon.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-12"></a>
+CMD DROP</p>
+</td><td valign="top"><p>Defines a series of actions that occur when a user &#8220;drops&#8221; one icon 
+on top of another.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-13"></a>
+DROPIF</p>
+</td><td valign="top"><p>Defines a set of file types that the icon will allow to be dropped on it.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-14"></a>
+CMD PRINT</p>
+</td><td valign="top"><p>Defines a series of actions that occur when a user chooses &#8220;Print&#8221; 
+from the Desktop or Directory View menus.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-15"></a>
+MENUCMD</p>
+</td><td valign="top"><p>Defines menu entries that appear in the Desktop menu and the 
+Selected toolchest when an icon is selected.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-16"></a>
+ICON</p>
+</td><td valign="top"><p>Defines the appearance (geometry) of the file type's icon.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT13.FTRs-17"></a>
+MAP</p>
+</td><td valign="top"><p>Maps the Desktop file-type name with the ICCCM or MIME 
+target-type names. </p>
+</td></tr></tbody></table></div><p>All file types must begin with a TYPE rule. Aside from that, the rules can appear in any order; however, the most efficient order for parsing is to include the MATCH rule second and the ICON rule last.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE10863-PARENT"></a>Naming File Types: The TYPE Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-18"></a>
+<a class="indexterm" name="IT13.FTRs-19"></a>
+It is important that your file type have a unique name so that <a class="indexterm" name="IT13.FTRs-20"></a>
+<a class="indexterm" name="IT13.FTRs-21"></a>
+it doesn't collide with Silicon Graphics types or types added by other developers. A good way to generate a unique file type name is to base your file type name on your application name (which is presumably unique). Another method is to include your company's initials or stock symbol in the file type name. You can also use the<tt> grep</tt>(1) command to search through existing <span class="bold"><b>.ftr</b></span> files:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep </tt></b><i>name</i><b><tt> /usr/lib/filetype/*/*.ftr</tt></b> 
+</pre></td></tr></table><p>Substitute your proposed new type name for the words <i>name</i>. If <tt>grep</tt> doesn't find your name, then go ahead and use it.</p>
+<p>You name a file type by using the TYPE rule. You can define more than one file type in a single file, as long as each new file type begins with the TYPE rule. The TYPE rule always goes on the first line of the file type definition. </p>
+<p>Here is the syntax and description for the TYPE rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>TYPE <span class="bold"><b>type-name</b></span></p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p><i>type-name</i> is a one-word ASCII string. You can use a legal C language variable as a type name. Choose a name that is in some way descriptive of the file type it represents. All rules that follow a TYPE declaration apply to that type, until the next TYPE declaration is encountered in the FTR file. Each TYPE declaration must have a unique type name.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>TYPE GenericExecutable</tt></p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE27184-PARENT"></a>Categorizing File Types: The SUPERTYPE Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-22"></a>
+<a class="indexterm" name="IT13.FTRs-23"></a>
+Use the SUPERTYPE rule to tell other file types that your file type should be treated as a &#8220;subset&#8221; of a larger type such as executables or directories. For example, you can create an executable with a custom icon, then use the SUPERTYPE rule to tell other Desktop file types that the icon represents an executable.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>In general, file types don't &#8220;inherit&#8221; icons, rules, or any other behavior from SUPERTYPEs. Directories are a special case. The Desktop automatically handles the DROP, OPEN, and ALTOPEN behavior for all directories marked as &#8220;SUPERTYPE Directory.&#8221; You can't override the DROP, OPEN, or ALTOPEN behavior if you include &#8220;SUPERTYPE Directory.&#8221;
+</td></tr></table><hr noshade="noshade"></div><p>You can use any existing file type as a SUPERTYPE. <a href="ape.html" title="Appendix E. Predefined File Types">Appendix E, &#8220;Predefined File Types&#8221;</a>, lists some of the file types defined by Silicon Graphics. You can generate a complete list of file types installed on your system using the <tt>grep</tt>(1) command:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep TYPE /usr/lib/filetype/*/*.ftr</tt></b> 
+</pre></td></tr></table><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The list of file types generated by the above command is very long and unsorted.
+</td></tr></table><hr noshade="noshade"></div><p>Here is the syntax and description for the SUPERTYPE rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>SUPERTYPE <span class="bold"><b>type-name</b></span> [<i>type-name</i> &#8230; ]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p><span class="bold"><b>type-name</b></span> is the TYPE name of any valid file type. Use SUPERTYPE to identify the file type as a &#8220;subset&#8221; of one or more other file types. This information can be accessed by other file types by calling <tt>isSuper</tt>(1) from within their CMD rules (OPEN, ALTOPEN, and so on). A file type can have multiple SUPERTYPEs. (For example, the Script file type has both Ascii and SourceFile SUPERTYPES.) See the <tt>isSuper(1)</tt> reference page for more information.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>SUPERTYPE Executable</tt></p>
+
+</td></tr></table></div><p>A common use for SUPERTYPEs is to allow users to drag data files onto other application icons to open and manipulate them. For example, if your application uses ASCII data files but you create a custom data type for those files, you can include in the file type declaration:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+SUPERTYPE Ascii
+</pre></td></tr></table><p>This allows users to drag your application's data files onto any text editor to open and view them. If your application creates images files, you could make a similar declaration to allow users to drag data file icons to appropriate image viewers such as <tt>ipaste</tt>(1).</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE98067-PARENT"></a>Matching File Types With Applications: The MATCH Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-24"></a>
+<a class="indexterm" name="IT13.FTRs-25"></a>
+The Desktop needs some way to figure out which FTRs pair up with which files. Your FTRs <span class="bold"><b>will not work</b></span> if they don't include some way for the Desktop to match them with the appropriate files. To do this, include the MATCH rule in your file type definition. This section explains how to use the MATCH rule to identify your files. The method you use depends on the kind of file you are matching and on the file permissions. First, here's the MATCH rule syntax and description:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>MATCH <span class="bold"><b>match-expression</b></span>;</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p><span class="bold"><b>match-expression</b></span> is a logical expression that should evaluate to true if, and only if, a file is of the type declared by TYPE. The match-expression must consist only of valid MATCH functions, as described later in this section. The match-expression can use multiple lines, but must terminate with a semicolon (;). Multiple match-expressions are not permitted for a given type. The MATCH rule is employed each time a file is encountered by the Desktop, to assign a type to that file.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Examples:</b></span></span></td><td width="10"> </td><td><p><tt>MATCH tag == 0x00001005;<br>
+MATCH glob(&#8220;myExecutabel&#8221;);</tt></p>
+
+</td></tr></table></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5232133"></a>Matching Tagged Files</h3></div></div>
+<p><a class="indexterm" name="IT13.FTRs-26"></a>
+<a class="indexterm" name="IT13.FTRs-27"></a>
+The easiest way to <a class="indexterm" name="IT13.FTRs-28"></a>
+match your application with its FTRs is to use the <tt>tag</tt>(1) command to assign a unique number to the application itself. You can then label the associated FTRs with this same unique number, using the MATCH rule, as shown in the example above.</p>
+<p>There are a few situations in which you cannot use<tt> tag</tt> to label your files. You cannot use <tt>tag</tt> if:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>your file is neither an executable nor a shell script</p>
+</li>
+<li><p>you don't have the necessary permissions to change the file</p>
+</li>
+</ul></div><p>For more information on matching your files without using the <span class="bold"><b>tag</b></span> command, see <a href="ch13.html#LE56776-PARENT" title="Matching Files Without the tag Command">&#8220;Matching Files Without the tag Command&#8221;</a>.</p>
+<p>To tag your application and its associated FTRs using the <span class="bold"><b>tag</b></span> command, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p>The <tt>tag</tt> command attaches an identification number to your application. Before you tag your application, select a number that is not already in use. Silicon Graphics assigns each company (or individual developer) a block of ID numbers for tagging files at no cost. If your company doesn't already have an assigned block of numbers, just send a request to Silicon Graphics. The best way is to e-mail your request to this address:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+desktoptags@sgi.com
+</pre></td></tr></table><br></li>
+<li><p>Once you have your block of numbers, you can select a number from the block of numbers assigned to your company. Make sure that you select a number that no one else in your company is using. </p>
+</li>
+<li><p>After you select a unique tag number for your application, go to the directory that contains your application and tag it using the<tt> tag</tt> command. This is the syntax:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>tag </tt></b><i>number</i> <i>filename</i> 
+</pre></td></tr></table><p>Replace the word<span class="bold"><b> number </b></span>with the number that you are assigning to the application and <span class="bold"><b>filename </b></span>with the name of your application. For more information on the <span class="bold"><b>tag</b></span> command, see the<tt> tag(1)</tt> reference page.</p>
+</li>
+<li><p>After tagging the application itself, include the tag in your application's FTRs, using the MATCH rule. Just include a line like this in your FTR file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+MATCH tag ==<span class="bold"><b> number</b></span>;
+</pre></td></tr></table><p>where <span class="bold"><b>number</b></span> is the unique tag number assigned to your application. </p>
+</li>
+</ol></div><p>You can also use the <tt>tag</tt> command to automatically assign a tag number for a predefined file type. Silicon Graphics provides a set of generic types, called predefined types, that you can use for utilities that do not require a personalized look. These predefined file types come complete with icons, FTRs, and tag numbers. Use the appropriate<tt> tag</tt> command arguments to get the desired file type features. For more information on <tt>tag</tt> arguments, see the <tt>tag(1)</tt> reference page. The predefined file types are listed in <a href="ape.html" title="Appendix E. Predefined File Types">Appendix E, &#8220;Predefined File Types&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE56776-PARENT"></a>Matching Files Without the <tt>tag</tt> Command</h3></div></div>
+<p><a class="indexterm" name="IT13.FTRs-29"></a>
+If you cannot use the <tt>tag</tt> command to match your application with the corresponding FTRs, you need to write a sequence of expressions that check files for distinguishing characteristics. Once you have written a sequence of expressions that adequately defines your application file, include that sequence in your FTR file, using the MATCH rule. For example, you can use this MATCH rule to match a C source file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+MATCH glob(&quot;*.c&quot;) &amp;&amp; ascii;
+</pre></td></tr></table><p>The <tt>glob</tt> function returns TRUE if the filename matches the string within the quotes. The <tt>ascii</tt> function returns TRUE if the first 512 bytes of the file are all printable ASCII characters. (<a href="ch13.html#id5233002" title="Table 13-3. Match-Expression Functions">Table 13-3</a> lists all of the available match-expression functions.) The &amp;&amp; conditional operator tells the Desktop that the functions on either side of it must <span class="bold"><b>both</b></span> return TRUE for a valid match. See <a href="ch13.html#LE44766-PARENT" title="Valid Match-Expressions">&#8220;Valid Match-Expressions&#8221;</a> for a list of all of the operators, constants, and numerical representations that you can use in your match-expressions.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5232526"></a>Writing Effective Match Expressions</h4></div></div>
+<p><a class="indexterm" name="IT13.FTRs-30"></a>
+The most effective way to order match-expressions in a single MATCH rule is to choose a set of expressions, each of which tests for a single characteristic, and conjoin them all using &#8220;and&#8221; conditionals (&amp;&amp;).</p>
+<p>The order in which you list the expressions in a MATCH rule is important. Order the expressions so that the maximum number of files are &#8220;weeded out&#8221; by the first expressions. This is advised because the conditional operator, &amp;&amp;, stops evaluation as soon as one side of the conditional is found to be false. Therefore, the more likely an expression is to be false, the further to the left of the MATCH rule you should place it.</p>
+<p>For instance, in the previous MATCH expression example, it is more efficient to place the <tt>glob</tt>(&quot;*.c&quot;) expression first because there are many more ASCII text files than there are files that end in .<span class="bold"><b>c</b></span>.</p>
+<p>Since the Desktop scans FTR files sequentially, you must make sure that your match rule is specific enough not to &#8220;catch&#8221; any unwanted files. For example, suppose you define a type named &#8220;myDataFile&#8221; using this MATCH rule:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+MATCH ascii;
+</pre></td></tr></table><p>Now every text file in your system will be defined as a file of type &#8220;myDataFile.&#8221;</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE44766-PARENT"></a>Valid Match-Expressions</h4></div></div>
+<p><a class="indexterm" name="IT13.FTRs-31"></a>
+This section describes the syntax and function of valid match-expressions. You can use these C language operators in a match-expression:</p>
+<div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr valign="top"><td scope="row" valign="top"><p>+</p>
+</td><td valign="top"><p>-</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>*</p>
+</td><td valign="top"><p>/ </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&amp;</p>
+</td><td valign="top"><p>| </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>^</p>
+</td><td valign="top"><p>! </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>%</p>
+</td><td valign="top"><p>( )</p>
+</td></tr></tbody></table></div><p>You can use these C language conditional operators in a match-expression:</p>
+<div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr valign="top"><td scope="row" valign="top"><p>&amp;&amp;</p>
+</td><td valign="top"><p>|| </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>==</p>
+</td><td valign="top"><p>!= </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;</p>
+</td><td valign="top"><p>&gt; </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;=</p>
+</td><td valign="top"><p>&gt;=</p>
+</td></tr></tbody></table></div><p>The `==' operator works for string comparisons in addition to numerical comparisons.</p>
+<p>You can use these constants in a match-expression:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+true false
+</pre></td></tr></table><p>You can represent numbers in match-expressions in decimal, octal, or hexadecimal notation. See <a href="ch13.html#id5232880" title="Table 13-2. Numerical Representations in Match-Expressions">Table 13-2</a>.</p>
+<div class="table"><a name="id5232880"></a><p><a name="id5232880"></a><b>Table 13-2. Numerical Representations in Match-Expressions</b></p>
+<table summary="Numerical Representations in Match-Expressions" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Representation</p>
+</th><th scope="col" valign="top"><p>Syntax </p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>decimal</p>
+</td><td valign="top"><p>num </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>octal</p>
+</td><td valign="top"><p>0num </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>hexadecimal</p>
+</td><td valign="top"><p>0xnum</p>
+</td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5232987"></a>Functions </h4></div></div>
+<p><a href="ch13.html#id5233002" title="Table 13-3. Match-Expression Functions">Table 13-3</a> lists the valid match-expression functions.</p>
+<div class="table"><a name="id5233002"></a><p><a name="id5233002"></a><b>Table 13-3. Match-Expression Functions</b></p>
+<table summary="Match-Expression Functions" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Function Syntax</p>
+</th><th scope="col" valign="top"><p>Definition </p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>ascii</p>
+</td><td valign="top"><p>Returns TRUE if the first 512 bytes of the file are all printable ASCII 
+characters.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>char(<span class="bold"><b>n</b></span>)</p>
+</td><td valign="top"><p>Returns the nth byte in the file as a signed character; range is -128 to 127.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>dircontains(&quot;<span class="bold"><b>string</b></span>&quot;)</p>
+</td><td valign="top"><p>Returns TRUE if the file is a directory and contains the file named by string. 
+Allows use of the following expansions in string for pattern matching: { } [ 
+] * ? and backslash (see <tt>sh(1)</tt> filename expansion). See <a href="ch13.html#LE46509-PARENT" title="Using dircontains()">&#8220;Using dircontains()&#8221;</a></p>
+<p> for more information.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>glob(&quot;<span class="bold"><b>string</b></span>&quot;)</p>
+</td><td valign="top"><p>Returns TRUE if the file's name matches string;. Allows use of the following 
+expansions in string for pattern matching: { } [ ] * ? and backslash (see 
+<tt>sh(1)</tt> filename expansion).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>linkcount</p>
+</td><td valign="top"><p>Returns the number of hard links to the file.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>long(<span class="bold"><b>n</b></span>)</p>
+</td><td valign="top"><p>Returns the nth byte in the file as a signed long integer; range is -231 to 231 - 1.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>mode</p>
+</td><td valign="top"><p>Returns the mode bits of the file (see chmod(1)).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>print(<span class="bold"><b>expr</b></span> or 
+&quot;<span class="bold"><b>string</b></span>&quot;)</p>
+</td><td valign="top"><p>Prints the value of the expression expr or string to stdout each time the rule 
+is evaluated; used for debugging. Always returns true.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>short(<span class="bold"><b>n</b></span>)</p>
+</td><td valign="top"><p>Returns the nth byte of the file as a signed short integer; range is -32768 to 
+32767.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>size</p>
+</td><td valign="top"><p>Returns the size of the file in bytes.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>string(<span class="bold"><b>n</b></span>,<span class="bold"><b>m</b></span>)</p>
+</td><td valign="top"><p>Returns a string from the file that is m bytes (characters) long, beginning at 
+the nth byte of the file.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>uchar (<span class="bold"><b>n</b></span>)</p>
+</td><td valign="top"><p>Returns the nth byte of the file as an unsigned character; range is 0 to 255.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>tag</p>
+</td><td valign="top"><p>Returns the specific Desktop application tag injected into an executable file 
+by the tag injection tool (see the <tt>tag(1)</tt> reference page.) Returns -1 if the 
+file is not a tagged file.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>ushort(<span class="bold"><b>n</b></span>)</p>
+</td><td valign="top"><p>Returns the nth byte of the file as an unsigned short integer; range is 0 to 
+65535. </p>
+</td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE46509-PARENT"></a>Using dircontains()</h4></div></div>
+<p><a class="indexterm" name="IT13.FTRs-32"></a>
+<a class="indexterm" name="IT13.FTRs-33"></a>
+In order to use the <tt>dircontains()</tt> function, you need to include these two rules in your filetype definition:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+    SUPERTYPE SpecialFile
+    SPECIALFILE
+</pre></td></tr></table><p>You can declare more than one SUPERTYPE in a file type, so the following would be a legal FTR file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TYPE scrimshawToolsDir
+    MATCH        dircontains(&quot;.toolsPref&quot;);
+    LEGEND       Scrimshaw drawing tools directory
+    SUPERTYPE    Directory
+    SUPERTYPE    SpecialFile
+    SPECIALFILE
+    ICON {
+           if (opened) {
+               include(&quot;../iconlib/generic.folder.open.fti&quot;);
+           } else {
+               include(&quot;../iconlib/generic.folder.closed.fti&quot;);
+         }
+         include(&quot;iconlib/scrimshaw.tools.dir.fti&quot;);
+    }
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE30222-PARENT"></a>Predefined File Types</h4></div></div>
+<p><a class="indexterm" name="IT13.FTRs-34"></a>
+<a class="indexterm" name="IT13.FTRs-35"></a>
+<a class="indexterm" name="IT13.FTRs-36"></a>
+<a class="indexterm" name="IT13.FTRs-37"></a>
+For some applications, you may not want to create a unique file type and icon. Several predefined file types exist and you can use them as necessary. If you use a predefined file type for your application, <tt>tag</tt> can automatically assign it a tag number. Just use the appropriate command line arguments as described in the<tt> tag(1)</tt> reference page. The predefined file types and their tag numbers are listed in <a href="ape.html" title="Appendix E. Predefined File Types">Appendix E, &#8220;Predefined File Types&#8221;</a>.</p>
+</div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE92689-PARENT"></a>Matching Non-Plain Files: The SPECIALFILE Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-38"></a>
+<a class="indexterm" name="IT13.FTRs-39"></a>
+SPECIALFILE is used to distinguish a file <a class="indexterm" name="IT13.FTRs-40"></a>
+<a class="indexterm" name="IT13.FTRs-41"></a>
+<a class="indexterm" name="IT13.FTRs-42"></a>
+<a class="indexterm" name="IT13.FTRs-43"></a>
+typing rule used for matching non-plain files. Device files and other non-plain files can cause damage to physical devices if they are matched using standard file typing rules (which might alter the device state by opening and reading the first block of the file).</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>SPECIALFILE</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>Special files are matched using only rules containing SPECIALFILE, which are written so as not to interfere with actual physical devices. Similarly, plain files are not matched using rules containing a SPECIALFILE rule.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>SPECIALFILE</tt></p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>When you include the SPECIALFILE rule in your file type, you should also include the line:
+</td></tr></table><hr noshade="noshade"></div><br><table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+SUPERTYPE SpecialFile
+</pre></td></tr></table><br>
+</td></tr></table></div><p>The SUPERTYPE declaration allows applications to use <tt>isSuper</tt>(1) to test whether your file type is a SPECIALFILE. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE15180-PARENT"></a>Adding a Descriptive Phrase: The LEGEND Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-44"></a>
+<a class="indexterm" name="IT13.FTRs-45"></a>
+Use the LEGEND rule to provide the Desktop with a short phrase that describes the file type. This phrase appears when users view your icon's directory as a list. It also appears when a user selects your icon, then selects the &#8220;Get File Info&#8221; item from the Desktop menu. Make your legend simple and informative and keep it to 25 characters or less.</p>
+<p>Here is the syntax and description for the LEGEND rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>LEGEND <span class="bold"><b>text-string</b></span></p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p><span class="bold"><b>text-string</b></span> is a string that describes the file type in plain language that a user can understand. Legends that are longer than 25 characters might be truncated in some circumstances.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>LEGEND C program source file</tt></p>
+
+</td></tr></table></div><p>You might also see a LEGEND rule that is prepended with a number between two colons&#8212;something like this:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+LEGEND :290:image in RGB format
+</pre></td></tr></table><p>The colons and the number between them are used for internationalization. For more information, refer to &#8220;Internationalizing File Typing Rule Strings&#8221; in Chapter 4 of the <i>Topics in IRIX Programming</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE85210-PARENT"></a>Setting FTR Variables: The SETVAR Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-46"></a>
+<a class="indexterm" name="IT13.FTRs-47"></a>
+<a class="indexterm" name="IT13.FTRs-48"></a>
+<a class="indexterm" name="IT13.FTRs-49"></a>
+The SETVAR rule allows you to set variables that affect operation of your icon.</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>SETVAR <span class="bold"><b>variable</b></span> <span class="bold"><b>value</b></span> </p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p><span class="bold"><b>variable</b></span> is a FTR variable and <span class="bold"><b>value</b></span> is the value to assign to the variable. Currently, two FTR variables are supported: <i>noLaunchEffect</i> and <i>noLaunchSound</i>. Set <i>noLaunchEffect</i> to True to turn off the visual launch effect when the user opens your icon. Set <i>noLaunchSound</i> to True to turn off the launch sound effect when the user opens your icon.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>SETVAR noLaunchEffect True</tt> </p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE33157-PARENT"></a>Programming Open Behavior: The CMD OPEN Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-50"></a>
+<a class="indexterm" name="IT13.FTRs-51"></a>
+<a class="indexterm" name="IT13.FTRs-52"></a>
+<a class="indexterm" name="IT13.FTRs-53"></a>
+Use the CMD OPEN rule to tell the Desktop what to do when a user opens your icon. Users can open an icon in any of these ways:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>double-clicking it</p>
+</li>
+<li><p>selecting it and then choosing the &#8220;Open&#8221; item from the Desktop popup menu (the Desktop menu is the menu that appears when you hold down the right mouse button while the cursor is over the Desktop background)</p>
+</li>
+<li><p>selecting it and then choosing the &#8220;Open Icon&#8221; selection in the Selected tool chest.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Directories are a special case. The Desktop automatically handles the OPEN behavior for all files marked as &#8220;SUPERTYPE Directory.&#8221; You can't override the OPEN behavior if you include &#8220;SUPERTYPE Directory.&#8221;
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><p>Here is the syntax and description for the CMD OPEN rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>CMD OPEN<span class="bold"><b> sh-expression</b></span>[;<span class="bold"><b> sh-expression</b></span>; &#8230; ;<span class="bold"><b> sh-expression</b></span>]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>The OPEN rule should reflect the most frequently used function that would be applied to a file of the given type. <span class="bold"><b>sh-expression</b></span> can be any valid Bourne shell expression. Any expression can use multiple lines. Any number of expressions can be used, and must be separated by semicolons (;). The final expression should not end with a semicolon. Variables can be defined and used as in a Bourne shell script, including environment variables. See <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a> for a list of special environment variables set by the Desktop. These environment variables can be used to refer to the currently selected icons within the Desktop or Directory View.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Examples:</b></span></span></td><td width="10"> </td><td><p><tt>CMD OPEN $WINEDITOR $SELECTED</tt></p>
+<p><a class="indexterm" name="IT13.FTRs-54"></a>
+<a class="indexterm" name="IT13.FTRs-55"></a>
+The CMD OPEN rule for the &#8220;Makefile&#8221; file type is more complex:</p>
+<p>TYPE Makefile</p>
+<p>...</p>
+<p>CMD OPEN echo &quot;make -f $LEADER |&amp; tee $LEADER.log; rm $LEADER.run&quot; \</p>
+<p>         &gt; $LEADER.run; winterm -H -t make -c csh -f $LEADER.run</p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE33173-PARENT"></a>Programming Alt-Open Behavior: The CMD ALTOPEN Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-56"></a>
+<a class="indexterm" name="IT13.FTRs-57"></a>
+<a class="indexterm" name="IT13.FTRs-58"></a>
+<a class="indexterm" name="IT13.FTRs-59"></a>
+<a class="indexterm" name="IT13.FTRs-60"></a>
+By using the CMD ALTOPEN rule, you can tell the Desktop what to do when users double-click your icon while pressing the <b><tt>&lt;Alt&gt;</tt></b> key.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Directories are a special case. The Desktop automatically handles the ALTOPEN behavior for all files marked as &#8220;SUPERTYPE Directory.&#8221; You can't override the ALTOPEN behavior if you include &#8220;SUPERTYPE Directory.&#8221;
+</td></tr></table><hr noshade="noshade"></div><p>Here is the syntax and description for the CMD ALTOPEN rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>CMD ALTOPEN <span class="bold"><b>sh-expression</b></span>[; <span class="bold"><b>sh-expression</b></span>; &#8230; ; <span class="bold"><b>sh-expression</b></span>]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>The ALTOPEN rule provides added functionality for power users. Typically, you set ALTOPEN to pop up a launch window to let the user edit arguments. <span class="bold"><b>sh-expression</b></span> can be any valid Bourne shell expression. Any expression can use multiple lines. Any number of expressions can be used, and must be separated by semicolons (;). The final expression should not end with a semicolon. Variables can be defined and used as in a Bourne shell script, including environment variables. See <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a> for a list of special environment variables set by the Desktop. These environment variables can be used to refer to the currently selected icons within the Desktop or Directory View.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Examples:</b></span></span></td><td width="10"> </td><td><p><tt>CMD ALTOPEN launch -c $LEADER $REST</tt></p>
+<p><a class="indexterm" name="IT13.FTRs-61"></a>
+<a class="indexterm" name="IT13.FTRs-62"></a>
+<a class="indexterm" name="IT13.FTRs-63"></a>
+The CMD ALTOPEN rule for the &#8220;SGIImage&#8221; file type, defined in <tt>/usr/lib/filetype/system/sgiimage.ftr</tt>, is more complex:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TYPE SGIImage
+CMD ALTOPEN if test -n &#8220;$IMGVIEWER&#8221;
+            then
+              IMGVIEWER $LEADER $REST
+            else
+              if test -x /usr/sbin/imgview
+                then
+                  imgview $LEADER $REST
+                else
+                    if test -x /usr/sbin/ipaste
+                    then
+                      ipaste $LEADER $REST
+                    else
+                    xconfirm -t &#8220;`gettxt uxsgidesktop:650
+`/usr/sbin/imgview is missing.
+Please install imgtools.sw.tools.'`&#8221; \
+               -B &#8220;`gettxt uxsgidesktop:736 `Continue'`&#8221; &gt;
+/dev/null
+                     fi
+                 fi
+          fi
+</pre></td></tr></table><br>
+</td></tr></table></div><p>In the previous example:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>This filetype uses the IMGVIEWER environment variable. This is one of six environment variables the user can set on the Desktop Utilities panel (<tt>/usr/sbin/dtUtilities</tt>). Your filetype should make use of such utilities as well, if appropriate. For example, if your application needs to open some data into an editor for one of its rules, then the rule should check for the WINEDITOR variable and use it to open the data. For more information on <span class="bold"><b>dtUtilities</b></span>, see Chapter 10, <a href="ch10.html#LE73704-PARENT" title="Using the Default Viewer and Editor Utilities Panel">&#8220;Using the Default Viewer and Editor Utilities Panel&#8221;</a><a href="ch10.html#LE73704-PARENT"> in Chapter 10</a>.</p>
+</li>
+<li><p>This filetype posts a dialog if it can't find any appropriate applications in which to open the SGIImage file. This dialog has text that you can translate into other languages; the embedded <tt>gettxt</tt> commands retrieve the text in the appropriate language from the specified <span class="bold"><b>uxsgidesktop</b></span> message catalog. You can make a message catalog to hold your own messages, then use <tt>gettxt</tt> to make your filetypes use these messages. For more information, see Chapter 11, <a href="ch11.html#LE17054-PARENT" title="Step Three: Programming Your Icon">&#8220;Step Three: Programming Your Icon&#8221;</a><a href="ch11.html#LE17054-PARENT"> in Chapter 11</a>. </p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE91613-PARENT"></a>Programming Drag and Drop Behavior: The CMD DROP and DROPIF Rules</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-64"></a>
+<a class="indexterm" name="IT13.FTRs-65"></a>
+<a class="indexterm" name="IT13.FTRs-66"></a>
+<a class="indexterm" name="IT13.FTRs-67"></a>
+Users can perform certain functions by dragging an icon and dropping it on top of another icon. For example, users can move a file from one directory to another by dragging the icon representing the file and dropping it onto the icon representing the new directory. You use the CMD DROP rule to tell the Desktop what to do when a user drags another icon and drops it on top of your application's icon.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Directories are a special case. The Desktop automatically handles the DROP behavior for all files marked as &#8220;SUPERTYPE Directory.&#8221; You can't override the DROP behavior if you include &#8220;SUPERTYPE Directory.&#8221;
+</td></tr></table><hr noshade="noshade"></div><p>Here is the syntax and description for the CMP DROP rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>CMD DROP <span class="bold"><b>sh-expression</b></span>[; <span class="bold"><b>sh-expression</b></span>; &#8230; ; <span class="bold"><b>sh-expression</b></span>]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>The DROP rule is invoked whenever a selected (file) icon is &#8220;dropped&#8221; onto another icon in the Desktop or Directory View windows. When this happens, the Desktop checks to see if the file type being dropped upon has a DROP rule to handle the files being dropped. In this way, you can write rules that allow one icon to process the contents of other icons. Simply drag the selected icons that you want processed and put them on top of the target icon (that is, the one with the DROP rule).</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>CMD DROP $TARGET $SELECTED</tt></p>
+
+</td></tr></table></div><p><a class="indexterm" name="IT13.FTRs-68"></a>
+<a class="indexterm" name="IT13.FTRs-69"></a>
+By default, the CMD DROP rule handles all icons dropped on the target icon. However, if you include a DROPIF rule in your file type, only those icons whose file types are listed in the DROPIF rule are accepted as drop candidates; the Desktop doesn't allow the user to drop other types of icons on the target icon. Here is the syntax and description for the DROPIF rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p> DROPIF <span class="bold"><b>file-type</b></span> [ <span class="bold"><b>file-type</b></span>  &#8230;  <span class="bold"><b>file-type</b></span>]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>Specifies the allowable file types that a user can drop on the icon.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>DROPIF </tt>MailFile </p>
+
+</td></tr></table></div><p>Using the DROPIF rule in conjunction with the CMD DROP rule is a good practice to follow to ensure that the file types of selected icons are compatible with the selected icon. You can also use the environment variables set by the Desktop, listed in <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a>, to determine other attributes of the selected icons.</p>
+<p>For example, the following CMD DROP and DROPIF rules accept only a single icon with the type &#8220;MyAppDataFile&#8221;:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+DROPIF MyAppDataFile
+CMD DROP    if [ $ARGC -gt 1 ]
+            then
+                inform &quot;Only one data file allowed.&quot;
+            else
+                $TARGET $SELECTED
+</pre></td></tr></table><p>In the example above, the DROPIF rule prevents users from dropping any file on the target icon except those with the type &#8220;MyAppDataFile.&#8221; The CMD DROP rule is invoked only after a successful drop. It checks the value of the environment variable ARGC to see how many icons were dropped on the target icon. If more than one icon is dropped, it displays an error message; if only one is dropped, it invokes the application with the dropped file as an argument.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The DROPIF rule doesn't &#8220;follow&#8221; SUPERTYPES. If you specify a file type in a DROPIF rule, only files of that type are accepted, not files that have that type as a SUPERTYPE.
+</td></tr></table><hr noshade="noshade"></div><p>If you want to handle all files with a given SUPERTYPE, you must use <tt>isSuper</tt>(1) to test for that SUPERTYPE in the CMD DROP rule. The following CMD DROP definition demonstrates this by accepting one or more files with an &#8220;Ascii&#8221; SUPERTYPE:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+CMD DROP    okfile='true'
+            for i in $SELECTEDTYPELIST
+            do
+                if isSuper Ascii $i &gt; /dev/null
+                   then
+                   okfile='true'
+                else
+                   okfile='false'
+                fi
+            done
+            if [ $okfile = 'true' ]
+               then
+               $TARGET $SELECTED
+            else
+                xconfirm &quot;$TARGET accepts only ASCII files.&quot;
+            fi
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE45038-PARENT"></a>Mapping Names: The MAP Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-70"></a>
+<a class="indexterm" name="IT13.FTRs-71"></a>
+<a class="indexterm" name="IT13.FTRs-72"></a>
+<a class="indexterm" name="IT13.FTRs-73"></a>
+<a class="indexterm" name="IT13.FTRs-74"></a>
+<a class="indexterm" name="IT13.FTRs-75"></a>
+If you want your datafile to work with the GoldenGate conversion, which is based on ICCCM target type names, you need to use the MAP rule to associate the desktop file-type name with the ICCCM target-type name. Then GoldenGate can access the ICCCM type.</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>MAP <i>namespace</i> <i>value</i></p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span>
+</span></td><td width="10"> </td><td><p><span class="bold"><b></b></span>The MAP rules specify a list of all mappings from desktop name space to a non-desktop name. Desktop <i>namespace</i> is defined by the TYPE    names. The <i>value</i> is mapped onto the desktop type, which you can obtain based on the value or TYPE name. You can use the MAP rule to translate from a desktop TYPE to another name space, such as ICCCM or MIME types. In the example below, the keyword <tt>SelectionTarget</tt> indicates a ICCCM name space. </p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>ICCCM Example:</b></span>
+</span></td><td width="10"> </td><td><p><span class="bold"><b></b></span> </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TYPE AIFFSoundFile
+MAP  SelectionTarget AIFF_FILE
+</pre></td></tr></table><br>
+</td></tr></table></div><p>For more information about GoldenGate conversion, see <a href="apg.html" title="Appendix G. Using GoldenGate Data Conversion Services">Appendix G, &#8220;Using GoldenGate Data Conversion Services&#8221;</a>, and <a href="ch07.html#LE97061-PARENT" title="Data Conversion Service">&#8220;Data Conversion Service&#8221;</a><a href="ch07.html#LE97061-PARENT"> in Chapter 7</a>. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE40547-PARENT"></a>Programming Print Behavior: The CMD PRINT Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-76"></a>
+<a class="indexterm" name="IT13.FTRs-77"></a>
+<a class="indexterm" name="IT13.FTRs-78"></a>
+<a class="indexterm" name="IT13.FTRs-79"></a>
+Use the CMD PRINT rule to tell the Desktop what to do when a user selects your icon, then selects &#8220;Print&#8221; from the Desktop popup menu. Here is the syntax and description for the CMD PRINT rule; see also <a href="ch14.html" title="Chapter 14. Printing From the Desktop">Chapter 14, &#8220;Printing From the Desktop&#8221;</a>, for information on writing rules to convert your new file type into one of the printable types.</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>CMD PRINT <span class="bold"><b>sh-expression</b></span>[; <span class="bold"><b>sh-expression</b></span>; &#8230; ; <span class="bold"><b>sh-expression</b></span>]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p><span class="bold"><b>sh-expression</b></span> can be any valid Bourne shell expression. Any expression can use multiple lines. Any number of expressions can be used, and must be separated by semicolons (;). The final expression should not end with a semicolon. Variables can be defined and used as in a Bourne shell script, including environment variables. See <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a> for a list of special environment variables set by the Desktop. These environment variables can be used to refer to the currently selected icons within the Desktop or Directory View. The recommended method of implementing the PRINT rule is to use <tt>routeprint</tt>, the Desktop's print-job routing utility, as in the example below. <tt>routeprint</tt> uses print conversion rules to automatically convert the selected files into formats accepted by the system's printers. See the <tt>routeprint(1)</tt> reference page for details on its syntax. See <a href="ch14.html" title="Chapter 14. Printing From the Desktop">Chapter 14, &#8220;Printing From the Desktop&#8221;</a> for information on setting up print conversion rules.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>CMD PRINT routeprint $LEADER $REST</tt></p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE31739-PARENT"></a>Adding Menu Items: The MENUCMD Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-80"></a>
+<a class="indexterm" name="IT13.FTRs-81"></a>
+<a class="indexterm" name="IT13.FTRs-82"></a>
+Use the MENUCMD rule to add items to the bottom of both the Desktop menu and the Selected toolchest menu. The Desktop menu is the menu that appears when you hold down the right mouse button while the cursor is positioned on the Desktop. The Selected toolchest menu is the menu that appears when you hold down the left mouse button while the cursor is positioned over the Selected toolchest menu. </p>
+<p>Menu items added to the Desktop menu and the Selected toolchest menu appear only when the icon is selected (highlighted in yellow) on the Desktop. </p>
+<p>You can add as many menu items as you like by adding multiple MENUCMD rules to your file type. Any menu items added using the MENUCMD rule are added both to the Desktop menu and the Selected toolchest menu&#8212;you can't add menu items to just one of these menus.</p>
+<p> Here is the syntax and description for the MENUCMD rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p>MENUCMD &quot;<span class="bold"><b>string</b></span>&quot; <span class="bold"><b>sh-expression</b></span>[; <span class="bold"><b>sh-expression</b></span>; &#8230; ; <span class="bold"><b>sh-expression</b></span>]</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>MENUCMD inserts the menu entry <span class="bold"><b>string</b></span> into the Desktop or Directory View menu if a single file of the appropriate type is selected, or if a group of all of the same, appropriate type is selected. If the menu entry is chosen, the actions described by the<span class="bold"><b> sh-expressions</b></span> are performed on each of the selected files.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>MENUCMD &quot;Empty Dumpster&quot; compress $LEADER $REST</tt></p>
+
+</td></tr></table></div><p>You might also see a MENUCMD rule that is prepended with a number between two colons&#8212;something like this:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+MENUCMD :472:<tt>&quot;</tt>make install<tt>&quot;</tt> winterm -H -t 'make install' \
+                            -c make -f $LEADER install
+</pre></td></tr></table><p>The colons and the number between them are used for internationalization. For more information, refer to &#8220;Internationalizing File Typing Rule Strings&#8221; in Chapter 4 of the <i>Topics in IRIX Programming</i>.</p>
+<p>To add more than one menu item to the Desktop popup menu, just add a MENUCMD rule for each item. For example, the &#8220;Makefile&#8221; file type includes all of the following MENUCMD rules:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+MENUCMD <tt>&quot;</tt>make install<tt>&quot;</tt> winterm -H -t 'make install' \
+                       -c make -f $LEADER install
+MENUCMD <tt>&quot;</tt>make clean<tt>&quot;</tt> winterm -H -t 'make clean' \
+                     -c make -f $LEADER clean
+MENUCMD <tt>&quot;</tt>make clobber<tt>&quot;</tt> winterm -H -t 'make clobber' \
+                       -c make -f $LEADER clobber
+MENUCMD <tt>&quot;</tt>Edit<tt>&quot;</tt> $WINEDITOR $LEADER $REST
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE35039-PARENT"></a>Getting the Icon Picture: The ICON Rule</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-83"></a>
+<a class="indexterm" name="IT13.FTRs-84"></a>
+<a class="indexterm" name="IT13.FTRs-85"></a>
+Use the ICON rule, described in this section, to tell the Desktop where to find the file(s) containing the picture(s) of the icon for a file type. The simplest way to do this is to provide the full IRIX pathname. For example, if the <span class="bold"><b>.fti</b></span> file is in the directory called <tt>/usr/lib/filetype/install/iconlib</tt>, you would simply write that pathname directly into your FTR file. </p>
+<p>If you prefer not to use the absolute pathname in your FTR, you can use a relative pathname, as long as the icon file resides anywhere within the<tt> /usr/lib/filetype</tt> directory structure. To make use of relative pathnames, list the pathname relative to the directory containing the FTR file that contains the ICON rule. If you choose to do this, take care to keep path names used in FTR files synchronized with icon locations.</p>
+<p>The Desktop sets Boolean status variables to indicate the state of an icon. You can use conditional statements that test these variables to alter the appearance of an icon based on its state. The state variables are: opened, which is True when the icon is opened; and selected, which is True when the icon is selected.</p>
+<p>As described in <a href="ch12.html#LE27381-PARENT" title="Importing Generic Icon Components (Magic Carpet)">&#8220;Importing Generic Icon Components (Magic Carpet)&#8221;</a><a href="ch12.html#LE27381-PARENT"> in Chapter 12</a>, a common technique is to draw a unique badge to identify an application and then combine that badge with a generic icon component. This works well if you also use conditional statements to change the appearance of an icon depending on its state. You can then combine the unique badge with a generic icon component appropriate to the icon's state. The example shown below demonstrates this technique.</p>
+<p>Use the basic format from the example below to tell the Desktop where to find your icon files (the files that you created using IconSmith). Here is the syntax and description for the ICON rule:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span> </span></td><td width="10"> </td><td><p>ICON <span class="bold"><b>icon-description-routine</b></span> </p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span> </span></td><td width="10"> </td><td><p><span class="bold"><b>icon-description-routine</b></span> is a routine written using the icon description language, detailed below. The routine can continue for any number of lines. The ICON rule is invoked any time a file of the specified type needs to be displayed in the Desktop or Directory View. The rule is evaluated each time the icon is painted by the application that needs it.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Examples:</b></span> </span></td><td width="10"> </td><td><p><tt>ICON {</tt></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+if (opened) {
+  include(&quot;../iconlib/generic.exec.open.fti&quot;);
+  } else {
+  include(&quot;../iconlib/generic.exec.closed.fti&quot;);
+  }
+  include(&quot;iconlib/ack.fti&quot;);
+}
+</pre></td></tr></table><p>The example above shows you exactly how to write the standard ICON rule. The first line invokes the ICON rule. The next two lines tell the Desktop where to find the parts of the icon representing the open and closed &#8220;magic carpet&#8221; that makes up the generic executable icons. The unique badge is in a file named <tt>ack.fti</tt><span class="bold"><b>.</b></span></p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>You must include your badge <span class="bold"><b>after</b></span> including the generic component so that it appears over the generic components when displayed on the Desktop.
+</td></tr></table><hr noshade="noshade"></div><br>
+</td></tr></table></div><p>If you have two separate badges, one for the open and one for the closed state, your ICON rule is:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+ICON {
+    if (opened) {
+        include(&quot;../iconlib/generic.exec.open.fti&quot;);
+        include(&quot;iconlib/ack.open.fti&quot;);
+    } else {
+        include(&quot;../iconlib/generic.exec.closed.fti&quot;);
+        include(&quot;iconlib/ack.closed.fti&quot;);
+    }
+}
+</pre></td></tr></table><p>Notice that this example gives the pathname of the icon files (<span class="bold"><b>.fti</b></span> files) <span class="bold"><b>relative</b></span> to the directory in which the FTR file is located. You can use the full pathname if you prefer. Your icon description routine would then look like this, assuming that <tt>ack.fti</tt> was placed in <tt>/usr/lib/filetype/install/iconlib</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+ICON {
+    if (opened) {
+        include(&quot;/usr/lib/filetype/iconlib/genericexec.open..fti&quot;);
+    else {
+        include(&quot;/usr/lib/filetype/iconlib/generic.exec.close.fti&quot;);
+    }
+    include(&quot;/usr/lib/filetype/install/iconlib/ack.fti&quot;);
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE88324-PARENT"></a>Creating a File Type: An Example</h2></div></div>
+<p><a class="indexterm" name="IT13.FTRs-86"></a>
+<a class="indexterm" name="IT13.FTRs-87"></a>
+<a class="indexterm" name="IT13.FTRs-88"></a>
+<a class="indexterm" name="IT13.FTRs-89"></a>
+<a class="indexterm" name="IT13.FTRs-90"></a>
+This section provides an example that demonstrates how to write a file type. In this example, assume we're writing a file type for a simple text editor called <tt>scribble</tt> and that we've decided on these behaviors for the <tt>scribble</tt> icon:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>When a user double-clicks the<span class="bold"><b> scribble</b></span> icon, the Desktop runs the application.</p>
+</li>
+<li><p>When a user drops another icon onto the <span class="bold"><b>scribble</b></span> icon, the Desktop brings up the<span class="bold"><b> scribble</b></span> application with the file represented by the dropped icon. Users can then use the <tt>scribble</tt> application to edit this file.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>We're making no provision for rejecting icons that represent files unsuitable for editing. You could enhance the <span class="bold"><b>scribble</b></span> file type by including a line that tells the Desktop to notify users when they drop an icon of the wrong type onto the <span class="bold"><b>scribble</b></span> icon.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><p>(This section assumes that we're writing the file type completely from scratch. You might prefer instead to modify an existing file type. To learn how to find the FTRs for an existing icon, see <a href="ch11.html#LE80328-PARENT" title="Add the FTRs: An Alternate Method">&#8220;Add the FTRs: An Alternate Method&#8221;</a><a href="ch11.html#LE80328-PARENT"> in Chapter 11</a>.)</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5236395"></a>Open an FTR File for <span class="bold"><b>scribble</b></span></h3></div></div>
+<p>For the purposes of this example, assume we're creating a new FTR file, rather than adding to an existing one. We just open a new file using any editor we choose, then type in whatever file typing rules we decide to use.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5236412"></a>Add the Rules to the <span class="bold"><b>scribble</b></span> FTR File</h3></div></div>
+<p>Now that we've opened a file for the FTRs, we just type in the rules we need to program the icon. The file type has to begin with the TYPE rule on the first line. The TYPE rule names the file type. This section discusses each line we use to create the file type. </p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236429"></a>Line 1: Name the File Type</h4></div></div>
+<p>Each file type has to have a unique name. Since our application is called <tt>scribble</tt>, assume that we decide to name the new file type &#8220;scribbleExecutable.&#8221; By basing the file type name on the application name, we help insure a unique file type name. </p>
+<p>Before using the name, <span class="bold"><b>scribbleExecutable</b></span>, we search for it in the <tt>/usr/lib/filetype</tt> directory, to make sure that the name is not already in use:</p>
+<div class="orderedlist"><ol type="1"><li><p>Change to the <tt>/usr/lib/filetype</tt> directory:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd /usr/lib/filetype</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Search for the name scribbleExecutable:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep &quot;scribbleExecutable&quot; */*.ftr</tt></b> 
+</pre></td></tr></table><br></li>
+</ol></div><p>Assume that we do not find an existing file type with the name &#8220;scribbleExecutable,&#8221; so that's what we name the new file type. </p>
+<p>Now we use the TYPE rule to name the file type by typing this line into our FTR file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+TYPE scribbleExecutable
+</pre></td></tr></table><p>For more information on the TYPE rule, see <a href="ch13.html#LE10863-PARENT" title="Naming File Types: The TYPE Rule">&#8220;Naming File Types: The TYPE Rule&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236519"></a>Line 2: Classify the Filetype</h4></div></div>
+<p>Next we use the SUPERTYPE rule to tell the Desktop what type of file the icon represents. Since<span class="bold"><b> scribble</b></span> is an executable, we add this line to the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+SUPERTYPE Executable
+</pre></td></tr></table><p>For more information on the SUPERTYPE rule, see <a href="ch13.html#LE27184-PARENT" title="Categorizing File Types: The SUPERTYPE Rule">&#8220;Categorizing File Types: The SUPERTYPE Rule&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236549"></a>Line 3: Match the File Type</h4></div></div>
+<p>Now we add the scribble executable's tag number to the file type definition by adding this line to the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+MATCH   tag == 0x00001001;
+</pre></td></tr></table><p>This step assumes that we've already tagged the executable itself with the tag 0X001001, as described in <a href="ch11.html#LE46561-PARENT" title="Step One: Tagging Your Application">&#8220;Step One: Tagging Your Application&#8221;</a><a href="ch11.html#LE46561-PARENT"> in Chapter 11</a>.</p>
+<p>(Since <tt>scribble</tt> is an executable, we're able to use the <tt>tag</tt> command to tag it. If we were unable to use the <tt>tag</tt> command to assign an identification number to the application itself, we would need a slightly more complicated MATCH rule to match the application with its FTRs. For more information, see <a href="ch13.html#LE98067-PARENT" title="Matching File Types With Applications: The MATCH Rule">&#8220;Matching File Types With Applications: The MATCH Rule&#8221;</a> and <a href="ch13.html#LE92689-PARENT" title="Matching Non-Plain Files: The SPECIALFILE Rule">&#8220;Matching Non-Plain Files: The SPECIALFILE Rule&#8221;</a>.)</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236626"></a>Line 4: Provide a Descriptive Phrase</h4></div></div>
+<p>Next we use the LEGEND rule to provide a <span class="bold"><b>legend</b></span> for the file type. The legend is a brief descriptive phrase that appears when users view a directory as a list or select &#8220;Get File Info&#8221; from the Desktop menu. It should be simple, informative, and 25 characters or less. To add the legend for<span class="bold"><b> scribble</b></span>, add this line to the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+LEGEND scribble text editor
+</pre></td></tr></table><p>For more information on using the LEGEND rule, see <a href="ch13.html#LE15180-PARENT" title="Adding a Descriptive Phrase: The LEGEND Rule">&#8220;Adding a Descriptive Phrase: The LEGEND Rule&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236662"></a>Line 5: Define Icon-Opening Behavior</h4></div></div>
+<p>We use the CMD OPEN rule to tell the Desktop what to do when users open the<span class="bold"><b> scribble </b></span>icon. In this example we want the Desktop to run the <tt>scribble</tt> <tt>application </tt>when the icon is opened, so we include this line in the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+CMD OPEN $LEADER $REST
+</pre></td></tr></table><p>$LEADER refers to the opened application, in this case<span class="bold"><b> scribble</b></span>. The Desktop uses $LEADER to open $REST. In this case, $REST means any other selected icons in the same window. $LEADER and $REST are Desktop environmental variables. These variables are listed and described in <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a>.</p>
+<p>For more information on using the CMD OPEN rule, see <a href="ch13.html#LE33157-PARENT" title="Programming Open Behavior: The CMD OPEN Rule">&#8220;Programming Open Behavior: The CMD OPEN Rule&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236748"></a>Line 6: Define Drag and Drop Behavior</h4></div></div>
+<p>We use the CMD DROP rule to tell the Desktop what to do when users drop another icon onto the<span class="bold"><b> scribble</b></span> icon. In this example we want the Desktop to open the <tt>scribble</tt> <tt>application </tt>with the contents of the dropped file, so we include this line in the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+CMD DROP $TARGET $SELECTED
+</pre></td></tr></table><p>$TARGET refers to the icon that the user dropped another icon on, in this case <span class="bold"><b>scribble</b></span>; $SELECTED refers to the icon that the user dropped onto the<span class="bold"><b> scribble</b></span> icon. $TARGET and $SELECTED are Desktop environmental variables. These variables are listed and described in <a href="apb.html" title="Appendix B. Desktop Variables">Appendix B, &#8220;Desktop Variables&#8221;</a>.</p>
+<p>For more information on the CMD DROP rule, see <a href="ch13.html#LE91613-PARENT" title="Programming Drag and Drop Behavior: The CMD DROP and DROPIF Rules">&#8220;Programming Drag and Drop Behavior: The CMD DROP and DROPIF Rules&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5236828"></a>Line 7: Define Alt-Open Behavior</h4></div></div>
+<p>We use the ALTOPEN rule to tell the Desktop what to do when users open the<span class="bold"><b> scribble </b></span>icon while holding down the <b><tt>&lt;Alt&gt;</tt></b> key. In this example, we want the Desktop to run the <tt>launch</tt>(1) program, so we include this line in the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+CMD ALTOPEN launch -c $LEADER $REST
+</pre></td></tr></table><p>Again, $LEADER refers to the opened application,<span class="bold"><b> scribble</b></span> and $REST refers to any other selected icons in the same window. <tt>launch</tt> runs the <tt>launch</tt> program, and <span class="bold"><b>-c</b></span> is a command line argument to <tt>launch</tt>. </p>
+<p>For more information on the CMD ALTOPEN rule, see <a href="ch13.html#LE33173-PARENT" title="Programming Alt-Open Behavior: The CMD ALTOPEN Rule">&#8220;Programming Alt-Open Behavior: The CMD ALTOPEN Rule&#8221;</a>. See the <tt>launch(1)</tt> reference page for more information about using the <tt>launch</tt> command.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE70583-PARENT"></a>Line 8: Add the Icon Picture</h4></div></div>
+<p>We use the ICON rule to tell the Desktop where to find the picture for the<span class="bold"><b> scribble</b></span> icon. Assume we have an icon picture in the file <tt>/usr/local/lib/install/iconlib/scribble.fti</tt>. In this example, we add these lines to the FTRs:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+ICON{
+if (opened) {
+   include(&quot;../iconlib/generic.open.fti&quot;);
+} else {
+   include(&quot;../iconlib/generic.closed.fti&quot;);
+}
+include(&quot;iconlib/scribble.fti&quot;);
+}
+</pre></td></tr></table><p>These lines tell the Desktop how to find pictures for the<span class="bold"><b> scribble</b></span> icon in the opened and closed states.The pathname of the icon (<span class="bold"><b>.fti</b></span>) files is listed relative to the location of the FTR file containing the ICON rule. Relative pathnames work as long as the icon files are located within the <tt>/usr/lib/filetype</tt> directory structure. Alternatively, you can use the absolute pathnames to the files: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><tt>/usr/local/lib/iconlib/generic.open.fti</tt> </p>
+</li>
+<li><p><tt>/usr/local/lib/iconlib/generic.closed.fti</tt> </p>
+</li>
+<li><p><tt>/usr/local/lib/iconlib/scribble.fti</tt> </p>
+</li>
+</ul></div><p>For more information on the ICON rule, see <a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5237000"></a>Name the <span class="bold"><b>scribble</b></span> FTR File and Put It in the Appropriate Directory</h3></div></div>
+<p>Assume the name of our company is Shakespeare. Then according to the naming conventions in <a href="ch11.html#LE58709-PARENT" title="Naming FTR Files">&#8220;Naming FTR Files&#8221;</a><a href="ch11.html#LE58709-PARENT"> in Chapter 11</a>, we should name our FTR file <tt>Shakespeare.scribble.ftr</tt>. We put the file in the <tt>/usr/lib/filetype/install</tt> directory.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE41208-PARENT"></a>The <span class="bold"><b>scribble</b></span> FTRs</h3></div></div>
+<p>Here is the set of FTRs that we created to define the file type called &#8220;scribbleExecutable.&#8221;</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+TYPE scribbleExecutable
+   SUPERTYPE Executable
+   MATCH tag == 0x00001001;
+   LEGEND scribble text editor
+   CMD OPEN $LEADER $REST
+   CMD ALTOPEN launch -c $LEADER $REST
+   CMD DROP $TARGET $SELECTED
+   ICON {
+   if (opened) {
+      include(&quot;../iconlib/generic.open.fti&quot;);
+    } else {
+      include(&quot;../iconlib/generic.closed.fti&quot;);
+   }
+   include(&quot;iconlib/scribble.fti&quot;):
+} 
+</pre></td></tr></table><p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch12.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch14.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 12. Using IconSmith </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 14. Printing From the Desktop </td></tr></table></div></body></html>

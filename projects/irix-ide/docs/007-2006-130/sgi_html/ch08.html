@@ -1,0 +1,478 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 8. Monitoring Changes to Files and Directories</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch07.html" title="Chapter 7. Interapplication Data Exchange"><link rel="next" href="ch09.html" title="Chapter 9. Providing Online Help With SGIHelp"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Monitoring Changes to Files and Directories</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch09.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE11012-PARENT"></a>Chapter 8. Monitoring Changes to Files and Directories</h2></div></div>
+<p><a class="indexterm" name="IT08.FAM-0"></a>
+<a class="indexterm" name="IT08.FAM-1"></a>
+<a class="indexterm" name="IT08.FAM-2"></a>
+<a class="indexterm" name="IT08.FAM-3"></a>
+<a class="indexterm" name="IT08.FAM-4"></a>
+The File Alteration Monitor (FAM) monitors changes to files and directories in the filesystem and notifies interested applications of these changes. Your application can use FAM to get an up-to-date view of the filesystem rather than having to poll the filesystem. This chapter describes the required libraries and provides a basic list of steps for using FAM. <a class="indexterm" name="IT08.FAM-5"></a>
+For more detailed information, refer to the <tt>fam(1M)</tt> and <tt>FAM(3X)</tt> reference pages.</p>
+<p>This chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#LE54801-PARENT" title="FAM Overview">&#8220;FAM Overview&#8221;</a> provides an overview to FAM including the libraries and header files needed to use FAM in your application.</p>
+</li>
+<li><p><a href="ch08.html#LE29093-PARENT" title="The FAM Interface">&#8220;The FAM Interface&#8221;</a> describes the FAM API.</p>
+</li>
+<li><p><a href="ch08.html#LE85266-PARENT" title="Using FAM">&#8220;Using FAM&#8221;</a> provides a simple example demonstrating FAM.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE54801-PARENT"></a>FAM Overview</h2></div></div>
+<p>Typically, if applications need to monitor the status of a file or directory, they must periodically poll the filesystem. FAM provides a more efficient and convenient method.</p>
+<p><a class="indexterm" name="IT08.FAM-6"></a>
+FAM consists of the FAM daemon, <tt>fam</tt>, and a library for interacting with this daemon. An application can request <tt>fam</tt> to monitor any files or directories in the filesystem. When <tt>fam</tt> detects changes to these files, it notifies the application.</p>
+<p>This section provides an overview of FAM and describes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#LE52432-PARENT" title="Theory of Operation">&#8220;Theory of Operation&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#LE15849-PARENT" title="FAM Libraries and Include Files">&#8220;FAM Libraries and Include Files&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE52432-PARENT"></a>Theory of Operation</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-7"></a>
+FAM uses <tt>imon</tt>, a pseudo device, to monitor filesystem activity on your system on a file-by-file basis. You can refer to the <tt>imon(7)</tt> reference page for more information on its operation, but you should not attempt to access <tt>imon</tt> directly.</p>
+<p>When you provide FAM with the name of a file or directory to monitor, FAM passes the request to <tt>imon</tt>, which begins monitoring the inode corresponding to the pathname. When <tt>imon</tt> detects a change to an inode that it is monitoring, it notifies FAM, which matches the inode to a corresponding filename. FAM then generates a FAM event on a socket. Your application can either monitor the socket or periodically poll FAM to detect FAM events.</p>
+<p>This difference between FAM and <tt>imon</tt> can produce some unexpected results. For example, if a user moves a file, FAM reports that the file is deleted. The reason is that FAM monitors files by name and not inode, so it doesn't know that the file still exists.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Unlike local files and directories, FAM monitors NFS-mounted files and directories by name rather than by inode.
+</td></tr></table><hr noshade="noshade"></div><p>As another example, consider the case where FAM is monitoring a file. If the user deletes the file, FAM correctly reports that fact. Then FAM polls the directory every few seconds to see if the file has been created. If you need to detect the creation of a given file by name, you may want to monitor the directory in which it will be created and watch for FAM events notifying the creation of a file by that name in the directory.</p>
+<p>Whenever FAM is asked to monitor a file/directory that resides on a remote (NFS) filesystem, FAM tries to make a connection to the FAM on the NFS server. If it succeeds, it asks the server fam to monitor the file. The server FAM sends FAM events, and the original FAM translates those events to a form its client can use. If FAM can't connect to FAM on the server, it monitors the file itself by polling every few seconds. Polling over NFS has a high overhead.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE15849-PARENT"></a>FAM Libraries and Include Files</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-8"></a>
+<a class="indexterm" name="IT08.FAM-9"></a>
+The FAM interface routines are in the <tt>libfam</tt> library. <tt>libfam</tt> depends on the <tt>libC</tt> library. Be sure to specify <tt>-lfam</tt> before <tt>-lC</tt> in the compilation or linking command. If you are using fam from a C++ program, <tt>libC</tt> is included automatically. You must include <tt>libC</tt> if you are using fam from a C program.</p>
+<p>You must include <tt>&lt;fam.h&gt;</tt> in any source file that uses FAM. You must also include <tt>&lt;sys/select.h&gt;</tt> if you use the <tt>select(2)</tt> system call.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE29093-PARENT"></a>The FAM Interface</h2></div></div>
+<p><a class="indexterm" name="IT08.FAM-10"></a>
+This section describes the functions you use to access FAM from your application:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch08.html#LE33054-PARENT" title="Opening and Closing a FAM Connection">&#8220;Opening and Closing a FAM Connection&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#LE28298-PARENT" title="Monitoring a File or Directory">&#8220;Monitoring a File or Directory&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#LE62804-PARENT" title="Suspending, Resuming, and Canceling Monitoring">&#8220;Suspending, Resuming, and Canceling Monitoring&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#LE33384-PARENT" title="Detecting Changes to Files and Directories">&#8220;Detecting Changes to Files and Directories&#8221;</a> </p>
+</li>
+<li><p><a href="ch08.html#LE25612-PARENT" title="FAM Examples">&#8220;FAM Examples&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE33054-PARENT"></a>Opening and Closing a FAM Connection</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-11"></a>
+<a class="indexterm" name="IT08.FAM-12"></a>
+The function <tt>FAMOpen()</tt> opens a connection to <tt>fam</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int FAMOpen(FAMConnection* <i>fc</i>)
+</pre></td></tr></table><p><tt>FAMOpen()</tt> returns 0 if successful and -1 if unsuccessful. <tt>FAMOpen()</tt> initializes the FAMConnection structure passed to it, which you must use in all subsequent FAM procedure calls in your application.</p>
+<p>An element of the FAMConnection structure is the file descriptor associated with the socket that FAM uses to communicate with your application. You need this file descriptor to perform <tt>select()</tt> operations on the socket. You can obtain the file descriptor using the <tt>FAMCONNECTION_GETFD()</tt> macro:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+FAMCONNECTION_GETFD(<i>fc</i>)
+</pre></td></tr></table><p>The function <tt>FAMOpen2</tt> tells FAM the application's name:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int FAMOpen2(FAMConnection* <i>fc</i>, const char* appName)
+</pre></td></tr></table><p>FAM uses <span class="bold"><b>appName</b></span> when it prints debugging messages.</p>
+<p>The function <tt>FAMClose()</tt> closes a connection to <tt>fam</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int FAMClose(FAMConnection* <i>fc</i>)
+</pre></td></tr></table><p><tt>FAMClose()</tt> returns 0 if successful and -1 if unsuccessful.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE28298-PARENT"></a>Monitoring a File or Directory</h3></div></div>
+<p><tt>FAMMonitorDirectory()</tt> and <tt>FAMMonitorFile()</tt> tell FAM to start monitoring a <a class="indexterm" name="IT08.FAM-13"></a>
+directory or file respectively:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+int FAMMonitorDirectory(FAMConnection *<i>fc</i>,
+                        char *<i>filename</i>,
+                        FAMRequest* <i>fr</i>,
+                        void* <i>userData</i>)
+
+int FAMMonitorFile(FAMConnection *<i>fc</i>,
+                   char *<i>filename</i>,
+                   FAMRequest* <i>fr</i>,
+                   void* <i>userData</i>)
+</pre></td></tr></table><p><tt>FAMMonitorDirectory()</tt> monitors not only changes that happens to the contents of the specified directory file, but also to the files in the directory. If the directory contains subdirectories, <tt>FAMMonitorDirectory()</tt> monitors changes to the subdirectory files, but not the contents of those subdirectories. <tt>FAMMonitorFile()</tt> monitors only what happens to the specified file. Both functions return 0 if successful and -1 otherwise.</p>
+<p>The first argument to these functions is the FAMConnection structure initialized by <tt>FAMOpen()</tt>. The second argument is the full pathname of the directory or file to monitor. Note that you can't use relative pathnames.</p>
+<p>The third argument is a FAMRequest structure that these functions initialize. You can pass this structure to <tt>FAMSuspendMonitor()</tt>, <tt>FAMResumeMonitor()</tt>, or <tt>FAMCancelMonitor()</tt> to respectively suspend, resume, or cancel the monitoring of the file or directory. <a href="ch08.html#LE62804-PARENT" title="Suspending, Resuming, and Canceling Monitoring">&#8220;Suspending, Resuming, and Canceling Monitoring&#8221;</a> further describes these functions.</p>
+<p>The fourth argument is a pointer to any arbitrary user data that you want included in the FAMEvent structure returned by <tt>FAMNextEvent()</tt> when this file or directory changes.</p>
+<p>FAM then generates <span class="bold"><b>FAM events</b></span> whenever it detects changes in monitored files or directories. <a href="ch08.html#LE33384-PARENT" title="Detecting Changes to Files and Directories">&#8220;Detecting Changes to Files and Directories&#8221;</a> describes how to detect and interpret these events.</p>
+<p>Two similar routines are <tt>FAMMonitorDirectory2()</tt> and <tt>FAMMonitorFile2()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+int FAMMonitorDirectory2(FAMConnection *fc,
+                        char *filename,
+                        FAMRequest* fr);
+
+int FAMMonitorFile2(FAMConnection *fc,
+                   char *filename,
+                   FAMRequest* fr);
+</pre></td></tr></table><p>In these routines, the caller picks the request number, not <tt>libfam</tt>. The caller specifies the request number by putting it in the FAMRequest before calling the routine. For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+FAMConnection fc;
+FAMRequest frq;
+...
+frq.reqnum = some_number_associated_with_tmp;
+if (FAMMonitorDirectory2(&amp;fc, &#8220;/tmp&#8221;, &amp;frq) &lt; 0)
+    perror(&#8220;can't monitor /tmp&#8221;);
+</pre></td></tr></table><p>If you use the -2 routines, you must choose unique request numbers. See FAMAcknowledge below.</p>
+<p>It's up to you to determine which routines to use: the -2 routines or the original routines. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE62804-PARENT"></a>Suspending, Resuming, and Canceling Monitoring</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-14"></a>
+<a class="indexterm" name="IT08.FAM-15"></a>
+<a class="indexterm" name="IT08.FAM-16"></a>
+Once you've begun monitoring a file or directory, you can cancel monitoring or temporarily suspend and later resume monitoring.</p>
+<p><tt>FAMSuspendMonitor()</tt> temporarily suspends monitoring a file or directory. <tt>FAMResumeMonitor()</tt> resumes monitoring the file or directory. Suspending file monitoring can be useful when your application does not need to display information about a file (for example, when your application is iconified).</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>FAM queues any changes that occur to the file or directory while monitoring is suspended. When your application resumes monitoring, FAM notifies it of any changes.
+</td></tr></table><hr noshade="noshade"></div><p>The syntax for these functions is:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+int FAMSuspendMonitor(FAMConnection *<i>fc</i>, FAMRequest *<i>fr</i>);
+
+int FAMResumeMonitor(FAMConnection *<i>fc</i>, FAMRequest *<i>fr</i>);
+</pre></td></tr></table><p><i>fc</i> is the FAMConnection returned by <tt>FAMOpen()</tt>, and <i>fr</i> is the FAMRequest returned by either <tt>FAMMonitorFile()</tt> or <tt>FAMMonitorDirectory()</tt>. Both functions return 0 if successful and -1 otherwise.</p>
+<p>When your application is finished monitoring a file or directory, it should call <tt>FAMCancelMonitor()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int FAMCancelMonitor(FAMConnection *<i>fc</i>, FAMRequest *<i>fr</i>)
+</pre></td></tr></table><p><tt>FAMCancelMonitor()</tt> instructs FAM to no longer monitor the file or directory specified by <i>fr</i>. It returns 0 if successful and -1 otherwise.</p>
+<p>After you call <tt>FAMCancelMonitor()</tt>, FAM sends a FAMAcknowledge event. When you've seen the FAMAcknowledge event, you know it's safe to re-use the request number (if you're using the -2 form monitoring routines).</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE33384-PARENT"></a>Detecting Changes to Files and Directories</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-17"></a>
+<a class="indexterm" name="IT08.FAM-18"></a>
+<a class="indexterm" name="IT08.FAM-19"></a>
+Whenever FAM detects changes in files or directories that it is monitoring, it generates a <span class="bold"><b>FAM event</b></span>. Your application can receive FAM events in one of two ways:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">The Select approach</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Your application performs a <tt>select</tt>(2) on the file descriptor in the FAMConnection structure returned by <tt>FAMOpen()</tt>. When this file descriptor becomes active, the application calls <tt>FAMNextEvent()</tt> to retrieve the pending FAM event.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">The Polling approach</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>Your application periodically calls <tt>FAMPending()</tt> (typically when the system is waiting for input). When <tt>FAMPending()</tt> returns with a positive return value, your application calls <tt>FAMNextEvent()</tt> to retrieve the pending FAM events.</p>
+
+</td></tr></table></div><p><tt>FAMPending()</tt> has the following syntax:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+int FAMPending(FAMConnection *<i>fc</i>)
+</pre></td></tr></table><p>It returns 1 if there is a FAM event queued, 0 if there is no queued event, and -1 if there is an error. <tt>FAMPending()</tt> returns immediately (that is, it does not wait for an event).</p>
+<p>Once you have determined that there is a FAM event queued, whether by using the select or polling approach, call <tt>FAMNextEvent()</tt> to retrieve it:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+int FAMNextEvent(FAMConnection *<i>fc</i>, FAMEvent *<i>fe</i>)
+</pre></td></tr></table><p><tt>FAMNextEvent()</tt> returns 0 if successful and -1 if there is an error. The first argument to <tt>FAMNextEvent()</tt> is the FAMConnection structure initialized by <tt>FAMOpen()</tt>. The second argument is a pointer to a FAMEvent structure, which <tt>FAMNextEvent()</tt> fills in with information about the FAM event. The format of the FAMEvent structure is:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef struct {
+    FAMConnection* <i>fc</i>;
+    FAMRequest <i>fr</i>;
+    char *<i>hostname</i>;
+    char <i>filename</i>[PATH_MAX];
+    void *<i>userdata</i>;
+    FAMCodes <i>code</i>;
+    } FAMEvent;
+</pre></td></tr></table><p><i>fc</i> is the FAMConnection structure initialized by <tt>FAMOpen()</tt>.</p>
+<p><i>fr</i> is the FAMRequest structure returned by either <tt>FAMMonitorFile()</tt> or <tt>FAMMonitorDirectory()</tt> when you requested that FAM monitor the file or directory that changed.</p>
+<p><i>hostname</i> is an obsolete field. Don't use it in your applications.</p>
+<p><i>filename</i> is either the full pathname of the file or directory that you monitored or the name of a file in a directory that you monitored.</p>
+<p><i>userdata</i> is the arbitrary data pointer that you provided when you called either <tt>FAMMonitorFile()</tt> or <tt>FAMMonitorDirectory()</tt> to monitor this file or directory. If you used the -2 routine, <tt>FAMMonitorDirectory2()</tt> or <tt>FAMMonitorFile2()</tt>, <i>userdata</i> is undefined. </p>
+<p><i>code</i> is an enumerated value of type FAMCodes that describes the change that occurred. It can take any of the following values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">FAMChanged</span></td><td width="10"> </td><td><p>Some value of the file or directory that can be obtained with <tt>lstat</tt>(2) changed.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMDeleted</span></td><td width="10"> </td><td><p>A file or directory being monitored was deleted.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMStartExecuting</span></td><td width="10"> </td><td><p>A monitored, executable file started executing. The event occurs only the first time the file is executed.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMStopExecuting</span></td><td width="10"> </td><td><p>A monitored, executable file that was running finished. If multiple processes from an executable are running, this event is generated only when the last one finishes.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMCreated</span></td><td width="10"> </td><td><p>A file was created in a directory being monitored.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMAcknowledge</span></td><td width="10"> </td><td><p>FAM generates a FAMAcknowledge event in response to a call to <tt>FAMCancelMonitor()</tt>. If you specify an invalid request, that is, a relative path, FAM automatically cancels the request and immediately sends a FAMAcknowledge event.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMExists</span></td><td width="10"> </td><td><p>When the application requests that a file be monitored, FAM generates a FAMExists event for that file (if it exists). When the application requests that a directory be monitored, FAM generates a FAMExists event for that directory (if it exists) and every file contained in that directory.</p>
+
+</td></tr><tr valign="top"><td><span class="term">FAMEndExist</span></td><td width="10"> </td><td><p>When the application requests a file or directory be monitored, FAM generates a FAMEndExist event after the last FAMExists event. (Therefore if you monitor a file, FAM generates a single FAMExists event followed by a FAMEndExist event.)</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Prior to IRIX 6.2, <tt>FAMNextEvent()</tt> did not initialize the <i>filename</i> field in a FAMEndExist event. You should use the request number to find the file or directory these events reference.
+</td></tr></table><hr noshade="noshade"></div><br>
+</td></tr></table></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5213694"></a>Symbolic Links</h4></div></div>
+<p><a class="indexterm" name="IT08.FAM-20"></a>
+<a class="indexterm" name="IT08.FAM-21"></a>
+If you specify the pathname of a symbolic link to <tt>FAMMonitorDirectory()</tt> or <tt>FAMMonitorFile()</tt>, FAM monitors only the symbolic link itself, not the target of the link. Although it might seem logical to automatically monitor the target of a symbolic link, consider that if the target is on an automounted filesystem, monitoring the target triggers and holds an automount. Another reason to monitor the link instead of the target is that the target may not exist.</p>
+<p>There is no general solution for monitoring targets of symbolic links. You might decide that it's appropriate for your application to monitor a target even if it's automounted.</p>
+<div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>The <tt>libc</tt> routine <tt>realpath(3C)</tt> is useful when you need to resolve a link into its ultimate target.
+</td></tr></table><hr noshade="noshade"></div><br><div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>Use <tt>statvfs(2)</tt> to recognize a remote file.
+</td></tr></table><hr noshade="noshade"></div><p>On the other hand, to avoid triggering and holding an automount, you can manually follow symbolic links until you reach either a local target, which you can then monitor, or a non-existent filesystem, in which case you might decide not to monitor the target. Another option is to test the target once to see if it is local, which triggers an automount only once if the target is automounted.</p>
+<p>For example, the following routine determines if a given path is nonexistent, a dangling link, local, or remote.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;errno.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/statvfs.h&gt;
+
+/*
+ *  determine a file's location
+ */
+
+enum location { ERROR, NONEXISTENT, DANGLING, LOCAL, REMOTE };
+
+enum location
+file_location(const char *path)
+{
+     char target_path[PATH_MAX];
+     struct stat statbuf;
+     struct statvfs svfsbuf;
+
+     if (!realpath(path, target_path))
+     {
+           /*
+            *  realpath failed -- probably a permission
+            *  problem, dangling link or nonexistent file.
+            */
+            if (errno == EACCES)
+                return ERROR;
+            if (lstat(path, &amp;statbuf) == 0)
+                return DANGLING;
+            else if (errno == ENOENT)
+                return NONEXISTENT;
+            else
+                return ERROR;
+      }
+     /*
+      *  Realpath succeeded.  Find out if file is local.
+      */
+      if (statvfs(target_path, &amp;svfsbuf) &lt; 0)
+          return ERROR;
+      if (svfsbuf.f_flag &amp; ST_LOCAL)
+          return LOCAL;
+      else
+          return REMOTE;
+}
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE25612-PARENT"></a>FAM Examples</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-22"></a>
+The following examples show event streams that FAM sends in certain situations. </p>
+<p><span class="bold"><b>Example: </b></span>A client monitors an existing file. Later, another program appends data to the file. Even later, the client cancels the monitoring request.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+User calls     FAMMonitorFile(... &#8220;/a/b/c&#8221; ...)
+FAM events:    FAMExists       /a/b/c
+               FAMEndExist     /a/b/c
+
+Other program appends to file.
+FAM event:     FAMChanged      /a/b/c
+
+User calls     FAMCancelMonitor(...)
+FAM event:     FAMAcknowledge  /a/b/c
+</pre></td></tr></table><p><span class="bold"><b>Example: </b></span>A client monitors a directory containing two files. Later, another program creates a third file.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+User calls     FAMMonitorDirectory(... &#8220;/a/b&#8221; ...)
+FAM events:    FAMExists       /a/b
+               FAMExists       file_one
+               FAMExists       file_two
+               FAMEndExist     /a/b
+Third file created.
+               FAMCreated      file_three
+</pre></td></tr></table><p><span class="bold"><b>Example: </b></span>A client monitors an executable file which is already running. Later, the program exits.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+User calls     FAMMonitorFile(... &#8220;/a/b/program&#8221; ...)
+FAM events:    FAMExists       /a/b/program
+               FAMEndExist     /a/b/program
+               FAMStartExecuting /a/b/program
+Program exits.
+FAM event:     FAMStopExecuting /a/b/program
+</pre></td></tr></table><p><span class="bold"><b>Example: </b></span>A client makes an invalid request.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+User calls     FAMMonitorDirectory(... &#8220;relative/path&#8221; ...)
+FAM event:     FAMAcknowledge  relative/path
+</pre></td></tr></table><p><span class="bold"><b>Example:</b></span> A client monitors a nonexistent file. Later, another program creates the file.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+User calls     FAMMonitorFile(... &#8220;/a/b/c&#8221; ...)
+FAM events:    FAMDeleted      /a/b/c
+               FAMEndExist
+File is created.
+FAM event:     FAMCreated      /a/b/c
+</pre></td></tr></table><p><span class="bold"><b>Example:</b></span> A client monitors a directory containing some files. Another program deletes the directory, then creates a new file with the same name as the directory.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+User calls     FAMMonitorDirectory(... &#8220;/a/b&#8221; ...)
+FAM events:    FAMExists       /a/b
+               FAMExists       file_one
+               FAMExists       file_two
+               FAMEndExist     /a/b
+Directory and files are deleted.
+FAM events:    FAMDeleted      /a/b
+               FAMChanged      /a/b
+               FAMDeleted      file_one
+               FAMDeleted      file_two
+File with same name created.
+FAM events:    FAMCreated      /a/b
+               FAMChanged      /a/b
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE85266-PARENT"></a>Using FAM</h2></div></div>
+<p>As noted in <a href="ch08.html#LE33384-PARENT" title="Detecting Changes to Files and Directories">&#8220;Detecting Changes to Files and Directories&#8221;</a>, your application can check for changes in files in directories that it monitors in two ways:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>use <tt>select()</tt> to wait until the FAM socket is active, indicating a change, which is described in <a href="ch08.html#LE89877-PARENT" title="Waiting for File Changes">&#8220;Waiting for File Changes&#8221;</a>. </p>
+</li>
+<li><p>use <tt>FAMPending()</tt> to periodically poll FAM, which is explained in <a href="ch08.html#LE49627-PARENT" title="Polling for File Changes">&#8220;Polling for File Changes&#8221;</a>. </p>
+</li>
+</ul></div><p>This section describes how to use both approaches.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE89877-PARENT"></a>Waiting for File Changes</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-23"></a>
+Follow these steps to use FAM in your application, using the select approach to detect changes:</p>
+<div class="orderedlist"><ol type="1"><li><p>Call <tt>FAMOpen()</tt> to create a connection to <tt>fam</tt>. This routine returns a FAMConnection structure used in all FAM procedures.</p>
+</li>
+<li><p>Call <tt>FAMMonitorFile()</tt> and <tt>FAMMonitorDirectory()</tt> to tell <tt>fam</tt> which files and directories to monitor.</p>
+</li>
+<li><p>Select on the <tt>fam</tt> socket file descriptor and call <tt>FAMNextEvent()</tt> when the <tt>fam</tt> socket is readable.</p>
+</li>
+<li><p>When the application is finished monitoring a file or directory, call <tt>FAMCancelMonitor()</tt>. If you want to temporarily suspend monitoring of a file or directory, call <tt>FAMSuspendMonitor()</tt>. When you're ready to start monitoring again, call <tt>FAMResumeMonitor()</tt>.</p>
+</li>
+<li><p>When the application no longer needs to monitor files and directories, call <tt>FAMClose()</tt> to release resources associated with files still being monitored and to close the connection to <tt>fam</tt>. This step is optional if you simply exit your application.</p>
+</li>
+</ol></div><p><a href="ch08.html#LE45453-PARENT" title="Example 8-1. Using Select With FAM ">Example 8-1</a> demonstrates this process in a simple program.</p>
+<div class="example"><a name="LE45453-PARENT"></a><p><a name="LE45453-PARENT"></a><b>Example 8-1. Using Select With FAM </b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/*
+ *   monitor.c -- monitor arbitrary file or directory
+ *                using fam
+ */
+ 
+#include &lt;fam.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/select.h&gt;
+ 
+/* event_name() - return printable name of fam event code */
+ 
+const char *event_name(int code)
+{
+    static const char *famevent[] = {
+        &quot;&quot;,
+        &quot;FAMChanged&quot;,
+        &quot;FAMDeleted&quot;,
+        &quot;FAMStartExecuting&quot;,
+        &quot;FAMStopExecuting&quot;,
+        &quot;FAMCreated&quot;,
+        &quot;FAMMoved&quot;,
+        &quot;FAMAcknowledge&quot;,
+        &quot;FAMExists&quot;,
+        &quot;FAMEndExist&quot;
+    };
+    static char unknown_event[10];
+ 
+    if (code &lt; FAMChanged || code &gt; FAMEndExist)
+    {
+        sprintf(unknown_event, &quot;unknown (%d)&quot;, code);
+        return unknown_event;
+    }
+    return famevent[code];
+}
+ 
+void main(int argc, char *argv[])
+{
+    int i, nmon, rc, fam_fd;
+    FAMConnection fc;
+    FAMRequest *frp;
+    struct stat status;
+    FAMEvent fe;
+    fd_set readfds;
+ 
+    /* Allocate storage for requests */
+ 
+    frp = malloc(argc * sizeof *frp);
+    if (!frp)
+    {
+        perror(&quot;malloc&quot;);
+        exit(1);
+    }
+ 
+    /* Open fam connection */
+ 
+    if ((FAMOpen(&amp;fc)) &lt; 0) 
+    {
+        perror(&quot;fam&quot;);
+        exit(1);
+    }
+ 
+    /* Request monitoring for each program argument */
+ 
+    for (nmon = 0, i = 1; i &lt; argc; i++)
+    {
+        if (stat(argv[i], &amp;status) &lt; 0)
+        {
+            perror(argv[i]);
+            status.st_mode = 0;
+        }
+        if ((status.st_mode &amp; S_IFMT) == S_IFDIR)
+            rc = FAMMonitorDirectory(&amp;fc, argv[i], frp + i,
+                                     NULL);
+        else
+            rc = FAMMonitorFile(&amp;fc, argv[i], frp + i, NULL);
+        if (rc &lt; 0)
+        {
+            perror(&quot;FAMMonitor failed&quot;);
+            continue;
+        }
+        nmon++;
+    }
+    if (!nmon)
+    {
+        fprintf(stderr, &quot;Nothing monitored.\n&quot;);
+        exit(1);
+    }
+ 
+    /* Initialize select data structure */
+ 
+    fam_fd = FAMCONNECTION_GETfd(&amp;fc);
+    FD_ZERO(&amp;readfds);
+    FD_SET(fam_fd, &amp;readfds);
+ 
+    /* Loop forever. */
+ 
+    while(1)
+    {
+        if (select(fam_fd + 1, &amp;readfds,
+                   NULL, NULL, NULL) &lt; 0)
+        {
+             perror(&quot;select failed&quot;);
+             exit(1);
+        }
+        if (FD_ISSET(fam_fd, &amp;readfds))
+        {
+            if (FAMNextEvent(&amp;fc, &amp;fe) &lt; 0)
+            {
+                perror(&quot;FAMNextEvent&quot;);
+                exit(1);
+            }
+            printf(&quot;%-24s %s\n&quot;, fe.filename,
+                   event_name(fe.code));
+        }
+    }
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE49627-PARENT"></a>Polling for File Changes</h3></div></div>
+<p><a class="indexterm" name="IT08.FAM-24"></a>
+<a class="indexterm" name="IT08.FAM-25"></a>
+Follow these steps to use FAM in your application, using the polling approach to detect changes:</p>
+<div class="orderedlist"><ol type="1"><li><p>Call <tt>FAMOpen()</tt> to create a connection to <tt>fam</tt>. This routine returns a FAMConnection structure used in all FAM procedures.</p>
+</li>
+<li><p>Call <tt>FAMMonitorFile()</tt> and <tt>FAMMonitorDirectory()</tt> to tell <tt>fam</tt> which files and directories to monitor.</p>
+</li>
+<li><p>Call <tt>FAMPending()</tt> to determine when there is a pending FAM event and then call <tt>FAMNextEvent()</tt> when an event is detected.</p>
+</li>
+<li><p>When the application is finished monitoring a file or directory, call <tt>FAMCancelMonitor()</tt>. If you want to temporarily suspend monitoring of a file or directory, call <tt>FAMSuspendMonitor()</tt>. When you're ready to start monitoring again, call <tt>FAMResumeMonitor()</tt>.</p>
+</li>
+<li><p>When the application no longer needs to monitor files and directories, call <tt>FAMClose()</tt> to free resources associated with files still being monitored and to close the connection to <tt>fam</tt>. This step is optional if you simply exit your application.</p>
+</li>
+</ol></div><p>For example, you could use the polling approach in the <tt>monitor.c</tt> program listed in <a href="ch08.html#LE45453-PARENT" title="Example 8-1. Using Select With FAM ">Example 8-1</a> by deleting the code pertaining to the select data structure and replacing the <tt>while</tt> loop with the code shown in <a href="ch08.html#LE25410-PARENT" title="Example 8-2. Polling With FAM ">Example 8-2</a>, which demonstrates this process in a simple program.</p>
+<div class="example"><a name="LE25410-PARENT"></a><p><a name="LE25410-PARENT"></a><b>Example 8-2. Polling With FAM </b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+while(1)
+{
+    rc = FAMPending(&amp;fc);
+    if (rc == 0)
+        break;
+    else if (rc == -1)
+        perror(&quot;FAMPending&quot;);
+    if (FAMNextEvent(&amp;fc, &amp;fe) &lt; 0)
+    {
+        perror(&quot;FAMNextEvent&quot;);
+        exit(1);
+    }
+    printf(&quot;%-24s %s\n&quot;, fe.filename,
+           event_name(fe.code));
+}
+</pre></td></tr></table><br></div><p>This is a particularly useful approach if you want to poll for changes from within an Xt work procedure. <a href="ch08.html#LE63394-PARENT" title="Example 8-3. Polling FAM Within an Xt Work Procedure">Example 8-3</a> shows the skeleton code for such a work procedure.</p>
+<div class="example"><a name="LE63394-PARENT"></a><p><a name="LE63394-PARENT"></a><b>Example 8-3. Polling FAM Within an Xt Work Procedure</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Boolean monitorFiles(XtPointer clientData)
+{
+    int rc = FAMPending(&amp;fc);
+ 
+    if (rc == 0)
+        return(FALSE);
+    else if (rc == -1)
+        XtAppError(app_context, &quot;FAMPending error&quot;);
+ 
+    if (FAMNextEvent(&amp;fc, &amp;fe) &lt; 0)
+    {
+        XtAppError(app_context, &quot;FAMNextEvent error&quot;);
+    }
+
+    handleFileChange(fe);
+    return(FALSE);
+} 
+</pre></td></tr></table><br></div><br></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch09.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 7. Interapplication Data Exchange </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 9. Providing Online Help With SGIHelp </td></tr></table></div></body></html>

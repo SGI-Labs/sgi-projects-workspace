@@ -1,0 +1,531 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 12. Using IconSmith</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt02.html" title="Part II. Creating Desktop Icons"><link rel="previous" href="ch11.html" title="Chapter 11. Creating Desktop Icons: An Overview"><link rel="next" href="ch13.html" title="Chapter 13. File Typing Rules"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 12. Using IconSmith</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch11.html">Prev</a> </td><th width="60%" align="center">Part II. Creating Desktop Icons</th><td width="20%" align="right"> <a accesskey="n" href="ch13.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE81290-PARENT"></a>Chapter 12. Using IconSmith</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-0"></a>
+<a class="indexterm" name="IT12.IconSmith-1"></a>
+<a class="indexterm" name="IT12.IconSmith-2"></a>
+This chapter explains how to use the IconSmith tool to draw an icon for your application. This <a class="indexterm" name="IT12.IconSmith-3"></a>
+chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#LE38832-PARENT" title="About IconSmith">&#8220;About IconSmith&#8221;</a> briefly describes the IconSmith tool.</p>
+</li>
+<li><p><a href="ch12.html#LE77527-PARENT" title="Where to Install Your Completed Icon">&#8220;Where to Install Your Completed Icon&#8221;</a> explains where to put your icon file, after you've finished drawing your icon.</p>
+</li>
+<li><p><a href="ch12.html#LE63643-PARENT" title="Some Definitions">&#8220;Some Definitions&#8221;</a> defines some terms you'll need to use IconSmith.</p>
+</li>
+<li><p><a href="ch12.html#LE87252-PARENT" title="Starting IconSmith">&#8220;Starting IconSmith&#8221;</a> explains how to start the IconSmith tool.</p>
+</li>
+<li><p><a href="ch12.html#LE65037-PARENT" title="IconSmith Menus">&#8220;IconSmith Menus&#8221;</a> discusses IconSmith's main menus: the IconSmith menu and the Preview menu.</p>
+</li>
+<li><p><a href="ch12.html#LE15755-PARENT" title="IconSmith Windows">&#8220;IconSmith Windows&#8221;</a> lists IconSmith's windows: the main window, the Palette window, the Constraints window, and the Import Icon (Set Template) window.</p>
+</li>
+<li><p><a href="ch12.html#LE49874-PARENT" title="Drawing With IconSmith">&#8220;Drawing With IconSmith&#8221;</a> describes IconSmith's drawing tools.</p>
+</li>
+<li><p><a href="ch12.html#LE26999-PARENT" title="Selecting">&#8220;Selecting&#8221;</a> describes IconSmith's selection features.</p>
+</li>
+<li><p><a href="ch12.html#LE93773-PARENT" title="Transformations">&#8220;Transformations&#8221;</a> describes IconSmith's transformation features.</p>
+</li>
+<li><p><a href="ch12.html#LE47763-PARENT" title="Concave Polygons">&#8220;Concave Polygons&#8221;</a> explains how to construct concave polygons in IconSmith.</p>
+</li>
+<li><p><a href="ch12.html#LE34047-PARENT" title="Constraints: Gravity (Object) Snap and Grid Snap">&#8220;Constraints: Gravity (Object) Snap and Grid Snap&#8221;</a> explains how to use IconSmith's gravity snap and grid snap features to guide your drawing. </p>
+</li>
+<li><p><a href="ch12.html#LE18262-PARENT" title="Icon Design and Composition Conventions">&#8220;Icon Design and Composition Conventions&#8221;</a> explains how to make sure that your icon complies with the basic icon design and composition conventions described in &#8220;Designing the Appearance of Icons&#8221; in Chapter 2 of the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+</li>
+<li><p><a href="ch12.html#LE15796-PARENT" title="Advanced IconSmith Techniques">&#8220;Advanced IconSmith Techniques&#8221;</a> describes some advanced techniques, such as drawing circles and ovals in IconSmith.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE38832-PARENT"></a>About IconSmith</h2></div></div>
+<p>IconSmith is a program for drawing Desktop icons. Icons drawn with IconSmith are saved in an <span class="bold"><b>icon description language</b></span>. The icon description language is described in <a href="apd.html" title="Appendix D. The Icon Description Language">Appendix D, &#8220;The Icon Description Language&#8221;</a>.</p>
+<p>Designed for the specific requirements of the Desktop, IconSmith produces icons that draw quickly and display properly on the Desktop on all Silicon Graphics workstations.</p>
+<p><a class="indexterm" name="IT12.IconSmith-4"></a>
+<a class="indexterm" name="IT12.IconSmith-5"></a>
+An icon picture generally consists of a unique <span class="bold"><b>badge</b></span> plus a generic component (for example, the &#8220;magic carpet&#8221; designating executables). The badge is the part of the icon picture that appears in front of the generic component and that uniquely identifies your application. The generic components are pre-drawn and installed by default when you install the IRIX Interactive Desktop environment. </p>
+<p>You don't need to draw the generic components of your icons. When using IconSmith to draw your icon badge, you can import the generic component as a template as described in <a href="ch12.html#LE27381-PARENT" title="Importing Generic Icon Components (Magic Carpet)">&#8220;Importing Generic Icon Components (Magic Carpet)&#8221;</a>. Then your ICON rule in your FTR can include the generic components so they appear behind your badge(s) when the icon is rendered on the Desktop.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Iconsmith is not a general-use drawing application. Use it only to draw Desktop icons.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE77527-PARENT"></a>Where to Install Your Completed Icon</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-6"></a>
+<a class="indexterm" name="IT12.IconSmith-7"></a>
+<a class="indexterm" name="IT12.IconSmith-8"></a>
+After drawing your badge with IconSmith, save the badge&#8212;the filename should end in <tt>.fti</tt>&#8212;and install the saved file in the correct directory:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>If you install your FTR (<span class="bold"><b>.</b></span><tt>ftr</tt>) files in the<tt> /usr/lib/filetype/install</tt> directory (where you typically should install your FTR files), then install your icon (<span class="bold"><b>.</b></span><tt>fti</tt>) files in the <tt>/usr/lib/filetype/install/iconlib</tt> directory.</p>
+</li>
+<li><p>If you install your FTR files in one of the other directories listed in <a href="apf.html" title="Appendix F. FTR File Directories">Appendix F, &#8220;FTR File Directories&#8221;</a>, then install your badge in a subdirectory of that directory. Name the subdirectory <tt>iconlib</tt> if the subdirectory doesn't already exist.</p>
+</li>
+</ul></div><p>After you install the badge in the appropriate directory, see the following for more information:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch11.html#LE17054-PARENT" title="Step Three: Programming Your Icon">&#8220;Step Three: Programming Your Icon&#8221;</a><a href="ch11.html#LE17054-PARENT"> in Chapter 11</a> </p>
+</li>
+<li><p><a href="ch11.html#LE52367-PARENT" title="Step Four: Compiling the Source Files">&#8220;Step Four: Compiling the Source Files&#8221;</a><a href="ch11.html#LE52367-PARENT"> in Chapter 11</a> </p>
+</li>
+<li><p><a href="ch11.html#LE78197-PARENT" title="Step Five: Installing Your Application in the Icon Catalog">&#8220;Step Five: Installing Your Application in the Icon Catalog&#8221;</a><a href="ch11.html#LE78197-PARENT"> in Chapter 11</a> </p>
+</li>
+<li><p><a href="ch11.html#LE74717-PARENT" title="Step Six: Restarting the Desktop">&#8220;Step Six: Restarting the Desktop&#8221;</a><a href="ch11.html#LE74717-PARENT"> in Chapter 11</a> </p>
+</li>
+<li><p><a href="ch11.html#LE21525-PARENT" title="Step Seven: Updating Your Installation Process">&#8220;Step Seven: Updating Your Installation Process&#8221;</a><a href="ch11.html#LE21525-PARENT"> in Chapter 11</a> </p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE63643-PARENT"></a>Some Definitions</h2></div></div>
+<p>IconSmith uses some terms that may not be familiar to you. This section defines some terms used in the rest of this chapter. </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5225112"></a>Caret</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-9"></a>
+<a class="indexterm" name="IT12.IconSmith-10"></a>
+<a class="indexterm" name="IT12.IconSmith-11"></a>
+<a class="indexterm" name="IT12.IconSmith-12"></a>
+<a class="indexterm" name="IT12.IconSmith-13"></a>
+The <span class="bold"><b>caret</b></span> (shown in <a href="ch12.html#id5225221" title="Figure 12-1. Caret">Figure 12-1</a>) is a small red and blue cross. The caret always shows the location of the last mouse click&#8212;when you click the left mouse button, the caret appears where the cursor is pointed. Unlike the cursor, the caret shows the effects of grids and gravity (described in <a href="ch12.html#LE34047-PARENT" title="Constraints: Gravity (Object) Snap and Grid Snap">&#8220;Constraints: Gravity (Object) Snap and Grid Snap&#8221;</a>).</p>
+<p><div class="figure"><a name="id5225221"></a><p><a name="id5225221"></a><b>Figure 12-1. Caret</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/caret.gif" alt="Caret" height="48" width="50"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5225244"></a>Transformation Pin</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-14"></a>
+<a class="indexterm" name="IT12.IconSmith-15"></a>
+<a class="indexterm" name="IT12.IconSmith-16"></a>
+<a class="indexterm" name="IT12.IconSmith-17"></a>
+The <span class="bold"><b>transformation pin</b></span> (shown in <a href="ch12.html#id5225313" title="Figure 12-2. Transformation Pin">Figure 12-2</a>) indicates the point from which an object is scaled or sheared and around which an object is rotated. It is a blue and white cross, larger than the caret. It can be dropped anywhere to affect a transform.</p>
+<p><div class="figure"><a name="id5225313"></a><p><a name="id5225313"></a><b>Figure 12-2. Transformation Pin</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/transpin.gif" alt="Transformation Pin" height="42" width="45"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5225335"></a>Vertex</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-18"></a>
+<a class="indexterm" name="IT12.IconSmith-19"></a>
+<a class="indexterm" name="IT12.IconSmith-20"></a>
+A <span class="bold"><b>vertex</b></span> (shown in <a href="ch12.html#id5225484" title="Figure 12-3. Vertex">Figure 12-3</a>) is a selectable point, created when the mouse is clicked in the IconSmith window while the <b><tt>&lt;Ctrl&gt;</tt></b> key is held down.</p>
+<p><div class="figure"><a name="id5225484"></a><p><a name="id5225484"></a><b>Figure 12-3. Vertex</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/vertex.gif" alt="Vertex" height="49" width="51"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5225506"></a>Path</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-21"></a>
+<a class="indexterm" name="IT12.IconSmith-22"></a>
+<a class="indexterm" name="IT12.IconSmith-23"></a>
+<a class="indexterm" name="IT12.IconSmith-24"></a>
+<a class="indexterm" name="IT12.IconSmith-25"></a>
+A <span class="bold"><b>path</b></span> (shown in <a href="ch12.html#id5225606" title="Figure 12-4. Path">Figure 12-4</a>) is one or more line segments between vertices. Paths can be open or closed. A closed path can be filled or unfilled.</p>
+<p><div class="figure"><a name="id5225606"></a><p><a name="id5225606"></a><b>Figure 12-4. Path</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/path.gif" alt="Path" height="49" width="51"></td></tr></table></div></div><br>
+</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE87252-PARENT"></a>Starting IconSmith</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-26"></a>
+<a class="indexterm" name="IT12.IconSmith-27"></a>
+To start IconSmith from the Desktop, double-click the IconSmith icon, shown in <a href="ch12.html#id5225677" title="Figure 12-5. The IconSmith Icon">Figure 12-5</a>.</p>
+<p><div class="figure"><a name="id5225677"></a><p><a name="id5225677"></a><b>Figure 12-5. The IconSmith Icon</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/figure2.1.gif" alt="The IconSmith Icon" height="67" width="72"></td></tr></table></div></div><br>
+</p>
+<p>To start IconSmith from the command line, type:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>/usr/sbin/iconsmith</tt></b> 
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE65037-PARENT"></a>IconSmith Menus</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-28"></a>
+<a class="indexterm" name="IT12.IconSmith-29"></a>
+The IconSmith main window, shown in <a href="ch12.html#id5225796" title="Figure 12-6. The Main IconSmith Window With Popup Menus ">Figure 12-6</a>, provides two popup menus, the IconSmith menu and the Preview menu:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Access the IconSmith menu by holding down the third (typically the right) mouse button anywhere in the main window drawing area.</p>
+</li>
+<li><p>Access the Preview menu by holding the third (right) mouse button down within the blue preview square located in the lower left corner of the IconSmith main window.</p>
+<div class="figure"><a name="id5225796"></a><p><a name="id5225796"></a><b>Figure 12-6. The Main IconSmith Window With Popup Menus </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-16.gif" alt="The Main IconSmith Window With Popup Menus " height="502" width="574"></td></tr></table></div></div><br></li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE15755-PARENT"></a>IconSmith Windows</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-30"></a>
+<a class="indexterm" name="IT12.IconSmith-31"></a>
+Besides the main window, IconSmith provides three other primary windows: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>Palette</b></span> (Selection Properties) window, which is described in <a href="ch12.html#LE17919-PARENT" title="Drawing Filled Shapes">&#8220;Drawing Filled Shapes&#8221;</a>. </p>
+</li>
+<li><p><span class="bold"><b>Constraints</b></span> window, which is described in<a href="ch12.html#LE34047-PARENT" title="Constraints: Gravity (Object) Snap and Grid Snap">&#8220;Constraints: Gravity (Object) Snap and Grid Snap&#8221;</a>. </p>
+</li>
+<li><p><span class="bold"><b>Import Icon or Set Template</b></span> window, which is described in <a href="ch12.html#LE27192-PARENT" title="Templates">&#8220;Templates&#8221;</a>. </p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE49874-PARENT"></a>Drawing With IconSmith</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-32"></a>
+<a class="indexterm" name="IT12.IconSmith-33"></a>
+IconSmith provides tools for drawing paths, selecting colors, importing design elements from other icons, drawing shapes, and using template images. This section covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#LE88511-PARENT" title="Drawing Paths">&#8220;Drawing Paths&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE58770-PARENT" title="Deleting">&#8220;Deleting&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE12126-PARENT" title="Keeping the 3-D Look">&#8220;Keeping the 3-D Look&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE17919-PARENT" title="Drawing Filled Shapes">&#8220;Drawing Filled Shapes&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE32183-PARENT" title="Sharing Design Elements">&#8220;Sharing Design Elements&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE27192-PARENT" title="Templates">&#8220;Templates&#8221;</a> </p>
+</li>
+</ul></div><p>Before you begin drawing, it's often useful to set up the preview box to represent the Desktop as closely as possible. This helps you choose colors and draw your icon to look its best when it appears on the Desktop and in the Icon Catalog. To do this:</p>
+<div class="orderedlist"><ol type="1"><li><p>Set the Background color to WorkSpace from the Preview popup menu. This gives the preview area the background color of the Icon Catalog. </p>
+</li>
+<li><p>Click the <b>Import</b> button at the bottom of the IconSmith window to display the Import Icon or Set Template window (shown in <a href="ch12.html#id5226126" title="Figure 12-7. The Import Icon or Set Template Window ">Figure 12-7</a>). </p>
+</li>
+<li><p>Import an appropriate template from the Import menu. For example, if you are drawing an icon for a new application, import the Closed Application template by clicking that button. This helps you center and size your design appropriately.</p>
+<div class="figure"><a name="id5226126"></a><p><a name="id5226126"></a><b>Figure 12-7. The Import Icon or Set Template Window </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-4.gif" alt="The Import Icon or Set Template Window " height="331" width="586"></td></tr></table></div></div><br><div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>Draw your icon design on a clear transparency, and tape the transparency to the top of the monitor housing. Using the drawing as a guide, trace it using IconSmith.
+</td></tr></table><hr noshade="noshade"></div><br><div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>When drawing in IconSmith, it is easy to select the wrong object. One technique that you can use is to draw adjacent icon components separately to prevent confusion when selecting and editing an object. When you have finished working with the parts, you can move them together.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ol></div><p><a class="indexterm" name="IT12.IconSmith-34"></a>
+<a class="indexterm" name="IT12.IconSmith-35"></a>
+There is an &#8220;Undo&#8221; option in the IconSmith popup menu. To bring up the IconSmith popup menu, hold down the right mouse button. You can undo up to nine operations using the <b><tt>&lt;F1&gt;</tt></b> key. To redo something you have undone, hold the <b><tt>&lt;Shift&gt;</tt></b> key and press the <b><tt>&lt;F1&gt;</tt></b> key.</p>
+<p><a class="indexterm" name="IT12.IconSmith-36"></a>
+<a class="indexterm" name="IT12.IconSmith-37"></a>
+No single polygon can contain more than 255 vertices. </p>
+<p>Also, be careful not to draw outside the royal blue boundary that appears in the preview box and in the drawing area. The Desktop doesn't display correctly outside those areas.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE88511-PARENT"></a>Drawing Paths</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-38"></a>
+<a class="indexterm" name="IT12.IconSmith-39"></a>
+To draw a path with IconSmith: </p>
+<div class="orderedlist"><ol type="1"><li><p>Select a starting point by clicking the primary (usually the left) mouse button.</p>
+</li>
+<li><p>Move the mouse to a new position.</p>
+</li>
+<li><p>Hold down the <b><tt>&lt;Control&gt;</tt></b> key and click the primary (left) mouse button.</p>
+</li>
+</ol></div><p>This process creates a line segment. To add more line segments connected to the first, repeat steps 2 and 3 as many times as necessary. To create a disconnected line segment, repeat from step 1.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE17919-PARENT"></a>Drawing Filled Shapes</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-40"></a>
+<a class="indexterm" name="IT12.IconSmith-41"></a>
+<a class="indexterm" name="IT12.IconSmith-42"></a>
+In IconSmith, you can fill a closed path (one in which the beginning and end points meet) with a color. To begin, click the <b>Palette</b> button at the bottom of the IconSmith window to display the Palette window, shown in <a href="ch12.html#id5226480" title="Figure 12-8. The Palette (Selection Properties) Window">Figure 12-8</a>.</p>
+<p>To draw a filled shape, select a fill color from the Palette menu, and proceed to draw. When you finish creating the closed path, the shape is filled with the current fill color. To change the fill color of an existing polygon, select it by clicking on one of its vertices. Then choose a new fill color from the Palette. Also, you can change the fill color of a path by selecting the path and then selecting a new fill color.</p>
+<p>Fill does not work properly with concave closed paths, nor with paths in which the beginning point does not meet the end point. See <a href="ch12.html#LE47763-PARENT" title="Concave Polygons">&#8220;Concave Polygons&#8221;</a>.</p>
+<p>The default fill color is &#8220;Icon,&#8221; a special white color, and the default line color is &#8220;Outline,&#8221; a special black color (see <a href="ch12.html#LE21742-PARENT" title="Selecting Colors">&#8220;Selecting Colors&#8221;</a>).</p>
+<p><div class="figure"><a name="id5226480"></a><p><a name="id5226480"></a><b>Figure 12-8. The Palette (Selection Properties) Window</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-17.gif" alt="The Palette (Selection Properties) Window" height="452" width="586"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE58770-PARENT"></a>Deleting</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-43"></a>
+<a class="indexterm" name="IT12.IconSmith-44"></a>
+<a class="indexterm" name="IT12.IconSmith-45"></a>
+<a class="indexterm" name="IT12.IconSmith-46"></a>
+To delete any path or vertex, select it and press the <b><tt>&lt;Back Space&gt;</tt></b> key, or use &#8220;Delete&#8221; in the IconSmith popup menu.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE12126-PARENT"></a>Keeping the 3-D Look</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-47"></a>
+<a class="indexterm" name="IT12.IconSmith-48"></a>
+<a class="indexterm" name="IT12.IconSmith-49"></a>
+<a class="indexterm" name="IT12.IconSmith-50"></a>
+Icons created by Silicon Graphics are drawn in the same <span class="bold"><b>isometric view</b></span>, which provides an illusion of 3-D, even though the polygons composing the icons are 2-D. If you draw icons facing the screen at right angles, they look 2-D. To generate a 3-D effect, draw &#8220;horizontal&#8221; lines so that they move up 1 unit in the y-axis for every 2 units they extend along the true x-axis. See <a href="ch12.html#id5226702" title="Figure 12-9. 3-D Icon Axes">Figure 12-9</a>.</p>
+<p><div class="figure"><a name="id5226702"></a><p><a name="id5226702"></a><b>Figure 12-9. 3-D Icon Axes</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-5.gif" alt="3-D Icon Axes" height="216" width="311"></td></tr></table></div></div><br>
+</p>
+<p>Use the same projection that the original icon set uses. Icons tilted in the wrong direction look off-balance, and destroy the 3-D appearance. For your convenience, IconSmith provides an isometric grid. By following the diagonals of this grid, as shown, you can create an icon that fits in exactly with other isometric icons in the Desktop. You can count along these diagonal grid dots, to help measure, align, or center pieces of your icon.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5226766"></a>Drawing for All Scales</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-51"></a>
+<a class="indexterm" name="IT12.IconSmith-52"></a>
+<a class="indexterm" name="IT12.IconSmith-53"></a>
+<a class="indexterm" name="IT12.IconSmith-54"></a>
+Desktop icons can be displayed in many sizes. IconSmith includes two features useful in designing your icon for display at all sizes, the Preview box and the slider on the right side of the drawing area. </p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5226830"></a>The Preview Box</h4></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-55"></a>
+<a class="indexterm" name="IT12.IconSmith-56"></a>
+You can use the <span class="bold"><b>Preview box</b></span> to see your icon design in common sizes and background colors. The Preview box is the blue box in the lower left corner of the main IconSmith window. By default, the Preview box shows your drawing at the default Desktop icon display size and no background color. You can change the icon size and background color in this window using the Preview box popup menu. </p>
+<p>As you design your icon, periodically check its appearance in the Preview box. Because users can enlarge icons only to a maximum size of about 1x1 inch, many details will not appear or will become distorted at normal icon size. Also, keep in mind that the more detail your icon has, the longer it takes for the Desktop to render the icon. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5226942"></a>Changing Drawing Size</h4></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-57"></a>
+<a class="indexterm" name="IT12.IconSmith-58"></a>
+<a class="indexterm" name="IT12.IconSmith-59"></a>
+<a class="indexterm" name="IT12.IconSmith-60"></a>
+You can change the size of your design in the IconSmith drawing area using the slider on the right side of the drawing area. Use the <span class="bold"><b>slider</b></span> to look at your design at all sizes. At particularly small sizes, some features may not be visible. At large sizes, design imperfections may appear.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE32183-PARENT"></a>Sharing Design Elements</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-61"></a>
+<a class="indexterm" name="IT12.IconSmith-62"></a>
+<a class="indexterm" name="IT12.IconSmith-63"></a>
+<a class="indexterm" name="IT12.IconSmith-64"></a>
+You can import design elements such as circles into your badge. Importing elements where possible saves you work and makes it easy to include common design elements in all the icons for one application.</p>
+<p>To import an existing icon or icon element, click the <b>Import</b> button. This brings up the Import Icon or Set Template window. Use the &#8220;Import to Icon Editing Layer&#8221; area to specify the icon file you want.</p>
+<p>Generic and sample material can be found in the<tt> /usr/lib/filetype/iconlib </tt>directory<tt>.</tt> For example, to import a sample circle, type the filename:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<b><tt>/usr/lib/filetype/iconlib/sample.circle.fti </tt></b>
+</pre></td></tr></table><p>Other icons can be found in:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><tt>/usr/lib/filetype/default/iconlib</tt> </p>
+</li>
+<li><p><tt>/usr/lib/filetype/system/iconlib</tt> </p>
+</li>
+<li><p><tt>/usr/lib/filetype/vadmin/iconlib</tt> </p>
+</li>
+</ul></div><p>All icons are potential sources for design elements. However, if you are designing a unique set of executable or document badges, you should make use of templates as described in <a href="ch12.html#LE27192-PARENT" title="Templates">&#8220;Templates&#8221;</a>, and <a href="ch12.html#LE18262-PARENT" title="Icon Design and Composition Conventions">&#8220;Icon Design and Composition Conventions&#8221;</a>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE27192-PARENT"></a>Templates</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-65"></a>
+<a class="indexterm" name="IT12.IconSmith-66"></a>
+<a class="indexterm" name="IT12.IconSmith-67"></a>
+<a class="indexterm" name="IT12.IconSmith-68"></a>
+You can use templates to help you design your icons or for tracing. You can import a template so that you can see it in the IconSmith drawing window, without saving or displaying as part of the design. This is most useful for getting position information while you are designing a unique badge to use in conjunction with the generic executable and document icons.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>You cannot move or change an icon template in IconSmith.
+</td></tr></table><hr noshade="noshade"></div><p>To display a template, click the <span class="bold"><b>Import</b></span> button. In the Import Icon or Set Template window (shown in <a href="ch12.html#id5226126" title="Figure 12-7. The Import Icon or Set Template Window ">Figure 12-7</a>), type the name of the template icon file you want in the textfield &#8220;Template File&#8221; in the area labeled &#8220;Set Template Layer.&#8221; Alternately, click any of the three template buttons to retrieve common generic components. These template images are the most often used, and they are discussed in <a href="ch12.html#LE18262-PARENT" title="Icon Design and Composition Conventions">&#8220;Icon Design and Composition Conventions&#8221;</a>. </p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE26999-PARENT"></a>Selecting</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-69"></a>
+<a class="indexterm" name="IT12.IconSmith-70"></a>
+Before you edit, move, delete, or change the color of an object or vertex, you have to tell IconSmith which object you want. This section describes aspects of selecting:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#LE23230-PARENT" title="Partial">&#8220;Partial&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE90206-PARENT" title="Deselect Fragments">&#8220;Deselect Fragments&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE57592-PARENT" title="Select Next">&#8220;Select Next&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE46960-PARENT" title="Select All">&#8220;Select All&#8221;</a> </p>
+</li>
+</ul></div><p>Selecting can be difficult in a complex composition. The following tips can make the task easier:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>To select an object or vertex, move the cursor on top of the object's outline and click the left mouse button. The vertices highlight blue and white when the object is selected. To move an object, double-click, hold down the left mouse button and move with the mouse. The vertices highlight green and yellow when you can move the object.</p>
+</li>
+<li><p>To move a vertex, click once on the vertex, then drag it to a new location.</p>
+</li>
+<li><p>You can select more than one object or vertex by holding down the <b><tt>&lt;Shift&gt;</tt></b> key during the selection process. To move the objects or vertices, move only one and the rest will follow.</p>
+</li>
+<li><p>You can select all vertices in an area with your mouse. Hold down the left mouse button and sweep the cursor across the vertices you want. The area you select is indicated by a box. When you let go of the left mouse button, all vertices are selected.</p>
+</li>
+<li><p>You can deselect a vertex by holding down the <b><tt>&lt;Shift&gt;</tt></b> key and clicking the vertex.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE23230-PARENT"></a>Partial</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-71"></a>
+<a class="indexterm" name="IT12.IconSmith-72"></a>
+When you use the mouse to select an area with objects in it, you can include only some vertices of some objects. When you toggle on the <b>Partial</b> button, objects partially selected are highlighted. When you toggle off the <b>Partial</b> button, only objects that fall entirely within the swept-out area are selected. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE90206-PARENT"></a>Deselect Fragments</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-73"></a>
+<a class="indexterm" name="IT12.IconSmith-74"></a>
+In compositions with many objects, you can use &#8220;Deselect Fragments&#8221; to make selection easier. When selecting the objects in the drawing area, you can also select adjacent objects, then deselect what you don't want. Hold the<b><tt> &lt;Shift&gt;</tt></b> key down and click one vertex of each object you don't want. This deselects the vertex, which makes the object partially selected. Then you can use &#8220;Deselect Fragments&#8221; from the IconSmith popup menu to deselect the entire object.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE57592-PARENT"></a>Select Next</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-75"></a>
+<a class="indexterm" name="IT12.IconSmith-76"></a>
+&#8220;Select Next&#8221; allows you to select a vertex that is covered by another vertex. When two or more trajectories (lines) each have a vertex at a common location, such as two triangles with a coincident edge, the &#8220;Select Next&#8221; operator is useful for selecting a trajectory other than the top one. &#8220;Select Next&#8221; is also useful in images with tiled parts, where most vertices share a location. </p>
+<p>Select a shared vertex by clicking its location. That vertex is highlighted in yellow and green (and the red and blue caret appears at that spot). The other vertices of the trajectory selected are highlighted in white to indicate the trajectory to which the selected vertex belongs. Now each time you choose &#8220;Select Next&#8221; from the IconSmith menu, you step through all the other vertices of all the other trajectories which have a vertex at that point.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE46960-PARENT"></a>Select All</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-77"></a>
+<a class="indexterm" name="IT12.IconSmith-78"></a>
+You can select all vertices in the main IconSmith window drawing area using the &#8220;Select All&#8221; option in the IconSmith popup menu. You can select all vertices in an area by holding down the left mouse button and sweeping out a box to surround the desired area.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE93773-PARENT"></a>Transformations</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-79"></a>
+<a class="indexterm" name="IT12.IconSmith-80"></a>
+<a class="indexterm" name="IT12.IconSmith-81"></a>
+<a class="indexterm" name="IT12.IconSmith-82"></a>
+<a class="indexterm" name="IT12.IconSmith-83"></a>
+<a class="indexterm" name="IT12.IconSmith-84"></a>
+The Transform buttons let you shrink, enlarge, stretch, and rotate portions of your icon design. These features can make drawing easier and more precise. </p>
+<p>To use any Transform button, follow this procedure.</p>
+<div class="orderedlist"><ol type="1"><li><p>Choose the Transform option you want using any of the six transform buttons located on the left side of the IconSmith window: Scale, Scale XY, Scale X, Scale Y, Rotate, or Shear Y.</p>
+</li>
+<li><p>Choose a point in the main IconSmith window drawing area as a reference point for the transformation by positioning the cursor and clicking the left mouse button.</p>
+</li>
+<li><p>Bring up the IconSmith popup menu and select &#8220;Move to Caret&#8221; from the Transform Pin rollover menu. </p>
+</li>
+<li><p>To select an entire object for transformation, hold down the <b><tt>&lt;Alt&gt;</tt></b> key and double-click the object you want to transform. Otherwise, you may select individual vertices by holding down the <b><tt>&lt;Alt&gt;</tt></b> and <b><tt>&lt;Shift&gt;</tt></b> keys while clicking each desired vertex. Do not release the <b><tt>&lt;Alt&gt;</tt></b> key when you have finished selecting vertices.</p>
+</li>
+<li><p>While still holding down the <b><tt>&lt;Alt&gt;</tt></b> key, position the cursor inside the object you want to transform. Press and hold down the left mouse button and move the mouse to transform the object.</p>
+</li>
+</ol></div><p><a class="indexterm" name="IT12.IconSmith-85"></a>
+For example, here is how you enlarge a circle:</p>
+<div class="orderedlist"><ol type="1"><li><p>Choose &#8220;Scale&#8221; from the Transform menu. </p>
+</li>
+<li><p>Choose a point on the perimeter of the circle.</p>
+</li>
+<li><p>Bring up the IconSmith popup menu and select &#8220;Move to Caret&#8221; from the &#8220;Transform Pin&#8221; rollover menu.</p>
+</li>
+<li><p>Hold down the <b><tt>&lt;Alt&gt;</tt></b> key and double-click the circle. All vertices on the circle are now highlighted in green and yellow.</p>
+</li>
+<li><p>Continue to hold down the <b><tt>&lt;Alt&gt;</tt></b> key. Position the cursor on a vertex of the circle. Press and continue to hold down the left mouse button while you sweep the mouse out of the circle. The circle perimeter follows the cursor, enlarging the circle.</p>
+</li>
+<li><p>Release the left mouse button and <b><tt>&lt;Alt&gt;</tt></b> key when the circle is the size you want.</p>
+</li>
+</ol></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5228137"></a>Scale </h3></div></div>
+<p>The <b>Scale</b> button changes the size of an object without changing its shape.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5228152"></a>Scale X and Y</h3></div></div>
+<p>The buttons marked <b>Scale X</b> and <b>Scale Y</b> limit scaling transformations to either horizontal or vertical, respectively. Unlike the <b>Scale</b> button, the <b>Scale XY</b> button allows you to stretch your object both horizontally and vertically.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5228180"></a>Rotate</h3></div></div>
+<p>Using the <b>Rotate</b> button, you can rotate a selected object around the Transform Pin.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5228195"></a>Shear Y</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-86"></a>
+<a class="indexterm" name="IT12.IconSmith-87"></a>
+The <b>Shear Y</b> transformation transforms rectangles into parallelograms with one pair of sides parallel to the y axis. The <b>Shear Y</b> button is useful for transforming art that is drawn in a face-on view to an isometric view.</p>
+<p>Note that strictly speaking, the <b>Shear Y</b> transformation performs two transformations: shear in y and scale in x.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE47763-PARENT"></a>Concave Polygons</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-88"></a>
+<a class="indexterm" name="IT12.IconSmith-89"></a>
+<a class="indexterm" name="IT12.IconSmith-90"></a>
+<a class="indexterm" name="IT12.IconSmith-91"></a>
+<a href="ch12.html#id5228341" title="Figure 12-10. Concave Polygon">Figure 12-10</a> shows a concave polygon.</p>
+<p><div class="figure"><a name="id5228341"></a><p><a name="id5228341"></a><b>Figure 12-10. Concave Polygon</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-8.gif" alt="Concave Polygon" height="202" width="176"></td></tr></table></div></div><br>
+</p>
+<p>By default, IconSmith does not fill concave polygons properly. If you prefer to have concave polygons filled properly while drawing your icon design, you can tell IconSmith to draw concave polygons. Bring up the IconSmith popup menu with the right mouse button. Select &#8220;Concave&#8221; and pull out the rollover menu. Select &#8220;No GL Check&#8221; from the rollover menu. IconSmith will not check for concave polygons until you select &#8220;GL Check&#8221; from the Concave menu. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE34047-PARENT"></a>Constraints: Gravity (Object) Snap and Grid Snap</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-92"></a>
+<a class="indexterm" name="IT12.IconSmith-93"></a>
+<a class="indexterm" name="IT12.IconSmith-94"></a>
+<a class="indexterm" name="IT12.IconSmith-95"></a>
+<a class="indexterm" name="IT12.IconSmith-96"></a>
+<a class="indexterm" name="IT12.IconSmith-97"></a>
+You can use <span class="bold"><b>gravity snap</b></span> and <span class="bold"><b>grid snap </b></span>to guide your drawing in IconSmith, allowing you to align and compose objects perfectly. This makes drawing easier and more precise. Grid snap causes the caret to &#8220;snap&#8221; to vertices or to the edges of the grid pattern displayed behind the objects you are editing. Gravity snap causes the caret to snap to vertices and the edges of objects you have already drawn. It is a good idea to make use of these features to ensure that your icon looks clean and precise at all sizes.</p>
+<p>Typically, it's sufficient to toggle on gravity snap and grid snap. However, you can control gravity snap and grid snap properties by using the Constraints window. </p>
+<p>Click the <b>Constraints</b> button at the bottom of the IconSmith window to display the Constraints window, shown in <a href="ch12.html#id5228600" title="Figure 12-11. The Constraints Window">Figure 12-11</a>.</p>
+<p><div class="figure"><a name="id5228600"></a><p><a name="id5228600"></a><b>Figure 12-11. The Constraints Window</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-18.gif" alt="The Constraints Window" height="339" width="586"></td></tr></table></div></div><br>
+</p>
+<p>When using the Constraints window, remember to click either the <b>Apply</b> or <b>Accept</b> button to implement your changes. The <b>Accept</b> button implements your changes and closes the Constraints window, and the <b>Apply</b> button leaves the window on your screen.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5228644"></a>Controlling the Grid</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-98"></a>
+<a class="indexterm" name="IT12.IconSmith-99"></a>
+In the main IconSmith window, the <b>Snap</b> button under the heading &#8220;Grid&#8221; lets you turn on or off the grid setting you've made in the Constraints window. The <b>Show</b> button lets you display or hide the grid. To change the grid behavior, use the settings in the &#8220;Grid Constraints&#8221; portion of the Constraints window. </p>
+<p>You can change grid properties by selecting various buttons in the Grid Constraints section of the Constraints window. Selections include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>Grid Basis</b></span> buttons control the shape of the grids. IconSmith includes two types of grids. The isometric grid provides guidance in the perspective described in <a href="ch12.html#LE12126-PARENT" title="Keeping the 3-D Look">&#8220;Keeping the 3-D Look&#8221;</a>. IconSmith also provides a traditional square grid. To change the type of grid you are using, select a Grid Basis button, and then click the <b>Apply</b> button.</p>
+</li>
+<li><p><span class="bold"><b>Snap to Grid</b></span> buttons affect what the caret gets snapped to: either vertices or edges. These changes are reflected in the appearance of the grid after you click the <b>Apply</b> button the appearance of the grid changes.</p>
+</li>
+<li><p><span class="bold"><b>Grid Spacing</b></span> controls the distance between points in the grid. You can type in the number of pixels you want, or base the distance on a selected line in your icon design. <span class="bold"><b>Measure from Line</b></span> measures the grid spacing from the line you select in the drawing area. When you copy an object using &#8220;Duplicate,&#8221; the copy is placed one grid space down and to the right from the original (or the previous copy). You can use Grid Spacing to control where IconSmith places duplicate objects.</p>
+</li>
+<li><p><span class="bold"><b>Snap Influence</b></span> allows you to adjust the area influenced by the &#8220;magnetic field&#8221; of the grid.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5228794"></a>Controlling Gravity</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-100"></a>
+<a class="indexterm" name="IT12.IconSmith-101"></a>
+The controls in the &#8220;Gravity Constraints&#8221; portion of the Constraints window control how gravity snap behaves. In the main IconSmith window, the <b>Snap</b> button under the &#8220;Gravity&#8221; heading lets you turn on or off the influence of gravity on objects.</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>Snap to Object</b></span> allows you assemble objects in your design smoothly.   The object's edge, vertex, or both attract other objects when they are moved within range of gravity.</p>
+</li>
+<li><p><span class="bold"><b>Snap Influence</b></span> allows you to determine the range, in pixels, of the gravity influence of objects in your design.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE18262-PARENT"></a>Icon Design and Composition Conventions</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-102"></a>
+<a class="indexterm" name="IT12.IconSmith-103"></a>
+<a class="indexterm" name="IT12.IconSmith-104"></a>
+<a class="indexterm" name="IT12.IconSmith-105"></a>
+The standard set of Desktop icons has been designed to establish a clear, predictable visual language for end users. As you extend the Desktop by adding your own application-specific icons, it is important to make sure that your extensions fit the overall look of the Desktop and operate in a manner consistent with the rest of the Desktop. This section discusses:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#LE27381-PARENT" title="Importing Generic Icon Components (Magic Carpet)">&#8220;Importing Generic Icon Components (Magic Carpet)&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE48388-PARENT" title="Icon Size">&#8220;Icon Size&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE21742-PARENT" title="Selecting Colors">&#8220;Selecting Colors&#8221;</a> </p>
+</li>
+</ul></div><p>&#8220;Designing the Appearance of Icons&#8221; in Chapter 2
+ of the <i>IRIX Interactive User Interface Guidelines</i> contains extensive guidelines for designing the look of your icon.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE27381-PARENT"></a>Importing Generic Icon Components (Magic Carpet)</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-106"></a>
+<a class="indexterm" name="IT12.IconSmith-107"></a>
+<a class="indexterm" name="IT12.IconSmith-108"></a>
+<a class="indexterm" name="IT12.IconSmith-109"></a>
+<a class="indexterm" name="IT12.IconSmith-110"></a>
+Many icons share common components. One example is the &#8220;magic carpet&#8221; component used as a background component by most executable files; individual applications can add unique badges.</p>
+<p>Rather than redrawing the common &#8220;generic&#8221; component in each individual icon, you can instead draw only the unique badges, and then use the ICON directive in the FTR file to combine the badge with the generic component. <a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a><a href="ch13.html#LE35039-PARENT"> in Chapter 13</a> describes how to do this. An advantage to this approach is that you don't have to create separate icons to identify open or closed states. You can simply create the unique badge and then set up the FTR file to include either the generic open component or the generic closed component as appropriate.</p>
+<p>While designing your icon, you can import the appropriate generic component as a template using the &#8220;Set Template Layer&#8221; of the &#8220;Import or Set Template&#8221; window; this helps you achieve the correct icon placement and perspective. When you import a component into the template layer, the template component is displayed in the drawing area, but not saved as part of the icon. When you are finished, you can save your icon in a<tt> .fti</tt> file, and combine it with the generic component in the FTR file.</p>
+<p>If you import a generic component using the &#8220;Icon Editing Layer&#8221; section of the &#8220;Import or Set Template&#8221; window, the component becomes part of your icon. In general, you shouldn't do this; if you do, you use more disk space and icon design is more difficult. Instead, you should draw only the badge. Then in your FTR file, you use the ICON rule to display the appropriate generic component before displaying your badge. (See <a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a><a href="ch13.html#LE35039-PARENT"> in Chapter 13</a> for information on the ICON rule.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE48388-PARENT"></a>Icon Size</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-111"></a>
+<a class="indexterm" name="IT12.IconSmith-112"></a>
+The blue boundary in the IconSmith drawing area indicates the area of your design that draws in the Desktop and is sensitive to mouse input. You must confine your final icon design to the area within this boundary. You can display or hide the boundary by using the <b>Show</b> button under Bounds in the main IconSmith window.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE21742-PARENT"></a>Selecting Colors</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-113"></a>
+<a class="indexterm" name="IT12.IconSmith-114"></a>
+You can select or change the color of any outlined or filled object by using the features in the Selection Properties window. To bring up this window, click the <b>Palette</b> button. The currently selected outline and fill colors are displayed under the &#8220;Current Colors&#8221; heading.</p>
+<p>There are two palettes in the Selection Properties window: one for the outline color, and another for the fill color. The outline color palette consists of the first 16 entries in the IRIS color map. The fill color palette gives you 128 colors created by dithering between the color values of the first 16 colormap entries.</p>
+<p><a class="indexterm" name="IT12.IconSmith-115"></a>
+<a class="indexterm" name="IT12.IconSmith-116"></a>
+<a class="indexterm" name="IT12.IconSmith-117"></a>
+In addition to the colors on these palette, there are three special colors available that you should use extensively when drawing your icon. The Desktop changes these colors to provide visual feedback <a class="indexterm" name="IT12.IconSmith-118"></a>
+<a class="indexterm" name="IT12.IconSmith-119"></a>
+<a class="indexterm" name="IT12.IconSmith-120"></a>
+when users select, locate, drag, and otherwise interact with your icon. These colors and their uses are:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">Icon Color</span></td><td width="10"> </td><td><p>Use extensively for drawing the main icon body</p>
+
+</td></tr><tr valign="top"><td><span class="term">Outline Color</span></td><td width="10"> </td><td><p>Use for outlining and line work in your icon</p>
+
+</td></tr><tr valign="top"><td><span class="term">Shadow Color</span></td><td width="10"> </td><td><p>Use for contrasting drop shadows below your icon</p>
+
+</td></tr></table></div><p><a class="indexterm" name="IT12.IconSmith-121"></a>
+<a class="indexterm" name="IT12.IconSmith-122"></a>
+<a class="indexterm" name="IT12.IconSmith-123"></a>
+Select outline and fill colors displayed in the palettes by clicking the appropriate buttons. If you want subsequent objects to use your color selections, click &#8220;Apply to Pen.&#8221; If you want to update current objects with colors already in your pen, click an existing object with the left mouse button, and then select &#8220;Get from Pen&#8221; from the Selection Properties window. The object gets the outline and fill colors currently assigned to the pen.</p>
+<p>On the Desktop and in the Preview box, the icon color turns yellow when the icon is selected and royal blue when an object is dropped on it. For more information on the use of color in designing icons, refer to &#8220;Icon Colors&#8221; in Chapter 2
+ of the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE15796-PARENT"></a>Advanced IconSmith Techniques</h2></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-124"></a>
+<a class="indexterm" name="IT12.IconSmith-125"></a>
+This section contains hints that make common IconSmith operations easier. This section also provides a step-by-step example of creating an icon. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch12.html#LE82563-PARENT" title="Drawing a Circle">&#8220;Drawing a Circle&#8221;</a> </p>
+</li>
+<li><p><a href="ch12.html#LE23144-PARENT" title="Drawing an Oval">&#8220;Drawing an Oval&#8221;</a></p>
+</li>
+<li><p><a href="ch12.html#LE18091-PARENT" title="Isometric Circles">&#8220;Isometric Circles&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE82563-PARENT"></a>Drawing a Circle</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-126"></a>
+<a class="indexterm" name="IT12.IconSmith-127"></a>
+<a class="indexterm" name="IT12.IconSmith-128"></a>
+Here is a trick for drawing a circle using lines:</p>
+<div class="orderedlist"><ol type="1"><li><p>Draw a path the length of the radius of the circle you want. <a href="ch12.html#id5229747" title="Figure 12-12. A Path">Figure 12-12</a> shows an example.</p>
+<div class="figure"><a name="id5229747"></a><p><a name="id5229747"></a><b>Figure 12-12. A Path</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-2.gif" alt="A Path" height="94" width="117"></td></tr></table></div></div><br></li>
+<li><p>Select &#8220;Grid Spacing&#8221; of 0 pixels in the Constraints window.</p>
+</li>
+<li><p>Duplicate the line 12 times. Because grid spacing is set to 0, the duplicate lines stack.</p>
+</li>
+<li><p>Select one vertex, bring up the IconSmith popup menu, and select &#8220;Push Pin&#8221; from the Transform Pin rollover menu.</p>
+</li>
+<li><p>Click the <b>Rotate</b> button from the Transform menu.</p>
+</li>
+<li><p>Hold down the <b><tt>&lt;Alt&gt;</tt></b> key and select the other vertex of the stack of paths. </p>
+</li>
+<li><p>Sweep out each path until the figure resembles a wheel, as shown in <a href="ch12.html#id5229855" title="Figure 12-13. Wheel Spokes">Figure 12-13</a>.</p>
+<div class="figure"><a name="id5229855"></a><p><a name="id5229855"></a><b>Figure 12-13. Wheel Spokes</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-9.gif" alt="Wheel Spokes" height="83" width="169"></td></tr></table></div></div><br></li>
+<li><p>Connect the outside vertices, as shown in <a href="ch12.html#id5229908" title="Figure 12-14. Connected Spokes">Figure 12-14</a>.</p>
+<div class="figure"><a name="id5229908"></a><p><a name="id5229908"></a><b>Figure 12-14. Connected Spokes</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-10.gif" alt="Connected Spokes" height="112" width="584"></td></tr></table></div></div><br></li>
+<li><p>Delete the inside &#8220;spoke&#8221; paths, to get a circle like the one in <a href="ch12.html#id5229941" title="Figure 12-15. Finished 2-D Circle">Figure 12-15</a>.</p>
+<div class="figure"><a name="id5229941"></a><p><a name="id5229941"></a><b>Figure 12-15. Finished 2-D Circle</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-11.gif" alt="Finished 2-D Circle" height="251" width="583"></td></tr></table></div></div><br></li>
+</ol></div><p>Circles and other shapes can be time-consuming to create. Another way of adding circles to your icon is to import a circle from another icon or from the icon parts library. See <a href="ch12.html#LE32183-PARENT" title="Sharing Design Elements">&#8220;Sharing Design Elements&#8221;</a>, for more information.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE23144-PARENT"></a>Drawing an Oval</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-129"></a>
+<a class="indexterm" name="IT12.IconSmith-130"></a>
+<a class="indexterm" name="IT12.IconSmith-131"></a>
+To create an oval, stretch the circle you have already drawn.</p>
+<div class="orderedlist"><ol type="1"><li><p>Double-click a circle.</p>
+</li>
+<li><p>Bring up the IconSmith menu, and select &#8220;Move to Caret&#8221; from the Transform Pin menu.</p>
+</li>
+<li><p>Place the pin directly above the circle.</p>
+</li>
+<li><p>Select <b>Scale Y</b> from the Transform menu.</p>
+</li>
+<li><p>Hold down the <b><tt>&lt;Alt&gt;</tt></b> key and use the mouse to stretch the circle to the oval shape you want. <a href="ch12.html#id5230100" title="Figure 12-16. An Oval">Figure 12-16</a> shows an example.</p>
+<div class="figure"><a name="id5230100"></a><p><a name="id5230100"></a><b>Figure 12-16. An Oval</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-12.gif" alt="An Oval" height="193" width="578"></td></tr></table></div></div><br></li>
+</ol></div><p>You can now assemble the parts to make a simple icon, as shown in <a href="ch12.html#id5230174" title="Figure 12-17. A Simple, Circular 2-D Icon">Figure 12-17</a>.</p>
+<p><div class="figure"><a name="id5230174"></a><p><a name="id5230174"></a><b>Figure 12-17. A Simple, Circular 2-D Icon</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-13.gif" alt="A Simple, Circular 2-D Icon" height="236" width="587"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE18091-PARENT"></a>Isometric Circles</h3></div></div>
+<p><a class="indexterm" name="IT12.IconSmith-132"></a>
+<a class="indexterm" name="IT12.IconSmith-133"></a>
+<a class="indexterm" name="IT12.IconSmith-134"></a>
+The circular icon created above is not a good central icon design because it is not isometric. The circle looks awkward in the context of isometric icons and may be misconstrued to be a sphere. Here are two ways to make the same design in isometric space.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5230274"></a>Isometric Transformation</h4></div></div>
+<p>You can use the <b>Shear Y</b> button with an isometric grid to make any object seem 3-D.</p>
+<div class="orderedlist"><ol type="1"><li><p>Duplicate your circle.</p>
+</li>
+<li><p>Click <b>Shear Y</b> in the Transform menu.</p>
+</li>
+<li><p>Bring up the IconSmith menu, and select &#8220;Push Pin&#8221; from the Transform Pin menu.</p>
+</li>
+<li><p>Place the pin on one of the vertices at the bottom of the circle. </p>
+</li>
+<li><p>Hold down the <b><tt>&lt;Alt&gt;</tt></b> key and align the bottom line of the circle using the grid. </p>
+</li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5230334"></a>Import Existing Object</h4></div></div>
+<p>If another icon contains the shape you need, recycle it.</p>
+<div class="orderedlist"><ol type="1"><li><p>Click the <b>Import</b> button.</p>
+</li>
+<li><p>Import the icon file <tt>/usr/lib/filetype/iconlib/sample.big.3circles.fti</tt>. You should now have the design shown in <a href="ch12.html#id5230402" title="Figure 12-18. Imported Circles">Figure 12-18</a> in your IconSmith drawing area.</p>
+<div class="figure"><a name="id5230402"></a><p><a name="id5230402"></a><b>Figure 12-18. Imported Circles</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-7.gif" alt="Imported Circles" height="305" width="305"></td></tr></table></div></div><br></li>
+<li><p>Delete all parts of this icon except the lower right circle.</p>
+</li>
+</ol></div><p>Using either method, you can create an isometric circle, shown in <a href="ch12.html#id5230472" title="Figure 12-19. Finished Isometric Circle">Figure 12-19</a>. Starting with the isometric circle, you can easily create isometric ovals, using the procedure in <a href="ch12.html#LE23144-PARENT" title="Drawing an Oval">&#8220;Drawing an Oval&#8221;</a>.</p>
+<p><div class="figure"><a name="id5230472"></a><p><a name="id5230472"></a><b>Figure 12-19. Finished Isometric Circle</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-14.gif" alt="Finished Isometric Circle" height="205" width="184"></td></tr></table></div></div><br>
+</p>
+<p>The final, isometric version of the icon is shown in <a href="ch12.html#id5230508" title="Figure 12-20. Simple, Isometric 2-D Icon">Figure 12-20</a>. Note that the design still looks flat. However, if you want to show a sphere, create a straight-on circle, as was done for the WebMagic icon.</p>
+<p><div class="figure"><a name="id5230508"></a><p><a name="id5230508"></a><b>Figure 12-20. Simple, Isometric 2-D Icon</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-1.gif" alt="Simple, Isometric 2-D Icon" height="201" width="180"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5230530"></a>Finishing Your Icon</h4></div></div>
+<p>A finished application icon is actually three or four <tt>.fti</tt> files: one or two badges, plus generic components for the open (running) and closed (not running) icon states. You need two badges rather than one if you want to animate your icon by changing its appearance which the user double-clicks it. <a href="ch12.html#id5230652" title="Figure 12-22. Open Icon">Figure 12-22</a> shows a possible open version for the example icon created in the previous section. When the icon appears on the Desktop, the generic executable icon component appears if you correctly define the ICON rule in the FTR file, as discussed in <a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a><a href="ch13.html#LE35039-PARENT"> in Chapter 13</a>.</p>
+<p>To see how your finished application icon appears on the Desktop:</p>
+<div class="orderedlist"><ol type="1"><li><p>Import the generic closed executable component using the <b>Import</b> button. In the &#8220;Import&#8221; dialogue box, under &#8220;Set Template Layer&#8221;, press the <b>Closed Application</b> button. The generic icon component appears under your closed badge design.</p>
+</li>
+<li><p>Center your design on the generic component template you have imported, as shown in the example illustrated in <a href="ch12.html#id5230602" title="Figure 12-21. Icon Centered on Generic Component">Figure 12-21</a>.</p>
+<div class="figure"><a name="id5230602"></a><p><a name="id5230602"></a><b>Figure 12-21. Icon Centered on Generic Component</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-6.gif" alt="Icon Centered on Generic Component" height="298" width="587"></td></tr></table></div></div><br></li>
+<li><p>(Optional, but recommended.) Follow the same two steps to create an open badge. You can give the appearance of animation by changing your design slightly and saving the changed version as an open badge.</p>
+<div class="figure"><a name="id5230652"></a><p><a name="id5230652"></a><b>Figure 12-22. Open Icon</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/12.IconSmith-15.gif" alt="Open Icon" height="330" width="240"></td></tr></table></div></div><br></li>
+<li><p>Save your icon designs to files with the suffix .<span class="bold"><b>fti</b></span>.</p>
+</li>
+</ol></div><p>For a discussion of icon file installation, see <a href="ch12.html#LE77527-PARENT" title="Where to Install Your Completed Icon">&#8220;Where to Install Your Completed Icon&#8221;</a>. To learn how to integrate your icon into an FTR file, see <a href="ch13.html#LE35039-PARENT" title="Getting the Icon Picture: The ICON Rule">&#8220;Getting the Icon Picture: The ICON Rule&#8221;</a><a href="ch13.html#LE35039-PARENT"> in Chapter 13</a>.</p>
+</div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch11.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch13.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 11. Creating Desktop Icons: An Overview </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 13. File Typing Rules </td></tr></table></div></body></html>

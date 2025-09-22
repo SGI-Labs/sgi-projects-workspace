@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 2. Icons</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt01.html" title="Part I. Integrating With the IRIX Interactive Desktop"><link rel="previous" href="ch01.html" title="Chapter 1. Overview of the IRIX Interactive Desktop"><link rel="next" href="ch03.html" title="Chapter 3. Windows in the IRIX Interactive Desktop Environment"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. Icons</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch01.html">Prev</a> </td><th width="60%" align="center">Part I. Integrating With the IRIX Interactive Desktop</th><td width="20%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5383411"></a>Chapter 2. <a name="id94988"></a>Icons</h2></div></div>
+<p>The IRIX Interactive Desktop uses icons to represent entities such as applications, files, directories, people, printers, the Indy Cam camera, removable media devices (for example, CDROM, floptical, and DAT drives), and other devices. Users can manipulate these icons through a point-and-click graphical user interface to initiate certain actions, such as launching an application or sending a data file to the printer. <a name="idch02.icons1"></a><a name="idch02.icons2"></a><a name="idch02.icons3"></a><a name="idch02.icons4"></a></p>
+<p>This chapter covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch02.html#id18888">&#8220;Designing the Appearance of Icons&#8221;</a> tells you how to design an application icon to represent your application's executable file and a file icon to represent your data files.</p>
+</li>
+<li><p><a href="ch02.html#id25444">&#8220;Defining the Behavior of Icons With FTRs&#8221;</a> explains which File Typing Rules (FTRs) you need to define for your application and file icons so that they will respond to user actions such as double-click and drag-and-drop. </p>
+</li>
+<li><p><a href="ch02.html#id38425">&#8220;Making Application Icons Accessible&#8221;</a> discusses adding your application icon to the Icon Catalog and naming and locating your executable file in the file system so that users can easily find your application icon.</p>
+</li>
+</ul></div><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>In this guide, the term <i>icon</i> refers to IRIX Interactive Desktop icons and not to minimized windows, as in the <i>OSF/Motif Style Guide</i>. Minimized windows are described in <a href="ch03.html#id87201">&#8220;Minimized Windows&#8221; in Chapter 3</a>.
+</td></tr></table><hr noshade="noshade"></div><br><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5383566"></a><a name="id18888"></a>Designing the Appearance of Icons</h2></div></div>
+<p>This section discusses icon design. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch02.html#id19353">&#8220;General Icon Design: Components, Size, and Colors&#8221;</a> </p>
+</li>
+<li><p><a href="ch02.html#id96073">&#8220;Application Icon Design&#8221;</a> </p>
+</li>
+<li><p><a href="ch02.html#id46804">&#8220;File Icon Design&#8221;</a> </p>
+</li>
+</ul></div><p>Your application's desktop icons can appear in any of several places on the IRIX Interactive Desktop, along with icons from other applications. For example, your icons can appear on the desktop background, in Directory View windows, and in the Icon Catalog. <a name="idch02.icons5"></a><a href="ch02.html#id68489">Figure 2-1</a> shows the Icon Catalog, which displays several application icons representing executable files. <a href="ch02.html#id68653">Figure 2-2</a> shows various data file icons that can appear on a user's desktop. </p>
+<p>For each application, you'll need to create an application icon. If your application saves its data in a unique format, you'll also need to create a data file icon. (If your application saves its data in a standard data format, your application's data files will automatically appear on the desktop using the appropriate standard data icon.)<a name="idch02.icons6"></a></p>
+<p><div class="figure"><p><a name="id5456422"></a><b>Figure 2-1. <a name="id68489"></a>Web Tools Icons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-3.gif" alt="Figure 2-1 Web Tools Icons" height="321" width="506"></td></tr></table></div></div><br>
+
+<div class="figure"><p><a name="id5456441"></a><b>Figure 2-2. <a name="id68653"></a>File Icons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-4.gif" alt="Figure 2-2 File Icons" height="459" width="587"></td></tr></table></div></div><br>
+</p>
+<p>To make your application and file icons stand out in a group of icons, be sure to create meaningful symbols that are distinctive and represent your product. Your icon designs should also follow the guidelines detailed in the remainder of this section so that users recognize your icons as desktop icons and know that they can interact with these icons in expected ways. </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5456472"></a><a name="id19353"></a>General Icon Design: Components, Size, and Colors</h3></div></div>
+<p>Design your application and file icons so that they:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>convey your product identity</p>
+</li>
+<li><p>have the correct components and thus are recognizable as desktop icons</p>
+</li>
+<li><p>are identifiable when zoomed to the minimum and maximum sizes allowed by the IRIX Interactive Desktop</p>
+</li>
+<li><p>use an effective color scheme, which allows the icon to reflect its state</p>
+</li>
+</ul></div><p><a name="id64864"></a>Your primary goal is to differentiate your icons from those of other products and to make the design fairly simple because desktop icons are small when minimized. </p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5456548"></a>Icon Components</h4></div></div>
+<p>Application and file icons consist of several components (as shown in <a name="idch02.icons7"></a><a href="ch02.html#id37550">Figure 2-3</a>): </p>
+<div class="itemizedlist"><ul type="disc"><li><p>a symbol identifying the application or type of data file</p>
+</li>
+<li><p>an outline around the edge of the symbol</p>
+</li>
+<li><p>a drop shadow that helps give the icons a 3D appearance</p>
+</li>
+<li><p>a label identifying the executable or data file</p>
+</li>
+</ul></div><p>Application icons also include a <a name="idch02.icons8"></a><i>magic carpet</i>, the generic executable symbol, which differentiates them from file icons and shows whether or not the application is running (by moving from the horizontal, at-rest position into a vertical, up-and-running position). File icons for document-based applications incorporate the generic data file symbol (three rectangles representing sheets of paper) into the file icon design.</p>
+<p><div class="figure"><p><a name="id5456686"></a><b>Figure 2-3. <a name="id37550"></a>Application and File Icon Components</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-5.gif" alt="Figure 2-3 Application and File Icon Components" height="167" width="561"></td></tr></table></div></div><br>
+</p>
+<p>You need to create the symbols for your application icon and for any unique file types your application creates. Create the symbols with the IconSmith drawing tool, which is described in Chapter 12, &#8220;Using IconSmith,&#8221; in the <a name="idch02.icons9"></a><i>IRIX Interactive Desktop Integration Guide</i>. IconSmith provides a drawing grid with tools for creating 3D graphics. It also supplies predefined templates for the magic carpet in both the running and not running states and the data file format symbol, complete with drop shadows. <a name="idch02.icons10"></a></p>
+<p>You can create your unique icon symbols in the drawing area and can readily add the predefined templates to your design. <a href="ch02.html#id71791">Figure 2-4</a> shows four examples of IconSmith. The drawing area in the example in the upper left corner contains the IRIS Showcase application symbol for its not-running state. The other three examples contain the three predefined templates. The icon labels are supplied automatically when the icons are displayed on the desktop. This label is the name of the executable for application icons and the name of the data file for file icons.</p>
+<p><div class="figure"><p><a name="id5456776"></a><b>Figure 2-4. <a name="id71791"></a>IconSmith Examples</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-6.gif" alt="Figure 2-4 IconSmith Examples" height="588" width="584"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5456798"></a>Icon Size</h4></div></div>
+<p>Draw your icon within the 100×100-pixel boundary box defined by IconSmith. Keep in mind that your symbol designs should allow any generic icon components, such as the magic carpet and stack of papers, to be at least partially visible. This is described in more detail in <a name="idch02.icons11"></a><a href="ch02.html#id96073">&#8220;Application Icon Design&#8221;</a> and <a href="ch02.html#id46804">&#8220;File Icon Design&#8221;</a> later in this chapter.</p>
+<p>By default, icons are reduced to fit within a 50x50 pixel area when they're displayed on the desktop. Because users can adjust the viewing scale for icons making the icons either larger or smaller than this default, your icon drawings should look good across the range of available sizes. You can use the IconSmith preview box to see what your icon looks like when scaled to various sizes. </p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5456848"></a><a name="id36254"></a>Icon Colors</h4></div></div>
+<p>IconSmith provides the color palette shown in <a name="idch02.icons12"></a><a href="ch02.html#id30364">Figure 2-5</a> for specifying the colors in your icon. The following two buttons are of particular importance for applying color to icons:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><b>Specific</b>&#8212;lets you apply a color from the color selection area to the selected part of the graphic. The <i>specific color</i> remains constant as an icon goes through its states.</p>
+</li>
+<li><p><a name="idch02.icons13"></a><b>Icon</b>&#8212;lets you apply the predefined <i>icon color</i> to the selected part of the graphic. Portions painted with the <i>icon color</i> change color dynamically as the icon changes its state.</p>
+</li>
+</ul></div><p>When choosing colors for your icons, consider that the <a name="idch02.icons14"></a><i>icon color</i> changes to indicate state and that icons appear against a variety of differently colored backgrounds. To accommodate these issues, you need to enable your icon to show its state and make sure your icon stands out from the most likely backgrounds, as explained in the following paragraphs. (See <a href="ch01.html#id73752">Chapter 1, &#8220;Overview of the IRIX Interactive Desktop,&#8221;</a> for explanations of icon states from the user's point of view.) </p>
+<p><div class="figure"><p><a name="id5456998"></a><b>Figure 2-5. <a name="id30364"></a>IconSmith Color Palette</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-7.gif" alt="Figure 2-5 IconSmith Color Palette" height="438" width="635"></td></tr></table></div></div><br>
+</p>
+<p>To enable your icon to reflect what state it's in, you need to paint portions of it with the predefined <i>icon color</i> supplied by IconSmith. Those portions of your icon are changed automatically by the IRIX Interactive Desktop to indicate the icon's state. In the example shown in <a href="ch02.html#id79050">Figure 2-6</a>, the hat brim, the light shading on the hat, and the carpet of the IRIS Showcase application icon use the predefined <i>icon color</i> (which is a light gray in the neutral state). In addition, to make the state color changes easier for users to detect in your icons, avoid (or use sparingly) intense, strongly saturated colors and the specific colors used by the IRIX Interactive Desktop to indicate state&#8212;bright yellow, dim yellow, royal blue, pure white, and light gray.</p>
+<p><div class="figure"><p><a name="id5457056"></a><b>Figure 2-6. <a name="id79050"></a>Icon States and Effects on Color</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-8.gif" alt="Figure 2-6 Icon States and Effects on Color" height="450" width="577"></td></tr></table></div></div><br>
+</p>
+<p>You can increase your icon's visibility on user-customized desktops. (Remember that users can customize the desktop background to be any color and pattern, as described in <a href="ch01.html#id73752">Chapter 1, &#8220;Overview of the IRIX Interactive Desktop.&#8221;</a>) To increase visibility:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the <i>icon color</i> defined by IconSmith to color most of your icon.</p>
+</li>
+<li><p>Use two or more areas of accent colors to help your icon stand out against user-customized background colors.</p>
+</li>
+<li><p>Avoid using only very small color areas (2-4 pixels) because these small areas may be difficult to see against a patterned background.</p>
+</li>
+<li><p>Use the <a name="idch02.icons15"></a><i>outline color</i> (which is black) supplied by IconSmith to define the outline of your icon. </p>
+</li>
+<li><p>Since your icons can display in certain IRIX Interactive Desktop tools as shown in <a href="ch02.html#id11788">Figure 2-7</a>, avoid (or use sparingly) the following background colors used by these tools: </p>
+<div class="itemizedlist"><ul type="round"><li><p>light gray-green&#8212;used in Directory View windows</p>
+</li>
+<li><p>cadet blue&#8212;used in read/write panes such as drop pockets, shelves in Directory View windows, and the Icon Catalog pages</p>
+</li>
+<li><p>Navajo white&#8212;used in read-only panes such as the results area of the Search tool</p>
+</li>
+</ul></div><p>See <tt>/usr/lib/X11/schemes/Base/OzSpec</tt> for colors used by these tools:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+*ozDirPanelColor: AlternateBackground4
+*ozCltnPanelColor: AlternateBackground5
+*ozDropPocketColor: AlternateBackground5
+</pre></td></tr></table><p>See <tt>/usr/lib/X11/schemes/Base/BaseColorPalette</tt> for definitions of these colors:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+#define AlternateBackground4 #729c9c
+#define AlternateBackground5 #5680ab
+#define AlternateBackground6 #b6b6aa
+</pre></td></tr></table><br></li>
+</ul></div><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The color descriptions &#8220;light gray-green&#8221; and &#8220;cadet blue&#8221; are approximate since hardware and gamma values vary. Look at these colors on your system in Directory View windows and read/write panes, and avoid using these colors in your icon or use them sparingly.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5457293"></a>Icon Orientation</h4></div></div>
+<p>Icons on the IRIX Interactive Desktop should display at a three-quarter view and face the lower right of the screen to make them appear 3D. When designing your application and data file format symbols, draw them using this perspective. This is the same perspective that is used for the generic executable symbol (the magic carpet) and the generic data file symbol (stack of papers). Icons that don't follow this convention appear to be facing the wrong way.<a name="idch02.icons16"></a></p>
+<p><div class="figure"><p><a name="id5457323"></a><b>Figure 2-7. <a name="id11788"></a>Potential Icon Background Areas and Colors</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-9.gif" alt="Figure 2-7 Potential Icon Background Areas and Colors" height="688" width="737"></td></tr></table></div></div><br>
+</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5457367"></a><a name="id96073"></a>Application Icon Design</h3></div></div>
+<p>In addition to adhering to the guidelines discussed in the previous section, <a name="idch02.icons17"></a><a href="ch02.html#id19353">&#8220;General Icon Design: Components, Size, and Colors,&#8221;</a> the application icon that represents your application's executable needs to convey to users:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>that it's an application icon (as opposed to a data file icon)</p>
+</li>
+<li><p>what its current state is (whether or not the application is running)</p>
+</li>
+</ul></div><p>The magic carpet is the generic executable symbol; it differentiates application icons from data file icons. As mentioned in the previous section, the magic carpet and its drop shadow are predefined components that can easily be incorporated into your icon design when using IconSmith. For details of having them appear with your application symbol, see Chapter 11, &#8220;Creating Desktop Icons: An Overview,&#8221; in the <a name="idch02.icons18"></a><i>IRIX Interactive Desktop Integration Guide</i>.</p>
+<p>As shown in <a name="idch02.icons19"></a><a href="ch02.html#id89242">Figure 2-8</a>, the application icon uses both of the following techniques to indicate its state&#8212;that is, whether or not the application is running:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The 3D application symbol changes (in this example, items pop out of the hat in the running state). </p>
+</li>
+<li><p>The magic carpet moves from a horizontal, at-rest position to a vertical, up-and-running one, and the drop shadow changes shape appropriately. Since the magic carpet must be recognizable in both states, make sure that your application symbol doesn't completely obscure it in either position.</p>
+<p><div class="figure"><p><a name="id5457476"></a><b>Figure 2-8. <a name="id89242"></a>Application Icon in Running and Not Running States</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-10.gif" alt="Figure 2-8 Application Icon in Running and Not Running States" height="173" width="509"></td></tr></table></div></div><br>
+</p>
+</li>
+</ul></div><p>To have your application icon change to reflect its running state, create two different symbols using IconSmith and associate them with your application. See Chapter 11, &#8220;Creating Desktop Icons: An Overview,&#8221; in the <i>IRIX Interactive Desktop Integration Guide </i>for details on how to do this. The specific design of the two symbols is up to you, but keep in mind that you're trying to convey an inactive state and an active, running one. Also, when viewed in succession, the two symbols look like a progressive animation rather than two unrelated icons.</p>
+<p>The IRIS Showcase application icon shown in <a name="idch02.icons20"></a><a href="ch02.html#id89242">Figure 2-8</a> is an example of a well-designed icon: it animates to show which state the application is in, and the carpet is always visible. <a href="ch02.html#id29855">Figure 2-9</a> shows three examples of application icon designs that can be improved: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>The first example is an application icon for a point-and-click ASCII text editor. Its carpet is clearly visible and functions properly. The application symbol doesn't change, however, to reflect that the application is running. To improve the design, the existing symbol could be used to show the running state and the pencil could be aligned at the bottom or side of a blank version of the pad when the application isn't running. </p>
+</li>
+<li><p>The application icon in the second example represents an online book viewer. The application symbol changes nicely to indicate its running state. The carpet, however, is almost totally obscured when the application isn't running and doesn't appear at all when the application is running. </p>
+</li>
+<li><p>The third application icon represents a database application for tracking software bugs. The application symbol is visually appealing but completely obscures the carpet. In addition, there's no change in the application symbol to reflect its running state, and the symbol is oriented toward the lower left instead of the lower right. The design could be improved by adding a second symbol for the not-running state (perhaps showing the file drawer closed with the bug's antennae sticking out), making the application symbol smaller so that the magic carpet is visible, and redrawing the symbol so that it faces the lower right.</p>
+<p><div class="figure"><p><a name="id5457612"></a><b>Figure 2-9. <a name="id29855"></a>Examples of Application Icons That Could be Improved</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-11.gif" alt="Figure 2-9 Examples of Application Icons That Could be Improved" height="288" width="569"></td></tr></table></div></div><br>
+</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5457669"></a><a name="id46804"></a>File Icon Design</h3></div></div>
+<p>If your application creates files, those files need to be associated with <a name="idch02.icons21"></a><i>data file icons</i>. Silicon Graphics defines a set of standard data formats and provides associated data file icons, some of which are shown in <a href="ch02.html#id17142">Figure 2-10</a>. (For information on these file formats, see Appendix E, &#8220;Predefined File Types,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>.) If your application saves its data in any of these standard formats, it will automatically use the appropriate data file icon for those files.</p>
+<p>If your application saves its data in a unique format, however, you need to design a distinctive file icon that relates graphically to the theme of your application icon. Indicate, if possible, how the data is used. Your file icon should follow the guidelines discussed in this section and in the earlier section <a href="ch02.html#id19353">&#8220;General Icon Design: Components, Size, and Colors.&#8221;</a> </p>
+<p><div class="figure"><p><a name="id5457747"></a><b>Figure 2-10. <a name="id17142"></a><a name="idch02.icons22"></a>Examples of Standard File Icons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-12.gif" alt="Figure 2-10 Examples of Standard File Icons" height="409" width="478"></td></tr></table></div></div><br>
+</p>
+<p>The standard file icons shown in <a name="idch02.icons23"></a><a href="ch02.html#id17142">Figure 2-10</a> that symbolize documents all contain the generic data file symbol (stack of papers). If your application creates data files, your file icon should include this generic symbol. Both the generic symbol and its drop shadow are predefined components available in IconSmith. If you're creating a unique icon that does not use the generic data file symbol, create an appropriately shaped drop shadow for your design and paint it with the <i>shadow color</i> predefined in IconSmith.<a name="idch02.icons24"></a></p>
+<p><a href="ch02.html#id18807">Figure 2-11</a> shows some file icons for application-specific file formats. For example, the IRIS Showcase file icon includes the generic data file symbol (a stack of papers) to indicate that it represents a document, and the data file format symbol is similar to that found in the IRIS Showcase application symbol for the running state.</p>
+<p><div class="figure"><p><a name="id5457817"></a><b>Figure 2-11. <a name="id18807"></a>Examples of File Icons for Application-Specific File Formats</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-13.gif" alt="Figure 2-11 Examples of File Icons for Application-Specific File Formats" height="90" width="522"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5457842"></a><a name="id14297"></a>Icon Appearance Design Guidelines</h3></div></div>
+<p><a name="idch02.icons25"></a><span class="bold"><b>For any icon you create . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Provide a meaningful, distinctive symbol that gives your product an identity and that allows users to readily identify your application and its corresponding custom data files, if any. </p>
+</li>
+<li><p>Keep designs fairly simple because desktop icons can be displayed in small sizes.</p>
+</li>
+<li><p>Make sure that your icon can be identified across the range of viewing sizes.</p>
+</li>
+<li><p>Color most of your icon using the <i>icon color</i> predefined by IconSmith so that your icon's state is easy to detect.</p>
+</li>
+<li><p>Use two or more areas of accent colors to help your icon stand out against user-customized background colors.</p>
+</li>
+<li><p>Avoid small areas of color (2-4 pixels) because they're difficult to see against patterned backgrounds.</p>
+</li>
+<li><p>Use an outline around your custom symbol, and use the <i>outline color</i> supplied by IconSmith.</p>
+</li>
+<li><p>Avoid or use sparingly intense, strongly saturated colors and the specific colors used by the IRIX Interactive Desktop&#8212;bright yellow, dim yellow, royal blue, light gray-green, cadet blue, and Navajo white. These colors make it difficult to distinguish between certain icon states and to find your icon against the background colors of many desktop tools.</p>
+</li>
+<li><p>Orient your icon so that it displays a three-quarter view that faces the lower right corner of the screen.</p>
+</li>
+</ul></div><p><span class="bold"><b>When designing an application icon . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Include the magic carpet, the generic executable symbol, with your application's symbol.</p>
+</li>
+<li><p>Indicate the state of the application (not running vs. running) by moving the magic carpet from a horizontal (not running) to vertical (running) position, or by providing two different application symbols and moving the magic carpet from a horizontal to vertical position. Remember that your application symbols should resemble a progressive animation when viewed in succession.</p>
+</li>
+<li><p>Make sure that your application symbols do not completely obscure the magic carpet in either its horizontal or vertical position.</p>
+</li>
+<li><p>Application icons that have two separate symbols for the not running and running states should make sure that the main part of the symbol remains in the same location during both states, so that the symbol appears stationary to the user. </p>
+</li>
+</ul></div><p><span class="bold"><b>If your application saves data in a custom file format . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Design a unique data file format symbol that is readily associated with your application icon design and also indicates how the data is used.</p>
+</li>
+<li><p>If your application is document-based, include the generic data file symbol (stack of papers) in your design.</p>
+</li>
+<li><p>If your data file icon does not use the generic data file symbol, create an appropriately shaped shadow for your file icon and use the predefined <i>shadow color</i> supplied by IconSmith.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5458087"></a><a name="id25444"></a>Defining the Behavior of Icons With FTRs</h2></div></div>
+<p>Define the behavior of icons on the IRIX Interactive Desktop by creating a File Typing Rule (FTR) file for each icon. This behavior includes such things as what happens when the user double-clicks on an icon and what happens when the user drags and drops one type of icon onto another type of icon. This section describes:<a name="idch02.icons26"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch02.html#id33416">&#8220;User and Icon Interaction,&#8221;</a> which explains how users can interact with icons, how an FTR supports these interactions (in brief).</p>
+</li>
+<li><p><a href="ch02.html#id14297">&#8220;Icon Appearance Design Guidelines,&#8221;</a> which lists the minimal set of standard behaviors your application and file icons should support.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5458160"></a><a name="id33416"></a>User and Icon Interaction</h3></div></div>
+<p><a name="idch02.icons27"></a><a href="ch02.html#id43521">Table 2-1</a> shows the behavior users expect for given interactions with application and file icons. The last column lists the rules for each type of interaction. For information on implementing these behaviors, see Chapter 11, &#8220;Creating Desktop Icons: An Overview,&#8221; in the <a name="idch02.icons28"></a><i>IRIX Interactive Desktop Integration Guide</i>.</p>
+<div class="table"><p><a name="id5458235"></a><b>Table 2-1. <a name="id43521"></a>User/Icon Interactions and Expected Behavior</b></p>
+<table summary="User/Icon Interactions and Expected Behavior" border="1"><colgroup><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>User Goal</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Expected Behavior</p>
+</th><th scope="col" valign="top"><p>Implementation Hints</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Launch application</p>
+</td><td valign="top"><p>Selects application icon and 
+chooses &#8220;Open&#8221; from the 
+corresponding Selected menu<br>
+-or-<br>
+Double-clicks application icon</p>
+</td><td valign="top"><p>The magic carpet and the application symbol 
+change from the not-running to the running 
+state. The application launches, set to a new file.</p>
+</td><td valign="top"><p>Add a CMD OPEN 
+rule for the 
+application icon</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Launch application 
+with a particular file 
+by directly opening 
+file</p>
+</td><td valign="top"><p>Selects file icon and chooses 
+&#8220;Open&#8221; from the corresponding 
+Selected menu<br>
+-or-<br>
+Double-clicks file icon</p>
+</td><td valign="top"><p>The magic carpet and the application symbol 
+change from the not-running to the running 
+state. The application launches, set to the 
+specified file.</p>
+</td><td valign="top"><p>Add a CMD OPEN 
+rule for the file icon 
+that specifies its 
+application<sup>[<a name="id5458379" href="#ftn.id5458379">a</a>]</sup></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Launch application 
+with a particular file 
+by dragging and 
+dropping</p>
+</td><td valign="top"><p>Drops file icon onto application 
+icon</p>
+</td><td valign="top"><p>If file is compatible, application launches, set to 
+specified file</p>
+<p>If file is incompatible, application posts an 
+appropriate error message and doesn't launch.</p>
+<p>In both cases, the magic carpet and the 
+application symbol change from the not 
+running to the running state.</p>
+</td><td valign="top"><p>Add a CMD DROP 
+rule for the 
+application icon</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Launch application 
+with command-line 
+arguments</p>
+</td><td valign="top"><p>Double-clicks application icon 
+while holding down the &lt;Alt&gt; 
+key</p>
+</td><td valign="top"><p>The Launch dialog box opens, displaying the 
+path to your executable (see <a href="ch02.html#id39600">Figure 2-12</a>). Users 
+can add arguments if desired. Clicking <b>OK</b> 
+executes the text input as specified. The magic 
+carpet and the application symbol then change 
+from the not-running to the running state.</p>
+</td><td valign="top"><p>Add a CMD 
+ALTOPEN rule for the 
+application icona</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Print file<a name="idch02.icons29"></a></p>
+</td><td valign="top"><p>Selects file icon and chooses 
+&#8220;Print&#8221; from the corresponding 
+Selected menu<br>
+-or-<br>
+Drops file icon onto printer icon</p>
+</td><td valign="top"><p>Specified file prints on default printer if 
+activated by a menu selection or prints on 
+specified printer if activated by a drag and drop 
+action.</p>
+</td><td valign="top"><p>Add a PRINT rule for 
+the file icon<sup>a</sup></p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="4"><div class="footnote"><p><sup>[<a name="ftn.id5458379" href="#id5458379">a</a>] </sup>Design the application so it can accept specific data (for example, a filename) as a command-line argument.</p>
+</div></td></tr></tbody></table></div><p><div class="figure"><p><a name="id5458604"></a><b>Figure 2-12. <a name="id39600"></a>Launch Dialog Box</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-1.gif" alt="Figure 2-12 Launch Dialog Box" height="135" width="371"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5458625"></a>Icon Behavior Guidelines</h3></div></div>
+<p><a name="idch02.icons30"></a><span class="bold"><b>When creating an FTR to define your application icon's behavior . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Provide a CMD OPEN rule that launches the application. This allows the user to open your application either by selecting your application icon and then choosing &#8220;Open&#8221; from the corresponding Selected menu, or by double-clicking your application icon.</p>
+</li>
+<li><p>Provide a CMD ALTOPEN rule that opens the Launch dialog box shown in <a href="ch02.html#id39600">Figure 2-12</a> with the path to your executable displayed in the text field of this window. This allows the user to open the Launch dialog box by double-clicking your application icon while holding down the &lt;Alt&gt; key. </p>
+</li>
+<li><p>Provide a CMD DROP rule that launches your application with the file specified by the dropped icon. If your application doesn't understand the type of file represented by the icon dropped on it, your application should provide an appropriate error message to the user rather than launching. This allows the user to launch your application with a specific file by dragging the file icon and dropping it on your application icon.</p>
+</li>
+</ul></div><p><span class="bold"><b>When creating an FTR for your file icon . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Provide a CMD OPEN rule that launches your application and automatically opens the file represented by the file icon. This allows the user to open a file created by your application either by selecting the file icon and then choosing &#8220;Open&#8221; from the corresponding Selected menu, or by double-clicking the file icon.</p>
+</li>
+<li><p>Provide a CMD PRINT rule that sends the file represented by the file icon to the specified printer. This allows the user to send your application's data files to the default printer by selecting the file icon and then choosing &#8220;Print&#8221; from the corresponding Selected menu. It also allows the user to send your application's data files to any printer by dragging the file icon and dropping it on an icon that represents the specific printer.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5458731"></a><a name="id38425"></a>Making Application Icons Accessible</h2></div></div>
+<p>In addition to designing the appearance and defining the behavior of your application icon, you need to make it accessible to users. This section describes:<a name="idch02.icons31"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch02.html#id74160">&#8220;Putting Icons Into the Icon Catalog&#8221;</a> </p>
+</li>
+<li><p><a href="ch02.html#id22021">&#8220;Naming and Locating Executables for the Find an Icon Tool&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5458796"></a><a name="id74160"></a>Putting Icons Into the Icon Catalog</h3></div></div>
+<p>After users install an application, they expect to find its icon in the Icon Catalog (described in <a href="ch01.html#id81108">&#8220;Overview of the Desktop&#8221; in Chapter 1</a>), so you need to add your application icon to the Catalog as part of the installation process. Also, decide on which page of the Catalog your icon should appear or, if necessary, create a new page. Once you've chosen an appropriate page for your application icon, refer to Chapter 11, &#8220;Creating Desktop Icons: An Overview,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i> for details on making your application icon appear on the chosen page. </p>
+<p>As shown in <a href="ch02.html#id83339">Figure 2-13</a>, the Icon Catalog lets users access applications visually without having to search through the file hierarchy. Some of the Icon Catalog pages are listed below along with typical applications that can appear on them:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Application page&#8212;multimedia presentation application (<a name="idch02.icons32"></a><tt>showcase</tt>), text editor (<tt>jot</tt>), electronic mail program <tt>(MediaMail</tt>)</p>
+</li>
+<li><p>Collaboration page&#8212;desktop conferencing application (<a name="idch02.icons33"></a><tt>inperson</tt>), 3D model annotator (<tt>annotator</tt>)</p>
+</li>
+<li><p>Demos page&#8212;<a name="idch02.icons34"></a><tt>xlogo</tt> and <tt>buttonfly</tt></p>
+</li>
+<li><p>Desktop Tools page&#8212;calculator program (<a name="idch02.icons35"></a><tt>xcalc</tt>), clock program (<tt>xclock</tt>), select fonts (<tt>xfontsel</tt>), mail notifier utility (<i>mailbox</i>), calendar display (<i>ical</i>), and screen magnifier (<i>mag</i>)</p>
+</li>
+<li><p>Media Tools page&#8212;compact disc player (<a name="idch02.icons36"></a><tt>cdman</tt>), digital audio tape player (<tt>datman</tt>), image file format conversion utility (<tt>imgcopy</tt>), movie creation/editing application (<tt>moviemaker</tt>), audio editing application <tt>(soundeditor</tt>)</p>
+</li>
+<li><p>Control Panels page&#8212;audio control panel (<a name="idch02.icons37"></a><tt>apanel</tt>), background setting control panel (<tt>background</tt>), desktop settings control panel (<tt>desktop</tt>)</p>
+</li>
+<li><p>Web Tools page&#8212;Netscape Navigator (netscape), WebMagic (webmagic), WebSpace Navigator, WebJumper (webjumper), OutBox/WebServer, DynaWeb Server, What's New, TarDist<a name="idch02.icons38"></a></p>
+</li>
+</ul></div><p>In most cases your application icon will appear on the Applications page, since that's where users will expect to find it. If you're developing a suite of applications, however, you may want to create a new page for your icons and let users know (in your product's documentation) that you've done this.</p>
+<p><div class="figure"><p><a name="id5459113"></a><b>Figure 2-13. <a name="id83339"></a>Icon Catalog</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-14.gif" alt="Figure 2-13 Icon Catalog" height="249" width="410"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5459135"></a><a name="id22021"></a>Naming and Locating Executables for the <br>
+Find an Icon Tool</h3></div></div>
+<p>The Find an Icon tool, shown in <a name="idch02.icons39"></a><a name="idch02.icons40"></a><a name="idch02.icons41"></a><a href="ch02.html#id49376">Figure 2-14</a>, allows users to find applications by typing the name of the executable. If they type the correct name and if the executable is located in a directory on the user's search path or under the user's home directory, the corresponding icon appears in the drop pocket. The user can then drag the icon to another location such as the desktop, or open it directly from the Find an Icon tool by double-clicking the icon. </p>
+<p><div class="figure"><p><a name="id5459202"></a><b>Figure 2-14. <a name="id49376"></a>The Find an Icon Tool </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch02.icons-2.gif" alt="Figure 2-14 The Find an Icon Tool " height="165" width="445"></td></tr></table></div></div><br>
+</p>
+<p>Since users may be guessing at the most likely name for the application's executable, adhere to the following naming conventions: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Choose a name that matches the product name or is strongly associated with the product. For example, the name of the IRIS Showcase executable is <tt>showcase</tt>, and the name of the online book application, IRIS InSight, is <tt>insight</tt>. Don't use an abbreviation of your product name.</p>
+</li>
+<li><p>Use only lowercase letters for the name. For example, the name for the SoundEditor executable is <tt>soundeditor</tt>.</p>
+</li>
+<li><p>Don't include spaces in the name since UNIX doesn't handle spaces elegantly.</p>
+</li>
+<li><p>Don't use numbers in the name to represent versions of a product. For example, the executables for IRIS InSight 2.2.1 and its earlier versions are all named <tt>insight</tt>.</p>
+</li>
+<li><p>Don't use any special characters in the name, such as underlines or periods. Simply remove any spaces when converting your product's name to an appropriate name for your executable.</p>
+</li>
+</ul></div><p>Since the Find an Icon tool searches only directories on the user's search path and under the user's home directory, put your executable&#8212;or a link to it, which is preferable&#8212;in one of the directories on the user's default path. The directories included in the default path are: <a name="idch02.icons42"></a></p>
+<div class="informaltable"><table border="1"><colgroup><col><col><col></colgroup><tbody><tr valign="top"><td scope="row" valign="top"><p><i>/usr/sbin</i></p>
+</td><td valign="top"><p> </p>
+<p><i>/usr/bsd</i></p>
+</td><td valign="top"><p> </p>
+<p><i>/sbin</i></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p> </p>
+<p><i>/usr/bin</i></p>
+</td><td valign="top"><p> </p>
+<p><i>/bin</i></p>
+</td><td valign="top"><p> </p>
+<p><i>/usr/bin/X11</i></p>
+</td></tr></tbody></table></div><p>The most appropriate place to put a link to your executable&#8212;and the one that will result in users finding your application the fastest&#8212;is <tt>/usr/sbin</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5459457"></a>Application Icon Accessibility Guidelines</h3></div></div>
+<p><a name="idch02.icons43"></a><span class="bold"><b>When making your application icons accessible to users . . .</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Place your application icon on the Applications page in the Icon Catalog. If you produce a suite of software applications, consider creating your own page.</p>
+</li>
+<li><p>In your documentation, refer users to the appropriate page in the Icon Catalog after they've installed your application.</p>
+</li>
+<li><p>When naming your executable, use the product name or choose a name that's strongly associated with the product.</p>
+</li>
+<li><p>When naming your executable, use only lowercase letters. Don't use numbers, spaces, or special characters such as underlines or periods. Don't use an abbreviation of the product name.</p>
+</li>
+<li><p>Make sure that a link to your executable (preferred method) or the executable itself resides in a directory in the user's default search path. Ideally, place a link to your executable in the <tt>/usr/sbin</tt> directory. This helps ensure that users can quickly find your application icon using the Find an Icon tool. </p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 1. Overview of the IRIX Interactive Desktop </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 3. Windows in the IRIX Interactive Desktop Environment </td></tr></table></div></body></html>

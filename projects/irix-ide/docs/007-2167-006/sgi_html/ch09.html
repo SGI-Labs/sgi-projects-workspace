@@ -1,0 +1,397 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 9. Controls</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt02.html" title="Part II. Interface Components"><link rel="previous" href="ch08.html" title="Chapter 8. Menus"><link rel="next" href="ch10.html" title="Chapter 10. Dialogs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 9. Controls</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch08.html">Prev</a> </td><th width="60%" align="center">Part II. Interface Components</th><td width="20%" align="right"> <a accesskey="n" href="ch10.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5487690"></a>Chapter 9. <a name="id95140"></a>Controls</h2></div></div>
+<p>Two types of controls are described in this chapter&#8212;those supported in the standard OSF/Motif environment (such as pushbuttons, lists, and scrollbars), and those unique to the IRIX Interactive Desktop environment (such as enhanced scales, thumbwheels, and dials). These controls can be used in any window of an application. Each description consists of a general description of the control and guidelines for when to use it, how to label it, and how it should behave.<a name="idch09.controls1"></a></p>
+<p>Note that some of the standard controls have been enhanced in the IRIX Interactive Desktop environment as described in <a href="ch03.html#id47013">&#8220;Enhanced Graphics in the IRIX Interactive Desktop Look&#8221; in Chapter 3</a>. To use these enhanced controls in your application, see , &#8220;Using the Silicon Graphics Enhanced Widgets,&#8221; of the <i>IRIX Interactive Desktop Integration Guide</i>. The reference pages in Chapter 9 of the <i>OSF/Motif Style Guide</i> provide details on the behavior of the OSF/Motif controls discussed in this chapter. This chapter describes the following controls:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch09.html#id18668">&#8220;Pushbuttons&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id68004">&#8220;Option Buttons&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#id22792">&#8220;Checkboxes&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id71369">&#8220;Radio Buttons&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id99993">&#8220;LED Indicators&#8221;</a> </p>
+</li>
+<li><p><a href="ch09.html#id72866">&#8220;Lists&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id36229">&#8220;Text Fields&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id33826">&#8220;Scrollbars&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id85716">&#8220;IRIX Interactive Desktop Scales&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id92572">&#8220;Labels&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id43846">&#8220;File Finder&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id20150">&#8220;Thumbwheels&#8221;</a></p>
+</li>
+<li><p><a href="ch09.html#id97285">&#8220;Dials&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5488040"></a><a name="id18668"></a>Pushbuttons</h2></div></div>
+<p>A pushbutton is a button that invokes an operation. Pushbuttons are rectangular and can be labeled with either text or icons, as shown in <a name="idch09.controls2"></a><a name="idch09.controls3"></a><a href="ch09.html#id55921">Figure 9-1</a>. The basic operations for pushbuttons are described in the section &#8220;Other Operations,&#8221; in the reference page for PushButton in the <i>OSF/Motif</i> <i>Style Guide</i>, Chapter 9. See <a href="ch06.html#id93963">&#8220;Control Areas in Primary Windows&#8221; in Chapter 6</a> for guidelines on using pushbuttons in control areas and tool palettes, and see <a href="ch10.html#id32754">&#8220;Standard Dialog Actions&#8221; in Chapter 10</a> for guidelines on using pushbuttons in dialogs.</p>
+<p><div class="figure"><p><a name="id5488127"></a><b>Figure 9-1. <a name="id55921"></a>Pushbuttons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-6.gif" alt="Figure 9-1 Pushbuttons" height="83" width="271"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5488150"></a>Pushbutton Guidelines</h3></div></div>
+<p><span class="bold"><b>When using pushbuttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>In windows with menu bars, use pushbuttons to provide easy access to the most frequently used application-specific functions in the pulldown menus. For primary windows, these pushbuttons appear in the control area of the window.</p>
+</li>
+<li><p>In windows without menu bars, use pushbuttons to access help and to close the window.</p>
+</li>
+<li><p>Use pushbuttons to create tool palettes, either in support windows or in primary windows. <a name="idch09.controls4"></a></p>
+</li>
+<li><p>Use pushbuttons in the response area of a dialog for the standard actions for that dialog. <a name="idch09.controls5"></a></p>
+</li>
+<li><p>Always have the pushbutton perform the same operation (although the input to that operation may vary based on what data is currently selected). Don't use the same pushbutton to perform different tasks based on some mode of the application.</p>
+</li>
+<li><p>Use pushbuttons to perform an action; don't use them merely to set state, such as a parameter value in a dialog box. Use checkboxes, radio buttons, or option menus for this purpose.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls6"></a></b></span><span class="bold"><b>When labeling a pushbutton . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use either a text or graphic label that describes the action associated with the button. With text labels, use an active verb describing the operation the button performs. Make each text label a single, capitalized word. Don't use abbreviations in labels.</p>
+</li>
+<li><p>Center the label on the button.</p>
+</li>
+<li><p>If the pushbutton opens a dialog to collect more information from the user before the action represented by the pushbutton can be completed, place an ellipsis after the button label. Don't use an ellipsis if the button opens a dialog simply to display some information to the user as an end result of the operation. This use of ellipses is the same as that described for menu entries in the section <a name="idch09.controls7"></a><a href="ch08.html#id87916">&#8220;Naming Menu Entries in the Pull-Down Menus&#8221; in Chapter 8</a>.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying pushbuttons . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the action associated with a button is temporarily unavailable, disable the button rather than remove it.</p>
+</li>
+<li><p>Don't resize pushbuttons when the window is resized.</p>
+</li>
+<li><p>Don't use dynamic buttons whose labels change to indicate different functionality depending on the current context. Instead, use multiple buttons and disable buttons that represent functionality that's currently unavailable. With multiple buttons, the functionality is obvious even if some of the buttons aren't currently active. With dynamic buttons, the user has to put the application into the proper context to discover some of the functionality. The one exception to this guideline is the <a name="idch09.controls8"></a><a name="idch09.controls9"></a><b>Cancel</b>/<b>Close</b> button used in Dialogs with the <b>Apply</b> button. See <a href="ch10.html#id32754">&#8220;Standard Dialog Actions&#8221; in Chapter 10</a> for information on this special case.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5488410"></a><a name="id68004"></a>Option Buttons</h2></div></div>
+<p>An option button is a button that displays an option menu. It allows the user to choose one of the options listed in the menu, and its label changes to reflect the currently selected menu entry. Entries in the option menu represent mutually exclusive values of a parameter. Users interact with option menus according to the model described in <a name="idch09.controls10"></a><a href="ch08.html#id19797">&#8220;Menu Traversal and Activation&#8221; in Chapter 8</a>. <a href="ch09.html#id36248">Figure 9-2</a> shows an option button and its option menu. Note that the button has a special graphic on it to distinguish it from regular pushbuttons. The basic operations for option buttons are described in the section &#8220;Other Operations,&#8221; in the reference page for OptionButton in the <i>OSF/Motif Style Guide</i>, Chapter 9.</p>
+<p><div class="figure"><p><a name="id5488486"></a><b>Figure 9-2. <a name="id36248"></a>Option Button and Option Menu</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-7.gif" alt="Figure 9-2 Option Button and Option Menu" height="163" width="437"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5488511"></a>Option Button Guidelines</h3></div></div>
+<p><span class="bold"><b>When using option buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use an option button when you want to offer the user about 5-12 mutually exclusive options; use a list for more than 12 choices. If there's enough space, use radio buttons for fewer than 5 choices. </p>
+</li>
+<li><p>Don't put radio buttons or checkboxes in an option menu.</p>
+</li>
+<li><p>Don't use an option button if the user can select several options at the same time&#8212;use a list or a set of checkboxes instead.</p>
+</li>
+<li><p>Don't put actions (such as zoom or rotate) in the option menu&#8212;use pulldown menus or pushbuttons instead.</p>
+</li>
+<li><p>Don't add or delete the choices in the option menu. If the choices must change, use a list.</p>
+</li>
+<li><p>Don't use cascading menus in the option menu. If there are so many items that they don't fit conveniently into an option menu, use a scrolling list instead.</p>
+</li>
+<li><p>Don't use a tear-off entry in an option menu.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls11"></a></b></span><span class="bold"><b>When labeling an option button . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the default label for the option button itself, which is the current value of the parameter.</p>
+</li>
+<li><p>Use a second label that describes the parameter that the option button controls. Place this parameter label to the left of the option button and put a colon (:) and a space after it (see <a href="ch09.html#id36248">Figure 9-2</a>). This label is typically a noun and is not abbreviated.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls12"></a></b></span><span class="bold"><b>When labeling the entries in an option menu . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use nouns that indicate the possible values of the parameter being set.</p>
+</li>
+<li><p>Use entire words for the entries rather than abbreviations.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying option menus . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If one of the entries in an option menu is unavailable for selection in the current context, disable the menu entry. Don't remove the entry from the menu. Note that the user should always be able to display the contents of an option menu even if all of the menu entries are currently disabled.</p>
+</li>
+<li><p>Don't include a title in option menus.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5488747"></a><a name="id22792"></a>Checkboxes</h2></div></div>
+<p>A checkbox is a button with two states&#8212;on and off. In a group of checkboxes, each can be turned on or off independently. The on state is indicated in the IRIX Interactive Desktop look by a red check mark, as shown in <a name="idch09.controls13"></a><a href="ch09.html#id67843">Figure 9-3</a>. The basic operations for checkboxes are described in the section &#8220;Other Operations,&#8221; in the reference page for CheckButton in the <i>OSF/Motif Style Guide</i>, Chapter 9.</p>
+<p><div class="figure"><p><a name="id5488791"></a><b>Figure 9-3. <a name="id67843"></a>Checkboxes</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-9.gif" alt="Figure 9-3 Checkboxes" height="121" width="122"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5488834"></a>Checkbox Guidelines</h3></div></div>
+<p><span class="bold"><b>When using checkboxes . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use checkboxes for single attributes or states that can be turned on and off, or for groups of items where multiple items in the group can be selected independently. (Also see <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus&#8221; in Chapter 8</a>.)</p>
+</li>
+<li><p>Use checkboxes for groups of less than about six items. When dealing with more than a handful of items, use a list that allows multiple elements to be selected at the same time.</p>
+</li>
+<li><p>Don't use checkboxes for mutually exclusive options. If only one item in a group of items can be selected at a time, use radio buttons instead.</p>
+</li>
+<li><p>Don't use checkboxes for actions; use pushbuttons instead.</p>
+</li>
+<li><p>Don't change the choices in the group based on the current context. If you want to offer a dynamic set of choices, use a list.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls14"></a></b></span><span class="bold"><b>When labeling checkboxes . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Give each checkbox a label that describes the attribute, state, or option it controls.</p>
+</li>
+<li><p>Create a group label for each group of checkboxes, and indent the checkboxes below the label. This group label should be a noun that describes the function of the group.</p>
+</li>
+<li><p>Don't use abbreviations for either the checkbox labels or the group label.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying checkboxes . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Keep checkboxes updated to reflect the current state of the application and the settings of the current selection (if the settings of the checkboxes relate to the current selection). For example, if a checkbox exists for turning underlining on and off and the user selects some text, update the checkbox to reflect whether or not the selection is underlined.</p>
+</li>
+<li><p>Disable checkboxes representing choices that aren't currently available. Don't remove the checkboxes.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5489003"></a><a name="id71369"></a>Radio Buttons</h2></div></div>
+<p>A radio button is a button with two states&#8212;on and off. Unlike checkboxes, radio buttons are always used in groups. Only one of a group of radio buttons can be turned on at any given time. The on state is indicated in the IRIX Interactive Desktop look by a blue triangle, as shown in <a name="idch09.controls15"></a><a href="ch09.html#id89261">Figure 9-4</a>. The basic operations for radio buttons are described in the section &#8220;Other Operations,&#8221; in the reference page for RadioButton in the <i>OSF/Motif Style Guide, <br>
+</i>Chapter 9.</p>
+<p><div class="figure"><p><a name="id5489072"></a><b>Figure 9-4. <a name="id89261"></a>Radio Buttons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-10.gif" alt="Figure 9-4 Radio Buttons" height="120" width="151"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5489095"></a>Radio Button Guidelines</h3></div></div>
+<p><span class="bold"><b>When using radio buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use radio buttons in groups, never as single buttons. If you need to use a single button that shows an on/off state, use a checkbox instead. (Also see <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus&#8221; in Chapter 8</a>.)</p>
+</li>
+<li><p>Use radio buttons for mutually exclusive options. If more than one item in the group can be selected at a time, use checkboxes or a list instead. </p>
+</li>
+<li><p>Use radio buttons when you want to offer the user fewer than six options. If you have more than six options, or if screen space is extremely limited, use an option button instead. (See the section <a href="ch09.html#id68004">&#8220;Option Buttons&#8221;</a> earlier in this chapter.) If you have more than 12 options, consider using a list where only a single element can be selected at a time. (See the section <a href="ch09.html#id72866">&#8220;Lists&#8221;</a> later in this chapter.)</p>
+</li>
+<li><p>Don't use radio buttons for actions; use pushbuttons instead.</p>
+</li>
+<li><p>Don't change the choices in a group of radio buttons based on the current context. If you want to offer a dynamic set of choices, use a list because users expect the elements of a list to change occasionally, but they don't expect radio buttons to change.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls16"></a></b></span><span class="bold"><b>When labeling radio buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Give each radio button a label that describes the attribute or option it controls.</p>
+</li>
+<li><p>Create a group label for each group of radio buttons, and indent the radio buttons below the label. This group label should be a noun that describes the function of the group.</p>
+</li>
+<li><p>Don't use abbreviations for either the radio button labels or the group label.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying radio buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Keep radio buttons updated. If the settings of the radio buttons depend on the current selection, update them when the user makes a new selection so that they reflect the settings of the new selection.</p>
+</li>
+<li><p>Disable radio buttons representing options that aren't currently available. Don't remove the radio buttons.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5489276"></a><a name="id99993"></a>LED Indicators</h2></div></div>
+<p>The LED Button is a toggle button with an enhanced appearance. It appears in the form of a push button, with an imbedded indicator lamp (LED) that provides state feedback. The button has two states&#8212;on or off. When the button is toggled to the ON state, it appears lighted; when OFF, it appears darkened.<a name="idch09.controls17"></a></p>
+<p>You can use a LED button (as shown in <a href="ch09.html#id60634">Figure 9-5</a>) instead of a radio button to indicate that one of a range of options or modes is currently in effect. Alternatively, you can use a toggle button instead of a checkbox, to indicate whether a given option or mode is currently on or off. </p>
+<p>In either case, an LED button is most appropriate in a context where other push buttons are used as part of a control panel, since an LED button is the same size as a push button. </p>
+<p><div class="figure"><p><a name="id5489326"></a><b>Figure 9-5. <a name="id60634"></a>LED Button</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-11.gif" alt="Figure 9-5 LED Button" height="49" width="124"></td></tr></table></div></div><br>
+</p>
+<p>For LED example code, see &#8220;Example Programs for SGI Enhanced Widgets&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>. </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5489412"></a>LED Button Guidelines</h3></div></div>
+<p><span class="bold"><b>When using LED buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use LED buttons for single attributes or states that can be turned on and off, or for groups of items where multiple items in the group can be selected independently. (Also see <a href="ch08.html#id67896">&#8220;Using Radio Buttons and Checkboxes in Pull-Down Menus&#8221; in Chapter 8</a>.)</p>
+</li>
+<li><p>Don't use LED buttons for actions; use pushbuttons instead.</p>
+</li>
+<li><p>Don't change the choices in the group based on the current context. If you want to offer a dynamic set of choices, use a list.</p>
+</li>
+</ul></div><p><span class="bold"><b>When labeling LED buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Label each LED button with a term that describes the attribute, state, or option it controls.</p>
+</li>
+<li><p>If there is a group of LED buttons, create a group label for the group, and indent the LED buttons below the label. Use a noun that describes the function of the group.</p>
+</li>
+<li><p>Don't use abbreviations for either the LED button labels or the group label.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5489497"></a><a name="id72866"></a>Lists</h2></div></div>
+<p>A list allows the user to choose from a series of elements. It can allow the user to choose a single element at a time or choose multiple elements at once. Lists should have vertical and horizontal scrollbars when necessary. (See <a name="idch09.controls18"></a><a href="ch09.html#id33826">&#8220;Scrollbars&#8221;</a> later in this chapter.) When allowing users to select elements in the list, follow the selection guidelines described in <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>. <a href="ch09.html#id83859">Figure 9-6</a> shows a list with vertical and horizontal scrollbars. The basic operation of lists is described in the section &#8220;Other Operations,&#8221; in the reference page for List in the <i>OSF/Motif Style Guide, </i>Chapter 9.</p>
+<p><div class="figure"><p><a name="id5489579"></a><b>Figure 9-6. <a name="id83859"></a>List</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-8.gif" alt="Figure 9-6 List" height="194" width="270"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5489603"></a>List Guidelines</h3></div></div>
+<p><span class="bold"><b>When using lists . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use a list when you want to allow the user to choose a single option from a large list (that is, more than 15 options). If you have fewer than 15 options, use either an option button (best for 5-15 options; see <a href="ch09.html#id68004">&#8220;Option Buttons&#8221;</a> earlier in this chapter) or a set of radio buttons (best for 2-5 options; see <a href="ch09.html#id71369">&#8220;Radio Buttons&#8221;</a> earlier in this chapter).</p>
+</li>
+<li><p>Use a list when you want to allow the user to choose several options from a list of six or more elements. If you have fewer options, use checkboxes (see <a href="ch09.html#id22792">&#8220;Checkboxes&#8221;</a> earlier in this chapter).</p>
+</li>
+<li><p>If you want to allow the user to choose elements from a dynamic list of options, use a list regardless of the number of options. (Option menus and groups of checkboxes or radio buttons should represent static lists of options.)</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls19"></a></b></span><span class="bold"><b>When labeling a list . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Label the list with a noun that indicates the function of the elements in the list. Don't use abbreviations in the label. </p>
+</li>
+<li><p>Place the label directly above and either left-aligned with or slightly to the left of the first element of the list.</p>
+</li>
+</ul></div><p><span class="bold"><b>When labeling the list entries . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the elements in the list represent operations to perform, use active verbs. Otherwise, use nouns. In either case, use entire words rather than abbreviations. </p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying lists . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>When a window using a list is first opened, the currently selected list elements should be highlighted and the list should be scrolled to display these. If multiple elements are selected, scroll the list so that the first selected one appears at the top of the viewing area. See <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>.</p>
+</li>
+<li><p>Allow users to select elements in the list according to the selection guideline discussed in <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>.</p>
+</li>
+<li><p>Disable list elements that aren't currently available.</p>
+</li>
+<li><p>Allow the list to autoscroll (the default behavior) if the user is making a selection and the selection goes outside the range of the displayed elements. See <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5489852"></a><a name="id36229"></a>Text Fields</h2></div></div>
+<p>Text fields can be single-line or multi-line. Single-line text fields don't have scrollbars, even if all of the text can't be displayed horizontally in the field. Multi-line text fields should have vertical and horizontal scrollbars when necessary. (See <a name="idch09.controls20"></a><a href="ch09.html#id33826">&#8220;Scrollbars&#8221;</a> later in this chapter.) </p>
+<p>Text fields can be either editable or noneditable. Editable and noneditable text fields have different colored backgrounds to indicate to the user whether the information can be changed. These background colors vary depending on what scheme the user has selected (see <a name="idch09.controls21"></a><a href="ch03.html#id78166">&#8220;Schemes for Colors and Fonts&#8221; in Chapter 3</a> for information on schemes).</p>
+<p>IRIX Interactive Desktop offers an enhanced text field; it allows the application to select a section of text and flag it with an error status. The error selection shows up with a special background color to distinguish it from an ordinary text selection. For example, a debugger might use the error selection to indicate to the user which section of code was causing an error. <a name="idch09.controls22"></a></p>
+<p>The enhanced text field control allows you to specify the following:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>both the foreground and background colors of the selected text (See <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a> for information on selection.)</p>
+</li>
+<li><p>the background color for text that's marked with an error status</p>
+</li>
+<li><p>whether to show the text cursor only when the text component currently has keyboard focus (See <a href="ch07.html#id50040">&#8220;Keyboard Focus and Navigation&#8221; in Chapter 7</a> for information on keyboard focus.)</p>
+</li>
+</ul></div><p>The basic operations for text fields are described in the section &#8220;Other Operations&#8221; in the reference page for Text in the <i>OSF/Motif Style Guide</i>, Chapter 9.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5490043"></a>Text Field Guidelines</h3></div></div>
+<p><span class="bold"><b>When using text fields . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use single-line, editable text fields to display values of parameters that users can edit.</p>
+</li>
+<li><p>Use single-line, noneditable text fields to display values of parameters that users can't edit, whenever these values either change over time or might need to be selected by the user. If the value doesn't change and the user doesn't need to select it, use a label.</p>
+</li>
+<li><p>Don't use a text field if you need to display and edit pathnames; use the IRIX Interactive Desktop File Finder instead.</p>
+</li>
+<li><p>Use text fields for values that change over time; don't use labels.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls23"></a></b></span><span class="bold"><b>When labeling text fields . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Label each editable or noneditable text field, unless the field represents the bulk of a window and the field's function is clear. Use entire words in labels rather than abbreviations.</p>
+</li>
+<li><p>For single-line text fields, place the label to the left of the text field, and follow the label with a colon (:) and a space. Vertically center the label within the text field.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying text fields . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the default selection and highlighting discussed in <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>.</p>
+</li>
+<li><p>Allow the user to cancel a text edit in progress by pressing &lt;Esc&gt;. That is, once the user has selected text and started to replace it with new text, &lt;Esc&gt; should cancel any changes that the user has made. <a name="idch09.controls24"></a></p>
+</li>
+<li><p>Keep text fields updated. When a window using a text field is first opened, show the default or current setting (if either exists) for the text field.</p>
+</li>
+<li><p>Make the text automatically scroll if the user is making a selection and the selection goes outside the range of the displayed elements.</p>
+</li>
+<li><p>When an editable text field can't be edited in the current context but the information is still useful to the user, change it to a noneditable text field. If the information isn't useful to the user (that is, the user doesn't need to know the value and won't need to select it), disable the text field.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5490221"></a><a name="id33826"></a>Scrollbars</h2></div></div>
+<p>A scrollbar &#8220;scrolls&#8221; the data in a viewing region to change the portion of the data that's visible. Scrollbars can be either horizontal or vertical. (&#8220;Enhanced Graphics in the IRIX Interactive Desktop Look&#8221; in Chapter 3 describes enhancements to the scrollbar's appearance.) <a name="idch09.controls25"></a><a name="idch09.controls26"></a><a href="ch09.html#id11538">Figure 9-7</a> shows a scrollbar.</p>
+<p><div class="figure"><p><a name="id5490258"></a><b>Figure 9-7. <a name="id11538"></a>Scrollbar</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-1.gif" alt="Figure 9-7 Scrollbar" height="217" width="291"></td></tr></table></div></div><br>
+</p>
+<p>A scrollbar includes the scroll region (shown as a trough), which represents the size of the entire scrollable element with arrow buttons at each end. If there's data that can be scrolled, the scrollbar also includes a slider that indicates the relative position and portion of the data currently being displayed. As the user moves the slider, a temporarily indented impression of the slider indicates the position of the slider before the user began moving it. This indented impression disappears when the user releases the mouse button to complete the scroll action. The basic operations for scrollbars are described in the section &#8220;Other Operations,&#8221; in the reference page for ScrollBar in the <i>OSF/Motif Style Guide</i>, Chapter 9.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5490333"></a>Scrollbar Guidelines</h3></div></div>
+<p><span class="bold"><b>When using scrollbars . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use scrollbars to pan an associated view.</p>
+</li>
+<li><p>Use scrollbars with components that can be resized such that all of the available information contained in the component can't be displayed at one time. Typical scrollable components include work areas in primary windows, lists, multiple line text fields, and data display areas in primary or support windows.</p>
+</li>
+<li><p>Use scrollbars with a list when the number of elements in the list doesn't fit in the viewing region (vertical scrollbar), when the elements are too wide to fit in the viewing region (horizontal scrollbar), or when the window containing the list can be resized such that either of these situations can occur. See <a href="ch09.html#id72866">&#8220;Lists&#8221;</a> earlier in this chapter for information.</p>
+</li>
+<li><p>Use scrollbars with multi-line text regions when the data can't all be displayed vertically or horizontally or when the window can be resized such that this is true. See <a href="ch09.html#id36229">&#8220;Text Fields&#8221;</a> earlier in this chapter for information.</p>
+</li>
+<li><p>Don't use scrollbars with single-line text fields. See <a href="ch09.html#id36229">&#8220;Text Fields&#8221;</a> earlier in this chapter for information.</p>
+</li>
+<li><p>Don't use scrollbars for zooming or for rotation. Use an IRIX Interactive Desktop thumbwheel instead. See <a href="ch09.html#id20150">&#8220;Thumbwheels&#8221;</a> later in this chapter.</p>
+</li>
+<li><p>Don't use scrollbars to choose a value in a range; use the IRIX Interactive Desktop scale instead.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying scrollbars . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Place vertical scrollbars along the right of the element being scrolled, and place horizontal scrollbars along the bottom of the element being scrolled. </p>
+</li>
+<li><p>Keep scrollbars updated. When a window using a scrollbar is first opened, the scrollbar should reflect the current area being displayed in the scrolled region.</p>
+</li>
+<li><p>Update the data in the scrolled area continuously as the user drags the slider along the scroll region. This gives the feeling of direct, continuous control. Don't wait until the user has released the slider to update the data, because users often use the current view of the data to determine when to stop dragging the slider.</p>
+</li>
+<li><p>When a component is being scrolled, don't scroll it beyond the first or last elements. That is, there should be no extra white space before the first element or after the last element. The exception to this rule is scrolling text elements that represent physical pages (for example, in a desktop publishing application).</p>
+</li>
+<li><p>Make all components that use scrollbars automatically scroll when the user makes a selection that goes outside of the data currently being displayed. Also, make the component automatically scroll if the user performs an operation that moves the cursor outside of the current view (for example, if the user inserts or deletes text that moves the cursor outside of the current view). In this case, the view should be automatically scrolled so that the cursor is shown when the operation is finished.</p>
+</li>
+<li><p>When using the &lt;Page Up&gt;, &lt;Page Down&gt;, &lt;Ctrl&gt;-&lt;Page Up&gt;, or &lt;Ctrl&gt;-&lt;Page Down&gt; key sequences to scroll a page at a time, leave one unit of overlap from the previous page to make it easier for the user to preserve the current context. This unit is application-specific; it might be a line of text, an item in a list, a row of icons, or a specific number of pixels (for example, in a drawing region). By default, this behavior is automatic for IRIS IM list and text components.<a name="idch09.controls27"></a></p>
+</li>
+<li><p>Remove the slider from the scrollbar when all of the data is currently being displayed. Don't remove the scrollbar or disable it in some other fashion.</p>
+</li>
+<li><p>Allow the user to cancel scroll actions by pressing &lt;Esc&gt;. By default, if the user presses the &lt;Esc&gt; key while dragging the slider along the scroll region, the scroll action is canceled, and both the data and the slider are returned to the position they had before the user initiated the scroll action.<a name="idch09.controls28"></a></p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5490621"></a><a name="id85716"></a>IRIX Interactive Desktop Scales</h2></div></div>
+<p>Scales can be used either to allow users to change a value in a given range or to display a value in a range. The size of the control shows the size of the range. When the scale is being used to allow users to specify or change a value, the slider indicates the current value in the range and can be dragged by the user. When the scale is being used for display only, there's no slider for the user to control. <a name="idch09.controls29"></a><a name="idch09.controls30"></a><a href="ch09.html#id64619">Figure 9-8</a> shows the IRIX Interactive Desktop scale in both modes. The basic operations for scales are described in the section &#8220;Other Operations&#8221; in the reference page for Scale in the <i>OSF/Motif Style Guide</i>, Chapter 9. For specific details on using the IRIX Interactive Desktop scale in your application, see &#8220;The Scale (Percent Done Indicator) Widget&#8221; in Chapter 4, &#8220;Using the Silicon Graphics Enhanced Widgets,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>. </p>
+<p><div class="figure"><p><a name="id5490682"></a><b>Figure 9-8. <a name="id64619"></a>IRIX Interactive Desktop Scale</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-3.gif" alt="Figure 9-8 IRIX Interactive Desktop Scale" height="72" width="357"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5490706"></a>IRIX Interactive Desktop Scale Guidelines</h3></div></div>
+<p><span class="bold"><b>When using the IRIX Interactive Desktop scale . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use scales to allow users to change a value in a given range. Use scales in display-only mode to display values that the user can't control. For example, use a display-only scale as a percent-done indicator to show progress in a Working dialog. (See <a href="ch10.html#id17857">&#8220;Working Dialogs&#8221; in Chapter 10</a>.)</p>
+</li>
+<li><p>Don't use scales for scrolling.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls31"></a></b></span><span class="bold"><b>When labeling a scale . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Label it with the current value for the scale.</p>
+</li>
+<li><p>If the function of the scale isn't immediately apparent, give the scale an additional label that indicates its purpose. Don't use abbreviations in this label.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying scales . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Keep scales updated. When a window using a scale is first opened, the slider of the scale should show the current setting for the scale control.</p>
+</li>
+<li><p>For sliders where the user can change the value, update the value being manipulated as the user moves the slider. Give the impression of direct, continuous manipulation. For sliders that also manipulate an object, update the object continuously as well. For sliders that are used only to display values, immediately update the slider to reflect the new value as the value changes. </p>
+</li>
+<li><p>Allow the user to cancel a scale operation by pressing &lt;Esc&gt;. If the user presses the &lt;Esc&gt; key while manipulating the scale, the action should be canceled, and the scale should return to the position it had before the user initiated the action.<a name="idch09.controls32"></a></p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5490894"></a><a name="id92572"></a>Labels</h2></div></div>
+<p>Labels are noneditable text or graphical objects. They aren't selectable.<a name="idch09.controls33"></a></p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5490912"></a>Label Guidelines</h3></div></div>
+<p><span class="bold"><b>When using labels . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use entire words in labels rather than abbreviations.</p>
+</li>
+<li><p>Use labels for displaying text information that the user won't need to edit or select.</p>
+</li>
+<li><p>Use labels for labeling controls as described under the individual controls in this chapter.</p>
+</li>
+<li><p>Use labels for labeling groups of controls. When used to label a group of controls, use a colon (:) and a space after the label, and place it either to the left of the item in the upper left corner of the group or above and slightly to the left of the item in the upper left corner of the group.</p>
+</li>
+<li><p>Use labels for simple instructions when necessary. Before adding instructions to any of your application windows, however, first try to design some alternatives that might make the instructions unnecessary. For example, if these instructions are necessary because the user interface works in a nonstandard way, redesigning the interface to be more standard is likely to make the instructions unnecessary.</p>
+</li>
+<li><p>Place labels on the background of the window (that is, the part of the window that isn't recessed). </p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying labels . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Don't change the text or graphic on a label. If this information will change, consider putting it in a noneditable text field instead; users don't expect label text to change.</p>
+</li>
+<li><p>Disable labels when the controls they represent are disabled. Don't disable group labels.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5491057"></a><a name="id43846"></a>File Finder</h2></div></div>
+<p>The File Finder is an IRIX Interactive Desktop control. It allows users to navigate the file hierarchy quickly and to specify directories and files easily, using drag and drop of desktop icons. The File Finder is pictured in <a name="idch09.controls34"></a><a name="idch09.controls35"></a><a name="idch09.controls36"></a><a href="ch09.html#id70546">Figure 9-9</a>.</p>
+<p><div class="figure"><p><a name="id5491095"></a><b>Figure 9-9. <a name="id70546"></a>The File Finder</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-2.gif" alt="Figure 9-9 The File Finder" height="107" width="305"></td></tr></table></div></div><br>
+</p>
+<p>The File Finder includes several pieces:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>text field&#8212;allows the user to enter the pathname for a file or directory.</p>
+</li>
+<li><p>drop pocket&#8212;displays the desktop icon representing the current file or directory whose name is displayed in the text field. A user can also drop a desktop icon into this drop pocket and have the text field automatically update with the pathname of the icon.<a name="idch09.controls37"></a></p>
+</li>
+<li><p>path navigation bar&#8212;each button represents the directory being displayed below it in the text field. A user can quickly navigate to ancestor directories by clicking on any of these buttons.<a name="idch09.controls38"></a></p>
+</li>
+<li><p>history button&#8212;similar to an option menu button; maintains a list of directories that the user already visited while using this control. The user can select any of these previously visited directories to return immediately to that directory.<a name="idch09.controls39"></a></p>
+</li>
+</ul></div><p>For specific details on using the file finder in your application, see the <tt>SgFinder</tt>(3X) reference page.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5491229"></a>File Finder Guidelines</h3></div></div>
+<p><span class="bold"><b>When using the File Finder . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the File Finder when the user needs to enter the pathname of a directory or file. This allows the user to drag and drop desktop icons to specify the file and to navigate the file hierarchy.</p>
+</li>
+<li><p>When a window using a file finder is first opened, the text field in the file finder should show the default or current value of the pathname, if any. Also place this value in the history list under the history button.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5491265"></a><a name="id20150"></a>Thumbwheels</h2></div></div>
+<p>The thumbwheel is an IRIX Interactive Desktop control that allows users to specify or change a value, either in a given range (for instance, when zooming) or in an infinite range (for instance, when rotating a 3D object). Users change the current value by direct manipulation of the wheel (that is, by clicking and dragging). The thumbwheel can also include a &#8220;home button&#8221; that returns the thumbwheel to a default value. Thumbwheels can be oriented either horizontally or vertically. <a name="idch09.controls40"></a><a name="idch09.controls41"></a><a href="ch09.html#id17825">Figure 9-10</a> shows a thumbwheel. For specific details on using the thumbwheel in your application, see the <tt>SgThumbWheel</tt>(3X) reference page.</p>
+<p><div class="figure"><p><a name="id5491317"></a><b>Figure 9-10. <a name="id17825"></a>Thumbwheel</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-4.gif" alt="Figure 9-10 Thumbwheel" height="179" width="169"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5491341"></a>Thumbwheel Guidelines</h3></div></div>
+<p><span class="bold"><b>When using thumbwheels . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use thumbwheels to change the values of continuous variables (that is, variables that don't have discrete values). For discrete values, consider a scale or dial instead.</p>
+</li>
+<li><p>Use thumbwheels with finite ranges for zooming operations and thumbwheels with infinite range for rotating objects.</p>
+</li>
+<li><p>When a thumbwheel is used to change a value that has a clear default, provide a home button. For example, a Directory View window has a thumbwheel that allows the user to set the size of the desktop icons. Pressing the home button on this thumbwheel sets the icons to their default size.</p>
+</li>
+<li><p>Use thumbwheels when screen real estate is extremely limited.</p>
+</li>
+<li><p>Don't use a thumbwheel for panning; use a scrollbar instead. A scrollbar gives the user much more information about the object being scrolled than a thumbwheel could.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying a thumbwheel . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Update the object or value being manipulated as the user moves the thumbwheel. The thumbwheel should give the impression of direct, continuous manipulation.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5491470"></a><a name="id97285"></a>Dials</h2></div></div>
+<p>The dial is an IRIX Interactive Desktop control that allows users to specify or change a value in a given range. Users change the current value by direct manipulation of the dial&#8212;by dragging or by clicking on the appropriate tic mark that represents the desired value. The appearance and the behavior of the dial can be modified. For example, the angular range in degrees through which the dial is allowed to rotate and the color of the dial and tic marks can be changed. <a name="idch09.controls42"></a><a href="ch09.html#id21965">Figure 9-11</a> shows two dials with different appearance options. For a complete list of options for dials, and other specific details on using dials in your application, see the <tt>SgDial</tt>(3X) reference page. </p>
+<p><div class="figure"><p><a name="id5491531"></a><b>Figure 9-11. <a name="id21965"></a>Dials</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch09.controls-5.gif" alt="Figure 9-11 Dials" height="124" width="291"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5491555"></a>Dial Guidelines</h3></div></div>
+<p><span class="bold"><b>When using dials . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use dials as an alternative to scales for setting parameters. Dials are best for numeric parameters where the range of allowable values is small and the values are discrete.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch09.controls43"></a></b></span><span class="bold"><b>When labeling dials . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Place a label either directly below or directly above the dial, specifying the parameter that the dial controls. </p>
+</li>
+<li><p>When you have a group of dials, place each dial label in the same position relative to its dial (that is, either all the labels are below the dials or all the labels are above the dials).</p>
+</li>
+<li><p>Use entire words in the label rather than abbreviations.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying dials . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>When a window using a dial is first opened, the dial should show the current setting.</p>
+</li>
+<li><p>As a dial is rotated, update the value being manipulated to reflect the new value on the dial. The dial should give the impression of direct, continuous manipulation. Also, if the dial is controlling an object, continuously update the object as the dial is manipulated.</p>
+</li>
+</ul></div><p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch08.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch10.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 8. Menus </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 10. Dialogs </td></tr></table></div></body></html>

@@ -5,29 +5,23 @@
     "color": {
       "bg": {
         "base": {
-          "value": "#0F0F10",
+          "value": "#4F5B66",
           "type": "color",
-          "description": "App background",
-          "platformOverrides": {
-            "motif": "#4F5B66"
-          }
+          "description": "App background"
         },
         "surface": {
-          "value": "#1E1E1E",
+          "value": "#5E6B7A",
           "type": "color"
         },
         "panel": {
-          "value": "#2C2C2E",
+          "value": "#3B4654",
           "type": "color"
         }
       },
       "focus": {
         "accent": {
-          "value": "#4C6EF5",
-          "type": "color",
-          "platformOverrides": {
-            "motif": "#6699CC"
-          }
+          "value": "#6699CC",
+          "type": "color"
         }
       },
       "text": {
@@ -36,115 +30,76 @@
           "type": "color"
         },
         "secondary": {
-          "value": "#8E8E93",
+          "value": "#D0D8E2",
           "type": "color"
         }
       },
       "status": {
         "success": {
-          "value": "#34C759",
+          "value": "#94D55A",
           "type": "color"
         },
         "warning": {
-          "value": "#FFD60A",
+          "value": "#FFD454",
           "type": "color"
         },
         "danger": {
-          "value": "#FF3B30",
+          "value": "#FF6B6B",
           "type": "color"
         },
         "offline": {
-          "value": "#FF9500",
-          "type": "color"
-        },
-        "irixAccent": {
-          "value": "#6699CC",
+          "value": "#FFA94D",
           "type": "color"
         }
       }
     },
     "spacing": {
       "4": {
-        "value": 16,
+        "value": 12,
         "type": "spacing",
-        "unit": "px",
-        "platformOverrides": {
-          "motif": {
-            "scale": 0.75
-          }
-        }
+        "unit": "px"
       }
     },
     "radius": {
       "sm": {
-        "value": 8,
-        "type": "radius",
-        "platformOverrides": {
-          "motif": 2
-        }
+        "value": 2,
+        "type": "radius"
       }
     },
     "typography": {
       "heading": {
         "lg": {
-          "fontFamily": "SF Pro Display",
+          "fontFamily": "Helvetica",
           "fontSize": 28,
           "fontWeight": "bold",
-          "lineHeight": 34,
-          "platformOverrides": {
-            "motif": {
-              "fontFamily": "Helvetica",
-              "fontSize": 28
-            }
-          }
+          "lineHeight": 34
         },
         "md": {
-          "fontFamily": "SF Pro Display",
+          "fontFamily": "Helvetica",
           "fontSize": 22,
           "fontWeight": "semibold",
-          "lineHeight": 28,
-          "platformOverrides": {
-            "motif": {
-              "fontFamily": "Helvetica",
-              "fontSize": 22
-            }
-          }
+          "lineHeight": 28
         }
       },
       "body": {
         "base": {
-          "fontFamily": "SF Pro Text",
+          "fontFamily": "Helvetica",
           "fontSize": 15,
           "fontWeight": "regular",
-          "lineHeight": 22,
-          "platformOverrides": {
-            "motif": {
-              "fontFamily": "Helvetica",
-              "fontSize": 15
-            }
-          }
+          "lineHeight": 22
         },
         "monoSm": {
-          "fontFamily": "SF Mono",
+          "fontFamily": "Courier",
           "fontSize": 13,
           "fontWeight": "regular",
-          "lineHeight": 20,
-          "platformOverrides": {
-            "motif": {
-              "fontFamily": "Courier",
-              "fontSize": 13
-            }
-          }
+          "lineHeight": 20
         }
       }
     },
     "icon": {
       "warning": {
-        "value": "exclamationmark.triangle.fill",
-        "type": "icon",
-        "platformOverrides": {
-          "motif": "assets/warning.xbm"
-        }
+        "value": "assets/warning.xbm",
+        "type": "icon"
       }
     }
   }
