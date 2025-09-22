@@ -1,0 +1,1 @@
+<BOOK NAME="IM_PG" ALIAS="IRIS IM Programming Guide" SGITYPE="sgi_html" SGIVERSION="007-1472-020, 8/93" SGIBKADDR="techpubs@sgi.com" SGIGROUP="HTML">

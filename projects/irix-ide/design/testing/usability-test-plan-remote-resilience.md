@@ -9,12 +9,11 @@
 - Do users recognize what triggered a host drop and what action to take?
 - Can they discover `Work Offline` and successfully queue changes?
 - How quickly do they resolve a sync conflict without external help?
-- Does the undo toast feel trustworthy and easy to act on within 5 seconds?
+- Does the undo status-strip message feel trustworthy and easy to act on within 5 seconds?
 
 ## Participants
-- 6 macOS engineers who regularly work with remote build servers (3 novice to IRIX, 3 experienced).
-- 2 IRIX maintainers who manage on-box sessions (if available for contrast).
-- Remote moderated sessions via Zoom; participants use provided prototype or instrumented build.
+- 6 IRIX engineers who regularly work with remote build servers (blend of novice and experienced operators).
+- Remote moderated sessions via X11 screen sharing or in-person lab setup; participants use provided prototype or instrumented build.
 
 ## Methodology
 - Session length: 45 minutes (5 intro, 30 tasks, 10 debrief).
@@ -22,7 +21,7 @@
 - Screen/audio recorded; event telemetry captured if using prototype build.
 
 ## Test Environment
-- High-fidelity prototype in Figma or instrumented desktop build with recovery flows enabled.
+- High-fidelity prototype in Figma or instrumented Motif build with recovery flows enabled.
 - Logging harness to simulate host drop, retry failures, offline queue, conflict scenario.
 - Stable network with ability to toggle latency/packet loss for realism.
 
@@ -30,7 +29,7 @@
 1. **Detect Host Drop** – Notice connection loss, interpret banner, choose an action (Retry vs Switch Host).
 2. **Continue Offline** – With retries failing, continue editing, queue sync, and explain confidence level.
 3. **Resolve Conflict** – On reconnect, handle conflicting file using modal options.
-4. **Deploy Safely** – Execute deploy, review confirmation checklist, and use undo toast within countdown.
+4. **Deploy Safely** – Execute deploy, review confirmation checklist, and use undo status-strip entry within countdown.
 5. **Review Logs** – After recovery, navigate to log history and summarize what happened.
 
 ## Success Metrics

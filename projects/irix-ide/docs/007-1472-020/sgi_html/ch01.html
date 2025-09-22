@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 1. X Window System and IRIS IM Programming Guidelines</title><meta name="generator" content="DocBook XSL Stylesheets V1.49"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.0"><link rel="home" href="index.html" title="IRIS IM Programming Guide"><link rel="up" href="index.html" title="IRIS IM Programming Guide"><link rel="previous" href="pr01.html" title="Introduction"><link rel="next" href="ix01.html" title="Index"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1. X Window System and IRIS IM Programming Guidelines</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="pr01.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ix01.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5364837"></a>Chapter 1. X Window System and IRIS IM Programming Guidelines</h2></div></div>
+<p>This chapter outlines the some of the facilities available to the developer in the Silicon Graphics X environment. Topics discussed in this chapter include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>building applications with X toolkits</p>
+</li>
+<li><p>using X visuals and nondefault X visuals</p>
+</li>
+<li><p>using colormaps</p>
+</li>
+</ul></div><p>The Silicon Graphics native X Window System is a full implementation of the X Version 11 Release 5 (X11R5) standard that supports multiple visuals, overlay windows, the X Input Extension, the Display PostScript Extension, the Shape Extension, and the Shared Memory Extension.<a name="idCh01_Prog_Guidelines1"></a><a name="idCh01_Prog_Guidelines2"></a><a name="idCh01_Prog_Guidelines3"></a><a name="idCh01_Prog_Guidelines4"></a></p>
+<p>The X Window System is a portable, network-based windowing system. The portability provided by X allows you to create an application that is capable of running on many different types of workstations. You can compile and execute portable X application code in IRIX without modification. Because X is network transparent, applications can be used in a heterogeneous environment, running and displaying on workstations from different vendors. X also allows simultaneous display on multiple graphics monitors.</p>
+<p>You'll find most of the information you need to develop X-based applications in the references listed under <a href="pr01.html#id19217">&#8220;Suggestions for Further Reading&#8221;</a> in the Introduction to this guide. The programming notes in this guide are a supplement to those references, detailing the features available in the Silicon Graphics X environment.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5362685"></a>Programming with IRIS IM</h2></div></div>
+<p>IRIS IM interface maker is Silicon Graphics' port of the industry standard, OSF/Motif, for use on Silicon Graphics IRIS workstations.<a name="idCh01_Prog_Guidelines5"></a><a name="idCh01_Prog_Guidelines6"></a></p>
+<p>Silicon Graphics also supplies some related software that is not part of standard OSF/Motif, including:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Widget support for integrating toolkits with the IRIS Graphics Library.</p>
+</li>
+<li><p><tt>4Dwm</tt>, an enhanced version of <tt>mwm</tt>.</p>
+</li>
+<li><p>Modified copies of many of the OSF/Motif demonstration programs, which show how IRIS IM programs can use nondefault visuals such as the popup and overlay planes.</p>
+<p>The techniques used in these sample programs are useful with any nondefault visual. These demos use <tt>#ifdef OVERLAY_DEMO</tt> statements so you can compile them without using the Silicon Graphics modifications.</p>
+</li>
+<li><p>An added &#8220;<a name="idCh01_Prog_Guidelines7"></a>
+
+
+<b>Quit...</b>&#8221; option for the <tt>mwm</tt> root menu to avoid an ICCCM shortcoming. This was added to both the built-in root menu and the default root menu in <tt>/usr/lib/X11/system.mwmrc</tt>.</p>
+</li>
+<li><p>Several bug fixes implemented by Silicon Graphics.</p>
+</li>
+</ul></div><p>This section contains information about programming IRIS IM on an IRIS workstation. See the release notes for release-specific information regarding IRIS IM, such as product codes, sizes, version numbers, and bugs.</p>
+<p>Topics discussed in section are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>the advantages of using shared libraries</p>
+</li>
+<li><p>specifics about building a toolkit-based program</p>
+</li>
+<li><p>virtual key bindings</p>
+</li>
+<li><p>default translation issues</p>
+</li>
+<li><p>rendering from the IRIS Graphics Library using the GlxMDraw widget</p>
+</li>
+<li><p>using nonstandard visuals that let you take advantage of the special framebuffer architecture available on Silicon Graphics workstations</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5362866"></a>Using Shared Libraries to Maximize System Resources</h3></div></div>
+<p>Generally, programs should be linked with the shared libraries. Shared libraries provide several significant advantages:<a name="idCh01_Prog_Guidelines8"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Programs are significantly smaller&#8212;they take less disk space and less virtual memory.</p>
+</li>
+<li><p>The smaller size leads to faster startup times.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b>If only one application is running with the shared library, memory usage and startup time can actually be worse; however, in the default system configuration two programs are running that make use of the IRIS IM shared library, namely <tt>4Dwm</tt> and <tt>Toolchest</tt>. The shared library is also used in <tt>mwm</tt>. 
+</td></tr></table><hr noshade="noshade"></div><br></li>
+<li><p>A program linked with the shared library benefits from any bug fixes and changes in subsequent <i>compatible</i> versions of the shared library. While this is normally a benefit, it does mean that the application could be running in an untested configuration.</p>
+<p>Silicon Graphics tries to maintain shared library compatibility across releases; however, it is not always possible to maintain compatibility in new releases. In cases where a new library is not compatible with those of previous releases, Silicon Graphics tries to supply the old, compatible library. The older library is not updated nor are bugs in it fixed; you must relink your applications with the new library to get these benefits. To check whether your application needs relinking, refer to the compatibility section of the Release Notes.</p>
+</li>
+</ul></div><p>The default system behavior is to link with shared libraries; however, sometimes you might not want to use shared libraries. You can do so only by specifying the full library name, such as <tt>libXm.a</tt>.</p>
+<p>It is strongly recommended that programs linked with the IRIS IM library be linked with the other shared libraries. Programs linked with the unshared IRIS IM library can still be linked with other shared libraries.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5362996"></a>Using Debugging Libraries to Troubleshoot Programs</h3></div></div>
+<p>Silicon Graphics provides a set of debugging libraries (for example, <tt>libXm_d</tt>, <tt>libUil_d</tt>, and <tt>libMrm_d</tt>) to help you troubleshoot IRIS IM programs. These libraries are large, so they are not automatically installed with the standard IRIS IM development libraries. If you have sufficient disk space, you can install these libraries and link your programs with them to find out more information when you debug your programs.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5363028"></a>Linking Your IRIS IM Programs</h3></div></div>
+<p>When using <a name="idCh01_Prog_Guidelines9"></a><tt>Imakefile</tt>s, the correct libraries are automatically loaded; however, when using <tt>Makefile</tt>s, the correct libraries must be specified.</p>
+<p>To handle regular expressions, the 
+
+
+<tt>FileSelectionBox</tt> and related IRIS IM code use the functions<span class="bold"><b> regex()<a name="idCh01_Prog_Guidelines10"></a></b></span> and <tt><a name="idCh01_Prog_Guidelines11"></a></tt><span class="bold"><b>regcmp()</b></span>. These functions are in <a name="idCh01_Prog_Guidelines12"></a><tt>libPW</tt>. A program linked with the unshared IRIS IM library requires
+
+
+<tt> -lPW</tt> only if the file selection box is used. A program linked with the shared IRIS IM library always requires it. Thus, converting from unshared to shared libraries may result in these undefined symbols unless 
+
+
+<tt>-lPW</tt> is included.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5363134"></a>Building IRIS IM Programs with <span class="emphasis"><i>imake</i></span></h3></div></div>
+<p>If you use <tt>Imakefile</tt>s, and you depend on the configuration files in the <tt>/usr/lib/X11/config</tt> directory, you need to generate a new <tt>Makefile</tt> as follows:</p>
+<div class="orderedlist"><ol type="1"><li><p><b><tt>cd</tt></b> to the directory containing your <tt>Imakefile.</tt></p>
+</li>
+<li><p>Run <tt>mmkmf<a name="idCh01_Prog_Guidelines13"></a></tt>.</p>
+</li>
+</ol></div><p>The above procedure makes a new <tt>Makefile</tt> with the correct definitions for building IRIS IM software so that the standard <tt>Makefile</tt> targets, such as <span class="bold"><b>make</b></span><span class="bold"><b> Makefile</b></span> or<b><tt> make </tt></b><span class="bold"><b>Makefiles</b></span> work properly.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b><tt>mmkmf</tt> is similar to <tt>xmkmf</tt>. 
+</td></tr></table><hr noshade="noshade"></div><p>Programs using <tt>Imakefile</tt>s will automatically be linked with the shared libraries.</p>
+<p>The <tt>Imakefile</tt>s loaded with the demonstration software build the demonstration programs under <tt>/usr/src/X11/motif/osf_demos</tt>. You can examine these<tt> Imakefile</tt>s for an example of how to build an IRIS IM program.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5363478"></a>Building IRIS IM Programs with Conventional Makefiles</h3></div></div>
+<p>It is entirely possible to build your IRIS IM programs using conventional <tt>Makefile<a name="idCh01_Prog_Guidelines14"></a></tt>s. For example, the <tt>Makefile</tt>s that build the book example programs (located under <tt>/usr/src/X11/motif/book_examples</tt>) are traditional <tt>Makefile</tt>s&#8212;even if they are fairly terse; however, if you use <tt>Makefile</tt>s to build your IRIS IM programs, you need to maintain the <tt>Makefile</tt>s and make sure that all definitions and targets still work from release to release. (If you use <tt>Imakefile</tt>s, up-to-date definitions will be provided in the configuration files with each new release.)</p>
+<p>If you are having problems with your <tt>Makefile</tt>s, look at the command lines generated by building the demo programs. Since the demo <tt>Makefile</tt>s were generated by <tt>imake</tt>, these command lines will be correct.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5363577"></a>Handling Keyboard Issues</h3></div></div>
+<p>This section touches on a few keyboard issues that may be of interest to developers.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5363586"></a>Virtual Key Bindings</h4></div></div>
+<p>The virtual key bindings shipped with IRIS IM match the default ones compiled into <a name="idCh01_Prog_Guidelines15"></a><tt>libXm</tt>. There is no assurance that users won't change their own bindings. Virtual key bindings are not synonyms for other keysyms. Instead, virtual key bindings <i>replace</i> other keysyms.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5363612"></a>Numeric Keypad Behavior</h4></div></div>
+<p>The OSF virtual key binding model translates a single keysym into a virtual keysym&#8212;for example, <a name="idCh01_Prog_Guidelines16"></a><span class="bold"><b>&lt;Key&gt;Left</b></span> is translated to <span class="bold"><b>&lt;Key&gt;osfLeft</b></span>. On Silicon Graphics keyboards, the arrows on the numeric keypad generate keypad arrows rather than arrows&#8212;for example, <span class="bold"><b>&lt;Key&gt;KP_Left</b></span> instead of <span class="bold"><b>&lt;Key&gt;Left</b></span>. The OSF virtual binding model is unable to accommodate multiple keysyms mapping to the same virtual keysym.</p>
+<p>To accommodate the two types of arrows without introducing an incompatible syntax, Silicon Graphics has introduced internal virtual keysyms prefixed with <span class="bold"><b>_sg_KP</b></span> (for example, <span class="bold"><b>_sg_KP_Left</b></span>). These are mapped internally to the same key code as the OSF equivalent, so the net result is that both the numeric keypad and the other arrow keypad will generate the <tt>osf</tt> virtual bindings (for example, <span class="bold"><b>osfLeft</b></span>).</p>
+<p>Because the <span class="bold"><b>_sg_KP</b></span> bindings are an internal mechanism that get translated to <tt>osf</tt> bindings, users should not use them directly. Bindings should not appear in translations; they may be removed from a future release.</p>
+<p>For all IRIS IM widgets except for XmText and XmTextField, the numeric keypad is treated as pure arrow keys. For the XmText and XmTextField, the numeric keypad is treated as either arrows or numbers, depending on the state of the <span class="bold"><b>&lt;Num Lock&gt;</b></span>, and <span class="bold"><b>&lt;Shift&gt;</b></span> keys. If either <span class="bold"><b>&lt;Shift&gt;</b></span> or <span class="bold"><b>&lt;Num Lock&gt;</b></span> is on, numbers are sent, otherwise arrows are sent. It should be noted, however, that <span class="bold"><b>&lt;Shift-Num Lock-KP_4&gt;</b></span> sends a shifted left arrow rather than an unshifted left arrow, which is treated differently by the text widget.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5363770"></a>Translation Tables and the Numeric Keypad</h4></div></div>
+<p>For writers of translations, whether in application default files or in widgets, it is important to understand how to write a translation so the numbers and the other keysyms work on the keypad.<a name="idCh01_Prog_Guidelines17"></a></p>
+<p>If a translation of the form:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+&lt;Key&gt;osfLeft:        action() \n \
+</pre></td></tr></table><p>is used, the action applies to both the left arrow key and to the numeric keypad <span class="bold"><b>&lt;4&gt;</b></span> key (because it also has a left arrow on it), whether or not the <span class="bold"><b>&lt;Shift&gt;</b></span> key is also pressed.</p>
+<p>To permit the numeric keypad keys to function normally, the following form is recommended:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+:&lt;Key&gt;KP_4:        self-insert() \n \
+&lt;Key&gt;osfLeft:        action() \n \
+</pre></td></tr></table><p>The leading colon on the first translation states that the action &#8220;self-insert&#8221; should be executed if keypad <span class="bold"><b>&lt;4&gt;</b></span> is pressed in such a manner that it would normally be interpreted as a digit&#8212;that is, either <span class="bold"><b>&lt;</b></span><span class="bold"><b>Num Lock</b></span><span class="bold"><b>&gt;</b></span> or <span class="bold"><b>&lt;</b></span><span class="bold"><b>Shift</b></span><span class="bold"><b>&gt;</b></span> is turned on, but not both. The second translation specifies that &#8220;action&#8221; should occur if <span class="bold"><b>&lt;key&gt;osfLeft</b></span> is pressed in any other circumstances. Note that the action for <span class="bold"><b>:&lt;key&gt;KP_4</b></span> must come first.</p>
+<p>So, if you are defining translations that affect the shifted keypad keys, the following translations should come first to also permit use of the digits from the numeric keypad:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+:&lt;Key&gt;KP_0:        self-insert() \n \
+:&lt;Key&gt;KP_1:        self-insert() \n \
+:&lt;Key&gt;KP_2:        self-insert() \n \
+:&lt;Key&gt;KP_3:        self-insert() \n \
+:&lt;Key&gt;KP_4:        self-insert() \n \
+:&lt;Key&gt;KP_5:        self-insert() \n \
+:&lt;Key&gt;KP_6:        self-insert() \n \
+:&lt;Key&gt;KP_7:        self-insert() \n \
+:&lt;Key&gt;KP_8:        self-insert() \n \
+:&lt;Key&gt;KP_9:        self-insert() \n \
+:&lt;Key&gt;KP_Decimal:  self-insert() \n \\
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5363956"></a>Widgets for GL/X Mixed-Model Programming</h3></div></div>
+<p>Silicon Graphics provides the GLwMDrawingArea widget for IRIS IM programs that use OpenGL to draw to a window within an IRIS IM application. The GLwMDrawingArea widget is actually a special version of the  GLwDrawingArea widget; GLwDrawingArea is a generic widget, suitable with any widget set that is based on the Xt intrinsics, whereas GLwMDrawingArea is designed specifically for use within an IRIS IM application. Similarly, the GlxMDraw widget allows programs to use IRIS GL to draw to a window within an IRIS IM application. The GlxMDraw widget is in turn a special version of the  GlxDraw widget for drawing IRIS GL into any Xt-based program. All of these widgets are included in the <a name="idCh01_Prog_Guidelines18"></a><a name="idCh01_Prog_Guidelines19"></a><a name="idCh01_Prog_Guidelines20"></a><a name="idCh01_Prog_Guidelines21"></a><a name="idCh01_Prog_Guidelines22"></a><tt>Sgm</tt> IRIS widget library. They can be linked in by specifying 
+
+
+<tt>-lSgm</tt> before 
+
+
+<tt>-lXm</tt> on the link line.</p>
+<p>Examples that use the mixed-model widget appear in the <tt>4Dgifts </tt>directory in <tt>examples/GLX/glxwidget/demos</tt>. The actual source to the widget appears in <tt>examples/GLX/glxwidget/widget</tt>, although it is recommended that programs link with the version provided in the <tt>Sgm</tt> library to ensure that they get future changes.</p>
+<p>For information on OpenGL/IRIS IM mixed-model programming and the GLwMDrawingArea widget, consult <i>OpenGL</i> <i>Programming Guide,</i> <i>OpenGL Porting Guide</i>, and the <span class="bold"><b>GlwMDrawingArea</b></span>(3X) manual page. For information on IRIS GL/IRIS IM mixed-model programming and the GlxMDraw widget, consult <i>Graphics Library Programming Tools and Techniques</i> and the <span class="bold"><b>GlxMDraw</b></span>(3X) manual page.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5364091"></a>Using Silicon Graphics Extensions</h3></div></div>
+<p>Silicon Graphics has adopted the convention for IRIS IM that names beginning with the letters <tt>SG</tt>, in upper or lower case, are Silicon Graphics extensions that customers can use, but they do not guarantee portability. Names beginning with <tt>_SG </tt>are for internal use only&#8212;they are subject to change without warning in future releases. This intent of this policy is to allow Silicon Graphics to make extensions that:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>do not affect existing customer code</p>
+</li>
+<li><p>let customers know when they are relying on Silicon Graphics extensions</p>
+</li>
+<li><p>minimize the chance that unforeseen OSF changes might force Silicon Graphics to break compatibility</p>
+</li>
+</ul></div><p>Such names appear in <tt>4Dwm</tt> resource names and in the <tt>sgi_visual</tt> module with the overlay demo programs.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5435586"></a>Using the IRIS IM Sample Source Code</h3></div></div>
+<p>To study code that uses IRIS IM, look at the sample code under these directories:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><tt>/usr/src/X11/motif/osf_demos</tt></span></td><td width="10"> </td><td><p><br>
+Contains the standard demonstration programs provided by OSF. All demos are unsupported.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><tt>/usr/src/X11/motif/overlay_demos</tt></span></td><td width="10"> </td><td><p><br>
+Contains modified versions of many of the programs from <tt>/usr/src/X11/motif/osf_demos</tt>. These demonstration programs  use the popup and overlay planes to show how IRIS IM programs can use nondefault visuals.<a name="idCh01_Prog_Guidelines23"></a></p>
+
+</td></tr><tr valign="top"><td><span class="term"><tt>/usr/src/X11/motif/book_examples</tt></span></td><td width="10"> </td><td><p><br>
+Contains the code examples from the book <i>The X Window System: Programming and Applications with Xt</i>.</p>
+
+</td></tr></table></div><p>Most of the demonstration software subdirectories also contain <tt>README</tt> files that describe the individual demonstration programs. Be sure to read the <tt>README</tt> file with each demonstration program before trying to run that program.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b>Be sure you actually read the <tt>README</tt> files in these directories. They contain important information on resource files. Simply typing <b><tt>make all</tt></b> is not sufficient. You need to first determine how the applications find their resource files. 
+</td></tr></table><hr noshade="noshade"></div><br><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5435723"></a>Using the IRIS IM Demonstration Programs</h4></div></div>
+<p>Your IRIS IM software includes source for the demonstration programs provided by OSF. Many of them are contributed software&#8212;they are not part of the core product. These programs and their <tt>Imakefiles</tt> are in the subdirectories of <tt>/usr/src/X11/motif/osf_demos</tt>.</p>
+<p>Here is important information about the demonstration programs provided by OSF:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Size of the demonstration programs</p>
+<p>Installing the demonstration program sources takes about 3 megabytes. When built, they take about 20 megabytes. If you do not want to build them all at once, see the <tt>README</tt> file for advice on building individual applications. </p>
+</li>
+<li><p>Building and running the demonstration programs</p>
+<p>The demonstration program source code is in subdirectories of <tt>/usr/src/X11/motif/osf_demos</tt>. To build the demonstration programs, read the file <tt>/usr/src/X11/motif/osf_demos/README </tt>and follow the instructions.</p>
+</li>
+<li><p>No support is provided for the demonstration programs</p>
+<p>Although Silicon Graphics has fixed a number of bugs in these demonstration programs, Silicon Graphics does not claim that these programs are bug free. Because OSF does not support these programs, neither does Silicon Graphics. Bug reports are welcome, but fixes are not guaranteed.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5435832"></a>Using the IRIS IM Overlay Demonstration Programs</h4></div></div>
+<p>Your IRIS IM software includes source for the overlay demonstration programs. These are slightly modified versions of the standard demonstration programs. Each source change has been clearly identified with <a name="idCh01_Prog_Guidelines24"></a><tt>#ifdef OVERLAY_DEMO</tt> statements. These programs and their <tt>Imakefiles</tt> are in the subdirectories of <tt>/usr/src/X11/motif/overlay_demos</tt>.</p>
+<p>Here is important information about the overlay demonstration programs:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>These programs use the popup and overlay planes. The techniques demonstrated are appropriate to any nondefault visual.</p>
+</li>
+<li><p>Size of the overlay demonstration programs</p>
+<p>The sources themselves take about 1.8 megabytes when installed. When built, they take about 9.8 megabytes. If you do not want to build them all at once, see the <tt>README</tt> file for advice on building individual applications.</p>
+</li>
+<li><p>Building and running the overlay demonstration programs</p>
+<p>The overlay demonstration programs are built and run just as the normal demonstration programs are. Be sure to read <tt>/usr/src/X11/motif/overlay_demos/README </tt>for the status of individual overlay demonstration programs.</p>
+</li>
+<li><p>No support is provided for the demonstration programs</p>
+<p>These programs are unsupported. They are derived from the (unsupported) standard demonstration software. Bug reports are welcome, but fixes are not guaranteed.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5435964"></a>Using the Reference Book Sample Programs</h4></div></div>
+<p>Your IRIS IM software includes source for the example programs in the book <i>The X Window System: Programming and Applications with Xt</i>, <i>OSF/Motif Edition</i>, Douglas A. Young, ISBN 0-13-497074-8.</p>
+<p>These sample programs are provided to make it easier for you to use this book to learn IRIS IM. The examples also show how to use simple <a name="idCh01_Prog_Guidelines25"></a><tt>Makefile</tt>s with IRIS IM (as contrasted with the demonstration programs that show you how to use <tt>Imakefiles</tt>). Before you try to run an example program, be sure to read the <tt>README</tt> file in its directory.</p>
+<p>The X defaults files for the example programs are in the <tt>AppDefaults</tt> subdirectory of <tt>/usr/src/X11/motif/book_examples</tt>.</p>
+<p>Here is important information about the overlay demonstration programs:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Size of the Example Program Sources</p>
+<p>Installing the example program sources takes about 0.5 megabytes. When built, they take about 72 megabytes. If you don't want to build them all at once, see the file <tt>/usr/src/X11/motif/book_examples/README</tt> for advice on building individual applications.</p>
+</li>
+<li><p>Building and Running the Example Programs</p>
+<p>These programs and their <tt>Makefile</tt>s are in the subdirectories of <tt>/usr/src/X11/motif/book_examples</tt>. Read the top level <tt>README</tt> file for instructions on building and running these example programs.</p>
+</li>
+<li><p>No support is provided for the demonstration programs</p>
+<p>Silicon Graphics does not claim that these example programs are bug free. Silicon Graphics does not support these example programs. These programs are as supplied by the book's publisher, except that Silicon Graphics has fixed a few bugs and provided some missing application default files. Bug reports are welcome, but fixes are not guaranteed.</p>
+</li>
+</ul></div></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5436159"></a>Rendering Considerations</h2></div></div>
+<p>This section highlights issues, including framebuffers and colormaps, that are related to rendering from a software and hardware perspective. All the information necessary for drawing on the screen, such as framebuffer selection, depth, and visual class (colormap type) is contained in an X11 <a name="idCh01_Prog_Guidelines26"></a>
+
+
+<i>visual</i>. See <a href="ch01.html#id36596">&#8220;Using X11 Visuals on Silicon Graphics Workstations&#8221;</a> for more information about visuals on Silicon Graphics workstations.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5436192"></a>Hardware Configurations of Silicon Graphics Workstations</h3></div></div>
+<p>This section outlines some hardware features of Silicon Graphics workstations that you should be aware of when developing your applications.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5436203"></a>Framebuffers on Silicon Graphics Workstations</h4></div></div>
+<p>On Silicon Graphics workstations, the display bitplanes are divided into framebuffers:<a name="idCh01_Prog_Guidelines27"></a></p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">Normal</span></td><td width="10"> </td><td><p>Supported on all IRIS workstations. Most applications use this framebuffer to render graphics. The number of bitplanes assigned to this framebuffer can vary.</p>
+
+</td></tr><tr valign="top"><td><span class="term">Popup</span></td><td width="10"> </td><td><p>Two popup planes are supported on all IRIS workstations. The popup planes are intended for transient drawing. For example, the window manager and toolchest use this framebuffer to display such things as popup menus without damaging the graphics rendered in other framebuffers.<a name="idCh01_Prog_Guidelines28"></a></p>
+<p>By system convention, drawing to these planes does not necessarily use a window. If you put anything other than transient drawing here, it may get damaged. It is reasonable to put your application's menus and modal popup dialogs here.</p>
+
+</td></tr><tr valign="top"><td><span class="term">Overlay</span></td><td width="10"> </td><td><p>0, 2, 4, or 8 overlay planes are supported on IRIS workstations.</p>
+<p>The 2-bit overlay planes are used by applications for transient things, such as popup menus and dialog boxes.<a name="idCh01_Prog_Guidelines29"></a></p>
+<p>Silicon Graphics discourages the use of 4-bit overlay framebuffers. The 4-bit overlay framebuffer uses the same hardware as the two-bit overlay and popup framebuffers. That means that both the pixels and the colormap of the 4-bit overlay planes conflict with those of both the 2-bit overlay planes and the popup planes.</p>
+
+</td></tr><tr valign="top"><td><span class="term">Underlay</span></td><td width="10"> </td><td><p>On any Silicon Graphics hardware that has overlay planes, the hardware supports underlay planes. The X server, however, does not support visuals for the underlay framebuffers. This means that X11 (and therefore IRIS IM) programs cannot draw in the underlay planes. Any underlay planes drawing must be done by means of the Graphics Library.<a name="idCh01_Prog_Guidelines30"></a></p>
+
+</td></tr><tr valign="top"><td><span class="term">Special</span></td><td width="10"> </td><td><p>Other special-purpose framebuffers include the z-buffer, the stencil planes, and the alpha planes. These framebuffers are not available in all IRIS workstations and there are no X visuals that support these framebuffers.<a name="idCh01_Prog_Guidelines31"></a><a name="idCh01_Prog_Guidelines32"></a><a name="idCh01_Prog_Guidelines33"></a></p>
+
+</td></tr><tr valign="top"><td><span class="term">Configurable</span></td><td width="10"> </td><td><p>Some workstations, such as RealityEngine&#8482;, allow you to configure the framebuffer to suit your application needs. This is an advanced concept that affects only RealityEngine systems and similar architectures and there are no X visuals that support this feature.<a name="idCh01_Prog_Guidelines34"></a></p>
+
+</td></tr></table></div><p>Note that only normal planes and popup planes are supported on all Silicon Graphics hardware. For more information on these framebuffers, including interactions between them, see the <i>Graphics Library Programming Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5436406"></a><a name="id46916"></a>Visual Classes on Silicon Graphics Workstations</h4></div></div>
+<p>As part of the complete X visual, a hierarchy of six visual classes (colormap types) distinguishes between color/monochrome display, read-only/<br>
+read-write colormaps, and color index/RGB color representation.</p>
+<p>All currently available Silicon Graphics workstations support an 8-bit PseudoColor visual, some workstations support 12-bit visuals, and X servers running on workstations with sufficient hardware support a 24-bit TrueColor visual. Other visuals may be available from a particular X server, depending largely on the type of workstation and its graphics capabilities. Various-depth visuals are available in static, dynamic, color, or gray classes.<a name="idCh01_Prog_Guidelines35"></a></p>
+<p>Some workstations, such as the RealityEngine, support a 24-bit DirectColor visual. A workstation that supports DirectColor can support any of the six visual classes. There is no difference in the number of displayable colors between a 24-bit TrueColor visual and a 24-bit DirectColor visual; however, with a DirectColor visual, you can redefine the colormap to include only one color and thus obtain varying intensities of that color. TrueColor displays colors at full intensity only.</p>
+<p>GL uses display 
+
+
+<i>modes</i> to access and properly display visual data in the bitplanes of a Silicon Graphics workstation. X visuals are mapped to GL modes when an X window is prepared for GL rendering. Consult the <i>OpenGL Programming Guide</i> and <i>The OpenGL Porting Guide</i> for information on OpenGL rendering in X windows. Consult the <i>Graphics Library Programming Tools and Techniques</i> for information on IRIS GL rendering in X windows.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5436501"></a><a name="id17725"></a>Colormaps on Silicon Graphics Workstations<a name="idCh01_Prog_Guidelines36"></a><a name="idCh01_Prog_Guidelines37"></a><a name="idCh01_Prog_Guidelines38"></a><a name="idCh01_Prog_Guidelines39"></a><a name="idCh01_Prog_Guidelines40"></a><a name="idCh01_Prog_Guidelines41"></a><a name="idCh01_Prog_Guidelines42"></a></h3></div></div>
+<p>Colormaps are managed by the X server. X employs a virtual colormap model. Each window can have a different virtual colormap, while GL maintains a fixed colormap notion. There are IRIS GL routines for manipulating the colormap, but you can use them only in pure IRIS GL programs&#8212;programs that contain no X routines. Some workstations allow more than one colormap to be loaded simultaneously.</p>
+<p>Silicon Graphics supports two types of hardware. One type, such as the Personal IRIS&#8482;, installs only one colormap at a time; thus colormap switching must occur when input focus shifts among windows with different colormaps. The other type, such as the IRIS Indigo&#8482;, installs multiple colormaps concurrently&#8212;for example, an X colormap and an IRIS GL colormap can be loaded simultaneously.<a name="idCh01_Prog_Guidelines43"></a></p>
+<p>On single colormap hardware, a single top-level colormap affects all windows on the screen (except for RGB, popup, and overlay windows, which are separate resources). On multiple colormap hardware, each window (up to a hardware dependent maximum) uses its own colormap. It's best to test your programs on both types of hardware. Some common mistakes might be seen on only one type of hardware.<a name="idCh01_Prog_Guidelines44"></a><a name="idCh01_Prog_Guidelines45"></a><a name="idCh01_Prog_Guidelines46"></a></p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5362477"></a>Colormap Size Issues</h4></div></div>
+<p>The size of the colormap depends on the number of bitplanes associated with the visual. To express interest in a colormap, use <tt><a name="idCh01_Prog_Guidelines47"></a></tt><span class="bold"><b>XSetWMColormapWindows</b></span><tt>()</tt>. This lets the window manager know which colormap(s) to install when your application gets focus. These are some important points about colormap sizes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>If you do decide to put widgets in one of the overlay visuals, remember that the colormap is probably smaller than the default one.</p>
+</li>
+<li><p>The 2-bit popup planes colormap has only 4 entries. Color 0 is reserved for transparent, and the other three colors are available.</p>
+</li>
+<li><p>The 2-bit overlay planes colormap has only 4 entries. Color 0 is reserved for transparent, and the other three colors are available.</p>
+</li>
+<li><p>The 4-bit overlay planes colormap has 16 entries. Color 0 is reserved for transparent, and the other fifteen colors are available.</p>
+</li>
+<li><p>The popup planes and the 2-bit overlay planes (if available) have independent colormaps. The colormap for the 4-bit overlay planes conflicts with both.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5436862"></a>Variation across Colormaps</h4></div></div>
+<p>The same pixel location in different colormaps does not necessarily represent the same color. Be sure you use the correct pixel values for the colormap you are working with.<a name="idCh01_Prog_Guidelines48"></a></p>
+<p>If you use a nondefault colormap, avoid color macros such as <span class="bold"><b>BlackPixel()</b></span> and <span class="bold"><b>WhitePixel()</b></span>. As is required by X11, these macros return pixel values that are correct for the default colormap. They will probably return inappropriate values for your application. The pixel is likely to represent a different color in your colormap, or worse yet, be out of range for it. If the pixel does not exist in your colormap (such as any pixel greater than three for a 2-bit overlay colormap), you will get an X protocol error.<a name="idCh01_Prog_Guidelines49"></a></p>
+<p>You are most likely to make a &#8220;right index&#8211;wrong map&#8221; type of mistake if you use the macros <tt>BlackPixel()</tt> and <span class="bold"><b>WhitePixel()</b></span>. For example, the <span class="bold"><b>BlackPixel()</b></span> macro returns <tt>0</tt>, which is black in the default colormap. That value is always transparent (not black) in the popup and overlay colormaps.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5436938"></a>Multiple Colormap Issues</h4></div></div>
+<p>The need to deal with multiple colormaps of various sizes raises new issues. Some of these issues do not have well-defined solutions.<a name="idCh01_Prog_Guidelines50"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>There is no general official way for multiple independent applications to cooperate to use a common colormap. There are no defaults, including a default colormap, for any visual other than the default visual.</p>
+</li>
+<li><p>With multiple colormaps in use, there may be colormap flashing. An application is guaranteed to have all of its colormaps installed only when it has colormap focus. At that time, the window manager installs all of the application's colormaps, regardless if they are all currently needed. These colormaps remain installed until another application needs to have one of them replaced. If another application gets colormap focus, the window manager installs those (possibly conflicting) colormaps. Thus, some widgets might be affected while other widgets remain unchanged. The window manager does not reinstall the colormaps for your application until your application has the colormap focus again.</p>
+</li>
+<li><p>Remember to call <tt><a name="idCh01_Prog_Guidelines51"></a></tt><span class="bold"><b>XSetWMColormapWindows()</b></span> to tell the window manager which colormaps your application wants installed when it gets colormap focus. Some of the IRIS IM overlay demonstration programs illustrate this.</p>
+<p>In particular, if any of your application's subwindows or override redirect windows (for example, pull-down and popup menus) use their own colormaps, remember to call <span class="bold"><b>XSetWMColormapWindows()</b></span> for those windows. This instructs the window manager to install the colormaps you need whenever you enter your main window.</p>
+</li>
+</ul></div></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5437074"></a><a name="id36596"></a>Using X11 Visuals on Silicon Graphics Workstations</h2></div></div>
+<p>An X <a name="idCh01_Prog_Guidelines52"></a>
+
+
+<i>visual</i> contains all the information necessary for drawing on the screen, such as framebuffer selection, depth, and visual class (colormap type). Each visual allows drawing to only a single combination of framebuffer, depth, and colormap type.</p>
+<p>The Silicon Graphics X11 server, <a name="idCh01_Prog_Guidelines53"></a><tt>Xsgi</tt>, provides various visuals that enable X11 drawing access to the framebuffers that are physically available. The server supports at least one visual for the overlay, popup, and normal framebuffers (except for Entry graphics, which does not support an overlay framebuffer). There are several visuals for the normal framebuffer. There is no visual for the underlay framebuffer.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b>One shortcoming of the current X11 visual model is that it does not consider layering of framebuffers (that is, it does not explicitly consider overlays or underlays). Thus, any application code that deals with them is nonstandard. Silicon Graphics is continuing to work with the X11 Consortium to get this area standardized, so you can expect this area to evolve. 
+</td></tr></table><hr noshade="noshade"></div><p>Each X server can support multiple visuals, depending on the available hardware. Each server has a default visual that can be specified when the server starts. You can ascertain the default visual with the Xlib macro <a name="idCh01_Prog_Guidelines54"></a><tt>DefaultVisual()</tt>.</p>
+<p>Because you can't predict the configuration of every X server, and you may not know what hardware configuration your program will be used on, it is best to find out what visual classes are available on a case-by-case basis. You can determine which visuals are supported on any given workstation either at the command line or from within an application.</p>
+<p>To get X display information from the command line, enter <span class="bold"><b>xdpyinfo</b></span>. Use <tt>xdpyinfo<a name="idCh01_Prog_Guidelines55"></a></tt> to confirm the visuals supported by your workstation and to return information regarding the capabilities of your X server. For more information, consult the manual page for <tt>xdpyinfo</tt>(1).</p>
+<p>To get X display information from within your application, use the Xlib functions <span class="bold"><b>XGetVisualInfo()<a name="idCh01_Prog_Guidelines56"></a></b></span> and<span class="bold"><b> XMatchVisualInfo()<a name="idCh01_Prog_Guidelines57"></a><a name="idCh01_Prog_Guidelines58"></a></b></span> to determine what visuals are available on a given workstation. These functions allow you to indicate the visuals you prefer, returning a list of available visuals called an <tt>XVisualInfo()<a name="idCh01_Prog_Guidelines59"></a><a name="idCh01_Prog_Guidelines60"></a><a name="idCh01_Prog_Guidelines61"></a></tt> structure, from which you can match your preference.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5437280"></a><a name="id88534"></a>Using Nondefault Visuals in the Normal Framebuffer</h2></div></div>
+<p>The need to use nondefault visuals on an IRIS workstation is not confined to putting a widget in the overlay or popup planes. Visuals define which bitplanes to use for a widget, and they also determine things such as whether you use 24-bit TrueColor or 8-bit PseudoColor, and so on.<a name="idCh01_Prog_Guidelines62"></a><a name="idCh01_Prog_Guidelines63"></a><a name="idCh01_Prog_Guidelines64"></a></p>
+<p>Thus, even if your application draws only into the normal framebuffer, it might need to specify a nondefault visual&#8212;if only to account for the possibility that the user can change the default visual.</p>
+<p>The sections that follow describe some issues related to using nondefault visuals when programming with Xlib, Xt, and IRIS IM.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5437341"></a>Xlib Programming with Nondefault Visuals</h3></div></div>
+<p>When you cal<span class="bold"><b>l XCreateWindow()<a name="idCh01_Prog_Guidelines65"></a></b></span>, the <i>depth</i> and <i>visual</i> resources must be consistent and correct. You cannot later change this information for the window. Other things can be set as needed.</p>
+<p>You must also be consistent in how you set the 
+
+
+<tt>XSetWindowAttributes</tt> structure members. <a href="ch01.html#id87592">Table 1-1</a> lists the requirements for these settings.</p>
+<div class="table"><p><a name="id5437385"></a><b>Table 1-1. <a name="id87592"></a>
+
+
+<tt>XSetWindowAttributes</tt> Structure Settings for Nondefault Visuals</b></p>
+<table summary="
+
+
+XSetWindowAttributes Structure Settings for Nondefault Visuals" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th valign="top"><p>Structure Member</p>
+</th><th valign="top"><p>Requirement</p>
+</th></tr></thead><tbody><tr valign="top"><td valign="top"><p>background pixmap</p>
+</td><td valign="top"><p>Must be of the stated depth</p>
+</td></tr><tr valign="top"><td valign="top"><p>background pixel</p>
+</td><td valign="top"><p>Doesn't exceed the colormap size</p>
+</td></tr><tr valign="top"><td valign="top"><p>border pixmap</p>
+</td><td valign="top"><p>Must be of the stated depth</p>
+</td></tr><tr valign="top"><td valign="top"><p>border pixel</p>
+</td><td valign="top"><p>Doesn't exceed the colormap size</p>
+</td></tr><tr valign="top"><td valign="top"><p>colormap</p>
+</td><td valign="top"><p>Must match the visual</p>
+</td></tr><tr valign="top"><td valign="top"><p>backing store</p>
+</td><td valign="top"><p>Information must be consistent with the visual and depth</p>
+</td></tr></tbody></table></div><p>If an application sets these values inconsistently, or if it allows a widget to inherit an inconsistent value, the result is an error returned by the X server.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5437610"></a>Xt Toolkit Programming with Nondefault Visuals</h3></div></div>
+<p>The major concerns when using the nondefault visuals with Xt Toolkit intrinsics are setting visual and depth resources consistently and expressing interest in any special colormaps you want to associate with the nondefault visual.<a name="idCh01_Prog_Guidelines66"></a></p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5437625"></a>Setting Consistent Resources for Nondefault Visuals</h4></div></div>
+<p><i>visual<a name="idCh01_Prog_Guidelines67"></a></i> is a Shell widget resource. A Shell widget's <a name="idCh01_Prog_Guidelines68"></a><i>visual</i> resource is inherited by all widget descendants of that Shell widget (except for other Shell widgets), because their windows are descendants of the Shell's window.</p>
+<p><i>colormap<a name="idCh01_Prog_Guidelines69"></a></i> and <i>depth<a name="idCh01_Prog_Guidelines70"></a></i> are Core widget resources. They must always be consistent with the current visual setting. Generally, whenever you set <i>visual</i>, you also need to set <i>colormap</i> and <i>depth</i>.</p>
+<p>Anything else that has an associated depth also needs to be consistent with the <i>depth</i> resource. The most common such consistency problem is using a pixmap at a depth different than the depth for which it was created.<a name="idCh01_Prog_Guidelines71"></a></p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b>Use the new IRIS IM function <span class="bold"><b>XmGetPixmapByDepth()<a name="idCh01_Prog_Guidelines72"></a></b></span> instead of <span class="bold"><b>XmGetPixmap()</b></span>. 
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5437766"></a>Resources Cannot Control Putting X Toolkit Components in Overlay Planes</h4></div></div>
+<p>When you put X toolkit components (for example, popup menus) into the overlay or popup planes, you must do this programmatically rather than from a resource file. The reasons are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>To put a widget tree into the overlay or popup planes, you must put the Shell for the widget tree into the overlay or popup planes. To put your entire application in the overlay or popup planes, you must put your top-level Shell in the overlay or popup planes.<a name="idCh01_Prog_Guidelines73"></a></p>
+<p>As useful as it is, you cannot use <tt><a name="idCh01_Prog_Guidelines74"></a></tt><span class="bold"><b>XtAppInitialize()</b></span> in this case. To put a Shell into the overlay or popup planes, you first need to know the display, which you cannot know before calling <span class="bold"><b>XtAppInitialize()</b></span>. Instead, you must use the older piece-meal approach. Then you can determine the display before you need to create the top-level Shell. (There are demos done each way for you to look at.)</p>
+</li>
+<li><p>There is no resource converter for the shell.visual resource, meaning that you can set this resource only programmatically.<a name="idCh01_Prog_Guidelines75"></a></p>
+<p>It also means that the <tt><a name="idCh01_Prog_Guidelines76"></a></tt><span class="bold"><b>varargs</b></span> calls such as <span class="bold"><b>XtVaCreate()</b></span> and <span class="bold"><b>XmVaCreate()</b></span> cannot use an XtVaTypedArg parameter to put a Shell in a nondefault visual.</p>
+</li>
+<li><p>There is no Xt resource that you can use to distinguish between the types of framebuffer (for example, there is no visualType: overlay).</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5437924"></a>Inheriting and Using Nondefault Visuals</h4></div></div>
+<p>The Shell widget inherits all of the visual attributes it needs (such as colormap and depth) from its widget parent&#8212;except for the visual itself. The Shell inherits the actual visual from its window (not widget) parent. Inheriting things that must be consistent from two different places causes trouble when using nondefault visuals because the inherited values are almost certain to be inconsistent.<a name="idCh01_Prog_Guidelines77"></a><a name="idCh01_Prog_Guidelines78"></a></p>
+<p>In practice, this usually means that the default colormap and depth come from the widget parent, but that the visual is inherited from the root window (and is therefore the default visual). This may cause an X11 server BADMATCH error when everything else pertains to a nondefault visual.<a name="idCh01_Prog_Guidelines79"></a><a name="idCh01_Prog_Guidelines80"></a></p>
+<p>To get around this problem, you need to do one of two things:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Explicitly set the visual for each shell you want to put in a nondefault visual. That is, be careful to not depend on how the shell visual is inherited.</p>
+</li>
+<li><p>Link with a modified <tt>Shell.o</tt> that inherits the visual from its widget tree instead of its window parent.</p>
+<p>A modified version of <tt>Shell.c</tt> is provided with the IRIS IM overlay demos so you can see what changes are needed.The requisite header files are not included. If you have your own X11 source, you have those header files and you can recompile it if you wish.<a name="idCh01_Prog_Guidelines81"></a></p>
+<p>A matching <tt>Shell.o</tt> is also supplied for those who want to link with this modified version. Many of the converted demo programs do this.</p>
+</li>
+</ul></div><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b>This modified <tt>Shell.c</tt>, and the modified <tt>Shell.o</tt>, are supplied solely on a demonstration software basis. They are not supported products and might not appear in future releases. If you link with one of them, you do not get any fixes to <tt>Shell.o</tt> that might appear in future versions of <tt>libXt</tt>. 
+</td></tr></table><hr noshade="noshade"></div><br></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5438081"></a>IRIS IM Programming with Nondefault Visuals</h3></div></div>
+<p>Most of the problems you might have with putting IRIS IM widgets in the overlay or popup planes arise from the need to use nondefault visuals; however, color range issues can arise if you try to put a 4-color widget in a framebuffer only two bits deep.<a name="idCh01_Prog_Guidelines82"></a></p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5438096"></a>Limited Color Range in Overlay and Popup Planes</h4></div></div>
+<p>Because the popup and 2-bit overlay framebuffers are two bits deep, the colormap for these framebuffers contains only four color values. In colormaps for popup or overlay framebuffers, pixel 0 is always reserved to mean transparent, which leaves room for three additional colors.<a name="idCh01_Prog_Guidelines83"></a></p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b>On workstations with configurable framebuffers, for example workstations with RealityEngine graphics, pixel 0 is not reserved to mean transparent. You can use all color values on these workstations. 
+</td></tr></table><hr noshade="noshade"></div><p>An IRIS IM widget generally uses at least four colors (foreground, background, top shadow color, bottom shadow color); however, allocating a fourth color fails. Silicon Graphics has modified certain color selection algorithms in <tt>libXm</tt> to deal with colormap overflow by choosing the &#8220;best&#8221; available color from those already in the colormap. The color chosen is not the background color (unless you are explicitly setting the background color), nor is it transparent.<a name="idCh01_Prog_Guidelines84"></a></p>
+<p>Because of the limited number of choices, the &#8220;best&#8221; available color might not be very close to the one you actually requested. To produce the best possible appearance for the widget, be sure that you select your three colors carefully.</p>
+<p>These Silicon Graphics modifications apply only to colors set in the IRIS IM library, <tt>libXm</tt>. Silicon Graphics did not modify color selection in <tt>libXt</tt>, which sets colors for things such as 
+
+
+<tt>BorderColor</tt>. If Xt cannot allocate the color you request, it returns pixel 0, which is transparent in popups and overlays.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5438189"></a>MenuBar Uses a Common Shell for Pull-down Menus</h4></div></div>
+<p>The IRIS IM MenuBar includes an optimization that uses a common shell for all of the pull-down menus of a single MenuBar, meaning that all such menus will be in the same visual; this should cause no practical problems.<a name="idCh01_Prog_Guidelines85"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5438206"></a>Pixmaps in Nondefault Visuals</h4></div></div>
+<p>As of Release 1.2 there is a new call, <span class="bold"><b>XmGetPixmapByDepth()<a name="idCh01_Prog_Guidelines86"></a></b></span>, which you should use instead of <span class="bold"><b>XmGetPixmap()</b></span>.</p>
+<p><span class="bold"><b>XmGetPixmap()</b></span> assumes 
+
+
+<tt>DefaultDepth</tt> when it creates pixmaps and does not let you set the depth resource. You cannot use <span class="bold"><b>XmGetPixmap() </b></span>to create pixmaps for use in a visual whose depth differs from the default depth.</p>
+<p>Because the Xt resource converter uses the default depth, you cannot specify pixmaps in an application default file if they will be used in a visual whose depth is different from that of the default visual.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5438280"></a>Beware of Visuals-related Issues in <tt>libMrm</tt></h4></div></div>
+<p>The IRIS IM resource manager (<a name="idCh01_Prog_Guidelines87"></a><tt>libMrm</tt>) has many visuals-related bugs that occur when you use a nondefault visual. Silicon Graphics has not fixed them. The bugs occur because <tt>libMrm</tt> relies on defaults, such as default depth and the default colormap. You can still use UIL, but use it with caution.</p>
+<p>In your UIL file, avoid:<a name="idCh01_Prog_Guidelines88"></a></p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">pixmaps<a name="idCh01_Prog_Guidelines89"></a></span></td><td width="10"> </td><td><p><a name="idCh01_Prog_Guidelines90"></a><tt>mrm</tt> uses the default depth</p>
+
+</td></tr><tr valign="top"><td><span class="term">bitmap files</span></td><td width="10"> </td><td><p><tt>mrm</tt> uses the default depth</p>
+
+</td></tr><tr valign="top"><td><span class="term">colors</span></td><td width="10"> </td><td><p><tt>mrm</tt> uses the colormap index appropriate to the default colormap. That index might not even exist in your colormap (for example, there is no pixel 10 in a 4-entry colormap).</p>
+
+</td></tr></table></div><p>You can specify your colors in a resource file instead of the UIL file, but you must set up your bitmaps and pixmaps programmatically. The pixmap resource converter uses the default depth when converting a resource.<a name="idCh01_Prog_Guidelines91"></a></p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5438490"></a>Using IRIS IM Interface Builders with Nondefault Visuals</h3></div></div>
+<p>Because default-file resources cannot deal with nondefault visual resource issues, it is possible that none of the interface builders work properly in this environment.<a name="idCh01_Prog_Guidelines92"></a></p>
+<p>In particular, <a name="idCh01_Prog_Guidelines93"></a><tt>TeleUSE</tt> and <a name="idCh01_Prog_Guidelines94"></a><tt>UIMX</tt> do not directly work with IRIS IM overlay use. A possible workaround is to hand code anything that needed a nondefault visual and then link this to the builder-generated code. This hand code could even be initially generated by the builder tool (for a default visual) and then hand-modified.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5438533"></a>Nondefault Visual Heuristic Routines</h3></div></div>
+<p>The files <tt>/usr/src/X11/motif/overlay_demos/lib/sgi_visual.[ch]</tt> provide convenient routines to get legal and consistent values for use with different visuals (such as overlay planes). Some of these routines are used by some Silicon Graphics code&#8212;for example, <tt>4Dwm</tt>, <tt>toolchest</tt>&#8212;and by the overlay demonstration programs. This encapsulation is useful because:<a name="idCh01_Prog_Guidelines95"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>The functions are commonly needed by software wanting to open windows in the overlay or popup planes.</p>
+</li>
+<li><p>Opening windows in the overlay or popup planes is (understandably) a mystery to many application writers.</p>
+</li>
+<li><p>Unfortunately, some of these requirements have neither a standard X11 nor a standard Silicon Graphics way to do them. This encapsulation includes a number of heuristic routines that may change in time.</p>
+</li>
+</ul></div><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png"></td><td align="left" valign="top"><b>Note: </b><tt>sgi_visual.c</tt> is unsupported demonstration code. It is extremely likely that details of the code, and even the programming interface it presents, will be different in future releases. If you make use of this code in your own software, you should make a copy of it so that it won't be overwritten by later installation of a changed version. 
+</td></tr></table><hr noshade="noshade"></div><p>The routines in <tt>sgi_visual.c</tt> deal with consistent sets of the following values: depth, visual class (for example, PseudoColor), visual type (for example, OVERLAY), X11 visual, and colormaps. The other members of the 
+
+
+<tt>XSetWindowAttributes</tt> structure must also be consistent, but they are easier for the application itself to keep track of and set correctly. Therefore, <tt>sgi_visual.c</tt> does not do anything with them.</p>
+<p>The following functions are included and are among the simplest to use. These are the functions used by the overlay demo programs. Each function inserts compatible values for the following visual-related resources into the 
+
+
+<tt>arglist</tt> for a toolkit widget: colormap, depth, and visual.</p>
+<p>The difference between the routines is the visual type (popup, overlay, or normal) of the visual:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>int SG_getPopupArgs(dpy, scr, args, n)</b></span></p>
+</li>
+<li><p><span class="bold"><b>int SG_getOverlayArgs(dpy, scr, args, n)</b></span></p>
+</li>
+<li><p><span class="bold"><b>int SG_getOverlay2Args(dpy, scr, args, n)</b></span></p>
+</li>
+<li><p><span class="bold"><b>int SG_getOverlay4Args(dpy, scr, args, n)</b></span></p>
+</li>
+<li><p><span class="bold"><b>int SG_getNormalArgs(dpy, scr, args, n)</b></span></p>
+</li>
+</ul></div><p>These functions require these arguments:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">Display 
+
+
+<tt>*dpy</tt></span></td><td width="10"> </td><td><p>The display is used to find the root window.</p>
+
+</td></tr><tr valign="top"><td><span class="term">int
+
+
+<tt> scr</tt>
+</span></td><td width="10"> </td><td><p>
+
+
+<tt></tt>Screen number</p>
+
+</td></tr><tr valign="top"><td><span class="term">Arglist 
+
+
+<tt>args</tt></span></td><td width="10"> </td><td><p>Must have room for the three arguments to be added by this routine; there may be more arguments in the future.</p>
+
+</td></tr><tr valign="top"><td><span class="term">int 
+
+
+<tt>*n</tt></span></td><td width="10"> </td><td><p>Index into the arguments list. It will be incremented for each argument added.</p>
+
+</td></tr></table></div><p>If the calling program asks for a visual type that does not exist on the hardware, the function automatically returns the best one it can.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5438869"></a>Adding Input Devices with the X Input Extension<a name="idCh01_Prog_Guidelines96"></a><a name="idCh01_Prog_Guidelines97"></a><a name="idCh01_Prog_Guidelines98"></a><a name="idCh01_Prog_Guidelines99"></a><a name="idCh01_Prog_Guidelines100"></a></h2></div></div>
+<p>To add an input device, you write a streams module that reformats the device events to the format used by the X server and handles the information and control <i>ioctls</i> that are used by the X server. In most cases, events go to the X server, where they are distributed based on focus policy. It is possible for a single program to own all the events generated by a device.</p>
+<p>Follow the procedure for adding input devices used by the X Window System and the X Input Extension. The X Input Extension is an X Consortium standard under X11R5. Documentation on the X Input Extension can be obtained in the X11R5 distribution from MIT in the <tt>mit/doc/extensions/xinput</tt> and<tt> mit/hardcopy/extensions/input</tt> directories.</p>
+<p>For more specific information about adding an input device to a workstation, refer to the subdirectory on input devices in the <tt>4Dgifts</tt> directory on your IRIS-4D Series workstation. This directory contains a<tt> README</tt> file with very detailed instructions on input devices, as well as some useful example programs that demonstrate how to add an input device. If you can't find the <tt>4Dgifts</tt> directory on input devices, refer to the <tt>README</tt> file in <tt>/usr/people/4Dgifts</tt>. This <tt>README</tt> file explains the structure and contents of the <tt>4Dgifts</tt> directory.</p>
+</div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="pr01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ix01.html">Next</a></td></tr><tr><td width="40%" align="left">Introduction </td><td width="20%" align="center"> </td><td width="40%" align="right">Index </td></tr></table></div></body></html>

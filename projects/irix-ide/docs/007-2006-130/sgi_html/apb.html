@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix B. Desktop Variables</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="apa.html" title="Appendix A. Example Programs for SGI Enhanced Widgets"><link rel="next" href="apc.html" title="Appendix C. Online Help Examples"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix B. Desktop Variables</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apa.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apc.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE71351-PARENT"></a>Appendix B. Desktop Variables</h2></div></div>
+<p><a class="indexterm" name="ITB.Variables-0"></a>
+<a class="indexterm" name="ITB.Variables-1"></a>
+<a class="indexterm" name="ITB.Variables-2"></a>
+Variables that are used by the Desktop are listed below. Some of these variables can be customized by the user. You can use any of these variables as part of the OPEN, ALTOPEN, or PRINT file typing rules, or as part of the FILTER print conversion rule. In IRIX 6.3 and above, variable substitution is done by the libraries; typically you do not set environment variables. However, if a variable would expand to null, the desktop automatically sets an empty environment variable.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5240310"></a>Variables Set By the Desktop</h2></div></div>
+<p>The variables listed below are preset by the Desktop (that is, the Desktop sets their values).</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">$LEADER </span></td><td width="10"> </td><td><p>If one or more icons are currently selected from the Desktop, <i>LEADER</i> is set to the icon that is selected first. If no icon is selected, it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$REST </span></td><td width="10"> </td><td><p>If more than one icon is currently selected from the Desktop, <i>REST</i> contains the list of names of all selected icons <span class="bold"><b>except</b></span> the highlighted icon (see <i>LEADER</i> above). Otherwise, it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$LEADERTYPE </span></td><td width="10"> </td><td><p>If one or more icons are currently selected from the Desktop, <i>LEADERTYPE</i> is set to the <i>TYPE</i> of the icon whose text field is highlighted. If no icons are selected, it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$RESTTYPE </span></td><td width="10"> </td><td><p>When more than one icon is currently selected from the Desktop, <i>RESTTYPE</i> contains the <i>TYPE</i> for all selected icons <span class="bold"><b>except</b></span> the highlighted icon, if the remainder of the selected icons are all of the same <i>TYPE</i>. If they are not the same <i>TYPE</i>, or only one icon is selected, <i>RESTTYPE</i> is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$RESTTYPELIST </span></td><td width="10"> </td><td><p>Contains the list of <i>TYPE</i>s corresponding to the arguments in <i>REST</i>. If only one icon is selected, <i>RESTTYPELIST</i> is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$ARGC </span></td><td width="10"> </td><td><p>Contains the number of selected icons.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$TARGET </span></td><td width="10"> </td><td><p>Set only for the CMD DROP rule, <i>TARGET</i> contains the name of the icon being dropped upon; otherwise it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$TARGETTYPE </span></td><td width="10"> </td><td><p>Set only for the CMD DROP rule, <i>TARGETTYPE</i> contains the <i>TYPE</i> of the icon being dropped upon; otherwise it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$SELECTED </span></td><td width="10"> </td><td><p>Contains the names of the selected icons (whether or not a drop occurs on <i>TARGET</i>).</p>
+
+</td></tr><tr valign="top"><td><span class="term">$SELECTEDTYPE </span></td><td width="10"> </td><td><p>If all of the icons named in <i>SELECTED</i> are of the same <i>TYPE</i>, <i>SELECTEDTYPE</i> contains that <i>TYPE</i>; otherwise it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$SELECTEDTYPELIST </span></td><td width="10"> </td><td><p>Contains a list of <i>TYPE</i>s corresponding to the <i>TYPE</i>s of the selected icons named in <i>SELECTED</i>. If only one icon is selected, it is set to null.</p>
+
+</td></tr><tr valign="top"><td><span class="term">$WINTERM </span></td><td width="10"> </td><td><p>Contains the name of the window terminal invoked from the Desktop using <tt>winterm(1)</tt>. Currently supported window terminals are <tt>wsh</tt> (the default) and <tt>xterm</tt>. </p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5240669"></a>Variables Set By the User</h2></div></div>
+<p>The variables listed below can be set by the user and the Desktop passes these customizable variables to the FTRs. Users set these variables from the Toolchest-&gt;Desktop-&gt;Customize-&gt;Utilities panel (or by the command, <span class="bold"><b>dtUtilities). S</b></span>ee <a href="ch10.html#LE73704-PARENT" title="Using the Default Viewer and Editor Utilities Panel">&#8220;Using the Default Viewer and Editor Utilities Panel&#8221;</a><a href="ch10.html#LE73704-PARENT"> in Chapter 10</a> for more information. </p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">$WINEDITOR </span></td><td width="10"> </td><td><p>Contains the path to and name for the text editor invoked from the Desktop. The default editor is <tt>/usr/sbin/</tt><tt>jot</tt>. </p>
+
+</td></tr><tr valign="top"><td><span class="term">$WEBBROWSER </span></td><td width="10"> </td><td><p>Contains the path to and name of an X Window System application that is a World Wide Web visual browser (for example, <tt>/usr/bin/X11/netscape</tt>).</p>
+
+</td></tr><tr valign="top"><td><span class="term">$IMGVIEWER </span></td><td width="10"> </td><td><p>Contains the path to and name of an application that displays image files (for example, <tt>/usr/bin/X11/imgview</tt>). </p>
+
+</td></tr><tr valign="top"><td><span class="term">$MAILBOXPROG </span></td><td width="10"> </td><td><p>Contains the path to and name of a mail reader application (for example, <tt>/usr/bin/X11/MediaMail -gui</tt>).</p>
+
+</td></tr><tr valign="top"><td><span class="term">$BOOKVIEWER </span></td><td width="10"> </td><td><p>Contains the path to and name of an application that displays InSight books (for example, <tt>/usr/sbin/insight</tt>).</p>
+
+</td></tr><tr valign="top"><td><span class="term">$PSVIEWER </span></td><td width="10"> </td><td><p>Contains the path to and name of an application for viewing PostScript files (for example, <tt>/usr/bin/X11/showps</tt>). </p>
+
+</td></tr></table></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apa.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="apc.html">Next</a></td></tr><tr><td width="40%" align="left">Appendix A. Example Programs for SGI Enhanced Widgets </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix C. Online Help Examples </td></tr></table></div></body></html>

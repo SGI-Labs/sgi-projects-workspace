@@ -1,0 +1,9 @@
+TYPE IRIXIDE
+    ICON {
+        if (opened) {
+            include("/Volumes/Irix/usr/lib/filetype/iconlib/generic.exec.open.fti");
+        } else {
+            include("/Volumes/Irix/usr/lib/filetype/iconlib/generic.exec.closed.fti");
+        }
+        include("irix_ide_overlay.fti");
+    }

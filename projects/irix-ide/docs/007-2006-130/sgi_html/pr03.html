@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Integrating an Application Into the IRIX Interactive Desktop Environment: An Introduction</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="pr02.html" title="About This Guide"><link rel="next" href="pt01.html" title="Part I. Getting the Right Look and Feel"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Integrating an Application Into the IRIX Interactive Desktop Environment: An Introduction</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="pr02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="pt01.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="preface"><div class="titlepage"><div><h2 class="title"><a name="LE63327-PARENT"></a>Integrating an Application Into the IRIX Interactive Desktop Environment: An Introduction</h2></div></div>
+<p><a class="indexterm" name="IT00.Intro-0"></a>
+<a class="indexterm" name="IT00.Intro-1"></a>
+<a class="indexterm" name="IT00.Intro-2"></a>
+<a class="indexterm" name="IT00.Intro-3"></a>
+<a class="indexterm" name="IT00.Intro-4"></a>
+<a class="indexterm" name="IT00.Intro-5"></a>
+This book describes how to integrate your application into the IRIX Interactive Desktop environment. It assumes that your application already runs on Silicon Graphics workstations. This is strictly a how-to guide&#8212;refer to the <i>IRIX Interactive Desktop User Interface Guidelines</i> for style guidelines.</p>
+<p>This introduction contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="pr03.html#LE10310-PARENT" title="About the IRIX Interactive Desktop Environment">&#8220;About the IRIX Interactive Desktop Environment&#8221;</a> presents a brief overview of the IRIX Interactive Desktop and explains why it's important to integrate your application into the Desktop environment. </p>
+</li>
+<li><p><a href="pr03.html#LE10020-PARENT" title="Implementation Strategies and Toolkits">&#8220;Implementation Strategies and Toolkits&#8221;</a> provides a checklist to help developers focus on the items that most benefit their users. </p>
+</li>
+<li><p><a href="pr03.html#LE60801-PARENT" title="Integrating an Application">&#8220;Integrating an Application&#8221;</a> offers a brief, general list of the basic steps for integration.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE10310-PARENT"></a>About the IRIX Interactive Desktop Environment</h2></div></div>
+<p>The IRIX Interactive Desktop environment provides a graphical user interface (GUI) to the IRIX filesystem and operating system. This interface allows users to interact with the workstation using a point-and-click interface, based on icons and windows. The Desktop provides tools and services for the users' convenience, many of which are accessible directly from the Desktop's toolchests.</p>
+<p>Integrating your application into the Desktop environment is an important step in creating your product. Since users are already familiar with the Desktop, they have certain expectations about how applications should look and behave in the Desktop environment. By integrating your application into the Desktop, you insure that these expectations are met&#8212;thus helping your users get the most out of your application.</p>
+<p><a href="pr03.html#id5179897" title="Figure 1. The IRIX Interactive Desktop">Figure 1</a> shows an example of the IRIX Interactive Desktop, introduced with IRIX version 6.5.14, with the following tools running:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Welcome page design and navigation (the center, blue Netscape window). This window can be launched from the Welcome_to_SGI icon.</p>
+</li>
+<li><p>Toolchest. The Toolchest serves as the primary access point for desktop user interfaces. For example, users can access interfaces for everyday tasks such as customizing their desktop, accessing applications and Web tools, backing up and restoring their files, and finding information (help) on a variety of desktop topics. By default, the Toolchest is located in the upper left corner.</p>
+</li>
+<li><p>New background patterns.  The background in the new screensnap is one of the new patterns available from the Background Setting panel.  The Background Setting panel itself is visible in the screensnap (lower right), previewing the new background pattern called &quot;Citrus Citrus.&#8221; The background panel can be launched from the Toolchest by selecting &#8220;Desktop &gt; Customize &gt; Background.&#8221;</p>
+</li>
+<li><p>System Manager (center window). This window has a new design but the same functionality as before.  System Manager can be launched from the Toolchest by selecting &#8220;System &gt; System Manager.&#8221;</p>
+</li>
+<li><p><a class="indexterm" name="IT00.Intro-6"></a>
+<a class="indexterm" name="IT00.Intro-7"></a>
+<a class="indexterm" name="IT00.Intro-8"></a>
+<a class="indexterm" name="IT00.Intro-9"></a>
+<a class="indexterm" name="IT00.Intro-10"></a>
+Desks Overview window. With the Desks Overview window, users can switch from one &#8220;desk,&#8221; or group of applications, to another. When your application appears in a desk other than the one currently in use, it is in a state similar to the minimized state. You need to be careful about what processes your application runs while in a minimized state. The Desks Overview window is shown in the lower left corner.</p>
+</li>
+<li><p><a class="indexterm" name="IT00.Intro-11"></a>
+<a class="indexterm" name="IT00.Intro-12"></a>
+<a class="indexterm" name="IT00.Intro-13"></a>
+<a class="indexterm" name="IT00.Intro-14"></a>
+<a class="indexterm" name="IT00.Intro-15"></a>
+Icon Catalog. Users can access icons from the different pages in the Icon Catalog. Some of the pages are: Applications, Demos, Desktop Tools, Media Tools, and Web Tools. Since the Icon Catalog is one of the first places users look when they need to find an application, you should add your product's icons to this catalog. By default, the Icon Catalog is below the Toolchest.</p>
+</li>
+<li><p>File Manager window. From this window, you can view file contents (example shown is a model of an X29 fighter jet, partly obscured by the System Manager window). The File Manager window is shown at the left, above the Desks Overview window.</p>
+</li>
+</ul></div><p>In addition, the &#8220;noiconlogin-mode&#8221; image has been updated to show the new SGI logo. The EZsetup account login and web page design have also been updated. Other elements that remain from the previous desktop design include the File QuickFind (shown in the upper right), minimized windows (five across on the left side under the Toolchest), and device icons along the right side. These are just a few examples of the kinds of things you will need to consider to integrate your application into the Desktop Environment. This book provides complete and detailed instructions for integration, while the <i>IRIX Interactive Desktop User Interface Guidelines</i> gives you style guidelines. For the best results, use both books together.</p>
+<p><div class="figure"><a name="id5179897"></a><p><a name="id5179897"></a><b>Figure 1. The IRIX Interactive Desktop</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/desktop.online.gif" alt="The IRIX Interactive Desktop" height="548" width="816"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE10020-PARENT"></a>Implementation Strategies and Toolkits</h2></div></div>
+<p><a class="indexterm" name="IT00.Intro-16"></a>
+<a class="indexterm" name="IT00.Intro-17"></a>
+<a class="indexterm" name="IT00.Intro-18"></a>
+<a class="indexterm" name="IT00.Intro-19"></a>
+<a class="indexterm" name="IT00.Intro-20"></a>
+<a class="indexterm" name="IT00.Intro-21"></a>
+This section presents strategies for implementing your application and suggests some toolkits that will make the implementation easier. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="pr03.html#LE71986-PARENT" title="Implementation Checklist">&#8220;Implementation Checklist&#8221;</a>, </p>
+</li>
+<li><p><a href="pr03.html#LE86843-PARENT" title="Using ViewKit and RapidApp">&#8220;Using ViewKit and RapidApp&#8221;</a>, </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE71986-PARENT"></a>Implementation Checklist</h3></div></div>
+<p><a class="indexterm" name="IT00.Intro-22"></a>
+<a class="indexterm" name="IT00.Intro-23"></a>
+<a href="pr03.html#id5177324" title="Table 1. Checklist of Implementation Tasks and References">Table 1</a> provides a checklist to help you focus your resources on the items that most benefit your users. The checklist lists tasks in order of importance. Try to adhere to the user interface guidelines in the order presented in the checklist.</p>
+<p>For a summary of user interface guidelines that includes a complete checklist, see Appendix A, &#8220;Summary of Guidelines,&#8221;
+ in <i>IRIX Interactive Desktop User Interface Guidelines</i>. </p>
+<div class="table"><a name="id5177324"></a><p><a name="id5177324"></a><b>Table 1. Checklist of Implementation Tasks and References</b></p>
+<table summary="Checklist of Implementation Tasks and References" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Task</p>
+</th><th scope="col" valign="top"><p>IRIX Interactive Desktop 
+User Interface Guidelines</p>
+</th><th scope="col" valign="top"><p>Implementation Reference</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Icons and File Typing Rules 
+(FTRs) </p>
+</td><td valign="top"><p>Chapter 2</p>
+</td><td valign="top"><p>Desktop Integration Guide, 
+Chapters 11-15</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>IRIX Interactive Desktop 
+Look<span class="bold"><b>*</b></span> </p>
+</td><td valign="top"><p>Chapter 3</p>
+</td><td valign="top"><p>Desktop Integration Guide, 
+Chapters 2-3</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Menus and Accelerators<span class="bold"><b>*</b></span> </p>
+</td><td valign="top"><p>Chapter 3</p>
+</td><td valign="top"><p>OSF/Motif Programmer's Guide, 
+Chapter 6</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Copy and Paste<span class="bold"><b>*</b></span> </p>
+</td><td valign="top"><p>Chapter 5</p>
+</td><td valign="top"><p>Desktop Integration Guide, 
+Chapter 7</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Window Management</p>
+</td><td valign="top"><p>Chapter 3</p>
+</td><td valign="top"><p>Desktop Integration Guide, 
+Chapters 5-6</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Software Installation </p>
+</td><td valign="top"><p>Chapter 4</p>
+</td><td valign="top"><p>S/W Packager User's Guide </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Session Management </p>
+</td><td valign="top"><p>Chapter 3 </p>
+</td><td valign="top"><p>Desktop Integration Guide, 
+Chapter 5</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Online Help </p>
+</td><td valign="top"><p>Chapter 4</p>
+</td><td valign="top"><p>Desktop Integration Guide, 
+Chapter 9</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Selection, Focus<span class="bold"><b>*</b></span> </p>
+</td><td valign="top"><p>Chapter 7</p>
+</td><td valign="top"><p>OSF/Motif Programmer's Guide, 
+Chapter 13</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Feedback </p>
+</td><td valign="top"><p>Chapter 11 </p>
+</td><td valign="top"><p>OSF Motif Programmer's Guide</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Internationalization </p>
+</td><td valign="top"><p>Chapter 4</p>
+</td><td valign="top"><p>Topics in IRIX Programming, 
+Chapter 4</p>
+</td></tr></tbody></table></div><p><sup>*</sup><sup> Items requiring use of the Motif toolkit.</sup></p>
+<p><a class="indexterm" name="IT00.Intro-24"></a>
+<a class="indexterm" name="IT00.Intro-25"></a>
+<a class="indexterm" name="IT00.Intro-26"></a>
+It's also useful to know which changes you can make without modifying the application's source code and which items require the use of the IRIS IM (OSF/Motif) toolkit. The Silicon Graphics style is based on Motif, so using the Motif toolkit makes compliance much easier. <a href="pr03.html#id5177735" title="Table 2.  Tasks Requiring Application Changes and/or Motif">Table 2</a> lists which tasks require application code changes and which require Motif. </p>
+<div class="table"><a name="id5177735"></a><p><a name="id5177735"></a><b>Table 2.  Tasks Requiring Application Changes and/or Motif</b></p>
+<table summary=" Tasks Requiring Application Changes and/or Motif" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Task</p>
+</th><th scope="col" valign="top"><p>Application Code Changes</p>
+</th><th scope="col" valign="top"><p>Requires Motif</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Icons and FTRs </p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>IRIX Interactive 
+Desktop Look</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>yes</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Menus/Accelerators</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>yes</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Copy &amp; Paste </p>
+</td><td valign="top"><p>yes</p>
+</td><td valign="top"><p>yes (Xt)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Window Management   </p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Software Installation </p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Session Management </p>
+</td><td valign="top"><p>yes</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Online Help</p>
+</td><td valign="top"><p>yes<br>
+
+Online help and context sensitive 
+help require no code changes with 
+ViewKit.</p>
+</td><td valign="top"><p>yes <br>
+
+Context sensitive help uses the 
+Motif widget hierarchy.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Selection, Focus</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>yes</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Feedback </p>
+</td><td valign="top"><p>yes</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Internationalization </p>
+</td><td valign="top"><p>yes</p>
+</td><td valign="top"><p> </p>
+</td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE86843-PARENT"></a>Using ViewKit and RapidApp</h3></div></div>
+<p><a class="indexterm" name="IT00.Intro-27"></a>
+<a class="indexterm" name="IT00.Intro-28"></a>
+<a class="indexterm" name="IT00.Intro-29"></a>
+<a class="indexterm" name="IT00.Intro-30"></a>
+<a class="indexterm" name="IT00.Intro-31"></a>
+<a class="indexterm" name="IT00.Intro-32"></a>
+Besides using Motif, other toolkits and tools can make integrating your application easier. These include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="pr03.html#LE54513-PARENT" title="ViewKit ">&#8220;ViewKit &#8221;</a> </p>
+</li>
+<li><p><a href="pr03.html#LE50925-PARENT" title="RapidApp">&#8220;RapidApp&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE54513-PARENT"></a>ViewKit </h4></div></div>
+<p>IRIS ViewKit is a C++ based, user-interface toolkit based on OSF/Motif. ViewKit also runs on Dec, HP, IBM, SCO, SunOS, and Sun Solaris. </p>
+<p><a href="pr03.html#id5178145" title="Table 3.  Integration and ViewKit">Table 3</a> lists integration tasks that you can achieve by using ViewKit. </p>
+<div class="table"><a name="id5178145"></a><p><a name="id5178145"></a><b>Table 3.  Integration and ViewKit</b></p>
+<table summary=" Integration and ViewKit" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Task</p>
+</th><th scope="col" valign="top"><p>ViewKit</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Icons and FTRs </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>IRIX Interactive Desktop Look</p>
+</td><td valign="top"><p>Color schemes set by default</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Menus and Accelerators</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Copy and Paste </p>
+</td><td valign="top"><p>VkCutPaste Class</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Window Management   </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Software Installation </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Session Management </p>
+</td><td valign="top"><p>Initial session management set</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Online Help</p>
+</td><td valign="top"><p>Help menu entry and context sensitive help</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Selection, Focus</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Feedback </p>
+</td><td valign="top"><p>Busy state and cursor are easily set</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Internationalization </p>
+</td><td valign="top"><p> </p>
+</td></tr></tbody></table></div><p>Your application can provide World Wide Web access by using VkWebViewerBase, which provides basic Web functionality. For more information, see the <i>IRIS ViewKit Programmer's Guide
+</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE50925-PARENT"></a>RapidApp</h4></div></div>
+<p>Developer Magic RapidApp is an interactive tool for creating applications. It integrates with other Developer Magic tools, including <tt>cvd</tt>, <tt>cvstatic</tt>, <tt>cvbuild</tt>, and others, to provide an environment for developing object-oriented applications as quickly as possible. RapidApp generates C++ code, with interface classes based on the IRIS ViewKit toolkit. In addition to the conveniences provided by IRIS ViewKit, you can use RapidApp to help create your application (see <a href="pr03.html#id5178430" title="Table 4.  Integration and RapidApp">Table 4</a>). </p>
+<div class="table"><a name="id5178430"></a><p><a name="id5178430"></a><b>Table 4.  Integration and RapidApp</b></p>
+<table summary=" Integration and RapidApp" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Task</p>
+</th><th scope="col" valign="top"><p>RapidApp</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Icons and FTRs </p>
+</td><td valign="top"><p>Generates an FTR rule and sample icon</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>IRIX Interactive Desktop Look</p>
+</td><td valign="top"><p>sgiMode &amp; schemes set by default</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Menus and Accelerators</p>
+</td><td valign="top"><p>Standard &amp; Common menu entries</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Copy and Paste </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Window Management   </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Software Installation </p>
+</td><td valign="top"><p>Automatically builds an inst image</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Session Management </p>
+</td><td valign="top"><p>Initial session management set</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Online Help</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Selection, Focus</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Feedback </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Internationalization </p>
+</td><td valign="top"><p> </p>
+</td></tr></tbody></table></div><p>For more information, see the <i>Developer Magic: RapidApp User's Guide</i>. </p>
+</div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE60801-PARENT"></a>Integrating an Application</h2></div></div>
+<p>This section lists the basic steps for integrating an existing application into the IRIX Interactive Desktop environment. The steps are listed in a very general way, to give you a brief overview of the process.</p>
+<p><a class="indexterm" name="IT00.Intro-33"></a>
+<a class="indexterm" name="IT00.Intro-34"></a>
+<a class="indexterm" name="IT00.Intro-35"></a>
+If you're writing a new application, here are a few tips:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a class="indexterm" name="IT00.Intro-36"></a>
+<a class="indexterm" name="IT00.Intro-37"></a>
+If possible, use IRIS ViewKit. Refer to the <i>IRIS ViewKit Programmer's Guide</i> for instructions.</p>
+</li>
+<li><p><a class="indexterm" name="IT00.Intro-38"></a>
+<a class="indexterm" name="IT00.Intro-39"></a>
+Don't use IRIS GL. Use OpenGL or Open Inventor instead.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Open Inventor isn't part of the IRIS Developer's Option, it is a separate option. In the United States and Canada, call SGI Direct at 800&#8211;800-SGI1 (7441) for more information about how to order the Open Inventor Option; outside the United States and Canada, please contact your local sales office or distributor.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><p>To integrate your application into the IRIX Interactive Desktop, follow these steps:</p>
+<div class="orderedlist"><ol type="1"><li><p><a class="indexterm" name="IT00.Intro-40"></a>
+<a class="indexterm" name="IT00.Intro-41"></a>
+If your application uses IRIS GL, port to OpenGL if possible. If it's impractical for you to port to OpenGL at this time, at least switch to mixed-model IRIS GL programming, if you haven't already done so. (Mixed-model programs use Xt for event and window management). </p>
+<p>For information on porting from IRIS GL to OpenGL and for switching your program to mixed-model, refer to the <i>OpenGL Porting Guide</i>. This manual is included online in the IRIS Developer's Option (IDO). View it using the IRIS InSight Viewer.</p>
+</li>
+<li><p>Set up your application to comply with the IRIX Interactive Desktop look and feel:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>use the Enhanced IRIS IM look</p>
+</li>
+<li><p>use Schemes</p>
+</li>
+<li><p>use the new and enhanced IRIS IM widgets where appropriate</p>
+</li>
+<li><p>set up your application for correct window, session, and desks management</p>
+</li>
+<li><p>customize the minimize window image for your application (optional)</p>
+</li>
+<li><p>use the extensions provided in the Selection Library and the File Alteration Monitor (optional)</p>
+</li>
+</ul></div><p>These topics, as well as information on fonts, are covered in Part 1 of this guide.</p>
+</li>
+<li><p>Create Desktop icons for your application and add them to the Icon Catalog. You'll need an icon for the application itself as well as icons for any unusual data formats. See Part 2 of this manual for instructions.</p>
+</li>
+<li><p>Use <tt>swpkg</tt> to package your application so that your users can install it easily. See the <i>Software Packager User's Guide</i> for information for instructions on using <tt>swpkg</tt>. </p>
+</li>
+</ol></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="pr02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="pt01.html">Next</a></td></tr><tr><td width="40%" align="left">About This Guide </td><td width="20%" align="center"> </td><td width="40%" align="right">Part I. Getting the Right Look and Feel </td></tr></table></div></body></html>

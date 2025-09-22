@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 3. Windows in the IRIX Interactive Desktop Environment</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt01.html" title="Part I. Integrating With the IRIX Interactive Desktop"><link rel="previous" href="ch02.html" title="Chapter 2. Icons"><link rel="next" href="ch04.html" title="Chapter 4. IRIX Interactive Desktop Services"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Windows in the IRIX Interactive Desktop Environment</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><th width="60%" align="center">Part I. Integrating With the IRIX Interactive Desktop</th><td width="20%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5459524"></a>Chapter 3. <a name="id42750"></a>Windows in the IRIX Interactive Desktop Environment</h2></div></div>
+<p>When users run your application on the IRIX Interactive Desktop, they interact with its windows through <a name="idch03.windows1"></a><i>4Dwm</i>, the IRIS Extended Motif Window Manager. This chapter describes the look, interactions, and behaviors that your application's windows should support. (For information on individual window components, see <a name="idch03.windows2"></a><a name="idch03.windows3"></a><a href="ch06.html#id71076">Chapter 6, &#8220;Application Windows,&#8221;</a> and <a href="ch09.html#id95140">Chapter 9, &#8220;Controls.&#8221;</a>) This chapter covers the following topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch03.html#id17675">&#8220;The IRIX Interactive Desktop Look: Graphic Features and Schemes&#8221;</a> discusses general characteristics of windows, including the IRIX Interactive Desktop enhanced look provided by the IRIS IM toolkit and its advantages, and color and font schemes.</p>
+</li>
+<li><p><a href="ch03.html#id38970">&#8220;Application Window Categories and Characteristics&#8221;</a> defines the categories of windows in the IRIX Interactive Desktop environment and presents several models of applications using the various window types. It also lists the required window decorations and Window menu for each window category, prescribes how to choose labels for title bars, and discusses window size and placement issues.</p>
+</li>
+<li><p><a href="ch03.html#id59672">&#8220;Keyboard Focus Across Windows&#8221;</a> establishes the <i>4Dwm</i> default keyboard focus policy across windows as implicit, and describes the behavior for applications that need to maintain control of the pointer while it's outside of the application's windows.</p>
+</li>
+<li><p><a href="ch03.html#id90668">&#8220;Minimized Windows&#8221;</a> provides ideas for designing minimized window images, describes how to choose labels for minimized windows, and discusses application behavior while minimized.</p>
+</li>
+<li><p><a href="ch03.html#id53752">&#8220;Desks&#8221;</a> describes the tool that provides users with multiple virtual screens or <i>desks</i>. It covers the design implications for your application windows, which can be distributed over these multiple desks.</p>
+</li>
+<li><p><a href="ch03.html#id17063">&#8220;Session Management&#8221;</a> describes the <i>4Dwm</i> session manager and the implications of allowing users to log out while your application is running and return automatically to the same state upon subsequent login.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5459757"></a><a name="id17675"></a>The IRIX Interactive Desktop Look: Graphic Features and Schemes</h2></div></div>
+<p>When using the IRIS IM user interface toolkit, you can choose one of two different appearances for your application: <a name="idch03.windows4"></a><a name="idch03.windows5"></a><a name="idch03.windows6"></a><a name="idch03.windows7"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>the IRIX Interactive Desktop look (preferred by Silicon Graphics)</p>
+</li>
+<li><p>the basic OSF/Motif look</p>
+</li>
+</ul></div><p>The IRIX Interactive Desktop look provides an attractive, 3D look for your application and the default colors and fonts used by the IRIX Interactive Desktop. The two components to the IRIX Interactive Desktop look are described below: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch03.html#id47013">&#8220;Enhanced Graphics in the IRIX Interactive Desktop Look&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id78166">&#8220;Schemes for Colors and Fonts&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5459866"></a><a name="id47013"></a>Enhanced Graphics in the IRIX Interactive Desktop Look</h3></div></div>
+<p>The IRIX Interactive Desktop look contains a number of graphic modifications made to the standard IRIS IM interface. These modifications improve the appearance and ease of use of applications. They have no impact on the component layout and require minimal work on the part of the developer. Some of the differences between the IRIX Interactive Desktop look and the standard IRIS IM look appear in <a href="ch03.html#id15859">Figure 3-1</a>. In comparison, the IRIX Interactive Desktop look:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Uses smooth shading with a rounded dimensional look to create a high-quality visual appearance. Numerous sharp bevels, such as those found in standard Motif components, detract from rather than add to the visual presentation of an application. (See <a name="idch03.windows8"></a><a href="ch03.html#id15859">Figure 3-1</a>A.)</p>
+</li>
+<li><p>Adds locate highlight (the object brightens as the pointer passes over it) so that users can tell which components are live functional objects and which are passive graphics or are disabled. Locate highlight also gives users feedback as to whether or not the application is listening.<a name="idch03.windows9"></a></p>
+</li>
+<li><p>Adds additional visual feedback for selected checkboxes and radio buttons. A distinct red arrow and a blue triangle clearly indicate a selected checkbox and radio button, respectively (see <a name="idch03.windows10"></a><a href="ch03.html#id15859">Figure 3-1</a>A).</p>
+</li>
+<li><p>Enhances scrollbars by providing a grip on the slider used in scrollbars and a temporarily indented impression to indicate the original location of the slider during the scrolling process (see <a name="idch03.windows11"></a><a href="ch03.html#id15859">Figure 3-1</a>C). The grip makes it easier for users to recognize the slider as something to be dragged rather than a button to be pressed. </p>
+</li>
+<li><p>Uses a stroked underline to indicate mnemonics in menus simply to give the look of an application some pizazz (see <a name="idch03.windows12"></a><a href="ch03.html#id15859">Figure 3-1</a>D).</p>
+</li>
+<li><p>Provides a more consolidated treatment for composite objects. For example, the IRIX Interactive Desktop look visually integrates the arrow stepper buttons in scrollbars with the scrollbars themselves to give a less cluttered look. In addition, the scrollbars are visually integrated with the client pane as much as possible to make the whole assembly appear as a single, integrated unit (see <a href="ch03.html#id15859">Figure 3-1</a>C). </p>
+</li>
+<li><p>Uses decals instead of stacked, 3D elements to make it easier for users to see the components (see <a href="ch03.html#id15859">Figure 3-1</a>B). There is no gratuitous use of 3D such as the raised arrows and rectangular option buttons in standard Motif.</p>
+</li>
+<li><p>Renders black outlines around stand-alone widgets to improve the readability and perception of adjoining color areas (see <a name="idch03.windows13"></a><a href="ch03.html#id15859">Figure 3-1</a>B and C). For example, the black outline around buttons and scrollbars make them stand out from a window's background. </p>
+</li>
+<li><p>Uses closely grouped dialog buttons that are right justified. This style makes the buttons easier to read, and the close grouping may reduce mouse motion.<a name="idch03.windows14"></a></p>
+</li>
+</ul></div><p>For details on how to obtain the graphic enhancements of the IRIX Interactive Desktop look, see Chapter 2, &#8220;Getting the IRIX Interactive Desktop Look,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>. For guidance on designing other aspects of your application windows, such as general layout principles and use of controls, see <a href="ch06.html#id71076">Chapter 6, &#8220;Application Windows&#8221;</a> and <a href="ch09.html#id95140">Chapter 9, &#8220;Controls.&#8221;</a></p>
+<p><div class="figure"><p><a name="id5460179"></a><b>Figure 3-1. <a name="id15859"></a><a name="idch03.windows15"></a>Examples of Graphic Modifications in the IRIX Interactive Desktop Look </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-4.gif" alt="Figure 3-1 Examples of Graphic Modifications in the IRIX Interactive Desktop Look " height="686" width="748"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5460256"></a><a name="id78166"></a>Schemes for Colors and Fonts</h3></div></div>
+<p>In addition to the graphic modifications described in the previous section, <a name="idch03.windows16"></a><a href="ch03.html#id47013">&#8220;Enhanced Graphics in the IRIX Interactive Desktop Look,&#8221;</a> the IRIX Interactive Desktop look includes <i>schemes</i>. A <i>scheme</i> is a pre-packaged collection of colors and fonts that users can apply to application windows.</p>
+<p>Schemes deliver several benefits to users. When all applications on a workstation use schemes, users can conveniently customize their environment. The schemes are designed with an eye to effective use of color, taking into account both usability and aesthetic considerations. Multiple schemes are provided to address such problems as red/green color-blindness, monochrome X-terminals, and user preference for light or dark text. A user changes the scheme for the desktop by selecting the new scheme from the control panel shown in . (This control panel is accessed from the Desktop-&gt;Customize cascading menu in the Toolchest.)</p>
+<p><div class="figure"><p><a name="id5460318"></a><b>Figure 3-2. <a name="id36463"></a>Scheme Setting Control Panel</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-5.gif" alt="Figure 3-2 Scheme Setting Control Panel" height="303" width="255"></td></tr></table></div></div><br>
+</p>
+<p>Using schemes also benefits you as a developer by leveraging the work that has already been done on appropriate color and font choices. Using schemes eliminates worrying about different display resolutions, gamma values, user preferences, or most style guide color and font issues.</p>
+<p>The model for using schemes as a developer is to specify color and font choices as abstract names from the predefined scheme color and font palettes instead of hard-coding specific color and font values. Then, when the user specifies a scheme, the palette entries are mapped to specific RGB color and font values. </p>
+<p>By default, the IRIX Interactive Desktop comes up in the IRIX Interactive Desktop scheme. This scheme is organized around a neutral gray palette with the typographically neutral Helvetica font. Using neutral colors for standard user interface elements preserves the use of color for the application's content areas. </p>
+<p>Schemes are meant to apply to any region of an application window built with the standard toolkit components. Don't use schemes for application client areas which are content specific&#8212;for example, a rendering window, a movie player, or a molecular modeler. The colors in such client areas will be application-specific and not subject to change when a user selects a new scheme.</p>
+<p>For information on supplying schemes in your application, see Chapter 3, &#8220;Using Schemes,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5460405"></a><a name="id95618"></a>IRIX Interactive Desktop Look Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing the look for your application . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the IRIX Interactive Desktop look rather than the standard IRIS IM look.</p>
+</li>
+<li><p>Use the pre-packaged color and font schemes supplied by Silicon Graphics rather than designing your own colors and fonts. </p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5460461"></a><a name="id38970"></a>Application Window Categories and Characteristics</h2></div></div>
+<p>This section defines the four categories of windows in the IRIX Interactive Desktop environment; presents four models of applications using these window types; and lists the decorations, Window menus, and behavior required for each window type. Specifically, this section covers:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch03.html#id82170">&#8220;Application Window Categories&#8221;</a></p>
+</li>
+<li><p><a href="ch03.html#id67450">&#8220;Application Models&#8221;</a></p>
+</li>
+<li><p><a href="ch03.html#id85826">&#8220;Window Decorations and the Window Menu&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id56252">&#8220;Window Title Bar&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id32339">&#8220;Window Size&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id11715">&#8220;Window Placement&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5460569"></a><a name="id82170"></a>Application Window Categories</h3></div></div>
+<p>The <a name="idch03.windows17"></a><a name="idch03.windows18"></a><a name="idch03.windows19"></a><i>OSF/Motif Style Guide </i>refers to two categories of windows: <i>primary windows</i> and <i>secondary windows</i>. The IRIX Interactive Desktop environment subdivides each of these categories to yield two additional categories useful in many applications. There are two types of primary windows:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>A <a name="idch03.windows20"></a><a name="idch03.windows21"></a><i>main primary window</i> serves as the application's main controlling window. It's used to view or manipulate data, get access to other windows within the application, and kill the process when users quit. There's only one main primary window per application (and sometimes it isn't visible to users). </p>
+</li>
+<li><p>A <a name="idch03.windows22"></a><a name="idch03.windows23"></a><i>co-primary window</i> is used for major data manipulation or viewing of data outside of the main window. </p>
+</li>
+</ul></div><p>There are two types of secondary windows:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>A <a name="idch03.windows24"></a><a name="idch03.windows25"></a><i>support window</i> is a <i>persistent</i> special-purpose window. It typically contains a control panel or tool palette that operates directly on data in a primary window. It is used repeatedly. </p>
+</li>
+<li><p>A <a name="idch03.windows26"></a><a name="idch03.windows27"></a><i>dialog</i> is a <i>transient</i> window, typically used for short, quick, user input, such as an action confirmation, or system output, as in a warning message. It may be user-requested or application-generated.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5460787"></a><a name="id67450"></a>Application Models</h3></div></div>
+<p>Although there can be many combinations in an application of the four window types discussed in the previous section (main, co-primary, support, and dialog windows), most applications can be classified as fitting one of four basic models. The distinguishing factors between the models are: <a name="idch03.windows28"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>whether they can have one or multiple documents (files) open at a time</p>
+</li>
+<li><p> their use of primary windows</p>
+</li>
+</ul></div><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The term <i>document</i> means a grouping of data and shouldn't be thought of as simply a text-oriented file. It covers such data types as film clips, audio segments, and Inventor scenes. 
+</td></tr></table><hr noshade="noshade"></div><p>These models are illustrated and discussed in more detail in <a href="ch06.html#id67644">&#8220;Application Models&#8221; in Chapter 6</a>. For information about how to implement the various models, see &#8220;Implementing an Application Model&#8221; in Chapter 5 in the<i> IRIX Interactive Desktop Integration Guide</i>. </p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5460854"></a>&#8220;Single Document, One Primary&#8221; Application Model</h4></div></div>
+<p>&#8220;Single document, one primary&#8221; is the most basic model&#8212;it accomplishes all of its tasks within the main window and uses as many support windows and dialogs as needed. Users can work on only one document at a time. Thus, when a user has one document open and opens a second document, the second document replaces the first. IRIS Showcase operates in this manner.<a name="idch03.windows29"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5460882"></a>&#8220;Single Document, Multiple Primaries&#8221; Application Model</h4></div></div>
+<p>The &#8220;single document, multiple primaries&#8221; model uses both main and co-primary windows to accomplish major tasks. In this model, the co-primary windows perform different functions. MediaMail is an example of this model. Its main window lets users select electronic mail messages from a folder and perform actions on them such as viewing, printing, deleting, and sorting. Its Compose and Message windows are typical of co-primary windows with different functions designed to support the functionality of the main window. In this model, each primary window has its own menu bar tailored specifically to the functions in that window.<a name="idch03.windows30"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5460922"></a>&#8220;Multiple Document, Visible Main&#8221; Application Model</h4></div></div>
+<p>The &#8220;multiple document, visible main&#8221; model has a main window that is mostly used to launch co-primary windows. These co-primary windows are identical to each other and perform the same functions on different files or documents. Each co-primary window has its own menu bar. IRIS InSight is an example of this model. Its main window lets users launch co-primary viewing windows, browse available files, and conduct global searches through these files. The co-primary windows are used for viewing online books. <a name="idch03.windows31"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5460958"></a>&#8220;Multiple Document, No Visible Main&#8221; Application Model</h4></div></div>
+<p>The &#8220;multiple document, no visible main&#8221; model is identical to the &#8220;multiple document, visible main&#8221; model except that the main window is invisible to the user and new co-primary windows are launched from co-primary windows that are already open. Users open one document and leave it open while opening others. When the last open document is closed, the process is killed.<a name="idch03.windows32"></a></p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5461013"></a><a name="id85826"></a>Window Decorations and the Window Menu</h3></div></div>
+<p>Users primarily interact with windows on the IRIX Interactive Desktop through the window decorations and Window menu, which <a name="idch03.windows33"></a><a name="idch03.windows34"></a><a name="idch03.windows35"></a><a name="idch03.windows36"></a><a name="idch03.windows37"></a><a name="idch03.windows38"></a><i>4Dwm</i>, the IRIS window manager, places on each window. The decorations and Window menu entries vary according to the category of the window (see <a href="ch03.html#id82170">&#8220;Application Window Categories&#8221;</a> earlier in this chapter) and whether any of the components in the window are resizable. <a href="ch03.html#id44435">Figure 3-3</a> shows the decorations for a typical main window. For complete details of the behavior of each of the window decorations, see Section 7.3, &#8220;Window Decorations,&#8221; in the <i>OSF/Motif Style Guide</i>.</p>
+<p><div class="figure"><p><a name="id5461116"></a><b>Figure 3-3. <a name="id44435"></a><a name="idch03.windows39"></a>Features of a Typical Main Primary Window  </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-6.gif" alt="Figure 3-3 Features of a Typical Main Primary Window  " height="437" width="572"></td></tr></table></div></div><br>
+</p>
+<p>The recommended decorations and Window menu entries for each category of window are shown in <a href="ch03.html#id68452">Table 3-1</a>. To meet these requirements, you may have to modify both the default window decorations and Window menu entries for at least some of your application windows. For information on modifying the default window decorations and Window menu entries, see Chapter 5, &#8220;Window, Session, and Desk Management,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>. <a href="ch03.html#id68452">Table 3-1</a> also lists the keyboard accelerators and mnemonics provided by <i>4Dwm</i> for each Window menu item. These keyboard accelerators are reserved; do not assign them to other functions in your application.</p>
+<p>The behavior of the window decorations and Window menu entries is consistent with the definitions in Section 7.3 of the <i>OSF/Motif Style Guide,</i> with two notable differences:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch03.windows40"></a><i>4Dwm</i> Window menus include the entry &#8220;Raise.&#8221; &#8220;Raise&#8221; allows the user to move the window to the top of the window hierarchy, making it completely visible (in contrast to &#8220;Lower&#8221;). </p>
+</li>
+<li><p>&#8220;Exit&#8221; lets users quit the application completely from a primary window. Your application must do all the appropriate cleanup work for an exit from the Window menu, such as prompting the user whether to save changes to a file. The behavior of &#8220;Exit&#8221; in the Window menu is the same as that of &#8220;Exit&#8221; in the File menu. See <a name="idch03.windows41"></a><a name="idch03.windows42"></a><a href="ch08.html#id38726">&#8220;File Menu&#8221; in Chapter 8</a> for information on the File menu. (Note that the &#8220;Close&#8221; entry on a co-primary window closes that window and any associated support windows and dialogs. It doesn't quit the application.)</p>
+</li>
+</ul></div><p>The Window menu entries are based on the functionality available for that type of window. For example, users can't exit the application from support or dialog windows, so these window types don't include an &#8220;Exit&#8221; entry. If a window can't be resized, it doesn't need the &#8220;Size&#8221; entry or the &#8220;Maximize&#8221; entry in its Window menu. (To eliminate the ability of a window to be resized, set the maximum and minimum window sizes equal to the default window size. See <a href="ch03.html#id32339">&#8220;Window Size&#8221;</a> later in this chapter.) Dialogs can't be minimized independently of their parent windows and thus don't have a &#8220;Minimize&#8221; entry.</p>
+<div class="table"><p><a name="id5461339"></a><b>Table 3-1. <a name="id68452"></a> Window Decorations and Window Menu Entries by Window Category </b></p>
+<table summary=" Window Decorations and Window Menu Entries by Window Category " border="1"><colgroup><col><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Window Decorations and 
+Window Menu Entries</p>
+</th><th scope="col" valign="top"><p>Main Windows</p>
+</th><th scope="col" valign="top"><p>Co-Primary Windows</p>
+</th><th scope="col" valign="top"><p>Support Windows</p>
+</th><th scope="col" valign="top"><p>Dialogs</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Window menu button</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows43"></a><span class="bold"><b>&#8220;Restore Alt+F5&#8221;</b></span>
+<sup></sup><sup></sup>
+<sup>[<a name="id5461460" href="#ftn.id5461460">a</a>]</sup><sup></sup></p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required<sup>a</sup></p>
+</td><td valign="top"><p>Required<sup>a</sup></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows44"></a><span class="bold"><b>&#8220;Move Alt+F7&#8221;</b></span></p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows45"></a><a name="idch03.windows46"></a><span class="bold"><b>&#8220;Size Alt+F8&#8221; / <br>
+
+Resize handles</b></span></p>
+</td><td valign="top"><p>Optional; use if user 
+may need to expand 
+work area or other 
+components. If 
+resizable, set minimum 
+and maximum size 
+limits.</p>
+</td><td valign="top"><p>Optional; use if user 
+may need to expand 
+work area or other 
+components. If 
+resizable, set minimum 
+and maximum size 
+limits.</p>
+</td><td valign="top"><p>Optional; use if user 
+may need to expand 
+any components, such 
+as text input fields or 
+scrolling lists. If 
+resizable, set minimum 
+and maximum size 
+limits.</p>
+</td><td valign="top"><p>Optional; use if user 
+may need to expand 
+any components, such 
+as text input fields or 
+scrolling lists. If 
+resizable, set minimum 
+and maximum size 
+limits.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows47"></a><a name="idch03.windows48"></a><span class="bold"><b>&#8220;Minimize Alt+F9&#8221; / 
+Minimize button</b></span></p>
+</td><td valign="top"><p>Required </p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Don't use</p>
+</td><td valign="top"><p>Don't use</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows49"></a><a name="idch03.windows50"></a><span class="bold"><b>&#8220;Maximize Alt+F10&#8221; / 
+Maximize button</b></span></p>
+</td><td valign="top"><p>Use only if there's a 
+&#8220;Size&#8221; entry.</p>
+</td><td valign="top"><p>Use only if there's a 
+&#8220;Size&#8221; entry.</p>
+</td><td valign="top"><p>Use only if there's a 
+&#8220;Size&#8221; entry.</p>
+</td><td valign="top"><p>Use only if there's a 
+&#8220;Size&#8221; entry.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows51"></a><span class="bold"><b>&#8220;Raise Alt+F2&#8221;</b></span></p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows52"></a><span class="bold"><b>&#8220;Lower Alt+F3&#8221;</b></span></p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows53"></a><span class="bold"><b>&#8220;Close Alt+F4&#8221;</b></span></p>
+</td><td valign="top"><p>Don't use; not relevant 
+for main windows.</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td><td valign="top"><p>Required</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a name="idch03.windows54"></a><span class="bold"><b>&#8220;Exit Alt+F12&#8221;</b></span></p>
+</td><td valign="top"><p>Required; closes all 
+windows for this 
+application and quits. </p>
+</td><td valign="top"><p>Optional; use if users 
+can quit application 
+from this window.</p>
+</td><td valign="top"><p>Don't use</p>
+</td><td valign="top"><p>Don't use</p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="5"><div class="footnote"><p><sup>[<a name="ftn.id5461460" href="#id5461460">a</a>] </sup>This entry always appears in the Window menu, and it's automatically disabled if there's no &#8220;Maximize&#8221; entry; this default behavior can't be 
+changed.</p>
+</div></td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5462019"></a><a name="id56252"></a>Window Title Bar</h3></div></div>
+<p>By default, all windows on the IRIX Interactive Desktop have a title bar that contains a label for the window. The default label used in the title bar (the application name) rarely provides enough information for users to be able to distinguish one window from another. Label your title bars according to the rules shown below to help your users distinguish among windows belonging to the same application as well as instances of the same application. (For information on how to set the label in the title bar, see &#8220;Interacting With the Window and Session Manager&#8221; in Chapter 5 of the <a name="idch03.windows55"></a><i>IRIX Interactive Desktop Integration Guide</i>.) </p>
+<p>In general, use the title bar label to identify the window; don't use it to display general status (such as current page number or viewing mode) or application-critical information. Using the title bar to display information can cause problems. For example:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The title bar may be covered by another window or off the screen. </p>
+</li>
+<li><p>Users aren't accustomed to looking for status information in the title bar, so they`re likely to overlook it if your application displays it there.</p>
+</li>
+<li><p>It's expensive for the application to update the title bar continuously.</p>
+</li>
+</ul></div><p>For more information on where to place status information or application-critical information in your application window's title bars, see <a href="ch06.html#id30855">&#8220;Status Areas in Primary Windows&#8221; in Chapter 6</a>.</p>
+<p>The label you put in the title bar is also used in the Desks Overview window (see <a name="idch03.windows56"></a><a href="ch03.html#id55393">&#8220;Desks&#8221;</a> later in this chapter). By default, as a user moves the pointer over the thumbnail window sketches in the Desks Overview, the thumbnail window's title bar label displays as shown in <a href="ch03.html#id81978">Figure 3-4</a>. (Note that users can specify that the minimized window label be shown in the thumbnail sketches instead of the title bar label.) This further emphasizes the need for users to be able to distinguish windows using only the title bar information.</p>
+<p><div class="figure"><p><a name="id5462160"></a><b>Figure 3-4. <a name="id81978"></a>Title Bar Label Appearing in Desks Overview</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-7.gif" alt="Figure 3-4 Title Bar Label Appearing in Desks Overview" height="232" width="504"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5462182"></a>Rules for Labeling the Title Bar in Main Primary Windows</h4></div></div>
+<p>The rules for labeling title bars in main windows are illustrated in <a name="idch03.windows57"></a><a href="ch03.html#id12998">Figure 3-5</a>. </p>
+<div class="itemizedlist"><ul type="disc"><li><p>First determine if your application accesses document files. If not, use just the application name. </p>
+</li>
+<li><p>If your application is document-based, use the application name followed by a colon (:) and the filename (or &#8220;Untitled&#8221; if it's a new file) as the label in the title bar. Unless you have a real need and enough room, don't include the full pathname in the title bar. Note that if you do include a filename in the label, you need to update the label whenever the file changes. </p>
+</li>
+<li><p>If your application is displaying remotely, use the host name followed by a colon as a prefix to the title bar label determined above. Be sure to leave spaces between strings and colons in the label. </p>
+</li>
+<li><p>Don't use the version number in the title bar; make that information available from the &#8220;Product Information&#8221; entry in the Help menu (see <a href="ch04.html#id35470">&#8220;Types of Online Help&#8221; in Chapter 4</a> for more information). </p>
+<p><div class="figure"><p><a name="id5462284"></a><b>Figure 3-5. <a name="id12998"></a>Labels for Main Window Title Bars </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-2.gif" alt="Figure 3-5 Labels for Main Window Title Bars " height="267" width="459"></td></tr></table></div></div><br>
+</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5462308"></a><a name="id15724"></a>Rules for Labeling the Title Bar in Windows Other Than Main</h4></div></div>
+<p>For those co-primary windows that are used to supplement the main window's functionality as in the &#8220;single document, multiple primaries&#8221; application model, use the application name and function in the format <a name="idch03.windows58"></a><i>AppName : Function</i>. </p>
+<p>Make sure that the function closely matches the entry in the menu or the label on the button that invokes it. If the co-primary window follows a multiple document model such as the &#8220;multiple document, visible main&#8221; application model or the &#8220;multiple document, no visible main&#8221; application model, use the format <i>AppName : Filename</i> (or <i>AppName : </i>Untitled if it's a new file). Unless you have a real need and enough room, don't include the full pathname in the title bar. </p>
+<p>Support windows use the application name and the function in the format <i>AppName : Function</i>. Make sure that the function closely matches the entry in the menu or the label on the button that invokes it.</p>
+<p>For dialog windows, use the application name, followed by the type of dialog in the format <i>AppName : DialogType</i>, where <i>DialogType</i> can be &#8220;Prompt,&#8221; &#8220;Error,&#8221; &#8220;Warning,&#8221; &#8220;Question,&#8221; &#8220;Information,&#8221; &#8220;Working,&#8221; or &#8220;File Selection.&#8221; (For information on dialogs, see <a href="ch10.html#id30192">Chapter 10, &#8220;Dialogs.&#8221;</a>)</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5462469"></a><a name="id32339"></a>Window Size</h3></div></div>
+<p>The <a name="idch03.windows59"></a><a name="idch03.windows60"></a><i>4Dwm</i> window manager provides users with complete control over the size of application windows unless the application sets limits. Without a minimum window limit, users can shrink your windows to the point where they're unusable. With no maximum limit, users can expand a window to cover the full screen, potentially wasting valuable screen real estate. These extreme cases, along with a window at its default size, are illustrated in <a href="ch03.html#id55167">Figure 3-6</a>. Set appropriate maximum and minimum window sizes for all of your application windows. See &#8220;Interacting With the Window and Session Manager&#8221; in Chapter 5 of the <i>IRIX Interactive Desktop Integration Guide.</i></p>
+<p>In general, windows should be resizable only if they contain areas or components that a user might wish to resize, for example, a primary window with a resizable work area or a support window with a scrolling list or text input field. If a window does not contain resizable areas or components, then it shouldn't be resizable and you should set both the maximum and minimum size equal to the default size. Remember also to remove the Size and Maximize entries from the Window menu as described in <a name="idch03.windows61"></a><a href="ch03.html#id85826">&#8220;Window Decorations and the Window Menu&#8221;</a> earlier in this chapter. For more information on specific window components, see <a href="ch09.html#id95140">Chapter 9, &#8220;Controls.&#8221;</a></p>
+<p><div class="figure"><p><a name="id5462567"></a><b>Figure 3-6. <a name="id55167"></a>Default Maximum and Minimum Window Size Examples </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-3.gif" alt="Figure 3-6 Default Maximum and Minimum Window Size Examples " height="589" width="631"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5462591"></a><a name="id11715"></a>Window Placement</h3></div></div>
+<p>Users expect the placement of all primary windows to respond to the value of the Auto Window Placement option in the Window Settings control panel, as shown in . (Users access this control panel from the Desktop-&gt;Customize cascading menu in the Toolchest.) Support windows and dialogs are always placed automatically.<a name="idch03.windows62"></a><a name="idch03.windows63"></a><a name="idch03.windows64"></a></p>
+<p><div class="figure"><p><a name="id5462640"></a><b>Figure 3-7. <a name="id82901"></a>Setting Auto Window Placement</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-8.gif" alt="Figure 3-7 Setting Auto Window Placement" height="347" width="285"></td></tr></table></div></div><br>
+</p>
+<p>When auto window placement is on (the default), <tt>4Dwm</tt> automatically places an application's primary windows. If a primary window does not supply any position information, <tt>4Dwm</tt> by default places it in the upper left corner of the screen. When auto window placement is off, users expect to be able to interactively place all primary windows. In this case, a window displays initially as a red outline attached to the pointer at its upper left corner, allowing the user to place the window manually. The user places the window by moving the outline to the desired location on the screen and clicking the left mouse button. </p>
+<p>To take advantage of the Auto Window Placement setting, you must supply <tt>4Dwm</tt> with a preferred window position for each primary window rather than a required window position. With a preferred window position, when Auto Window Placement is on, <i>4Dwm</i> places the window at its preferred position. When Auto Window Placement is off, <i>4Dwm</i> ignores the preferred position, allowing the user to place the window interactively. If the window has a required position, however, <i>4Dwm</i> always tries to place the window at this preferred position even when users want to place windows themselves.</p>
+<p>Furthermore, users expect complete control when moving windows and should be able to move any of your application's windows anywhere on the desktop. Some applications try to &#8220;help&#8221; the user by repositioning the window programmatically; this strategy is never successful and instead ends up frustrating the user. </p>
+<p>For details on how to set a preferred window placement, see &#8220;Interacting With the Window and Session Manager&#8221; in Chapter 5 of the <i>IRIX Interactive Desktop Integration Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5462743"></a><a name="id57875"></a>Application Window Characteristic Guidelines</h3></div></div>
+<p><span class="bold"><b><a name="idch03.windows65"></a></b></span><span class="bold"><b>In general, when deciding on the characteristics for your application windows . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Determine which category (main, co-primary, support, or dialog) each application window belongs to and assign characteristics appropriately.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows66"></a></b></span><span class="bold"><b>When setting up your window decorations . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Include a Window menu button for all windows.</p>
+</li>
+<li><p>Include resize handles only if the window contains resizable components such as work areas, scrolling lists, and text input fields.</p>
+</li>
+<li><p>Include a <b>Minimize</b> button for all primary windows. Do not include this button on support windows or dialogs.</p>
+</li>
+<li><p>Include a <b>Maximize</b> button only if the window contains resizable components.</p>
+</li>
+</ul></div><p>(To see the above window decoration requirements arranged according to window type, see <a href="ch03.html#id68452">Table 3-1</a>.)</p>
+<p><span class="bold"><b><a name="idch03.windows67"></a></b></span><span class="bold"><b>When designing the Window menus for your application windows . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Include &#8220;Restore Alt+F5&#8221; for all primary windows. Include it for support windows and dialogs only if the menu contains a &#8220;Maximize&#8221; entry.</p>
+</li>
+<li><p>Include &#8220;Move Alt+F7&#8221; for all windows.</p>
+</li>
+<li><p>Include &#8220;Size Alt+F8&#8221; and resize handles for windows that contain resizable components such as works areas, scrolling lists, and text input fields.</p>
+</li>
+<li><p>Include &#8220;Minimize Alt+F9&#8221; and the <b>Minimize</b> button for all primary windows. Do not include the Minimize entry for support windows or dialogs.</p>
+</li>
+<li><p>Include &#8220;Maximize Alt+F10&#8221; for windows that are resizable, that is, they have a &#8220;Size Alt+F8&#8221; entry.</p>
+</li>
+<li><p>Include &#8220;Raise Alt+F2&#8221; for all windows.</p>
+</li>
+<li><p>Include &#8220;Lower Alt+F3&#8221; for all windows.</p>
+</li>
+<li><p>Include &#8220;Close Alt+F4&#8221; for all windows except the main primary window.</p>
+</li>
+<li><p>Include &#8220;Exit Alt+F12&#8221; for the main primary window. Include &#8220;Exit Alt+F12&#8221; for those co-primary windows from which users can quit the application. &#8220;Exit&#8221; always has the same behavior, that is, it quits the application, no matter how it's activated. Don't include &#8220;Exit&#8221; for support windows or dialogs.</p>
+</li>
+</ul></div><p>(To see the above Window menu requirements arranged according to window type, see <a href="ch03.html#id68452">Table 3-1</a>.)</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Always use the default behaviors for the Window menu entries except for &#8220;Exit.&#8221; Don't add functionality to these commands. When users choose &#8220;Exit,&#8221; your application must perform any necessary clean up, such as prompting the user to save unsaved changes before quitting.</p>
+</li>
+<li><p>Don't add application-specific entries to this menu. Users don't expect application-specific entries in the Window menu.</p>
+</li>
+<li><p>Don't add a title to the Window menu.</p>
+</li>
+<li><p>Don't use the keyboard accelerators &lt;Alt-F2&gt;, &lt;Alt-F3&gt;, &lt;Alt-F4&gt;, &lt;Alt-F5&gt;, &lt;Alt-F7&gt;, &lt;Alt-F8&gt;, &lt;Alt-F9&gt;, &lt;Alt-F10&gt;, or &lt;Alt-F12&gt; for other functions in your application. They are reserved for the <i>4Dwm</i> Window menu entries.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows68"></a></b></span><span class="bold"><b>When specifying the label in the title bar . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>For all categories of windows, limit the length of each title bar label such that the entire label displays when the window is viewed at its default size.</p>
+</li>
+<li><p>Don't include application-critical information or general status information in the title bar such as the current page number or whether a file is in view-only mode. </p>
+</li>
+<li><p>For main windows, first determine if your application uses document files. If it is not document-based, use the application name only. If it is document-based, use the application name followed by a colon and the filename (or Untitled if new file) in the format <i>AppName : filename</i> and update the label whenever the filename changes. Don't use the full pathname unless that information is required for users to distinguish one window from another. If your application is displaying remotely, add the host name followed by a colon at the beginning of the title bar label in the format <i>Host : AppName ...</i> .</p>
+</li>
+<li><p>Don't include full pathnames unless that information is required by users to distinguish one window from another. For remote applications, don't include domain information.</p>
+</li>
+<li><p>Don't use the version number in the title bar; make that information available from the &#8220;Product Information&#8221; entry in the Help menu.</p>
+</li>
+<li><p>For co-primary windows used in multiple document models, use the format <i>AppName : Filename</i> (or <i>AppName : </i>Untitled if a new file). For co-primary windows used in the &#8220;single document, multiple primaries<i>&#8221; </i>model, use the format <i>AppName : Function</i>. Make sure that the function matches the menu entry or the label on the button that invokes it. Don't use the full pathname unless that information is required for users to distinguish one window from another.</p>
+</li>
+<li><p>For support windows, use the application name and function in the format: <i>AppName : Function</i>. Make sure that the function closely matches the menu entry or the label on the button that invokes it. </p>
+</li>
+<li><p>For dialog windows, use the application name, followed by the type of dialog in the format: <i>AppName : DialogType</i>, where <i>DialogType</i> is &#8220;Prompt,&#8221; &#8220;Error,&#8221; &#8220;Warning,&#8221; &#8220;Question,&#8221; &#8220;Information,&#8221; &#8220;Working,&#8221; or &#8220;File Selection.&#8221;</p>
+</li>
+<li><p>Leave spaces between strings and colons in a label.</p>
+</li>
+</ul></div><p><span class="bold"><b>For windows without title bars . . .<a name="idch03.windows69"></a></b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Display the &#8220;Exit&#8221; option with the right mouse button. </p>
+</li>
+<li><p>Allow users to resize the window with the left mouse button. </p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows70"></a></b></span><span class="bold"><b>When determining the default, minimum, and maximum sizes for your windows . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Specify a default size for each window.</p>
+</li>
+<li><p>If the window is resizable, specify a minimum size at which all controls and work areas will be visible and large enough to be usable. If the window is not resizable, set the minimum size equal to the default size.</p>
+</li>
+<li><p>If the window is resizable, specify a maximum size such that your application window doesn't expand to fill screen space unnecessarily. If the window is not resizable, set the maximum size equal to the default size.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows71"></a></b></span><span class="bold"><b>When considering window placement . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Set a preferred window position for all primary windows. Don't set a required window position for primary windows. </p>
+</li>
+<li><p>Try to anticipate other application windows that may be displayed with your application and set your preferred default position appropriately.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5463403"></a><a name="id59672"></a>Keyboard Focus Across Windows</h2></div></div>
+<p>As defined in the<a name="idch03.windows72"></a><i> OSF/Motif Style Guide</i>, the two types of keyboard focus (also referred to as input focus) include: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch03.windows73"></a><i>implicit</i>, in which the keyboard focus tracks the pointer</p>
+</li>
+<li><p><a name="idch03.windows74"></a><i>explicit,</i> which requires the user to explicitly select (by clicking with the left mouse button) which window or component receives the keyboard focus</p>
+</li>
+</ul></div><p>The IRIX Interactive Desktop uses implicit focus when moving the keyboard focus across windows. Your application should work well under implicit focus and shouldn't require users to change the default keyboard focus policy to explicit. (Note that within windows, applications should use explicit focus to move the keyboard focus between components in the window. Guidelines for using explicit focus within windows are discussed in <a href="ch07.html#id50040">&#8220;Keyboard Focus and Navigation&#8221; in Chapter 7</a>.) </p>
+<p>Certain applications need to <a name="idch03.windows75"></a><i>grab the keyboard focus</i>, that is, use the pointer while it is outside of the application window&#8212;for example, applications performing screen captures. This is called <i>pointer grab</i> mode. </p>
+<p>There are two recommended interaction models for pointer grab mode:<a name="idch03.windows76"></a><a name="idch03.windows77"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>single-action</i>, which permits the user only one action to capture the data before returning to implicit focus</p>
+</li>
+<li><p><i>multiple-action</i>, which lets the user perform multiple actions while in pointer grab mode</p>
+</li>
+</ul></div><p>In the multiple-action model, the user turns on a toggle to maintain keyboard focus while specifying the data to capture. In both the single- and multiple-action models, the application should change the pointer shape to indicate that the pointer belongs to a specific window and no longer adheres to implicit focus. (For a list of standard pointers, see <a href="ch11.html#id15568">&#8220;Pointer Shapes and Colors&#8221; in Chapter 11</a>.)</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5463565"></a><a name="id17496"></a>Single-Action Pointer Grab Model</h3></div></div>
+<p>The InPerson desktop conferencing application is a good example of the single-action pointer grab model. The sequence in <a href="ch03.html#id69430">Figure 3-8</a> illustrates the single-action pointer grab where the action is to sweep out an area of the screen to be captured as an image. The user chooses the &#8220;Snap Screen Area&#8221; entry from the screen capture menu in the whiteboard's tool bar. The pointer changes to a sighting pointer (a camera with a cross hair) and the user can then drag a rectangle around the area of the screen that the user wants to capture as an image. When the user completes the single action of dragging, InPerson releases the pointer and it is no longer in pointer grab mode. Note that in pointer grab mode, the active window is the window that has grabbed the keyboard focus, regardless of where the pointer is positioned on the screen. </p>
+<p><div class="figure"><p><a name="id5463615"></a><b>Figure 3-8. <a name="id69430"></a><a name="idch03.windows78"></a>Single-Action Pointer Grab Example: Capture by Sweeping </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-9.gif" alt="Figure 3-8 Single-Action Pointer Grab Example: Capture by Sweeping " height="675" width="755"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5463642"></a>Multiple-Action Pointer Grab Model</h3></div></div>
+<p>The IRIS Showcase Image Gizmo, used for doing screen captures, is an example of the multiple-action pointer grab model. The IRIS Showcase Image Gizmo lets users capture an area of the screen as an image, then place that image in a IRIS Showcase document. The major difference between the Image Gizmo screen capture and the InPerson screen capture described in the previous section (<a name="idch03.windows79"></a><a href="ch03.html#id17496">&#8220;Single-Action Pointer Grab Model&#8221;</a>) is that the Image Gizmo allows a user to perform multiple actions when defining the screen capture region and not just a single action like InPerson. This allows users to grab the pointer, sweep out an area to capture, and make any adjustments to the capture area before releasing the pointer and returning to implicit focus mode.</p>
+<p>The IRIS Showcase Image Gizmo provides an example of entering pointer grab mode. Here's the process:</p>
+<div class="orderedlist"><ol type="1"><li><p>The user clicks the<b> Sweep Area</b> button in the Image Gizmo. This changes the pointer to a camera with a cross hair, which is used as the sighting pointer. At this point, the sighting pointer is limited to the Image Gizmo window, that is, the user hasn't initiated pointer grab mode yet.</p>
+</li>
+<li><p>The user enters pointer grab mode by clicking the <b>Grab Selection Focus</b> button. Once in pointer grab mode, the sighting pointer is no longer limited to the Image Gizmo window. Now when the user moves the pointer out of the Image Gizmo window, the Image Gizmo retains the keyboard focus and the sighting pointer continues to display.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>A better design would be to eliminate the step of requiring the user to click the <b>Grab Selection Focus</b> button and to instead have the Image Gizmo grab the keyboard focus when the user clicks the <b>Sweep Area</b> button.
+</td></tr></table><hr noshade="noshade"></div><br></li>
+<li><p>The user drags a rectangle around the area of interest on the screen. At this point, the user is still in pointer grab mode and can redefine the area by dragging the boundaries of the current rectangle or sweeping out a completely new area.</p>
+</li>
+<li><p>The user clicks the <b>Grab Image</b> button, which releases the pointer, completes the screen capture, and returns the user to implicit focus mode.</p>
+<p><a href="ch03.html#id63084">Figure 3-9</a> shows this example during pointer grab mode. </p>
+<p><div class="figure"><p><a name="id5463820"></a><b>Figure 3-9. <a name="id63084"></a><a name="idch03.windows80"></a>Multiple-Action Pointer Grab Example </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-10.gif" alt="Figure 3-9 Multiple-Action Pointer Grab Example " height="372" width="521"></td></tr></table></div></div><br>
+</p>
+</li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5463848"></a>Guidelines for Keyboard Focus Across Windows</h3></div></div>
+<p><span class="bold"><b><a name="idch03.windows81"></a></b></span><span class="bold"><b>When designing your application windows . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Make sure that your application works well under implicit focus across windows.</p>
+</li>
+<li><p>Don't have your application move the pointer to another location on the screen. Always allow the user to control the position of the pointer on the screen.</p>
+</li>
+</ul></div><p><span class="bold"><b>When incorporating a &#8220;pointer grab&#8221; function into your application . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the user is always going to specify the data to capture with a single action such as a single mouse click or a single mouse drag, use the single-action pointer grab model; otherwise use the multiple-action pointer grab model.</p>
+</li>
+<li><p>Display a standard or modified sighting pointer whenever your application window grabs keyboard focus. This indicates that the keyboard focus belongs to your application's window and that the pointer isn't currently following implicit focus across windows.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5463939"></a><a name="id87201"></a><a name="id90668"></a>Minimized Windows</h2></div></div>
+<p>Minimizing windows frees up screen area for other uses. On the IRIX Interactive Desktop, users minimize windows by clicking the <a name="idch03.windows82"></a><b>Minimize</b> button in the window's title bar or choosing the &#8220;Minimize&#8221; entry from the Window menu. When a window is minimized, it's replaced by an 85x67-pixel representation with an identifying label of twelve characters or fewer. The <i>4Dwm</i> window manager determines the placement of all minimized windows. This section describes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch03.html#id80365">&#8220;Choosing an Image for Your Minimized Window&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id46466">&#8220;Labeling a Minimized Window&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id67243">&#8220;Processing While Minimized&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#id54212">&#8220;Using the Minimized Window to Show Status&#8221;</a> </p>
+</li>
+</ul></div><p>Note that primary windows can be minimized independently of each other. Note also that dialogs and support windows become unmapped when their associated primary windows are minimized. </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5464103"></a><a name="id80365"></a>Choosing an Image for Your Minimized Window</h3></div></div>
+<p>It's important for users to be able to identify application windows readily when minimized. You need to define a specific image for your main window and any co-primary windows in your application. A good example in which users can easily associate the minimized window with the application appears in <a name="idch03.windows83"></a><a href="ch03.html#id90304">Figure 3-10</a>. In the example, the IRIS InSight viewer window uses an open book as its minimized window image with the name of the book as the label.</p>
+<p><div class="figure"><p><a name="id5464165"></a><b>Figure 3-10. <a name="id90304"></a>Minimized Window Example: Good User Association With Application</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/fig.3-10.gif" alt="Figure 3-10 Minimized Window Example: Good User Association With Application" height="99" width="99"></td></tr></table></div></div><br>
+</p>
+<p>If your application fits either of the single document application models discussed in <a name="idch03.windows84"></a><a href="ch03.html#id67450">&#8220;Application Models&#8221;</a> earlier in this chapter, provide separate images for all primary windows. If your application fits one of the multiple document models, then provide one image for the main window and a second image for the co-primary windows.</p>
+<p>When choosing a minimized window image, use:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Marketing theme&#8212;If your application has a symbol used in packaging or marketing your product, you can use some or all of it to create an image. The IRIS Showcase minimized window is an example of this approach.</p>
+</li>
+<li><p>Window snapshots&#8212;If your application's main primary window layout is distinctive, you can use a snapshot of a recognizable portion of it, as in the Icon Catalog and Directory View window examples. </p>
+</li>
+<li><p>Symbolic theme&#8212;You can use a symbol that reflects the nature of your application. For example, the text editor <tt>Jot</tt> uses an image of a writing hand. The IRIS Insight online book viewer uses an image of a stack of books to represent the main library window.</p>
+</li>
+<li><p>Evocative image&#8212;You can use an image that's evocative of the function your application performs. For example, the minimized window image for the mouse control panel is an image of a mouse. The minimized window image for the background control panel is an image that uses a combination of the various background patterns available for users via this tool.</p>
+</li>
+</ul></div><p>Examples of minimized windows appear in <a href="ch03.html#id79097">Figure 3-11</a>.</p>
+<p><div class="figure"><p><a name="id5464329"></a><b>Figure 3-11. <a name="id79097"></a>Minimized Window Examples</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-12.gif" alt="Figure 3-11 Minimized Window Examples" height="290" width="456"></td></tr></table></div></div><br>
+</p>
+<p>Although it is desirable to keep some family resemblance between the minimized window and other elements of an application, it's a bad idea to use a snapshot of a desktop icon as an image for a minimized window. The problem is that users can mistake the minimized window for the real desktop icon. <a href="ch03.html#id67613">Figure 3-12</a> demonstrates this problem. The minimized window at the left (faked for this example) uses a snapshot of the application icon in its open state as its image. Users can confuse the minimized window with the application icon itself. The actual minimized window appears at the right of the figure, demonstrating good design. It reuses the magician's hat theme, showing the family resemblance, but uses a different rendition of the hat to avoid confusion.</p>
+<p><div class="figure"><p><a name="id5464381"></a><b>Figure 3-12. <a name="id67613"></a>Minimized Window Example: Incorrect Design</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-13.gif" alt="Figure 3-12 Minimized Window Example: Incorrect Design" height="146" width="499"></td></tr></table></div></div><br>
+</p>
+<p>Whichever theme you choose, make sure that the significance of your image will be grasped in foreign countries and will not offend international users. Images that are too literal will not be understood by an international audience. For example, the minimized window in <a href="ch03.html#id35209">Figure 3-13</a> is for a debugging application and uses an image, with an English acronym &#8220;RIP,&#8221; that represents dead bugs. This may not be readily apparent to some non-English speaking users.</p>
+<p><div class="figure"><p><a name="id5464436"></a><b>Figure 3-13. <a name="id35209"></a>Minimized Window Example: Design That's Too Literal</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-14.gif" alt="Figure 3-13 Minimized Window Example: Design That's Too Literal" height="113" width="112"></td></tr></table></div></div><br>
+</p>
+<p>For information on creating and implementing minimized window images, see Chapter 6, &#8220;Customizing Your Application's Minimized Windows,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i> </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5464495"></a><a name="id46466"></a>Labeling a Minimized Window</h3></div></div>
+<p>By default, the <a name="idch03.windows85"></a><i>4Dwm</i> window manager reuses the title bar label for the minimized window label. (The guidelines for specifying title bar labels are discussed in <a href="ch03.html#id56252">&#8220;Window Title Bar&#8221;</a> earlier in this chapter.) This doesn't usually work due to the space limit (approximately twelve characters) on the minimized window label. Thus, you will need to specify a label for each of your minimized windows. </p>
+<p>Those applications that aren't document-based should use the application name as the minimized window label for the main window. Any minimized co-primary windows for these applications should use the label <i>Function</i>, where <i>Function</i> is the same function as in the co-primary window's title bar.</p>
+<p>Applications that are document-based and follow the single-document models (see <a href="ch03.html#id67450">&#8220;Application Models&#8221;</a> earlier in this chapter) should use <i>Filename</i> (or &#8220;Untitled&#8221; for new files) for the minimized main window label. Any co-primary windows for these applications should use <i>Function</i> for the minimized window label, where <i>Function</i> is the same function as in the co-primary window's title bar.</p>
+<p>Applications that are document-based and follow the multiple-document models (see <a href="ch03.html#id67450">&#8220;Application Models&#8221;</a> earlier in this chapter), should use the application name as the label for the main window (if this main window is visible). The co-primary windows in these models represent the multiple documents and should have the minimized window label<i> Filename</i> (or &#8220;Untitled&#8221; for new files).</p>
+<p>The minimized window label is also used in the Desks Overview window (see <a href="ch03.html#id55393">&#8220;Desks&#8221;</a> later in this chapter). The user can customize the Desks Overview so that moving the pointer over the thumbnail window sketches in the Desks Overview displays the minimized window labels for those windows. This further emphasizes the need for users to be able to distinguish windows using only the minimized window label.</p>
+<p>For more information on specifying a label for a minimized window image, see Chapter 6, &#8220;Customizing Your Application's Minimized Windows,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5464672"></a><a name="id67243"></a>Processing While Minimized</h3></div></div>
+<p>Users generally expect an application to continue processing while its windows are minimized; when re-opened, the window's contents should have changed appropriately. Of course, it doesn't make sense for all types of functions to continue processing while the window is minimized. For example, you needn't keep moving a clock application's hands while it is minimized. It's up to you to determine which functions are appropriate for continued processing and which are inappropriate. Be sure to stop those functions that don't need to process as they can be a drain on CPU resources.<a name="idch03.windows86"></a></p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5464720"></a><a name="id54212"></a>Using the Minimized Window to Show Status</h3></div></div>
+<p>If it is typical for users to minimize your application's windows while processing continues, you may wish to use your minimized application window to indicate status. <a name="idch03.windows87"></a><a href="ch03.html#id19815">Figure 3-14</a> shows how to use the minimized window label to indicate status in an electronic mail application by showing the number of messages in a mail folder.</p>
+<p><div class="figure"><p><a name="id5464755"></a><b>Figure 3-14. <a name="id19815"></a><a name="idch03.windows88"></a>Minimized Window Example: Indicating Status With the Label </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-15.gif" alt="Figure 3-14 Minimized Window Example: Indicating Status With the Label " height="122" width="120"></td></tr></table></div></div><br>
+</p>
+<p>It is also possible to change the minimized window image to show status, however this is quite difficult. For more information on changing minimized window labels and images to show status, see Chapter 6, &#8220;Customizing Your Application's Minimized Windows,&#8221; in the <i>IRIX Interactive Desktop Integration Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5464802"></a>Minimized Window Guidelines</h3></div></div>
+<p><a name="idch03.windows89"></a><span class="bold"><b>When designing images for your minimized primary windows . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use a color image rather than the standard two-color Motif bitmap.</p>
+</li>
+<li><p>Design your images to look best at the default size of 85x67 pixels.</p>
+</li>
+<li><p>If your application is based on a single document model, create separate images for each of the primary windows. If your application is based on a multiple document model, create one image for the main window and a second image to use for all co-primary windows. </p>
+</li>
+<li><p>Choose images that clearly identify the window that is minimized. If you have multiple images, make sure that the separate images work well together.</p>
+</li>
+<li><p> Make sure that the images you use for minimized windows will be understood by an international audience.</p>
+</li>
+<li><p>Don't use a snapshot of the desktop icon for the image. This could be confused with the real icon.</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows90"></a></b></span><span class="bold"><b>When choosing labels for your minimized primary windows . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Limit the label to approximately twelve characters. If you need a few more characters than this, check that your label will fit with the default size and font for minimized windows (the label may be truncated).</p>
+</li>
+<li><p>If your application is not document-based, use the application name as the minimized window label for the minimized main window. Use the label <i>Function</i> for minimized co-primary windows where <i>Function</i> is the same function as in the co-primary window's title bar.</p>
+</li>
+<li><p>If your application is document-based and follows one of the single-document models, use <i>Filename</i> (or &#8220;Untitled&#8221; for new files) for the minimized main window label. Use <i>Function</i> for minimized co-primary window labels where <i>Function</i> is the same function as in the co-primary window's title bar.</p>
+</li>
+<li><p>If your application is document-based and follows one of the multiple-document models, use the application name as the label for the main window (if it is visible). The co-primary windows in these models represent the multiple documents and should have the minimized window label<i> Filename</i> (or &#8220;Untitled&#8221; for new files).</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows91"></a></b></span><span class="bold"><b>When determining the behavior for a window that the user has chosen to minimize . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Decide which operations should and should not continue to be processed while the window is minimized. </p>
+</li>
+<li><p>Indicate status with the minimized window label if your application is typically minimized during long processes.</p>
+</li>
+<li><p>Use the default screen locations supplied by <i>4Dwm</i> for the minimized window. Don't specify your own screen location.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5465064"></a><a name="id55393"></a><a name="id53752"></a>Desks</h2></div></div>
+<p>The IRIX Interactive Desktop provides users with a handy tool called Desks Overview for organizing their work (see <a name="idch03.windows92"></a><a name="idch03.windows93"></a><a href="ch03.html#id94809">Figure 3-15</a>). The Desks Overview application allows users to create multiple virtual screens (desks). The user can place any primary window (main or co-primary) on any desk. The window appears in the thumbnail sketch in the Desks Overview window. Support windows and dialogs don't appear in these thumbnail sketches. </p>
+<p><div class="figure"><p><a name="id5465156"></a><b>Figure 3-15. <a name="id94809"></a><a name="idch03.windows94"></a>Desks Overview Window</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-16.gif" alt="Figure 3-15 Desks Overview Window" height="164" width="511"></td></tr></table></div></div><br>
+</p>
+<p>There are several things you need to know about desks and the corresponding effects on the design of your application.</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a name="idch03.windows95"></a><i>4Dwm</i> treats application windows on desks other than the current one as if they are minimized. The windows are no longer mapped to the screen display and the application is informed that it's unmapped. This emphasizes how important it is for you to decide which operations continue processing when the application is in an unmapped (minimized) state. (See <a href="ch03.html#id67243">&#8220;Processing While Minimized&#8221;</a> earlier in this chapter.)</p>
+</li>
+<li><p>As users move the pointer over the miniaturized window representations in the thumbnail sketches, the title bar labels display by default. If the user prefers, the minimized window labels can be displayed instead. This further emphasizes the need to pick title bar labels and minimized window labels so that a user can distinguish windows using only this information. (For information on defining these labels, see <a name="idch03.windows96"></a><a href="ch03.html#id56252">&#8220;Window Title Bar&#8221;</a> and <a href="ch03.html#id46466">&#8220;Labeling a Minimized Window&#8221;</a> earlier in this chapter.)</p>
+</li>
+<li><p>Support windows and dialogs will appear on all desks if their associated parent window is not mapped to the screen. Since support windows and dialogs should only appear on the desk where their parent appears, make sure that all parent windows are visible and mapped to the screen.<a name="idch03.windows97"></a></p>
+</li>
+<li><p>Your application should not create a screen background. Screen backgrounds are managed by <a name="idch03.windows98"></a><i>4Dwm</i> by default or by the user through the Background control panel. Users typically employ different screen backgrounds on different desks as an aid in orienting themselves. </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5465296"></a>Desks Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing your application . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Make sure that all windows with associated support or dialogs are visible and mapped to the screen so that the support windows and dialogs appear only on the desk where their parent window displays.</p>
+</li>
+<li><p>Don't design your application to manage the screen background.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5465349"></a><a name="id17063"></a>Session Management</h2></div></div>
+<p>Session management allows users to log out of their accounts and have any running applications automatically restart when they log back in, thus eliminating the need for users to restart applications manually when they log back in. In <a name="idch03.windows99"></a><a name="idch03.windows100"></a><i>4Dwm</i>, users have the option of turning session management on (the default) or off by using the Window Settings control panel (which is available from the Desktop-&gt;Customize cascading menu in the Toolchest), as shown in <a href="ch03.html#id86587">Figure 3-16</a>.</p>
+<p><div class="figure"><p><a name="id5465394"></a><b>Figure 3-16. <a name="id86587"></a>Setting Session Management</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-17.gif" alt="Figure 3-16 Setting Session Management" height="335" width="285"></td></tr></table></div></div><br>
+</p>
+<p>For your application to be restarted via the <a name="idch03.windows101"></a><i>4Dwm</i> session manager, your application needs to create a command line that will launch the application and restore its current state. Your application needs to update this command line as the application state changes. For details of specifying this command line and keeping it up to date, see &#8220;Interacting With the Window and Session Manager&#8221; in Chapter 5 of the <i>IRIX Interactive Desktop Integration Guide</i>. The following scenario outlines the process.</p>
+<p><div class="figure"><p><a name="id5465450"></a><b>Figure 3-17. Setting Auto Window Placement</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch03.windows-18.gif" alt="Figure 3-17 Setting Auto Window Placement" height="339" width="284"></td></tr></table></div></div><br>
+</p>
+<p>When a user launches an application, that application registers itself with the <i>4Dwm</i> session manager by creating a command line that will launch the application and restore its current state. For example, if your application is used to edit a specific file, the command line should contain the information necessary to launch your application and open this specific file. There is only one command line per application. </p>
+<p>As the state changes over time, your application needs to update this command line. So, to continue the example, suppose the user opens a different file to edit under your application. In such a case, your application needs to create a new command line that will launch the application and open this new file.</p>
+<p>If the user opens co-primary windows or support windows (see <a href="ch03.html#id38970">&#8220;Application Window Categories and Characteristics&#8221;</a> earlier in this chapter for window definitions), these windows should also redisplay when the user logs out and back in again. (Dialogs typically don't redisplay.) One method for obtaining this behavior is to allow your application to take command line arguments to redisplay these windows so that you can include these arguments on the stored command line when appropriate. </p>
+<p>When the user logs out, <a name="idch03.windows102"></a><i>4Dwm</i> saves the command lines for all applications that are currently running on the user's desktop. When the user logs back in, <i>4Dwm</i> attempts to execute the commands that it saved and restore the user's desktop to what it was when the user logged out.</p>
+<p>Applications can also request to have <i>4Dwm</i> inform them when a user chooses &#8220;Log Out.&#8221; When applications receive this notification, they should not post any dialogs such as &#8220;Save unsaved changes before quitting?&#8221; Instead, if <i>4Dwm</i> notifies your application that the user is logging out and there are unsaved changes for the current file, your application should use one of the following strategies:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Save these changes into another file and name it something logical such as <i>original_file_name</i>.save. When the application is restarted at login, post a dialog that tells the user that this file with unsaved changes exists and query the user whether to open the original file or the file with the unsaved changes. This is the preferred strategy.</p>
+</li>
+<li><p>Ignore the user's unsaved changes, and simply restart the application using the most recent saved version of the file. This strategy is okay, but it is not preferred.</p>
+</li>
+</ul></div><p>Don't automatically save the user's changes by default. This may cause the user to lose as much data as throwing away all unsaved changes. Let the user control when changes are saved. </p>
+<p>For details on how to request log-out notification from <i>4Dwm</i>, see &#8220;Interacting With the Window and Session Manager&#8221; in Chapter 5 of the <i>IRIX Interactive Desktop Integration Guide</i>.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5465634"></a><a name="id38661"></a>Session Management Guidelines</h3></div></div>
+<p><span class="bold"><b><a name="idch03.windows103"></a></b></span><span class="bold"><b>When designing your application . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Have your application create a command line that will launch the application and restore its current state. This current state should minimally include reopening any files that are currently open under the application and opening any primary or support windows that are currently open.</p>
+</li>
+<li><p>Update this command line as the state of the application changes.</p>
+</li>
+<li><p>If your application allows users to create and edit data files, have <i>4Dwm</i> notify your application when the user chooses &#8220;Log Out.&#8221;</p>
+</li>
+</ul></div><p><span class="bold"><b><a name="idch03.windows104"></a></b></span><span class="bold"><b>If your application is running when the user chooses &#8220;Log Out&#8221; and there are unsaved changes for a specific file . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Save these changes into another file and name it something logical such as <i>original_file_name</i>.save. When the application is restarted at login, post a dialog that tells the user that this file with unsaved changes exists and query the user to determine whether to open the original file or the file with the unsaved changes.</p>
+</li>
+<li><p>If you cannot implement the preferred strategy described above, ignore the user's unsaved changes. Do not automatically save the user's changes by default. </p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 2. Icons </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 4. IRIX Interactive Desktop Services </td></tr></table></div></body></html>

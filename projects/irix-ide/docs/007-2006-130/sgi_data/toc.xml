@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc>
+<book href="index.html" id="id5381062">
+<title>IRIX® Interactive Desktop Integration Guide</title>
+<bookinfo href="front.html">
+<title>Front Matter</title>
+</bookinfo>
+<preface href="pr01.html" id="id5384633">
+<title>New Features in This Guide</title>
+<section href="pr01.html#id5384644" id="id5384644">
+<title>Major Documentation Changes</title>
+</section>
+</preface>
+<preface href="pr02.html" id="id5178893">
+<title>About This Guide</title>
+<section href="pr02.html#id5178905" id="id5178905">
+<title>What This Guide Contains</title>
+</section>
+<section href="pr02.html#id5178939" id="id5178939">
+<title>How to Use This Guide</title>
+</section>
+<section href="pr02.html#id5178958" id="id5178958">
+<title>What You Should Know Before Reading This Guide</title>
+</section>
+<section href="pr02.html#LE37212-PARENT" id="LE37212-PARENT">
+<title>Suggested Reading</title>
+</section>
+<section href="pr02.html#id5179315" id="id5179315">
+<title>Font Conventions in This Guide</title>
+</section>
+</preface>
+<preface href="pr03.html" id="LE63327-PARENT">
+<title>Integrating an Application Into the IRIX Interactive Desktop Environment: An Introduction</title>
+<section href="pr03.html#LE10310-PARENT" id="LE10310-PARENT">
+<title>About the IRIX Interactive Desktop Environment</title>
+<figure href="pr03.html#id5179897" id="id5179897">
+<title>Figure 1. The IRIX Interactive Desktop</title>
+</figure>
+</section>
+<section href="pr03.html#LE10020-PARENT" id="LE10020-PARENT">
+<title>Implementation Strategies and Toolkits</title>
+<section href="pr03.html#LE71986-PARENT" id="LE71986-PARENT">
+<title>Implementation Checklist</title>
+<table href="pr03.html#id5177324" id="id5177324">
+<title>Table 1. Checklist of Implementation Tasks and References</title>
+</table>
+<table href="pr03.html#id5177735" id="id5177735">
+<title>Table 2.  Tasks Requiring Application Changes and/or Motif</title>
+</table>
+</section>
+<section href="pr03.html#LE86843-PARENT" id="LE86843-PARENT">
+<title>Using ViewKit and RapidApp</title>
+<section href="pr03.html#LE54513-PARENT" id="LE54513-PARENT">
+<title>ViewKit </title>
+<table href="pr03.html#id5178145" id="id5178145">
+<title>Table 3.  Integration and ViewKit</title>
+</table>
+</section>
+<section href="pr03.html#LE50925-PARENT" id="LE50925-PARENT">
+<title>RapidApp</title>
+<table href="pr03.html#id5178430" id="id5178430">
+<title>Table 4.  Integration and RapidApp</title>
+</table>
+</section>
+</section>
+</section>
+<section href="pr03.html#LE60801-PARENT" id="LE60801-PARENT">
+<title>Integrating an Application</title>
+</section>
+</preface>
+<part href="pt01.html" id="LE98056-PARENT">
+<title>Part I. Getting the Right Look and Feel</title>
+<chapter href="ch01.html" id="LE69734-PARENT">
+<title>Chapter 1. Getting the Right Look and Feel: An Overview</title>
+<section href="ch01.html#LE70187-PARENT" id="LE70187-PARENT">
+<title>About the IRIX Interactive Desktop Look and Feel</title>
+</section>
+<section href="ch01.html#LE81063-PARENT" id="LE81063-PARENT">
+<title>Getting the Right Look and Feel: The Basic Steps</title>
+</section>
+</chapter>
+<chapter href="ch02.html" id="LE62287-PARENT">
+<title>Chapter 2. Getting the IRIX Interactive Desktop Look</title>
+</chapter>
+<chapter href="ch03.html" id="LE74067-PARENT">
+<title>Chapter 3. Using Schemes</title>
+<section href="ch03.html#LE48163-PARENT" id="LE48163-PARENT">
+<title>Schemes Overview</title>
+<section href="ch03.html#id5189201" id="id5189201">
+<title>Why You Should Use Schemes</title>
+</section>
+<section href="ch03.html#id5189366" id="id5189366">
+<title>Basic Scheme Concepts</title>
+</section>
+</section>
+<section href="ch03.html#LE86764-PARENT" id="LE86764-PARENT">
+<title>Using Schemes in Your Application</title>
+<section href="ch03.html#LE89574-PARENT" id="LE89574-PARENT">
+<title>Turning on Schemes for Your Application</title>
+</section>
+<section href="ch03.html#LE95704-PARENT" id="LE95704-PARENT">
+<title>Special Considerations for Programming with Schemes</title>
+</section>
+<section href="ch03.html#LE68883-PARENT" id="LE68883-PARENT">
+<title>Assigning Non-Default Colors and Fonts to Widgets</title>
+</section>
+<section href="ch03.html#LE34543-PARENT" id="LE34543-PARENT">
+<title>Directly Accessing Colors and Fonts</title>
+<example href="ch03.html#LE42852-PARENT" id="LE42852-PARENT">
+<title>Example 3-1. Retrieving a Scheme Color Value</title>
+</example>
+</section>
+<section href="ch03.html#id5190194" id="id5190194">
+<title>Pre-Defined Scheme Resources and Symbolic Values</title>
+<table href="ch03.html#id5190326" id="id5190326">
+<title>Table 3-1. Pre-Defined Scheme Resources and Symbolic Values</title>
+</table>
+</section>
+</section>
+<section href="ch03.html#LE83109-PARENT" id="LE83109-PARENT">
+<title>Extending a Scheme to Support New Colors</title>
+<section href="ch03.html#id5191795" id="id5191795">
+<title>Scheme File Organization</title>
+</section>
+<section href="ch03.html#id5191929" id="id5191929">
+<title>How to Extend a Scheme</title>
+</section>
+</section>
+<section href="ch03.html#id5192144" id="id5192144">
+<title>Testing Your Application with Schemes</title>
+</section>
+<section href="ch03.html#LE64336-PARENT" id="LE64336-PARENT">
+<title>Creating New Schemes</title>
+</section>
+<section href="ch03.html#LE92475-PARENT" id="LE92475-PARENT">
+<title>Hard-Coding a Scheme for an Application</title>
+</section>
+</chapter>
+<chapter href="ch04.html" id="LE67830-PARENT">
+<title>Chapter 4. Using the SGI Enhanced Widgets</title>
+<section href="ch04.html#LE77041-PARENT" id="LE77041-PARENT">
+<title>Using the SGI Enhanced Widgets</title>
+</section>
+<section href="ch04.html#LE27962-PARENT" id="LE27962-PARENT">
+<title>Using the Widget Demos</title>
+<section href="ch04.html#id5192756" id="id5192756">
+<title>Location of Widget Demos</title>
+</section>
+<section href="ch04.html#id5192776" id="id5192776">
+<title>Instructions for Building the Widget Demos</title>
+</section>
+</section>
+<section href="ch04.html#LE27054-PARENT" id="LE27054-PARENT">
+<title>The Enhanced Widgets</title>
+<section href="ch04.html#LE38934-PARENT" id="LE38934-PARENT">
+<title>The File Selection Box Widget</title>
+<figure href="ch04.html#id5193133" id="id5193133">
+<title>Figure 4-1. The File Selection Box Widget</title>
+</figure>
+</section>
+<section href="ch04.html#LE80138-PARENT" id="LE80138-PARENT">
+<title>The Scale (Percent Done Indicator) Widget</title>
+</section>
+<section href="ch04.html#LE92950-PARENT" id="LE92950-PARENT">
+<title>The Text and TextField Widgets</title>
+</section>
+</section>
+<section href="ch04.html#LE43041-PARENT" id="LE43041-PARENT">
+<title>The Mixed-Model Programming Widgets</title>
+</section>
+<section href="ch04.html#LE69317-PARENT" id="LE69317-PARENT">
+<title>The SGI Enhanced Widgets</title>
+<section href="ch04.html#LE95600-PARENT" id="LE95600-PARENT">
+<title>The Color Chooser Widget</title>
+<figure href="ch04.html#id5194572" id="id5194572">
+<title>Figure 4-2. The Color Chooser Widget</title>
+</figure>
+<figure href="ch04.html#id5194790" id="id5194790">
+<title>Figure 4-3. The Color Chooser Widget with HSV and RGB Sliders</title>
+</figure>
+<section href="ch04.html#id5194869" id="id5194869">
+<title>Controlling the Color Chooser Interface</title>
+</section>
+<section href="ch04.html#id5195143" id="id5195143">
+<title>Getting and Setting the Color Chooser's Colors</title>
+</section>
+<section href="ch04.html#LE51289-PARENT" id="LE51289-PARENT">
+<title>Handling User Interaction with the Color Chooser</title>
+</section>
+</section>
+<section href="ch04.html#LE48293-PARENT" id="LE48293-PARENT">
+<title>The Dial Widget 
+</title>
+<figure href="ch04.html#id5195805" id="id5195805">
+<title>Figure 4-4. The Dial Widget in Knob and Pointer Form</title>
+</figure>
+<section href="ch04.html#id5195897" id="id5195897">
+<title>Controlling the Dial Interface</title>
+</section>
+<section href="ch04.html#id5196081" id="id5196081">
+<title>Getting and Setting the Dial's Value</title>
+</section>
+<section href="ch04.html#LE68199-PARENT" id="LE68199-PARENT">
+<title>Detecting Changes in the Dial's Value</title>
+</section>
+</section>
+<section href="ch04.html#LE34855-PARENT" id="LE34855-PARENT">
+<title>The Thumbwheel Widget</title>
+<figure href="ch04.html#id5196535" id="id5196535">
+<title>Figure 4-5. The Thumbwheel Widget</title>
+</figure>
+<section href="ch04.html#id5196635" id="id5196635">
+<title>Controlling the ThumbWheel Interface</title>
+</section>
+<section href="ch04.html#id5196809" id="id5196809">
+<title>Getting and Setting the ThumbWheel's Value</title>
+</section>
+<section href="ch04.html#LE27959-PARENT" id="LE27959-PARENT">
+<title>Detecting Changes in the ThumbWheel's Value</title>
+</section>
+</section>
+<section href="ch04.html#LE66571-PARENT" id="LE66571-PARENT">
+<title>The Drop Pocket Widget</title>
+<figure href="ch04.html#id5197142" id="id5197142">
+<title>Figure 4-6. The Drop Pocket Widget (on left) As Part of the Finder Widget</title>
+</figure>
+<section href="ch04.html#id5197204" id="id5197204">
+<title>man Page Text</title>
+</section>
+</section>
+<section href="ch04.html#LE81745-PARENT" id="LE81745-PARENT">
+<title>The Finder Widget</title>
+<figure href="ch04.html#id5197491" id="id5197491">
+<title>Figure 4-7. The Finder Widget</title>
+</figure>
+<section href="ch04.html#id5197869" id="id5197869">
+<title>Controlling the Finder Interface</title>
+</section>
+<section href="ch04.html#id5198010" id="id5198010">
+<title>Getting and Setting Finder Values</title>
+</section>
+<section href="ch04.html#id5198232" id="id5198232">
+<title>Handling User Interaction with the Finder</title>
+</section>
+</section>
+<section href="ch04.html#LE30541-PARENT" id="LE30541-PARENT">
+<title>The Graph Widget</title>
+<figure href="ch04.html#id5198438" id="id5198438">
+<title>Figure 4-8. The Graph Widget</title>
+</figure>
+</section>
+<section href="ch04.html#LE37790-PARENT" id="LE37790-PARENT">
+<title>The Springbox Widget</title>
+</section>
+<section href="ch04.html#LE22284-PARENT" id="LE22284-PARENT">
+<title>The Grid Widget</title>
+<section href="ch04.html#id5198795" id="id5198795">
+<title>Setting Grid Characteristics</title>
+</section>
+<section href="ch04.html#id5199091" id="id5199091">
+<title>Setting Constraints on the Child Widget of a Grid</title>
+</section>
+<section href="ch04.html#id5199175" id="id5199175">
+<title>Examples of Using the Grid Widget</title>
+<example href="ch04.html#LE10463-PARENT" id="LE10463-PARENT">
+<title>Example 4-1. An Example of Using the Grid Widget</title>
+</example>
+<example href="ch04.html#LE16679-PARENT" id="LE16679-PARENT">
+<title>Example 4-2. Another Example of Using the Grid Widget</title>
+</example>
+</section>
+</section>
+</section>
+<section href="ch04.html#LE46176-PARENT" id="LE46176-PARENT">
+<title>HTML Viewer Component</title>
+<figure href="ch04.html#LE27208-PARENT" id="LE27208-PARENT">
+<title>Figure 4-9. The HTML Widget</title>
+</figure>
+<section href="ch04.html#LE12495-PARENT" id="LE12495-PARENT">
+<title>Overview of the HTML Viewer Components</title>
+</section>
+<section href="ch04.html#LE40627-PARENT" id="LE40627-PARENT">
+<title>Viewer Components</title>
+</section>
+<section href="ch04.html#LE47778-PARENT" id="LE47778-PARENT">
+<title>Supported Tags and Attributes</title>
+<table href="ch04.html#id5199910" id="id5199910">
+<title>Table 4-1.  HTML Viewer Tags and Attributes</title>
+</table>
+<table href="ch04.html#id5200587" id="id5200587">
+<title>Table 4-2.  HTML Viewer Character Tags</title>
+</table>
+</section>
+</section>
+</chapter>
+<chapter href="ch05.html" id="LE92718-PARENT">
+<title>Chapter 5. Window, Session, and Desk Management</title>
+<section href="ch05.html#LE52150-PARENT" id="LE52150-PARENT">
+<title>Window, Session, and Desk Management Overview</title>
+<section href="ch05.html#LE40567-PARENT" id="LE40567-PARENT">
+<title>Window Management</title>
+</section>
+<section href="ch05.html#LE17311-PARENT" id="LE17311-PARENT">
+<title>Session Management</title>
+<section href="ch05.html#LE50285-PARENT" id="LE50285-PARENT">
+<title>Overview of Session Management</title>
+</section>
+<section href="ch05.html#id5201351" id="id5201351">
+<title>Types of Session Management: Continuous and Explicit</title>
+<figure href="ch05.html#id5201513" id="id5201513">
+<title>Figure 5-1. Window Settings Control Panel</title>
+</figure>
+</section>
+<section href="ch05.html#LE24459-PARENT" id="LE24459-PARENT">
+<title>Adding Session Management to Your Application</title>
+</section>
+<section href="ch05.html#LE30184-PARENT" id="LE30184-PARENT">
+<title>Setting the WM_COMMAND String</title>
+</section>
+<section href="ch05.html#LE16597-PARENT" id="LE16597-PARENT">
+<title>Saving Session Information to a File</title>
+</section>
+<section href="ch05.html#id5201809" id="id5201809">
+<title>Debugging Tips</title>
+<example href="ch05.html#LE72263-PARENT" id="LE72263-PARENT">
+<title>Example 5-1. Session Management Example Code: saveyourself.c</title>
+</example>
+</section>
+<section href="ch05.html#id5201987" id="id5201987">
+<title>Reference</title>
+</section>
+</section>
+<section href="ch05.html#LE23180-PARENT" id="LE23180-PARENT">
+<title>Desk Management</title>
+</section>
+<section href="ch05.html#LE87980-PARENT" id="LE87980-PARENT">
+<title>Further Reading on Window and Session Management</title>
+</section>
+</section>
+<section href="ch05.html#LE14513-PARENT" id="LE14513-PARENT">
+<title>Implementing an Application Model</title>
+<section href="ch05.html#id5202357" id="id5202357">
+<title>Implementing the &#8220;Single Document, One Primary&#8221; Model</title>
+</section>
+<section href="ch05.html#id5202421" id="id5202421">
+<title>Implementing the &#8220;Single Document, Multiple Primaries&#8221; Model</title>
+</section>
+<section href="ch05.html#id5202487" id="id5202487">
+<title>Implementing the &#8220;Multiple Document, Visible Main&#8221; Model</title>
+</section>
+<section href="ch05.html#LE64025-PARENT" id="LE64025-PARENT">
+<title>Implementing the &#8220;Multiple Document, No Visible Main&#8221; Model</title>
+</section>
+</section>
+<section href="ch05.html#LE96868-PARENT" id="LE96868-PARENT">
+<title>Interacting With the Window and Session Manager</title>
+<section href="ch05.html#LE51311-PARENT" id="LE51311-PARENT">
+<title>Creating Windows and Setting Decorations</title>
+<section href="ch05.html#LE96168-PARENT" id="LE96168-PARENT">
+<title>Creating a Main Primary Window</title>
+<example href="ch05.html#LE25385-PARENT" id="LE25385-PARENT">
+<title>Example 5-2. Creating a Main Primary Window </title>
+</example>
+</section>
+<section href="ch05.html#LE44175-PARENT" id="LE44175-PARENT">
+<title>Creating a Co-Primary Window</title>
+<example href="ch05.html#LE44281-PARENT" id="LE44281-PARENT">
+<title>Example 5-3. Creating a Co-Primary Window </title>
+</example>
+</section>
+<section href="ch05.html#LE40129-PARENT" id="LE40129-PARENT">
+<title>Creating a Support Window</title>
+<example href="ch05.html#LE49142-PARENT" id="LE49142-PARENT">
+<title>Example 5-4. Creating a Support Window </title>
+</example>
+</section>
+<section href="ch05.html#LE37042-PARENT" id="LE37042-PARENT">
+<title>Creating a Dialog</title>
+<example href="ch05.html#LE90677-PARENT" id="LE90677-PARENT">
+<title>Example 5-5. Creating a Dialog </title>
+</example>
+</section>
+</section>
+<section href="ch05.html#LE73941-PARENT" id="LE73941-PARENT">
+<title>Handling Window Manager Protocols</title>
+<section href="ch05.html#LE81479-PARENT" id="LE81479-PARENT">
+<title>Handling the Window Manager Quit Protocol</title>
+<example href="ch05.html#LE80772-PARENT" id="LE80772-PARENT">
+<title>Example 5-6. Handling the Window Manager Quit Protocol </title>
+</example>
+</section>
+<section href="ch05.html#LE15555-PARENT" id="LE15555-PARENT">
+<title>Handling the Window Manager Delete Window Protocol</title>
+<example href="ch05.html#LE67206-PARENT" id="LE67206-PARENT">
+<title>Example 5-7. Handling the Window Manager Delete Window Protocol in Co-Primary Windows </title>
+</example>
+<example href="ch05.html#LE45992-PARENT" id="LE45992-PARENT">
+<title>Example 5-8. Handling the Window Manager Delete Window Protocol in Support Windows and Dialogs </title>
+</example>
+</section>
+<section href="ch05.html#LE70788-PARENT" id="LE70788-PARENT">
+<title>Handling the Window Manager Save Yourself Protocol</title>
+<example href="ch05.html#LE20969-PARENT" id="LE20969-PARENT">
+<title>Example 5-9. Handling the Window Manager &#8220;Save Yourself&#8221; Protocol </title>
+</example>
+</section>
+</section>
+<section href="ch05.html#LE12004-PARENT" id="LE12004-PARENT">
+<title>Setting the Window Title</title>
+</section>
+<section href="ch05.html#LE90776-PARENT" id="LE90776-PARENT">
+<title>Controlling Window Placement and Size</title>
+<section href="ch05.html#id5205466" id="id5205466">
+<title>Controlling Window Placement</title>
+</section>
+<section href="ch05.html#id5205521" id="id5205521">
+<title>Controlling Window Size</title>
+</section>
+</section>
+</section>
+</chapter>
+<chapter href="ch06.html" id="LE87269-PARENT">
+<title>Chapter 6. Customizing Your Application's Minimized Windows</title>
+<section href="ch06.html#LE35430-PARENT" id="LE35430-PARENT">
+<title>Some Different Sources for Minimized Window Images</title>
+<figure href="ch06.html#id5206154" id="id5206154">
+<title>Figure 6-1. Minimized Window Image Examples</title>
+</figure>
+</section>
+<section href="ch06.html#LE61992-PARENT" id="LE61992-PARENT">
+<title>Creating a Minimized Window Image: The Basic Steps</title>
+<section href="ch06.html#LE94162-PARENT" id="LE94162-PARENT">
+<title>Using mediarecorder to Get an RGB Format Image</title>
+<figure href="ch06.html#id5206468" id="id5206468">
+<title>Figure 6-2. The mediarecorder Tool</title>
+</figure>
+<section href="ch06.html#LE79617-PARENT" id="LE79617-PARENT">
+<title>Taking a Screen Snapshot With mediarecorder</title>
+</section>
+</section>
+<section href="ch06.html#LE65843-PARENT" id="LE65843-PARENT">
+<title>Resizing the RGB Image Using imgworks</title>
+</section>
+</section>
+<section href="ch06.html#LE69741-PARENT" id="LE69741-PARENT">
+<title>Setting the Minimized Window Label</title>
+</section>
+<section href="ch06.html#LE89721-PARENT" id="LE89721-PARENT">
+<title>Changing the Minimized Window Image</title>
+</section>
+</chapter>
+<chapter href="ch07.html" id="LE58622-PARENT">
+<title>Chapter 7. Interapplication Data Exchange</title>
+<section href="ch07.html#LE28382-PARENT" id="LE28382-PARENT">
+<title>Data Exchange Overview</title>
+<section href="ch07.html#LE68459-PARENT" id="LE68459-PARENT">
+<title>Primary Transfer Model Overview</title>
+</section>
+<section href="ch07.html#LE30175-PARENT" id="LE30175-PARENT">
+<title>Clipboard Transfer Model Overview</title>
+</section>
+<section href="ch07.html#LE69257-PARENT" id="LE69257-PARENT">
+<title>Interaction Between the Primary and Clipboard Transfer Models</title>
+</section>
+</section>
+<section href="ch07.html#LE35778-PARENT" id="LE35778-PARENT">
+<title>Implementing the Primary Transfer Model</title>
+<section href="ch07.html#LE17379-PARENT" id="LE17379-PARENT">
+<title>Data Selection</title>
+<example href="ch07.html#LE59545-PARENT" id="LE59545-PARENT">
+<title>Example 7-1. Asserting Ownership of PRIMARY Selection</title>
+</example>
+</section>
+<section href="ch07.html#LE83248-PARENT" id="LE83248-PARENT">
+<title>Requests for the Primary Selection</title>
+</section>
+<section href="ch07.html#LE14041-PARENT" id="LE14041-PARENT">
+<title>Loss of the Primary Selection</title>
+</section>
+<section href="ch07.html#LE13583-PARENT" id="LE13583-PARENT">
+<title>Inserting the Primary Selection</title>
+</section>
+</section>
+<section href="ch07.html#LE56716-PARENT" id="LE56716-PARENT">
+<title>Implementing the Clipboard Transfer Model</title>
+<section href="ch07.html#LE63612-PARENT" id="LE63612-PARENT">
+<title>Cut Actions</title>
+<example href="ch07.html#LE55139-PARENT" id="LE55139-PARENT">
+<title>Example 7-2. Handling Cut Actions in the Clipboard Transfer Model</title>
+</example>
+</section>
+<section href="ch07.html#LE37249-PARENT" id="LE37249-PARENT">
+<title>Copy Actions</title>
+</section>
+<section href="ch07.html#LE59533-PARENT" id="LE59533-PARENT">
+<title>Requests for the Clipboard Selection</title>
+</section>
+<section href="ch07.html#LE96161-PARENT" id="LE96161-PARENT">
+<title>Paste Actions</title>
+</section>
+<section href="ch07.html#LE10915-PARENT" id="LE10915-PARENT">
+<title>Loss of the Clipboard Selection</title>
+</section>
+</section>
+<section href="ch07.html#LE11667-PARENT" id="LE11667-PARENT">
+<title>Supported Target Formats</title>
+<table href="ch07.html#id5209535" id="id5209535">
+<title>Table 7-1. Audio 
+Formats </title>
+</table>
+<table href="ch07.html#id5209886" id="id5209886">
+<title>Table 7-2. Image 
+Formats </title>
+</table>
+<table href="ch07.html#id5210400" id="id5210400">
+<title>Table 7-3. Movie 
+Formats </title>
+</table>
+<table href="ch07.html#id5210750" id="id5210750">
+<title>Table 7-4. 3D Graphics Formats </title>
+</table>
+<table href="ch07.html#id5211138" id="id5211138">
+<title>Table 7-5. Additional Data Types Supported by Silicon Graphics </title>
+</table>
+<table href="ch07.html#id5211344" id="id5211344">
+<title>Table 7-6. World Wide Web Targets</title>
+</table>
+</section>
+<section href="ch07.html#LE97061-PARENT" id="LE97061-PARENT">
+<title>Data Conversion Service</title>
+<section href="ch07.html#id5211680" id="id5211680">
+<title>The Converter Registry</title>
+</section>
+<section href="ch07.html#id5211785" id="id5211785">
+<title>The GoldenGate API</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch08.html" id="LE11012-PARENT">
+<title>Chapter 8. Monitoring Changes to Files and Directories</title>
+<section href="ch08.html#LE54801-PARENT" id="LE54801-PARENT">
+<title>FAM Overview</title>
+<section href="ch08.html#LE52432-PARENT" id="LE52432-PARENT">
+<title>Theory of Operation</title>
+</section>
+<section href="ch08.html#LE15849-PARENT" id="LE15849-PARENT">
+<title>FAM Libraries and Include Files</title>
+</section>
+</section>
+<section href="ch08.html#LE29093-PARENT" id="LE29093-PARENT">
+<title>The FAM Interface</title>
+<section href="ch08.html#LE33054-PARENT" id="LE33054-PARENT">
+<title>Opening and Closing a FAM Connection</title>
+</section>
+<section href="ch08.html#LE28298-PARENT" id="LE28298-PARENT">
+<title>Monitoring a File or Directory</title>
+</section>
+<section href="ch08.html#LE62804-PARENT" id="LE62804-PARENT">
+<title>Suspending, Resuming, and Canceling Monitoring</title>
+</section>
+<section href="ch08.html#LE33384-PARENT" id="LE33384-PARENT">
+<title>Detecting Changes to Files and Directories</title>
+<section href="ch08.html#id5213694" id="id5213694">
+<title>Symbolic Links</title>
+</section>
+</section>
+<section href="ch08.html#LE25612-PARENT" id="LE25612-PARENT">
+<title>FAM Examples</title>
+</section>
+</section>
+<section href="ch08.html#LE85266-PARENT" id="LE85266-PARENT">
+<title>Using FAM</title>
+<section href="ch08.html#LE89877-PARENT" id="LE89877-PARENT">
+<title>Waiting for File Changes</title>
+<example href="ch08.html#LE45453-PARENT" id="LE45453-PARENT">
+<title>Example 8-1. Using Select With FAM </title>
+</example>
+</section>
+<section href="ch08.html#LE49627-PARENT" id="LE49627-PARENT">
+<title>Polling for File Changes</title>
+<example href="ch08.html#LE25410-PARENT" id="LE25410-PARENT">
+<title>Example 8-2. Polling With FAM </title>
+</example>
+<example href="ch08.html#LE63394-PARENT" id="LE63394-PARENT">
+<title>Example 8-3. Polling FAM Within an Xt Work Procedure</title>
+</example>
+</section>
+</section>
+</chapter>
+<chapter href="ch09.html" id="LE60030-PARENT">
+<title>Chapter 9. Providing Online Help With SGIHelp</title>
+<section href="ch09.html#LE86080-PARENT" id="LE86080-PARENT">
+<title>Overview of SGIHelp</title>
+<section href="ch09.html#LE78532-PARENT" id="LE78532-PARENT">
+<title>The Help Viewer</title>
+<figure href="ch09.html#id5214946" id="id5214946">
+<title>Figure 9-1. The Help Viewer</title>
+</figure>
+<figure href="ch09.html#id5215003" id="id5215003">
+<title>Figure 9-2. The Help Index Window</title>
+</figure>
+</section>
+<section href="ch09.html#LE69702-PARENT" id="LE69702-PARENT">
+<title>The SGIHelp Library and Include File</title>
+</section>
+<section href="ch09.html#LE28277-PARENT" id="LE28277-PARENT">
+<title>Help Document Files</title>
+</section>
+<section href="ch09.html#LE73361-PARENT" id="LE73361-PARENT">
+<title>Application Helpmap Files</title>
+</section>
+</section>
+<section href="ch09.html#LE34967-PARENT" id="LE34967-PARENT">
+<title>The SGIHelp Interface</title>
+<section href="ch09.html#LE83049-PARENT" id="LE83049-PARENT">
+<title>Initializing the Help Session</title>
+<example href="ch09.html#LE99466-PARENT" id="LE99466-PARENT">
+<title>Example 9-1. Initializing a Help Session Using SGIHelpInit()</title>
+</example>
+</section>
+<section href="ch09.html#LE20950-PARENT" id="LE20950-PARENT">
+<title>Displaying a Help Topic</title>
+<example href="ch09.html#LE76756-PARENT" id="LE76756-PARENT">
+<title>Example 9-2. Requesting a Specific Help Topic Using SGIHelpMsg()</title>
+</example>
+<example href="ch09.html#LE73018-PARENT" id="LE73018-PARENT">
+<title>Example 9-3. Requesting a Help Topic for a Widget Using SGIHelpMsg()</title>
+</example>
+</section>
+<section href="ch09.html#LE51771-PARENT" id="LE51771-PARENT">
+<title>Displaying the Help Index</title>
+<example href="ch09.html#LE12291-PARENT" id="LE12291-PARENT">
+<title>Example 9-4. Displaying a Help Index Using SGIHelpIndexMsg() </title>
+</example>
+</section>
+</section>
+<section href="ch09.html#LE58688-PARENT" id="LE58688-PARENT">
+<title>Implementing Help in an Application</title>
+<section href="ch09.html#LE44432-PARENT" id="LE44432-PARENT">
+<title>Constructing a Help Menu</title>
+</section>
+<section href="ch09.html#LE82226-PARENT" id="LE82226-PARENT">
+<title>Implementing a Help Button</title>
+<example href="ch09.html#LE86304-PARENT" id="LE86304-PARENT">
+<title>Example 9-5. Providing a Help Button</title>
+</example>
+</section>
+<section href="ch09.html#LE31270-PARENT" id="LE31270-PARENT">
+<title>Providing Context-Sensitive Help</title>
+<example href="ch09.html#LE56968-PARENT" id="LE56968-PARENT">
+<title>Example 9-6. Implementing Context-Sensitive Help</title>
+</example>
+</section>
+</section>
+<section href="ch09.html#LE73995-PARENT" id="LE73995-PARENT">
+<title>Application Helpmap Files</title>
+<section href="ch09.html#LE40507-PARENT" id="LE40507-PARENT">
+<title>Helpmap File Conventions</title>
+</section>
+<section href="ch09.html#LE41266-PARENT" id="LE41266-PARENT">
+<title>Helpmap File Format</title>
+<section href="ch09.html#id5217048" id="id5217048">
+<title>Helpmap Fields</title>
+</section>
+<section href="ch09.html#id5217327" id="id5217327">
+<title>Examples of Helpmap Entries</title>
+</section>
+<section href="ch09.html#LE82992-PARENT" id="LE82992-PARENT">
+<title>Example of Helpmap Entry to Access a Web Browser</title>
+</section>
+</section>
+<section href="ch09.html#LE10425-PARENT" id="LE10425-PARENT">
+<title>Widget Hierarchies in the Helpmap File</title>
+</section>
+</section>
+<section href="ch09.html#LE67544-PARENT" id="LE67544-PARENT">
+<title>Writing the Online Help</title>
+<section href="ch09.html#LE49493-PARENT" id="LE49493-PARENT">
+<title>Overview of Help Document Files</title>
+</section>
+<section href="ch09.html#LE39625-PARENT" id="LE39625-PARENT">
+<title>Viewing the Sample Help Document Files</title>
+</section>
+<section href="ch09.html#LE26529-PARENT" id="LE26529-PARENT">
+<title>Creating a Help Document File</title>
+</section>
+<section href="ch09.html#LE29476-PARENT" id="LE29476-PARENT">
+<title>Preparing to Build the Online Help</title>
+</section>
+<section href="ch09.html#LE23960-PARENT" id="LE23960-PARENT">
+<title>Building the Online Help</title>
+</section>
+<section href="ch09.html#LE68072-PARENT" id="LE68072-PARENT">
+<title>Finding and Correcting Build Errors</title>
+</section>
+</section>
+<section href="ch09.html#LE81424-PARENT" id="LE81424-PARENT">
+<title>Producing the Final Product</title>
+<section href="ch09.html#LE62065-PARENT" id="LE62065-PARENT">
+<title>Creating the Installable Subsystem</title>
+</section>
+<section href="ch09.html#LE17461-PARENT" id="LE17461-PARENT">
+<title>Incorporating the Help Subsystem into an Installable Product</title>
+</section>
+<section href="ch09.html#LE77482-PARENT" id="LE77482-PARENT">
+<title>Incorporating the Help Subsystem into a Product With a Custom Installation Script</title>
+</section>
+</section>
+<section href="ch09.html#LE36112-PARENT" id="LE36112-PARENT">
+<title>Bibliography of SGML References</title>
+</section>
+</chapter>
+<chapter href="ch10.html" id="LE23828-PARENT">
+<title>Chapter 10. Handling Users' System Preferences</title>
+<section href="ch10.html#LE27927-PARENT" id="LE27927-PARENT">
+<title>Handling the Mouse Double-Click Speed Setting</title>
+</section>
+<section href="ch10.html#LE73704-PARENT" id="LE73704-PARENT">
+<title>Using the Default Viewer and Editor Utilities Panel</title>
+<figure href="ch10.html#id5220175" id="id5220175">
+<title>Figure 10-1. The dtUtilities Panel</title>
+</figure>
+<section href="ch10.html#id5220452" id="id5220452">
+<title>Selecting Utilities and Their Values</title>
+<table href="ch10.html#id5220524" id="id5220524">
+<title>Table 10-1. dtUtilities and Their Values</title>
+</table>
+</section>
+<section href="ch10.html#LE37112-PARENT" id="LE37112-PARENT">
+<title>Setting the Preferred Text Editor</title>
+</section>
+</section>
+</chapter>
+</part>
+<part href="pt02.html" id="id5221205">
+<title>Part II. Creating Desktop Icons</title>
+<chapter href="ch11.html" id="LE69723-PARENT">
+<title>Chapter 11. Creating Desktop Icons: An Overview</title>
+<section href="ch11.html#LE56002-PARENT" id="LE56002-PARENT">
+<title>About IRIX Interactive Desktop Icons</title>
+</section>
+<section href="ch11.html#LE91887-PARENT" id="LE91887-PARENT">
+<title>Checklist for Creating an Icon</title>
+</section>
+<section href="ch11.html#LE68942-PARENT" id="LE68942-PARENT">
+<title>Creating an Icon: The Basic Steps Explained in Detail</title>
+<section href="ch11.html#LE46561-PARENT" id="LE46561-PARENT">
+<title>Step One: Tagging Your Application</title>
+</section>
+<section href="ch11.html#LE75048-PARENT" id="LE75048-PARENT">
+<title>Step Two: Drawing a Picture of Your Icon</title>
+</section>
+<section href="ch11.html#LE17054-PARENT" id="LE17054-PARENT">
+<title>Step Three: Programming Your Icon</title>
+<section href="ch11.html#LE89793-PARENT" id="LE89793-PARENT">
+<title>Where to Put FTR Files</title>
+</section>
+<section href="ch11.html#LE58709-PARENT" id="LE58709-PARENT">
+<title>Naming FTR Files</title>
+</section>
+<section href="ch11.html#id5222891" id="id5222891">
+<title>Name the File Type</title>
+</section>
+<section href="ch11.html#id5223013" id="id5223013">
+<title>Add the FTRs</title>
+</section>
+<section href="ch11.html#LE80328-PARENT" id="LE80328-PARENT">
+<title>Add the FTRs: An Alternate Method</title>
+</section>
+<section href="ch11.html#id5223411" id="id5223411">
+<title>An Example File Type</title>
+</section>
+</section>
+<section href="ch11.html#LE52367-PARENT" id="LE52367-PARENT">
+<title>Step Four: Compiling the Source Files</title>
+</section>
+<section href="ch11.html#LE78197-PARENT" id="LE78197-PARENT">
+<title>Step Five: Installing Your Application in the Icon Catalog</title>
+</section>
+<section href="ch11.html#LE74717-PARENT" id="LE74717-PARENT">
+<title>Step Six: Restarting the Desktop</title>
+</section>
+<section href="ch11.html#LE21525-PARENT" id="LE21525-PARENT">
+<title>Step Seven: Updating Your Installation Process</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch12.html" id="LE81290-PARENT">
+<title>Chapter 12. Using IconSmith</title>
+<section href="ch12.html#LE38832-PARENT" id="LE38832-PARENT">
+<title>About IconSmith</title>
+</section>
+<section href="ch12.html#LE77527-PARENT" id="LE77527-PARENT">
+<title>Where to Install Your Completed Icon</title>
+</section>
+<section href="ch12.html#LE63643-PARENT" id="LE63643-PARENT">
+<title>Some Definitions</title>
+<section href="ch12.html#id5225112" id="id5225112">
+<title>Caret</title>
+<figure href="ch12.html#id5225221" id="id5225221">
+<title>Figure 12-1. Caret</title>
+</figure>
+</section>
+<section href="ch12.html#id5225244" id="id5225244">
+<title>Transformation Pin</title>
+<figure href="ch12.html#id5225313" id="id5225313">
+<title>Figure 12-2. Transformation Pin</title>
+</figure>
+</section>
+<section href="ch12.html#id5225335" id="id5225335">
+<title>Vertex</title>
+<figure href="ch12.html#id5225484" id="id5225484">
+<title>Figure 12-3. Vertex</title>
+</figure>
+</section>
+<section href="ch12.html#id5225506" id="id5225506">
+<title>Path</title>
+<figure href="ch12.html#id5225606" id="id5225606">
+<title>Figure 12-4. Path</title>
+</figure>
+</section>
+</section>
+<section href="ch12.html#LE87252-PARENT" id="LE87252-PARENT">
+<title>Starting IconSmith</title>
+<figure href="ch12.html#id5225677" id="id5225677">
+<title>Figure 12-5. The IconSmith Icon</title>
+</figure>
+</section>
+<section href="ch12.html#LE65037-PARENT" id="LE65037-PARENT">
+<title>IconSmith Menus</title>
+<figure href="ch12.html#id5225796" id="id5225796">
+<title>Figure 12-6. The Main IconSmith Window With Popup Menus </title>
+</figure>
+</section>
+<section href="ch12.html#LE15755-PARENT" id="LE15755-PARENT">
+<title>IconSmith Windows</title>
+</section>
+<section href="ch12.html#LE49874-PARENT" id="LE49874-PARENT">
+<title>Drawing With IconSmith</title>
+<figure href="ch12.html#id5226126" id="id5226126">
+<title>Figure 12-7. The Import Icon or Set Template Window </title>
+</figure>
+<section href="ch12.html#LE88511-PARENT" id="LE88511-PARENT">
+<title>Drawing Paths</title>
+</section>
+<section href="ch12.html#LE17919-PARENT" id="LE17919-PARENT">
+<title>Drawing Filled Shapes</title>
+<figure href="ch12.html#id5226480" id="id5226480">
+<title>Figure 12-8. The Palette (Selection Properties) Window</title>
+</figure>
+</section>
+<section href="ch12.html#LE58770-PARENT" id="LE58770-PARENT">
+<title>Deleting</title>
+</section>
+<section href="ch12.html#LE12126-PARENT" id="LE12126-PARENT">
+<title>Keeping the 3-D Look</title>
+<figure href="ch12.html#id5226702" id="id5226702">
+<title>Figure 12-9. 3-D Icon Axes</title>
+</figure>
+</section>
+<section href="ch12.html#id5226766" id="id5226766">
+<title>Drawing for All Scales</title>
+<section href="ch12.html#id5226830" id="id5226830">
+<title>The Preview Box</title>
+</section>
+<section href="ch12.html#id5226942" id="id5226942">
+<title>Changing Drawing Size</title>
+</section>
+</section>
+<section href="ch12.html#LE32183-PARENT" id="LE32183-PARENT">
+<title>Sharing Design Elements</title>
+</section>
+<section href="ch12.html#LE27192-PARENT" id="LE27192-PARENT">
+<title>Templates</title>
+</section>
+</section>
+<section href="ch12.html#LE26999-PARENT" id="LE26999-PARENT">
+<title>Selecting</title>
+<section href="ch12.html#LE23230-PARENT" id="LE23230-PARENT">
+<title>Partial</title>
+</section>
+<section href="ch12.html#LE90206-PARENT" id="LE90206-PARENT">
+<title>Deselect Fragments</title>
+</section>
+<section href="ch12.html#LE57592-PARENT" id="LE57592-PARENT">
+<title>Select Next</title>
+</section>
+<section href="ch12.html#LE46960-PARENT" id="LE46960-PARENT">
+<title>Select All</title>
+</section>
+</section>
+<section href="ch12.html#LE93773-PARENT" id="LE93773-PARENT">
+<title>Transformations</title>
+<section href="ch12.html#id5228137" id="id5228137">
+<title>Scale </title>
+</section>
+<section href="ch12.html#id5228152" id="id5228152">
+<title>Scale X and Y</title>
+</section>
+<section href="ch12.html#id5228180" id="id5228180">
+<title>Rotate</title>
+</section>
+<section href="ch12.html#id5228195" id="id5228195">
+<title>Shear Y</title>
+</section>
+</section>
+<section href="ch12.html#LE47763-PARENT" id="LE47763-PARENT">
+<title>Concave Polygons</title>
+<figure href="ch12.html#id5228341" id="id5228341">
+<title>Figure 12-10. Concave Polygon</title>
+</figure>
+</section>
+<section href="ch12.html#LE34047-PARENT" id="LE34047-PARENT">
+<title>Constraints: Gravity (Object) Snap and Grid Snap</title>
+<figure href="ch12.html#id5228600" id="id5228600">
+<title>Figure 12-11. The Constraints Window</title>
+</figure>
+<section href="ch12.html#id5228644" id="id5228644">
+<title>Controlling the Grid</title>
+</section>
+<section href="ch12.html#id5228794" id="id5228794">
+<title>Controlling Gravity</title>
+</section>
+</section>
+<section href="ch12.html#LE18262-PARENT" id="LE18262-PARENT">
+<title>Icon Design and Composition Conventions</title>
+<section href="ch12.html#LE27381-PARENT" id="LE27381-PARENT">
+<title>Importing Generic Icon Components (Magic Carpet)</title>
+</section>
+<section href="ch12.html#LE48388-PARENT" id="LE48388-PARENT">
+<title>Icon Size</title>
+</section>
+<section href="ch12.html#LE21742-PARENT" id="LE21742-PARENT">
+<title>Selecting Colors</title>
+</section>
+</section>
+<section href="ch12.html#LE15796-PARENT" id="LE15796-PARENT">
+<title>Advanced IconSmith Techniques</title>
+<section href="ch12.html#LE82563-PARENT" id="LE82563-PARENT">
+<title>Drawing a Circle</title>
+<figure href="ch12.html#id5229747" id="id5229747">
+<title>Figure 12-12. A Path</title>
+</figure>
+<figure href="ch12.html#id5229855" id="id5229855">
+<title>Figure 12-13. Wheel Spokes</title>
+</figure>
+<figure href="ch12.html#id5229908" id="id5229908">
+<title>Figure 12-14. Connected Spokes</title>
+</figure>
+<figure href="ch12.html#id5229941" id="id5229941">
+<title>Figure 12-15. Finished 2-D Circle</title>
+</figure>
+</section>
+<section href="ch12.html#LE23144-PARENT" id="LE23144-PARENT">
+<title>Drawing an Oval</title>
+<figure href="ch12.html#id5230100" id="id5230100">
+<title>Figure 12-16. An Oval</title>
+</figure>
+<figure href="ch12.html#id5230174" id="id5230174">
+<title>Figure 12-17. A Simple, Circular 2-D Icon</title>
+</figure>
+</section>
+<section href="ch12.html#LE18091-PARENT" id="LE18091-PARENT">
+<title>Isometric Circles</title>
+<section href="ch12.html#id5230274" id="id5230274">
+<title>Isometric Transformation</title>
+</section>
+<section href="ch12.html#id5230334" id="id5230334">
+<title>Import Existing Object</title>
+<figure href="ch12.html#id5230402" id="id5230402">
+<title>Figure 12-18. Imported Circles</title>
+</figure>
+<figure href="ch12.html#id5230472" id="id5230472">
+<title>Figure 12-19. Finished Isometric Circle</title>
+</figure>
+<figure href="ch12.html#id5230508" id="id5230508">
+<title>Figure 12-20. Simple, Isometric 2-D Icon</title>
+</figure>
+</section>
+<section href="ch12.html#id5230530" id="id5230530">
+<title>Finishing Your Icon</title>
+<figure href="ch12.html#id5230602" id="id5230602">
+<title>Figure 12-21. Icon Centered on Generic Component</title>
+</figure>
+<figure href="ch12.html#id5230652" id="id5230652">
+<title>Figure 12-22. Open Icon</title>
+</figure>
+</section>
+</section>
+</section>
+</chapter>
+<chapter href="ch13.html" id="LE36003-PARENT">
+<title>Chapter 13. File Typing Rules</title>
+<section href="ch13.html#LE10520-PARENT" id="LE10520-PARENT">
+<title>A Table of the FTRs With Descriptions</title>
+<table href="ch13.html#id5231061" id="id5231061">
+<title>Table 13-1.  Rules That Appear in a Filetype Definition</title>
+</table>
+</section>
+<section href="ch13.html#LE10863-PARENT" id="LE10863-PARENT">
+<title>Naming File Types: The TYPE Rule</title>
+</section>
+<section href="ch13.html#LE27184-PARENT" id="LE27184-PARENT">
+<title>Categorizing File Types: The SUPERTYPE Rule</title>
+</section>
+<section href="ch13.html#LE98067-PARENT" id="LE98067-PARENT">
+<title>Matching File Types With Applications: The MATCH Rule</title>
+<section href="ch13.html#id5232133" id="id5232133">
+<title>Matching Tagged Files</title>
+</section>
+<section href="ch13.html#LE56776-PARENT" id="LE56776-PARENT">
+<title>Matching Files Without the tag Command</title>
+<section href="ch13.html#id5232526" id="id5232526">
+<title>Writing Effective Match Expressions</title>
+</section>
+<section href="ch13.html#LE44766-PARENT" id="LE44766-PARENT">
+<title>Valid Match-Expressions</title>
+<table href="ch13.html#id5232880" id="id5232880">
+<title>Table 13-2. Numerical Representations in Match-Expressions</title>
+</table>
+</section>
+<section href="ch13.html#id5232987" id="id5232987">
+<title>Functions </title>
+<table href="ch13.html#id5233002" id="id5233002">
+<title>Table 13-3. Match-Expression Functions</title>
+</table>
+</section>
+<section href="ch13.html#LE46509-PARENT" id="LE46509-PARENT">
+<title>Using dircontains()</title>
+</section>
+<section href="ch13.html#LE30222-PARENT" id="LE30222-PARENT">
+<title>Predefined File Types</title>
+</section>
+</section>
+</section>
+<section href="ch13.html#LE92689-PARENT" id="LE92689-PARENT">
+<title>Matching Non-Plain Files: The SPECIALFILE Rule</title>
+</section>
+<section href="ch13.html#LE15180-PARENT" id="LE15180-PARENT">
+<title>Adding a Descriptive Phrase: The LEGEND Rule</title>
+</section>
+<section href="ch13.html#LE85210-PARENT" id="LE85210-PARENT">
+<title>Setting FTR Variables: The SETVAR Rule</title>
+</section>
+<section href="ch13.html#LE33157-PARENT" id="LE33157-PARENT">
+<title>Programming Open Behavior: The CMD OPEN Rule</title>
+</section>
+<section href="ch13.html#LE33173-PARENT" id="LE33173-PARENT">
+<title>Programming Alt-Open Behavior: The CMD ALTOPEN Rule</title>
+</section>
+<section href="ch13.html#LE91613-PARENT" id="LE91613-PARENT">
+<title>Programming Drag and Drop Behavior: The CMD DROP and DROPIF Rules</title>
+</section>
+<section href="ch13.html#LE45038-PARENT" id="LE45038-PARENT">
+<title>Mapping Names: The MAP Rule</title>
+</section>
+<section href="ch13.html#LE40547-PARENT" id="LE40547-PARENT">
+<title>Programming Print Behavior: The CMD PRINT Rule</title>
+</section>
+<section href="ch13.html#LE31739-PARENT" id="LE31739-PARENT">
+<title>Adding Menu Items: The MENUCMD Rule</title>
+</section>
+<section href="ch13.html#LE35039-PARENT" id="LE35039-PARENT">
+<title>Getting the Icon Picture: The ICON Rule</title>
+</section>
+<section href="ch13.html#LE88324-PARENT" id="LE88324-PARENT">
+<title>Creating a File Type: An Example</title>
+<section href="ch13.html#id5236395" id="id5236395">
+<title>Open an FTR File for scribble</title>
+</section>
+<section href="ch13.html#id5236412" id="id5236412">
+<title>Add the Rules to the scribble FTR File</title>
+<section href="ch13.html#id5236429" id="id5236429">
+<title>Line 1: Name the File Type</title>
+</section>
+<section href="ch13.html#id5236519" id="id5236519">
+<title>Line 2: Classify the Filetype</title>
+</section>
+<section href="ch13.html#id5236549" id="id5236549">
+<title>Line 3: Match the File Type</title>
+</section>
+<section href="ch13.html#id5236626" id="id5236626">
+<title>Line 4: Provide a Descriptive Phrase</title>
+</section>
+<section href="ch13.html#id5236662" id="id5236662">
+<title>Line 5: Define Icon-Opening Behavior</title>
+</section>
+<section href="ch13.html#id5236748" id="id5236748">
+<title>Line 6: Define Drag and Drop Behavior</title>
+</section>
+<section href="ch13.html#id5236828" id="id5236828">
+<title>Line 7: Define Alt-Open Behavior</title>
+</section>
+<section href="ch13.html#LE70583-PARENT" id="LE70583-PARENT">
+<title>Line 8: Add the Icon Picture</title>
+</section>
+</section>
+<section href="ch13.html#id5237000" id="id5237000">
+<title>Name the scribble FTR File and Put It in the Appropriate Directory</title>
+</section>
+<section href="ch13.html#LE41208-PARENT" id="LE41208-PARENT">
+<title>The scribble FTRs</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch14.html" id="LE55672-PARENT">
+<title>Chapter 14. Printing From the Desktop</title>
+<section href="ch14.html#LE43588-PARENT" id="LE43588-PARENT">
+<title>About routeprint</title>
+</section>
+<section href="ch14.html#LE99077-PARENT" id="LE99077-PARENT">
+<title>Converting a File for Printing</title>
+<figure href="ch14.html#id5237672" id="id5237672">
+<title>Figure 14-1. File Conversions for Printing Standard Desktop Files</title>
+</figure>
+<section href="ch14.html#LE24707-PARENT" id="LE24707-PARENT">
+<title>Print Costs</title>
+<table href="ch14.html#id5237849" id="id5237849">
+<title>Table 14-1. Conversion Costs for Print Conversion Rules</title>
+</table>
+</section>
+</section>
+<section href="ch14.html#LE68180-PARENT" id="LE68180-PARENT">
+<title>The Print Conversion Rules</title>
+<section href="ch14.html#id5238119" id="id5238119">
+<title>The CONVERT Rule</title>
+</section>
+<section href="ch14.html#id5238262" id="id5238262">
+<title>The COST Rule</title>
+</section>
+<section href="ch14.html#id5238368" id="id5238368">
+<title>The FILTER Rule</title>
+</section>
+</section>
+<section href="ch14.html#LE11590-PARENT" id="LE11590-PARENT">
+<title>The Current Printer</title>
+</section>
+</chapter>
+</part>
+<appendix href="apa.html" id="LE67532-PARENT">
+<title>Appendix A. Example Programs for SGI Enhanced Widgets</title>
+<section href="apa.html#LE83520-PARENT" id="LE83520-PARENT">
+<title>Example Program for Color Chooser</title>
+<section href="apa.html#id5239130" id="id5239130">
+<title>Makefile for colortest.c</title>
+</section>
+</section>
+<section href="apa.html#LE74701-PARENT" id="LE74701-PARENT">
+<title>Example Program for Dial</title>
+</section>
+<section href="apa.html#LE84471-PARENT" id="LE84471-PARENT">
+<title>Example Program for Drop Pocket</title>
+<section href="apa.html#id5239405" id="id5239405">
+<title>Makefile for Drop Pocket Example</title>
+</section>
+</section>
+<section href="apa.html#LE23162-PARENT" id="LE23162-PARENT">
+<title>Example Program for Finder</title>
+</section>
+<section href="apa.html#LE98277-PARENT" id="LE98277-PARENT">
+<title>Example Program for History Button (Dynamenu)</title>
+</section>
+<section href="apa.html#LE30790-PARENT" id="LE30790-PARENT">
+<title>Example Program for ThumbWheel</title>
+</section>
+<section href="apa.html#LE36380-PARENT" id="LE36380-PARENT">
+<title>Example Program for File Selection Box</title>
+<section href="apa.html#id5239930" id="id5239930">
+<title>Makefile for File Selection Box Example Program</title>
+</section>
+</section>
+<section href="apa.html#LE96832-PARENT" id="LE96832-PARENT">
+<title>Example Programs for Scale (Percent Done Indicator) Widget</title>
+</section>
+<section href="apa.html#LE89093-PARENT" id="LE89093-PARENT">
+<title>Example Program for LED Widget</title>
+</section>
+</appendix>
+<appendix href="apb.html" id="LE71351-PARENT">
+<title>Appendix B. Desktop Variables</title>
+<section href="apb.html#id5240310" id="id5240310">
+<title>Variables Set By the Desktop</title>
+</section>
+<section href="apb.html#id5240669" id="id5240669">
+<title>Variables Set By the User</title>
+</section>
+</appendix>
+<appendix href="apc.html" id="LE65110-PARENT">
+<title>Appendix C. Online Help Examples</title>
+<section href="apc.html#LE61401-PARENT" id="LE61401-PARENT">
+<title>A Simple Help Document</title>
+<example href="apc.html#LE61943-PARENT" id="LE61943-PARENT">
+<title>Example C-1. An Example of a Help Source File</title>
+</example>
+</section>
+<section href="apc.html#LE13073-PARENT" id="LE13073-PARENT">
+<title>Allowable Elements in a Help Document</title>
+<example href="apc.html#LE39308-PARENT" id="LE39308-PARENT">
+<title>Example C-2. A Description of the Elements Defined by the Help DTD</title>
+</example>
+</section>
+<section href="apc.html#LE37036-PARENT" id="LE37036-PARENT">
+<title>An Example of Implementing Help in an Application</title>
+<example href="apc.html#LE19858-PARENT" id="LE19858-PARENT">
+<title>Example C-3. An Example of Integrating SGIHelp With an Application</title>
+</example>
+<example href="apc.html#LE82258-PARENT" id="LE82258-PARENT">
+<title>Example C-4. Help Source File for Example Program</title>
+</example>
+<example href="apc.html#LE73698-PARENT" id="LE73698-PARENT">
+<title>Example C-5. Helpmap for Example Program</title>
+</example>
+</section>
+</appendix>
+<appendix href="apd.html" id="LE25750-PARENT">
+<title>Appendix D. The Icon Description Language</title>
+<section href="apd.html#id5242583" id="id5242583">
+<title>Operators </title>
+</section>
+<section href="apd.html#id5242665" id="id5242665">
+<title>Constants </title>
+</section>
+<section href="apd.html#id5242738" id="id5242738">
+<title>Variables </title>
+</section>
+<section href="apd.html#id5242847" id="id5242847">
+<title>Functions</title>
+<table href="apd.html#id5242892" id="id5242892">
+<title>Table D-1. Icon Description Functions</title>
+</table>
+</section>
+</appendix>
+<appendix href="ape.html" id="LE44691-PARENT">
+<title>Appendix E. Predefined File Types</title>
+<section href="ape.html#LE12764-PARENT" id="LE12764-PARENT">
+<title>Naming Conventions for Predefined File Types</title>
+<table href="ape.html#id5243825" id="id5243825">
+<title>Table E-1. Predefined File Type Naming Conventions</title>
+</table>
+</section>
+<section href="ape.html#LE45554-PARENT" id="LE45554-PARENT">
+<title>The Predefined File Types and What They Do</title>
+<section href="ape.html#id5244029" id="id5244029">
+<title>SpecialFile</title>
+</section>
+<section href="ape.html#id5244054" id="id5244054">
+<title>Directory</title>
+</section>
+<section href="ape.html#id5244101" id="id5244101">
+<title>Ascii</title>
+</section>
+<section href="ape.html#id5244192" id="id5244192">
+<title>Source Files</title>
+</section>
+<section href="ape.html#id5244306" id="id5244306">
+<title>Binary</title>
+</section>
+<section href="ape.html#id5244340" id="id5244340">
+<title>ImageFile</title>
+</section>
+<section href="ape.html#id5244504" id="id5244504">
+<title>Executable</title>
+</section>
+<section href="ape.html#id5244540" id="id5244540">
+<title>Scripts</title>
+</section>
+<section href="ape.html#id5244622" id="id5244622">
+<title>GenericWindowedExecutable</title>
+</section>
+<section href="ape.html#id5244703" id="id5244703">
+<title>LaunchExecutable</title>
+</section>
+<section href="ape.html#id5244763" id="id5244763">
+<title>ttyExecutable</title>
+</section>
+<section href="ape.html#id5244817" id="id5244817">
+<title>ttyLaunchExecutable</title>
+</section>
+<section href="ape.html#id5244895" id="id5244895">
+<title>ttyOutExecutable</title>
+</section>
+<section href="ape.html#id5244952" id="id5244952">
+<title>ttyLaunchOutExecutable</title>
+</section>
+</section>
+</appendix>
+<appendix href="apf.html" id="LE51651-PARENT">
+<title>Appendix F. FTR File Directories</title>
+</appendix>
+<appendix href="apg.html" id="LE41465-PARENT">
+<title>Appendix G. Using GoldenGate Data Conversion Services</title>
+<section href="apg.html#LE97872-PARENT" id="LE97872-PARENT">
+<title>Converting Data Using the GoldenGate Data Conversion Service</title>
+<section href="apg.html#LE15075-PARENT" id="LE15075-PARENT">
+<title>Overview of the Conversion Process</title>
+<section href="apg.html#LE29775-PARENT" id="LE29775-PARENT">
+<title>The Converter Registry</title>
+</section>
+<section href="apg.html#id5245822" id="id5245822">
+<title>Creating a Conversion Context</title>
+</section>
+<section href="apg.html#id5245901" id="id5245901">
+<title>Evaluating a Converter </title>
+</section>
+<section href="apg.html#LE86616-PARENT" id="LE86616-PARENT">
+<title>Converting Data In a File or Stream</title>
+</section>
+</section>
+<section href="apg.html#LE27143-PARENT" id="LE27143-PARENT">
+<title>Selecting a Converter </title>
+<section href="apg.html#LE62783-PARENT" id="LE62783-PARENT">
+<title>Querying the Converter Registry</title>
+<table href="apg.html#id5246309" id="id5246309">
+<title>Table G-1. Converter Attributes</title>
+</table>
+<table href="apg.html#id5246575" id="id5246575">
+<title>Table G-2. Query Operators</title>
+</table>
+</section>
+<section href="apg.html#LE60733-PARENT" id="LE60733-PARENT">
+<title>Setting Up the Conversion Context</title>
+</section>
+<section href="apg.html#LE87840-PARENT" id="LE87840-PARENT">
+<title>Evaluating Converters</title>
+</section>
+<section href="apg.html#LE25846-PARENT" id="LE25846-PARENT">
+<title>Getting Converter Details</title>
+</section>
+</section>
+<section href="apg.html#LE31875-PARENT" id="LE31875-PARENT">
+<title>Using GoldenGate to Convert Data</title>
+<section href="apg.html#LE61772-PARENT" id="LE61772-PARENT">
+<title>Converting Data Using File Converters </title>
+</section>
+<section href="apg.html#LE85174-PARENT" id="LE85174-PARENT">
+<title>Converting Data Using Stream Data Converters </title>
+</section>
+<section href="apg.html#LE27136-PARENT" id="LE27136-PARENT">
+<title>Initializing the Pipeline</title>
+</section>
+<section href="apg.html#LE39159-PARENT" id="LE39159-PARENT">
+<title>Sending and Receiving Data</title>
+</section>
+<section href="apg.html#LE75494-PARENT" id="LE75494-PARENT">
+<title>Cleaning Up</title>
+</section>
+<section href="apg.html#LE49475-PARENT" id="LE49475-PARENT">
+<title>Converter Return Status Values </title>
+<table href="apg.html#id5248729" id="id5248729">
+<title>Table G-3.  Converter Return Status Values </title>
+</table>
+</section>
+</section>
+</section>
+<section href="apg.html#LE66520-PARENT" id="LE66520-PARENT">
+<title>Compiling and Linking Your Program with GoldenGate</title>
+</section>
+<section href="apg.html#LE61988-PARENT" id="LE61988-PARENT">
+<title>Writing Converters for the GoldenGate Data Conversion Service</title>
+<section href="apg.html#id5249944" id="id5249944">
+<title>Overview of the Converter Writing Process</title>
+</section>
+<section href="apg.html#LE66083-PARENT" id="LE66083-PARENT">
+<title>Writing Converter Code</title>
+<section href="apg.html#LE95827-PARENT" id="LE95827-PARENT">
+<title>Implementing Your Converter - Handling Evaluation Requests</title>
+</section>
+<section href="apg.html#LE24054-PARENT" id="LE24054-PARENT">
+<title>Implementing Your Converter - Handling Conversion Requests</title>
+</section>
+<section href="apg.html#LE83154-PARENT" id="LE83154-PARENT">
+<title>Input and Output Formats</title>
+</section>
+<section href="apg.html#LE31930-PARENT" id="LE31930-PARENT">
+<title>Process Blocking </title>
+</section>
+<section href="apg.html#LE41367-PARENT" id="LE41367-PARENT">
+<title>Programming Constraints</title>
+</section>
+<section href="apg.html#LE30794-PARENT" id="LE30794-PARENT">
+<title>Example of a Simple Stream Converter</title>
+</section>
+</section>
+<section href="apg.html#LE44009-PARENT" id="LE44009-PARENT">
+<title>Building a DSO</title>
+<section href="apg.html#LE59553-PARENT" id="LE59553-PARENT">
+<title>Creating a DSO For Your Converter</title>
+</section>
+<section href="apg.html#LE79942-PARENT" id="LE79942-PARENT">
+<title>Creating a Converter Description File</title>
+<table href="apg.html#id5251404" id="id5251404">
+<title>Table G-4. Converter Description File Statements</title>
+</table>
+</section>
+</section>
+<section href="apg.html#LE53923-PARENT" id="LE53923-PARENT">
+<title>Testing Your Converter</title>
+</section>
+<section href="apg.html#LE67307-PARENT" id="LE67307-PARENT">
+<title>Registering Your Converter</title>
+<section href="apg.html#id5251901" id="id5251901">
+<title>The System Registry </title>
+</section>
+<section href="apg.html#id5251933" id="id5251933">
+<title>Some Registry Syntax Details</title>
+</section>
+</section>
+<section href="apg.html#LE81851-PARENT" id="LE81851-PARENT">
+<title>Installing Your Converter </title>
+</section>
+<section href="apg.html#LE96157-PARENT" id="LE96157-PARENT">
+<title>Some Sample Converters</title>
+<section href="apg.html#LE68810-PARENT" id="LE68810-PARENT">
+<title>A Simple StreamToStream Converter - UpperCase</title>
+</section>
+<section href="apg.html#LE71684-PARENT" id="LE71684-PARENT">
+<title>A FileToFile Converter - UNIX Man Page File to HTML File</title>
+</section>
+</section>
+</section>
+</appendix>
+<appendix href="aph.html" id="LE21714-PARENT">
+<title>Appendix H. Standard Menu Resources</title>
+<section href="aph.html#LE74041-PARENT" id="LE74041-PARENT">
+<title>Common Menu Bar Resources</title>
+</section>
+<section href="aph.html#LE40617-PARENT" id="LE40617-PARENT">
+<title>Standard File Menu Resources</title>
+</section>
+<section href="aph.html#LE25646-PARENT" id="LE25646-PARENT">
+<title>Standard Edit Menu Resources</title>
+</section>
+</appendix>
+<index href="ix01.html" id="sgi-index">
+<title>Index</title>
+</index>
+</book>
+</toc>

@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 11. User Feedback</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt02.html" title="Part II. Interface Components"><link rel="previous" href="ch10.html" title="Chapter 10. Dialogs"><link rel="next" href="pt03.html" title="Part III. 3D Style Guidelines"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 11. User Feedback</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch10.html">Prev</a> </td><th width="60%" align="center">Part II. Interface Components</th><td width="20%" align="right"> <a accesskey="n" href="pt03.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5495521"></a>Chapter 11. <a name="id58675"></a>User Feedback</h2></div></div>
+<p>Your application should supply feedback to users so that they know it's working and what it's doing. This chapter covers the following topics:<a name="idch11.feedback1"></a><a name="idch11.feedback2"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch11.html#id60318">&#8220;Types of Feedback&#8221;</a> briefly describes various types of feedback users expect your application to provide; it also tells you where to look in this guide for more information about each type of feedback.</p>
+</li>
+<li><p><a href="ch11.html#id15568">&#8220;Pointer Shapes and Colors&#8221;</a> discusses when to use each of the standard pointer shapes and provides guidelines for designing your own pointer shapes.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5495583"></a><a name="id60318"></a>Types of Feedback</h2></div></div>
+<p>Your application should provide feedback to users using the techniques described in this section. Note that most of these techniques are covered in other chapters of this guide, as indicated; these other chapters also include the explicit checklist guidelines to follow, so they're not repeated here. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch11.html#id74719">&#8220;Providing Graphic Feedback&#8221;</a> </p>
+</li>
+<li><p><a href="ch11.html#id14245">&#8220;Keeping Information Up to Date&#8221;</a> </p>
+</li>
+<li><p><a href="ch11.html#id21977">&#8220;Providing Messages to the User&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5495669"></a><a name="id74719"></a>Providing Graphic Feedback</h3></div></div>
+<p>Appropriate desktop icons for your application's executable and data files allow users to readily identify your application, files that were created using your application, and the current state of the application (that is, running or not running). Design executable and data file icons to provide this sort of graphic feedback, as discussed in <a name="idch11.feedback3"></a><a name="idch11.feedback4"></a><a href="ch02.html#id94988">Chapter 2, &#8220;Icons.&#8221;</a></p>
+<p>The IRIX Interactive Desktop look includes graphic modifications that were made to standard IRIS IM in order to improve the level of user feedback. For instance, locate highlight visually indicates which components are live functional objects and which are passive graphics. In addition, scrollbars were redesigned to keep track of their initial positions, and radio buttons and checkboxes show their state more emphatically. Your application should use the IRIX Interactive Desktop look, which is discussed in <a name="idch11.feedback5"></a><a href="ch03.html#id17675">&#8220;The IRIX Interactive Desktop Look: Graphic Features and Schemes&#8221; in Chapter 3</a>.</p>
+<p>Users expect the pointer to change shape to reflect the current state of the window&#8212;for example, when the application is busy processing and can't accept keyboard or mouse input, the pointer changes to a watch. Guidelines for pointer shapes are discussed later in this chapter, in <a name="idch11.feedback6"></a><a href="ch11.html#id15568">&#8220;Pointer Shapes and Colors.&#8221;</a></p>
+<p>As users select data in a window, highlight that data to show what's included in the current selection. The data should remain highlighted even when the window isn't the currently active window. See <a name="idch11.feedback7"></a><a href="ch07.html#id93501">&#8220;Highlighting a Selection&#8221; in Chapter 7</a> for more information about highlighting selections.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5495841"></a><a name="id14245"></a>Keeping Information Up to Date</h3></div></div>
+<p>As users set particular values in components such as radio buttons, check boxes, lists, and option menus, your application should always indicate the current values so that the user knows what they are. For example, the Language control panel highlights the current values for &#8220;Locations&#8221; and &#8220;Keyboards&#8221; in the two corresponding lists. Radio buttons, checkboxes, lists, and option menus are discussed in more detail in <a name="idch11.feedback8"></a><a href="ch09.html#id95140">Chapter 9, &#8220;Controls.&#8221;</a> </p>
+<p>Even if users can change values or data without using an explicitly provided component, your application should still endeavor to display the current information. For instance, users can change the file hierarchy using the shell; if your application displays information affected by such a change (such as a directory view), the display should update dynamically as the user makes the change. If it's impossible or if it would have a significantly adverse effect on your application's performance to make the display dynamic, choose a design that looks static. For example, you might use label text, which looks like it's a permanent part of the background, rather than text fields, which look like they should be updated constantly. The desktop uses this strategy for the &#8220;business cards&#8221; that are displayed when a user double-clicks a person icon.</p>
+<p>When component settings apply to a specific object, the displayed components should reflect the values for the currently selected object (if there is one). For example, if you select some text in an IRIS Showcase file, the &#8220;Font Family,&#8221; &#8220;Font Size,&#8221; Bold/Italic/Underline, and color options in the Master Gizmo are updated to display the characteristics of the selected text. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5495966"></a><a name="id21977"></a>Providing Messages to the User</h3></div></div>
+<p>In addition to providing immediate graphic feedback through your application's icons, components, and pointers, provide textual messages that describe your application's status. Keep in mind that by default the window manager for the IRIX Interactive Desktop, <a name="idch11.feedback9"></a><a name="idch11.feedback10"></a><a name="idch11.feedback11"></a><tt>4Dwm</tt>, sends <tt>stdout</tt> and <tt>stderr</tt> messages to the Console window, which users typically keep minimized. (Users can choose to have <tt>stderr</tt> messages appear in a dialog box by using the Desktop Settings control panel available from the Desktop-&gt;Customize cascading menu in the Toolchest, and they can of course un-minimize the Console window.) Because of these default settings, you can't be sure that users will notice messages sent to <tt>stdout</tt> and <tt>stderr</tt>; therefore, use dialogs or status areas in your application instead. </p>
+<p>In particular, use dialogs to provide warning messages, error messages, and work-in-progress feedback, as discussed in <a name="idch11.feedback12"></a><a name="idch11.feedback13"></a><a name="idch11.feedback14"></a><a href="ch10.html#id30192">Chapter 10, &#8220;Dialogs.&#8221;</a> Also define an area on primary windows for status messages in the cases discussed in <a href="ch06.html#id30855">&#8220;Status Areas in Primary Windows&#8221; in Chapter 6</a>. Finally, change the label (or possibly the image) of your application's minimized window when appropriate to provide feedback; <a href="ch03.html#id87201">&#8220;Minimized Windows&#8221; in Chapter 3</a> discusses when to use this technique. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5496125"></a>General User Feedback Guidelines</h3></div></div>
+<div class="itemizedlist"><ul type="disc"><li><p>Provide graphic feedback with appropriate desktop icon designs, by using the IRIX Interactive Desktop look, by changing pointer shapes appropriately, and by highlighting selected text.</p>
+</li>
+<li><p>Be sure your application displays up-to-date information&#8212;in controls and components (display the settings that correspond to the currently selected object or the current values), and in information displays (such as directory views). If the information being displayed can't be dynamically updated, choose a design that looks static.</p>
+</li>
+<li><p>Provide textual message to the user through dialogs, through status areas on your primary windows, and by changing the label of your minimized window when appropriate.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5496171"></a><a name="id15568"></a>Pointer Shapes and Colors</h2></div></div>
+<p>Your application should use different pointer shapes to indicate when it's busy or in a particular mode, or when one of its windows isn't accepting input. This section describes:<a name="idch11.feedback15"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch11.html#id74495">&#8220;Standard Pointer Shapes and Colors&#8221;</a> </p>
+</li>
+<li><p><a href="ch11.html#id29040">&#8220;Designing New Pointer Shapes&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5496244"></a><a name="id74495"></a>Standard Pointer Shapes and Colors</h3></div></div>
+<p>The <i>OSF/Motif Style Guide </i>defines several standard pointer shapes. Your application should use these standard shapes for the purposes described in <a href="ch11.html#id55346">Table 11-1</a>; the table also notes any additions and exceptions to the OSF/Motif policies for using these pointers. If your application requires functionality beyond what's described below, design your own new pointers, as described in <a href="ch11.html#id29040">&#8220;Designing New Pointer Shapes,&#8221;</a> rather than extend the functionality of these standard ones.</p>
+<div class="table"><p><a name="id5496287"></a><b>Table 11-1. <a name="id55346"></a> Standard Pointer Shapes and Colors</b></p>
+<table summary=" Standard Pointer Shapes and Colors" border="1"><colgroup><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Pointer</p>
+</th><th scope="col" valign="top"><p>Name</p>
+</th><th scope="col" valign="top"><p>Purpose</p>
+</th><th scope="col" valign="top"><p>Additions and Exceptions to OSF/Motif Style</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/arrowleft.gif" height="17" width="17"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>upper-left 
+arrow<a name="idch11.feedback16"></a></p>
+</td><td valign="top"><p>General-purpose pointer, used for 
+selecting data, setting the values of 
+controls, and initiating actions (for 
+example, by clicking on a button).</p>
+</td><td valign="top"><p>In the IRIX Interactive Desktop environment, this pointer 
+should be red with a white outline (rather than black with a 
+white outline) so that it's easier to see against most typical 
+user-customized background colors and patterns.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/arrowright.gif" height="17" width="17"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>upper-right 
+arrow<a name="idch11.feedback17"></a></p>
+</td><td valign="top"><p>Indicates that a menu is being 
+displayed and that the application is 
+waiting for the user to select a menu 
+item or remove the menu.</p>
+</td><td valign="top"><p>This is the default pointer when a menu is pulled down from a 
+menu bar, popped up from the right mouse button, or 
+displayed from an option menu button. (See <a href="ch08.html#id98597">Chapter 8, 
+&#8220;Menus,&#8221;</a> for details on the various types of menus.) </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/watch.gif" height="17" width="17"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>watch<a name="idch11.feedback18"></a></p>
+</td><td valign="top"><p>Indicates that an operation is in 
+progress in the area, and that all 
+mouse-button and keyboard events 
+are ignored in the area. </p>
+</td><td valign="top"><p>Use this pointer instead of the hourglass because the watch is a 
+more universally recognized symbol for time. Also, use this 
+pointer if you estimate that the operation generally takes more 
+than 3 seconds. (Note that you might have to choose one of 
+several different platforms as your standard for estimating 
+times of operations.) For less than 3 seconds, maintain the 
+current pointer shape to avoid distracting users. For more than 
+5 seconds, use a work-in-progress dialog in addition to the 
+watch pointer. (See <a href="ch10.html#id30192">Chapter 10, &#8220;Dialogs.&#8221;</a>)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ibeam.gif" height="15" width="16"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>I-beam 
+pointer<a name="idch11.feedback19"></a></p>
+</td><td valign="top"><p>Indicates that your application is in 
+text-editing mode. (Note that this <br>
+I-beam pointer is different from the 
+I-beam text insertion cursor.)</p>
+</td><td valign="top"><p>OSF/Motif allows this pointer to be used for indicating that the 
+pointer is over an editable text component in a window that 
+uses implicit focus. Since you should use explicit focus when 
+moving within a window, you don't need the I-beam pointer 
+for this purpose. However, you can use it to indicate that your 
+application is in text-editing mode; this might be useful if your 
+application can edit both text and graphics, for example.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/question.gif" height="16" width="16"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>question 
+mark<a name="idch11.feedback20"></a></p>
+</td><td valign="top"><p>Indicates that the user is in 
+context-sensitive help mode and 
+needs to click on an area of the 
+screen to specify the exact help 
+information requested.</p>
+</td><td valign="top"><p>none</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/crosshair.gif" height="16" width="16"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>cross hair<a name="idch11.feedback21"></a></p>
+</td><td valign="top"><p>Used to make fine position 
+selections; for example, to indicate a 
+pixel to fill in a drawing program, or 
+to select the endpoint of a line.</p>
+</td><td valign="top"><p>none</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/resize.gif" height="35" width="35"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>resize<a name="idch11.feedback22"></a></p>
+</td><td valign="top"><p>Indicates positions when resizing an 
+area.</p>
+</td><td valign="top"><p>none</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/fourdirection.gif" height="16" width="16"></td></tr></table></div>
+</p>
+</td><td valign="top"><p>4-directional 
+arrow<a name="idch11.feedback23"></a></p>
+</td><td valign="top"><p>Indicates that either a move 
+operation or a resize operation 
+(before the resize direction has been 
+determined) is in progress.</p>
+</td><td valign="top"><p>none</p>
+</td></tr></tbody></table></div><p>The <i>OSF/Motif Style Guide </i>defines a few pointers that you shouldn't need to use: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Hourglass&#8212;Use the watch instead of the hourglass because the watch is a more universally recognized symbol for time.<a name="idch11.feedback24"></a></p>
+</li>
+<li><p>X&#8212;Reserved for use by the window manager.<a name="idch11.feedback25"></a></p>
+</li>
+</ul></div><p>OSF/Motif also defines a caution pointer to be used for indicating that all mouse and keyboard events are ignored in the area until the user performs an expected action in a primary modal or application modal dialog. You can use this pointer in your application if you want; note that many IRIX Interactive Desktop applications don't use it because at this time there's no automatic support for it in IRIS IM. (See <a href="ch10.html#id54825">&#8220;Dialog Modes&#8221; in Chapter 10</a> for more information on primary and application modal dialogs.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5496953"></a><a name="id29040"></a>Designing New Pointer Shapes</h3></div></div>
+<p>You might find it necessary to design new pointer shapes that represent functionality specific to your application, particularly if your application has modes. In these cases, the pointer shape can be used to indicate the current mode. For example, a paint program typically has different tools or modes that the user can select; the pointer shape might resemble a specific brush style, spray paint can, eraser, or I-beam pointer, depending on the tool selected. When you design new pointer shapes, follow the guidelines listed in the reference page on Pointer Shapes in the <a name="idch11.feedback26"></a><i>OSF/Motif Style Guide</i>: create a pointer shape that gives a hint about its purpose and is easy to see, avoid shapes that create visual clutter, and make its hotspot easy to locate. (The hotspot identifies where mouse actions occur.) </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5496989"></a>Pointer Shapes and Colors Guidelines</h3></div></div>
+<p><span class="bold"><b>When deciding which pointers to use in your application . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard pointers when possible.</p>
+</li>
+<li><p>Use the upper-left pointing arrow as a general-purpose pointer; this pointer should be red with a white outline.</p>
+</li>
+<li><p>Use the upper-right pointing arrow when a menu is pulled down from a menu bar, popped up from the right mouse button, or displayed from an option menu button. </p>
+</li>
+<li><p>Use the watch pointer for operations that take more than 3 seconds. (For less than 3 seconds, maintain the current pointer; for more than 5 seconds, also use a work-in-progress dialog.)</p>
+</li>
+<li><p>Use the I-beam pointer to indicate that your application is in a text-editing mode, but don't use it to indicate implicit focus over a text object within a window.</p>
+</li>
+<li><p>Use the question mark to indicate that the user is in context-sensitive help mode.</p>
+</li>
+<li><p>Use the sighting pointer (crosshair) to make fine position selections.</p>
+</li>
+<li><p>Use resize pointers to indicate positions when resizing an area.</p>
+</li>
+<li><p>Use the 4-directional arrow to indicate that either a move operation or a resize operation is in progress.</p>
+</li>
+<li><p>Don't use the hourglass pointer; use the watch pointer instead.</p>
+</li>
+<li><p>Don't use the X pointer (it's reserved for the window manager).</p>
+</li>
+<li><p>Don't assign new functionality to the standard pointer shapes; instead, design your own new pointer shape.</p>
+</li>
+</ul></div><p><span class="bold"><b>When designing new pointer shapes . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Create a pointer shape that gives a hint about its purpose.</p>
+</li>
+<li><p>Make the shape easy to see.</p>
+</li>
+<li><p>Make the hotspot easy to locate.</p>
+</li>
+<li><p>Avoid shapes that would create visual clutter.</p>
+</li>
+</ul></div><p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch10.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="pt03.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 10. Dialogs </td><td width="20%" align="center"> </td><td width="40%" align="right">Part III. 3D Style Guidelines </td></tr></table></div></body></html>

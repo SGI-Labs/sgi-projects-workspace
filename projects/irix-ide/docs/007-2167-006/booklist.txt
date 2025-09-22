@@ -1,0 +1,1 @@
+<BOOK NAME="UI_Glines" ALIAS="IRIX Interactive Desktop User Interface Guidelines" SGITYPE="sgi_html" SGIVERSION="007-2167-006" SGIBKADDR="techpubs@sgi.com" SGIGROUP="HTML">

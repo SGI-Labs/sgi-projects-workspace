@@ -1,0 +1,586 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 5. Window, Session, and Desk Management</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch04.html" title="Chapter 4. Using the SGI Enhanced Widgets"><link rel="next" href="ch06.html" title="Chapter 6. Customizing Your Application's Minimized Windows"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 5. Window, Session, and Desk Management</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch06.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE92718-PARENT"></a>Chapter 5. Window, Session, and Desk Management</h2></div></div>
+<p>This chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#LE52150-PARENT" title="Window, Session, and Desk Management Overview">&#8220;Window, Session, and Desk Management Overview&#8221;</a> briefly discusses window, session, and desk management on Silicon Graphics systems.</p>
+</li>
+<li><p><a href="ch05.html#LE14513-PARENT" title="Implementing an Application Model">&#8220;Implementing an Application Model&#8221;</a> describes how to structure your application to follow one of the four application models.</p>
+</li>
+<li><p><a href="ch05.html#LE96868-PARENT" title="Interacting With the Window and Session Manager">&#8220;Interacting With the Window and Session Manager&#8221;</a> describes how to create windows and interact with the window and session manager.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE52150-PARENT"></a>Window, Session, and Desk Management Overview</h2></div></div>
+<p>This section briefly discusses features of window, session, and desk management on Silicon Graphics system:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#LE40567-PARENT" title="Window Management">&#8220;Window Management&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE17311-PARENT" title="Session Management">&#8220;Session Management&#8221;</a></p>
+</li>
+<li><p><a href="ch05.html#LE23180-PARENT" title="Desk Management">&#8220;Desk Management&#8221;</a></p>
+</li>
+</ul></div><p>This section also provides a list of references for further reading on window and session management.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE40567-PARENT"></a>Window Management</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-0"></a>
+<a class="indexterm" name="IT05.Window.Management-1"></a>
+<a class="indexterm" name="IT05.Window.Management-2"></a>
+<tt>4Dwm</tt>, which is based on <tt>mwm</tt> (the Motif Window Manager), is the window manager typically used on Silicon Graphics workstations. It provides functions that allow both users and programmers to control elements of window states such as: placement, size, icon/normal display, and input-focus ownership. In addition to window management, <tt>4Dwm</tt> provides session and desks management.</p>
+<p>Chapter 3, &#8220;Windows in the IRIX Interactive Desktop Environment,&#8221;
+ of the <i>IRIX Interactive User Interface Guidelines</i> discusses the interactions and behaviors that your application's windows should support. <a href="ch05.html#LE96868-PARENT" title="Interacting With the Window and Session Manager">&#8220;Interacting With the Window and Session Manager&#8221;</a> describes how to comply with the style guidelines.</p>
+<p>See <span class="bold"><b>IRIS Essentials</b></span> for more information about the features <tt>4Dwm</tt> provides for your users. See the <tt>mwm(1X)</tt> and <tt>4Dwm(1X)</tt> reference pages for more information about the features <tt>4Dwm</tt> provides.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE17311-PARENT"></a>Session Management</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-3"></a>
+This section describes session management and explains how to add it to your application. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#LE50285-PARENT" title="Overview of Session Management">&#8220;Overview of Session Management&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE24459-PARENT" title="Adding Session Management to Your Application">&#8220;Adding Session Management to Your Application&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE30184-PARENT" title="Setting the WM_COMMAND String">&#8220;Setting the WM_COMMAND String&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE16597-PARENT" title="Saving Session Information to a File">&#8220;Saving Session Information to a File&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE50285-PARENT"></a>Overview of Session Management</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-4"></a>
+<a class="indexterm" name="IT05.Window.Management-5"></a>
+<a class="indexterm" name="IT05.Window.Management-6"></a>
+<a class="indexterm" name="IT05.Window.Management-7"></a>
+<a class="indexterm" name="IT05.Window.Management-8"></a>
+Session management allows users to log out, and any applications that are running at logout automatically restart when they log back in. The 4Dwm window manager keeps a list of the applications and desks that were previously running when the user last logged out and restarts them when the user logs in again. </p>
+<p>For your application to be restarted via the <tt>4Dwm</tt> session manager, the application must register its initial state with the session manager and make sure the current state is registered at all times.</p>
+<p><a class="indexterm" name="IT05.Window.Management-9"></a>
+<a class="indexterm" name="IT05.Window.Management-10"></a>
+Additionally, your application should restart in the same state it was in when the user logged out (for example, the same windows open, the same files open, and so on). To support this, you need to design your application so that when the <tt>4Dwm</tt> session manager restarts it, it can redisplay any of its co-primary or support windows that were open when the user logged out, reopen any data files that were open, and so on. You can support this either by providing command-line options to your application or other mechanisms such as a state file that your application reads when it is launched.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5201351"></a>Types of Session Management: Continuous and Explicit</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-11"></a>
+<a class="indexterm" name="IT05.Window.Management-12"></a>
+<a class="indexterm" name="IT05.Window.Management-13"></a>
+<a class="indexterm" name="IT05.Window.Management-14"></a>
+The two types of session management include <span class="bold"><b>continuous</b></span> session management and <span class="bold"><b>explicit</b></span> session management. Continuous session management restarts the applications that were running when the user last logged out of the window manager. This is the default setting.</p>
+<p>Explicit session management ignores the windows that were open when the user last logged out and always opens a particular set of windows that the user has chosen. Users can configure the windows on the desktop by using the Window Settings Control Panel. They can launch this panel via the Toolchest. From the Toolchest, open the Desktop menu, select &#8220;Customize,&#8221; and then select &#8220;Windows.&#8221; The Windows Settings dialog box appears (see <a href="ch05.html#id5201513" title="Figure 5-1. Window Settings Control Panel">Figure 5-1</a>). The &#8220;Save Windows &amp; Desks&#8221; item on the Window Settings Control Panel configures either continuous or explicit session management. A user can select explicit, and then press the &#8220;Set Home Session&#8221; button to save the (current) explicit window configuration. Also, users can launch this control panel from the Icon Catalog's Control Panel page. </p>
+<p><div class="figure"><a name="id5201513"></a><p><a name="id5201513"></a><b>Figure 5-1. Window Settings Control Panel</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/05.Window.Management-1.gif" alt="Window Settings Control Panel" height="346" width="284"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE24459-PARENT"></a>Adding Session Management to Your Application</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-15"></a>
+<a class="indexterm" name="IT05.Window.Management-16"></a>
+<a class="indexterm" name="IT05.Window.Management-17"></a>
+Applications can communicate with the window manager by setting properties on the top level window. The WM_COMMAND property gives the window manager the command line that can be used to re-invoke the application in its current state. The 4Dwm window manager sends a WM_SAVE_YOURSELF message to each window that subscribes to tell it to update its WM_COMMAND property and then reads in the value. If the user selects continuous session management, 4Dwm sends the message every 10 minutes and at logout. If the user selects explicit session management, the window manager only queries the applications when the user presses the &#8220;Set Home Session&#8221; button.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE30184-PARENT"></a>Setting the WM_COMMAND String</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-18"></a>
+<a class="indexterm" name="IT05.Window.Management-19"></a>
+If you use ViewKit or <tt>XtAppInitialize(3Xt)</tt>, the initial WM_COMMAND string is set for you when the top level window is realized. Use the <tt>xprop</tt>(1) command to make sure the WM_COMMAND string is set correctly for the top level window. For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+WM_COMMAND(STRING) = { &#8220;webmagic&#8221;, &#8220;/usr/tmp/sgiLook.html&#8221; }
+</pre></td></tr></table><p>Even if WM_COMMAND is initially set by your toolkit, you need to keep WM_COMMAND updated if your program changes its state. For instance, if the user renames a data file or successfully opens a new data file, you need to change the WM_COMMAND string with the <tt>XSetCommand</tt>(3X11):</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+XSetCommand(Display *display, Window w,char **argv,int argc);
+</pre></td></tr></table><p>This can be done in the function that changes the state, and is simpler than responding to the window manager's WM_SAVE_YOURSELF message.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE16597-PARENT"></a>Saving Session Information to a File</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-20"></a>
+<a class="indexterm" name="IT05.Window.Management-21"></a>
+If your application already saves state information to a file instead of using the command line, this &#8220;state file&#8221; can also be used for session management. To work correctly with the user's Windows Control Panel setting, the application should update the file only in response to the window manager's WM_SAVE_YOURSELF message (see <a href="ch05.html#LE72263-PARENT" title="Example 5-1. Session Management Example Code: saveyourself.c">Example 5-1</a>, <span class="bold"><b>saveyourself.c</b></span>). This strategy does not work correctly if several instances of your application are able to run at the same time. Only applications that enforced a &#8220;Run Once&#8221; policy can rely on this strategy. </p>
+<p>For more information, see the ViewKit reference page, <tt>VkRunOnce(3x)</tt>, and <tt>XSetCommand(3X11)</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5201809"></a>Debugging Tips</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-22"></a>
+<a class="indexterm" name="IT05.Window.Management-23"></a>
+<a class="indexterm" name="IT05.Window.Management-24"></a>
+When debugging:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use <tt>xprop(1)</tt> to see the WM_COMMAND string property.</p>
+</li>
+<li><p>Make sure that you use the full pathname for data file arguments, which typically are not referenced in the user's path.</p>
+</li>
+<li><p>If your application has multiple windows, only set WM_COMMAND for the top-level window.<a class="indexterm" name="IT05.Window.Management-25"></a>
+ </p>
+<div class="example"><a name="LE72263-PARENT"></a><p><a name="LE72263-PARENT"></a><b>Example 5-1. Session Management Example Code: saveyourself.c</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* saveyourself.c                                       */
+/*                                                      */
+/* Example code for handling the window manager's       */
+/* WM_SAVE_YOURSELF Protocol                            */
+/*                                                      */
+/* cc -o saveyourself saveyourself.c -lXm -lXt          */
+ 
+#include &lt;Xm/Protocols.h&gt;
+#include &lt;Xm/Label.h&gt;
+ 
+void saveYourSelfCallback(Widget w,  XtPointer client_data, 
+                             XtPointer call_data)
+{
+    printf(&#8220;Update state file if needed, then update WM_COMMAND\n&#8221;);
+}
+ 
+void main(int argc, char** argv)
+{
+   Widget toplevel, label;
+   XtAppContext app_context;
+   Atom WM_SAVE_YOURSELF;
+ 
+   toplevel = XtAppInitialize(&amp;app_context, &#8220;SaveYourSelf&#8221;,
+                              NULL, 0, &amp;argc, argv, NULL, NULL, 0);
+ 
+   label = XmCreateLabel(toplevel, &#8220;saveme&#8221;, NULL, 0);
+   XtManageChild(label);
+ 
+   WM_SAVE_YOURSELF = XmInternAtom( XtDisplay(toplevel),
+                                      &#8220;WM_SAVE_YOURSELF&#8221;,
+                                      FALSE);
+ 
+   XmAddWMProtocolCallback( toplevel, WM_SAVE_YOURSELF,
+                            saveYourSelfCallback, NULL );
+ 
+   XtRealizeWidget(toplevel);
+   XtAppMainLoop(app_context);
+}
+</pre></td></tr></table><br></div><br></li>
+</ul></div><p><a href="ch05.html#LE70788-PARENT" title="Handling the Window Manager Save Yourself Protocol">&#8220;Handling the Window Manager Save Yourself Protocol&#8221;</a> describes what your application needs to do to support session management. &#8220;Session Management&#8221; in Chapter 3 of the <i>IRIX Interactive User Interface Guidelines</i> provides further guidelines for handling session management.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5201987"></a>Reference</h4></div></div>
+<p>For more information, see <i>Inter-Client Communication Conventions Manual</i> (ICCCM). The ICCCM is reprinted as an appendix in O'Reilly and Associates, <i>X Protocol Reference</i> Manual, Volume Zero. </p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE23180-PARENT"></a>Desk Management</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-26"></a>
+Users can use &#8220;desks&#8221; to create multiple virtual screens. <a class="indexterm" name="IT05.Window.Management-27"></a>
+<a class="indexterm" name="IT05.Window.Management-28"></a>
+<a class="indexterm" name="IT05.Window.Management-29"></a>
+They can assign any primary or support window to any desk, causing that window to appear in the thumbnail sketch in the Desks Overview window.</p>
+<p>&#8220;Desks&#8221; in Chapter 3
+ of the <i>IRIX Interactive User Interface Guidelines</i> discusses the important development concerns issues relating to desks. Review the information in &#8220;Session Management,&#8221; and adhere to the &#8220;Session Management Guidelines,&#8221; and the window manager will take care of desks for you. </p>
+<p>The key points to keep in mind are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Transient windows appear on every desk and are not shown in the Desks overview window&#8212;so choose your transient windows carefully.</p>
+</li>
+<li><p>Application windows that are on a desk other than the current one are in a state similar to the minimized state&#8212;processing continues although the window is no longer mapped to the screen display. Keep this in mind when selecting which operations should continue to be processed when your application is in a minimized state.</p>
+</li>
+<li><p>Users can select different backgrounds for different desks, so your application should not create its own screen background. </p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE87980-PARENT"></a>Further Reading on Window and Session Management</h3></div></div>
+<p>For more information on window and session management with <tt>4Dwm</tt>, refer to the <tt>mwm(1X)</tt> and <tt>4Dwm(1X)</tt> reference pages. You may also want to look at <i>IRIS Essentials</i>, since this book explains important window and session management features to your users.</p>
+<p>For more information on window and session management with Xt, refer to the chapters on Interclient Communication in these manuals:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>The X Window Systems Programming and Applications with Xt, OSF/Motif Edition</i>, Second Edition, by Doug Young</p>
+</li>
+<li><p>O'Reilly Volume Four, <i>X Toolkit Intrinsics Programming Manual</i>, OSF/Motif Edition, by Adrian Nye and Tim O'Reilly</p>
+</li>
+</ul></div><p>For more information on window and session management with Xlib, refer to the chapters on Inter-Client Communication in O'Reilly Volume One, <i>Xlib Programming Manual</i>, by Adrian Nye. For more detailed information, refer to the <i>Inter-Client Communications Conventions Manual</i> (ICCCM). (The ICCCM is reprinted as an appendix of O'Reilly Volume Zero, <i>X Protocol Reference Manual</i>.)</p>
+<p>More detailed information on window properties is available in the <i>OSF/Motif Programmer's Guide</i>, in the chapter on &#8220;Inter-Client Communication Conventions.&#8221;</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE14513-PARENT"></a>Implementing an Application Model</h2></div></div>
+<p>&#8220;Application Models&#8221; in Chapter 6
+ of the <i>IRIX Interactive User Interface Guidelines</i> <a class="indexterm" name="IT05.Window.Management-30"></a>
+<a class="indexterm" name="IT05.Window.Management-31"></a>
+describes four application models based on four different window categories: main primary windows, co-primary windows, support windows, and dialogs. It also describes how to select a model appropriate for your application. This section provides suggestions for implementing each application model, including recommended shell types for your primary windows. <a href="ch05.html#LE96868-PARENT" title="Interacting With the Window and Session Manager">&#8220;Interacting With the Window and Session Manager&#8221;</a> describes how to create the windows and get them to look and behave in the manner described in &#8220;Application Window Categories and Characteristics&#8221; in Chapter 3 of the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5202357"></a>Implementing the &#8220;Single Document, One Primary&#8221; Model</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-32"></a>
+<a class="indexterm" name="IT05.Window.Management-33"></a>
+This model is the simplest to implement. You can use the ApplicationShell returned by <tt>XtAppInitialize()</tt> as your application's main window. This model requires no special treatment to handle schemes or for window or session management.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5202421"></a>Implementing the &#8220;Single Document, Multiple Primaries&#8221; Model</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-34"></a>
+<a class="indexterm" name="IT05.Window.Management-35"></a>
+The simplest way to implement this model is to use the ApplicationShell returned by <tt>XtAppInitialize()</tt> as your application's main window. You can create co-primary windows as popup children of the main window using TopLevelShells. This approach requires no special treatment to handle schemes or for window or session management.</p>
+<p>You can also choose the implement this model using the techniques described in &#8220;Implementing the &#8220;Multiple Document, No Visible Main&#8221; Model,&#8221; although this requires more work.</p>
+<div class="caution"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/caution.png" height="24" width="24"></td><td align="left" valign="top"><b>Caution: </b>Don't use <tt>XtAppCreateShell()</tt> to create co-primary windows. If you do, the windows don't pick up the resources specified in schemes.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5202487"></a>Implementing the &#8220;Multiple Document, Visible Main&#8221; Model</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-36"></a>
+<a class="indexterm" name="IT05.Window.Management-37"></a>
+Once again, the simplest way to implement this model is to use the ApplicationShell returned by <tt>XtAppInitialize()</tt> as your application's main window. You can create co-primary windows as popup children of the main window using TopLevelShells. This approach requires no special treatment to handle schemes or for window or session management.</p>
+<p>You can also choose the implement this model using the techniques described in &#8220;Implementing the &#8220;Multiple Document, No Visible Main&#8221; Model,&#8221; although this requires more work.</p>
+<div class="caution"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/caution.png" height="24" width="24"></td><td align="left" valign="top"><b>Caution: </b>Don't use <tt>XtAppCreateShell()</tt> to create co-primary windows. If you do, the windows don't pick up the resources specified in schemes.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE64025-PARENT"></a>Implementing the &#8220;Multiple Document, No Visible Main&#8221; Model</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-38"></a>
+<a class="indexterm" name="IT05.Window.Management-39"></a>
+This model requires more careful consideration than the other models. Presumably, the visible windows can be created and destroyed in any order; therefore it is very difficult to use one as a main window and have the others be children of it.</p>
+<p>Instead, the best solution in this case is to leave the ApplicationShell returned by <tt>XtAppInitialize()</tt> unrealized. You can then create the visible co-primary windows as popup children of this invisible shell.</p>
+<p>Session management requires a realized ApplicationShell widget so that your application can store restart information in its <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources. Because your application's visible windows can be created and destroyed dynamically, you should use ApplicationShells rather than TopLevelShells for your visible windows. Then you can set the <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources on any of them. (Another option would be to use TopLevelShells for the visible windows and then explicitly create and set WM_COMMAND and WM_MACHINE properties on the windows.)</p>
+<p>One complication when using ApplicationShells is that by default, IRIS IM automatically quits an application when it destroys an ApplicationShell. To avoid this, you must set each window's <span class="bold"><b>XmNdeleteResponse</b></span> resource to XmDO_NOTHING, and then explicitly handle the window manager's WM_DELETE_WINDOW protocol for each window. <a href="ch05.html#LE15555-PARENT" title="Handling the Window Manager Delete Window Protocol">&#8220;Handling the Window Manager Delete Window Protocol&#8221;</a> describes how to implement these handlers.</p>
+<p>Another complication is that the initial values of the <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources are stored in the application's invisible main window rather than a visible window. This is also true for the <span class="bold"><b>XmNgeometry</b></span> resource if specified by the user. To avoid this, you should copy these values from the invisible main window to your application's first visible window.</p>
+<div class="caution"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/caution.png" height="24" width="24"></td><td align="left" valign="top"><b>Caution: </b>Don't use <tt>XtAppCreateShell()</tt> to create co-primary windows. If you do, the windows don't pick up the resources specified in schemes. 
+</td></tr></table><hr noshade="noshade"></div><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE96868-PARENT"></a>Interacting With the Window and Session Manager</h2></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-40"></a>
+<a class="indexterm" name="IT05.Window.Management-41"></a>
+<a class="indexterm" name="IT05.Window.Management-42"></a>
+<a class="indexterm" name="IT05.Window.Management-43"></a>
+<a class="indexterm" name="IT05.Window.Management-44"></a>
+Most communication between an application and a window manager takes place through properties on an application's top-level windows. The window manager can also generate events that are available to the application. You can use Xlib functions to set properties and handle window manager events.</p>
+<p>In IRIS IM, shell widgets simplify communications with the window manager. The application can set most window properties by setting shell resources. Shells also select for and handle most events from the window manager.</p>
+<p>Because this guide assumes that you are programming in IRIS IM rather than Xlib, this chapter describes the IRIS IM mechanisms for creating windows and interacting with the window and session manager. Topics include: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#LE51311-PARENT" title="Creating Windows and Setting Decorations">&#8220;Creating Windows and Setting Decorations&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE73941-PARENT" title="Handling Window Manager Protocols">&#8220;Handling Window Manager Protocols&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE12004-PARENT" title="Setting the Window Title">&#8220;Setting the Window Title&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE90776-PARENT" title="Controlling Window Placement and Size">&#8220;Controlling Window Placement and Size&#8221;</a> </p>
+</li>
+</ul></div><p>For detailed information about setting window properties using shell resources, consult Chapter 11, &#8220;Interclient Communication,&#8221; in O'Reilly's <i>X Toolkit Intrinsics Programming Manual </i>and Chapter 16, &#8220;Interclient Communication,&#8221; in the <i>OSF/Motif Programmer's Guide</i>. For detailed information about window properties and setting them using Xlib routines, consult Chapter 12, &#8220;Interclient Communication,&#8221; in O'Reilly's <i>Xlib Programming Manual</i>.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE51311-PARENT"></a>Creating Windows and Setting Decorations</h3></div></div>
+<p>Chapter 6, &#8220;Application Windows,&#8221;
+ in the <i>IRIX Interactive User Interface Guidelines</i> describes <a class="indexterm" name="IT05.Window.Management-45"></a>
+several application models based on four different window categories: main primary windows, co-primary windows, support windows, and dialogs. This section describes how to implement these window categories with proper window decorations and window menu entries:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#LE96168-PARENT" title="Creating a Main Primary Window">&#8220;Creating a Main Primary Window&#8221;</a></p>
+</li>
+<li><p><a href="ch05.html#LE44175-PARENT" title="Creating a Co-Primary Window">&#8220;Creating a Co-Primary Window&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE40129-PARENT" title="Creating a Support Window">&#8220;Creating a Support Window&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE37042-PARENT" title="Creating a Dialog">&#8220;Creating a Dialog&#8221;</a> </p>
+</li>
+</ul></div><p><a class="indexterm" name="IT05.Window.Management-46"></a>
+<a class="indexterm" name="IT05.Window.Management-47"></a>
+<a class="indexterm" name="IT05.Window.Management-48"></a>
+To properly integrate with the IRIX Interactive Desktop, you need to use the appropriate shell widget for each widow category. This section describes which shell widget to use for each window category. Then you need to properly set the shell's <span class="bold"><b>XmNmwmFunctions</b></span> resource to control which entries appear in the window menu and the <span class="bold"><b>XmNmwmDecorations</b></span> resource to remove the window's resize handles, if appropriate.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE96168-PARENT"></a>Creating a Main Primary Window</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-49"></a>
+<a class="indexterm" name="IT05.Window.Management-50"></a>
+<a class="indexterm" name="IT05.Window.Management-51"></a>
+<a class="indexterm" name="IT05.Window.Management-52"></a>
+<a class="indexterm" name="IT05.Window.Management-53"></a>
+<a class="indexterm" name="IT05.Window.Management-54"></a>
+Your application's main primary window must be an ApplicationShell. Typically, you use the ApplicationShell widget returned by <tt>XtAppInitialize()</tt> as your application's main primary window.</p>
+<p>You should set the main primary window's <span class="bold"><b>XmNmwmFunctions</b></span> resource to remove the &#8220;Close&#8221; option from the window menu. Also, if you don't want the user to be able to resize the window, you should set <span class="bold"><b>XmNmwmFunctions</b></span> to remove the &#8220;Size&#8221; and &#8220;Maximize&#8221; options and set <span class="bold"><b>XmNmwmDecorations</b></span> to remove the resize handles. <a href="ch05.html#LE25385-PARENT" title="Example 5-2. Creating a Main Primary Window ">Example 5-2</a> shows how you can create a main primary window and set the resource values appropriately.</p>
+<p>&#8220;Main and Co-Primary Windows&#8221; in Chapter 6
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for using main primary windows.</p>
+<div class="example"><a name="LE25385-PARENT"></a><p><a name="LE25385-PARENT"></a><b>Example 5-2. Creating a Main Primary Window </b></p><a class="indexterm" name="IT05.Window.Management-55"></a><a class="indexterm" name="IT05.Window.Management-56"></a><a class="indexterm" name="IT05.Window.Management-57"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;Xm/Xm.h&gt;           /* Required by all Motif applications */
+#include &lt;Xm/MwmUtil.h&gt;      /* Required to set window menu and decorations */
+#include &lt;X11/Shell.h&gt;       /* Shell definitions */
+ 
+void main ( int argc, char **argv )
+{
+    Widget       mainWindow; /* Main window shell widget */
+    XtAppContext app;        /* An application context, needed by Xt */
+    Arg          args[10];   /* Argument list */
+    int          n;          /* Argument count */
+ 
+    /*
+     * Initialize resource value flags to include all window menu options and
+     * all decorations.
+     */
+ 
+    long functions = MWM_FUNC_ALL;
+    long handleMask = MWM_DECOR_ALL;
+    
+    n = 0;
+    
+    /*
+     * The following lines REMOVE items from the window manager menu.
+     */
+    
+    functions  |= MWM_FUNC_CLOSE;        /* Remove &quot;Close&quot; menu option */
+    
+    /* Include the following two lines only if the window is *not* resizable */
+ 
+    functions  |= MWM_FUNC_RESIZE;       /* Remove &quot;Size&quot; menu option */
+    functions  |= MWM_FUNC_MAXIMIZE;     /* Remove &quot;Maximize&quot; menu option */
+    
+    XtSetArg(args[n], XmNmwmFunctions, functions); n++;
+ 
+    /* Include the following two lines only if the window is *not* resizable */
+ 
+    handleMask |= MWM_DECOR_RESIZEH;     /* Remove resize handles */
+    
+    XtSetArg(args[n], XmNmwmDecorations, handleMask); n++
+    
+    /*
+     * Initialize Xt and create shell
+     */
+    
+    mainWindow = XtAppInitialize ( &amp;app, &quot;WindowTest&quot;, NULL, 0, 
+                                   &amp;argc, argv, NULL, args, n );
+ 
+    /* ... */
+ 
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE44175-PARENT"></a>Creating a Co-Primary Window</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-58"></a>
+<a class="indexterm" name="IT05.Window.Management-59"></a>
+<a class="indexterm" name="IT05.Window.Management-60"></a>
+<a class="indexterm" name="IT05.Window.Management-61"></a>
+Your application's co-primary windows should be ApplicationShells or TopLevelShells. <a href="ch05.html#LE14513-PARENT" title="Implementing an Application Model">&#8220;Implementing an Application Model&#8221;</a> describes which to choose depending on your application model. The easiest way to implement these windows are as pop-up children of the shell widget returned by <tt>XtAppInitialize()</tt> (which is typically your application's main primary window). </p>
+<p>If the user can't quit the application from a co-primary window, you should set the window's <span class="bold"><b>XmNmwmFunctions</b></span> resource to remove the &#8220;Exit&#8221; option from the window menu. Also, if you don't want the user to be able to resize the window, you should set <span class="bold"><b>XmNmwmFunctions</b></span> to remove the &#8220;Size&#8221; and &#8220;Maximize&#8221; options and set <span class="bold"><b>XmNmwmDecorations</b></span> to remove the resize handles. <a href="ch05.html#LE44281-PARENT" title="Example 5-3. Creating a Co-Primary Window ">Example 5-3</a> shows how you can create a co-primary window and set the resource values appropriately.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The default action when IRIS IM destroys an ApplicationShell is to quit your application. To avoid this if you are using ApplicationShells for your co-primary windows, you must set each window's <span class="bold"><b>XmNdeleteResponse</b></span> resource to XmDO_NOTHING, and then explicitly handle the window manager's WM_DELETE_WINDOW protocol for each window. You might want to follow this approach even if you use TopLevelShells for co-primary windows so that you can simply popdown the window instead of deleting it. This can save time if you might redisplay the window later. <a href="ch05.html#LE15555-PARENT" title="Handling the Window Manager Delete Window Protocol">&#8220;Handling the Window Manager Delete Window Protocol&#8221;</a> describes how to implement these handlers.
+</td></tr></table><hr noshade="noshade"></div><p>&#8220;Main and Co-Primary Windows&#8221; in Chapter 6
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for using co-primary windows.</p>
+<div class="example"><a name="LE44281-PARENT"></a><p><a name="LE44281-PARENT"></a><b>Example 5-3. Creating a Co-Primary Window </b></p><a class="indexterm" name="IT05.Window.Management-62"></a><a class="indexterm" name="IT05.Window.Management-63"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;Xm/Xm.h&gt;       /* Required by all Motif applications */
+#include &lt;Xm/MwmUtil.h&gt;  /* Required to set window menu and decorations */
+#include &lt;X11/Shell.h&gt;   /* Shell definitions */
+ 
+Widget       mainWindow; /* Main window shell widget */
+Widget       coPrimary;  /* Co-primary window shell widget */
+Arg          args[10];   /* Argument list */
+int          n;          /* Argument count */
+ 
+/*
+ * Initialize resource value flags to include all window menu options and
+ * all decorations.
+ */
+ 
+long functions = MWM_FUNC_ALL;
+long handleMask = MWM_DECOR_ALL;
+ 
+/* ... */
+
+n = 0;
+ 
+/*
+ * The following lines REMOVE items from the  window manager menu.
+ */
+ 
+/* Remove the &quot;Exit&quot; window menu option if users can *not* quit from this window */
+ 
+functions  |= MWM_FUNC_QUIT;
+ 
+/* Include the following two lines only if the window is *not* resizable */
+ 
+functions  |= MWM_FUNC_RESIZE;       /* Remove &quot;Size&quot; menu option */
+functions  |= MWM_FUNC_MAXIMIZE;     /* Remove &quot;Maximize&quot; menu option */
+    
+XtSetArg(args, XmNmwmFunctions, functions); n++;
+ 
+/* Include the following two lines only if the window is *not* resizable */
+ 
+handleMask |= MWM_DECOR_RESIZEH;     /* Remove resize handles */
+    
+XtSetArg(args, XmNmwmDecorations, handleMask); n++;
+ 
+/* You need the following line only if you use an ApplicationShell for the window */
+ 
+XtSetArg(args, XmNdeleteResponse, XmDO_NOTHING); n++;
+ 
+/* 
+ * Assume that the application has already created a main window and assigned its widget
+ * to the variable mainWindow
+ */
+ 
+coPrimary = XtCreatePopupShell( &quot;coPrimary&quot;, applicationShellWidgetClass,
+                                mainWindow, args, n );
+ 
+/* ... */
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE40129-PARENT"></a>Creating a Support Window</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-64"></a>
+<a class="indexterm" name="IT05.Window.Management-65"></a>
+<a class="indexterm" name="IT05.Window.Management-66"></a>
+<a class="indexterm" name="IT05.Window.Management-67"></a>
+Support windows are essentially custom dialogs. The easiest way to create a support window is to use <tt>XmCreateBulletinBoardDialog()</tt> to create a DialogShell containing a BulletinBoard widget, or use <tt>XmCreateFormDialog()</tt> to create a DialogShell containing a Form widget. You can then add appropriate controls and displays as children of the BulletinBoard or Form.</p>
+<p>Another advantage to using a DialogShell for support windows is that they automatically have the proper window menu options and decorations. If you don't want the user to be able to resize the window&#8212;and you implemented the support window as a customized dialog&#8212;you should set <span class="bold"><b>XmNnoResize</b></span> to &#8220;TRUE&#8221; to remove the &#8220;Size&#8221; and &#8220;Maximize&#8221; options and to remove the resize handles. <a href="ch05.html#LE49142-PARENT" title="Example 5-4. Creating a Support Window ">Example 5-4</a> shows how you can create a support window and set the resource values appropriately.</p>
+<p>&#8220;Support Windows&#8221; in Chapter 6
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for using support windows.</p>
+<div class="example"><a name="LE49142-PARENT"></a><p><a name="LE49142-PARENT"></a><b>Example 5-4. Creating a Support Window </b></p><a class="indexterm" name="IT05.Window.Management-68"></a><a class="indexterm" name="IT05.Window.Management-69"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;Xm/Xm.h&gt;          /* Required by all Motif applications */
+#include &lt;Xm/MwmUtil.h&gt;     /* Required to set window menu and decorations */
+#include &lt;X11/Form.h&gt;       /* Form definitions */
+ 
+Widget       parentWindow;  /* Parent window of support window */
+Widget       supportWindow; /* Support window */
+Arg          args[10];      /* Argument list */
+int          n;             /* Argument count */
+ 
+/* ... */
+ 
+n = 0;
+ 
+/* Include the following line only if the window is *not* resizable */
+ 
+XtSetArg(args, XmNnoResize, TRUE); n++
+ 
+supportWindow = XmCreateFormDialog( parentWindow, &quot;supportWindow&quot;, args, n );
+ 
+/* Create the window interface... */
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE37042-PARENT"></a>Creating a Dialog</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-70"></a>
+<a class="indexterm" name="IT05.Window.Management-71"></a>
+<a class="indexterm" name="IT05.Window.Management-72"></a>
+<a class="indexterm" name="IT05.Window.Management-73"></a>
+<a class="indexterm" name="IT05.Window.Management-74"></a>
+The easiest way to create dialogs is to use the IRIS IM convenience functions such as <tt>XmCreateMessageDialog()</tt> and <tt>XmCreatePromptDialog()</tt>. These functions automatically set most of the window characteristics required for the IRIX Interactive Desktop environment.</p>
+<p>Dialogs automatically have the proper window menu options and decorations. If you don't want the user to be able to resize the dialog, you should set <span class="bold"><b>XmNnoResize</b></span> to &#8220;TRUE&#8221; to remove the &#8220;Size&#8221; and &#8220;Maximize&#8221; options and to remove the resize handles. <a href="ch05.html#LE90677-PARENT" title="Example 5-5. Creating a Dialog ">Example 5-5</a> shows an example of creating a WarningDialog and setting the resource values appropriately.</p>
+<p>Chapter 10, &#8220;Dialogs,&#8221;
+ in the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for using dialogs.</p>
+<div class="example"><a name="LE90677-PARENT"></a><p><a name="LE90677-PARENT"></a><b>Example 5-5. Creating a Dialog </b></p><a class="indexterm" name="IT05.Window.Management-75"></a><a class="indexterm" name="IT05.Window.Management-76"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;Xm/Xm.h&gt;          /* Required by all Motif applications */
+#include &lt;Xm/MwmUtil.h&gt;     /* Required to set window menu and decorations */
+#include &lt;Xm/MessageB.h&gt;    /* Warning dialog definitions */
+ 
+Widget       parentWindow;  /* Parent window of dialog */
+Widget       dialog;        /* Dialog */
+Arg          args[10];      /* Argument list */
+int          n;             /* Argument count */
+ 
+/* ... */
+ 
+n = 0;
+ 
+/* Include the following line only if the window is *not* resizable */
+ 
+XtSetArg(args, XmNnoResize, TRUE); n++
+ 
+dialog = XmCreateWarningDialog ( parentWindow, &quot;warningDialog&quot;, args, n );
+</pre></td></tr></table><br></div><br></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE73941-PARENT"></a>Handling Window Manager Protocols</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-77"></a>
+<a class="indexterm" name="IT05.Window.Management-78"></a>
+This section describes how to handle window manager <span class="bold"><b>protocols</b></span>:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch05.html#LE81479-PARENT" title="Handling the Window Manager Quit Protocol">&#8220;Handling the Window Manager Quit Protocol&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE15555-PARENT" title="Handling the Window Manager Delete Window Protocol">&#8220;Handling the Window Manager Delete Window Protocol&#8221;</a> </p>
+</li>
+<li><p><a href="ch05.html#LE70788-PARENT" title="Handling the Window Manager Save Yourself Protocol">&#8220;Handling the Window Manager Save Yourself Protocol&#8221;</a> </p>
+</li>
+</ul></div><p> <a class="indexterm" name="IT05.Window.Management-79"></a>
+<a class="indexterm" name="IT05.Window.Management-80"></a>
+<a class="indexterm" name="IT05.Window.Management-81"></a>
+Protocols allow the window manager to send messages to your application. The window manager sends these messages only if your application registers callback function to handle the corresponding protocols.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE81479-PARENT"></a>Handling the Window Manager Quit Protocol</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-82"></a>
+<a class="indexterm" name="IT05.Window.Management-83"></a>
+<a class="indexterm" name="IT05.Window.Management-84"></a>
+<a class="indexterm" name="IT05.Window.Management-85"></a>
+When a user selects the &#8220;Exit&#8221; option from a window menu, the window manager sends a Quit message to your application. You should install a callback routine to handle this event. <a href="ch05.html#LE80772-PARENT" title="Example 5-6. Handling the Window Manager Quit Protocol ">Example 5-6</a> demonstrates installing such a callback for the window specified by <i>mainWindow</i>.</p>
+<div class="example"><a name="LE80772-PARENT"></a><p><a name="LE80772-PARENT"></a><b>Example 5-6. Handling the Window Manager Quit Protocol </b></p><a class="indexterm" name="IT05.Window.Management-86"></a><a class="indexterm" name="IT05.Window.Management-87"></a><a class="indexterm" name="IT05.Window.Management-88"></a><a class="indexterm" name="IT05.Window.Management-89"></a><a class="indexterm" name="IT05.Window.Management-90"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Atom WM_QUIT_APP = XmInternAtom( XtDisplay(mainWindow),
+                                 &quot;_WM_QUIT_APP&quot;, 
+                                 FALSE );
+XmAddWMProtocolCallback( mainWindow, WM_QUIT_APP,
+                         quitCallback, NULL );
+ 
+/* ... */
+ 
+quitCallback( Widget w, XtPointer clientData,
+              XmAnyCallbackStruct cbs )
+{
+    /* Quit application */
+}
+</pre></td></tr></table><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>You must install the quit callback for each window that contains an &#8220;Exit&#8221; option in its window menu. Often the only such window is your application's main primary window.
+</td></tr></table><hr noshade="noshade"></div><br></div><p>The operations performed by the callback function should be the same as those that occur when the user quits from within your application (for example, by selecting an &#8220;Exit&#8221; option from a File menu). Your application can prompt the user to save any files that are open, to perform any other cleanup, or even to abort the quit.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE15555-PARENT"></a>Handling the Window Manager Delete Window Protocol</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-91"></a>
+<a class="indexterm" name="IT05.Window.Management-92"></a>
+<a class="indexterm" name="IT05.Window.Management-93"></a>
+<a class="indexterm" name="IT05.Window.Management-94"></a>
+<a class="indexterm" name="IT05.Window.Management-95"></a>
+<a class="indexterm" name="IT05.Window.Management-96"></a>
+<a class="indexterm" name="IT05.Window.Management-97"></a>
+<a class="indexterm" name="IT05.Window.Management-98"></a>
+When a user selects the &#8220;Close&#8221; option from a window menu, the window manager sends a Delete Window message to your application. How to handle this message depends on whether the window is a co-primary window, a dialog, or support window. (A main primary window should not have a &#8220;Close&#8221; option on its window menu.)</p>
+<p>To handle the Delete Window message with a co-primary window, you should make sure to set the window's <span class="bold"><b>XmNdeleteResponse</b></span> resource to XmDO_NOTHING. Otherwise, IRIS automatically deletes the window and, if the window uses an ApplicationShell, quits the application.</p>
+<p>The callback you install can ask for user confirmation and can decide to comply or not comply with the request. If it decides to comply, your application can either pop down or destroy the window. If you think that the user might want to redisplay the window later, popping down the window is usually the better choice because your application doesn't have to re-create it later. <a href="ch05.html#LE67206-PARENT" title="Example 5-7. Handling the Window Manager Delete Window Protocol in Co-Primary Windows ">Example 5-7</a> shows an example of installing a callback to handle the Delete Window message.</p>
+<div class="example"><a name="LE67206-PARENT"></a><p><a name="LE67206-PARENT"></a><b>Example 5-7. Handling the Window Manager Delete Window Protocol in Co-Primary Windows </b></p><a class="indexterm" name="IT05.Window.Management-99"></a><a class="indexterm" name="IT05.Window.Management-100"></a><a class="indexterm" name="IT05.Window.Management-101"></a><a class="indexterm" name="IT05.Window.Management-102"></a><a class="indexterm" name="IT05.Window.Management-103"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Atom WM_DELETE_WINDOW = XmInternAtom( XtDisplay(window),
+                                      &quot;WM_DELETE_WINDOW&quot;, 
+                                      FALSE);
+XmAddWMProtocolCallback( window, WM_DELETE_WINDOW,
+                         closeCallback, NULL );
+ 
+/* ... */
+
+closeCallback( Widget w, XtPointer clientData,
+               XmAnyCallbackStruct cbs )
+{
+    /* Delete or pop down window */
+}
+</pre></td></tr></table><br></div><p>For support windows and dialogs, you typically want to dismiss the window when the user selects &#8220;Close.&#8221; Therefore, the default value of <span class="bold"><b>XmNdeleteResponse</b></span>, XmDESTROY, is appropriate. Additionally, you should perform whatever other actions are appropriate for when that support window or dialog is dismissed. Typically, you can accomplish this by invoking the callback associated with the <b>Cancel</b> button, if it exists. <a href="ch05.html#LE45992-PARENT" title="Example 5-8. Handling the Window Manager Delete Window Protocol in Support Windows and Dialogs ">Example 5-8</a> shows an example of this.</p>
+<div class="example"><a name="LE45992-PARENT"></a><p><a name="LE45992-PARENT"></a><b>Example 5-8. Handling the Window Manager Delete Window Protocol in Support Windows and Dialogs </b></p><a class="indexterm" name="IT05.Window.Management-104"></a><a class="indexterm" name="IT05.Window.Management-105"></a><a class="indexterm" name="IT05.Window.Management-106"></a><a class="indexterm" name="IT05.Window.Management-107"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Atom WM_DELETE_WINDOW = XmInternAtom( XtDisplay(dialog),
+                                      &quot;WM_DELETE_WINDOW&quot;, 
+                                      FALSE);
+XmAddWMProtocolCallback( dialog, WM_DELETE_WINDOW,
+                         cancelCallback, NULL );
+ 
+/* ... */
+ 
+cancelCallback( Widget w, XtPointer clientData,
+                XmAnyCallbackStruct cbs )
+{
+    /* Perform cancel operations */
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE70788-PARENT"></a>Handling the Window Manager Save Yourself Protocol</h4></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-108"></a>
+<a class="indexterm" name="IT05.Window.Management-109"></a>
+<a class="indexterm" name="IT05.Window.Management-110"></a>
+<a class="indexterm" name="IT05.Window.Management-111"></a>
+<a class="indexterm" name="IT05.Window.Management-112"></a>
+<a class="indexterm" name="IT05.Window.Management-113"></a>
+<a class="indexterm" name="IT05.Window.Management-114"></a>
+The &#8220;Save Yourself&#8221; protocol is part of the session management mechanism. The session manager sends a Save Yourself message to allow your application to update the command needed to restart itself in its current state. Currently, the session manager sends Save Yourself messages before ending a session (that is, logging out) and periodically while a session is active.</p>
+<p>Your application doesn't need to subscribe to the Save Yourself protocol. Instead, your application can simply update the <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources on one of its ApplicationShells whenever it changes state, for example, when it opens or closes a file. The session manager re-saves its state information whenever your application changes these resources. (Actually, the session manager monitors the WM_COMMAND and WM_MACHINE properties, which are set by the ApplicationShell whenever you change its <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources.)</p>
+<p>If you decide to use Save Yourself for session management, you can handle the protocol on any realized ApplicationShell. Don't use Save Yourself with the unrealized main window of the &#8220;Multiple Document, No Visible Main&#8221; application model. When the window manager sends a Save Yourself message to your application, your application must update the value of the <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources to specify the command needed to restart the application in its current state. Once you've updated the <span class="bold"><b>XmNargv</b></span> and <span class="bold"><b>XmNargc</b></span> resources, the session manager assumes that it can safely kill your application. <a href="ch05.html#LE20969-PARENT" title="Example 5-9. Handling the Window Manager &#8220;Save Yourself&#8221; Protocol ">Example 5-9</a> shows how to handle Save Yourself messages.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Your application shouldn't prompt the user for input when it receives a Save Yourself message. 
+</td></tr></table><hr noshade="noshade"></div><br><div class="example"><a name="LE20969-PARENT"></a><p><a name="LE20969-PARENT"></a><b>Example 5-9. Handling the Window Manager &#8220;Save Yourself&#8221; Protocol </b></p><a class="indexterm" name="IT05.Window.Management-115"></a><a class="indexterm" name="IT05.Window.Management-116"></a><a class="indexterm" name="IT05.Window.Management-117"></a>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* saveyourself.c                                       */
+/*                                                     */
+/* Example code for handling the window manager's        */
+/* WM_SAVE_YOURSELF Protocol                            */
+/*                                                     */
+/* cc -o saveyourself saveyourself.c -lXm -lXt          */
+ 
+#include &lt;Xm/Protocols.h&gt;
+#include &lt;Xm/Label.h&gt;
+ 
+void saveYourSelfCallback(Widget w,  XtPointer client_data, 
+                             XtPointer call_data)
+{
+    printf(&#8220;Update WM_COMMAND or state file\n&#8221;);
+}
+ 
+void main(int argc, char** argv)
+{
+   Widget toplevel, label;
+   XtAppContext app_context;
+   Atom WM_SAVE_YOURSELF;
+ 
+   toplevel = XtAppInitialize(&amp;app_context, &#8220;SaveYourSelf&#8221;,
+                              NULL, 0, &amp;argc, argv, NULL, NULL, 0);
+ 
+   label = XmCreateLabel(toplevel, &#8220;saveme&#8221;, NULL, 0);
+   XtManageChild(label);
+ 
+   WM_SAVE_YOURSELF = XmInternAtom( XtDisplay(toplevel),
+                                      &#8220;WM_SAVE_YOURSELF&#8221;,
+                                      FALSE);
+ 
+   XmAddWMProtocolCallback( toplevel, WM_SAVE_YOURSELF,
+                            saveYourSelfCallback, NULL );
+ 
+   XtRealizeWidget(toplevel);
+   XtAppMainLoop(app_context);
+}
+</pre></td></tr></table><br></div><p>Your application might not be able to fully specify its state using command line options. In that case, you can design your application to create a state file to save its state and to read the state file when it restarts. </p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE12004-PARENT"></a>Setting the Window Title</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-118"></a>
+<a class="indexterm" name="IT05.Window.Management-119"></a>
+<a class="indexterm" name="IT05.Window.Management-120"></a>
+<a class="indexterm" name="IT05.Window.Management-121"></a>
+To set the title of a main primary window or co-primary window in your application, set the window's <span class="bold"><b>title</b></span> resource. If the title you specify uses a non-default encoding, remember to also set the value of the <span class="bold"><b>titleEncoding</b></span> resource appropriately. For support windows and dialogs, set the value of the <span class="bold"><b>XmNdialogTitle</b></span> resource.</p>
+<p>Choose the title according to the guidelines in the section &#8220;Window Title Bar&#8221; in Chapter 3
+ of the <i>IRIX Interactive User Interface Guidelines</i>. Update the label so that it always reflects the current information. For example, if the label reflects the name of the file the user is working on, you should update the label when the user opens a different file.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE90776-PARENT"></a>Controlling Window Placement and Size</h3></div></div>
+<p><a class="indexterm" name="IT05.Window.Management-122"></a>
+<a class="indexterm" name="IT05.Window.Management-123"></a>
+<a class="indexterm" name="IT05.Window.Management-124"></a>
+<a class="indexterm" name="IT05.Window.Management-125"></a>
+<a class="indexterm" name="IT05.Window.Management-126"></a>
+Users have the option <a class="indexterm" name="IT05.Window.Management-127"></a>
+<a class="indexterm" name="IT05.Window.Management-128"></a>
+<a class="indexterm" name="IT05.Window.Management-129"></a>
+<a class="indexterm" name="IT05.Window.Management-130"></a>
+of specifying window placement and size, either through the <tt>-geometry</tt> option interactively using the mouse, or having applications automatically place their windows on the screen. To support automatic window placement, your application should provide default placement information for its main primary and co-primary windows. (Support windows and dialogs appear centered over their parent widget if the value of their <span class="bold"><b>XmNdefaultPosition</b></span> resources are TRUE, which is the default.) You can also specify a default window size, minimum and maximum window sizes, minimum and maximum aspect ratios, and resizing increments for your windows. Typically, you should set these resources in your application's <tt>app-default</tt> file.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5205466"></a>Controlling Window Placement</h4></div></div>
+<p>You should provide initial values for the window shell's <span class="bold"><b>x</b></span> and <span class="bold"><b>y</b></span> resources before mapping the window to specify its default location. The window manager ignores these values if the user requests interactive window placement or specifies a location using the <tt>-geometry</tt> option when invoking your application. You should not use the window's <span class="bold"><b>XmNgeometry</b></span> resource to control initial window placement, either in your application's source code or its <tt>app-default</tt> file.</p>
+<p>&#8220;Window Placement&#8221; in Chapter 3
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for controlling window placement.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5205521"></a>Controlling Window Size</h4></div></div>
+<p>If the user doesn't specify a window size and you don't explicitly set the window size in your application, the initial size of the window is determined by geometry management negotiations of the shell widget's descendents. Typically, the resulting size is just large enough for all of the descendent widget to fit &#8220;comfortably.&#8221; Optionally, you can specify a default initial size for a window by providing initial values for the window's <span class="bold"><b>width</b></span> and <span class="bold"><b>height</b></span> resources before mapping the window. You should not use the window's <span class="bold"><b>XmNgeometry</b></span> resource to control initial window size, either in your application's source code or its <tt>app-default</tt> file.</p>
+<p>You can also set several shell resources to specify minimum and maximum window sizes, minimum and maximum aspect ratios, and resizing increments for a window:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>minHeight</b></span> and <span class="bold"><b>minWidth</b></span></span></td><td width="10"> </td><td><p>The desired minimum height and width for the window.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>maxHeight</b></span> and <span class="bold"><b>maxWidth</b></span></span></td><td width="10"> </td><td><p>The desired maximum height and width for the window.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>minAspectX</b></span> and <span class="bold"><b>minAspectY</b></span></span></td><td width="10"> </td><td><p>The desired minimum aspect ratio (X/Y) for the window.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>maxAspectX</b></span> and <span class="bold"><b>maxAspectY</b></span></span></td><td width="10"> </td><td><p>The desired maximum aspect ratio (X/Y) for the window.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>baseHeight</b></span> and <span class="bold"><b>baseWidth</b></span></span></td><td width="10"> </td><td><p>The base for a progression of preferred heights and widths for the window. The preferred heights are <span class="bold"><b>baseHeight</b></span> plus integral multiples of <span class="bold"><b>heightInc</b></span>, and the preferred widths are <span class="bold"><b>baseWidth</b></span> plus integral multiples of <span class="bold"><b>widthInc</b></span>. The window can't be resized smaller or larger than the values of the <span class="bold"><b>min*</b></span> and <span class="bold"><b>max*</b></span> resources.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>heightInc</b></span> and <span class="bold"><b>widthInc</b></span></span></td><td width="10"> </td><td><p>The desired increments for resizing the window. </p>
+
+</td></tr></table></div><p>&#8220;Window Size&#8221; in Chapter 3
+ of the <i>IRIX Interactive User Interface Guidelines</i> provides guidelines for controlling window size.</p>
+</div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch06.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 4. Using the SGI Enhanced Widgets </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 6. Customizing Your Application's Minimized Windows </td></tr></table></div></body></html>

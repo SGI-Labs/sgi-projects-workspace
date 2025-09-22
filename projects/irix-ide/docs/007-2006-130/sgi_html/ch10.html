@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 10. Handling Users' System Preferences</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch09.html" title="Chapter 9. Providing Online Help With SGIHelp"><link rel="next" href="pt02.html" title="Part II. Creating Desktop Icons"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 10. Handling Users' System Preferences</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch09.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="pt02.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE23828-PARENT"></a>Chapter 10. Handling Users' System Preferences</h2></div></div>
+<p>This chapter describes how your application can recognize and use various system preferences that users can set through Desktop control panels. Whenever possible, your application should follow these preferences to provide a consistent interface for your users. In particular, this chapter contains:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch10.html#LE27927-PARENT" title="Handling the Mouse Double-Click Speed Setting">&#8220;Handling the Mouse Double-Click Speed Setting&#8221;</a> describes how to recognize the preferred mouse double-click speed.</p>
+</li>
+<li><p><a href="ch10.html#LE73704-PARENT" title="Using the Default Viewer and Editor Utilities Panel">&#8220;Using the Default Viewer and Editor Utilities Panel&#8221;</a> describes the <span class="bold"><b>dtUtilities</b></span> panel, lists utility variables and their values, and provides an example of how to set the preferred visual text editor when your application needs to let users edit text.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE27927-PARENT"></a>Handling the Mouse Double-Click Speed Setting</h2></div></div>
+<p><a class="indexterm" name="IT10.System.Preferences-0"></a>
+<a class="indexterm" name="IT10.System.Preferences-1"></a>
+<a class="indexterm" name="IT10.System.Preferences-2"></a>
+The Mouse Settings control panel (available from the &#8220;Customize&#8221; submenu of the Desktop toolchest) allows users to set various parameters that affect the operation of the mouse. <a class="indexterm" name="IT10.System.Preferences-3"></a>
+<a class="indexterm" name="IT10.System.Preferences-4"></a>
+The setting of importance to applications is &#8220;Click Speed,&#8221; which determines the maximum interval between double-clicks. &#8220;Click Speed&#8221; sets the <span class="bold"><b>*multiClickTime</b></span> X resource.</p>
+<p>In most cases, you don't need to do anything to handle this setting. IRIS IM widgets automatically use the <span class="bold"><b>multiClickTime</b></span> value as appropriate. Only if your application needs to handle double-clicks explicitly (for example, to select a word in a word processing application) does it need to call <tt>XtGetMultiClickTime()</tt> to determine the double-click time. See the <tt>XtGetMultiClickTime(3Xt)</tt> reference page for more information on <tt>XtGetMultiClickTime()</tt>.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Don't call <tt>XtSetMultiClickTime()</tt>, which sets the double-click time for the entire display.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE73704-PARENT"></a>Using the Default Viewer and Editor Utilities Panel</h2></div></div>
+<p><a class="indexterm" name="IT10.System.Preferences-5"></a>
+<a class="indexterm" name="IT10.System.Preferences-6"></a>
+<a class="indexterm" name="IT10.System.Preferences-7"></a>
+<a class="indexterm" name="IT10.System.Preferences-8"></a>
+<a class="indexterm" name="IT10.System.Preferences-9"></a>
+Users who select Toolchest-&gt;Customize-&gt;Utilities invoke <tt>/usr/sbin/dtUtilities</tt>. This application displays the &#8220;Default Viewer and Editor Utilities&#8221; panel (shown in <a href="ch10.html#id5220175" title="Figure 10-1. The dtUtilities Panel">Figure 10-1</a>). </p>
+<p><div class="figure"><a name="id5220175"></a><p><a name="id5220175"></a><b>Figure 10-1. The dtUtilities Panel</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/10.System.Preferences-1.gif" alt="The dtUtilities Panel" height="339" width="588"></td></tr></table></div></div><br>
+</p>
+<p><a class="indexterm" name="IT10.System.Preferences-10"></a>
+<a class="indexterm" name="IT10.System.Preferences-11"></a>
+<a class="indexterm" name="IT10.System.Preferences-12"></a>
+<a class="indexterm" name="IT10.System.Preferences-13"></a>
+<a class="indexterm" name="IT10.System.Preferences-14"></a>
+<a class="indexterm" name="IT10.System.Preferences-15"></a>
+Using the <span class="bold"><b>dtUtilities</b></span> panel, <a class="indexterm" name="IT10.System.Preferences-16"></a>
+<a class="indexterm" name="IT10.System.Preferences-17"></a>
+<a class="indexterm" name="IT10.System.Preferences-18"></a>
+<a class="indexterm" name="IT10.System.Preferences-19"></a>
+<a class="indexterm" name="IT10.System.Preferences-20"></a>
+<a class="indexterm" name="IT10.System.Preferences-21"></a>
+users can select installed utilities, including the following:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Text Editor (for example, xwsh, Jot, or Vi)</p>
+</li>
+<li><p>Web Browser (for example, Netscape)</p>
+</li>
+<li><p>Image Viewer (for example, Imgview)</p>
+</li>
+<li><p>Mailer (for example, MediaMail or Netscape)</p>
+</li>
+<li><p>Book Viewer (for example, Insight)</p>
+</li>
+<li><p>PostScript Viewer (for example, ShowPS)</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5220452"></a>Selecting Utilities and Their Values</h3></div></div>
+<p><a class="indexterm" name="IT10.System.Preferences-22"></a>
+<a class="indexterm" name="IT10.System.Preferences-23"></a>
+The <span class="bold"><b>dtUtilities</b></span> variables and their values are listed in <a href="ch10.html#id5220524" title="Table 10-1. dtUtilities and Their Values">Table 10-1</a>. An example of providing programmatic access to one of these utilities is in <a href="ch10.html#LE37112-PARENT" title="Setting the Preferred Text Editor">&#8220;Setting the Preferred Text Editor&#8221;</a>, which is below the table.</p>
+<div class="table"><a name="id5220524"></a><p><a name="id5220524"></a><b>Table 10-1. dtUtilities and Their Values</b></p>
+<table summary="dtUtilities and Their Values" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>dtUtility Variable</p>
+</th><th scope="col" valign="top"><p>Value</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT10.System.Preferences-24"></a>
+<a class="indexterm" name="IT10.System.Preferences-25"></a>
+<a class="indexterm" name="IT10.System.Preferences-26"></a>
+<a class="indexterm" name="IT10.System.Preferences-27"></a>
+WINEDITOR</p>
+</td><td valign="top"><p>Path to a window editor (for example, <span class="bold"><b>/usr/sbin/jot</b></span>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT10.System.Preferences-28"></a>
+<a class="indexterm" name="IT10.System.Preferences-29"></a>
+<a class="indexterm" name="IT10.System.Preferences-30"></a>
+<a class="indexterm" name="IT10.System.Preferences-31"></a>
+WEBBROWSER</p>
+</td><td valign="top"><p>Path to an X Window System application that is a World Wide 
+Web visual browser (for example, <span class="bold"><b>/usr/bin/X11/netscape</b></span>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT10.System.Preferences-32"></a>
+<a class="indexterm" name="IT10.System.Preferences-33"></a>
+<a class="indexterm" name="IT10.System.Preferences-34"></a>
+<a class="indexterm" name="IT10.System.Preferences-35"></a>
+IMGVIEWER</p>
+</td><td valign="top"><p>Path to an application that displays image files (for example, 
+<span class="bold"><b>/usr/bin/X11/imgview</b></span>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT10.System.Preferences-36"></a>
+<a class="indexterm" name="IT10.System.Preferences-37"></a>
+<a class="indexterm" name="IT10.System.Preferences-38"></a>
+<a class="indexterm" name="IT10.System.Preferences-39"></a>
+MAILBOXPROG</p>
+</td><td valign="top"><p>Path to a mail reader application (for example, 
+<span class="bold"><b>/usr/bin/X11/MediaMail -gui</b></span>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT10.System.Preferences-40"></a>
+<a class="indexterm" name="IT10.System.Preferences-41"></a>
+<a class="indexterm" name="IT10.System.Preferences-42"></a>
+BOOKVIEWER</p>
+</td><td valign="top"><p>Path to an application for displaying InSight books (for 
+example, <span class="bold"><b>/usr/sbin/insight</b></span>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT10.System.Preferences-43"></a>
+<a class="indexterm" name="IT10.System.Preferences-44"></a>
+<a class="indexterm" name="IT10.System.Preferences-45"></a>
+PSVIEWER</p>
+</td><td valign="top"><p>Path to an application for viewing PostScript files (for 
+example,<span class="bold"><b> /usr/bin/X11/showps</b></span>).</p>
+</td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE37112-PARENT"></a>Setting the Preferred Text Editor</h3></div></div>
+<p><a class="indexterm" name="IT10.System.Preferences-46"></a>
+<a class="indexterm" name="IT10.System.Preferences-47"></a>
+The &#8220;Text Editor&#8221; setting on the <span class="bold"><b>dtUtilities</b></span> control panel allows users to select a preferred visual editor for editing ASCII text. This setting sets the value of the WINEDITOR environment variable.</p>
+<p>The following instructions explain how to set the value of WINEDITOR. You can use the same instructions for the other utilities on the control panel. Just refer to <a href="ch10.html#id5220524" title="Table 10-1. dtUtilities and Their Values">Table 10-1</a> for the utility and value you wish to set.</p>
+<p>Whenever your application needs to let users edit text, you should:</p>
+<div class="orderedlist"><ol type="1"><li><p>Call <tt>getenv()</tt> to check whether the WINEDITOR environment variable is set. See the <tt>getenv(3c)</tt> reference page for more information on <tt>getenv()</tt>.</p>
+</li>
+<li><p>If WINEDITOR is set, save the text to edit in a temporary file. Typically, you should check the value of the environment variable TMPDIR and, if it is set, put the temporary file in that directory.</p>
+</li>
+<li><p>Execute the editor, providing it the name of the temporary file as an argument.</p>
+</li>
+<li><p>When the user quits the editor, read the temporary file and delete it.</p>
+</li>
+</ol></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch09.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="pt02.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 9. Providing Online Help With SGIHelp </td><td width="20%" align="center"> </td><td width="40%" align="right">Part II. Creating Desktop Icons </td></tr></table></div></body></html>

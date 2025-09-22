@@ -1,0 +1,54 @@
+# defaults |
+0|IRIS IM Programming Guide|sgi_html/index.html
+1|Front Matter|sgi_html/front.html
+1|Introduction|sgi_html/pr01.html
+2|Suggestions for Further Reading|sgi_html/pr01.html#id5418794
+2|Typographical Conventions|sgi_html/pr01.html#id5364702
+1|Chapter 1. X Window System and IRIS IM Programming Guidelines|sgi_html/ch01.html
+2|Programming with IRIS IM|sgi_html/ch01.html#id5362685
+3|Using Shared Libraries to Maximize System Resources|sgi_html/ch01.html#id5362866
+3|Using Debugging Libraries to Troubleshoot Programs|sgi_html/ch01.html#id5362996
+3|Linking Your IRIS IM Programs|sgi_html/ch01.html#id5363028
+3|Building IRIS IM Programs with imake|sgi_html/ch01.html#id5363134
+3|Building IRIS IM Programs with Conventional Makefiles|sgi_html/ch01.html#id5363478
+3|Handling Keyboard Issues|sgi_html/ch01.html#id5363577
+4|Virtual Key Bindings|sgi_html/ch01.html#id5363586
+4|Numeric Keypad Behavior|sgi_html/ch01.html#id5363612
+4|Translation Tables and the Numeric Keypad|sgi_html/ch01.html#id5363770
+3|Widgets for GL/X Mixed-Model Programming|sgi_html/ch01.html#id5363956
+3|Using Silicon Graphics Extensions|sgi_html/ch01.html#id5364091
+3|Using the IRIS IM Sample Source Code|sgi_html/ch01.html#id5435586
+4|Using the IRIS IM Demonstration Programs|sgi_html/ch01.html#id5435723
+4|Using the IRIS IM Overlay Demonstration Programs|sgi_html/ch01.html#id5435832
+4|Using the Reference Book Sample Programs|sgi_html/ch01.html#id5435964
+2|Rendering Considerations|sgi_html/ch01.html#id5436159
+3|Hardware Configurations of Silicon Graphics Workstations|sgi_html/ch01.html#id5436192
+4|Framebuffers on Silicon Graphics Workstations|sgi_html/ch01.html#id5436203
+4|Visual Classes on Silicon Graphics Workstations|sgi_html/ch01.html#id5436406
+3|Colormaps on Silicon Graphics Workstations|sgi_html/ch01.html#id5436501
+4|Colormap Size Issues|sgi_html/ch01.html#id5362477
+4|Variation across Colormaps|sgi_html/ch01.html#id5436862
+4|Multiple Colormap Issues|sgi_html/ch01.html#id5436938
+2|Using X11 Visuals on Silicon Graphics Workstations|sgi_html/ch01.html#id5437074
+2|Using Nondefault Visuals in the Normal Framebuffer|sgi_html/ch01.html#id5437280
+3|Xlib Programming with Nondefault Visuals|sgi_html/ch01.html#id5437341
+3|Xt Toolkit Programming with Nondefault Visuals|sgi_html/ch01.html#id5437610
+4|Setting Consistent Resources for Nondefault Visuals|sgi_html/ch01.html#id5437625
+4|Resources Cannot Control Putting X Toolkit Components in Overlay Planes|sgi_html/ch01.html#id5437766
+4|Inheriting and Using Nondefault Visuals|sgi_html/ch01.html#id5437924
+3|IRIS IM Programming with Nondefault Visuals|sgi_html/ch01.html#id5438081
+4|Limited Color Range in Overlay and Popup Planes|sgi_html/ch01.html#id5438096
+4|MenuBar Uses a Common Shell for Pull-down Menus|sgi_html/ch01.html#id5438189
+4|Pixmaps in Nondefault Visuals|sgi_html/ch01.html#id5438206
+4|Beware of Visuals-related Issues in libMrm|sgi_html/ch01.html#id5438280
+3|Using IRIS IM Interface Builders with Nondefault Visuals|sgi_html/ch01.html#id5438490
+3|Nondefault Visual Heuristic Routines|sgi_html/ch01.html#id5438533
+2|Adding Input Devices with the X Input Extension|sgi_html/ch01.html#id5438869
+1|Index|sgi_html/ix01.html
+# figures |
+# tables |
+4|Table 1-1. XSetWindowAttributes Structure Settings for Nondefault Visuals|sgi_html/ch01.html#id5437385
+# examples |
+# procedures |
+# helpids |
+

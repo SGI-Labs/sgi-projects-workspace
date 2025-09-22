@@ -1,0 +1,801 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 4. Using the SGI Enhanced Widgets</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch03.html" title="Chapter 3. Using Schemes"><link rel="next" href="ch05.html" title="Chapter 5. Window, Session, and Desk Management"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4. Using the SGI Enhanced Widgets</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE67830-PARENT"></a>Chapter 4. Using the SGI Enhanced Widgets</h2></div></div>
+<p><a class="indexterm" name="IT04.Widgets-0"></a>
+<a class="indexterm" name="IT04.Widgets-1"></a>
+<a class="indexterm" name="IT04.Widgets-2"></a>
+This chapter discusses the SGI enhanced IRIS IM widgets, the mixed-model programming widgets for using OpenGL in an IRIS IM application, and the HTML viewer widget. This chapter contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch04.html#LE77041-PARENT" title="Using the SGI Enhanced Widgets">&#8220;Using the SGI Enhanced Widgets&#8221;</a> explains how your application can access the SGI enhanced widgets.</p>
+</li>
+<li><p><a href="ch04.html#LE27962-PARENT" title="Using the Widget Demos">&#8220;Using the Widget Demos&#8221;</a> explains how to use the provided demos to experiment with some of the SGI enhanced widgets.</p>
+</li>
+<li><p><a href="ch04.html#LE69317-PARENT" title="The SGI Enhanced Widgets">&#8220;The SGI Enhanced Widgets&#8221;</a> lists and discusses each of the new widgets.</p>
+</li>
+<li><p><a href="ch04.html#LE27054-PARENT" title="The Enhanced Widgets">&#8220;The Enhanced Widgets&#8221;</a> lists and discusses each of the enhanced widgets.</p>
+</li>
+<li><p><a href="ch04.html#LE43041-PARENT" title="The Mixed-Model Programming Widgets">&#8220;The Mixed-Model Programming Widgets&#8221;</a> discusses the mixed-model programming widgets that SGI provides for use with your OpenGL or IRIS GL application.</p>
+</li>
+<li><p><a href="ch04.html#LE46176-PARENT" title="HTML Viewer Component">&#8220;HTML Viewer Component&#8221;</a> explains the HTML viewer component that provides the widgets and libraries necessary for applications to directly access the World Wide Web to display online help and licensing information.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE77041-PARENT"></a>Using the SGI Enhanced Widgets</h2></div></div>
+<p>To use a new or enhanced widget, first switch on the IRIX Interactive Desktop enhanced look and schemes, as described in <a href="ch02.html" title="Chapter 2. Getting the IRIX Interactive Desktop Look">Chapter 2, &#8220;Getting the IRIX Interactive Desktop Look&#8221;</a>, and <a href="ch03.html" title="Chapter 3. Using Schemes">Chapter 3, &#8220;Using Schemes&#8221;</a>, respectively. </p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE27962-PARENT"></a>Using the Widget Demos</h2></div></div>
+<p><a class="indexterm" name="IT04.Widgets-3"></a>
+SGI provides demos for some of the SGI enhanced widgets. These demos let you experiment with the different resources for each widget.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5192756"></a>Location of Widget Demos</h3></div></div>
+<p>The widget demos are in <tt>/usr/src/X11/motif/Sgm</tt>. The demos are part of the <span class="bold"><b>motif_dev.sw.demoSgi</b></span> subsystem&#8212;if you cannot find them on your system, check to make sure this subsystem is installed.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5192776"></a>Instructions for Building the Widget Demos</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-4"></a>
+The demo tree is shipped with X11 Imakefiles, not Makefiles. To build the demos:</p>
+<div class="orderedlist"><ol type="1"><li><p>Change to the IRIS IM demos build tree location.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>cd /usr/src/X11/motif/Sgm</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Build the initial Makefile.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>../mmkmf</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Verify that the Makefile is OK.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make Makefile</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Update the rest of your Makefiles.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make Makefiles</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Clean the directory. If you do notand this is not your first installation, obsolete binaries might remain, giving unexpected results.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make clean</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Update Makefile dependencies to make sure that everything is installed properly.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make depend</tt></b> 
+</pre></td></tr></table><br></li>
+<li><p>Build the demos.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>make all</tt></b> 
+</pre></td></tr></table><br></li>
+</ol></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE27054-PARENT"></a>The Enhanced Widgets</h2></div></div>
+<p><a class="indexterm" name="IT04.Widgets-5"></a>
+SGI provides enhanced versions of these existing IRIS IM widgets:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch04.html#LE38934-PARENT" title="The File Selection Box Widget">&#8220;The File Selection Box Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE80138-PARENT" title="The Scale (Percent Done Indicator) Widget">&#8220;The Scale (Percent Done Indicator) Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE92950-PARENT" title="The Text and TextField Widgets">&#8220;The Text and TextField Widgets&#8221;</a> </p>
+</li>
+</ul></div><p>This section describes how to use the enhancements to these widgets. For guidelines on when to use these widgets, refer to the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE38934-PARENT"></a>The File Selection Box Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-6"></a>
+<a class="indexterm" name="IT04.Widgets-7"></a>
+<a class="indexterm" name="IT04.Widgets-8"></a>
+The FileSelectionBox widget (<span class="bold"><b>SgFileSelectionBox</b></span>), shown in <a href="ch04.html#id5193133" title="Figure 4-1. The File Selection Box Widget">Figure 4-1</a>, is an enhanced version of the existing IRIS IM FileSelectionBox widget (<span class="bold"><b>XmFileSelectionBox</b></span>). The API is consistent with the IRIS IM version of the widget, but the presentation is different.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>To get the enhanced FileSelectionBox, you need to set the <span class="bold"><b>SgNuseEnhancedFSB</b></span> resource to true (in addition to linking with <tt>-lSgm</tt>). Typically, do this in your application's <tt>app-defaults</tt> file.
+</td></tr></table><hr noshade="noshade"></div><p><div class="figure"><a name="id5193133"></a><p><a name="id5193133"></a><b>Figure 4-1. The File Selection Box Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/file.selection.box.online.gif" alt="The File Selection Box Widget" height="272" width="348"></td></tr></table></div></div><br>
+</p>
+<p>The FileSelectionBox traverses directories, shows files and subdirectories, and selects files. It has these main areas:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">Show menu and Hidden Files toggle</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>They control what appears in the scrolling list of directories and files beneath them. The Show menu allows the user to restrict the list to display only files of a particular type or format. Minimally the list has two items: All and Custom... . &#8220;All&#8221; always appears at the top of the menu, and &#8220;Custom...&#8221; always appears at the bottom of the menu following a separator. All shows an unrestricted view of all files and directories in the current subdirectory. Custom... launches the custom filter dialog. </p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">Files and directories list</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The scrollable list in the enhanced FileSelectionBox contains both files and directories. Directories appear in bold at the top of the list. Files appear after the directories and are sorted alphabetically. </p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">Finder widget</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The DropPocket displays the icon and the text field displays the name of the current directory or file. The user can select a file or directory by dropping its icon on the DropPocket or typing its name in the text field. Automatic file completion is supported. Clicking the right mouse over a path bar button of the path navigation bar shows the directory/file choices at that level. The user can also recall a previously-selected directory from the DynaMenu. <a href="ch04.html#LE81745-PARENT" title="The Finder Widget">&#8220;The Finder Widget&#8221;</a> discusses the Finder widget in more detail.</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">Command panel</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The buttons at the bottom of the FileSelectionBox reflect the action name; the <b>OK</b>, <b>Cancel</b> and <b>Help</b> buttons operate the same in the enhanced FileSelectionBox as they do in the regular version. The <b>Filter</b> button pops up a Filter Dialog, which allows a user to enter a shell-style filename expression as filter pattern. The enhanced FileSelectionBox displays only those files in the current directory that match the given pattern. (The FileSelectionBox continues to display any subdirectories in the current directory.)</p>
+
+</td></tr></table></div><p>The programmatic interface to the enhanced FileSelectionBox differs from the regular version in the following points:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>You can retrieve the Finder child of the FileSelectionBox using the standard <span class="bold"><b>XmFileSelectionBoxGetChild</b></span>(3X) by providing the defined constant SgDIALOG_FINDER as the child. You should check the returned widget for validity; it is NULL if the FileSelectionBox is not enhanced.</p>
+</li>
+<li><p><span class="bold"><b>XmNdirMask</b></span> is not guaranteed to be exactly the same as the regular version of the FileSelectionBox in all situations. It does conform to the definition in the <tt>XmFileSelectionBox(3X)</tt> man page. Specifically, the directory portion <span class="bold"><b>XmNdirMask</b></span> may not be present in the enhanced FileSelectionBox's representation.</p>
+</li>
+<li><p><span class="bold"><b>XmNfileTypeMask</b></span> behavior is different because there is no separate directory list. In the enhanced FileSelectionBox:</p>
+<div class="itemizedlist"><ul type="round"><li><p>XmFILE_REGULAR and XmFILE_ANY_TYPE show both files and directories in the file list</p>
+</li>
+<li><p>XmFILE_DIRECTORY shows only directories</p>
+</li>
+</ul></div></li>
+</ul></div><p>For detailed information on the FileSelectionBox widget, refer to the <tt>SgFileSelectionBox(3X)</tt> man page. For an example program using the FileSelectionBox widget, see <a href="apa.html#LE36380-PARENT" title="Example Program for File Selection Box">&#8220;Example Program for File Selection Box&#8221;</a><a href="apa.html#LE36380-PARENT"> in Appendix A</a>. See Chapter 10, &#8220;Dialogs,&#8221; in the <i>IRIX Interactive User Interface Guidelines</i> for guidelines on using dialogs in your application. For information about standard <span class="bold"><b>XmFileSelectionBox</b></span> resources, behavior, and callbacks, see the <tt>XmFileSelectionBox(3X)</tt> man page. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE80138-PARENT"></a>The Scale (Percent Done Indicator) Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-9"></a>
+<a class="indexterm" name="IT04.Widgets-10"></a>
+<a class="indexterm" name="IT04.Widgets-11"></a>
+<a class="indexterm" name="IT04.Widgets-12"></a>
+<a class="indexterm" name="IT04.Widgets-13"></a>
+<a class="indexterm" name="IT04.Widgets-14"></a>
+The Scale widget (<span class="bold"><b>SgScale</b></span>), is an enhanced version <a class="indexterm" name="IT04.Widgets-15"></a>
+<a class="indexterm" name="IT04.Widgets-16"></a>
+of the IRIS IM Scale widget (<span class="bold"><b>XmScale</b></span>). The enhanced Scale widget is also referred to as the Percent Done Indicator or Progress Indicator. </p>
+<p>To implement this indicator, set the following resources: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+*scale.sliderVisual:    flat_foreground
+*scale.slidingMode:     thermometer
+*scale.slanted:         true
+</pre></td></tr></table><p>For an example of code, see <a href="apa.html#LE96832-PARENT" title="Example Programs for Scale (Percent Done Indicator) Widget">&#8220;Example Programs for Scale (Percent Done Indicator) Widget&#8221;</a><a href="apa.html#LE96832-PARENT"> in Appendix A</a>. Also see &#8220;IRIX Interactive Desktop Scales&#8221; in Chapter 9 of the <i>IRIX Interactive User Interface Guidelines</i> for guidelines on using scales in your application. For more information on the enhanced Scale widget, refer to the <tt>SgScale(3X)</tt> man page. For more information on the unenhanced version of the widget, refer to the <tt>XmScale(3X)</tt> man page. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE92950-PARENT"></a>The Text and TextField Widgets</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-17"></a>
+<a class="indexterm" name="IT04.Widgets-18"></a>
+<a class="indexterm" name="IT04.Widgets-19"></a>
+<a class="indexterm" name="IT04.Widgets-20"></a>
+The Text and TextField widgets (<span class="bold"><b>SgText</b></span> and <span class="bold"><b>SgTextField</b></span>) are enhanced versions of the IRIS IM Text and TextField widgets (<span class="bold"><b>XmText</b></span> and <span class="bold"><b>XmTextField</b></span>). In addition to the standard <span class="bold"><b>XmText</b></span> and <span class="bold"><b>XmTextField</b></span> resources, these widgets provide the following new resources:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>selectionBackground</b></span></span></td><td width="10"> </td><td><p>The background color for selected text.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>selectionForeground</b></span></span></td><td width="10"> </td><td><p>The foreground color for selected text.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>errorBackground</b></span></span></td><td width="10"> </td><td><p>The background color for text that you select with an &#8220;error status&#8221; by using the <tt>SgTextSetErrorSelection()</tt> or <tt>SgTextFieldSetErrorSelection()</tt> function (depending on whether the widget is a <span class="bold"><b>SgText</b></span> or <span class="bold"><b>SgTextField</b></span> widget).</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>cursorVisibleOnFocus</b></span></span></td><td width="10"> </td><td><p>If TRUE (the default), the widget displays the text cursor only when the widget has focus. If FALSE, the cursor is always visible even when the widget does not have keyboard focus.</p>
+
+</td></tr></table></div><p>The <tt>SgTextSetErrorSelection()</tt> and <tt>SgTextFieldSetErrorSelection()</tt> functions operate almost identically to the <tt>XmTextSetSelection()</tt> and <tt>XmTextFieldSetSelection()</tt> functions. You use them to select a range of text as the primary selection. The only difference is that the selected text is drawn with the background color specified by the <span class="bold"><b>errorBackground</b></span> resource instead of that specified by the <span class="bold"><b>selectionBackground</b></span> resource.</p>
+<p>For a detailed description of the new resources for the enhanced versions of these widgets, refer to the <tt>SgText(3X)</tt> and <tt>SgTextField(3X)</tt> man pages. For information on the unenhanced versions of these widgets, refer to the <tt>XmText(3X)</tt> and <tt>XmTextField(3X)</tt> man pages. See &#8220;Text Fields&#8221; in Chapter 9
+ of the <i>IRIX Interactive User Interface Guidelines</i> for guidelines on using text fields in your application.</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE43041-PARENT"></a>The Mixed-Model Programming Widgets</h2></div></div>
+<p><a class="indexterm" name="IT04.Widgets-21"></a>
+<a class="indexterm" name="IT04.Widgets-22"></a>
+<a class="indexterm" name="IT04.Widgets-23"></a>
+<a class="indexterm" name="IT04.Widgets-24"></a>
+SGI provides two sets of mixed-model programming widgets: one set for use with OpenGL and one set for use with IRIS GL.</p>
+<p>A mixed-model program, briefly, is an X program that creates one or more subwindows that use OpenGL or IRIS GL for rendering. Such a program uses Xlib or Xt calls for windowing, event handling, color maps, fonts, and so on. A &#8220;pure&#8221; IRIS GL application, on the other hand, uses IRIS GL calls for windowing, event handling, color maps, and fonts. (For a more detailed discussion of mixed-model programming, refer to the <i>OpenGL Porting Guide</i>.) </p>
+<p>If you plan to port your IRIS GL application to OpenGL, a good first step is to port it to mixed-model. The switch to OpenGL is then much easier. The IRIS GL mixed-model widgets make it much easier to port pure IRIS GL applications to mixed-model. </p>
+<p>If you are writing a new application, just start with OpenGL and the OpenGL versions of the mixed-model widgets (or use Open Inventor instead of OpenGL&#8212;Open Inventor handles all this for you).</p>
+<p>The mixed-model widgets are:</p>
+<div class="informaltable"><table border="0"><colgroup><col><col></colgroup><tbody><tr valign="top"><td scope="row" valign="top"><p>IRIS GL</p>
+</td><td valign="top"><p>OpenGL</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>GlxDraw</p>
+</td><td valign="top"><p>GLwDrawingArea</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>GlxMDraw</p>
+</td><td valign="top"><p>GLwMDrawingArea</p>
+</td></tr></tbody></table></div><p>The GlxDraw and GLwDrawingArea widgets are suitable for use with any widget set. The GlxMDraw and GLwMDrawingArea widgets are designed especially for use with IRIS IM.</p>
+<p>This manual does not tell you how to create a mixed-model program. For instructions on mixed-model programming, refer to the <i>OpenGL Porting Guide</i>. (The <i>OpenGL Porting Guide</i> contains mixed-model programming information that's relevant for both IRIS GL and OpenGL programmers.) </p>
+<p>You can find examples of many mixed-model programs for both OpenGL and IRIS GL in the <tt>4Dgifts</tt> directories. If you have trouble finding the relevant directories, refer to the <tt>README</tt> file in <tt>/usr/people/4Dgifts</tt>. This README file explains the contents and organization of the 4Dgifts directories.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE69317-PARENT"></a>The SGI Enhanced Widgets</h2></div></div>
+<p>SGI provides these new widgets: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch04.html#LE95600-PARENT" title="The Color Chooser Widget">&#8220;The Color Chooser Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE48293-PARENT" title="The Dial Widget 
+">&#8220;The Dial Widget 
+&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE66571-PARENT" title="The Drop Pocket Widget">&#8220;The Drop Pocket Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE81745-PARENT" title="The Finder Widget">&#8220;The Finder Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE30541-PARENT" title="The Graph Widget">&#8220;The Graph Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE22284-PARENT" title="The Grid Widget">&#8220;The Grid Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE37790-PARENT" title="The Springbox Widget">&#8220;The Springbox Widget&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE34855-PARENT" title="The Thumbwheel Widget">&#8220;The Thumbwheel Widget&#8221;</a> </p>
+</li>
+</ul></div><p>For guidelines on when to use the different widgets (for example, when to use a Thumbwheel or a Dial) refer to the <i>IRIX Interactive User Interface Guidelines</i>.</p>
+<p><a class="indexterm" name="IT04.Widgets-25"></a>
+<a class="indexterm" name="IT04.Widgets-26"></a>
+<a class="indexterm" name="IT04.Widgets-27"></a>
+<a class="indexterm" name="IT04.Widgets-28"></a>
+<a class="indexterm" name="IT04.Widgets-29"></a>
+<a class="indexterm" name="IT04.Widgets-30"></a>
+<a class="indexterm" name="IT04.Widgets-31"></a>
+<a class="indexterm" name="IT04.Widgets-32"></a>
+<a class="indexterm" name="IT04.Widgets-33"></a>
+<a class="indexterm" name="IT04.Widgets-34"></a>
+This section describes each important new IRIS IM widget. It does not discuss new widgets that are part of composite widgets, unless they are generally useful.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE95600-PARENT"></a>The Color Chooser Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-35"></a>
+<a class="indexterm" name="IT04.Widgets-36"></a>
+<a class="indexterm" name="IT04.Widgets-37"></a>
+The ColorChooser widget (<span class="bold"><b>SgColorChooser</b></span>) allows users to select colors in RGB or HSV color spaces. <a href="ch04.html#id5194572" title="Figure 4-2. The Color Chooser Widget">Figure 4-2</a> <a class="indexterm" name="IT04.Widgets-38"></a>
+<a class="indexterm" name="IT04.Widgets-39"></a>
+shows the ColorChooser's default configuration.</p>
+<p><div class="figure"><a name="id5194572"></a><p><a name="id5194572"></a><b>Figure 4-2. The Color Chooser Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/04.Widgets-4.gif" alt="The Color Chooser Widget" height="291" width="405"></td></tr></table></div></div><br>
+</p>
+<p><a class="indexterm" name="IT04.Widgets-40"></a>
+The ColorChooser includes these components:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Menus for setting options and sliders for the color chooser.</p>
+</li>
+<li><p>A color hexagon that provides visual selection of the hue and saturation components of a color in an HSV color space.</p>
+</li>
+<li><p>Color sliders for each of the hue, saturation, value, red, green, and blue color components. To make the color sliders visible, the user can select items from the Sliders menu. (<a href="ch04.html#id5194790" title="Figure 4-3. The Color Chooser Widget with HSV and RGB Sliders">Figure 4-3</a> shows the ColorChooser with all the sliders visible.) You can also display the color sliders programmatically. Text fields show the exact value of each current color component and allow users to set these values numerically.</p>
+</li>
+<li><p>Two color swatches: one for showing the current selected color and one for enabling the user to store a second color for reference.</p>
+</li>
+<li><p>Three or four buttons. The default button labels are <b>OK</b>, <b>Cancel</b>, <b>Help</b>, and <b>Apply</b>. If the parent of the ColorChooser widget is a DialogShell, then the <b>Apply</b> button is managed; otherwise it is unmanaged.</p>
+<div class="figure"><a name="id5194790"></a><p><a name="id5194790"></a><b>Figure 4-3. The Color Chooser Widget with HSV and RGB Sliders</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/04.Widgets-6.gif" alt="The Color Chooser Widget with HSV and RGB Sliders" height="415" width="277"></td></tr></table></div></div><br></li>
+</ul></div><p>Users can select a color by manipulating the color hexagon and any of the six sliders, or by changing the values in any of the text fields.</p>
+<p>You must include the header file <tt>&lt;Sgm/ColorC.h&gt;</tt> in any source file that uses a ColorChooser widget.</p>
+<p>For more detailed information about the ColorChooser widget, refer to the <tt>SgColorChooser(3X)</tt> man page. For an example program using the ColorChooser widget, see <a href="apa.html#LE83520-PARENT" title="Example Program for Color Chooser">&#8220;Example Program for Color Chooser&#8221;</a><a href="apa.html#LE83520-PARENT"> in Appendix A</a>. You can also examine, compile, and experiment with the <tt>colorc</tt> demonstration program in the directory <tt>/usr/src/X11/motif/Sgm/colorc</tt>. See &#8220;A Specific Standard Support Window: The IRIX Interactive Desktop Color Chooser&#8221; in Chapter 6
+ of the IRIX Interactive Desktop for guidelines on using the ColorChooser widget in your application.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5194869"></a>Controlling the Color Chooser Interface</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-41"></a>
+By default, the ColorChooser widget uses GL's Gouraud shading to display the colors in the hexagon and sliders. You can force the ColorChooser widget not to use GL by setting the value of the <span class="bold"><b>SgNuseGl</b></span> resource to FALSE. When <span class="bold"><b>SgNuseGl</b></span> is FALSE, the ColorChooser widget uses only X function calls. In this case, it does not draw a color hexagon and it uses XmScale widgets instead of the special color sliders.</p>
+<p><a class="indexterm" name="IT04.Widgets-42"></a>
+<a class="indexterm" name="IT04.Widgets-43"></a>
+<a class="indexterm" name="IT04.Widgets-44"></a>
+When using GL, the ColorChooser normally shades the color hexagon and color sliders so that each point is a true representation of the color that would be selected if the user were to move the hexagon pointer or color slider to that point. However, if the value of the <span class="bold"><b>SgNwysiwyg</b></span> resource is FALSE, then the ColorChooser always displays the hexagon colors with a Value (intensity) of 1 (maximum intensity), and the RGB sliders with a color range of black to the maximum RGB color component value.</p>
+<p>For example, if the current selected color RGB value is (100, 200, 50), then the Red color slider displays the colors (0, 200, 50) through (255, 200, 50) if <span class="bold"><b>SgNwysiwyg</b></span> is TRUE, and (0, 0, 0) through (233, 0, 0) if <span class="bold"><b>SgNwysiwyg</b></span> is FALSE. (Note that the user can also toggle the value of <span class="bold"><b>SgNwysiwyg</b></span> by selecting the &#8220;WYSIWYG&#8221; option from the ColorChooser's Options menu.)</p>
+<p>The <span class="bold"><b>SgNshowSliders</b></span> resource determines which of the color sliders are visible. Possible values are:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">SgValue</span></td><td width="10"> </td><td><p>Show only the slider for the color Value (the default)</p>
+
+</td></tr><tr valign="top"><td><span class="term">SgRGB_and_Value</span></td><td width="10"> </td><td><p>Show the Value and RGB sliders</p>
+
+</td></tr><tr valign="top"><td><span class="term">SgRGB_and_HSV</span></td><td width="10"> </td><td><p>Show all six sliders, the HSV and RGB sliders</p>
+
+</td></tr></table></div><p>The default labels (in the C locale) for the ColorChooser buttons are &#8220;OK,&#8221; &#8220;Apply,&#8221; &#8220;Cancel,&#8221; and &#8220;Help.&#8221; You can change these by setting the values of <span class="bold"><b>SgNokLabelString</b></span>, <span class="bold"><b>SgNapplyLabelString</b></span>, <span class="bold"><b>SgNcancelLabelString</b></span>, and <span class="bold"><b>SgNhelpLabelString</b></span> respectively.</p>
+<p>You can add additional children to the ColorChooser after creation&#8212;they are laid out in the following manner:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The first child is used as a work area. The work area is placed just below the menu bar.</p>
+</li>
+<li><p>Buttons&#8212;All <span class="bold"><b>XmPushButton</b></span> widgets or gadgets, and their subclasses are placed after the <b>OK</b> button, in the order of their creation.</p>
+</li>
+<li><p>The layout of additional children that are not in the above categories is undefined.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5195143"></a>Getting and Setting the Color Chooser's Colors</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-45"></a>
+<a class="indexterm" name="IT04.Widgets-46"></a>
+In ColorChooser callback functions, the RGB color values are provided as the <i>r</i>, <i>g</i>, and <i>b</i> parameters of the SgColorChooserCallbackStruct structure passed to the functions. <a href="ch04.html#LE51289-PARENT" title="Handling User Interaction with the Color Chooser">&#8220;Handling User Interaction with the Color Chooser&#8221;</a> describes the ColorChooser callbacks.</p>
+<p>ColorChooser also provides several convenience routines for getting and setting both the current color values and setting the stored color value.</p>
+<p><tt>SgColorChooserSetColor()</tt> sets both the current and the stored color values to the same color:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+void SgColorChooserSetColor(Widget <i>w</i>, short <i>r</i>, short <i>g</i>,
+                            short <i>b</i>);
+</pre></td></tr></table><p><tt>SgColorChooserGetColor()</tt> retrieves the current color values:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+void SgColorChooserGetColor(Widget <i>w</i>, short *<i>r</i>, short *<i>g</i>,
+                            short *<i>b</i>);
+</pre></td></tr></table><p><tt>SgColorChooserSetCurrentColor()</tt> sets the current color but not the stored color:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+void SgColorChooserSetCurrentColor(Widget <i>w</i>, short <i>r</i>,
+                                   short <i>g</i>, short <i>b</i>);
+</pre></td></tr></table><p><tt>SgColorChooserSetStoredColor()</tt> sets the stored color but not the current color:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+void SgColorChooserSetStoredColor(Widget <i>w</i>, short <i>r</i>,
+                                  short <i>g</i>, short <i>b</i>);
+</pre></td></tr></table><p>For each function, <i>w</i> is the ColorChooser widget and <i>r</i>, <i>g</i>, and <i>b</i> are the red, green, and blue values, respectively.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE51289-PARENT"></a>Handling User Interaction with the Color Chooser</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-47"></a>
+<a class="indexterm" name="IT04.Widgets-48"></a>
+<a class="indexterm" name="IT04.Widgets-49"></a>
+The ColorChooser widget defines the following callback resources:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>SgNapplyCallback</b></span></span></td><td width="10"> </td><td><p>Invoked when the user activates the <b>Apply</b> button. The callback reason is SgCR_APPLY.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>SgNcancelCallback</b></span></span></td><td width="10"> </td><td><p>Invoked when the user activates the <b>Cancel</b> button. The callback reason is SgCR_CANCEL.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>SgNokCallback</b></span></span></td><td width="10"> </td><td><p>Invoked when the user activates the <b>OK</b> button. The callback reason is SgCR_OK.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>SgNvalueChangedCallback</b></span></span></td><td width="10"> </td><td><p>Invoked when the user selects a color. The callback reason is XmCR_VALUE_CHANGED. A color is selected when the user changes the value of a color component with the color hexagon, one of the color sliders, or one of the color components text widgets.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>SgNdragCallback</b></span></span></td><td width="10"> </td><td><p>Specifies the list of callbacks called when the user drags the mouse over the color hexagon or one of the color sliders to select a color. The callback reason is XmCR_DRAG.</p>
+
+</td></tr></table></div><p>A pointer to a SgColorChooserCallbackStruct structure is passed to each ColorChooser callback function:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef struct {
+    int <i>reason</i>;
+    XEvent *<i>event</i>;
+    short <i>r</i>, <i>g</i>, <i>b</i>;
+} SgColorChooserCallbackStruct;
+</pre></td></tr></table><br><div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>reason</i></span></td><td width="10"> </td><td><p>Indicates why the callback was invoked.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>event</i></span></td><td width="10"> </td><td><p>Points to the XEvent that triggered the callback.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>r</i></span></td><td width="10"> </td><td><p>Indicates the red color component of the currently selected color.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>g</i></span></td><td width="10"> </td><td><p>Indicates the green color component of the currently selected color.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>b</i></span></td><td width="10"> </td><td><p>Indicates the blue color component of the currently selected color.</p>
+
+</td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE48293-PARENT"></a>The Dial Widget 
+</h3></div></div><a class="indexterm" name="IT04.Widgets-50"></a>
+<p><a class="indexterm" name="IT04.Widgets-51"></a>
+<a class="indexterm" name="IT04.Widgets-52"></a>
+<a class="indexterm" name="IT04.Widgets-53"></a>
+<a class="indexterm" name="IT04.Widgets-54"></a>
+The Dial widget (<span class="bold"><b>SgDial</b></span>), shown in <a href="ch04.html#id5195805" title="Figure 4-4. The Dial Widget in Knob and Pointer Form">Figure 4-4</a>, is a new widget that allows users to input or modify a value from within a range of values. <a href="ch04.html#id5195805" title="Figure 4-4. The Dial Widget in Knob and Pointer Form">Figure 4-4</a> shows two forms of the Dial widget, one with the input control in the shape of a knob and the other in the shape of a pointer. The user can modify the Dial's value by spinning the knob or pointer. The Dial is usually surrounded by tick marks (marked divisions around the perimeter of the Dial).</p>
+<p><div class="figure"><a name="id5195805"></a><p><a name="id5195805"></a><b>Figure 4-4. The Dial Widget in Knob and Pointer Form</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/04.Widgets-2.gif" alt="The Dial Widget in Knob and Pointer Form" height="89" width="178"></td></tr></table></div></div><br>
+</p>
+<p>You must include the header file <tt>&lt;Sgm/Dial.h&gt;</tt> in any source file that uses a Dial widget.</p>
+<p>For more detailed information about the Dial widget, refer to the <tt>SgDial(3X)</tt> man page. For an example program using the Dial widget, see <a href="apa.html#LE74701-PARENT" title="Example Program for Dial">&#8220;Example Program for Dial&#8221;</a><a href="apa.html#LE74701-PARENT"> in Appendix A</a>. You can also examine, compile, and experiment with the <tt>dial</tt> demonstration program in the directory <tt>/usr/src/X11/motif/Sgm/dial</tt>. See &#8220;Dials&#8221; in Chapter 9
+ of the <i>IRIX Interactive User Interface Guidelines</i> for guidelines on using the Dial widget in an application.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5195897"></a>Controlling the Dial Interface</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-55"></a>
+<a class="indexterm" name="IT04.Widgets-56"></a>
+You control the display characteristics of a Dial through widget resources.</p>
+<p><a class="indexterm" name="IT04.Widgets-57"></a>
+The <span class="bold"><b>SgNdialVisual</b></span> resource determines whether the Dial uses a knob or a pointer. The default value, SgKNOB, specifies a knob and SgPOINTER specifies a pointer. If you use a pointer, you can also specify the color of the small &#8220;indicator&#8221; at the center of the pointer using the <span class="bold"><b>SgNindicatorColor</b></span> resource; the default color is red.</p>
+<p>Specify the position of the lowest value on the Dial with the <span class="bold"><b>SgNstartAngle</b></span> resource. The value, which must be between 0 and 360 inclusive, specifies the number of degrees clockwise from the top of the Dial. A default value of 0 corresponds to the top of the Dial.</p>
+<p>The <span class="bold"><b>SgNangleRange</b></span> resource determines the range of the Dial in degrees. The value, which must be between 0 and 360 inclusive, specifies the number of degrees clockwise from the start angle of the Dial. The default value of 360 allows the Dial to rotate completely.</p>
+<p>The Dial widget displays evenly spaced &#8220;tick marks&#8221; along the perimeter of the Dial's angle range. You control the number of tick marks with the <span class="bold"><b>SgNdialMarkers</b></span> resource; the default number is 16. The length of the tick marks in pixels is determined by the <span class="bold"><b>SgNmarkerLength</b></span> resource; the default length is 8 pixels. The <span class="bold"><b>SgNdialForeground</b></span> resource determines the color of the tick marks; the default is red.</p>
+<p>The resources <span class="bold"><b>XmNminimum</b></span> and <span class="bold"><b>XmNmaximum</b></span> determine the minimum and maximum values of the Dial. The Dial takes on the minimum value at the position specified by <span class="bold"><b>SgNstartAngle</b></span> and takes on the maximum value at the position <span class="bold"><b>SgNangleRange</b></span> degrees clockwise from <span class="bold"><b>SgNstartAngle</b></span>. The value of <span class="bold"><b>XmNmaximum</b></span> must be greater than or equal to the value of <span class="bold"><b>XmNminimum</b></span>. The default value of <span class="bold"><b>XmNminimum</b></span> is 0 and the default value of <span class="bold"><b>XmNmaximum</b></span> is 360.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5196081"></a>Getting and Setting the Dial's Value</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-58"></a>
+<a class="indexterm" name="IT04.Widgets-59"></a>
+<a class="indexterm" name="IT04.Widgets-60"></a>
+The <span class="bold"><b>XmNvalue</b></span> resource, which must be a value between <span class="bold"><b>XmNminimum</b></span> and <span class="bold"><b>XmNmaximum</b></span> inclusive, contains the current position of the Dial. You can set or get the value of a Dial widget at any time by respectively setting or getting its <span class="bold"><b>XmNvalue</b></span> resource.</p>
+<p>In Dial callback functions, the Dial value is provided as the <i>position</i> parameter of the SgDialCallbackStruct structure passed to the functions. <a href="ch04.html#LE68199-PARENT" title="Detecting Changes in the Dial's Value">&#8220;Detecting Changes in the Dial's Value&#8221;</a> describes the Dial callbacks.</p>
+<p>Dial also provides a convenience routine, <tt>SgDialSetValue()</tt>, for setting the value of <span class="bold"><b>XmNvalue</b></span>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+void SgDialSetValue(Widget <i>w</i>, int <i>value</i>);
+</pre></td></tr></table><p><i>w</i> is the Dial widget whose value you want to set and <i>value</i> is the new value.</p>
+<p>You can get the current value of a Dial widget at any time by retrieving the value of its <span class="bold"><b>XmNvalue</b></span> resource. Dial also provides a convenience routine, <tt>SgDialGetValue()</tt>, for getting the value of <span class="bold"><b>XmNvalue</b></span>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+void SgDialGetValue(Widget <i>w</i>, int *<i>value</i>);
+</pre></td></tr></table><p><i>w</i> is the Dial widget whose value you want to get. Upon returning, <i>value</i> contains the Dial's value.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE68199-PARENT"></a>Detecting Changes in the Dial's Value</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-61"></a>
+<a class="indexterm" name="IT04.Widgets-62"></a>
+The Dial widget defines two callback list resources, <span class="bold"><b>XmNvalueChangedCallback</b></span> and <span class="bold"><b>XmNdragCallback</b></span>. A Dial widget invokes <span class="bold"><b>XmNvalueChangedCallback</b></span> whenever its value changes either programmatically (for example, by calling <tt>SgDialSetValue()</tt>) or through user interaction. A Dial widget invokes <span class="bold"><b>XmNdragCallback</b></span> whenever the user clicks and drags, or &#8220;spins,&#8221; the Dial's knob or pointer.</p>
+<p>A pointer to a SgDialCallbackStruct structure is passed to each Dial callback function:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef struct {
+    int <i>reason</i>;
+    XEvent *<i>event</i>;
+    int <i>position</i>;
+} SgDialCallbackStruct;
+</pre></td></tr></table><p>The SgDialCallbackStruct parameters are:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>reason</i></span></td><td width="10"> </td><td><p>The reason the callback was invoked. This value is XmCR_VALUE_CHANGED in the event of a <span class="bold"><b>XmNvalueChangedCallback</b></span> and XmCR_DRAG in the event of a <span class="bold"><b>XmNdragCallback</b></span>.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>event</i></span></td><td width="10"> </td><td><p>A pointer to the XEvent that triggered the callback</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>position</i></span></td><td width="10"> </td><td><p>The new Dial value </p>
+
+</td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE34855-PARENT"></a>The Thumbwheel Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-63"></a>
+<a class="indexterm" name="IT04.Widgets-64"></a>
+<a class="indexterm" name="IT04.Widgets-65"></a>
+The ThumbWheel widget (<span class="bold"><b>SgThumbWheel</b></span>), shown in <a href="ch04.html#id5196535" title="Figure 4-5. The Thumbwheel Widget">Figure 4-5</a>, is a new widget that allows users to <a class="indexterm" name="IT04.Widgets-66"></a>
+input or modify a value, either from within a range of values or from an unbounded (infinite) range.</p>
+<p><div class="figure"><a name="id5196535"></a><p><a name="id5196535"></a><b>Figure 4-5. The Thumbwheel Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/04.Widgets-5.gif" alt="The Thumbwheel Widget" height="126" width="165"></td></tr></table></div></div><br>
+</p>
+<p>A ThumbWheel has an elongated rectangular region within which a wheel graphic is displayed. Users can modify the ThumbWheel's value by spinning the wheel. A ThumbWheel can also include a home button, located outside the wheel region. This button allows users to set the ThumbWheel's value to a known position.</p>
+<p>You must include the header file <tt>&lt;Sgm/ThumbWheel.h&gt;</tt> in any source file that uses a Thumbwheel widget.</p>
+<p>For detailed information on the ThumbWheel widget, refer to the<tt> SgThumbWheel(3X)</tt> man page. For an example program using the ThumbWheel widget, see <a href="apa.html#LE30790-PARENT" title="Example Program for ThumbWheel">&#8220;Example Program for ThumbWheel&#8221;</a><a href="apa.html#LE30790-PARENT"> in Appendix A</a>. You can also examine, compile, and experiment with the <tt>thumbwheel</tt> demonstration program in the directory <tt>/usr/src/X11/motif/Sgm/thumbwheel</tt>. See &#8220;Thumbwheels&#8221; in Chapter 9
+ of the <i>IRIX Interactive User Interface Guidelines</i> for guidelines on using the ThumbWheel widget in your application.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5196635"></a>Controlling the ThumbWheel Interface</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-67"></a>
+<a class="indexterm" name="IT04.Widgets-68"></a>
+You control the display characteristics of a ThumbWheel through widget resources.</p>
+<p>The resources <span class="bold"><b>XmNminimum</b></span> and <span class="bold"><b>XmNmaximum</b></span> determine the minimum and maximum values of the ThumbWheel. Setting <span class="bold"><b>XmNmaximum</b></span> equal to <span class="bold"><b>XmNminimum</b></span> indicates an infinite range.</p>
+<p>The default value of <span class="bold"><b>XmNminimum</b></span> is 0 and the default value of <span class="bold"><b>XmNmaximum</b></span> is 100.</p>
+<p>The <span class="bold"><b>SgNangleRange</b></span> resource specifies the angular range, in degrees, through which the ThumbWheel is allowed to rotate. The default of 150 represents roughly the visible amount of the wheel. Thus clicking at one end of the wheel and dragging the mouse to the other end would give roughly the entire range from <span class="bold"><b>XmNminimum</b></span> to <span class="bold"><b>XmNmaximum</b></span>.</p>
+<p>In conjunction with <span class="bold"><b>XmNmaximum</b></span> and <span class="bold"><b>XmNminimum</b></span>, the <span class="bold"><b>SgNangleRange</b></span> resource controls the fineness or coarseness of the wheel control when it is not infinite. If this value is 0, the ThumbWheel has an infinite range. If the range of the ThumbWheel is infinite, you can use the <span class="bold"><b>SgNunitsPerRotation</b></span> resource to specify the change in the ThumbWheel's value for each full rotation of the wheel.</p>
+<p>If the value of <span class="bold"><b>SgNshowHomeButton</b></span> is TRUE, the default, the ThumbWheel displays a home button by the slider. The user can click on the home button to set the value of the ThumbWheel to a known value, which is specified by the <span class="bold"><b>SgNhomePosition</b></span> resource. The default value of <span class="bold"><b>SgNhomePosition</b></span> is 50.</p>
+<p>The <span class="bold"><b>XmNorientation</b></span> resource determines whether the orientation of the ThumbWheel is vertical, indicated by a value of XmVERTICAL, or horizontal, indicated by a value of XmHORIZONTAL. The default value is XmVERTICAL.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5196809"></a>Getting and Setting the ThumbWheel's Value</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-69"></a>
+<a class="indexterm" name="IT04.Widgets-70"></a>
+The <span class="bold"><b>XmNvalue</b></span> resource contains the current position of the ThumbWheel.<span class="bold"><b> XmNvalue</b></span> must be a value between <span class="bold"><b>XmNminimum</b></span> and <span class="bold"><b>XmNmaximum</b></span> if the ThumbWheel is not &#8220;infinite.&#8221; You can set or get the value of a ThumbWheel widget at any time by respectively setting or getting its <span class="bold"><b>XmNvalue</b></span> resource.</p>
+<p>In ThumbWheel callback functions, the ThumbWheel value is provided as the <i>value</i> parameter of the SgThumbWheelCallbackStruct structure passed to the functions. <a href="ch04.html#LE27959-PARENT" title="Detecting Changes in the ThumbWheel's Value">&#8220;Detecting Changes in the ThumbWheel's Value&#8221;</a> describes the ThumbWheel callbacks.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="LE27959-PARENT"></a>Detecting Changes in the ThumbWheel's Value</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-71"></a>
+<a class="indexterm" name="IT04.Widgets-72"></a>
+The ThumbWheel widget defines two callback list resources, <span class="bold"><b>XmNvalueChangedCallback</b></span> and <span class="bold"><b>XmNdragCallback</b></span>. A ThumbWheel widget invokes <span class="bold"><b>XmNvalueChangedCallback</b></span> whenever its value changes either programmatically (that is, by setting the value of <span class="bold"><b>XmNvalue</b></span>) or through user interaction. A ThumbWheel widget invokes <span class="bold"><b>XmNdragCallback</b></span> whenever the user clicks and drags, or &#8220;spins,&#8221; the ThumbWheel's wheel.</p>
+<p>A pointer to a SgThumbWheelCallbackStruct structure is passed to each ThumbWheel callback function:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef struct { int reason;
+                 XEvent * event;
+                 int value;
+               } SgThumbWheelCallbackStruct;
+</pre></td></tr></table><p>The SgThumbWheelCallbackStruct parameters are:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><i>reason</i></span></td><td width="10"> </td><td><p>The reason the callback was invoked. This value is XmCR_VALUE_CHANGED in the event of a <span class="bold"><b>XmNvalueChangedCallback</b></span> and XmCR_DRAG in the event of a <span class="bold"><b>XmNdragCallback</b></span>.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>event</i></span></td><td width="10"> </td><td><p>A pointer to the XEvent that triggered the callback.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><i>position</i></span></td><td width="10"> </td><td><p>The new ThumbWheel value. </p>
+
+</td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE66571-PARENT"></a>The Drop Pocket Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-73"></a>
+<a class="indexterm" name="IT04.Widgets-74"></a>
+The Drop Pocket widget (<span class="bold"><b>SgDropPocket</b></span>), shown in <a href="ch04.html#id5197142" title="Figure 4-6. The Drop Pocket Widget (on left) As Part of the Finder Widget">Figure 4-6</a>, receives and displays Desktop icons.</p>
+<p><div class="figure"><a name="id5197142"></a><p><a name="id5197142"></a><b>Figure 4-6. The Drop Pocket Widget (on left) As Part of the Finder Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/04.Widgets-1.gif" alt="The Drop Pocket Widget (on left) As Part of the Finder Widget" height="74" width="588"></td></tr></table></div></div><br>
+</p>
+<p>When users drop Desktop file icons onto the Drop Pocket, the Drop Pocket determines the name of the icon and returns information describing the icon to the application in the callback. </p>
+<p>When users drag an acceptable icon over the Drop Pocket, the Drop Pocket background changes color and the Drop Pocket displays the dropped icon. If the type of a file is not known, or if the file does not exist (for example, if the user is specifying a new file), the Drop Pocket displays the icon for unknown file types (this icon looks like a round balloon).</p>
+<p>For more information on the Drop Pocket widget, refer to the <tt>SgDropPocket(3X)</tt> man page. You can find example code in <tt>/usr/src/X11/motif/Sgm/dropPocket</tt> directory. For an example program using the Drop Pocket widget, see <a href="apa.html#LE84471-PARENT" title="Example Program for Drop Pocket">&#8220;Example Program for Drop Pocket&#8221;</a><a href="apa.html#LE84471-PARENT"> in Appendix A</a>.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5197204"></a>man Page Text</h4></div></div>
+<p>SYNOPSIS #include &lt;Sgm/DropPocket.h&gt;</p>
+<p>New Resources</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>SgNDropPocketActivePixel</b></span></span></td><td width="10"> </td><td><p>Specifies the color for the background of the DropPocket when an icon that can be dropped is above the DropPocket.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>SgNiconDataBasePath</b></span></span></td><td width="10"> </td><td><p>Specifies the location of the icon database. The default value is <tt>/usr/lib/filetype/workspace.otr</tt>. Setting this resource to a filename that is not a legal icon database will cause serious problems for the DropPocket.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>SgNname</b></span></span></td><td width="10"> </td><td><p>Specifies the compound string that is the name of the current icon. By setting this resource, the application can control the initial icon that appears in the DropPocket. If this resource is NULL, the DropPocket will appear empty. Refer to XmString(3X) for more information on the creation and structure of compound strings.</p>
+
+</td></tr></table></div><p>Callback Information</p>
+<p>The Callback structure is SgDropPocketCallbackStruct. A pointer to the following structure is passed to each callback:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+typedef struct { int reason;
+                 XEvent * event;
+                 Window window;
+                 XmString iconName;
+                 char * iconData;
+               } SgDropPocketCallbackStruct;
+</pre></td></tr></table><br><div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">reason</span></td><td width="10"> </td><td><p>Indicates why the callback was invoked. The constant SgCR_ICON_CHANGE is the reason associated with callbacks generated by a successful icon drop on the DropPocket.</p>
+
+</td></tr><tr valign="top"><td><span class="term">event</span></td><td width="10"> </td><td><p>Points to the XEvent that triggered the callback</p>
+
+</td></tr><tr valign="top"><td><span class="term">window</span></td><td width="10"> </td><td><p>Specifies the window of the DropPocket.</p>
+
+</td></tr><tr valign="top"><td><span class="term">iconName</span></td><td width="10"> </td><td><p>Specifies the name of the icon. For icons representing files, this is the file name. For other types of icons, the name may not completely specify the icon. For example a person icon may have the name jake, but the icon represents a person in /usr/lib/faces/jake.</p>
+
+</td></tr><tr valign="top"><td><span class="term">iconData</span></td><td width="10"> </td><td><p>The full string description of the icon. </p>
+
+</td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE81745-PARENT"></a>The Finder Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-75"></a>
+<a class="indexterm" name="IT04.Widgets-76"></a>
+The Finder widget (<span class="bold"><b>SgFinder</b></span>), shown in <a href="ch04.html#id5197491" title="Figure 4-7. The Finder Widget">Figure 4-7</a>, is a new widget that accelerates text selection of long objects such as filenames. (A good way to experiment with a Finder widget is to select &#8220;An Icon&#8221; from the Find toolchest.)</p>
+<p><div class="figure"><a name="id5197491"></a><p><a name="id5197491"></a><b>Figure 4-7. The Finder Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/finder.online.gif" alt="The Finder Widget" height="159" width="393"></td></tr></table></div></div><br>
+</p>
+<p><a class="indexterm" name="IT04.Widgets-77"></a>
+<a class="indexterm" name="IT04.Widgets-78"></a>
+The Finder widget is customizable for various applications (it is not just for looking at directories; see the <tt>SgFinder(3X)</tt> man page for customization details). The Finder widget includes four components:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">Text field</span></td><td width="10"> </td><td><p>Displays the name of a file or directory. </p>
+
+</td></tr><tr valign="top"><td><span class="term"><a class="indexterm" name="IT04.Widgets-79"></a>
+<a class="indexterm" name="IT04.Widgets-80"></a>
+<a class="indexterm" name="IT04.Widgets-81"></a>
+Path navigation bar</span></td><td width="10"> </td><td><p>Contains buttons representing each directory in the pathname. When the user clicks on a path bar button, the Finder sets the current directory to the directory listed underneath that button. The path bar is created with an <span class="bold"><b>SgZoomBar</b></span>(3X) widget.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><a class="indexterm" name="IT04.Widgets-82"></a>
+<a class="indexterm" name="IT04.Widgets-83"></a>
+<a class="indexterm" name="IT04.Widgets-84"></a>
+Recycle button</span></td><td width="10"> </td><td><p>When users click on the Recycle button, the recycle list appears listing the directories that the user has selected during the current Finder session. Selecting an item from the recycle list changes the current directory to the selected directory. The recycle button is created with an <span class="bold"><b>SgDynaMenu</b></span>(3X) widget.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><a class="indexterm" name="IT04.Widgets-85"></a>
+<a class="indexterm" name="IT04.Widgets-86"></a>
+Drop pocket</span></td><td width="10"> </td><td><p>Displays the Desktop file icon for the file listed in the text field. The user can drop Desktop file icons into the drop pocket to find the pathname for the file and drag icons out of the drop pocket and put them on the Desktop. The recycle button is created with an <span class="bold"><b>SgDropPocket</b></span>(3X) widget.</p>
+
+</td></tr></table></div><p>You must include the header file <tt>&lt;Sgm/Finder.h&gt;</tt> in any source file that uses a Finder widget.</p>
+<p>For more detailed information on the Finder widget, refer to the <tt>SgFinder(3X)</tt>, <tt>SgDropPocket(3X)</tt>, and <tt>SgDynaMenu(3X)</tt> man pages. For an example using the Finder widget, see <a href="apa.html#LE23162-PARENT" title="Example Program for Finder">&#8220;Example Program for Finder&#8221;</a><a href="apa.html#LE23162-PARENT"> in Appendix A</a>. You can also examine, compile, and experiment with the <tt>finderTest</tt> demonstration program in the directory <tt>/usr/src/X11/motif/Sgm/finder</tt>. See &#8220;File Finder&#8221; in Chapter 9
+ of the <i>IRIX Interactive User Interface Guidelines</i> for guidelines on using the Finder widget in your application.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5197869"></a>Controlling the Finder Interface</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-87"></a>
+<a class="indexterm" name="IT04.Widgets-88"></a>
+If you do not need the drop pocket feature of the Finder widget, you can set the value of the resource <span class="bold"><b>SgNuseDropPocket</b></span> to FALSE when you create the widget. This bypasses the costs of setting up drag and drop and loading the file icon libraries. Note that you cannot set this resource using <tt>XtSetValues()</tt>; if you do not originally create a Finder widget with a drop pocket, you cannot add one afterwards.</p>
+<p>Similarly, if you do not need the Recycle button, you can set the value of the resource <span class="bold"><b>SgNuseHistoryMenu</b></span> to FALSE. Note that you cannot set this resource using <tt>XtSetValues()</tt>; if you do not originally create a Finder widget with a Recycle button, you cannot add one afterwards.</p>
+<p><a class="indexterm" name="IT04.Widgets-89"></a>
+<a class="indexterm" name="IT04.Widgets-90"></a>
+You can customize the appearance of the Recycle button by setting the value of the <span class="bold"><b>SgNhistoryPixmap</b></span> resource to the pixmap you want to display.</p>
+<p>By default, the Finder widget determines where to place the buttons on the path navigation bar by the location of the forward slash (/) character in the text field. You can specify a different separator character by providing it as the value of the <span class="bold"><b>SgNseparator</b></span> resource. This feature is useful if you want to use the Finder widget to display something other than filenames.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5198010"></a>Getting and Setting Finder Values</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-91"></a>
+You can retrieve the current value of the Finder's text field with <tt>SgFinderGetTextString()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+char *SgFinderGetTextString(Widget <i>w</i>);
+</pre></td></tr></table><p>You can set the value of the text field with <tt>SgFinderSetTextString()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+void SgFinderSetTextString(Widget <i>w</i>, char *<i>value</i>);
+</pre></td></tr></table><p>You can add an item to the &#8220;history list&#8221; of the Recycle button with <tt>SgFinderAddHistoryItem()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+void SgFinderAddHistoryItem(Widget <i>w</i>, char *<i>str</i>);
+</pre></td></tr></table><p>You can clear the Recycle button's history list with <tt>SgFinderClearHistory()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+void SgFinderClearHistory(Widget <i>w</i>);
+</pre></td></tr></table><p>You can access a widget component within a finder using <tt>SgFinderGetChild()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+Widget SgFinderGetChild(Widget <i>w</i>, int <i>child</i>);
+</pre></td></tr></table><p><i>child</i> specifies the component and can take any of the following values:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td colspan="2"><span class="term">SgFINDER_DROP_POCKET</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The drop pocket</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SgFINDER_TEXT</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The text field</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SgFINDER_ZOOM_BAR</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The path navigation bar</p>
+
+</td></tr><tr valign="top"><td colspan="2"><span class="term">SgFINDER_HISTORY_MENUBAR</span></td></tr><tr valign="top"><td width="15%"> </td><td><p>The Recycle button</p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5198232"></a>Handling User Interaction with the Finder</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-92"></a>
+<a class="indexterm" name="IT04.Widgets-93"></a>
+<a class="indexterm" name="IT04.Widgets-94"></a>
+When the user clicks a button in the path navigation bar, the default action of the Finder is to set the current directory to the directory listed underneath that button. You can change this behavior by setting the <span class="bold"><b>SgNsetTextSectionFunc</b></span> resource to the handler you want to use. The handler function must be of type SgSetTextFunc, which is defined in <tt>&lt;Sg/Finder.h&gt;</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+typedef void (*SgSetTextFunc)(Widget finder, int section);
+</pre></td></tr></table><p>The first argument is the Finder widget and the second is an integer corresponding to the button pressed. Buttons are numbered sequentially from the left, starting with 0. You can perform whatever operations you want in this function, but typically you include a call to <tt>SgFinderSetTextString()</tt> to set the value of the text field after the user clicks a button.</p>
+<p>Additionally, the Finder widget defines two callback list resources:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>XmNactivateCallback</b></span></span></td><td width="10"> </td><td><p>Invoked when the user clicks a path navigation bar button, when the text field generates an activateCallback (for example, the user presses the <b><tt>&lt;Return&gt;</tt></b> key in the text field), or when you set the text string by calling <tt>SgFinderSetTextString()</tt>. A pointer to an XmAnyCallbackStruct structure is passed to each callback function. The reason sent by the callback is XmCR_ACTIVATE.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>XmNvalueChangedCallback</b></span></span></td><td width="10"> </td><td><p>Invoked when text is deleted from or inserted into the text field. A pointer to an XmAnyCallbackStruct structure is passed to each callback function. The reason sent by the callback is XmCR_VALUE_CHANGED. </p>
+
+</td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE30541-PARENT"></a>The Graph Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-95"></a>
+<a class="indexterm" name="IT04.Widgets-96"></a>
+The Graph widget (<span class="bold"><b>SgGraph</b></span>) allows you to display any group of widgets as a graph, with each widget representing a node. <a href="ch04.html#id5198438" title="Figure 4-8. The Graph Widget">Figure 4-8</a> shows an example of a Graph widget.</p>
+<p><div class="figure"><a name="id5198438"></a><p><a name="id5198438"></a><b>Figure 4-8. The Graph Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/graph.online.gif" alt="The Graph Widget" height="256" width="436"></td></tr></table></div></div><br>
+</p>
+<p><a class="indexterm" name="IT04.Widgets-97"></a>
+<a class="indexterm" name="IT04.Widgets-98"></a>
+The arcs used to connect the nodes are instances of an Arc widget (<span class="bold"><b>SgArc</b></span>), developed specifically for use with the Graph widget. </p>
+<p>The Graph widget allows you to display any group of widgets as a graph, with each widget representing a node. The graph can be disconnected and can contain cycles. The arcs used to connect the nodes are instances of an Arc widget (<span class="bold"><b>SgArc</b></span>), developed specifically for use with the Graph widget. Arcs may be undirected, directed, or bidirected. Note that the Graph widget does not understand the semantics of arc direction; in other words, for layout and editing purposes, an Arc will always have a parent and a child regardless of its direction.</p>
+<p>The Graph widget has the ability to arrange all nodes either horizontally or vertically according to an internal layout algorithm, and supports an edit mode in which arcs and nodes may be interactively repositioned as well as created. There is also a read-only mode in which all events are passed directly to the children of the Graph widget. In edit mode, the Graph takes over all device events for editing commands.</p>
+<p>The Graph is a complex widget, and a full discuss of its resources, utility functions, and capabilities is beyond the scope of this document. For detailed information about the Graph and Arc widgets, refer to the <tt>SgGraph(3X)</tt> and <tt>SgArc(3X)</tt> man pages.</p>
+<p>You must include the header file <tt>&lt;Sgm/Graph.h&gt;</tt> in any source file that uses a Graph widget. You must include the header files <tt>&lt;Sgm/Graph.h&gt;</tt> and <tt>&lt;Sgm/Arc.h&gt;</tt> in any source file that uses an Arc widget. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE37790-PARENT"></a>The Springbox Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-99"></a>
+<a class="indexterm" name="IT04.Widgets-100"></a>
+The SpringBox widget (<span class="bold"><b>SgSpringBox</b></span>) is a new container widget that arranges its children in a single row or column based on a set of spring constraints assigned to each child. You can use the SpringBox widget to create layouts similar to those supported by the <span class="bold"><b>XmForm</b></span> widget, but the SpringBox widget is usually easier to set up.</p>
+<p>The value of the SpringBox widget's <tt>XmNorientation</tt> resource determines its orientation. The default value, XmHORIZONTAL, specifies a horizontal SpringBox and the value XmVERTICAL specifies a vertical SpringBox.</p>
+<p>To use the SpringBox, you set constraint resources on each child of the widget to specify the &#8220;springiness&#8221; for both the widget's size and position relative to its siblings.</p>
+<p>You control the springiness of a widget's size by setting the values of its <tt>XmNverticalSpring</tt> and <tt>XmNhorizontalSpring</tt> resources. A value of zero means the child cannot be resized in that direction. For non-zero values, the values are compared to the values of other springs in the overall system to determine the proportional effects of any resizing. For example, a widget with a springiness of 200 would stretch twice as much as a widget with a springiness of 100. The default value of both resources is zero.</p>
+<p>The values of the resources <tt>XmNleftSpring</tt>, <tt>XmNrightSpring</tt>, <tt>XmNtopSpring</tt>, and <tt>XmNbottomSpring</tt> control the springiness of a widget's position in relation to its neighboring boundaries. By default, the value of each of these springs is 50. A value of zero means that the SpringBox widget cannot add additional space adjacent to that part of a widget. Larger values are considered in relation to all other spring values in the system.</p>
+<p>You must include the header file <tt>&lt;Sgm/SpringBox.h&gt;</tt> in any source file that uses a SpringBox widget. For more detailed information on the SpringBox widget, refer to the <tt>SgSpringBox(3X)</tt> man page. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE22284-PARENT"></a>The Grid Widget</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-101"></a>
+<a class="indexterm" name="IT04.Widgets-102"></a>
+The Grid widget (<span class="bold"><b>SgGrid</b></span>) is a new container widget that arranges its children in a two-dimensional grid of arbitrary size. You can separately designate each row and column of the grid as having a fixed size or as having some degree of stretchability. You can also resize each child in either or both directions, or force a child to a fixed size.</p>
+<p>You must include the header file <tt>&lt;Sgm/Grid.h&gt;</tt> in any source file that uses a Grid widget. For detailed information on the Grid widget, refer to the <tt>SgGrid(3X)</tt> man page.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5198795"></a>Setting Grid Characteristics</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-103"></a>
+<a class="indexterm" name="IT04.Widgets-104"></a>
+You specify the number of rows and columns in a Grid by setting the values of its <span class="bold"><b>XmNnumRows</b></span> and <span class="bold"><b>XmNnumColumns</b></span> resources, respectively. The default value for each is 1. Note that you can set the size of a Grid only when you create it; you cannot use <tt>XtSetValues()</tt> to change the number of rows or columns in a Grid.<a class="indexterm" name="IT04.Widgets-105"></a>
+ </p>
+<p>The <span class="bold"><b>XmNautoLayout</b></span> resource determines the layout policy for a Grid. If its value is TRUE (the default), all rows and columns that have a non-zero resizability factor (described below) are sized according to the desired natural size of the widgets in that row or column.</p>
+<p>If <span class="bold"><b>XmNautoLayout</b></span> is FALSE, all widgets in resizable rows or columns are sized according to the resizability factor for that row or column. By default, the resizability factor is &#8220;1&#8221; for all rows and columns, which results in each cell in the grid having an equal size. You can change the resizability factor for a row or column by calling <tt>SgGridSetRowMargin()</tt> or <tt>SgGridSetColumnMargin()</tt> respectively:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgGridSetRowResizability(Widget <i>widget</i>, int <i>row</i>, int <i>factor</i>);
+
+SgGridSetColumnResizability(Widget <i>widget</i>, int <i>column</i>,
+                            int <i>factor</i>);
+</pre></td></tr></table><p><i>widget</i> is the Grid widget. The second argument specifies the row or column. Rows are numbered sequentially from the top starting at 0; columns are numbered sequentially from the left starting with 0. <i>factor</i> is the resizability factor for the row or column. Setting this value to 0 establishes the specified row or column as not resizable, regardless of the setting of <span class="bold"><b>XmNautoLayout</b></span>. Other values are taken relative to all other rows. For example, if a Grid has three rows whose resizability factors are set to 100, 100, and 200, the first and second rows will occupy one quarter of the space (100/(100+100+200)), while the third row will occupy one half of the available space.</p>
+<p>The <span class="bold"><b>XmNdefaultSpacing</b></span> resource default spacing between rows and columns. The default value is 4 pixels. You can override the value on a per row/column basis using <tt>SgGridSetColumnMargin()</tt> or <tt>SgGridSetRowMargin()</tt> respectively:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+SgGridSetRowMargin(Widget <i>widget</i>, int <i>row</i>, Dimension <i>margin</i>);
+
+SgGridSetColumnMargin(Widget <i>widget</i>, int <i>column</i>,
+                      Dimension <i>margin</i>);
+</pre></td></tr></table><p><i>widget</i> is the Grid widget. The second argument specifies the row or column. <i>margin</i> specifies the margin in pixels between the row or column's edges and the widgets it contains. The margin is added to both sides of each row or column, so adding a 1 pixel margin increases the relevant dimension of the affected row or column by 2 pixels.</p>
+<p>You can display the boundaries of a Grid by setting the value of its <span class="bold"><b>XmNshowGrid</b></span> resource to TRUE. You might find this useful for debugging resize specifications. The default value is FALSE.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5199091"></a>Setting Constraints on the Child Widget of a Grid</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-106"></a>
+<a class="indexterm" name="IT04.Widgets-107"></a>
+The <span class="bold"><b>XmNrow</b></span> and <span class="bold"><b>XmNcolumn</b></span> resources of a Grid's child widget specify the row and column in which the Grid places the child. If you do not specify these values, the Grid widget places the child in a randomly selected unoccupied cell.</p>
+<p>The <span class="bold"><b>XmNresizeVertical</b></span> and <span class="bold"><b>XmNresizeHorizontal</b></span> resources determine whether the Grid can resize the child to fill the cell in the vertical and horizontal directions. The default value of TRUE allows the Grid to resize the child.</p>
+<p>If a child is a fixed size, and smaller than the cell that contains it, the child's position within the cell is determined by an <span class="bold"><b>XmNgravity</b></span> resource. Gravity may be any of the gravity values defined by Xlib except StaticGravity and ForgetGravity. The default is NorthWestGravity. Note that gravity has no effect if both <span class="bold"><b>XmNresizeVertical</b></span> and <span class="bold"><b>XmNresizeHorizontal</b></span> are TRUE.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5199175"></a>Examples of Using the Grid Widget</h4></div></div>
+<p><a class="indexterm" name="IT04.Widgets-108"></a>
+<a href="ch04.html#LE10463-PARENT" title="Example 4-1. An Example of Using the Grid Widget">Example 4-1</a> creates a grid of four buttons that all size (and resize) equally to fill one quarter of their parent.</p>
+<div class="example"><a name="LE10463-PARENT"></a><p><a name="LE10463-PARENT"></a><b>Example 4-1. An Example of Using the Grid Widget</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+createGrid(Widget parent)
+{
+    int n;
+    Arg args[10];
+    Widget grid, child1, child2, child3, child4;
+    n = 0;
+    XtSetArg(args[n], XmNnumRows, 2); n++;
+    XtSetArg(args[n], XmNnumColumns, 2); n++;
+    grid = SgCreateGrid(parent, &quot;grid&quot;, args, n);
+    child1 = XtVaCreateManagedWidget(&quot;child1&quot;,
+                                     xmPushButtonWidgetClass,
+                                     grid,
+                                     XmNrow, 0,
+                                     XmNcolumn, 0,
+                                     NULL);
+    child2 = XtVaCreateManagedWidget(&quot;child2&quot;,
+                                     xmPushButtonWidgetClass,
+                                     grid,
+                                     XmNrow, 0,
+                                     XmNcolumn, 1,
+                                     NULL);
+    child3 = XtVaCreateManagedWidget(&quot;child3&quot;,
+                                     xmPushButtonWidgetClass
+                                     grid,
+                                     XmNrow, 1,
+                                     XmNcolumn, 0,
+                                     NULL);
+    child4 = XtVaCreateManagedWidget(&quot;child4&quot;,
+                                     xmPushButtonWidgetClass
+                                     grid,
+                                     XmNrow, 1,
+                                     XmNcolumn, 1,
+                                     NULL);
+    XtManageChild(grid);
+}
+</pre></td></tr></table><br></div><p><a href="ch04.html#LE16679-PARENT" title="Example 4-2. Another Example of Using the Grid Widget">Example 4-2</a> creates four buttons. The top row has a fixed vertical size, while the bottom row is resizable. The left column has a fixed size, but the right column can be resized. The button in the lower right can be resized, but the others cannot. The button in the lower left cell, which can be resized vertically, floats in the middle of its cell. The button in the upper right stays to the left of its cell.</p>
+<div class="example"><a name="LE16679-PARENT"></a><p><a name="LE16679-PARENT"></a><b>Example 4-2. Another Example of Using the Grid Widget</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+createGrid(Widget parent) {
+    int n;
+    Arg args[10];
+    Widget grid, chidl1, child2, child3, child4;
+ 
+    n = 0;
+    XtSetArg(args[n], XmNnumRows, 2); n++;
+    XtSetArg(args[n], XmNnumColumns, 2); n++;
+    grid = SgCreateGrid( parent, &quot;grid&quot;, args, n );
+ 
+    SgGridSetColumnResizability(grid, 0, 0);
+    SgGridSetRowResizability(grid, 0, 0);
+ 
+    child1 = XtVaCreateManagedWidget(&quot;child1&quot;,
+                                 xmPushButtonWidgetClass,
+                                 grid,
+                                 XmNrow, 0,
+                                 XmNcolumn, 0,
+                                 NULL);
+    child2 = XtVaCreateManagedWidget(&quot;child2&quot;,
+                                 xmPushButtonWidgetClass,
+                                 grid,
+                                 XmNrow, 0,
+                                 XmNcolumn, 1,
+                                 XmNresizeHorizontal, FALSE,
+                                 XmNgravity, WestGravity,
+                                 NULL);
+    child3 = XtVaCreateManagedWidget(&quot;child3&quot;,
+                                 xmPushButtonWidgetClass,
+                                 grid,
+                                 XmNrow, 1,
+                                 XmNcolumn, 0,
+                                 XmNresizeVertical, FALSE,
+                                 XmNgravity, CenterGravity,
+                                 NULL);
+    child4 = XtVaCreateManagedWidget(&quot;child4&quot;,
+                                 xmPushButtonWidgetClass,
+                                 grid,
+                                 XmNrow, 1,
+                                 XmNcolumn, 1,
+                                 NULL);
+    XtManageChild(grid); 
+} 
+</pre></td></tr></table><br></div><br></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE46176-PARENT"></a>HTML Viewer Component</h2></div></div>
+<p><a class="indexterm" name="IT04.Widgets-109"></a>
+<a class="indexterm" name="IT04.Widgets-110"></a>
+<a class="indexterm" name="IT04.Widgets-111"></a>
+<a class="indexterm" name="IT04.Widgets-112"></a>
+<a class="indexterm" name="IT04.Widgets-113"></a>
+The HTML viewer <a class="indexterm" name="IT04.Widgets-114"></a>
+<a class="indexterm" name="IT04.Widgets-115"></a>
+<a class="indexterm" name="IT04.Widgets-116"></a>
+<a class="indexterm" name="IT04.Widgets-117"></a>
+component provides the widgets and libraries necessary for applications to <a class="indexterm" name="IT04.Widgets-118"></a>
+<a class="indexterm" name="IT04.Widgets-119"></a>
+<a class="indexterm" name="IT04.Widgets-120"></a>
+include direct Web access for information from within an application (no external applications have to be run). Thus, applications can provide direct Web access to licensing, online help, and information retrieval.</p>
+<p>For example, applications can use this component with a form and the post method to obtain a license for a user on a local or remote server. Also, applications can use the component to format text and images as read-only text, or provide help to the user. <a href="ch04.html#LE27208-PARENT" title="Figure 4-9. The HTML Widget">Figure 4-9</a>
+ shows an example of the HTML widget.</p>
+<p><div class="figure"><a name="LE27208-PARENT"></a><p><a name="LE27208-PARENT"></a><b>Figure 4-9. The HTML Widget</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/04.Widgets-7.gif" alt="The HTML Widget" height="495" width="554"></td></tr></table></div></div><br>
+</p>
+<p>This section covers the following aspects of the HTML viewer component:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch04.html#LE12495-PARENT" title="Overview of the HTML Viewer Components">&#8220;Overview of the HTML Viewer Components&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE40627-PARENT" title="Viewer Components">&#8220;Viewer Components&#8221;</a> </p>
+</li>
+<li><p><a href="ch04.html#LE47778-PARENT" title="Supported Tags and Attributes">&#8220;Supported Tags and Attributes&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE12495-PARENT"></a>Overview of the HTML Viewer Components</h3></div></div>
+<p>The HTML viewer makes the World Wide Web accessible from any application. Prior to the Web, applications had to develop a protocol for remote help and construct a server to answer the protocol. Today, however, the Web supplies a predesigned protocol. And the HTML viewer provides the additional components to implement a Web viewer.</p>
+<p>The HTML viewer understands how to render HTML markup language. The viewer is derived from the widget and class library licensed for the SGI WebMagic authoring environment. The library allows each application to decide exactly what it needs to support. This component is not meant to supplant general Web browsers which have support for things like bookmarks and search engines. However, the HTML viewer component answers the need for online access to licensing and help.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE40627-PARENT"></a>Viewer Components</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-121"></a>
+<a class="indexterm" name="IT04.Widgets-122"></a>
+The viewer ViewKit component uses the Motif widget to access Web sites, a prebuilt GUI, and provides browsing, navigation, and history control. The ViewKit component requires the use of C++. It is composed of the following components:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><tt>VkWebViewerBase</tt> class, which is for programmers who want to provide their own interface.<tt> VkWebViewerBase</tt> is, from a widget point of view, just a scrolled window with a viewer in it. The scrolled window is held in a form. The subclass uses this form to add the other controls.</p>
+</li>
+<li><p><tt>VkWebViewer</tt> class, which is a more complete browser for an application programmer that does not want to do a lot of programming with the component.</p>
+</li>
+</ul></div><p>The include file is <tt>/usr/include/Vk/VkWebViewer.h</tt>. For example, to create the widget:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+   _viewer = new VkWebViewer(&#8220;Viewer&#8221;, mainWindowWidget());
+    addView(_viewer);
+</pre></td></tr></table><p>For more information about ViewKit, see the <i>IRIS ViewKit Programmer's Guide</i>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE47778-PARENT"></a>Supported Tags and Attributes</h3></div></div>
+<p><a class="indexterm" name="IT04.Widgets-123"></a>
+<a class="indexterm" name="IT04.Widgets-124"></a>
+<a href="ch04.html#id5199910" title="Table 4-1.  HTML Viewer Tags and Attributes">Table 4-1</a> lists the HTML viewer supported tags. The tags are basically all of HTML 2, selective tags of HTML 3, and extended tags from Netscape and SGI</p>
+<div class="table"><a name="id5199910"></a><p><a name="id5199910"></a><b>Table 4-1.  HTML Viewer Tags and Attributes</b></p>
+<table summary=" HTML Viewer Tags and Attributes" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Tag</p>
+</th><th scope="col" valign="top"><p>Attributes</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>A</p>
+</td><td valign="top"><p>HREF, TARGET, NAME</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>AREA</p>
+</td><td valign="top"><p>HREF, TARGET, COORDS, SHAPE</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>BASE</p>
+</td><td valign="top"><p>HREF, TARGET</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>BASEFONT</p>
+</td><td valign="top"><p>SIZE (1..7, or exact size such as 24pt)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>BLOCKQUOTE, BQ</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>BR</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>BODY</p>
+</td><td valign="top"><p>BACKGROUND, VLINK, LINK. ALINK, BGCOLOR, TEXT, LANG</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>CAPTION</p>
+</td><td valign="top"><p>ALIGN</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>DIV</p>
+</td><td valign="top"><p>ALIGN</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>DIR, OL, MENU, UL</p>
+</td><td valign="top"><p>START (for OL). See also P, H<span class="bold"><b>n</b></span> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>DL</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>DT</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>FRAME</p>
+</td><td valign="top"><p>SRC, NAME, WIDTH, HEIGHT</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>FRAMESET</p>
+</td><td valign="top"><p>COLS, ROWS</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>FORM</p>
+</td><td valign="top"><p>METHOD, ACTION, TARGET</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>HEAD</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>HTML</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>HR</p>
+</td><td valign="top"><p>SIZE, WIDTH, NOSHADE, ALIGN</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>IMG</p>
+</td><td valign="top"><p>SRC, NOFLOW, ALT, ALIGN, WIDTH, HEIGHT, BORDER, VSPACE, 
+CLEAR</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>INPUT</p>
+</td><td valign="top"><p>NAME, VALUE, TYPE, SIZE, MAXLENGTH, CHECKED</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>ISINDEX</p>
+</td><td valign="top"><p>PROMPT</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>LI</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>LISTING</p>
+</td><td valign="top"><p><i>Deprecated</i></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>MAP</p>
+</td><td valign="top"><p>NAME</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>NOBR</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>NOFRAMES</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>OPTION</p>
+</td><td valign="top"><p>VALUE, SELECTED</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>P, H<i>n</i> </p>
+</td><td valign="top"><p>CLEAR</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>PLAINTEXT</p>
+</td><td valign="top"><p><i>Deprecated</i></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>PRE</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SELECT</p>
+</td><td valign="top"><p>NAME, SIZE, MULTIPLE</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>TABLE</p>
+</td><td valign="top"><p>CELLSPACING, CELLPADDING, BORDER, ALIGN, WIDTH, 
+NOFLOW, CLEAR, BGCOLOR</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>TD, TH</p>
+</td><td valign="top"><p>ROWSPAN, COLSPAN, ALIGN, VALIGN, BGCOLOR, NOWRAP</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>TEXTAREA</p>
+</td><td valign="top"><p>NAME, ROWS, COLS</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>TITLE</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>TR</p>
+</td><td valign="top"><p>ALIGN, VALIGN, BGCOLOR</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>WBR</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>XMP</p>
+</td><td valign="top"><p><i>Deprecated </i></p>
+</td></tr></tbody></table></div><p><a href="ch04.html#id5200587" title="Table 4-2.  HTML Viewer Character Tags">Table 4-2</a> lists HTML viewer character tags. </p>
+<div class="table"><a name="id5200587"></a><p><a name="id5200587"></a><b>Table 4-2.  HTML Viewer Character Tags</b></p>
+<table summary=" HTML Viewer Character Tags" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p> </p>
+</th><th scope="col" valign="top"><p> </p>
+</th><th scope="col" valign="top"><p> </p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>ADDRESS</p>
+</td><td valign="top"><p>B</p>
+</td><td valign="top"><p>BIG</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>CITE</p>
+</td><td valign="top"><p>CODE</p>
+</td><td valign="top"><p>DFN</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>EM</p>
+</td><td valign="top"><p>I</p>
+</td><td valign="top"><p>KBD</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>FONT SIZE=(0..7)</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>COLOR=&#8221;#rrbbgg&#8221; <sup>[<a name="id5472970" href="#ftn.id5472970">a</a>]</sup></p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>S </p>
+</td><td valign="top"><p>SAMP</p>
+</td><td valign="top"><p>SMALL</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>STRIKE</p>
+</td><td valign="top"><p>STRONG</p>
+</td><td valign="top"><p>SUB</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SUP</p>
+</td><td valign="top"><p>IT</p>
+</td><td valign="top"><p>U</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>UL</p>
+</td><td valign="top"><p>VAR</p>
+</td><td valign="top"><p> </p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a name="ftn.id5472970" href="#id5472970">a</a>] </sup>COLOR=&#8221;#rrbbgg&#8221; or COLOR=&#8221;colorname&#8221; </p>
+</div></td></tr></tbody></table></div><br></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 3. Using Schemes </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 5. Window, Session, and Desk Management </td></tr></table></div></body></html>

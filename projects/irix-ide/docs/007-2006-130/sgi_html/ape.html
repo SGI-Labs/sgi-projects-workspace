@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix E. Predefined File Types</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="apd.html" title="Appendix D. The Icon Description Language"><link rel="next" href="apf.html" title="Appendix F. FTR File Directories"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix E. Predefined File Types</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apd.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apf.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE44691-PARENT"></a>Appendix E. Predefined File Types</h2></div></div>
+<p><a class="indexterm" name="ITE.Predefined.Types-0"></a>
+<a class="indexterm" name="ITE.Predefined.Types-1"></a>
+<a class="indexterm" name="ITE.Predefined.Types-2"></a>
+This appendix lists the predefined file types and their associated tag numbers that are available for your use. <a class="indexterm" name="ITE.Predefined.Types-3"></a>
+Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ape.html#LE12764-PARENT" title="Naming Conventions for Predefined File Types">&#8220;Naming Conventions for Predefined File Types&#8221;</a></p>
+</li>
+<li><p><a href="ape.html#LE45554-PARENT" title="The Predefined File Types and What They Do">&#8220;The Predefined File Types and What They Do&#8221;</a> </p>
+</li>
+</ul></div><p><a class="indexterm" name="ITE.Predefined.Types-4"></a>
+You can use these predefined file types for utilities that do not need a unique, personalized look. You may also want to use these file types as SUPERTYPEs for your own custom file types.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE12764-PARENT"></a>Naming Conventions for Predefined File Types</h2></div></div>
+<p><a class="indexterm" name="ITE.Predefined.Types-5"></a>
+<a class="indexterm" name="ITE.Predefined.Types-6"></a>
+<a class="indexterm" name="ITE.Predefined.Types-7"></a>
+The file types listed in this appendix are named according to the conventions listed in <a href="ape.html#id5243825" title="Table E-1. Predefined File Type Naming Conventions">Table E-1</a>.</p>
+<div class="table"><a name="id5243825"></a><p><a name="id5243825"></a><b>Table E-1. Predefined File Type Naming Conventions</b></p>
+<table summary="Predefined File Type Naming Conventions" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>If the file type name includes:</p>
+</th><th scope="col" valign="top"><p>Then</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>1-Narg</p>
+</td><td valign="top"><p>it requires at least one argument</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>1arg</p>
+</td><td valign="top"><p>it requires exactly one argument</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>2arg</p>
+</td><td valign="top"><p>it requires exactly two arguments</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>3arg</p>
+</td><td valign="top"><p>it requires exactly three arguments</p>
+</td></tr></tbody></table></div><p>In all cases, if the expected number of arguments is not received, <tt>launch</tt> is run so that users can type in the desired options. For more information on the <tt>launch</tt> command, see the <tt>launch(1)</tt> reference page.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE45554-PARENT"></a>The Predefined File Types and What They Do</h2></div></div>
+<p><a class="indexterm" name="ITE.Predefined.Types-8"></a>
+<a class="indexterm" name="ITE.Predefined.Types-9"></a>
+In this section, file types that are essentially the same, except for the number of arguments they require, are grouped together by the &#8220;base&#8221; file type name, meaning the file type name without the argument codes described in <a href="ape.html#LE12764-PARENT" title="Naming Conventions for Predefined File Types">&#8220;Naming Conventions for Predefined File Types&#8221;</a>. </p>
+<p>For example, to find the file type named &#8220;ttyLaunchOut1argExecutable,&#8221; look under &#8220;ttyLaunchOutExecutable.&#8221; These two file types are identical, except that &#8220;ttyLaunchOut1argExecutable&#8221; requires exactly one argument.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244029"></a>SpecialFile</h3></div></div>
+<p>&#8220;SpecialFile&#8221; is a predefined SUPERTYPE, not an actual file type. When you include the SPECIALFILE rule in your file type, you should also declare the &#8220;SpecialFile&#8221; SUPERTYPE. This allows applications to use <tt>isSuper</tt>(1) to test whether your file type is a SPECIALFILE.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244054"></a>Directory</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-10"></a>
+<a class="indexterm" name="ITE.Predefined.Types-11"></a>
+TYPE Directory
+MATCH (mode &amp; 0170000) == 040000;
+</pre></td></tr></table><p>The &#8220;Directory&#8221; type. Any custom file types you define for directories should include &#8220;Directory&#8221; as a SUPERTYPE. &#8220;Directory&#8221; is defined in <tt>/usr/lib/filetype/default/sgidefault.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244101"></a>Ascii</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-12"></a>
+<a class="indexterm" name="ITE.Predefined.Types-13"></a>
+TYPE Ascii
+</pre></td></tr></table><p>&#8220;Ascii&#8221; is a pseudotype defined to support <tt>routeprint</tt> conversions. Actual ASCII text files have the type &#8220;AsciiTestFile&#8221;:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+TYPE AsciiTextFile
+MATCH ascii;
+</pre></td></tr></table><p>&#8220;Ascii&#8221; is defined in <tt>/usr/lib/filetype/system/sgisystem.converts.ftr</tt> and &#8220;AsciiTextFile&#8221; is defined in <tt>/usr/lib/filetype/default/sgidefault.ftr</tt>. The Ascii icon is <tt>/usr/lib/filetype/default/iconlib/AsciiText.closed.fti</tt> superimposed over <tt>/usr/lib/filetype/iconlib/generic.doc.fti</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244192"></a>Source Files</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-14"></a>
+<a class="indexterm" name="ITE.Predefined.Types-15"></a>
+TYPE SourceFile
+</pre></td></tr></table><p>&#8220;SourceFile&#8221; is a pseudotype defined to support <tt>routeprint</tt> conversions. Actual source files have more specific types such as:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+TYPE Makefile
+MATCH (glob(&quot;[mM]akefile&quot;) || glob(&quot;*.mk&quot;)) &amp;&amp; ascii;
+TYPE HeaderFile
+MATCH glob(&quot;*.h&quot;) &amp;&amp; ascii;
+TYPE CPlusPlusProgram
+MATCH glob(&quot;*.c++&quot;) &amp;&amp; ascii;
+</pre></td></tr></table><p>TYPE CProgram<br>
+MATCH glob(&quot;*.c&quot;) &amp;&amp; ascii;</p>
+<p>TYPE Program<br>
+MATCH (glob(&quot;*.[pfrasly]&quot;) || glob(&quot;*.pl[i1]&quot;)) &amp;&amp; ascii;</p>
+<p>&#8220;SourceFile&#8221; is defined in <tt>/usr/lib/filetype/system/sgisystem.converts.ftr</tt> and the specific types shown above are defined in <tt>/usr/lib/filetype/system/sgisystem.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244306"></a>Binary</h3></div></div>
+<p><a class="indexterm" name="ITE.Predefined.Types-16"></a>
+<a class="indexterm" name="ITE.Predefined.Types-17"></a>
+&#8220;Binary&#8221; is a predefined SUPERTYPE, not an actual file type. You can create custom file types using &#8220;Binary&#8221; as a SUPERTYPE.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244340"></a>ImageFile</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-18"></a>
+<a class="indexterm" name="ITE.Predefined.Types-19"></a>
+TYPE ImageFile
+</pre></td></tr></table><p>&#8220;ImageFile&#8221; is a top-level image pseudotype. You can create custom file types using ImageFile as a SUPERTYPE, or you can use a more specific file type such as:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+TYPE SGIImage
+MATCH short(0) == 000732 ||
+# normal SGI image
+short(0) == 0155001;
+#byte-swapped SGI image
+TYPE TIFFImage
+MATCH long(0) == 0x49492a00 || long(0) == 0x4d4d002a;
+# TIFF image
+TYPE FITImage
+MATCH string(0,2) == &quot;IT&quot;;
+# FIT image
+TYPE PCDimage
+MATCH string(2048,7) == &quot;PCD_IPI&quot;;
+# Kodak Photo CD image pack
+TYPE PCDOimage
+MATCH string(0,7) == &quot;PCD_OPA&quot;;
+# Kodak Photo CD overview pack
+TYPE GIF87Image
+MATCH string(0,6) == &quot;GIF87a&quot;;
+# GIF image (GIF87a format)
+TYPE GIF89Image
+MATCH string(0,6) == &quot;GIF89a&quot;;
+# GIF image (GIF89a format)
+</pre></td></tr></table><p>These and other file types are defined in <tt>/usr/lib/filetype/system/sgiimage.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244504"></a>Executable</h3></div></div>
+<p><a class="indexterm" name="ITE.Predefined.Types-20"></a>
+<a class="indexterm" name="ITE.Predefined.Types-21"></a>
+&#8220;Executable&#8221; is a predefined SUPERTYPE, not an actual file type. You can create custom file types using &#8220;Executable&#8221; as a SUPERTYPE.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244540"></a>Scripts</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-22"></a>
+<a class="indexterm" name="ITE.Predefined.Types-23"></a>
+TYPE Script
+MATCH (mode &amp; 0111) &amp;&amp; ascii;
+</pre></td></tr></table><p>This is the file type for shell scripts, defined in <tt>/usr/lib/filetype/default/sgidefault.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244622"></a>GenericWindowedExecutable</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-24"></a>
+<a class="indexterm" name="ITE.Predefined.Types-25"></a>
+TYPE GenericWindowedExecutable
+MATCH   tag == 0x00000000;
+TYPE Generic1-NargExecutable
+MATCH   tag == 0x00000020;
+TYPE Generic1argExecutable
+MATCH   tag == 0x00000001;
+TYPE Generic2argExecutable
+MATCH   tag == 0x00000002;
+TYPE Generic3argExecutable
+MATCH   tag == 0x00000003;
+</pre></td></tr></table><p>Simply runs the command. No output or terminal emulation windows are used. These file types are defined in <tt>/usr/lib/filetype/system/sgicmds.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244703"></a>LaunchExecutable</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-26"></a>
+<a class="indexterm" name="ITE.Predefined.Types-27"></a>
+TYPE LaunchExecutable
+MATCH   tag == 0x00000100;
+TYPE Launch1-NargExecutable
+MATCH   tag == 0x00000120;
+TYPE Launch1argExecutable
+MATCH   tag == 0x00000101;
+TYPE Launch2argExecutable
+MATCH   tag == 0x00000102;
+</pre></td></tr></table><p>Same as &#8220;GenericWindowedExecutable,&#8221; except that it runs <tt>launch</tt> to allow user to enter options prior to running the command. These file types are defined in <tt>/usr/lib/filetype/system/sgicmds.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244763"></a>ttyExecutable</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-28"></a>
+<a class="indexterm" name="ITE.Predefined.Types-29"></a>
+TYPE ttyExecutable
+MATCH   (tag == 0x00000400) || (tag == 0x00000410);
+TYPE tty1-NargExecutable
+MATCH   tag == 0x00000420;
+TYPE tty2argExecutable
+MATCH   tag == 0x00000402;
+</pre></td></tr></table><p>Runs the command in a window that allows terminal I/O. The output window (which is where the terminal emulation is being done) exits immediately upon termination of the command. These file types are defined in <tt>/usr/lib/filetype/system/sgicmds.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244817"></a>ttyLaunchExecutable</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-30"></a>
+<a class="indexterm" name="ITE.Predefined.Types-31"></a>
+TYPE ttyLaunchExecutable
+MATCH   tag == 0x00000500;
+TYPE ttyLaunch1-NargExecutable
+MATCH   tag == 0x00000520;
+TYPE ttyLaunch1argExecutable
+MATCH   tag == 0x00000501;
+</pre></td></tr></table><p>Same as &#8220;ttyExecutable,&#8221; except that it runs <tt>launch</tt> to allow user to enter options before running the command. These file types are defined in <tt>/usr/lib/filetype/system/sgicmds.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244895"></a>ttyOutExecutable</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-32"></a>
+<a class="indexterm" name="ITE.Predefined.Types-33"></a>
+TYPE ttyOutExecutable
+MATCH   (tag == 0x00000600) || (tag == 0x00000610);
+TYPE ttyOut1-NargExecutable
+MATCH   tag == 0x00000620;
+TYPE ttyOut1argExecutable
+MATCH   tag == 0x00000601;
+TYPE ttyOut2argExecutable
+MATCH   tag == 0x00000602;
+</pre></td></tr></table><p>Same as &#8220;ttyExecutable,&#8221; except that the output window persists until the user explicitly dismisses it. These file types are defined in <tt>/usr/lib/filetype/system/sgicmds.ftr</tt>.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5244952"></a>ttyLaunchOutExecutable</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<a class="indexterm" name="ITE.Predefined.Types-34"></a>
+<a class="indexterm" name="ITE.Predefined.Types-35"></a>
+TYPE ttyLaunchOutExecutable
+MATCH   (tag == 0x00000700) || (tag == 0x00000710);
+TYPE ttyLaunchOut1-NargExecutable
+MATCH   tag == 0x00000720;
+TYPE ttyLaunchOut1argExecutable
+MATCH   tag == 0x00000701;
+TYPE ttyLaunchOut2argExecutable
+MATCH   tag == 0x00000702;
+TYPE ttyLaunchOut3argExecutable
+MATCH   tag == 0x00000703
+</pre></td></tr></table><p>Same as &#8220;ttyOutExecutable,&#8221; except that it runs <tt>launch</tt> to allow user to enter options before running the command. These file types are defined in <tt>/usr/lib/filetype/system/sgicmds.ftr</tt>. </p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apd.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="apf.html">Next</a></td></tr><tr><td width="40%" align="left">Appendix D. The Icon Description Language </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix F. FTR File Directories </td></tr></table></div></body></html>

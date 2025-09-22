@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='320' viewBox='0 0 1080 320'>
+  <rect x='0' y='0' width='1080' height='320' fill='#2C2C2E' rx='24' />
+  <text x='40' y='64' font-family='SF Pro Display' font-size='28' fill='#F2F2F7' font-weight='500' text-anchor='start'>Offline Work Queue</text>
+  <text x='40' y='104' font-family='SF Pro Display' font-size='20' fill='#8E8E93' font-weight='500' text-anchor='start'>3 files pending. Next retry in 00:18.</text>
+  <rect x='40' y='132' width='600' height='140' fill='#1E1E1E' rx='18' />
+  <text x='60' y='172' font-family='SF Pro Display' font-size='20' fill='#F2F2F7' font-weight='500' text-anchor='start'>src/render.c (12 KB)</text>
+  <text x='60' y='212' font-family='SF Pro Display' font-size='20' fill='#F2F2F7' font-weight='500' text-anchor='start'>src/sync.rs (8 KB)</text>
+  <text x='60' y='252' font-family='SF Pro Display' font-size='20' fill='#F2F2F7' font-weight='500' text-anchor='start'>resources/assets/ui.json (4 KB)</text>
+  <rect x='680' y='152' width='160' height='52' fill='#4C6EF5' rx='16' />
+  <text x='760' y='186' font-family='SF Pro Display' font-size='20' fill='#0E0E13' font-weight='500' text-anchor='middle'>Retry Now</text>
+  <rect x='860' y='152' width='160' height='52' fill='#1E1E1E' rx='16' />
+  <text x='940' y='186' font-family='SF Pro Display' font-size='20' fill='#F2F2F7' font-weight='500' text-anchor='middle'>Work Offline</text>
+  <rect x='680' y='220' width='340' height='70' fill='#FFD60A' rx='16' opacity='0.25' />
+  <text x='700' y='262' font-family='SF Pro Display' font-size='18' fill='#FFD60A' font-weight='500' text-anchor='start'>Editing limited until reconnection succeeds.</text>
+</svg>

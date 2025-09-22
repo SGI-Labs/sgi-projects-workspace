@@ -1,0 +1,513 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 3. Using Schemes</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch02.html" title="Chapter 2. Getting the IRIX Interactive Desktop Look"><link rel="next" href="ch04.html" title="Chapter 4. Using the SGI Enhanced Widgets"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 3. Using Schemes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE74067-PARENT"></a>Chapter 3. Using Schemes</h2></div></div>
+<p><a class="indexterm" name="IT03.Schemes-0"></a>
+<a class="indexterm" name="IT03.Schemes-1"></a>
+<a class="indexterm" name="IT03.Schemes-2"></a>
+<a class="indexterm" name="IT03.Schemes-3"></a>
+<a class="indexterm" name="IT03.Schemes-4"></a>
+<a class="indexterm" name="IT03.Schemes-5"></a>
+<span class="bold"><b>Schemes</b></span> provide an easy way to apply a collection of resources <a class="indexterm" name="IT03.Schemes-6"></a>
+to your application. The scheme mechanism allows your users to select from <a class="indexterm" name="IT03.Schemes-7"></a>
+<a class="indexterm" name="IT03.Schemes-8"></a>
+pre-packaged collections of colors and fonts that are designed to integrate visually with the IRIX Interactive Desktop and other applications. &#8220;Schemes for Colors and Fonts&#8221; in Chapter 3
+ in <i>IRIX Interactive User Interface Guidelines</i> describes the guidelines for using schemes in the IRIX Interactive Desktop environment.</p>
+<p>This chapter contains the following sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch03.html#LE48163-PARENT" title="Schemes Overview">&#8220;Schemes Overview&#8221;</a> provides an overview to schemes.</p>
+</li>
+<li><p><a href="ch03.html#LE86764-PARENT" title="Using Schemes in Your Application">&#8220;Using Schemes in Your Application&#8221;</a> describes what you need to do to use schemes in your application.</p>
+</li>
+<li><p><a href="ch03.html#LE83109-PARENT" title="Extending a Scheme to Support New Colors">&#8220;Extending a Scheme to Support New Colors&#8221;</a> provides tips for testing how your application responds to different schemes.</p>
+</li>
+<li><p><a href="ch03.html#LE64336-PARENT" title="Creating New Schemes">&#8220;Creating New Schemes&#8221;</a> describes how to create new schemes.</p>
+</li>
+<li><p><a href="ch03.html#LE92475-PARENT" title="Hard-Coding a Scheme for an Application">&#8220;Hard-Coding a Scheme for an Application&#8221;</a> describes how to force your application to use one specific scheme.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE48163-PARENT"></a>Schemes Overview</h2></div></div>
+<p><a class="indexterm" name="IT03.Schemes-9"></a>
+<a class="indexterm" name="IT03.Schemes-10"></a>
+Schemes allow you to provide default colors and fonts for your application, while also ensuring that users can easily select other color and font collections according to their individual needs and preferences. SGI includes some standard system schemes with the X execution environment, but end users can modify existing schemes or create new ones, and you can create new schemes or extend existing ones for use with your application.</p>
+<p>This section provides an overview of schemes and explains why you should use schemes in your application.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5189201"></a>Why You Should Use Schemes</h3></div></div>
+<p><a class="indexterm" name="IT03.Schemes-11"></a>
+<a class="indexterm" name="IT03.Schemes-12"></a>
+<a class="indexterm" name="IT03.Schemes-13"></a>
+<a class="indexterm" name="IT03.Schemes-14"></a>
+<a class="indexterm" name="IT03.Schemes-15"></a>
+<a class="indexterm" name="IT03.Schemes-16"></a>
+As a developer, it is impossible for you to choose colors and fonts for your application that satisfy all users. Aside from the consideration of individual taste, display characteristics vary and some users have various degrees of colorblindness. Schemes allow users to select colors and fonts according to their preferences and needs.</p>
+<p>Although users can already use the X resource mechanism to customize colors and fonts, it is very difficult and time-consuming for most end users to do so, because the task requires knowledge of the internal structure of the program. On the other hand, if your application supports schemes, users can use the graphical Schemes Browser, <tt>schemebr</tt> (available from the &#8220;Color Schemes&#8221; option of the Customize menu in Desktop toolchest), to change colors and fonts.</p>
+<p>Using schemes also reduces the time and effort required to develop your application. Instead of choosing your own colors and fonts and coding them into your application, you can simply set a resource value to activate schemes and get the distinctive IRIX Interactive Desktop appearance.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5189366"></a>Basic Scheme Concepts</h3></div></div>
+<p><a class="indexterm" name="IT03.Schemes-17"></a>
+A scheme simply maps specific colors and fonts to abstract resource names according to the functions they serve in an application. So instead of using specific colors like &#8220;blue&#8221; or &#8220;#123456&#8221; and specific fonts like &#8220;-*-screen-medium-r-normal--13-*-*-*-*-*-iso8859-1,&#8221; your application can use symbolic values like TextForeground, TextSelectedColor, and FixedWidthFont. The exact definition of these symbolic values depends on the scheme the user chooses to apply to your application. As long as your application uses the symbolic color and font names for the purposes for which they were intended, users or graphic designers can design a new palette (a binding of the symbolic values to specific colors) and the result should look good with your application.</p>
+<p>Often, you do not even need to deal with the symbolic colors and fonts yourself. The schemes mechanism includes a map file that automatically binds the symbolic values to the various IRIS IM widgets and widget resources. One case where you may need to set a color or font explicitly is if you need to highlight a component (for example, in a chart). The schemes mechanism defines special symbolic values such as HighlightColor1 through HighlightColor8 for these purposes. (See <a href="ch03.html#LE34543-PARENT" title="Directly Accessing Colors and Fonts">&#8220;Directly Accessing Colors and Fonts&#8221;</a> for more information on the symbolic values.) Another case where you need to be aware of the symbolic values is if you need to extend a scheme for your application. (See <a href="ch03.html#LE83109-PARENT" title="Extending a Scheme to Support New Colors">&#8220;Extending a Scheme to Support New Colors&#8221;</a> for more information on extending a scheme.)</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE86764-PARENT"></a>Using Schemes in Your Application</h2></div></div>
+<p><a class="indexterm" name="IT03.Schemes-18"></a>
+<a class="indexterm" name="IT03.Schemes-19"></a>
+This section describes how to write your application for use with schemes and includes:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch03.html#LE89574-PARENT" title="Turning on Schemes for Your Application">&#8220;Turning on Schemes for Your Application&#8221;</a> </p>
+</li>
+<li><p><a href="ch03.html#LE95704-PARENT" title="Special Considerations for Programming with Schemes">&#8220;Special Considerations for Programming with Schemes&#8221;</a></p>
+</li>
+<li><p><a href="ch03.html#LE68883-PARENT" title="Assigning Non-Default Colors and Fonts to Widgets">&#8220;Assigning Non-Default Colors and Fonts to Widgets&#8221;</a></p>
+</li>
+<li><p><a href="ch03.html#LE34543-PARENT" title="Directly Accessing Colors and Fonts">&#8220;Directly Accessing Colors and Fonts&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE89574-PARENT"></a>Turning on Schemes for Your Application</h3></div></div>
+<p><a class="indexterm" name="IT03.Schemes-20"></a>
+<a class="indexterm" name="IT03.Schemes-21"></a>
+<a class="indexterm" name="IT03.Schemes-22"></a>
+SGI incorporates schemes in its implementation of Xt, so you do not need to link to a separate schemes library or call a special function to use schemes. All you need to do to enable schemes is to include in your application's <tt>app-defaults</tt> file (in the <tt>/usr/lib/X11/app-defaults</tt> directory) the line:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<i>AppClass</i>*useSchemes:     all
+</pre></td></tr></table><p><i>AppClass </i>is your application's class name. This activates all aspects of schemes.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>To ensure that users do not accidently override your settings, be sure to prefix the <span class="bold"><b>useSchemes</b></span> resource with your application's class name.
+</td></tr></table><hr noshade="noshade"></div><p>To deactivate schemes, you can set:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<i>AppClass</i>*useSchemes: none
+</pre></td></tr></table><p>If you wish to activate schemes without using an <tt>app-defaults</tt> file, or if you want to guarantee that the schemes setting cannot be changed by users, call the function <tt>SgiUseScheme()</tt>:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+void SgiUseScheme(char *<i>value</i>)
+</pre></td></tr></table><p><i>value</i> can be either &#8220;all&#8221; or &#8220;none.&#8221; This function requires that you include the header file <tt>&lt;X11/SGIScheme.h&gt;</tt>.</p>
+<p>For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* schemes.c                           */
+/* cc -o schemes schemes.c -lXm -lXt    */
+
+#include &lt;Xm/Label.h&gt;
+#include &lt;X11/SGIScheme.h&gt;
+
+void main(int argc, char** argv)
+{
+   Widget toplevel, label;
+   XtAppContext app_context;
+ 
+   SgiUseSchemes(&#8220;all&#8221;); 
+ 
+   toplevel = XtAppInitialize(&amp;app_context, &#8220;Hello&#8221;, 
+                         NULL, 0, &amp;argc, argv, NULL, NULL, 0);
+
+   label = XmCreateLabel(toplevel, &#8220;hello&#8221;, NULL, 0);
+   XtManageChild(label);
+
+   XtRealizeWidget(toplevel);
+   XtAppMainLoop(app_context);
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE95704-PARENT"></a>Special Considerations for Programming with Schemes</h3></div></div>
+<p><a class="indexterm" name="IT03.Schemes-23"></a>
+The schemes map file automatically handles applying colors and fonts to most IRIS IM widgets based on the widgets' class names. Unfortunately, IRIS IM does not have unique class names for menu bars, menu panes, and option menus. To allow schemes to be applied to these elements, your application should use some simple naming conventions for these widgets. Name all menu bars &#8220;menuBar,&#8221; all option menus &#8220;optionMenu,&#8221; and the pane of all option menus &#8220;optionPane.&#8221; Schemes also recognize some other variations of these names, including &#8220;menu_bar,&#8221; &#8220;menubar,&#8221; &#8220;menu_Bar,&#8221; and so on. </p>
+<p>If you need to set a color or a font in your application, use the procedures described in <a href="ch03.html#LE68883-PARENT" title="Assigning Non-Default Colors and Fonts to Widgets">&#8220;Assigning Non-Default Colors and Fonts to Widgets&#8221;</a> and <a href="ch03.html#LE34543-PARENT" title="Directly Accessing Colors and Fonts">&#8220;Directly Accessing Colors and Fonts&#8221;</a>. Do not hard code colors or fonts in your application because they may not work with the scheme that a user selects. For example, if you programmatically set a text color to black and a user chooses a scheme that has a very dark background, your text is unreadable. Also avoid setting colors that IRIS IM normally computes. For example, if you hard code the top or bottom shadow colors used by IRIS IM controls, these colors may not be correct if a user changes the scheme.</p>
+<p>There are obviously some cases for which this recommendation does not apply. The most common are windows in which you are rendering images. For example, if your application uses OpenGL or some other library to render an image in a window, the colors used in this window are not derived from schemes.</p>
+<p>Fonts are usually less critical than colors, although the best visual effects are produced if you use only the fonts defined in the schemes. You should be aware that on high-resolution screens, the sizes of the fonts defined by schemes can change. Therefore, you should design the layout of your application to handle variable-sized fonts. This means you should not hard-code <i>x</i>, <i>y</i> locations or fixed widths or heights for widgets in your application. Instead use IRIS IM manager widgets such as the Form to achieve a flexible layout that can respond to changes in font sizes.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE68883-PARENT"></a>Assigning Non-Default Colors and Fonts to Widgets</h3></div></div>
+<p><a class="indexterm" name="IT03.Schemes-24"></a>
+<a class="indexterm" name="IT03.Schemes-25"></a>
+Sometimes, you may want to override the default color or font assigned to a widget by a scheme. For example, all labels are set by default to use a bold font (BoldLabelFont); however you may decide that a regular font (PlainLabelFont) is more appropriate for some of your application's labels.</p>
+<p>To assign a non-default font or color to a widget, include a line in your application's <tt>app-defaults</tt> file mapping a different symbolic scheme resource to that widget. For example, the following line assigns a regular label font (rather than the default bold font) to a label in your application named &#8220;simpleLabel&#8221;:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<span class="bold"><b>YourApp</b></span>*simpleLabel*fontList: SGI_DYNAMIC PlainLabelFont
+</pre></td></tr></table><p>The symbol SGI_DYNAMIC identifies this resource as a dynamically changeable scheme resource. The actual font assigned to PlainLabelFont can potentially be different in each scheme. As the user changes schemes, the correct resource is applied to your program.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Remember to prefix the widget hierarchy with your application's class name to prevent users from accidentally overriding your setting.
+</td></tr></table><hr noshade="noshade"></div><p>You can use the same technique with colors. For example, suppose you have two types of label widgets positioned on an IRIS IM XmDrawingArea widget and you want to use color to give some significance to different labels. Perhaps the application is some type of a flowchart and some of the labels represent tasks in progress, while other represent tasks that have been completed. The schemes map file already maps the symbolic scheme resource DrawingAreaColor to the XmDrawingArea widget. The scheme palette also provides colors that both provide a nice contrast against the DrawingAreaColor and allow the current TextForeground color to be readable. These colors are DrawingAreaContrast1, DrawingAreaContrast2, DrawingAreaContrast3, and DrawingAreaContrast4. To specify the colors of each label widget in your application, you can set the following resources:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<span class="bold"><b>YourApp</b></span>*label1*background: SGI_DYNAMIC DrawingAreaContrast1
+<span class="bold"><b>YourApp</b></span>*label2*background: SGI_DYNAMIC DrawingAreaContrast1
+<span class="bold"><b>YourApp</b></span>*label3*background: SGI_DYNAMIC DrawingAreaContrast2
+...
+</pre></td></tr></table><p>Each scheme also contains a set of basic colors that you can use for simple graphics, icons, and so on. These colors maintain their basic characteristics, but change slightly from scheme to scheme to blend with the general flavor of the scheme. For example, you can set a label widget to be &#8220;red&#8221; as follows:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<span class="bold"><b>YourApp</b></span>*label*background: SGI_DYNAMIC RedColor
+</pre></td></tr></table><p>The exact shade of red changes from scheme to scheme, but always is &#8220;reddish&#8221; and always fits with the other colors in the scheme.</p>
+<p>If necessary, you can also use non-scheme colors and fonts, although SGI strongly recommends that you do not do this. If you hard-code a color, the user may select a scheme in which that color does not provide the contrast you desire. The color can even be &#8220;lost&#8221; among the other scheme colors. Non-scheme fonts are less likely to cause problems, but your application will have an inconsistent appearance if it uses them.</p>
+<p>You use the same methods to assign a non-scheme color or font that you normally would in an X program. For example, you can set a font for a label named &#8220;simpleLabel&#8221; in your <tt>app-defaults</tt> file as follows:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<span class="bold"><b>YourApp</b></span>*simpleLabel*fontList: 6x12
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE34543-PARENT"></a>Directly Accessing Colors and Fonts</h3></div></div>
+<p><a class="indexterm" name="IT03.Schemes-26"></a>
+When your application uses widgets only, the schemes map file automatically retrieves all colors and fonts from the current scheme and assigns them to your application's widgets. However, you may need to access some of the scheme's colors or fonts directly from within a program. For example, you may want to draw a bar chart or other display using colors that look good no matter what scheme the user has selected.</p>
+<p><a href="ch03.html#LE42852-PARENT" title="Example 3-1. Retrieving a Scheme Color Value">Example 3-1</a> shows an example of a function that retrieves a color value given a widget, the color resource name, and the color resource class.</p>
+<div class="example"><a name="LE42852-PARENT"></a><p><a name="LE42852-PARENT"></a><b>Example 3-1. Retrieving a Scheme Color Value</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Pixel getColorResource(Widget w, char *name, char *classname)
+{
+ 
+    XtResource request_resources;
+    Display *dpy  = XtDisplay ( w );
+    int      scr  = DefaultScreen ( dpy );
+    Colormap cmap = DefaultColormap ( dpy, scr );
+    XColor   color, ignore;
+    char    *colorname;
+ 
+    request_resources.resource_name   = (char *) name;
+    request_resources.resource_class  = (char *) className;
+    request_resources.resource_type   = XmRString;
+    request_resources.resource_size   = sizeof (char *);
+    request_resources.default_type    = XmRImmediate;
+    request_resources.resource_offset = 0;
+    request_resources.default_addr    = (XtPointer) NULL;
+ 
+    XtGetSubresources(w,
+                      (XtPointer) &amp;colorname,
+                      NULL, NULL,
+                      &amp;requested_resources,
+                      1, NULL, 0);
+ 
+    if ( colorname &amp;&amp;
+         XAllocNamedColor ( dpy, cmap, colorname, &amp;color,
+                            &amp;ignore ) )
+        return ( color.pixel );
+    else
+        return ( BlackPixel ( dpy, scr ) );
+}
+</pre></td></tr></table><br></div><p>You can then retrieve the color defined by the scheme resource <span class="bold"><b>drawingAreaContrastColor1</b></span> using <tt>getColorResource()</tt> as follows:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+color1 = getColorResource(barChartWidget,
+                          &quot;drawingAreaContrastColor1&quot;,
+                          XmCForeground);
+</pre></td></tr></table><p>where <i>barChartWidget</i> is the widget that you will use the color in.</p>
+<div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>There is a simple method for retrieving a resource value if you are using the IRIS <a class="indexterm" name="IT03.Schemes-27"></a>
+ViewKit toolkit. Instead of writing the <tt>getColorResource()</tt> function listed in Example 3-1, you can call:
+</td></tr></table><hr noshade="noshade"></div><br><table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Pixel color1 = (Pixel) VkGetResource( barChartWidget,
+                            &quot;drawingAreaContrastColor1&quot;,
+                             XmCForeground, XmRPixel,
+                            &quot;Black&quot; );
+</pre></td></tr></table><p>You must handle some resources programmatically. For example, the <i>IRIX Interactive User Interface Guidelines</i> suggests that your application use a different color for text fields that are not editable than it uses for editable text fields. The IRIS IM text widget currently does not change colors automatically when set to read only mode; so your application must handle this itself. The correct color is provided by schemes as the symbolic name ReadOnlyBackground, and can be retrieved by the resource <span class="bold"><b>readOnlyBackground</b></span>. Assuming that you've created the <tt>getColorResource()</tt> function listed in Example 3-1, the following code illustrates this process:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+ro = getColorResource( textw,  &quot;readOnlyBackground&quot;,
+                       XmCForeground);
+XtVaSetValues( textw, XmNeditable, FALSE,
+               XmNbackgroundColor, ro,
+               NULL);
+</pre></td></tr></table><br><div class="tip"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/tip.png" height="24" width="25"></td><td align="left" valign="top"><b>Tip: </b>The equivalent IRIS ViewKit code would be:
+</td></tr></table><hr noshade="noshade"></div><br><table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Pixel ro = (Pixel) VkGetResource( textw, &quot;readOnlyBackground&quot;,
+                                  XmCForeground, XmRPixel,
+                                  &quot;White&quot; );
+XtVaSetValues( textw, XmNeditable, FALSE,
+               XmNbackgroundColor, ro,
+               NULL);
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5190194"></a>Pre-Defined Scheme Resources and Symbolic Values</h3></div></div>
+<p><a href="ch03.html#id5190326" title="Table 3-1. Pre-Defined Scheme Resources and Symbolic Values">Table 3-1</a> lists the pre-defined scheme resources and symbolic values. You can use the <a class="indexterm" name="IT03.Schemes-28"></a>
+<a class="indexterm" name="IT03.Schemes-29"></a>
+<a class="indexterm" name="IT03.Schemes-30"></a>
+<a class="indexterm" name="IT03.Schemes-31"></a>
+resources to retrieve color and font values from within your application as described in <a href="ch03.html#LE34543-PARENT" title="Directly Accessing Colors and Fonts">&#8220;Directly Accessing Colors and Fonts&#8221;</a>. You can use the symbolic values to assign colors and fonts to widgets in resource files as explained in <a href="ch03.html#LE68883-PARENT" title="Assigning Non-Default Colors and Fonts to Widgets">&#8220;Assigning Non-Default Colors and Fonts to Widgets&#8221;</a>.</p>
+<div class="table"><a name="id5190326"></a><p><a name="id5190326"></a><b>Table 3-1. Pre-Defined Scheme Resources and Symbolic Values</b></p>
+<table summary="Pre-Defined Scheme Resources and Symbolic Values" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Resource</p>
+</th><th scope="col" valign="top"><p>Symbolic Value</p>
+</th><th scope="col" valign="top"><p>Intended Use</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>basicBackground</b></span></p>
+</td><td valign="top"><p>BasicBackground</p>
+</td><td valign="top"><p>Background of application</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>textForeground</b></span></p>
+</td><td valign="top"><p>TextForeground</p>
+</td><td valign="top"><p>Color of text characters</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>textBackground</b></span></p>
+</td><td valign="top"><p>TextBackground</p>
+</td><td valign="top"><p>Background of multi-line text 
+widgets</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>textFieldBackground</b></span></p>
+</td><td valign="top"><p>TextFieldBackground</p>
+</td><td valign="top"><p>Background of single-line text 
+field widgets</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>readOnlyBackground</b></span></p>
+</td><td valign="top"><p>ReadOnlyBackground</p>
+</td><td valign="top"><p>Background of read-only text 
+and text field widgets</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>textSelectedBackground</b></span></p>
+</td><td valign="top"><p>TextSelectedBackground</p>
+</td><td valign="top"><p>Background when text is 
+selected with the mouse</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>textSelectedForeground</b></span></p>
+</td><td valign="top"><p>TextSelectedForeground</p>
+</td><td valign="top"><p>Color of text characters when 
+text is selected with the mouse</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>disabledTextForeground</b></span></p>
+</td><td valign="top"><p>DisabledTextForeground</p>
+</td><td valign="top"><p>For future use, this color will 
+indicate disabled text instead of 
+stippling.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>scrolledListBackground</b></span></p>
+</td><td valign="top"><p>ScrolledListBackground</p>
+</td><td valign="top"><p>Background of scrolled list 
+widgets</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>scrollBarTroughColor</b></span></p>
+</td><td valign="top"><p>ScrollBarTroughColor</p>
+</td><td valign="top"><p>Trough of scrollbar </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>scrollBarControlBackground</b></span></p>
+</td><td valign="top"><p>ScrollBarControlBackground</p>
+</td><td valign="top"><p>Scrollbar controls (thumb, 
+searchbutton)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>buttonBackground</b></span></p>
+</td><td valign="top"><p>ButtonBackground</p>
+</td><td valign="top"><p>Background of push buttons</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>selectFillColor</b></span></p>
+</td><td valign="top"><p>SelectFillColor</p>
+</td><td valign="top"><p>Fill color for standard IRIS IM 
+radio and toggle buttons</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>selectColor</b></span></p>
+</td><td valign="top"><p>SelectFillColor</p>
+</td><td valign="top"><p>IRIS IM toggle and check fill 
+color</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>checkColor</b></span></p>
+</td><td valign="top"><p>CheckColor</p>
+</td><td valign="top"><p>IRIX Interactive Desktop toggle 
+check mark color</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>radioColor</b></span></p>
+</td><td valign="top"><p>RadioColor</p>
+</td><td valign="top"><p>IRIX Interactive Desktop radio 
+pip color</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>indicatorBackground</b></span></p>
+</td><td valign="top"><p>IndicatorBackground</p>
+</td><td valign="top"><p>IRIX Interactive Desktop 
+background color for toggles 
+and radios</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>warningColor</b></span></p>
+</td><td valign="top"><p>WarningColor</p>
+</td><td valign="top"><p>Background color for icons in 
+warning dialogs</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>errorColor</b></span></p>
+</td><td valign="top"><p>ErrorColor</p>
+</td><td valign="top"><p>Background color for icons in 
+error dialogs</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>informationColor</b></span></p>
+</td><td valign="top"><p>InformationColor</p>
+</td><td valign="top"><p>Background color for icons in 
+information dialogs</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>wMBackground</b></span></p>
+</td><td valign="top"><p>WMBackground</p>
+</td><td valign="top"><p>Window manager colors. Note 
+that <tt>4Dwm</tt> currently does not 
+pick up foreground. &#8220;Active&#8221; 
+colors are used for window 
+manager borders with mouse 
+focus.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>wMActiveBackground</b></span></p>
+</td><td valign="top"><p>WMActiveBackground</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>wMForeground</b></span></p>
+</td><td valign="top"><p>WMForeground</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>wMActiveForeground</b></span></p>
+</td><td valign="top"><p>WMActiveForeground</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>alternateBackground1</b></span></p>
+</td><td valign="top"><p>AlternateBackground1</p>
+</td><td valign="top"><p>Can be used as background 
+color for widgets or text areas. 
+Guaranteed to be different from 
+one another, contrast with basic 
+background and text 
+background, and can have text 
+drawn on them.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>alternateBackground2</b></span></p>
+</td><td valign="top"><p>AlternateBackground2</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>alternateBackground3</b></span></p>
+</td><td valign="top"><p>AlternateBackground3</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>alternateBackground4</b></span></p>
+</td><td valign="top"><p>AlternateBackground4</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>alternateBackground5</b></span></p>
+</td><td valign="top"><p>AlternateBackground5</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>alternateBackground6</b></span></p>
+</td><td valign="top"><p>AlternateBackground6</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>drawingAreaBackground</b></span></p>
+</td><td valign="top"><p>DrawingAreaBackground</p>
+</td><td valign="top"><p>Background of drawing area 
+widgets (typically used for 
+graphs)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>drawingAreaContrastColor1</b></span></p>
+</td><td valign="top"><p>DrawingAreaContrastColor1</p>
+</td><td valign="top"><p>Contrast colors for drawing 
+areas (typically used for graphs 
+and trees). These colors are 
+guaranteed to be different from 
+one another, different from the 
+drawing area background, and 
+can have text drawn on them</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>drawingAreaContrastColor2</b></span></p>
+</td><td valign="top"><p>DrawingAreaContrastColor2</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>drawingAreaContrastColor3</b></span></p>
+</td><td valign="top"><p>DrawingAreaContrastColor3</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>drawingAreaContrastColor4</b></span></p>
+</td><td valign="top"><p>DrawingAreaContrastColor4</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor1</b></span></p>
+</td><td valign="top"><p>HighlightColor1</p>
+</td><td valign="top"><p>Bright highlights suitable for 
+small color spots. The first four 
+are supposed to be in the same 
+hue family as the corresponding 
+DrawingAreaContrast colors so 
+that the pair may be used for 
+doing highlights in an annotated 
+scrollbar.</p>
+<p>These colors are typically used 
+for outlining and drawing 
+graphs, wherever a small 
+amount of color needs to be 
+highly visible.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor2</b></span></p>
+</td><td valign="top"><p>HighlightColor2</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor3</b></span></p>
+</td><td valign="top"><p>HighlightColor3</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor4</b></span></p>
+</td><td valign="top"><p>HighlightColor4</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor5</b></span></p>
+</td><td valign="top"><p>HighlightColor5</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor6</b></span></p>
+</td><td valign="top"><p>HighlightColor6</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor7</b></span></p>
+</td><td valign="top"><p>HighlightColor7</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>highlightColor8</b></span></p>
+</td><td valign="top"><p>HighlightColor8</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>redColor</b></span></p>
+</td><td valign="top"><p>RedColor</p>
+</td><td valign="top"><p>Colors that can be used for 
+various graphics purposes. 
+These colors always 
+approximate their names, but 
+may be slightly adjusted to 
+blend with each scheme. 
+Typically used in graphs and 
+charts.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>orangeColor</b></span></p>
+</td><td valign="top"><p>OrangeColor</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>yellowColor</b></span></p>
+</td><td valign="top"><p>YellowColor</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>greenColor</b></span></p>
+</td><td valign="top"><p>GreenColor</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>blueColor</b></span></p>
+</td><td valign="top"><p>BlueColor</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>brownColor</b></span></p>
+</td><td valign="top"><p>BrownColor</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><span class="bold"><b>purpleColor</b></span></p>
+</td><td valign="top"><p>PurpleColor</p>
+</td><td valign="top"><p> </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>boldLabelFont</p>
+</td><td valign="top"><p>BoldLabelFont</p>
+</td><td valign="top"><p>Bold labels, such as column 
+headings</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>smallBoldLabelFont</p>
+</td><td valign="top"><p>SmallBoldLabelFont</p>
+</td><td valign="top"><p>Labels for tight packing 
+situations</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>tinyBoldLabelFont</p>
+</td><td valign="top"><p>TinyBoldLabelFont</p>
+</td><td valign="top"><p>Labels where space is at a 
+premium</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>plainLabelFont</p>
+</td><td valign="top"><p>PlainLabelFont</p>
+</td><td valign="top"><p>Button labels, also can be used 
+for values in &#8220;Name: Value&#8221; 
+pairs</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>smallPlainLabelFont</p>
+</td><td valign="top"><p>SmallPlainLabelFont</p>
+</td><td valign="top"><p>Small buttons</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>obliqueLabelFont</p>
+</td><td valign="top"><p>ObliqueLabelFont</p>
+</td><td valign="top"><p>Menus</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>smallObliqueLabelFont</p>
+</td><td valign="top"><p>SmallObliqueLabelFont</p>
+</td><td valign="top"><p>Small menus</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>fixedWidthFont</p>
+</td><td valign="top"><p>FixedWidthFont</p>
+</td><td valign="top"><p>Text areas where fixed width is 
+mandatory, for example where 
+it's important that columns line 
+up</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>smallFixedWidthFont</p>
+</td><td valign="top"><p>SmallFixedWidthFont</p>
+</td><td valign="top"><p>Text where a fixed-width font is 
+appropriate but space is at a 
+premium</p>
+</td></tr></tbody></table></div><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE83109-PARENT"></a>Extending a Scheme to Support New Colors</h2></div></div>
+<p>SGI strongly recommends that you use existing scheme colors for your application. Using the existing scheme colors ensures that your application will work with all schemes. However, you may need to add colors in some basic cases.This section explains how to extend Schemes to support new colors when necessary.</p>
+<p>To extend a scheme, you create new symbolic values for the resources you need and then define bindings between these values and resources that your application can retrieve. This section describes the internal organization of scheme files and then describes how to define these symbolic values and mappings.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5191795"></a>Scheme File Organization</h3></div></div>
+<p>All system scheme files are kept in the directory <tt>/usr/lib/X11/schemes</tt> by default. This directory contains several subdirectories, one for each scheme. The directory <tt>Base</tt> serves as the basis of all schemes, although it is not a user-identifiable scheme itself. <tt>Base </tt>contains at least three files: <tt>Base</tt>, <tt>BaseColorPalette</tt>, and <tt>FontPalette</tt>. You may see other files as well. </p>
+<p>Each of the palette files (<tt>BaseColorPalette</tt> and <tt>FontPalette</tt>) contain <tt>cpp</tt>-style definitions of symbolic names that represent colors and fonts. The <tt>Base</tt> file (referred to as a <i>map</i> file) contains the default mappings between these symbolic names and specific resources, using the same format as all X resource files. </p>
+<p>For example, the <tt>Base</tt> file contains a line like:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+*XmText*foreground: TextForeground
+</pre></td></tr></table><p>This says that all Text widgets should use the color represented by TextForeground as their foreground color. By default, all schemes share the mappings specified in this <tt>Base</tt> file. However, the value assigned to each symbolic name can vary from scheme to scheme. For example the Mendocino scheme defines TextForeground to be #fffffe (white) whereas the Milan scheme defines TextForeground to be #000000 (black). The scheme mechanism evaluates these specifications at run time, based on the scheme specified by the user.</p>
+<p>By default, all applications pick up the definitions in the <tt>Base</tt> file and the palette files from the selected scheme. However, applications can load additional scheme files as well.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5191929"></a>How to Extend a Scheme</h3></div></div>
+<p>There are two methods for extending a scheme. The first is to add additional mappings between existing colors and widgets in your application. This may be necessary if you want to bind colors of fonts to your widgets in a different way, or if you are using custom widgets that are not handled by the basic scheme mappings. You should do this by adding resources to your application's <tt>app-defaults</tt> file, using the SGI_DYNAMIC mechanism described earlier. </p>
+<p>The second situation occurs when you would like to use colors or fonts that are not provided as a part of the existing schemes. Your should try to avoid this situation when at all possible, because users can use the scheme editor to create new schemes, and there is no current mechanism for using the scheme editor to adjust any additional colors your application may define. The standard scheme palettes contain over 40 colors, which should be enough for most situations.</p>
+<p>To add new colors to the existing schemes, you need to create a new palette file that contains <tt>cpp</tt>-style definitions of those colors. To get your application to load this new palette, you then need to set a resource, <span class="bold"><b>paletteFileList</b></span>, in your application's <tt>app-defaults</tt> files that specifies as a comma-separated list all custom palette files to be loaded.</p>
+<p>For example, assume you have an application whose class name is Calendar and that you need two colors that you refer to in your program symbolically as <span class="bold"><b>brightColor</b></span> and <span class="bold"><b>darkColor</b></span>. If no color in the exiting schemes satisfies your requirements for this color, you will need to extend a scheme. Here are the steps you'd follow:</p>
+<div class="orderedlist"><ol type="1"><li><p>Define the colors in a palette file. By convention, you should name this file <tt>&lt;AppClass&gt;Palette</tt>, where <tt>&lt;AppClass&gt;</tt> is the application class of your application. In this case, you would name the palette <tt>CalendarPalette</tt>. It would contain the lines:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+#define BrightColor red
+#define DarkColor MidnightBlue
+</pre></td></tr></table><p>You can use any color names available on your target systems, as well as RGB specifications. If the resources you are using are dependent on the gamma setting, you should account for this in the palette file. You can handle the commonly used gamma settings like this:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#ifdef GAMMA_1_0
+#define BrightColor &lt;color that looks right on 1.0 gamma&gt;
+#define DarkColor &lt;color that looks right on 1.0 gamma&gt;
+#endif
+#ifdef GAMMA_1_7
+#define BrightColor &lt;color that looks right on 1.7 gamma&gt;
+#define DarkColor &lt;color that looks right on 1.7 gamma&gt;
+#endif
+#ifdef GAMMA_2_4
+#define BrightColor &lt;color that looks right on 2.4 gamma&gt;
+#define DarkColor &lt;color that looks right on 2.4 gamma&gt;
+#endif
+</pre></td></tr></table><p>The scheme mechanism handles gamma other than those listed here by finding the closest match.</p>
+</li>
+<li><p>Create additional palette files as needed. If your new resources need to change values when a scheme changes, create a file named <tt>CalendarPalette</tt> for each scheme you want to support. For each scheme, choose the colors that look right for that scheme. Note that if you do not support all existing schemes, the values of your new scheme resources defaults to the values in Base; so your application may not look right when a user selects that scheme.</p>
+</li>
+<li><p>Set your application's <span class="bold"><b>paletteFileList</b></span> resource to load the new palettes. In this example, you would add the following line to your <tt>app-defaults</tt> file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+Calendar*schemeFilePaletteList: CalendarPalette
+</pre></td></tr></table><br></li>
+<li><p>When you install your software on a user's machine, you need to install the executable, the <tt>app-defaults</tt> file, and any other files specific to your application. You must also install your palette files into the directory of each scheme you support. You should, at a minimum, support the schemes found in <tt>/usr/lib/X11/schemes</tt>. You may also want to support schemes you find installed in <tt>/usr/local/schemes</tt>.</p>
+</li>
+</ol></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5192144"></a>Testing Your Application with Schemes</h2></div></div>
+<p><a class="indexterm" name="IT03.Schemes-32"></a>
+<a class="indexterm" name="IT03.Schemes-33"></a>
+<a class="indexterm" name="IT03.Schemes-34"></a>
+<a class="indexterm" name="IT03.Schemes-35"></a>
+<a class="indexterm" name="IT03.Schemes-36"></a>
+For best results, be sure to test your application against all available schemes, and watch for any anomalies. As an added precaution, you can try using the Scheme Browser, <tt>schemebr</tt> (available from the &#8220;Color Schemes&#8221; option of the Customize menu in Desktop toolchest), to create some variations on existing schemes and see how your program reacts. If you have not added any resources and are not setting any colors or fonts in your program or <tt>app-defaults</tt> files, any scheme should be reasonable. If you have extended the schemes or set colors directly in your application, you should watch carefully to see how your application reacts as colors change. It is always possible to use the scheme editor to create a very bad scheme, but if your program seems more sensitive than others to changes, you should think more carefully about your use of color.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE64336-PARENT"></a>Creating New Schemes</h2></div></div>
+<p><a class="indexterm" name="IT03.Schemes-37"></a>
+<a class="indexterm" name="IT03.Schemes-38"></a>
+<a class="indexterm" name="IT03.Schemes-39"></a>
+<a class="indexterm" name="IT03.Schemes-40"></a>
+You can also include your own new schemes in your software distribution; however, be aware of the following concerns: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>The largest benefit of schemes is the users' ability to change to schemes of their choice; so even if you create a scheme that you prefer for your application, make sure your program looks good with the existing schemes. </p>
+</li>
+<li><p>If you install your scheme on a user's system, the user may apply that scheme to other applications. If you attempt to design a new scheme, make sure the scheme works reasonably with other applications on the desktop.</p>
+</li>
+</ul></div><p>The easiest way to design a new scheme is to use the Scheme Browser, <tt>schemebr</tt>, available from the &#8220;Color Schemes&#8221; option of the Customize menu in Desktop toolchest. For best results, you should base your scheme on an existing scheme, preferably one of the standard ones supported by SGI. If you make only minor changes, your new scheme should work with other programs. Once you have created and saved your new scheme, you can retrieve the files from your <tt>$HOME/.desktop-&lt;hostname&gt;/schemes</tt> directory, where <i>&lt;hostname&gt;</i> is the name of your system. You can install your scheme in <tt>/usr/local/schemes/&lt;SchemeName&gt;</tt>, where <i>&lt;SchemeName&gt;</i> is the name you have chosen for your scheme. Once installed, this scheme appears in the Scheme Browser as a local scheme. You can also include this scheme with your software distribution.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE92475-PARENT"></a>Hard-Coding a Scheme for an Application</h2></div></div>
+<p>In some rare situations, you may want your application to use one particular scheme, not the one that the user selects. SGI strongly recommends that you not use this approach, but if your application has special needs, the process is simple to do. Specify the value of the <span class="bold"><b>scheme</b></span> resource in your application's <tt>app-defaults</tt> file using a complete path name. For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<span class="bold"><b>YourApp</b></span>*scheme: /usr/lib/X11/schemes/Milan 
+</pre></td></tr></table><p>When using this approach, the location of the scheme directory is unimportant. For example, if you've designed a custom scheme for your application, you can place the scheme directory in special configuration directory for your application. For example:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<span class="bold"><b>YourApp</b></span>*scheme: /usr/lib/YourApp.config/YourAppScheme
+</pre></td></tr></table><p>This setting implies that <tt>/usr/lib/YourApp.config/YourAppScheme</tt> is a scheme directory. This means that the directory <tt>YourAppScheme</tt> would need to contain the files <tt>BaseColorPalette</tt> (containing the color palette you have defined), a file whose name is the same as the scheme that contains mappings, and a file named <tt>FontPalette</tt>. Normally, the <tt>FontPalette</tt> file would be a copy of the file in <tt>/usr/lib/X11/schemes/Base</tt>, and the map file would be the same as <tt>/usr/lib/X11/schemes/Base/Base</tt>, but renamed to have the same name as your scheme.</p>
+</div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 2. Getting the IRIX Interactive Desktop Look </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 4. Using the SGI Enhanced Widgets </td></tr></table></div></body></html>

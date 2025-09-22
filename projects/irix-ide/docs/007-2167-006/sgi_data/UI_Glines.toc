@@ -1,0 +1,549 @@
+# defaults |
+0|IRIX® Interactive Desktop User Interface Guidelines|sgi_html/index.html
+1|Front Matter|sgi_html/front.html
+1|About This Guide|sgi_html/pr01.html
+2|What This Guide Contains|sgi_html/pr01.html#id5439412
+3|Part One: Integrating With the IRIX Interactive Desktop|sgi_html/pr01.html#id5439424
+3|Part Two: Interface Components|sgi_html/pr01.html#id5439583
+3|Part Three: Designing 3D Applications|sgi_html/pr01.html#id5385415
+3|Appendix|sgi_html/pr01.html#id5385525
+2|What You Should Know Before Reading This Guide|sgi_html/pr01.html#id5385546
+2|Suggestions for Further Reading|sgi_html/pr01.html#id5385564
+2|Conventions Used in This Guide|sgi_html/pr01.html#id5383816
+3|Style Guidelines|sgi_html/pr01.html#id5383826
+3|Font Conventions|sgi_html/pr01.html#id5383848
+1|Part I. Integrating With the IRIX Interactive Desktop|sgi_html/pt01.html
+2|Chapter 1. Overview of the IRIX Interactive Desktop|sgi_html/ch01.html
+3|Overview of the Desktop|sgi_html/ch01.html#id5384203
+3|How Users Interact with Desktop Icons|sgi_html/ch01.html#id5384421
+3|Mouse and Keyboard Hardware|sgi_html/ch01.html#id5382651
+2|Chapter 2. Icons|sgi_html/ch02.html
+3|Designing the Appearance of Icons|sgi_html/ch02.html#id5383566
+4|General Icon Design: Components, Size, and Colors|sgi_html/ch02.html#id5456472
+5|Icon Components|sgi_html/ch02.html#id5456548
+5|Icon Size|sgi_html/ch02.html#id5456798
+5|Icon Colors|sgi_html/ch02.html#id5456848
+5|Icon Orientation|sgi_html/ch02.html#id5457293
+4|Application Icon Design|sgi_html/ch02.html#id5457367
+4|File Icon Design|sgi_html/ch02.html#id5457669
+4|Icon Appearance Design Guidelines|sgi_html/ch02.html#id5457842
+3|Defining the Behavior of Icons With FTRs|sgi_html/ch02.html#id5458087
+4|User and Icon Interaction|sgi_html/ch02.html#id5458160
+4|Icon Behavior Guidelines|sgi_html/ch02.html#id5458625
+3|Making Application Icons Accessible|sgi_html/ch02.html#id5458731
+4|Putting Icons Into the Icon Catalog|sgi_html/ch02.html#id5458796
+4|Naming and Locating Executables for the Find an Icon Tool|sgi_html/ch02.html#id5459135
+4|Application Icon Accessibility Guidelines|sgi_html/ch02.html#id5459457
+2|Chapter 3. Windows in the IRIX Interactive Desktop Environment|sgi_html/ch03.html
+3|The IRIX Interactive Desktop Look: Graphic Features and Schemes|sgi_html/ch03.html#id5459757
+4|Enhanced Graphics in the IRIX Interactive Desktop Look|sgi_html/ch03.html#id5459866
+4|Schemes for Colors and Fonts|sgi_html/ch03.html#id5460256
+4|IRIX Interactive Desktop Look Guidelines|sgi_html/ch03.html#id5460405
+3|Application Window Categories and Characteristics|sgi_html/ch03.html#id5460461
+4|Application Window Categories|sgi_html/ch03.html#id5460569
+4|Application Models|sgi_html/ch03.html#id5460787
+5|&#8220;Single Document, One Primary&#8221; Application Model|sgi_html/ch03.html#id5460854
+5|&#8220;Single Document, Multiple Primaries&#8221; Application Model|sgi_html/ch03.html#id5460882
+5|&#8220;Multiple Document, Visible Main&#8221; Application Model|sgi_html/ch03.html#id5460922
+5|&#8220;Multiple Document, No Visible Main&#8221; Application Model|sgi_html/ch03.html#id5460958
+4|Window Decorations and the Window Menu|sgi_html/ch03.html#id5461013
+4|Window Title Bar|sgi_html/ch03.html#id5462019
+5|Rules for Labeling the Title Bar in Main Primary Windows|sgi_html/ch03.html#id5462182
+5|Rules for Labeling the Title Bar in Windows Other Than Main|sgi_html/ch03.html#id5462308
+4|Window Size|sgi_html/ch03.html#id5462469
+4|Window Placement|sgi_html/ch03.html#id5462591
+4|Application Window Characteristic Guidelines|sgi_html/ch03.html#id5462743
+3|Keyboard Focus Across Windows|sgi_html/ch03.html#id5463403
+4|Single-Action Pointer Grab Model|sgi_html/ch03.html#id5463565
+4|Multiple-Action Pointer Grab Model|sgi_html/ch03.html#id5463642
+4|Guidelines for Keyboard Focus Across Windows|sgi_html/ch03.html#id5463848
+3|Minimized Windows|sgi_html/ch03.html#id5463939
+4|Choosing an Image for Your Minimized Window|sgi_html/ch03.html#id5464103
+4|Labeling a Minimized Window|sgi_html/ch03.html#id5464495
+4|Processing While Minimized|sgi_html/ch03.html#id5464672
+4|Using the Minimized Window to Show Status|sgi_html/ch03.html#id5464720
+4|Minimized Window Guidelines|sgi_html/ch03.html#id5464802
+3|Desks|sgi_html/ch03.html#id5465064
+4|Desks Guidelines|sgi_html/ch03.html#id5465296
+3|Session Management|sgi_html/ch03.html#id5465349
+4|Session Management Guidelines|sgi_html/ch03.html#id5465634
+2|Chapter 4. IRIX Interactive Desktop Services|sgi_html/ch04.html
+3|Software Installation|sgi_html/ch04.html#id5465962
+4|Software Installation Guideline|sgi_html/ch04.html#id5466159
+3|Online Help|sgi_html/ch04.html#id5466176
+4|Providing Help Using SGIHelp|sgi_html/ch04.html#id5466345
+4|Types of Online Help|sgi_html/ch04.html#id5466436
+5|Context-Sensitive Information|sgi_html/ch04.html#id5466578
+5|Overview Information|sgi_html/ch04.html#id5466714
+5|Task-Oriented Information|sgi_html/ch04.html#id5466774
+5|Index of Help Topics|sgi_html/ch04.html#id5466827
+5|Keyboard Shortcut Information|sgi_html/ch04.html#id5466938
+5|Product Information|sgi_html/ch04.html#id5466999
+4|Providing Help through a Help Menu|sgi_html/ch04.html#id5467072
+4|Providing Help Through a Help Button|sgi_html/ch04.html#id5467433
+4|Guidelines for Designing Online Help|sgi_html/ch04.html#id5467740
+4|Writing Online Help Content for SGIHelp|sgi_html/ch04.html#id5468310
+5|Learning About SGIHelp|sgi_html/ch04.html#id5468349
+5|Creating Help Cards|sgi_html/ch04.html#id5468436
+5|Writing Context-Sensitive Help|sgi_html/ch04.html#id5468496
+5|Writing Overview Information|sgi_html/ch04.html#id5468549
+5|Writing Task Information|sgi_html/ch04.html#id5468585
+5|Writing Index Information|sgi_html/ch04.html#id5468693
+5|Writing Keyboard Shortcut Information|sgi_html/ch04.html#id5468744
+5|Writing for Windows With Help Buttons|sgi_html/ch04.html#id5468783
+4|Guidelines for Creating SGIHelp Content|sgi_html/ch04.html#id5468850
+3|Online Documentation|sgi_html/ch04.html#id5469309
+3|Desktop Variables|sgi_html/ch04.html#id5469486
+4|Scheme Setting|sgi_html/ch04.html#id5467599
+4|Auto Window Placement Setting|sgi_html/ch04.html#id5467651
+4|Language Setting|sgi_html/ch04.html#id5467675
+4|Mouse Double-Click Speed Setting|sgi_html/ch04.html#id5470898
+4|Editor Preference Setting|sgi_html/ch04.html#id5469394
+4|Desktop Variables Guidelines|sgi_html/ch04.html#id5472248
+3|File Alteration Monitor (FAM)|sgi_html/ch04.html#id5472462
+4|File Monitoring Guideline|sgi_html/ch04.html#id5472571
+2|Chapter 5. Data Exchange on the IRIX Interactive Desktop|sgi_html/ch05.html
+3|Supporting the Clipboard Transfer Model|sgi_html/ch05.html#id5472706
+3|Supporting the Primary Transfer Model|sgi_html/ch05.html#id5472992
+3|Data Types Supported for Inter-Application Transfer|sgi_html/ch05.html#id5473510
+3|Data Exchange Guidelines|sgi_html/ch05.html#id5474075
+1|Part II. Interface Components|sgi_html/pt02.html
+2|Chapter 6. Application Windows|sgi_html/ch06.html
+3|Application Models|sgi_html/ch06.html#id5474517
+4|Window Types|sgi_html/ch06.html#id5474582
+4|Standard Application Models|sgi_html/ch06.html#id5474827
+5|&#8220;Single Document, One Primary&#8221; Application Model|sgi_html/ch06.html#id5474874
+5|&#8220;Single Document, Multiple Primaries&#8221; Application Model|sgi_html/ch06.html#id5474955
+5|&#8220;Multiple Document, Visible Main&#8221; Application Model|sgi_html/ch06.html#id5475046
+5|&#8220;Multiple Document, No Visible Main&#8221; Application Model|sgi_html/ch06.html#id5475209
+4|Application Model Guidelines|sgi_html/ch06.html#id5475319
+3|Main and Co-Primary Windows|sgi_html/ch06.html#id5475350
+4|Menu Bars in Primary Windows|sgi_html/ch06.html#id5475636
+4|Scrollable Work Areas in Primary Windows|sgi_html/ch06.html#id5475755
+4|Control Areas in Primary Windows|sgi_html/ch06.html#id5475921
+4|Status Areas in Primary Windows|sgi_html/ch06.html#id5476207
+4|Splitting Primary Windows Into Panes|sgi_html/ch06.html#id5476275
+4|Popup Menus in Primary Windows|sgi_html/ch06.html#id5476382
+4|Primary Window Guidelines|sgi_html/ch06.html#id5476414
+3|Support Windows|sgi_html/ch06.html#id5476625
+4|General Support Window Design|sgi_html/ch06.html#id5476737
+4|A Specific Standard Support Window: The IRIX Interactive Desktop Color Chooser|sgi_html/ch06.html#id5477030
+4|Support Window Guidelines|sgi_html/ch06.html#id5477352
+3|Pointer Behavior in a Window|sgi_html/ch06.html#id5477473
+4|Pointer Behavior Guidelines|sgi_html/ch06.html#id5477575
+2|Chapter 7. Focus, Selection, and Drag and Drop|sgi_html/ch07.html
+3|Keyboard Focus and Navigation|sgi_html/ch07.html#id5477726
+4|Keyboard Focus Policy and Navigation Within a Window|sgi_html/ch07.html#id5477932
+5|Keyboard Navigation|sgi_html/ch07.html#id5478379
+5|Mouse Navigation|sgi_html/ch07.html#id5478848
+4|Keyboard Focus and Navigation Guidelines|sgi_html/ch07.html#id5478906
+3|Selection|sgi_html/ch07.html#id5479008
+4|Selection Models&#8212;What Can Be Selected and How To Select It|sgi_html/ch07.html#id5479137
+4|Highlighting a Selection|sgi_html/ch07.html#id5479902
+4|Multiple Collections in One Application Window|sgi_html/ch07.html#id5480017
+4|Selection Guidelines|sgi_html/ch07.html#id5480114
+3|Drag and Drop|sgi_html/ch07.html#id5480224
+4|Two Models of Drag and Drop|sgi_html/ch07.html#id5480384
+5|Drag and Drop for Non-Text Objects|sgi_html/ch07.html#id5480399
+5|Drag and Drop for Text|sgi_html/ch07.html#id5480580
+4|Pointers for Drag Operations|sgi_html/ch07.html#id5480637
+4|Drag and Drop Guidelines|sgi_html/ch07.html#id5480696
+2|Chapter 8. Menus|sgi_html/ch08.html
+3|Types of Menus|sgi_html/ch08.html#id5480898
+4|Pull Down Menus|sgi_html/ch08.html#id5480989
+4|Popup Menus|sgi_html/ch08.html#id5481190
+4|Option Menus|sgi_html/ch08.html#id5481276
+3|Menu Traversal and Activation|sgi_html/ch08.html#id5481452
+4|Using the Mouse to Manipulate Menus|sgi_html/ch08.html#id5481562
+5|Spring-Loaded Manner|sgi_html/ch08.html#id5481583
+5|Posted Manner|sgi_html/ch08.html#id5481632
+5|Mouse Click|sgi_html/ch08.html#id5481662
+4|Using the Keyboard to Manipulate Menus|sgi_html/ch08.html#id5481680
+4|Menu Traversal and Activation Guidelines|sgi_html/ch08.html#id5481845
+3|The Menu Bar and Pull-Down Menus|sgi_html/ch08.html#id5481915
+4|Standard Menus|sgi_html/ch08.html#id5482419
+5|File Menu|sgi_html/ch08.html#id5482700
+5|Selected Menu|sgi_html/ch08.html#id5483627
+5|Edit Menu|sgi_html/ch08.html#id5483700
+5|View Menu|sgi_html/ch08.html#id5484592
+5|Tools menu|sgi_html/ch08.html#id5484678
+5|Options menu|sgi_html/ch08.html#id5484715
+5|Help menu|sgi_html/ch08.html#id5484747
+4|What to Put in the Pull-Down Menus|sgi_html/ch08.html#id5484814
+5|Naming Menus in the Menu Bar|sgi_html/ch08.html#id5484990
+5|Naming Menu Entries in the Pull-Down Menus|sgi_html/ch08.html#id5485093
+5|Ordering Menus and Menu Entries in the Pull-Down Menus|sgi_html/ch08.html#id5485487
+5|Using Cascading Menus|sgi_html/ch08.html#id5485633
+5|Using Radio Buttons and Checkboxes in Pull-Down Menus|sgi_html/ch08.html#id5485679
+4|Choosing Mnemonics|sgi_html/ch08.html#id5485877
+4|Choosing Keyboard Accelerators|sgi_html/ch08.html#id5485955
+4|Disabling Menu Entries|sgi_html/ch08.html#id5486495
+4|Dynamic Menu Entries|sgi_html/ch08.html#id5486657
+4|Pull-Down Menu Guidelines|sgi_html/ch08.html#id5486729
+3|Popup Menus|sgi_html/ch08.html#id5487265
+4|What to Put in Popup Menus|sgi_html/ch08.html#id5487401
+4|Disabling Popup Menu Entries|sgi_html/ch08.html#id5487488
+4|Popup Menu Guidelines|sgi_html/ch08.html#id5487530
+2|Chapter 9. Controls|sgi_html/ch09.html
+3|Pushbuttons|sgi_html/ch09.html#id5488040
+4|Pushbutton Guidelines|sgi_html/ch09.html#id5488150
+3|Option Buttons|sgi_html/ch09.html#id5488410
+4|Option Button Guidelines|sgi_html/ch09.html#id5488511
+3|Checkboxes|sgi_html/ch09.html#id5488747
+4|Checkbox Guidelines|sgi_html/ch09.html#id5488834
+3|Radio Buttons|sgi_html/ch09.html#id5489003
+4|Radio Button Guidelines|sgi_html/ch09.html#id5489095
+3|LED Indicators|sgi_html/ch09.html#id5489276
+4|LED Button Guidelines|sgi_html/ch09.html#id5489412
+3|Lists|sgi_html/ch09.html#id5489497
+4|List Guidelines|sgi_html/ch09.html#id5489603
+3|Text Fields|sgi_html/ch09.html#id5489852
+4|Text Field Guidelines|sgi_html/ch09.html#id5490043
+3|Scrollbars|sgi_html/ch09.html#id5490221
+4|Scrollbar Guidelines|sgi_html/ch09.html#id5490333
+3|IRIX Interactive Desktop Scales|sgi_html/ch09.html#id5490621
+4|IRIX Interactive Desktop Scale Guidelines|sgi_html/ch09.html#id5490706
+3|Labels|sgi_html/ch09.html#id5490894
+4|Label Guidelines|sgi_html/ch09.html#id5490912
+3|File Finder|sgi_html/ch09.html#id5491057
+4|File Finder Guidelines|sgi_html/ch09.html#id5491229
+3|Thumbwheels|sgi_html/ch09.html#id5491265
+4|Thumbwheel Guidelines|sgi_html/ch09.html#id5491341
+3|Dials|sgi_html/ch09.html#id5491470
+4|Dial Guidelines|sgi_html/ch09.html#id5491555
+2|Chapter 10. Dialogs|sgi_html/ch10.html
+3|Types and Modes of Dialogs|sgi_html/ch10.html#id5491874
+4|Dialog Modes|sgi_html/ch10.html#id5492487
+4|Guidelines for Using the Various Types and Modes of Dialogs|sgi_html/ch10.html#id5492674
+3|Designing Dialogs|sgi_html/ch10.html#id5492759
+4|Decorations, Initial State, and Layout of Dialogs|sgi_html/ch10.html#id5492894
+4|Standard Dialog Actions|sgi_html/ch10.html#id5493304
+5|Choosing Specific Actions for Your Dialogs|sgi_html/ch10.html#id5493350
+5|Choosing Default Actions|sgi_html/ch10.html#id5493500
+5|Labeling Dialog Buttons|sgi_html/ch10.html#id5493662
+4|Content of Specific Types of Dialogs|sgi_html/ch10.html#id5493766
+5|Prompt Dialogs|sgi_html/ch10.html#id5493832
+5|Error Dialogs|sgi_html/ch10.html#id5493873
+5|Warning Dialogs|sgi_html/ch10.html#id5493973
+5|Question Dialogs|sgi_html/ch10.html#id5493988
+5|Working Dialogs|sgi_html/ch10.html#id5494010
+4|Guidelines for Designing Dialogs|sgi_html/ch10.html#id5494137
+3|Invoking Dialogs|sgi_html/ch10.html#id5494580
+4|Invoking Dialogs When Manipulating Files|sgi_html/ch10.html#id5494686
+4|Other Situations for Invoking Dialogs|sgi_html/ch10.html#id5495138
+4|Guidelines for Invoking Dialogs|sgi_html/ch10.html#id5495316
+2|Chapter 11. User Feedback|sgi_html/ch11.html
+3|Types of Feedback|sgi_html/ch11.html#id5495583
+4|Providing Graphic Feedback|sgi_html/ch11.html#id5495669
+4|Keeping Information Up to Date|sgi_html/ch11.html#id5495841
+4|Providing Messages to the User|sgi_html/ch11.html#id5495966
+4|General User Feedback Guidelines|sgi_html/ch11.html#id5496125
+3|Pointer Shapes and Colors|sgi_html/ch11.html#id5496171
+4|Standard Pointer Shapes and Colors|sgi_html/ch11.html#id5496244
+4|Designing New Pointer Shapes|sgi_html/ch11.html#id5496953
+4|Pointer Shapes and Colors Guidelines|sgi_html/ch11.html#id5496989
+1|Part III. 3D Style Guidelines|sgi_html/pt03.html
+2|Chapter 12. Introduction to 3D Style Guidelines|sgi_html/ch12.html
+3|Making 3D Functionality Available|sgi_html/ch12.html#id5497383
+4|Designing Mouse Input for 3D Applications|sgi_html/ch12.html#id5497441
+4|Using Modifier Keys in 3D Applications|sgi_html/ch12.html#id5497636
+4|Basic 3D Interface Design Guidelines|sgi_html/ch12.html#id5498004
+3|Pointer Shapes for 3D Functions|sgi_html/ch12.html#id5498176
+4|Pointer Feedback Guidelines for 3D Applications|sgi_html/ch12.html#id5498835
+3|Resizing the 3D Viewing Window|sgi_html/ch12.html#id5498875
+4|Guidelines for Resizing Windows in 3D Applications|sgi_html/ch12.html#id5498914
+2|Chapter 13. Interactive Viewing of 3D Objects|sgi_html/ch13.html
+3|Introduction to 3D Viewing|sgi_html/ch13.html#id5499091
+3|3D Viewing Functions|sgi_html/ch13.html#id5499224
+4|Inspection Functions for 3D Viewing|sgi_html/ch13.html#id5499857
+5|Inspection Overview|sgi_html/ch13.html#id5499952
+5|Tumbling|sgi_html/ch13.html#id5500321
+5|Dollying|sgi_html/ch13.html#id5500420
+5|Panning|sgi_html/ch13.html#id5500655
+5|Seeking|sgi_html/ch13.html#id5500728
+4|Navigation Functions for 3D Viewing|sgi_html/ch13.html#id5500866
+5|Navigation Overview|sgi_html/ch13.html#id5500961
+5|Roaming|sgi_html/ch13.html#id5501321
+5|Tilting|sgi_html/ch13.html#id5501449
+5|Sidling|sgi_html/ch13.html#id5501528
+4|Guidelines for 3D Viewing Functions|sgi_html/ch13.html#id5501636
+3|3D Viewing Interface Trade-Offs|sgi_html/ch13.html#id5502016
+4|Viewing and Editing in 3D Applications|sgi_html/ch13.html#id5502105
+5|Separate View and Edit Modes|sgi_html/ch13.html#id5502270
+5|View Overlay|sgi_html/ch13.html#id5502324
+5|Viewing Controls|sgi_html/ch13.html#id5502412
+5|Dedicated Viewing Peripheral Devices|sgi_html/ch13.html#id5502481
+4|Single-Viewport and Multi-Viewport Viewing in 3D Applications|sgi_html/ch13.html#id5502528
+5|Single-Viewport Viewing|sgi_html/ch13.html#id5502603
+5|Multi-Viewport Viewing|sgi_html/ch13.html#id5502703
+4|3D Viewing Performance and Scene Fidelity|sgi_html/ch13.html#id5502770
+4|3D Viewing Trade-Offs and Related Guidelines|sgi_html/ch13.html#id5502915
+2|Chapter 14. Selection in 3D Applications|sgi_html/ch14.html
+3|3D Selection Concepts and Models|sgi_html/ch14.html#id5503398
+4|The Object-Action Paradigm in 3D Applications|sgi_html/ch14.html#id5503427
+4|Direct Selection in 3D Applications|sgi_html/ch14.html#id5503495
+4|Indirect Selection in 3D Applications|sgi_html/ch14.html#id5503644
+4|3D Selection Models|sgi_html/ch14.html#id5503733
+4|Selection in Hierarchies of Objects|sgi_html/ch14.html#id5504214
+4|3D Selection Design Guidelines|sgi_html/ch14.html#id5504234
+3|Selection Feedback for 3D Objects|sgi_html/ch14.html#id5504483
+4|Bounding Box Selection Feedback|sgi_html/ch14.html#id5504579
+4|Manipulator Selection Feedback|sgi_html/ch14.html#id5504689
+4|Highlight Selection Feedback|sgi_html/ch14.html#id5504848
+4|3D Selection Feedback Design Guidelines|sgi_html/ch14.html#id5504915
+3|Lead Objects in 3D Applications|sgi_html/ch14.html#id5504984
+4|Lead Object When Selecting Multiple Objects|sgi_html/ch14.html#id5505136
+4|Lead Object During Grouping and Ungrouping|sgi_html/ch14.html#id5505286
+4|Lead Object Design Guidelines for 3D Applications|sgi_html/ch14.html#id5505423
+2|Chapter 15. Manipulating 3D Objects|sgi_html/ch15.html
+3|Basic 3D Manipulation Techniques|sgi_html/ch15.html#id5505711
+4|Phases of 3D Manipulation|sgi_html/ch15.html#id5505800
+4|3D Manipulation Feedback|sgi_html/ch15.html#id5506111
+4|Free and Constrained 3D Manipulation|sgi_html/ch15.html#id5506370
+4|Manipulator Presentation and Selection|sgi_html/ch15.html#id5506930
+4|Basic 3D Manipulation Guidelines|sgi_html/ch15.html#id5506962
+3|Translating 3D Objects|sgi_html/ch15.html#id5507248
+4|3D Translation Basics|sgi_html/ch15.html#id5507309
+4|Simple (Planar) 3D Translation|sgi_html/ch15.html#id5507509
+4|Constrained 3D Translation|sgi_html/ch15.html#id5507983
+5|Translation Constrained to One Axis of the Plane|sgi_html/ch15.html#id5508053
+5|Translation Constrained to the Normal of the Selected Plane|sgi_html/ch15.html#id5508461
+4|3D Translation User Interface Guidelines|sgi_html/ch15.html#id5508891
+3|Rotating 3D Objects|sgi_html/ch15.html#id5509046
+4|3D Rotation Basics|sgi_html/ch15.html#id5509144
+4|Constrained 3D Rotation|sgi_html/ch15.html#id5509291
+4|Free 3D Rotation|sgi_html/ch15.html#id5509656
+4|3D Rotation User Interface Guidelines|sgi_html/ch15.html#id5510159
+3|Scaling 3D Objects|sgi_html/ch15.html#id5510267
+4|3D Scaling Basics|sgi_html/ch15.html#id5510412
+4|Uniform 3D Scaling|sgi_html/ch15.html#id5510643
+4|Axial 3D Scaling (Stretching)|sgi_html/ch15.html#id5510994
+4|Scaling Around the Opposite Corner or Side|sgi_html/ch15.html#id5511459
+4|3D Scaling User Interface Guidelines|sgi_html/ch15.html#id5512218
+3|Changing the Center of Rotation and Scaling for 3D Objects|sgi_html/ch15.html#id5512410
+4|Guidelines for Changing the Center of 3D Rotation|sgi_html/ch15.html#id5513142
+3|Object Manipulation for Multiple Selected 3D Objects|sgi_html/ch15.html#id5513242
+4|Translation of Multiple Selected 3D Objects|sgi_html/ch15.html#id5513388
+4|Rotation of Multiple Selected 3D Objects|sgi_html/ch15.html#id5513430
+4|Scaling of Multiple Selected 3D Objects|sgi_html/ch15.html#id5513486
+4|Guidelines for Manipulating More Than One 3D Object|sgi_html/ch15.html#id5513520
+2|Appendix A. Summary of Guidelines|sgi_html/apa.html
+3|Guidelines for Integrating With the IRIX Interactive Desktop|sgi_html/apa.html#id5514802
+4|Icon Appearance Design Guidelines|sgi_html/apa.html#id5514816
+4|Icon Behavior Guidelines|sgi_html/apa.html#id5515043
+4|Application Icon Accessibility Guidelines|sgi_html/apa.html#id5515177
+4|IRIX Interactive Desktop Look Guidelines|sgi_html/apa.html#id5515249
+4|Application Window Characteristic Guidelines|sgi_html/apa.html#id5515336
+4|Guidelines for Keyboard Focus Across Windows|sgi_html/apa.html#id5515878
+4|Minimized Window Guidelines|sgi_html/apa.html#id5515950
+4|Desks Guidelines|sgi_html/apa.html#id5516156
+4|Session Management Guidelines|sgi_html/apa.html#id5516221
+4|Software Installation Guideline|sgi_html/apa.html#id5516331
+4|Guidelines for Designing Online Help|sgi_html/apa.html#id5516350
+4|Guidelines for Creating SGIHelp Content|sgi_html/apa.html#id5516678
+4|Desktop Variables Guidelines|sgi_html/apa.html#id5517075
+4|File Monitoring Guideline|sgi_html/apa.html#id5517274
+4|Data Exchange Guidelines|sgi_html/apa.html#id5517294
+3|Interface Component Guidelines|sgi_html/apa.html#id5517421
+4|Application Model Guidelines|sgi_html/apa.html#id5517451
+4|Primary Window Guidelines|sgi_html/apa.html#id5517486
+4|Support Window Guidelines|sgi_html/apa.html#id5517694
+4|Pointer Behavior Guidelines|sgi_html/apa.html#id5517863
+4|Keyboard Focus and Navigation Guidelines|sgi_html/apa.html#id5517899
+4|Selection Guidelines|sgi_html/apa.html#id5517972
+4|Drag and Drop Guidelines|sgi_html/apa.html#id5518104
+4|Menu Traversal and Activation Guidelines|sgi_html/apa.html#id5518153
+4|Pull-Down Menu Guidelines|sgi_html/apa.html#id5518246
+4|Popup Menu Guidelines|sgi_html/apa.html#id5518781
+4|Tab Panel Guidelines|sgi_html/apa.html#id5518926
+4|Pushbutton Guidelines|sgi_html/apa.html#id5519007
+4|Option Button Guidelines|sgi_html/apa.html#id5519212
+4|Checkbox Guidelines|sgi_html/apa.html#id5519392
+4|Radio Button Guidelines|sgi_html/apa.html#id5519624
+4|LED Button Guidelines|sgi_html/apa.html#id5519777
+4|List Guidelines|sgi_html/apa.html#id5519866
+4|Text Field Guidelines|sgi_html/apa.html#id5520081
+4|Scrollbar Guidelines|sgi_html/apa.html#id5520247
+4|IRIX Interactive Desktop Scale Guidelines|sgi_html/apa.html#id5520458
+4|Label Guidelines|sgi_html/apa.html#id5520596
+4|File Finder Guidelines|sgi_html/apa.html#id5520724
+4|Thumbwheel Guidelines|sgi_html/apa.html#id5520784
+4|Dial Guidelines|sgi_html/apa.html#id5520866
+4|Guidelines for Using the Various Types and Modes of Dialogs|sgi_html/apa.html#id5520975
+4|Guidelines for Designing Dialogs|sgi_html/apa.html#id5521063
+4|Guidelines for Invoking Dialogs|sgi_html/apa.html#id5521504
+4|General User Feedback Guidelines|sgi_html/apa.html#id5521713
+4|Pointer Shapes and Colors Guidelines|sgi_html/apa.html#id5521762
+3|3D Style Guidelines|sgi_html/apa.html#id5521953
+4|Basic 3D Interface Design Guidelines|sgi_html/apa.html#id5521964
+4|Pointer Feedback Guidelines for 3D Applications|sgi_html/apa.html#id5522084
+4|Guidelines for Resizing Windows in 3D Applications|sgi_html/apa.html#id5522142
+4|Guidelines for 3D Viewing Functions|sgi_html/apa.html#id5522183
+4|3D Viewing Trade-Offs and Related Guidelines|sgi_html/apa.html#id5522582
+4|3D Selection Design Guidelines|sgi_html/apa.html#id5522865
+4|3D Selection Feedback Design Guidelines|sgi_html/apa.html#id5523146
+4|Lead Object Design Guidelines for 3D Applications|sgi_html/apa.html#id5523218
+4|Basic 3D Manipulation Guidelines|sgi_html/apa.html#id5523344
+4|3D Translation User Interface Guidelines|sgi_html/apa.html#id5523628
+4|3D Rotation User Interface Guidelines|sgi_html/apa.html#id5523771
+4|3D Scaling User Interface Guidelines|sgi_html/apa.html#id5523877
+4|Guidelines for Changing the Center of 3D Rotation|sgi_html/apa.html#id5524099
+4|Guidelines for Manipulating More Than One 3D Object|sgi_html/apa.html#id5524222
+2|Index|sgi_html/pt03.html#sgi-index
+# figures |
+4|Figure 1-1. IRIX Interactive Desktop|sgi_html/ch01.html#id5384389
+4|Figure 1-2. Icon States: User Actions and Effects|sgi_html/ch01.html#id5382621
+4|Figure 2-1. Web Tools Icons|sgi_html/ch02.html#id5456422
+4|Figure 2-2. File Icons|sgi_html/ch02.html#id5456441
+6|Figure 2-3. Application and File Icon Components|sgi_html/ch02.html#id5456686
+6|Figure 2-4. IconSmith Examples|sgi_html/ch02.html#id5456776
+6|Figure 2-5. IconSmith Color Palette|sgi_html/ch02.html#id5456998
+6|Figure 2-6. Icon States and Effects on Color|sgi_html/ch02.html#id5457056
+6|Figure 2-7. Potential Icon Background Areas and Colors|sgi_html/ch02.html#id5457323
+5|Figure 2-8. Application Icon in Running and Not Running States|sgi_html/ch02.html#id5457476
+5|Figure 2-9. Examples of Application Icons That Could be Improved|sgi_html/ch02.html#id5457612
+5|Figure 2-10. Examples of Standard File Icons|sgi_html/ch02.html#id5457747
+5|Figure 2-11. Examples of File Icons for Application-Specific File Formats|sgi_html/ch02.html#id5457817
+5|Figure 2-12. Launch Dialog Box|sgi_html/ch02.html#id5458604
+5|Figure 2-13. Icon Catalog|sgi_html/ch02.html#id5459113
+5|Figure 2-14. The Find an Icon Tool|sgi_html/ch02.html#id5459202
+5|Figure 3-1. Examples of Graphic Modifications in the IRIX Interactive Desktop Look|sgi_html/ch03.html#id5460179
+5|Figure 3-2. Scheme Setting Control Panel|sgi_html/ch03.html#id5460318
+5|Figure 3-3. Features of a Typical Main Primary Window|sgi_html/ch03.html#id5461116
+5|Figure 3-4. Title Bar Label Appearing in Desks Overview|sgi_html/ch03.html#id5462160
+6|Figure 3-5. Labels for Main Window Title Bars|sgi_html/ch03.html#id5462284
+5|Figure 3-6. Default Maximum and Minimum Window Size Examples|sgi_html/ch03.html#id5462567
+5|Figure 3-7. Setting Auto Window Placement|sgi_html/ch03.html#id5462640
+5|Figure 3-8. Single-Action Pointer Grab Example: Capture by Sweeping|sgi_html/ch03.html#id5463615
+5|Figure 3-9. Multiple-Action Pointer Grab Example|sgi_html/ch03.html#id5463820
+5|Figure 3-10. Minimized Window Example: Good User Association With Application|sgi_html/ch03.html#id5464165
+5|Figure 3-11. Minimized Window Examples|sgi_html/ch03.html#id5464329
+5|Figure 3-12. Minimized Window Example: Incorrect Design|sgi_html/ch03.html#id5464381
+5|Figure 3-13. Minimized Window Example: Design That's Too Literal|sgi_html/ch03.html#id5464436
+5|Figure 3-14. Minimized Window Example: Indicating Status With the Label|sgi_html/ch03.html#id5464755
+4|Figure 3-15. Desks Overview Window|sgi_html/ch03.html#id5465156
+4|Figure 3-16. Setting Session Management|sgi_html/ch03.html#id5465394
+4|Figure 3-17. Setting Auto Window Placement|sgi_html/ch03.html#id5465450
+4|Figure 4-1. The IRIX Interactive Desktop Software Manager|sgi_html/ch04.html#id5466018
+5|Figure 4-2. Typical Help Menu and Related Windows|sgi_html/ch04.html#id5466550
+6|Figure 4-3. Context-Sensitive Help Example|sgi_html/ch04.html#id5466688
+5|Figure 4-4. Typical Help Menu|sgi_html/ch04.html#id5467136
+5|Figure 4-5. Help Button Example|sgi_html/ch04.html#id5467715
+6|Figure 4-6. Task-Oriented Help Example|sgi_html/ch04.html#id5468638
+5|Figure 4-7. Language Control Panel|sgi_html/ch04.html#id5470873
+5|Figure 4-8. Mouse Settings Control Panel|sgi_html/ch04.html#id5469369
+5|Figure 4-9. Desktop Settings Control Panel|sgi_html/ch04.html#id5469437
+5|Figure 4-10. Selecting Preferred Editor in MediaMail|sgi_html/ch04.html#id5472221
+4|Figure 5-1. Clipboard Transfer Example|sgi_html/ch05.html#id5472933
+4|Figure 5-2. Primary Selection Example|sgi_html/ch05.html#id5473183
+4|Figure 5-3. Primary Transfer Example: Before Transfer|sgi_html/ch05.html#id5473260
+4|Figure 5-4. Primary Transfer Example: After Transfer|sgi_html/ch05.html#id5473285
+5|Figure 6-1. Allowable Parent-Child Window Relationships|sgi_html/ch06.html#id5474800
+6|Figure 6-2. &#8221;Single Document, One Primary&#8221; Application Model|sgi_html/ch06.html#id5474906
+6|Figure 6-3. &#8221;Single Document, Multiple Primaries&#8221; Application Model|sgi_html/ch06.html#id5475003
+6|Figure 6-4. &#8221;Multiple Document, Visible Main&#8221; Application Model|sgi_html/ch06.html#id5475160
+6|Figure 6-5. &#8221;Multiple Document, No Visible Main&#8221; Application Model|sgi_html/ch06.html#id5475259
+4|Figure 6-6. Basic Primary Window|sgi_html/ch06.html#id5475546
+4|Figure 6-7. Primary Windows With Tool Palettes|sgi_html/ch06.html#id5475568
+4|Figure 6-8. Primary Window With Two Panes|sgi_html/ch06.html#id5475592
+5|Figure 6-9. The IRIS Showcase Align Gizmo|sgi_html/ch06.html#id5476935
+5|Figure 6-10. The IRIX Interactive Desktop Color Chooser|sgi_html/ch06.html#id5477089
+5|Figure 7-1. Location Cursor Example|sgi_html/ch07.html#id5477998
+6|Figure 7-2. Components and Fields|sgi_html/ch07.html#id5478466
+6|Figure 7-3. File Finder Component|sgi_html/ch07.html#id5480555
+5|Figure 8-1. Menu Bar|sgi_html/ch08.html#id5481014
+5|Figure 8-2. Pull-Down Menu|sgi_html/ch08.html#id5481055
+5|Figure 8-3. Cascading Menu|sgi_html/ch08.html#id5481165
+5|Figure 8-4. Popup Menu|sgi_html/ch08.html#id5481232
+5|Figure 8-5. Option Menu Button|sgi_html/ch08.html#id5481346
+5|Figure 8-6. An Open Option Menu|sgi_html/ch08.html#id5481389
+4|Figure 8-7. Elements of a Pull-Down Menu|sgi_html/ch08.html#id5482090
+5|Figure 8-8. Standard Menus for Menu Bars|sgi_html/ch08.html#id5482622
+6|Figure 8-9. The Standard File Menu|sgi_html/ch08.html#id5482813
+6|Figure 8-10. The Standard Edit Menu|sgi_html/ch08.html#id5483773
+6|Figure 8-11. Radio buttons|sgi_html/ch08.html#id5485714
+6|Figure 8-12. Checkboxes|sgi_html/ch08.html#id5485831
+5|Figure 8-13. Popup Menu|sgi_html/ch08.html#id5487440
+4|Figure 9-1. Pushbuttons|sgi_html/ch09.html#id5488127
+4|Figure 9-2. Option Button and Option Menu|sgi_html/ch09.html#id5488486
+4|Figure 9-3. Checkboxes|sgi_html/ch09.html#id5488791
+4|Figure 9-4. Radio Buttons|sgi_html/ch09.html#id5489072
+4|Figure 9-5. LED Button|sgi_html/ch09.html#id5489326
+4|Figure 9-6. List|sgi_html/ch09.html#id5489579
+4|Figure 9-7. Scrollbar|sgi_html/ch09.html#id5490258
+4|Figure 9-8. IRIX Interactive Desktop Scale|sgi_html/ch09.html#id5490682
+4|Figure 9-9. The File Finder|sgi_html/ch09.html#id5491095
+4|Figure 9-10. Thumbwheel|sgi_html/ch09.html#id5491317
+4|Figure 9-11. Dials|sgi_html/ch09.html#id5491531
+4|Figure 10-1. Sample Prompt, Error, Warning, Working, Question and Information Dialogs|sgi_html/ch10.html#id5492354
+4|Figure 10-2. The IRIX Interactive Desktop File Selection Dialog|sgi_html/ch10.html#id5492380
+5|Figure 10-3. Warning Dialog Layout|sgi_html/ch10.html#id5493258
+6|Figure 10-4. Warning Dialog With Save, Discard, and Cancel Buttons|sgi_html/ch10.html#id5493710
+6|Figure 10-5. Error Dialog With Specific Entity|sgi_html/ch10.html#id5493947
+6|Figure 10-6. Working Dialog with IRIX Interactive Desktop Scale|sgi_html/ch10.html#id5494072
+5|Figure 10-7. Warning Dialog for Overwriting a File|sgi_html/ch10.html#id5494996
+5|Figure 10-8. Warning Dialog for Reverting to Previous Version|sgi_html/ch10.html#id5495108
+5|Figure 10-9. Product Information Dialog|sgi_html/ch10.html#id5495182
+4|Figure 13-1. The Camera Analogy in 3D Viewing|sgi_html/ch13.html#id5499196
+6|Figure 13-2. Schematic Illustration of Tumbling (Implementation Perspective)|sgi_html/ch13.html#id5500392
+6|Figure 13-3. Schematic Illustration of Dollying (Implementation Perspective)|sgi_html/ch13.html#id5500483
+6|Figure 13-4. Schematic Illustration of Zooming (Implementation Perspective)|sgi_html/ch13.html#id5500607
+6|Figure 13-5. Schematic Illustration of Panning (User Drags Right)|sgi_html/ch13.html#id5500700
+6|Figure 13-6. Simple Example of Seeking to Door|sgi_html/ch13.html#id5500826
+6|Figure 13-7. Schematic illustration of Roaming (Implementation Perspective)|sgi_html/ch13.html#id5501402
+6|Figure 13-8. Schematic Illustration of Tilting (Implementation Perspective).|sgi_html/ch13.html#id5501501
+6|Figure 13-9. Schematic Illustration of Sidling (User Drags Left)|sgi_html/ch13.html#id5501608
+6|Figure 13-10. Application With Viewing Controls|sgi_html/ch13.html#id5502455
+5|Figure 14-1. Two Objects with Bounding Box Feedback|sgi_html/ch14.html#id5504624
+5|Figure 14-2. Object With Manipulator|sgi_html/ch14.html#id5504723
+5|Figure 14-3. Selection Feedback: Lead Object Has Manipulator.|sgi_html/ch14.html#id5505209
+5|Figure 14-4. Grouped Collection of Objects With Manipulator.|sgi_html/ch14.html#id5505314
+5|Figure 14-5. Ungrouped Collection of Objects (Knight Is Lead Object)|sgi_html/ch14.html#id5505395
+5|Figure 15-1. Object With Translation Manipulator (Bounding Box)|sgi_html/ch15.html#id5507372
+5|Figure 15-2. Simple Planar Translation Sequence|sgi_html/ch15.html#id5507882
+6|Figure 15-3. Constrained Translation Along One Axis of the Selected Plane|sgi_html/ch15.html#id5508400
+6|Figure 15-4. Constrained Translation Along the Normal to the Selected Plane|sgi_html/ch15.html#id5508808
+5|Figure 15-5. Object With Rotation Manipulator (Rotation Handles)|sgi_html/ch15.html#id5509264
+5|Figure 15-6. Constrained Rotation Sequence|sgi_html/ch15.html#id5509611
+5|Figure 15-7. Free Rotation Sequence|sgi_html/ch15.html#id5510024
+5|Figure 15-8. Object With Scaling Manipulator (Scaling Handles)|sgi_html/ch15.html#id5510596
+5|Figure 15-9. Uniform Scaling Sequence|sgi_html/ch15.html#id5510945
+5|Figure 15-10. Axial Scaling Sequence|sgi_html/ch15.html#id5511375
+5|Figure 15-11. Uniform Scaling Around a Corner|sgi_html/ch15.html#id5511788
+5|Figure 15-12. Axial Scaling Around a Side|sgi_html/ch15.html#id5512132
+4|Figure 15-13. Changing the Center of Rotation and Scaling|sgi_html/ch15.html#id5512742
+4|Figure 15-14. Changing the Center of Rotation and Scaling Along An Axis|sgi_html/ch15.html#id5513095
+# tables |
+4|Table 1-1. Mouse Button Names and Functions|sgi_html/ch01.html#id5382703
+4|Table 1-2. Keyboard Substitutes|sgi_html/ch01.html#id5383179
+5|Table 2-1. User/Icon Interactions and Expected Behavior|sgi_html/ch02.html#id5458235
+5|Table 3-1. Window Decorations and Window Menu Entries by Window Category|sgi_html/ch03.html#id5461339
+4|Table 5-1. Data Types Supported for Inter-Application Transfer|sgi_html/ch05.html#id5473566
+5|Table 7-1. Selection Actions and Results|sgi_html/ch07.html#id5479324
+6|Table 8-1. File Menu Entries|sgi_html/ch08.html#id5482871
+6|Table 8-2. Standard Edit Menu Entries|sgi_html/ch08.html#id5483819
+5|Table 8-3. Keyboard Accelerators|sgi_html/ch08.html#id5486023
+4|Table 10-1. Types of Dialogs, Their Modality, and When to Use Them|sgi_html/ch10.html#id5492000
+5|Table 11-1. Standard Pointer Shapes and Colors|sgi_html/ch11.html#id5496287
+5|Table 12-1. Use of Modifier Keys in a 3D Application|sgi_html/ch12.html#id5497686
+4|Table 12-2. Pointers for 3D Functionality|sgi_html/ch12.html#id5498271
+4|Table 13-1. 3D Viewing Functions and User Interface|sgi_html/ch13.html#id5499368
+6|Table 13-2. Overview of Inspection Viewing Functions|sgi_html/ch13.html#id5500095
+6|Table 13-3. Overview of Navigation Viewing Functions|sgi_html/ch13.html#id5501120
+5|Table 14-1. 3D Selection Actions and Results|sgi_html/ch14.html#id5503829
+5|Table 15-1. Overview of Manipulation Techniques|sgi_html/ch15.html#id5506419
+5|Table 15-2. Phases of Planar Translation|sgi_html/ch15.html#id5507541
+6|Table 15-3. Phases of Translation Along One Axis of the Selected Plane|sgi_html/ch15.html#id5508093
+6|Table 15-4. Phases of Translation Along the Normal to the Selected Plane|sgi_html/ch15.html#id5508531
+5|Table 15-5. Phases of Constrained Rotation|sgi_html/ch15.html#id5509317
+5|Table 15-6. Phases of Free Rotation|sgi_html/ch15.html#id5509777
+5|Table 15-7. Phases of Uniform Scaling|sgi_html/ch15.html#id5510672
+5|Table 15-8. Phases of Axial Scaling (Stretching)|sgi_html/ch15.html#id5511068
+5|Table 15-9. Phases of Uniform Scaling Around a Corner|sgi_html/ch15.html#id5511505
+5|Table 15-10. Phases of Axial Scaling Around a Side|sgi_html/ch15.html#id5511886
+4|Table 15-11. Phases of Changing the Center of Rotation and Scaling Along a Plane|sgi_html/ch15.html#id5512469
+4|Table 15-12. Phases of Changing the Center of Rotation and Scaling Along an Axis|sgi_html/ch15.html#id5512829
+# examples |
+# procedures |
+# helpids |
+

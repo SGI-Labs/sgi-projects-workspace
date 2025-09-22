@@ -1,0 +1,1631 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc>
+<book href="index.html" id="id5381062">
+<title>IRIX® Interactive Desktop
+User Interface Guidelines</title>
+<bookinfo href="front.html">
+<title>Front Matter</title>
+</bookinfo>
+<preface href="pr01.html" id="id5384587">
+<title>About This Guide</title>
+<section href="pr01.html#id5439412" id="id5439412">
+<title>What This Guide Contains</title>
+<section href="pr01.html#id5439424" id="id5439424">
+<title>Part One: Integrating With the IRIX Interactive Desktop</title>
+</section>
+<section href="pr01.html#id5439583" id="id5439583">
+<title>Part Two: Interface Components</title>
+</section>
+<section href="pr01.html#id5385415" id="id5385415">
+<title>Part Three: Designing 3D Applications</title>
+</section>
+<section href="pr01.html#id5385525" id="id5385525">
+<title>Appendix</title>
+</section>
+</section>
+<section href="pr01.html#id5385546" id="id5385546">
+<title>What You Should Know Before Reading This Guide</title>
+</section>
+<section href="pr01.html#id5385564" id="id5385564">
+<title>Suggestions for Further Reading</title>
+</section>
+<section href="pr01.html#id5383816" id="id5383816">
+<title>Conventions Used in This Guide</title>
+<section href="pr01.html#id5383826" id="id5383826">
+<title>Style Guidelines</title>
+</section>
+<section href="pr01.html#id5383848" id="id5383848">
+<title>Font Conventions</title>
+</section>
+</section>
+</preface>
+<part href="pt01.html" id="id5383955">
+<title>Part I. Integrating With the IRIX Interactive Desktop</title>
+<chapter href="ch01.html" id="id5384020">
+<title>Chapter 1. Overview of the IRIX Interactive Desktop</title>
+<section href="ch01.html#id5384203" id="id5384203">
+<title>Overview of the Desktop</title>
+<figure href="ch01.html#id5384389" id="id5384389">
+<title>Figure 1-1. IRIX Interactive Desktop</title>
+</figure>
+</section>
+<section href="ch01.html#id5384421" id="id5384421">
+<title>How Users Interact with Desktop Icons</title>
+<figure href="ch01.html#id5382621" id="id5382621">
+<title>Figure 1-2. Icon States: User Actions and Effects</title>
+</figure>
+</section>
+<section href="ch01.html#id5382651" id="id5382651">
+<title>Mouse and Keyboard Hardware</title>
+<table href="ch01.html#id5382703" id="id5382703">
+<title>Table 1-1. Mouse Button Names and Functions</title>
+</table>
+<table href="ch01.html#id5383179" id="id5383179">
+<title>Table 1-2.  Keyboard Substitutes </title>
+</table>
+</section>
+</chapter>
+<chapter href="ch02.html" id="id5383411">
+<title>Chapter 2. Icons</title>
+<section href="ch02.html#id5383566" id="id5383566">
+<title>Designing the Appearance of Icons</title>
+<figure href="ch02.html#id5456422" id="id5456422">
+<title>Figure 2-1. Web Tools Icons</title>
+</figure>
+<figure href="ch02.html#id5456441" id="id5456441">
+<title>Figure 2-2. File Icons</title>
+</figure>
+<section href="ch02.html#id5456472" id="id5456472">
+<title>General Icon Design: Components, Size, and Colors</title>
+<section href="ch02.html#id5456548" id="id5456548">
+<title>Icon Components</title>
+<figure href="ch02.html#id5456686" id="id5456686">
+<title>Figure 2-3. Application and File Icon Components</title>
+</figure>
+<figure href="ch02.html#id5456776" id="id5456776">
+<title>Figure 2-4. IconSmith Examples</title>
+</figure>
+</section>
+<section href="ch02.html#id5456798" id="id5456798">
+<title>Icon Size</title>
+</section>
+<section href="ch02.html#id5456848" id="id5456848">
+<title>Icon Colors</title>
+<figure href="ch02.html#id5456998" id="id5456998">
+<title>Figure 2-5. IconSmith Color Palette</title>
+</figure>
+<figure href="ch02.html#id5457056" id="id5457056">
+<title>Figure 2-6. Icon States and Effects on Color</title>
+</figure>
+</section>
+<section href="ch02.html#id5457293" id="id5457293">
+<title>Icon Orientation</title>
+<figure href="ch02.html#id5457323" id="id5457323">
+<title>Figure 2-7. Potential Icon Background Areas and Colors</title>
+</figure>
+</section>
+</section>
+<section href="ch02.html#id5457367" id="id5457367">
+<title>Application Icon Design</title>
+<figure href="ch02.html#id5457476" id="id5457476">
+<title>Figure 2-8. Application Icon in Running and Not Running States</title>
+</figure>
+<figure href="ch02.html#id5457612" id="id5457612">
+<title>Figure 2-9. Examples of Application Icons That Could be Improved</title>
+</figure>
+</section>
+<section href="ch02.html#id5457669" id="id5457669">
+<title>File Icon Design</title>
+<figure href="ch02.html#id5457747" id="id5457747">
+<title>Figure 2-10. Examples of Standard File Icons</title>
+</figure>
+<figure href="ch02.html#id5457817" id="id5457817">
+<title>Figure 2-11. Examples of File Icons for Application-Specific File Formats</title>
+</figure>
+</section>
+<section href="ch02.html#id5457842" id="id5457842">
+<title>Icon Appearance Design Guidelines</title>
+</section>
+</section>
+<section href="ch02.html#id5458087" id="id5458087">
+<title>Defining the Behavior of Icons With FTRs</title>
+<section href="ch02.html#id5458160" id="id5458160">
+<title>User and Icon Interaction</title>
+<table href="ch02.html#id5458235" id="id5458235">
+<title>Table 2-1. User/Icon Interactions and Expected Behavior</title>
+</table>
+<figure href="ch02.html#id5458604" id="id5458604">
+<title>Figure 2-12. Launch Dialog Box</title>
+</figure>
+</section>
+<section href="ch02.html#id5458625" id="id5458625">
+<title>Icon Behavior Guidelines</title>
+</section>
+</section>
+<section href="ch02.html#id5458731" id="id5458731">
+<title>Making Application Icons Accessible</title>
+<section href="ch02.html#id5458796" id="id5458796">
+<title>Putting Icons Into the Icon Catalog</title>
+<figure href="ch02.html#id5459113" id="id5459113">
+<title>Figure 2-13. Icon Catalog</title>
+</figure>
+</section>
+<section href="ch02.html#id5459135" id="id5459135">
+<title>Naming and Locating Executables for the 
+Find an Icon Tool</title>
+<figure href="ch02.html#id5459202" id="id5459202">
+<title>Figure 2-14. The Find an Icon Tool </title>
+</figure>
+</section>
+<section href="ch02.html#id5459457" id="id5459457">
+<title>Application Icon Accessibility Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch03.html" id="id5459524">
+<title>Chapter 3. Windows in the IRIX Interactive Desktop Environment</title>
+<section href="ch03.html#id5459757" id="id5459757">
+<title>The IRIX Interactive Desktop Look: Graphic Features and Schemes</title>
+<section href="ch03.html#id5459866" id="id5459866">
+<title>Enhanced Graphics in the IRIX Interactive Desktop Look</title>
+<figure href="ch03.html#id5460179" id="id5460179">
+<title>Figure 3-1. Examples of Graphic Modifications in the IRIX Interactive Desktop Look </title>
+</figure>
+</section>
+<section href="ch03.html#id5460256" id="id5460256">
+<title>Schemes for Colors and Fonts</title>
+<figure href="ch03.html#id5460318" id="id5460318">
+<title>Figure 3-2. Scheme Setting Control Panel</title>
+</figure>
+</section>
+<section href="ch03.html#id5460405" id="id5460405">
+<title>IRIX Interactive Desktop Look Guidelines</title>
+</section>
+</section>
+<section href="ch03.html#id5460461" id="id5460461">
+<title>Application Window Categories and Characteristics</title>
+<section href="ch03.html#id5460569" id="id5460569">
+<title>Application Window Categories</title>
+</section>
+<section href="ch03.html#id5460787" id="id5460787">
+<title>Application Models</title>
+<section href="ch03.html#id5460854" id="id5460854">
+<title>&#8220;Single Document, One Primary&#8221; Application Model</title>
+</section>
+<section href="ch03.html#id5460882" id="id5460882">
+<title>&#8220;Single Document, Multiple Primaries&#8221; Application Model</title>
+</section>
+<section href="ch03.html#id5460922" id="id5460922">
+<title>&#8220;Multiple Document, Visible Main&#8221; Application Model</title>
+</section>
+<section href="ch03.html#id5460958" id="id5460958">
+<title>&#8220;Multiple Document, No Visible Main&#8221; Application Model</title>
+</section>
+</section>
+<section href="ch03.html#id5461013" id="id5461013">
+<title>Window Decorations and the Window Menu</title>
+<figure href="ch03.html#id5461116" id="id5461116">
+<title>Figure 3-3. Features of a Typical Main Primary Window  </title>
+</figure>
+<table href="ch03.html#id5461339" id="id5461339">
+<title>Table 3-1.  Window Decorations and Window Menu Entries by Window Category </title>
+</table>
+</section>
+<section href="ch03.html#id5462019" id="id5462019">
+<title>Window Title Bar</title>
+<figure href="ch03.html#id5462160" id="id5462160">
+<title>Figure 3-4. Title Bar Label Appearing in Desks Overview</title>
+</figure>
+<section href="ch03.html#id5462182" id="id5462182">
+<title>Rules for Labeling the Title Bar in Main Primary Windows</title>
+<figure href="ch03.html#id5462284" id="id5462284">
+<title>Figure 3-5. Labels for Main Window Title Bars </title>
+</figure>
+</section>
+<section href="ch03.html#id5462308" id="id5462308">
+<title>Rules for Labeling the Title Bar in Windows Other Than Main</title>
+</section>
+</section>
+<section href="ch03.html#id5462469" id="id5462469">
+<title>Window Size</title>
+<figure href="ch03.html#id5462567" id="id5462567">
+<title>Figure 3-6. Default Maximum and Minimum Window Size Examples </title>
+</figure>
+</section>
+<section href="ch03.html#id5462591" id="id5462591">
+<title>Window Placement</title>
+<figure href="ch03.html#id5462640" id="id5462640">
+<title>Figure 3-7. Setting Auto Window Placement</title>
+</figure>
+</section>
+<section href="ch03.html#id5462743" id="id5462743">
+<title>Application Window Characteristic Guidelines</title>
+</section>
+</section>
+<section href="ch03.html#id5463403" id="id5463403">
+<title>Keyboard Focus Across Windows</title>
+<section href="ch03.html#id5463565" id="id5463565">
+<title>Single-Action Pointer Grab Model</title>
+<figure href="ch03.html#id5463615" id="id5463615">
+<title>Figure 3-8. Single-Action Pointer Grab Example: Capture by Sweeping </title>
+</figure>
+</section>
+<section href="ch03.html#id5463642" id="id5463642">
+<title>Multiple-Action Pointer Grab Model</title>
+<figure href="ch03.html#id5463820" id="id5463820">
+<title>Figure 3-9. Multiple-Action Pointer Grab Example </title>
+</figure>
+</section>
+<section href="ch03.html#id5463848" id="id5463848">
+<title>Guidelines for Keyboard Focus Across Windows</title>
+</section>
+</section>
+<section href="ch03.html#id5463939" id="id5463939">
+<title>Minimized Windows</title>
+<section href="ch03.html#id5464103" id="id5464103">
+<title>Choosing an Image for Your Minimized Window</title>
+<figure href="ch03.html#id5464165" id="id5464165">
+<title>Figure 3-10. Minimized Window Example: Good User Association With Application</title>
+</figure>
+<figure href="ch03.html#id5464329" id="id5464329">
+<title>Figure 3-11. Minimized Window Examples</title>
+</figure>
+<figure href="ch03.html#id5464381" id="id5464381">
+<title>Figure 3-12. Minimized Window Example: Incorrect Design</title>
+</figure>
+<figure href="ch03.html#id5464436" id="id5464436">
+<title>Figure 3-13. Minimized Window Example: Design That's Too Literal</title>
+</figure>
+</section>
+<section href="ch03.html#id5464495" id="id5464495">
+<title>Labeling a Minimized Window</title>
+</section>
+<section href="ch03.html#id5464672" id="id5464672">
+<title>Processing While Minimized</title>
+</section>
+<section href="ch03.html#id5464720" id="id5464720">
+<title>Using the Minimized Window to Show Status</title>
+<figure href="ch03.html#id5464755" id="id5464755">
+<title>Figure 3-14. Minimized Window Example: Indicating Status With the Label </title>
+</figure>
+</section>
+<section href="ch03.html#id5464802" id="id5464802">
+<title>Minimized Window Guidelines</title>
+</section>
+</section>
+<section href="ch03.html#id5465064" id="id5465064">
+<title>Desks</title>
+<figure href="ch03.html#id5465156" id="id5465156">
+<title>Figure 3-15. Desks Overview Window</title>
+</figure>
+<section href="ch03.html#id5465296" id="id5465296">
+<title>Desks Guidelines</title>
+</section>
+</section>
+<section href="ch03.html#id5465349" id="id5465349">
+<title>Session Management</title>
+<figure href="ch03.html#id5465394" id="id5465394">
+<title>Figure 3-16. Setting Session Management</title>
+</figure>
+<figure href="ch03.html#id5465450" id="id5465450">
+<title>Figure 3-17. Setting Auto Window Placement</title>
+</figure>
+<section href="ch03.html#id5465634" id="id5465634">
+<title>Session Management Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch04.html" id="id5465829">
+<title>Chapter 4. IRIX Interactive Desktop Services</title>
+<section href="ch04.html#id5465962" id="id5465962">
+<title>Software Installation</title>
+<figure href="ch04.html#id5466018" id="id5466018">
+<title>Figure 4-1. The IRIX Interactive Desktop Software Manager </title>
+</figure>
+<section href="ch04.html#id5466159" id="id5466159">
+<title>Software Installation Guideline</title>
+</section>
+</section>
+<section href="ch04.html#id5466176" id="id5466176">
+<title>Online Help</title>
+<section href="ch04.html#id5466345" id="id5466345">
+<title>Providing Help Using SGIHelp</title>
+</section>
+<section href="ch04.html#id5466436" id="id5466436">
+<title>Types of Online Help</title>
+<figure href="ch04.html#id5466550" id="id5466550">
+<title>Figure 4-2. Typical Help Menu and Related Windows</title>
+</figure>
+<section href="ch04.html#id5466578" id="id5466578">
+<title>Context-Sensitive Information</title>
+<figure href="ch04.html#id5466688" id="id5466688">
+<title>Figure 4-3. Context-Sensitive Help Example </title>
+</figure>
+</section>
+<section href="ch04.html#id5466714" id="id5466714">
+<title>Overview Information</title>
+</section>
+<section href="ch04.html#id5466774" id="id5466774">
+<title>Task-Oriented Information</title>
+</section>
+<section href="ch04.html#id5466827" id="id5466827">
+<title>Index of Help Topics</title>
+</section>
+<section href="ch04.html#id5466938" id="id5466938">
+<title>Keyboard Shortcut Information</title>
+</section>
+<section href="ch04.html#id5466999" id="id5466999">
+<title>Product Information</title>
+</section>
+</section>
+<section href="ch04.html#id5467072" id="id5467072">
+<title>Providing Help through a Help Menu</title>
+<figure href="ch04.html#id5467136" id="id5467136">
+<title>Figure 4-4. Typical Help Menu</title>
+</figure>
+</section>
+<section href="ch04.html#id5467433" id="id5467433">
+<title>Providing Help Through a Help Button</title>
+<figure href="ch04.html#id5467715" id="id5467715">
+<title>Figure 4-5. Help Button Example </title>
+</figure>
+</section>
+<section href="ch04.html#id5467740" id="id5467740">
+<title>Guidelines for Designing Online Help</title>
+</section>
+<section href="ch04.html#id5468310" id="id5468310">
+<title>Writing Online Help Content for SGIHelp</title>
+<section href="ch04.html#id5468349" id="id5468349">
+<title>Learning About SGIHelp</title>
+</section>
+<section href="ch04.html#id5468436" id="id5468436">
+<title>Creating Help Cards</title>
+</section>
+<section href="ch04.html#id5468496" id="id5468496">
+<title>Writing Context-Sensitive Help</title>
+</section>
+<section href="ch04.html#id5468549" id="id5468549">
+<title>Writing Overview Information</title>
+</section>
+<section href="ch04.html#id5468585" id="id5468585">
+<title>Writing Task Information</title>
+<figure href="ch04.html#id5468638" id="id5468638">
+<title>Figure 4-6. Task-Oriented Help Example </title>
+</figure>
+</section>
+<section href="ch04.html#id5468693" id="id5468693">
+<title>Writing Index Information</title>
+</section>
+<section href="ch04.html#id5468744" id="id5468744">
+<title>Writing Keyboard Shortcut Information</title>
+</section>
+<section href="ch04.html#id5468783" id="id5468783">
+<title>Writing for Windows With Help Buttons</title>
+</section>
+</section>
+<section href="ch04.html#id5468850" id="id5468850">
+<title>Guidelines for Creating SGIHelp Content</title>
+</section>
+</section>
+<section href="ch04.html#id5469309" id="id5469309">
+<title>Online Documentation</title>
+</section>
+<section href="ch04.html#id5469486" id="id5469486">
+<title>Desktop Variables</title>
+<section href="ch04.html#id5467599" id="id5467599">
+<title>Scheme Setting</title>
+</section>
+<section href="ch04.html#id5467651" id="id5467651">
+<title>Auto Window Placement Setting</title>
+</section>
+<section href="ch04.html#id5467675" id="id5467675">
+<title>Language Setting</title>
+<figure href="ch04.html#id5470873" id="id5470873">
+<title>Figure 4-7. Language Control Panel</title>
+</figure>
+</section>
+<section href="ch04.html#id5470898" id="id5470898">
+<title>Mouse Double-Click Speed Setting</title>
+<figure href="ch04.html#id5469369" id="id5469369">
+<title>Figure 4-8. Mouse Settings Control Panel</title>
+</figure>
+</section>
+<section href="ch04.html#id5469394" id="id5469394">
+<title>Editor Preference Setting</title>
+<figure href="ch04.html#id5469437" id="id5469437">
+<title>Figure 4-9. Desktop Settings Control Panel</title>
+</figure>
+<figure href="ch04.html#id5472221" id="id5472221">
+<title>Figure 4-10. Selecting Preferred Editor in MediaMail </title>
+</figure>
+</section>
+<section href="ch04.html#id5472248" id="id5472248">
+<title>Desktop Variables Guidelines</title>
+</section>
+</section>
+<section href="ch04.html#id5472462" id="id5472462">
+<title>File Alteration Monitor (FAM)</title>
+<section href="ch04.html#id5472571" id="id5472571">
+<title>File Monitoring Guideline</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch05.html" id="id5472588">
+<title>Chapter 5. Data Exchange on the IRIX Interactive Desktop</title>
+<section href="ch05.html#id5472706" id="id5472706">
+<title>Supporting the Clipboard Transfer Model</title>
+<figure href="ch05.html#id5472933" id="id5472933">
+<title>Figure 5-1. Clipboard Transfer Example </title>
+</figure>
+</section>
+<section href="ch05.html#id5472992" id="id5472992">
+<title>Supporting the Primary Transfer Model</title>
+<figure href="ch05.html#id5473183" id="id5473183">
+<title>Figure 5-2. Primary Selection Example </title>
+</figure>
+<figure href="ch05.html#id5473260" id="id5473260">
+<title>Figure 5-3. Primary Transfer Example: Before Transfer</title>
+</figure>
+<figure href="ch05.html#id5473285" id="id5473285">
+<title>Figure 5-4. Primary Transfer Example: After Transfer</title>
+</figure>
+</section>
+<section href="ch05.html#id5473510" id="id5473510">
+<title>Data Types Supported for Inter-Application Transfer</title>
+<table href="ch05.html#id5473566" id="id5473566">
+<title>Table 5-1.   Data Types Supported for Inter-Application Transfer</title>
+</table>
+</section>
+<section href="ch05.html#id5474075" id="id5474075">
+<title>Data Exchange Guidelines</title>
+</section>
+</chapter>
+</part>
+<part href="pt02.html" id="id5474204">
+<title>Part II. Interface Components</title>
+<chapter href="ch06.html" id="id5474317">
+<title>Chapter 6. Application Windows</title>
+<section href="ch06.html#id5474517" id="id5474517">
+<title>Application Models</title>
+<section href="ch06.html#id5474582" id="id5474582">
+<title>Window Types</title>
+<figure href="ch06.html#id5474800" id="id5474800">
+<title>Figure 6-1. Allowable Parent-Child Window Relationships</title>
+</figure>
+</section>
+<section href="ch06.html#id5474827" id="id5474827">
+<title>Standard Application Models</title>
+<section href="ch06.html#id5474874" id="id5474874">
+<title>&#8220;Single Document, One Primary&#8221; Application Model</title>
+<figure href="ch06.html#id5474906" id="id5474906">
+<title>Figure 6-2. &#8221;Single Document, One Primary&#8221; Application Model</title>
+</figure>
+</section>
+<section href="ch06.html#id5474955" id="id5474955">
+<title>&#8220;Single Document, Multiple Primaries&#8221; Application Model</title>
+<figure href="ch06.html#id5475003" id="id5475003">
+<title>Figure 6-3. &#8221;Single Document, Multiple Primaries&#8221; Application Model</title>
+</figure>
+</section>
+<section href="ch06.html#id5475046" id="id5475046">
+<title>&#8220;Multiple Document, Visible Main&#8221; Application Model</title>
+<figure href="ch06.html#id5475160" id="id5475160">
+<title>Figure 6-4. &#8221;Multiple Document, Visible Main&#8221; Application Model</title>
+</figure>
+</section>
+<section href="ch06.html#id5475209" id="id5475209">
+<title>&#8220;Multiple Document, No Visible Main&#8221; Application Model</title>
+<figure href="ch06.html#id5475259" id="id5475259">
+<title>Figure 6-5. &#8221;Multiple Document, No Visible Main&#8221; Application Model</title>
+</figure>
+</section>
+</section>
+<section href="ch06.html#id5475319" id="id5475319">
+<title>Application Model Guidelines</title>
+</section>
+</section>
+<section href="ch06.html#id5475350" id="id5475350">
+<title>Main and Co-Primary Windows</title>
+<figure href="ch06.html#id5475546" id="id5475546">
+<title>Figure 6-6. Basic Primary Window</title>
+</figure>
+<figure href="ch06.html#id5475568" id="id5475568">
+<title>Figure 6-7. Primary Windows With Tool Palettes</title>
+</figure>
+<figure href="ch06.html#id5475592" id="id5475592">
+<title>Figure 6-8. Primary Window With Two Panes</title>
+</figure>
+<section href="ch06.html#id5475636" id="id5475636">
+<title>Menu Bars in Primary Windows</title>
+</section>
+<section href="ch06.html#id5475755" id="id5475755">
+<title>Scrollable Work Areas in Primary Windows</title>
+</section>
+<section href="ch06.html#id5475921" id="id5475921">
+<title>Control Areas in Primary Windows</title>
+</section>
+<section href="ch06.html#id5476207" id="id5476207">
+<title>Status Areas in Primary Windows</title>
+</section>
+<section href="ch06.html#id5476275" id="id5476275">
+<title>Splitting Primary Windows Into Panes</title>
+</section>
+<section href="ch06.html#id5476382" id="id5476382">
+<title>Popup Menus in Primary Windows</title>
+</section>
+<section href="ch06.html#id5476414" id="id5476414">
+<title>Primary Window Guidelines</title>
+</section>
+</section>
+<section href="ch06.html#id5476625" id="id5476625">
+<title>Support Windows</title>
+<section href="ch06.html#id5476737" id="id5476737">
+<title>General Support Window Design</title>
+<figure href="ch06.html#id5476935" id="id5476935">
+<title>Figure 6-9. The IRIS Showcase Align Gizmo</title>
+</figure>
+</section>
+<section href="ch06.html#id5477030" id="id5477030">
+<title>A Specific Standard Support Window: The IRIX Interactive Desktop Color Chooser</title>
+<figure href="ch06.html#id5477089" id="id5477089">
+<title>Figure 6-10. The IRIX Interactive Desktop Color Chooser</title>
+</figure>
+</section>
+<section href="ch06.html#id5477352" id="id5477352">
+<title>Support Window Guidelines</title>
+</section>
+</section>
+<section href="ch06.html#id5477473" id="id5477473">
+<title>Pointer Behavior in a Window</title>
+<section href="ch06.html#id5477575" id="id5477575">
+<title>Pointer Behavior Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch07.html" id="id5477609">
+<title>Chapter 7. Focus, Selection, and Drag and Drop</title>
+<section href="ch07.html#id5477726" id="id5477726">
+<title>Keyboard Focus and Navigation</title>
+<section href="ch07.html#id5477932" id="id5477932">
+<title>Keyboard Focus Policy and Navigation Within a Window</title>
+<figure href="ch07.html#id5477998" id="id5477998">
+<title>Figure 7-1. Location Cursor Example</title>
+</figure>
+<section href="ch07.html#id5478379" id="id5478379">
+<title>Keyboard Navigation</title>
+<figure href="ch07.html#id5478466" id="id5478466">
+<title>Figure 7-2. Components and Fields</title>
+</figure>
+</section>
+<section href="ch07.html#id5478848" id="id5478848">
+<title>Mouse Navigation</title>
+</section>
+</section>
+<section href="ch07.html#id5478906" id="id5478906">
+<title>Keyboard Focus and Navigation Guidelines</title>
+</section>
+</section>
+<section href="ch07.html#id5479008" id="id5479008">
+<title>Selection</title>
+<section href="ch07.html#id5479137" id="id5479137">
+<title>Selection Models&#8212;What Can Be Selected and How To Select It</title>
+<table href="ch07.html#id5479324" id="id5479324">
+<title>Table 7-1.  Selection Actions and Results</title>
+</table>
+</section>
+<section href="ch07.html#id5479902" id="id5479902">
+<title>Highlighting a Selection</title>
+</section>
+<section href="ch07.html#id5480017" id="id5480017">
+<title>Multiple Collections in One Application Window</title>
+</section>
+<section href="ch07.html#id5480114" id="id5480114">
+<title>Selection Guidelines</title>
+</section>
+</section>
+<section href="ch07.html#id5480224" id="id5480224">
+<title>Drag and Drop</title>
+<section href="ch07.html#id5480384" id="id5480384">
+<title>Two Models of Drag and Drop</title>
+<section href="ch07.html#id5480399" id="id5480399">
+<title>Drag and Drop for Non-Text Objects</title>
+<figure href="ch07.html#id5480555" id="id5480555">
+<title>Figure 7-3. File Finder Component</title>
+</figure>
+</section>
+<section href="ch07.html#id5480580" id="id5480580">
+<title>Drag and Drop for Text</title>
+</section>
+</section>
+<section href="ch07.html#id5480637" id="id5480637">
+<title>Pointers for Drag Operations</title>
+</section>
+<section href="ch07.html#id5480696" id="id5480696">
+<title>Drag and Drop Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch08.html" id="id5480743">
+<title>Chapter 8. Menus</title>
+<section href="ch08.html#id5480898" id="id5480898">
+<title>Types of Menus</title>
+<section href="ch08.html#id5480989" id="id5480989">
+<title>Pull Down Menus</title>
+<figure href="ch08.html#id5481014" id="id5481014">
+<title>Figure 8-1. Menu Bar</title>
+</figure>
+<figure href="ch08.html#id5481055" id="id5481055">
+<title>Figure 8-2. Pull-Down Menu</title>
+</figure>
+<figure href="ch08.html#id5481165" id="id5481165">
+<title>Figure 8-3. Cascading Menu</title>
+</figure>
+</section>
+<section href="ch08.html#id5481190" id="id5481190">
+<title>Popup Menus</title>
+<figure href="ch08.html#id5481232" id="id5481232">
+<title>Figure 8-4. Popup Menu</title>
+</figure>
+</section>
+<section href="ch08.html#id5481276" id="id5481276">
+<title>Option Menus</title>
+<figure href="ch08.html#id5481346" id="id5481346">
+<title>Figure 8-5. Option Menu Button</title>
+</figure>
+<figure href="ch08.html#id5481389" id="id5481389">
+<title>Figure 8-6. An Open Option Menu</title>
+</figure>
+</section>
+</section>
+<section href="ch08.html#id5481452" id="id5481452">
+<title>Menu Traversal and Activation</title>
+<section href="ch08.html#id5481562" id="id5481562">
+<title>Using the Mouse to Manipulate Menus</title>
+<section href="ch08.html#id5481583" id="id5481583">
+<title>Spring-Loaded Manner</title>
+</section>
+<section href="ch08.html#id5481632" id="id5481632">
+<title>Posted Manner</title>
+</section>
+<section href="ch08.html#id5481662" id="id5481662">
+<title>Mouse Click</title>
+</section>
+</section>
+<section href="ch08.html#id5481680" id="id5481680">
+<title>Using the Keyboard to Manipulate Menus</title>
+</section>
+<section href="ch08.html#id5481845" id="id5481845">
+<title>Menu Traversal and Activation Guidelines</title>
+</section>
+</section>
+<section href="ch08.html#id5481915" id="id5481915">
+<title>The Menu Bar and Pull-Down Menus</title>
+<figure href="ch08.html#id5482090" id="id5482090">
+<title>Figure 8-7. Elements of a Pull-Down Menu</title>
+</figure>
+<section href="ch08.html#id5482419" id="id5482419">
+<title>Standard Menus</title>
+<figure href="ch08.html#id5482622" id="id5482622">
+<title>Figure 8-8. Standard Menus for Menu Bars</title>
+</figure>
+<section href="ch08.html#id5482700" id="id5482700">
+<title>File Menu</title>
+<figure href="ch08.html#id5482813" id="id5482813">
+<title>Figure 8-9. The Standard File Menu</title>
+</figure>
+<table href="ch08.html#id5482871" id="id5482871">
+<title>Table 8-1.  File Menu Entries</title>
+</table>
+</section>
+<section href="ch08.html#id5483627" id="id5483627">
+<title>Selected Menu</title>
+</section>
+<section href="ch08.html#id5483700" id="id5483700">
+<title>Edit Menu</title>
+<figure href="ch08.html#id5483773" id="id5483773">
+<title>Figure 8-10. The Standard Edit Menu</title>
+</figure>
+<table href="ch08.html#id5483819" id="id5483819">
+<title>Table 8-2.   	Standard Edit Menu Entries</title>
+</table>
+</section>
+<section href="ch08.html#id5484592" id="id5484592">
+<title>View Menu</title>
+</section>
+<section href="ch08.html#id5484678" id="id5484678">
+<title>Tools menu</title>
+</section>
+<section href="ch08.html#id5484715" id="id5484715">
+<title>Options menu</title>
+</section>
+<section href="ch08.html#id5484747" id="id5484747">
+<title>Help menu</title>
+</section>
+</section>
+<section href="ch08.html#id5484814" id="id5484814">
+<title>What to Put in the Pull-Down Menus</title>
+<section href="ch08.html#id5484990" id="id5484990">
+<title>Naming Menus in the Menu Bar</title>
+</section>
+<section href="ch08.html#id5485093" id="id5485093">
+<title>Naming Menu Entries in the Pull-Down Menus</title>
+</section>
+<section href="ch08.html#id5485487" id="id5485487">
+<title>Ordering Menus and Menu Entries in the Pull-Down Menus</title>
+</section>
+<section href="ch08.html#id5485633" id="id5485633">
+<title>Using Cascading Menus</title>
+</section>
+<section href="ch08.html#id5485679" id="id5485679">
+<title>Using Radio Buttons and Checkboxes in Pull-Down Menus</title>
+<figure href="ch08.html#id5485714" id="id5485714">
+<title>Figure 8-11. Radio buttons</title>
+</figure>
+<figure href="ch08.html#id5485831" id="id5485831">
+<title>Figure 8-12. Checkboxes</title>
+</figure>
+</section>
+</section>
+<section href="ch08.html#id5485877" id="id5485877">
+<title>Choosing Mnemonics</title>
+</section>
+<section href="ch08.html#id5485955" id="id5485955">
+<title>Choosing Keyboard Accelerators</title>
+<table href="ch08.html#id5486023" id="id5486023">
+<title>Table 8-3.   Keyboard Accelerators</title>
+</table>
+</section>
+<section href="ch08.html#id5486495" id="id5486495">
+<title>Disabling Menu Entries</title>
+</section>
+<section href="ch08.html#id5486657" id="id5486657">
+<title>Dynamic Menu Entries</title>
+</section>
+<section href="ch08.html#id5486729" id="id5486729">
+<title>Pull-Down Menu Guidelines</title>
+</section>
+</section>
+<section href="ch08.html#id5487265" id="id5487265">
+<title>Popup Menus</title>
+<section href="ch08.html#id5487401" id="id5487401">
+<title>What to Put in Popup Menus</title>
+<figure href="ch08.html#id5487440" id="id5487440">
+<title>Figure 8-13. Popup Menu</title>
+</figure>
+</section>
+<section href="ch08.html#id5487488" id="id5487488">
+<title>Disabling Popup Menu Entries</title>
+</section>
+<section href="ch08.html#id5487530" id="id5487530">
+<title>Popup Menu Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch09.html" id="id5487690">
+<title>Chapter 9. Controls</title>
+<section href="ch09.html#id5488040" id="id5488040">
+<title>Pushbuttons</title>
+<figure href="ch09.html#id5488127" id="id5488127">
+<title>Figure 9-1. Pushbuttons</title>
+</figure>
+<section href="ch09.html#id5488150" id="id5488150">
+<title>Pushbutton Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5488410" id="id5488410">
+<title>Option Buttons</title>
+<figure href="ch09.html#id5488486" id="id5488486">
+<title>Figure 9-2. Option Button and Option Menu</title>
+</figure>
+<section href="ch09.html#id5488511" id="id5488511">
+<title>Option Button Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5488747" id="id5488747">
+<title>Checkboxes</title>
+<figure href="ch09.html#id5488791" id="id5488791">
+<title>Figure 9-3. Checkboxes</title>
+</figure>
+<section href="ch09.html#id5488834" id="id5488834">
+<title>Checkbox Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5489003" id="id5489003">
+<title>Radio Buttons</title>
+<figure href="ch09.html#id5489072" id="id5489072">
+<title>Figure 9-4. Radio Buttons</title>
+</figure>
+<section href="ch09.html#id5489095" id="id5489095">
+<title>Radio Button Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5489276" id="id5489276">
+<title>LED Indicators</title>
+<figure href="ch09.html#id5489326" id="id5489326">
+<title>Figure 9-5. LED Button</title>
+</figure>
+<section href="ch09.html#id5489412" id="id5489412">
+<title>LED Button Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5489497" id="id5489497">
+<title>Lists</title>
+<figure href="ch09.html#id5489579" id="id5489579">
+<title>Figure 9-6. List</title>
+</figure>
+<section href="ch09.html#id5489603" id="id5489603">
+<title>List Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5489852" id="id5489852">
+<title>Text Fields</title>
+<section href="ch09.html#id5490043" id="id5490043">
+<title>Text Field Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5490221" id="id5490221">
+<title>Scrollbars</title>
+<figure href="ch09.html#id5490258" id="id5490258">
+<title>Figure 9-7. Scrollbar</title>
+</figure>
+<section href="ch09.html#id5490333" id="id5490333">
+<title>Scrollbar Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5490621" id="id5490621">
+<title>IRIX Interactive Desktop Scales</title>
+<figure href="ch09.html#id5490682" id="id5490682">
+<title>Figure 9-8. IRIX Interactive Desktop Scale</title>
+</figure>
+<section href="ch09.html#id5490706" id="id5490706">
+<title>IRIX Interactive Desktop Scale Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5490894" id="id5490894">
+<title>Labels</title>
+<section href="ch09.html#id5490912" id="id5490912">
+<title>Label Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5491057" id="id5491057">
+<title>File Finder</title>
+<figure href="ch09.html#id5491095" id="id5491095">
+<title>Figure 9-9. The File Finder</title>
+</figure>
+<section href="ch09.html#id5491229" id="id5491229">
+<title>File Finder Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5491265" id="id5491265">
+<title>Thumbwheels</title>
+<figure href="ch09.html#id5491317" id="id5491317">
+<title>Figure 9-10. Thumbwheel</title>
+</figure>
+<section href="ch09.html#id5491341" id="id5491341">
+<title>Thumbwheel Guidelines</title>
+</section>
+</section>
+<section href="ch09.html#id5491470" id="id5491470">
+<title>Dials</title>
+<figure href="ch09.html#id5491531" id="id5491531">
+<title>Figure 9-11. Dials</title>
+</figure>
+<section href="ch09.html#id5491555" id="id5491555">
+<title>Dial Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch10.html" id="id5491763">
+<title>Chapter 10. Dialogs</title>
+<section href="ch10.html#id5491874" id="id5491874">
+<title>Types and Modes of Dialogs</title>
+<table href="ch10.html#id5492000" id="id5492000">
+<title>Table 10-1.  Types of Dialogs, Their Modality, and When to Use Them</title>
+</table>
+<figure href="ch10.html#id5492354" id="id5492354">
+<title>Figure 10-1. Sample Prompt, Error, Warning, Working, Question and Information Dialogs</title>
+</figure>
+<figure href="ch10.html#id5492380" id="id5492380">
+<title>Figure 10-2. The IRIX Interactive Desktop File Selection Dialog</title>
+</figure>
+<section href="ch10.html#id5492487" id="id5492487">
+<title>Dialog Modes</title>
+</section>
+<section href="ch10.html#id5492674" id="id5492674">
+<title>Guidelines for Using the Various Types and Modes of Dialogs</title>
+</section>
+</section>
+<section href="ch10.html#id5492759" id="id5492759">
+<title>Designing Dialogs</title>
+<section href="ch10.html#id5492894" id="id5492894">
+<title>Decorations, Initial State, and Layout of Dialogs</title>
+<figure href="ch10.html#id5493258" id="id5493258">
+<title>Figure 10-3. Warning Dialog Layout</title>
+</figure>
+</section>
+<section href="ch10.html#id5493304" id="id5493304">
+<title>Standard Dialog Actions</title>
+<section href="ch10.html#id5493350" id="id5493350">
+<title>Choosing Specific Actions for Your Dialogs</title>
+</section>
+<section href="ch10.html#id5493500" id="id5493500">
+<title>Choosing Default Actions</title>
+</section>
+<section href="ch10.html#id5493662" id="id5493662">
+<title>Labeling Dialog Buttons</title>
+<figure href="ch10.html#id5493710" id="id5493710">
+<title>Figure 10-4. Warning Dialog With Save, Discard, and Cancel Buttons</title>
+</figure>
+</section>
+</section>
+<section href="ch10.html#id5493766" id="id5493766">
+<title>Content of Specific Types of Dialogs</title>
+<section href="ch10.html#id5493832" id="id5493832">
+<title>Prompt Dialogs</title>
+</section>
+<section href="ch10.html#id5493873" id="id5493873">
+<title>Error Dialogs</title>
+<figure href="ch10.html#id5493947" id="id5493947">
+<title>Figure 10-5. Error Dialog With Specific Entity</title>
+</figure>
+</section>
+<section href="ch10.html#id5493973" id="id5493973">
+<title>Warning Dialogs</title>
+</section>
+<section href="ch10.html#id5493988" id="id5493988">
+<title>Question Dialogs</title>
+</section>
+<section href="ch10.html#id5494010" id="id5494010">
+<title>Working Dialogs</title>
+<figure href="ch10.html#id5494072" id="id5494072">
+<title>Figure 10-6. Working Dialog with IRIX Interactive Desktop Scale</title>
+</figure>
+</section>
+</section>
+<section href="ch10.html#id5494137" id="id5494137">
+<title>Guidelines for Designing Dialogs</title>
+</section>
+</section>
+<section href="ch10.html#id5494580" id="id5494580">
+<title>Invoking Dialogs</title>
+<section href="ch10.html#id5494686" id="id5494686">
+<title>Invoking Dialogs When Manipulating Files</title>
+<figure href="ch10.html#id5494996" id="id5494996">
+<title>Figure 10-7. Warning Dialog for Overwriting a File</title>
+</figure>
+<figure href="ch10.html#id5495108" id="id5495108">
+<title>Figure 10-8. Warning Dialog for Reverting to Previous Version</title>
+</figure>
+</section>
+<section href="ch10.html#id5495138" id="id5495138">
+<title>Other Situations for Invoking Dialogs</title>
+<figure href="ch10.html#id5495182" id="id5495182">
+<title>Figure 10-9. Product Information Dialog</title>
+</figure>
+</section>
+<section href="ch10.html#id5495316" id="id5495316">
+<title>Guidelines for Invoking Dialogs</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch11.html" id="id5495521">
+<title>Chapter 11. User Feedback</title>
+<section href="ch11.html#id5495583" id="id5495583">
+<title>Types of Feedback</title>
+<section href="ch11.html#id5495669" id="id5495669">
+<title>Providing Graphic Feedback</title>
+</section>
+<section href="ch11.html#id5495841" id="id5495841">
+<title>Keeping Information Up to Date</title>
+</section>
+<section href="ch11.html#id5495966" id="id5495966">
+<title>Providing Messages to the User</title>
+</section>
+<section href="ch11.html#id5496125" id="id5496125">
+<title>General User Feedback Guidelines</title>
+</section>
+</section>
+<section href="ch11.html#id5496171" id="id5496171">
+<title>Pointer Shapes and Colors</title>
+<section href="ch11.html#id5496244" id="id5496244">
+<title>Standard Pointer Shapes and Colors</title>
+<table href="ch11.html#id5496287" id="id5496287">
+<title>Table 11-1.  Standard Pointer Shapes and Colors</title>
+</table>
+</section>
+<section href="ch11.html#id5496953" id="id5496953">
+<title>Designing New Pointer Shapes</title>
+</section>
+<section href="ch11.html#id5496989" id="id5496989">
+<title>Pointer Shapes and Colors Guidelines</title>
+</section>
+</section>
+</chapter>
+</part>
+<part href="pt03.html" id="id5497180">
+<title>Part III. 3D Style Guidelines</title>
+<chapter href="ch12.html" id="id5497262">
+<title>Chapter 12. Introduction to 3D Style Guidelines</title>
+<section href="ch12.html#id5497383" id="id5497383">
+<title>Making 3D Functionality Available</title>
+<section href="ch12.html#id5497441" id="id5497441">
+<title>Designing Mouse Input for 3D Applications</title>
+</section>
+<section href="ch12.html#id5497636" id="id5497636">
+<title>Using Modifier Keys in 3D Applications</title>
+<table href="ch12.html#id5497686" id="id5497686">
+<title>Table 12-1. Use of Modifier Keys in a 3D Application</title>
+</table>
+</section>
+<section href="ch12.html#id5498004" id="id5498004">
+<title>Basic 3D Interface Design Guidelines</title>
+</section>
+</section>
+<section href="ch12.html#id5498176" id="id5498176">
+<title>Pointer Shapes for 3D Functions</title>
+<table href="ch12.html#id5498271" id="id5498271">
+<title>Table 12-2. Pointers for 3D Functionality</title>
+</table>
+<section href="ch12.html#id5498835" id="id5498835">
+<title>Pointer Feedback Guidelines for 3D Applications</title>
+</section>
+</section>
+<section href="ch12.html#id5498875" id="id5498875">
+<title>Resizing the 3D Viewing Window</title>
+<section href="ch12.html#id5498914" id="id5498914">
+<title>Guidelines for Resizing Windows in 3D Applications</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch13.html" id="id5498951">
+<title>Chapter 13. Interactive Viewing of 3D Objects</title>
+<section href="ch13.html#id5499091" id="id5499091">
+<title>Introduction to 3D Viewing</title>
+<figure href="ch13.html#id5499196" id="id5499196">
+<title>Figure 13-1. The Camera Analogy in 3D Viewing</title>
+</figure>
+</section>
+<section href="ch13.html#id5499224" id="id5499224">
+<title>3D Viewing Functions</title>
+<table href="ch13.html#id5499368" id="id5499368">
+<title>Table 13-1.  3D Viewing Functions and User Interface</title>
+</table>
+<section href="ch13.html#id5499857" id="id5499857">
+<title>Inspection Functions for 3D Viewing</title>
+<section href="ch13.html#id5499952" id="id5499952">
+<title>Inspection Overview</title>
+<table href="ch13.html#id5500095" id="id5500095">
+<title>Table 13-2.   Overview of Inspection Viewing Functions</title>
+</table>
+</section>
+<section href="ch13.html#id5500321" id="id5500321">
+<title>Tumbling</title>
+<figure href="ch13.html#id5500392" id="id5500392">
+<title>Figure 13-2. Schematic Illustration of Tumbling (Implementation Perspective)</title>
+</figure>
+</section>
+<section href="ch13.html#id5500420" id="id5500420">
+<title>Dollying</title>
+<figure href="ch13.html#id5500483" id="id5500483">
+<title>Figure 13-3. Schematic Illustration of Dollying (Implementation Perspective) </title>
+</figure>
+<figure href="ch13.html#id5500607" id="id5500607">
+<title>Figure 13-4. Schematic Illustration of Zooming (Implementation Perspective)</title>
+</figure>
+</section>
+<section href="ch13.html#id5500655" id="id5500655">
+<title>Panning</title>
+<figure href="ch13.html#id5500700" id="id5500700">
+<title>Figure 13-5. Schematic Illustration of Panning (User Drags Right)</title>
+</figure>
+</section>
+<section href="ch13.html#id5500728" id="id5500728">
+<title>Seeking</title>
+<figure href="ch13.html#id5500826" id="id5500826">
+<title>Figure 13-6. Simple Example of Seeking to Door</title>
+</figure>
+</section>
+</section>
+<section href="ch13.html#id5500866" id="id5500866">
+<title>Navigation Functions for 3D Viewing</title>
+<section href="ch13.html#id5500961" id="id5500961">
+<title>Navigation Overview</title>
+<table href="ch13.html#id5501120" id="id5501120">
+<title>Table 13-3.  Overview of Navigation Viewing Functions</title>
+</table>
+</section>
+<section href="ch13.html#id5501321" id="id5501321">
+<title>Roaming</title>
+<figure href="ch13.html#id5501402" id="id5501402">
+<title>Figure 13-7. Schematic illustration of Roaming (Implementation Perspective)</title>
+</figure>
+</section>
+<section href="ch13.html#id5501449" id="id5501449">
+<title>Tilting</title>
+<figure href="ch13.html#id5501501" id="id5501501">
+<title>Figure 13-8. Schematic Illustration of Tilting (Implementation Perspective).</title>
+</figure>
+</section>
+<section href="ch13.html#id5501528" id="id5501528">
+<title>Sidling</title>
+<figure href="ch13.html#id5501608" id="id5501608">
+<title>Figure 13-9. Schematic Illustration of Sidling (User Drags Left)</title>
+</figure>
+</section>
+</section>
+<section href="ch13.html#id5501636" id="id5501636">
+<title>Guidelines for 3D Viewing Functions</title>
+</section>
+</section>
+<section href="ch13.html#id5502016" id="id5502016">
+<title>3D Viewing Interface Trade-Offs</title>
+<section href="ch13.html#id5502105" id="id5502105">
+<title>Viewing and Editing in 3D Applications</title>
+<section href="ch13.html#id5502270" id="id5502270">
+<title>Separate View and Edit Modes</title>
+</section>
+<section href="ch13.html#id5502324" id="id5502324">
+<title>View Overlay</title>
+</section>
+<section href="ch13.html#id5502412" id="id5502412">
+<title>Viewing Controls </title>
+<figure href="ch13.html#id5502455" id="id5502455">
+<title>Figure 13-10. Application With Viewing Controls</title>
+</figure>
+</section>
+<section href="ch13.html#id5502481" id="id5502481">
+<title>Dedicated Viewing Peripheral Devices</title>
+</section>
+</section>
+<section href="ch13.html#id5502528" id="id5502528">
+<title>Single-Viewport and Multi-Viewport Viewing in 3D Applications</title>
+<section href="ch13.html#id5502603" id="id5502603">
+<title>Single-Viewport Viewing</title>
+</section>
+<section href="ch13.html#id5502703" id="id5502703">
+<title>Multi-Viewport Viewing</title>
+</section>
+</section>
+<section href="ch13.html#id5502770" id="id5502770">
+<title>3D Viewing Performance and Scene Fidelity</title>
+</section>
+<section href="ch13.html#id5502915" id="id5502915">
+<title>3D Viewing Trade-Offs and Related Guidelines</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch14.html" id="id5503248">
+<title>Chapter 14. Selection in 3D Applications</title>
+<section href="ch14.html#id5503398" id="id5503398">
+<title>3D Selection Concepts and Models</title>
+<section href="ch14.html#id5503427" id="id5503427">
+<title>The Object-Action Paradigm in 3D Applications</title>
+</section>
+<section href="ch14.html#id5503495" id="id5503495">
+<title>Direct Selection in 3D Applications</title>
+</section>
+<section href="ch14.html#id5503644" id="id5503644">
+<title>Indirect Selection in 3D Applications</title>
+</section>
+<section href="ch14.html#id5503733" id="id5503733">
+<title>3D Selection Models</title>
+<table href="ch14.html#id5503829" id="id5503829">
+<title>Table 14-1.  3D Selection Actions and Results</title>
+</table>
+</section>
+<section href="ch14.html#id5504214" id="id5504214">
+<title>Selection in Hierarchies of Objects</title>
+</section>
+<section href="ch14.html#id5504234" id="id5504234">
+<title>3D Selection Design Guidelines</title>
+</section>
+</section>
+<section href="ch14.html#id5504483" id="id5504483">
+<title>Selection Feedback for 3D Objects</title>
+<section href="ch14.html#id5504579" id="id5504579">
+<title>Bounding Box Selection Feedback</title>
+<figure href="ch14.html#id5504624" id="id5504624">
+<title>Figure 14-1. Two Objects with Bounding Box Feedback</title>
+</figure>
+</section>
+<section href="ch14.html#id5504689" id="id5504689">
+<title>Manipulator Selection Feedback</title>
+<figure href="ch14.html#id5504723" id="id5504723">
+<title>Figure 14-2. Object With Manipulator</title>
+</figure>
+</section>
+<section href="ch14.html#id5504848" id="id5504848">
+<title>Highlight Selection Feedback</title>
+</section>
+<section href="ch14.html#id5504915" id="id5504915">
+<title>3D Selection Feedback Design Guidelines</title>
+</section>
+</section>
+<section href="ch14.html#id5504984" id="id5504984">
+<title>Lead Objects in 3D Applications</title>
+<section href="ch14.html#id5505136" id="id5505136">
+<title>Lead Object When Selecting Multiple Objects </title>
+<figure href="ch14.html#id5505209" id="id5505209">
+<title>Figure 14-3. Selection Feedback: Lead Object Has Manipulator. </title>
+</figure>
+</section>
+<section href="ch14.html#id5505286" id="id5505286">
+<title>Lead Object During Grouping and Ungrouping</title>
+<figure href="ch14.html#id5505314" id="id5505314">
+<title>Figure 14-4. Grouped Collection of Objects With Manipulator.</title>
+</figure>
+<figure href="ch14.html#id5505395" id="id5505395">
+<title>Figure 14-5. Ungrouped Collection of Objects (Knight Is Lead Object)</title>
+</figure>
+</section>
+<section href="ch14.html#id5505423" id="id5505423">
+<title>Lead Object Design Guidelines for 3D Applications</title>
+</section>
+</section>
+</chapter>
+<chapter href="ch15.html" id="id5505554">
+<title>Chapter 15. Manipulating 3D Objects</title>
+<section href="ch15.html#id5505711" id="id5505711">
+<title>Basic 3D Manipulation Techniques</title>
+<section href="ch15.html#id5505800" id="id5505800">
+<title>Phases of 3D Manipulation</title>
+</section>
+<section href="ch15.html#id5506111" id="id5506111">
+<title>3D Manipulation Feedback</title>
+</section>
+<section href="ch15.html#id5506370" id="id5506370">
+<title>Free and Constrained 3D Manipulation</title>
+<table href="ch15.html#id5506419" id="id5506419">
+<title>Table 15-1.  Overview of Manipulation Techniques</title>
+</table>
+</section>
+<section href="ch15.html#id5506930" id="id5506930">
+<title>Manipulator Presentation and Selection</title>
+</section>
+<section href="ch15.html#id5506962" id="id5506962">
+<title>Basic 3D Manipulation Guidelines</title>
+</section>
+</section>
+<section href="ch15.html#id5507248" id="id5507248">
+<title>Translating 3D Objects</title>
+<section href="ch15.html#id5507309" id="id5507309">
+<title>3D Translation Basics</title>
+<figure href="ch15.html#id5507372" id="id5507372">
+<title>Figure 15-1. Object With Translation Manipulator (Bounding Box)</title>
+</figure>
+</section>
+<section href="ch15.html#id5507509" id="id5507509">
+<title>Simple (Planar) 3D Translation</title>
+<table href="ch15.html#id5507541" id="id5507541">
+<title>Table 15-2.  Phases of Planar Translation</title>
+</table>
+<figure href="ch15.html#id5507882" id="id5507882">
+<title>Figure 15-2. Simple Planar Translation Sequence</title>
+</figure>
+</section>
+<section href="ch15.html#id5507983" id="id5507983">
+<title>Constrained 3D Translation</title>
+<section href="ch15.html#id5508053" id="id5508053">
+<title>Translation Constrained to One Axis of the Plane</title>
+<table href="ch15.html#id5508093" id="id5508093">
+<title>Table 15-3. Phases of Translation Along One Axis of the Selected Plane</title>
+</table>
+<figure href="ch15.html#id5508400" id="id5508400">
+<title>Figure 15-3. Constrained Translation Along One Axis of the Selected Plane</title>
+</figure>
+</section>
+<section href="ch15.html#id5508461" id="id5508461">
+<title>Translation Constrained to the Normal of the Selected Plane</title>
+<table href="ch15.html#id5508531" id="id5508531">
+<title>Table 15-4.   Phases of Translation Along the Normal to the Selected Plane</title>
+</table>
+<figure href="ch15.html#id5508808" id="id5508808">
+<title>Figure 15-4. Constrained Translation Along the Normal to the Selected Plane</title>
+</figure>
+</section>
+</section>
+<section href="ch15.html#id5508891" id="id5508891">
+<title>3D Translation User Interface Guidelines</title>
+</section>
+</section>
+<section href="ch15.html#id5509046" id="id5509046">
+<title>Rotating 3D Objects</title>
+<section href="ch15.html#id5509144" id="id5509144">
+<title>3D Rotation Basics</title>
+<figure href="ch15.html#id5509264" id="id5509264">
+<title>Figure 15-5. Object With Rotation Manipulator (Rotation Handles)</title>
+</figure>
+</section>
+<section href="ch15.html#id5509291" id="id5509291">
+<title>Constrained 3D Rotation</title>
+<table href="ch15.html#id5509317" id="id5509317">
+<title>Table 15-5.   Phases of Constrained Rotation</title>
+</table>
+<figure href="ch15.html#id5509611" id="id5509611">
+<title>Figure 15-6. Constrained Rotation Sequence</title>
+</figure>
+</section>
+<section href="ch15.html#id5509656" id="id5509656">
+<title>Free 3D Rotation</title>
+<table href="ch15.html#id5509777" id="id5509777">
+<title>Table 15-6.   Phases of Free Rotation</title>
+</table>
+<figure href="ch15.html#id5510024" id="id5510024">
+<title>Figure 15-7. Free Rotation Sequence</title>
+</figure>
+</section>
+<section href="ch15.html#id5510159" id="id5510159">
+<title>3D Rotation User Interface Guidelines </title>
+</section>
+</section>
+<section href="ch15.html#id5510267" id="id5510267">
+<title>Scaling 3D Objects</title>
+<section href="ch15.html#id5510412" id="id5510412">
+<title>3D Scaling Basics</title>
+<figure href="ch15.html#id5510596" id="id5510596">
+<title>Figure 15-8. Object With Scaling Manipulator (Scaling Handles)</title>
+</figure>
+</section>
+<section href="ch15.html#id5510643" id="id5510643">
+<title>Uniform 3D Scaling</title>
+<table href="ch15.html#id5510672" id="id5510672">
+<title>Table 15-7.    Phases of Uniform Scaling</title>
+</table>
+<figure href="ch15.html#id5510945" id="id5510945">
+<title>Figure 15-9. Uniform Scaling Sequence</title>
+</figure>
+</section>
+<section href="ch15.html#id5510994" id="id5510994">
+<title>Axial 3D Scaling (Stretching)</title>
+<table href="ch15.html#id5511068" id="id5511068">
+<title>Table 15-8.   Phases of Axial Scaling (Stretching)</title>
+</table>
+<figure href="ch15.html#id5511375" id="id5511375">
+<title>Figure 15-10. Axial Scaling Sequence</title>
+</figure>
+</section>
+<section href="ch15.html#id5511459" id="id5511459">
+<title>Scaling Around the Opposite Corner or Side</title>
+<table href="ch15.html#id5511505" id="id5511505">
+<title>Table 15-9.   Phases of Uniform Scaling Around a Corner</title>
+</table>
+<figure href="ch15.html#id5511788" id="id5511788">
+<title>Figure 15-11. Uniform Scaling Around a Corner</title>
+</figure>
+<table href="ch15.html#id5511886" id="id5511886">
+<title>Table 15-10.  Phases of Axial Scaling Around a Side</title>
+</table>
+<figure href="ch15.html#id5512132" id="id5512132">
+<title>Figure 15-12. Axial Scaling Around a Side</title>
+</figure>
+</section>
+<section href="ch15.html#id5512218" id="id5512218">
+<title>3D Scaling User Interface Guidelines</title>
+</section>
+</section>
+<section href="ch15.html#id5512410" id="id5512410">
+<title>Changing the Center of Rotation and Scaling for 3D Objects</title>
+<table href="ch15.html#id5512469" id="id5512469">
+<title>Table 15-11.   Phases of Changing the Center of Rotation and Scaling Along a Plane</title>
+</table>
+<figure href="ch15.html#id5512742" id="id5512742">
+<title>Figure 15-13. Changing the Center of Rotation and Scaling</title>
+</figure>
+<table href="ch15.html#id5512829" id="id5512829">
+<title>Table 15-12.   Phases of Changing the Center of Rotation and Scaling Along an Axis</title>
+</table>
+<figure href="ch15.html#id5513095" id="id5513095">
+<title>Figure 15-14. Changing the Center of Rotation and Scaling Along An Axis</title>
+</figure>
+<section href="ch15.html#id5513142" id="id5513142">
+<title>Guidelines for Changing the Center of 3D Rotation</title>
+</section>
+</section>
+<section href="ch15.html#id5513242" id="id5513242">
+<title>Object Manipulation for Multiple Selected 3D Objects</title>
+<section href="ch15.html#id5513388" id="id5513388">
+<title>Translation of Multiple Selected 3D Objects</title>
+</section>
+<section href="ch15.html#id5513430" id="id5513430">
+<title>Rotation of Multiple Selected 3D Objects</title>
+</section>
+<section href="ch15.html#id5513486" id="id5513486">
+<title>Scaling of Multiple Selected 3D Objects</title>
+</section>
+<section href="ch15.html#id5513520" id="id5513520">
+<title>Guidelines for Manipulating More Than One 3D Object</title>
+</section>
+</section>
+</chapter>
+<appendix href="apa.html" id="id5513589">
+<title>Appendix A. Summary of Guidelines</title>
+<section href="apa.html#id5514802" id="id5514802">
+<title>Guidelines for Integrating With the IRIX Interactive Desktop</title>
+<section href="apa.html#id5514816" id="id5514816">
+<title>Icon Appearance Design Guidelines</title>
+</section>
+<section href="apa.html#id5515043" id="id5515043">
+<title>Icon Behavior Guidelines</title>
+</section>
+<section href="apa.html#id5515177" id="id5515177">
+<title>Application Icon Accessibility Guidelines</title>
+</section>
+<section href="apa.html#id5515249" id="id5515249">
+<title>IRIX Interactive Desktop Look Guidelines</title>
+</section>
+<section href="apa.html#id5515336" id="id5515336">
+<title>Application Window Characteristic Guidelines</title>
+</section>
+<section href="apa.html#id5515878" id="id5515878">
+<title>Guidelines for Keyboard Focus Across Windows</title>
+</section>
+<section href="apa.html#id5515950" id="id5515950">
+<title>Minimized Window Guidelines</title>
+</section>
+<section href="apa.html#id5516156" id="id5516156">
+<title>Desks Guidelines</title>
+</section>
+<section href="apa.html#id5516221" id="id5516221">
+<title>Session Management Guidelines</title>
+</section>
+<section href="apa.html#id5516331" id="id5516331">
+<title>Software Installation Guideline</title>
+</section>
+<section href="apa.html#id5516350" id="id5516350">
+<title>Guidelines for Designing Online Help</title>
+</section>
+<section href="apa.html#id5516678" id="id5516678">
+<title>Guidelines for Creating SGIHelp Content</title>
+</section>
+<section href="apa.html#id5517075" id="id5517075">
+<title>Desktop Variables Guidelines</title>
+</section>
+<section href="apa.html#id5517274" id="id5517274">
+<title>File Monitoring Guideline</title>
+</section>
+<section href="apa.html#id5517294" id="id5517294">
+<title>Data Exchange Guidelines</title>
+</section>
+</section>
+<section href="apa.html#id5517421" id="id5517421">
+<title>Interface Component Guidelines</title>
+<section href="apa.html#id5517451" id="id5517451">
+<title>Application Model Guidelines</title>
+</section>
+<section href="apa.html#id5517486" id="id5517486">
+<title>Primary Window Guidelines</title>
+</section>
+<section href="apa.html#id5517694" id="id5517694">
+<title>Support Window Guidelines</title>
+</section>
+<section href="apa.html#id5517863" id="id5517863">
+<title>Pointer Behavior Guidelines</title>
+</section>
+<section href="apa.html#id5517899" id="id5517899">
+<title>Keyboard Focus and Navigation Guidelines</title>
+</section>
+<section href="apa.html#id5517972" id="id5517972">
+<title>Selection Guidelines</title>
+</section>
+<section href="apa.html#id5518104" id="id5518104">
+<title>Drag and Drop Guidelines</title>
+</section>
+<section href="apa.html#id5518153" id="id5518153">
+<title>Menu Traversal and Activation Guidelines</title>
+</section>
+<section href="apa.html#id5518246" id="id5518246">
+<title>Pull-Down Menu Guidelines</title>
+</section>
+<section href="apa.html#id5518781" id="id5518781">
+<title>Popup Menu Guidelines</title>
+</section>
+<section href="apa.html#id5518926" id="id5518926">
+<title>Tab Panel Guidelines</title>
+</section>
+<section href="apa.html#id5519007" id="id5519007">
+<title>Pushbutton Guidelines</title>
+</section>
+<section href="apa.html#id5519212" id="id5519212">
+<title>Option Button Guidelines</title>
+</section>
+<section href="apa.html#id5519392" id="id5519392">
+<title>Checkbox Guidelines</title>
+</section>
+<section href="apa.html#id5519624" id="id5519624">
+<title>Radio Button Guidelines</title>
+</section>
+<section href="apa.html#id5519777" id="id5519777">
+<title>LED Button Guidelines</title>
+</section>
+<section href="apa.html#id5519866" id="id5519866">
+<title>List Guidelines</title>
+</section>
+<section href="apa.html#id5520081" id="id5520081">
+<title>Text Field Guidelines</title>
+</section>
+<section href="apa.html#id5520247" id="id5520247">
+<title>Scrollbar Guidelines</title>
+</section>
+<section href="apa.html#id5520458" id="id5520458">
+<title>IRIX Interactive Desktop Scale Guidelines</title>
+</section>
+<section href="apa.html#id5520596" id="id5520596">
+<title>Label Guidelines</title>
+</section>
+<section href="apa.html#id5520724" id="id5520724">
+<title>File Finder Guidelines</title>
+</section>
+<section href="apa.html#id5520784" id="id5520784">
+<title>Thumbwheel Guidelines</title>
+</section>
+<section href="apa.html#id5520866" id="id5520866">
+<title>Dial Guidelines</title>
+</section>
+<section href="apa.html#id5520975" id="id5520975">
+<title>Guidelines for Using the Various Types and Modes of Dialogs</title>
+</section>
+<section href="apa.html#id5521063" id="id5521063">
+<title>Guidelines for Designing Dialogs</title>
+</section>
+<section href="apa.html#id5521504" id="id5521504">
+<title>Guidelines for Invoking Dialogs</title>
+</section>
+<section href="apa.html#id5521713" id="id5521713">
+<title>General User Feedback Guidelines</title>
+</section>
+<section href="apa.html#id5521762" id="id5521762">
+<title>Pointer Shapes and Colors Guidelines</title>
+</section>
+</section>
+<section href="apa.html#id5521953" id="id5521953">
+<title>3D Style Guidelines</title>
+<section href="apa.html#id5521964" id="id5521964">
+<title>Basic 3D Interface Design Guidelines</title>
+</section>
+<section href="apa.html#id5522084" id="id5522084">
+<title>Pointer Feedback Guidelines for 3D Applications</title>
+</section>
+<section href="apa.html#id5522142" id="id5522142">
+<title>Guidelines for Resizing Windows in 3D Applications</title>
+</section>
+<section href="apa.html#id5522183" id="id5522183">
+<title>Guidelines for 3D Viewing Functions</title>
+</section>
+<section href="apa.html#id5522582" id="id5522582">
+<title>3D Viewing Trade-Offs and Related Guidelines</title>
+</section>
+<section href="apa.html#id5522865" id="id5522865">
+<title>3D Selection Design Guidelines</title>
+</section>
+<section href="apa.html#id5523146" id="id5523146">
+<title>3D Selection Feedback Design Guidelines</title>
+</section>
+<section href="apa.html#id5523218" id="id5523218">
+<title>Lead Object Design Guidelines for 3D Applications</title>
+</section>
+<section href="apa.html#id5523344" id="id5523344">
+<title>Basic 3D Manipulation Guidelines</title>
+</section>
+<section href="apa.html#id5523628" id="id5523628">
+<title>3D Translation User Interface Guidelines</title>
+</section>
+<section href="apa.html#id5523771" id="id5523771">
+<title>3D Rotation User Interface Guidelines </title>
+</section>
+<section href="apa.html#id5523877" id="id5523877">
+<title>3D Scaling User Interface Guidelines</title>
+</section>
+<section href="apa.html#id5524099" id="id5524099">
+<title>Guidelines for Changing the Center of 3D Rotation</title>
+</section>
+<section href="apa.html#id5524222" id="id5524222">
+<title>Guidelines for Manipulating More Than One 3D Object</title>
+</section>
+</section>
+</appendix>
+<index href="pt03.html#sgi-index" id="sgi-index">
+<title>Index</title>
+</index>
+</part>
+</book>
+</toc>

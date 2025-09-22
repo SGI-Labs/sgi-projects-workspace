@@ -1,0 +1,173 @@
+{
+  "artifacts": [
+    {
+      "id": "screen.dashboard.default",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/screens/irix/dashboard-default.md",
+      "tokens": [
+        "color.bg.base",
+        "color.bg.surface",
+        "color.bg.panel",
+        "color.focus.accent",
+        "color.text.primary",
+        "color.text.secondary",
+        "color.status.warning",
+        "color.status.offline"
+      ],
+      "states": [
+        "keyboard-focus-rail",
+        "metrics-bevel",
+        "operations-disabled",
+        "status-strip-retry"
+      ]
+    },
+    {
+      "id": "screen.editor.connected",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/screens/irix/editor-connected.md",
+      "tokens": [
+        "color.bg.base",
+        "color.bg.surface",
+        "color.bg.panel",
+        "color.focus.accent",
+        "color.status.success",
+        "color.status.warning",
+        "color.status.offline"
+      ],
+      "states": [
+        "command-palette-modal",
+        "explorer-sync-warning",
+        "terminal-ansi-preview",
+        "status-strip-idle"
+      ]
+    },
+    {
+      "id": "screen.buildLogs.irix",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/screens/irix/build-logs.md",
+      "tokens": [
+        "color.bg.base",
+        "color.bg.surface",
+        "color.bg.panel",
+        "color.status.success",
+        "color.status.warning",
+        "color.status.danger",
+        "color.status.offline"
+      ],
+      "states": [
+        "running-row",
+        "failed-row",
+        "reconnect-banner",
+        "status-strip-retry"
+      ]
+    },
+    {
+      "id": "screen.remoteHosts.irix",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/screens/irix/remote-hosts.md",
+      "tokens": [
+        "color.bg.base",
+        "color.bg.surface",
+        "color.bg.panel",
+        "color.status.success",
+        "color.status.warning",
+        "color.status.offline",
+        "color.focus.accent"
+      ],
+      "states": [
+        "degraded-host-selected",
+        "telemetry-tooltip",
+        "process-warning-row",
+        "offline-banner"
+      ]
+    },
+    {
+      "id": "screen.debugger.irix",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/screens/irix/debugger-session.md",
+      "tokens": [
+        "color.bg.base",
+        "color.bg.surface",
+        "color.status.success",
+        "color.status.warning",
+        "color.status.danger",
+        "color.status.offline",
+        "color.focus.accent"
+      ],
+      "states": [
+        "breakpoint-hit",
+        "variable-highlight",
+        "reconnect-modal",
+        "console-warning"
+      ]
+    },
+    {
+      "id": "screen.settings.appearance",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/screens/irix/settings-theme.md",
+      "tokens": [
+        "color.bg.base",
+        "color.bg.surface",
+        "color.focus.accent",
+        "color.status.warning",
+        "color.text.primary",
+        "color.text.secondary"
+      ],
+      "states": [
+        "motif-classic-selected",
+        "restart-warning-banner",
+        "density-slider",
+        "apply-enabled"
+      ]
+    },
+    {
+      "id": "overlay.deployConfirmation",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/overlays/deploy-confirmation.md",
+      "tokens": [
+        "color.bg.panel",
+        "color.focus.accent",
+        "color.status.warning",
+        "color.status.danger"
+      ],
+      "states": [
+        "countdown-active",
+        "warning-badge",
+        "primary-disabled"
+      ]
+    },
+    {
+      "id": "overlay.syncConflict",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/overlays/sync-conflict.md",
+      "tokens": [
+        "color.bg.panel",
+        "color.focus.accent",
+        "color.status.warning",
+        "color.status.danger"
+      ],
+      "states": [
+        "default",
+        "local-selected",
+        "merge-launch"
+      ]
+    },
+    {
+      "id": "overlay.offlineWork",
+      "platform": "irix",
+      "source": "projects/irix-ide/docs/user-guides/mockups/overlays/offline-work-drawer.md",
+      "tokens": [
+        "color.bg.panel",
+        "color.text.primary",
+        "color.text.secondary",
+        "color.status.warning",
+        "color.status.success"
+      ],
+      "states": [
+        "queue-building",
+        "queue-populated",
+        "retry-success"
+      ]
+    }
+  ]
+}

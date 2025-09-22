@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix D. The Icon Description Language</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="apc.html" title="Appendix C. Online Help Examples"><link rel="next" href="ape.html" title="Appendix E. Predefined File Types"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix D. The Icon Description Language</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apc.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ape.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE25750-PARENT"></a>Appendix D. The Icon Description Language</h2></div></div>
+<p><a class="indexterm" name="ITD.Icon.Language-0"></a>
+<a class="indexterm" name="ITD.Icon.Language-1"></a>
+Use IconSmith to draw your icons. To learn how to use IconSmith, see <a href="ch12.html" title="Chapter 12. Using IconSmith">Chapter 12, &#8220;Using IconSmith&#8221;</a>. After you draw your icon, include it in the FTR file using the ICON rule described in <a href="ch13.html" title="Chapter 13. File Typing Rules">Chapter 13, &#8220;File Typing Rules&#8221;</a>. IconSmith writes the ICON rule for you using the <span class="bold"><b>icon description language</b></span>. This appendix describes the icon description language that IconSmith uses to write the ICON rule. This information is provided for completeness. Do not try to write the ICON rule directly in the icon description language.</p>
+<p>The icon description language is a restricted subset of the C programming language. It includes line and polygon drawing routines from the IRIS Graphics Library&#8482; (GL), as well as some additional routines that are not in the GL. The description routine for a given icon is similar in structure to a C subroutine without the subroutine and variable declarations. The valid symbols and functions in the icon description language are described below. </p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5242583"></a>Operators </h2></div></div>
+<p><a class="indexterm" name="ITD.Icon.Language-2"></a>
+<a class="indexterm" name="ITD.Icon.Language-3"></a>
+<a class="indexterm" name="ITD.Icon.Language-4"></a>
+You can use these C language operators in an icon description routine:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
++
+-
+*
+/
+&amp;
+|
+^
+!
+%
+=
+( )
+{ }
+</pre></td></tr></table><p><a class="indexterm" name="ITD.Icon.Language-5"></a>
+<a class="indexterm" name="ITD.Icon.Language-6"></a>
+You can use these C language conditional operators in an icon description routine:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+&amp;&amp;
+||
+==
+!=
+&lt;
+&gt;
+&lt;=
+&gt;=
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5242665"></a>Constants </h2></div></div>
+<p><a class="indexterm" name="ITD.Icon.Language-7"></a>
+<a class="indexterm" name="ITD.Icon.Language-8"></a>
+<a class="indexterm" name="ITD.Icon.Language-9"></a>
+You can use these logical constants in an icon description routine:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+true false
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5242738"></a>Variables </h2></div></div>
+<p><a class="indexterm" name="ITD.Icon.Language-10"></a>
+<a class="indexterm" name="ITD.Icon.Language-11"></a>
+The following icon status variables are set by the Desktop. You can use them in an icon description routine:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+opened located selected current disabled
+</pre></td></tr></table><p>These variables have values of either <span class="bold"><b>true</b></span> or <span class="bold"><b>false</b></span>. You can use them in a conditional statement to alter the appearance of an icon when it has been manipulated in various ways from the Desktop. </p>
+<p>You can use other legal C variables in an icon description routine, without a declaration; all variables are represented as type <span class="bold"><b>float</b></span>. Any variable name is acceptable, provided it does not collide with any of the predefined constants, variables, or function names in the icon description language.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5242847"></a>Functions</h2></div></div>
+<p><a class="indexterm" name="ITD.Icon.Language-12"></a>
+<a class="indexterm" name="ITD.Icon.Language-13"></a>
+The icon description functions comprise, for the most part, a very restricted subset of the C language version of the IRIS Graphics Library, modified for 2-D drawing. <a href="apd.html#id5242892" title="Table D-1. Icon Description Functions">Table D-1</a> for a list of all the icon description functions.</p>
+<div class="table"><a name="id5242892"></a><p><a name="id5242892"></a><b>Table D-1. Icon Description Functions</b></p>
+<table summary="Icon Description Functions" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Function	</p>
+</th><th scope="col" valign="top"><p>Definition</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>arc(<span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>,<span class="bold"><b> r</b></span>, <span class="bold"><b>startang</b></span>, 
+<span class="bold"><b>endang</b></span>)</p>
+</td><td valign="top"><p>Draw an arc starting at icon coordinates <span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>; with radius <span class="bold"><b>r</b></span>; starting 
+at angle <span class="bold"><b>startang</b></span>; ending at angle <span class="bold"><b>endang</b></span>. Angle measures are in 
+tenths of degrees.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>arcf(<span class="bold"><b>x</b></span>,<span class="bold"><b> y</b></span>, <span class="bold"><b>r</b></span>, <span class="bold"><b>startang</b></span>, 
+<span class="bold"><b>endang</b></span>)</p>
+</td><td valign="top"><p>Like arc, but filled with the current pen color.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>bclos(<span class="bold"><b>color</b></span>)</p>
+</td><td valign="top"><p>Like pclos, but uses <span class="bold"><b>color</b></span> for the border (outline) color of the 
+polygon.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>bgnclosedline()</p>
+</td><td valign="top"><p>Begin drawing a closed, unfilled figure drawn in the current pen 
+color. Used in conjunction with vertex and endclosedline.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>bgnline()</p>
+</td><td valign="top"><p>Like bgnclosedline, except the figure is not closed. Used in 
+conjunction with vertex and endline.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>bgnoutlinepolygon</p>
+</td><td valign="top"><p>Begin drawing a polygon filled with the current pen color. The 
+polygon is outlined with a color specified by endoutlinepolygon. 
+Also used in conjunction with vertex.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>bgnpoint()</p>
+</td><td valign="top"><p>Begin drawing a series of unconnected points defined using calls to 
+vertex. Used in conjunction with vertex and endpoint.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>bgnpolygon()</p>
+</td><td valign="top"><p>Like bgnoutlinepolygon except the polygon is not outlined. Used in 
+conjunction with vertex and endpolygon.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>color(<span class="bold"><b>n</b></span>)</p>
+</td><td valign="top"><p>Set current pen color to color index <span class="bold"><b>n</b></span>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>draw<span class="bold"><b>(x</b></span>, <span class="bold"><b>y</b></span>)</p>
+</td><td valign="top"><p>Draw a line in the current color from the current pen location to <span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>endclosedline()</p>
+</td><td valign="top"><p>Finish a closed, unfilled figure started with bgnclosedline.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>endline()</p>
+</td><td valign="top"><p>Finish an open, unfilled figure started with bgnline.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>endoutlinepolygon(<span class="bold"><b>color</b></span>)</p>
+</td><td valign="top"><p>Finish a filled polygon started with bgnoutlinepolygon and outline 
+it with <span class="bold"><b>color</b></span>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>endpoint()</p>
+</td><td valign="top"><p>Finish a series of points started with bgnpoint.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>endpolygon()</p>
+</td><td valign="top"><p>Finish a filled, unoutlined polygon started with bgnpolygon.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>for (<span class="bold"><b>expr</b></span>; <span class="bold"><b>expr</b></span>; <span class="bold"><b>expr</b></span>) <span class="bold"><b>expr</b></span></p>
+</td><td valign="top"><p>Note that shorthand operators such as ++ and -- are not part of the 
+icon description language, so longer hand expressions must be 
+used.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>if (<span class="bold"><b>expr</b></span>) <span class="bold"><b>expr</b></span> [ else <span class="bold"><b>expr</b></span> ]</p>
+</td><td valign="top"><p>Standard C language if-statement.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>include(&quot;<span class="bold"><b>path</b></span>&quot;)</p>
+</td><td valign="top"><p>Tell the Desktop to find the icon geometry in the file with pathname 
+<i>path</i>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>move(<span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>)</p>
+</td><td valign="top"><p>Move current pen location to <span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>pclos()</p>
+</td><td valign="top"><p>Draw a line in the current pen color that closes the current polygon, 
+and fill the polygon with the current color.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>pdr(<span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>)</p>
+</td><td valign="top"><p>Draw the side of a filled polygon in the current pen color, from the 
+current pen location to <span class="bold"><b>x</b></span>,<span class="bold"><b> y</b></span>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>pmv(<span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>)</p>
+</td><td valign="top"><p>Begin a filled polygon at location <span class="bold"><b>x</b></span>, <span class="bold"><b>y</b></span>.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>print(<span class="bold"><b>expr</b></span> or &quot;<span class="bold"><b>string</b></span>&quot;)</p>
+</td><td valign="top"><p>Print the value of the expression <span class="bold"><b>expr</b></span> or <span class="bold"><b>string</b></span> to <span class="bold"><b>stdout</b></span>; used for 
+debugging.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>vertex(<span class="bold"><b>x</b></span>,<span class="bold"><b>y</b></span>)</p>
+</td><td valign="top"><p>Specify a coordinate used for drawing points, lines and polygons by 
+bgnpoint, bgnline, bgnpolygon, and so forth. </p>
+</td></tr></tbody></table></div><br></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apc.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ape.html">Next</a></td></tr><tr><td width="40%" align="left">Appendix C. Online Help Examples </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix E. Predefined File Types </td></tr></table></div></body></html>

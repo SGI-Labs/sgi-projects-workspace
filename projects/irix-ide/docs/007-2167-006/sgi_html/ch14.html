@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 14. Selection in 3D Applications</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt03.html" title="Part III. 3D Style Guidelines"><link rel="previous" href="ch13.html" title="Chapter 13. Interactive Viewing of 3D Objects"><link rel="next" href="ch15.html" title="Chapter 15. Manipulating 3D Objects"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 14. Selection in 3D Applications</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch13.html">Prev</a> </td><th width="60%" align="center">Part III. 3D Style Guidelines</th><td width="20%" align="right"> <a accesskey="n" href="ch15.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5503248"></a>Chapter 14. <a name="id35617"></a>Selection in 3D Applications</h2></div></div>
+<p>Any 3D application that offers more than simple viewing requires a selection mechanism. Just like 2D applications, 3D applications need to allow users to select one or more objects. This chapter discusses object selection in 3D applications and extends and complements the guidelines for selection in 2D applications (see <a name="idch14.3Dselect1"></a><a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>). It includes these topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch14.html#id43482">&#8220;3D Selection Concepts and Models&#8221;</a> briefly summarizes the object-action paradigm, explains two techniques for selecting objects (direct and indirect selection), and discusses how the OSF/Motif selection models apply to 3D applications.</p>
+</li>
+<li><p><a href="ch14.html#id91268">&#8220;Selection Feedback for 3D Objects&#8221;</a> discusses user feedback to indicate an object can be selected and to indicate an object is currently selected. </p>
+</li>
+<li><p><a href="ch14.html#id29468">&#8220;Lead Objects in 3D Applications&#8221;</a> explains how to use the concept of a lead object to determine how to apply specific actions when multiple objects are selected. </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5503398"></a><a name="id43482"></a>3D Selection Concepts and Models</h2></div></div>
+<p>This section first discusses the object-action paradigm and then contrasts two techniques for selecting objects: direct selection and indirect selection. It then presents the selection models and minimum selection actions users expect in a 3D application. These techniques extend the 2D-oriented OSF/Motif guidelines for selection (see <a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a>). </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5503427"></a>The Object-Action Paradigm in 3D Applications</h3></div></div>
+<p>In the object-action paradigm, the user first selects an object or a group of objects and then applies an action to the objects in the selection (see <a name="idch14.3Dselect2"></a><a href="ch07.html#id59818">&#8220;Selection&#8221; in Chapter 7</a> for details). Object selection is the prerequisite to other operations. As a shortcut, selecting and manipulating the object can sometimes be combined (see &#8220;Drag and Drop for Non-Text Objects&#8221; in Chapter 7, &#8220;Focus, Selection, and Drag and Drop&#8221;). For example, users may move the pointer over an object, press and hold the mouse button, and thereby select and drag the object at the same time.</p>
+<p>Each 3D application must have a current selection to which the action is applied at any time. The current selection may be empty (that is, no selection). Note that if your application supports several viewports, each window can maintain a separate selection, but there is only one current selection. </p>
+<p>Some applications use an action-object paradigm instead: The user selects an action, then chooses the object to which the action should apply, and exits by returning to the selection rule (neutral state). This paradigm can be useful for tools that attach to the pointing device. In most cases, however, a user interface using an action-object paradigm tends to be excessively modal and cumbersome to use, and this paradigm isn't recommended.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5503495"></a><a name="id30444"></a>Direct Selection in 3D Applications</h3></div></div>
+<p>Direct selection means that the user selects one or more objects by selecting the objects themselves, not an indirect representation of them (for example, the name of an object in a list). Because users of 2D applications are accustomed to direct selection, using direct selection in 3D applications makes these applications easier to learn. Direct selection is therefore the preferred primary selection mechanism.<a name="idch14.3Dselect3"></a></p>
+<p>Direct selection can be used to select one or more objects, as follows:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>To select a single object, the user moves the pointer over an object and presses the left mouse button. As the user clicks, the application determines which object is selected by following a ray projected into the scene. The first object the ray intersects is selected. </p>
+</li>
+<li><p>To add objects to the current selection (or remove them from the current selection), the user holds the &lt;Ctrl&gt; key while clicking on individual objects. Objects which are not currently selected become selected, while currently selected objects are deselected.</p>
+</li>
+<li><p>To select several objects at the same time, the user presses the left mouse button and drags around a group of objects. When the user releases the mouse button, all objects inside the drag area are selected. This is referred to as sweep selection. There are two variants of this technique:</p>
+<div class="itemizedlist"><ul type="round"><li><p><span class="bold"><b>Rectangle-drag</b></span>. The user drags the pointer to define the diagonal of a rectangular area on the screen. All objects inside this rectangle are selected.</p>
+</li>
+<li><p><span class="bold"><b>Lasso-drag</b></span>. The user draws out an irregularly shaped area with the pointer. All objects inside this area are selected.</p>
+</li>
+</ul></div><p>In both cases, the initial mouse-down action doesn't make a selection but sets the point of origin for the area to be selected. When the user releases the mouse button to complete the drag operation, the selected region is defined by the boundaries of the drag and extends from the user's current z position back to the full length of the viewing frustum. All objects, completely visible or partly obscured, that fall in this region are considered to be in the selected region. </p>
+</li>
+</ul></div><p>Note that some applications may need to provide sub-object selection methods to allow users to select vertices, edges, and faces. This isn't discussed in this document. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5503644"></a>Indirect Selection in 3D Applications</h3></div></div>
+<p>In indirect selection, the user selects an object by selecting an indirect representation of it. For example, assume that the names of all the objects in a 3D scene appear in a scrolling list and the user can click on a name in the list to select the object. Other examples are using a &#8220;Select All&#8221; menu command, which allows users to select all objects in a 3D scene, and selecting up and down a text representation of the object hierarchy. <a name="idch14.3Dselect4"></a></p>
+<p>Indirect selection is a useful secondary selection mechanism. It can be especially useful in 3D applications because:<a name="idch14.3Dselect5"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Users may have to choose among a large number of objects. </p>
+</li>
+<li><p>An object may be obscured or too far away in the scene to be easily selected using direct selection. </p>
+</li>
+</ul></div><p>Don't make indirect selection the only selection paradigm. Instead, use it to augment direct selection. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5503733"></a><a name="id25233"></a>3D Selection Models</h3></div></div>
+<p>The four OSF/Motif selection models recommended for 2D applications are listed in <a href="ch07.html#id65350">Table 7-1</a>. For 3D applications, users expect that one of the following two OSF/Motif selection models is supported:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The <a name="idch14.3Dselect6"></a><i>single selection model</i> in applications that allow users to select only one object at a time</p>
+</li>
+<li><p>The <i>discontiguous selection model<a name="idch14.3Dselect7"></a></i> in applications that allow users to select more than one object at a time (these objects don't have to be next to each other).</p>
+</li>
+</ul></div><p><a href="ch14.html#id22433">Table 14-1</a> describes the selection actions in the single selection and discontiguous selection models. It also lists which of these actions users minimally expect in a 3D application and which are optional but ideally supported.</p>
+<div class="table"><p><a name="id5503829"></a><b>Table 14-1. <a name="id22433"></a> 3D Selection Actions and Results</b></p>
+<table summary=" 3D Selection Actions and Results" border="1"><colgroup><col><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Action </p>
+</th><th scope="col" valign="top"><p>Model</p>
+</th><th scope="col" valign="top"><p>Required</p>
+</th><th scope="col" valign="top"><p>Result</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Click an object.</p>
+</td><td valign="top"><p>Single and 
+discontiguous</p>
+</td><td valign="top"><p>Yes</p>
+</td><td valign="top"><p>Object is selected. Any previously selected objects are deselected. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Ctrl&gt;-click an object. </p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>Yes</p>
+</td><td valign="top"><p>Selection state of the object is toggled. That is, a previously selected 
+object is removed from the current selection and a previously 
+unselected object is added to the current selection. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Shift&gt;-click an object.</p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>No<sup>[<a name="id5503983" href="#ftn.id5503983">a</a>]</sup></p>
+</td><td valign="top"><p>Same as &lt;Ctrl&gt;-clicking an object.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Click outside the selection in 
+an empty area.<sup>[<a name="id5504014" href="#ftn.id5504014">b</a>]</sup></p>
+</td><td valign="top"><p>Single and 
+discontiguous</p>
+</td><td valign="top"><p>Yes</p>
+</td><td valign="top"><p>All objects are deselected.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Sweep out a selection area.<sup>[<a name="id5504077" href="#ftn.id5504077">c</a>]</sup></p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>No</p>
+</td><td valign="top"><p>Only objects included in the sweep area are selected. All other 
+objects are deselected.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Ctrl&gt;-sweep an area.<sup>c</sup></p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>No</p>
+</td><td valign="top"><p>Selection state of each object inside the sweep area is toggled. 
+Selection state of each object outside the sweep area is unchanged. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>&lt;Shift&gt;-sweep an area.<sup>c</sup></p>
+</td><td valign="top"><p>Discontiguous</p>
+</td><td valign="top"><p>No<sup>[<a name="id5504170" href="#ftn.id5504170">d</a>]</sup></p>
+</td><td valign="top"><p>Same as &lt;Ctrl&gt;-sweep area.</p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="4"><div class="footnote"><p><sup>[<a name="ftn.id5503983" href="#id5503983">a</a>] </sup>Recommended if users are accustomed to using the &lt;Shift&gt; key in their other applications to toggle the selection state of an object.</p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5504014" href="#id5504014">b</a>] </sup>An application may additionally include a &#8220;Deselect All&#8221; menu item. This is especially useful for applications that support densely populated 
+scenes or objects that fill the entire background. </p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5504077" href="#id5504077">c</a>] </sup>Can support sweep selection using either rectangle-drag or lasso-drag as described in &#8220;Direct Selection in 3D Applications.&#8221;</p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5504170" href="#id5504170">d</a>] </sup>Recommended if your application supports the selection action &lt;Ctrl&gt;-sweep area and users are accustomed to using the &lt;Shift&gt; key to toggle 
+the selection state of an object.</p>
+</div></td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5504214"></a>Selection in Hierarchies of Objects</h3></div></div>
+<p>Some applications support hierarchies of objects and allow users to select more than one object in these hierarchies. If your application lets users select more than one object in a hierarchy of objects, provide at a minimum a method for selecting the highest and lowest object in the hierarchy and a method for adjusting the selection up and down the hierarchy.<a name="idch14.3Dselect8"></a></p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5504234"></a>3D Selection Design Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing the selection user interface for your 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Follow the object-action paradigm of direct manipulation: The user first selects an object (or group of objects), then chooses an action to perform on it.</p>
+</li>
+<li><p>For actions that apply to objects, apply the action to all the objects in the current selection and only to those objects.</p>
+</li>
+<li><p>Provide one current selection for each application at any time. The current selection may be empty (that is, no selection). Note that each window of your application can maintain a separate selection, but there is only one current selection. </p>
+</li>
+<li><p>Support direct selection as the primary selection mechanism. Using the left mouse button, the user either clicks directly on an object to select it or sweeps out an area to select multiple objects. </p>
+</li>
+<li><p>Support indirect selection if your users need it. For example, allow users to select an indirect representation of an object such as an item in a list, or provide a &#8220;Select All&#8221; menu item. </p>
+</li>
+<li><p>If your application lets users select more than one object in a hierarchy of objects, provide at a minimum a method for selecting the highest and lowest object in the hierarchy and a method for adjusting the selection up and down the hierarchy. </p>
+</li>
+</ul></div><p><span class="bold"><b>When deciding on a selection model...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>If your application allows users to select only one object at a time, support the OSF/Motif single selection model as follows:</p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Users directly select an object by moving the pointer over it and pressing the left mouse button. Any previously selected object is deselected. </p>
+</li>
+<li><p>Users deselect an object by clicking outside the selection in an empty area. </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>If your application allows users to select more than one object at a time, support the OSF/Motif discontiguous selection model as follows. Ideally, support the entire OSF/Motif discontiguous selection model. </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Users directly select an object by moving the pointer over it and pressing the left mouse button. Any previously selected objects are deselected. </p>
+</li>
+<li><p>Users &lt;Ctrl&gt;-click an unselected object to add it to the current selection, and &lt;Ctrl&gt;-click an already selected object to remove it from the current selection. That is, &lt;Ctrl&gt;-click toggles the selection state of the object.</p>
+</li>
+<li><p>If users are accustomed to using the &lt;Shift&gt; key in other applications to toggle the selection state of an object, allow them to add and remove objects by &lt;Shift&gt;-clicking an object in addition to &lt;Ctrl&gt;-clicking an object. In that case, &lt;Shift&gt;-clicking an object performs the same selection actions as &lt;Ctrl&gt;-clicking an object.</p>
+</li>
+<li><p>Users deselect all objects by clicking outside the selection in an empty area. In addition, a &#8220;Deselect All&#8221; menu item may be useful for some applications. </p>
+</li>
+<li><p>Optionally, allow users to use sweep selection to select multiple objects, allowing either rectangle-drag or lasso-drag. At the end of a sweep action, the only objects selected are those inside the sweep area.</p>
+</li>
+<li><p>Optionally allow users to &lt;Ctrl&gt;-sweep through a collection of objects to toggle the selection state of all objects inside the sweep area. That is, objects inside the sweep area that were previously selected are deselected, and objects inside the sweep area that were previously deselected are selected. The selection state of objects outside the sweep area doesn't change. </p>
+</li>
+<li><p>If your application supports the optional &lt;Ctrl&gt;-sweep selection action and users are accustomed to using the &lt;Shift&gt; key in their other applications to toggle the selection state of an object, allow users to use &lt;Shift&gt;-sweep in addition to &lt;Ctrl&gt;-sweep to toggle the selection state of all objects inside the sweep area.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5504483"></a><a name="id91268"></a>Selection Feedback for 3D Objects</h2></div></div>
+<p>When an object is selected, applications need to provide selection feedback on the object. This section discusses three techniques for indicating that an object is selected&#8212;bounding box, manipulator, and highlighting&#8212;and provides guidelines for when to use each technique. </p>
+<p>This section covers these topics: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch14.html#id82501">&#8220;Bounding Box Selection Feedback&#8221;</a></p>
+</li>
+<li><p><a href="ch14.html#id53761">&#8220;Manipulator Selection Feedback&#8221;</a></p>
+</li>
+<li><p><a href="ch14.html#id29761">&#8220;Highlight Selection Feedback&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5504579"></a><a name="id82501"></a>Bounding Box Selection Feedback</h3></div></div>
+<p><a href="ch14.html#id38416">Figure 14-1</a> shows two objects with bounding box feedback: A box is placed around the object. The bounding box needs to be differently shaped or larger than the object itself so that it's readily visible. Using a distinct color for the box is also highly recommended.</p>
+<p><div class="figure"><p><a name="id5504624"></a><b>Figure 14-1. <a name="id38416"></a>Two Objects with Bounding Box Feedback</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/twobox.gif" alt="Figure 14-1 Two Objects with Bounding Box Feedback" height="169" width="315"></td></tr></table></div></div><br>
+</p>
+<p>Note that for some applications a bounding box may not be the most intuitive or useful shape. For example, some applications might use a bounding volume that's a pyramid or cone. Other applications might use a shape that uses planes that don't form a closed bounding volume. In most cases, however, users find the bounding box the most intuitive shape. The term bounding box is used in this document to mean a bounding box or a bounding volume.<a name="idch14.3Dselect9"></a></p>
+<p>Bounding box selection feedback is most appropriate for applications where users can select objects but either don't typically manipulate them (translate, rotate, scale) or can't manipulate them. This type of feedback is appropriate for both applications that support the single selection model and applications that support the discontiguous selection model (see <a href="ch14.html#id25233">&#8220;3D Selection Models&#8221;</a>).</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5504689"></a><a name="id53761"></a>Manipulator Selection Feedback</h3></div></div>
+<p><a href="ch14.html#id28615">Figure 14-2</a> shows an application that uses a manipulator to indicate that an object is selected. A manipulator is a control that allows users to change the position, orientation, or scale of objects. Specific manipulators are discussed in <a href="ch15.html#id24672">Chapter 15, &#8220;Manipulating 3D Objects.&#8221;</a></p>
+<p><div class="figure"><p><a name="id5504723"></a><b>Figure 14-2. <a name="id28615"></a>Object With Manipulator</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/manip.gif" alt="Figure 14-2 Object With Manipulator" height="227" width="264"></td></tr></table></div></div><br>
+</p>
+<p>Manipulator selection feedback is most appropriate for applications where users typically select objects to perform manipulations on them. For these applications, placing the manipulator on an object as soon as the object is selected has two advantages:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The manipulator feedback clearly indicates that the object is selected.</p>
+</li>
+<li><p>The immediate display of the manipulator makes the manipulation functions readily available.</p>
+</li>
+</ul></div><p>If your application allows users to select more than one object at a time (see the description of the discontiguous selection model in <a href="ch14.html#id25233">&#8220;3D Selection Models&#8221;</a>), you need to decide whether to use manipulators as selection feedback on all or just some of the selected objects. Displaying a manipulator on all selected objects may make it more difficult for users to select and interact with a specific object's manipulator and may impede performance. </p>
+<p>As an alternative, some applications support the concept of a lead object (see <a href="ch14.html#id29468">&#8220;Lead Objects in 3D Applications&#8221;</a>). The lead object has the manipulator as the selection feedback and other selected objects have bounding boxes as the selection feedback (see <a href="ch14.html#id99300">&#8220;Lead Object When Selecting Multiple Objects&#8221;</a>). </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5504848"></a><a name="id29761"></a>Highlight Selection Feedback</h3></div></div>
+<p>In highlight selection feedback, selected objects are highlighted in some way to make them stand out, for example, by brightening the colors of the selected objects or using the same distinct color for all selected objects.</p>
+<p>This technique is most appropriate for experiential consumer applications that allow users, for example, to explore an architectural model or a museum. These types of applications typically want to always present a realistic representation of objects in the scene to make the experience immediate. Cluttering the scene with bounding boxes would greatly reduce the realism.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5504915"></a>3D Selection Feedback Design Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing selection feedback for your 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Provide clear feedback on each object as it is selected. </p>
+</li>
+<li><p>When using a bounding box for selection feedback, make sure that it's differently shaped or larger than the object itself so that it's readily visible. Using a distinct color for the bounding box is also highly recommended.</p>
+</li>
+<li><p>If users don't typically select objects in your application to manipulate them (translate, rotate, scale) or can't manipulate the selected objects, use bounding boxes to indicate the selected objects.</p>
+</li>
+<li><p>If users typically select objects in your application to manipulate them, use the manipulator as selection feedback. If your application allows more than one object to be selected at a time, consider displaying the manipulator only on a lead object and bounding boxes on the other selected objects.</p>
+</li>
+<li><p>If your application needs to always present a realistic &#8220;experience-oriented&#8221; representation of objects in the scene, highlight selected objects in some way rather than cluttering the scene with bounding boxes or manipulators.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5504984"></a><a name="id29468"></a>Lead Objects in 3D Applications</h2></div></div>
+<p>If your application allows users to select more than one object at a time, consider identifying one of those objects as the lead object (also sometimes called the master object). The lead object is necessary for performing certain object manipulations if more than one object is selected. For example, if you have several objects selected and rotate the lead object, all selected objects rotate around the lead object's center of rotation.</p>
+<p>The lead object is clearly distinguished from other objects in the selection. For example as shown in <a href="ch14.html#id16507">Figure 14-3</a>, if users typically select objects to manipulate them, the manipulator can be used to distinguish the lead object and bounding boxes can be used as selection feedback on other selected objects (see <a href="ch14.html#id53761">&#8220;Manipulator Selection Feedback&#8221;</a>). </p>
+<p>The rest of this section discusses how to choose the lead object in specific situations. </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch14.html#id99300">&#8220;Lead Object When Selecting Multiple Objects&#8221;</a></p>
+</li>
+<li><p><a href="ch14.html#id67603">&#8220;Lead Object During Grouping and Ungrouping&#8221;</a></p>
+</li>
+</ul></div><p>For more detailed information on the role of the lead object during specific manipulations, see <a href="ch15.html#id78376">&#8220;Object Manipulation for Multiple Selected 3D Objects&#8221; in Chapter 15</a>. </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5505136"></a><a name="id99300"></a>Lead Object When Selecting Multiple Objects </h3></div></div>
+<p>If the user clicks to define a selection or &lt;Ctrl&gt;-clicks to add to a selection (see <a href="ch14.html#id25233">&#8220;3D Selection Models&#8221;</a>), the object just added to the selection becomes the lead object. Having the last object selected be the lead object differs from the standard OSF/Motif guidelines of having the lead or &#8220;anchor&#8221; be the first object selected regardless of how many objects are later added to the selection. <a name="idch14.3Dselect10"></a></p>
+<p>This difference between the 2D-oriented OSF/Motif guidelines and these 3D guidelines is necessary because it allows users to quickly change the lead object in a 3D application. For example, to change the lead object to one that's currently not selected, a user can use click or &lt;Ctrl&gt;-click to select that object. To change the lead object to one that's already selected, the user can click or &lt;Ctrl&gt;-click twice on the object: the first time to deselect it and the second time to make it the most recently selected object.</p>
+<p><div class="figure"><p><a name="id5505209"></a><b>Figure 14-3. <a name="id16507"></a>Selection Feedback: Lead Object Has Manipulator. </b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/leadmanip.gif" alt="Figure 14-3 Selection Feedback: Lead Object Has Manipulator. " height="278" width="278"></td></tr></table></div></div><br>
+</p>
+<p>In some situations, users may add multiple objects to the current selection without actually clicking on the individual objects. For example, a user may select several objects using sweep selection (see <a href="ch14.html#id25233">&#8220;3D Selection Models&#8221;</a>) or choose a &#8220;Select All&#8221; menu command to select all objects in a scene. Alternatively, a user may import a grouped object, place it in the scene, then ungroup the collection, leading to the selection of all objects that were previously grouped (see <a href="ch14.html#id67603">&#8220;Lead Object During Grouping and Ungrouping&#8221;</a>). In these situations, make the lead object the one that's closest to the camera and closest to the middle of the viewing window.</p>
+<p>When the user deselects the lead object, move back through the previous lead objects making the most recent lead object that's still selected the new lead object. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5505286"></a><a name="id67603"></a>Lead Object During Grouping and Ungrouping</h3></div></div>
+<p>If the user groups a collection of objects, the group becomes a single selected object. Since the group is also considered to be the last selected object, it becomes the lead object. All selection feedback is removed from the individual objects in the group and the selection feedback is displayed only for the group.<a name="idch14.3Dselect11"></a><a name="idch14.3Dselect12"></a></p>
+<p><div class="figure"><p><a name="id5505314"></a><b>Figure 14-4. <a name="id25793"></a>Grouped Collection of Objects With Manipulator.</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/group.gif" alt="Figure 14-4 Grouped Collection of Objects With Manipulator." height="322" width="464"></td></tr></table></div></div><br>
+</p>
+<p>When the user ungroups a grouped collection of objects, for example, by selecting the group and choosing an Ungroup command, each object in that group becomes selected. The object from the group that's closest to the camera and closest to the middle of the viewing window becomes the lead object. <a href="ch14.html#id25793">Figure 14-4</a> shows a grouped collection of objects and <a href="ch14.html#id97531">Figure 14-5</a> shows the same group ungrouped. After ungrouping, the knight is the lead object because it's closest to the camera and closest to the middle of the viewing window. In this example, the lead object uses the manipulator to distinguish it from other selected objects. </p>
+<p><div class="figure"><p><a name="id5505395"></a><b>Figure 14-5. <a name="id97531"></a>Ungrouped Collection of Objects (Knight Is Lead Object)</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ungroup.gif" alt="Figure 14-5 Ungrouped Collection of Objects (Knight Is Lead Object)" height="323" width="463"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5505423"></a><a name="id66860"></a>Lead Object Design Guidelines for 3D Applications</h3></div></div>
+<p><span class="bold"><b>When designing the selection user interface for your 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>If your application allows users to select more than one object at a time, consider identifying one of those objects as the lead object.</p>
+</li>
+<li><p>Clearly distinguish the lead object from other selected objects: </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>If users typically select objects to manipulate them, consider making this distinction by displaying the manipulator only on the lead object and a bounding box on all other selected objects. </p>
+</li>
+<li><p>Otherwise, if there are manipulators or bounding boxes on all selected objects, distinguish the lead object another way (color, full manipulator instead of partial, and so on.). </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>If the user clicks to define a selection or &lt;Ctrl&gt;-clicks to add to a selection, make the lead object the last object selected. This allows users to change the lead object using click or &lt;Ctrl&gt;-click on an object that's currently not selected, or using &lt;Ctrl&gt;-click twice on a currently selected object. </p>
+</li>
+<li><p>If the user employs a single action such as a sweep selection to select multiple objects at the same time, make the lead object the one that's closest to the camera and closest to the middle of the viewing window.</p>
+</li>
+<li><p>When the user deselects the lead object, move back through the previous lead objects making the most recent lead object that's still selected the new lead object. </p>
+</li>
+<li><p>If the user groups a collection of objects, make the group the new lead object. </p>
+</li>
+<li><p>When the user ungroups a grouped collection of objects, each object that was in the group becomes selected, and the object from the group that's closest to the camera and closest to the middle of the viewing window becomes the new lead object. </p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch13.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch15.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 13. Interactive Viewing of 3D Objects </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 15. Manipulating 3D Objects </td></tr></table></div></body></html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 14. Printing From the Desktop</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt02.html" title="Part II. Creating Desktop Icons"><link rel="previous" href="ch13.html" title="Chapter 13. File Typing Rules"><link rel="next" href="apa.html" title="Appendix A. Example Programs for SGI Enhanced Widgets"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 14. Printing From the Desktop</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch13.html">Prev</a> </td><th width="60%" align="center">Part II. Creating Desktop Icons</th><td width="20%" align="right"> <a accesskey="n" href="apa.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE55672-PARENT"></a>Chapter 14. Printing From the Desktop</h2></div></div>
+<p><a class="indexterm" name="IT14.Printing-0"></a>
+<a class="indexterm" name="IT14.Printing-1"></a>
+The desktop provides printing services so that users can print from an application. This chapter covers these topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch14.html#LE43588-PARENT" title="About routeprint">&#8220;About routeprint&#8221;</a> discusses the <tt>routeprint</tt> command, which converts files into printable form.</p>
+</li>
+<li><p><a href="ch14.html#LE99077-PARENT" title="Converting a File for Printing">&#8220;Converting a File for Printing&#8221;</a> explains how the Desktop converts a file for printing.</p>
+</li>
+<li><p><a href="ch14.html#LE68180-PARENT" title="The Print Conversion Rules">&#8220;The Print Conversion Rules&#8221;</a> explains the print conversion rules. </p>
+</li>
+<li><p><a href="ch14.html#LE11590-PARENT" title="The Current Printer">&#8220;The Current Printer&#8221;</a> discusses the Desktop's concept of the current, or default, printer and the Desktop environment variable $CURRENTPRINTER.</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE43588-PARENT"></a>About <tt>routeprint</tt></h2></div></div>
+<p><a class="indexterm" name="IT14.Printing-2"></a>
+<a class="indexterm" name="IT14.Printing-3"></a>
+<a class="indexterm" name="IT14.Printing-4"></a>
+<a class="indexterm" name="IT14.Printing-5"></a>
+<a class="indexterm" name="IT14.Printing-6"></a>
+To print a file, the Desktop invokes the <tt>routeprint</tt>(1) <a class="indexterm" name="IT14.Printing-7"></a>
+command. <tt>routeprint</tt> knows how to convert most files into printable form, even if the conversion requires several steps. <a class="indexterm" name="IT14.Printing-8"></a>
+</p>
+<p><a class="indexterm" name="IT14.Printing-9"></a>
+<a class="indexterm" name="IT14.Printing-10"></a>
+You can show <tt>routeprint</tt> how to convert your application's data files into printable format by adding one or more CONVERT rules to your application's FTR file. </p>
+<p>This chapter explains the process <tt>routeprint</tt> uses to convert data files into a printable format, what file types <tt>routeprint</tt> already recognizes, and how to write your own print CONVERT rule to allow your application to tap into <tt>routeprint</tt>'s powerful printing capabilities.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE99077-PARENT"></a>Converting a File for Printing</h2></div></div>
+<p><a class="indexterm" name="IT14.Printing-11"></a>
+The Desktop already has rules for printing many types of files, such as ASCII, PostScript, and RGB image files. <a class="indexterm" name="IT14.Printing-12"></a>
+<a class="indexterm" name="IT14.Printing-13"></a>
+<a class="indexterm" name="IT14.Printing-14"></a>
+<a class="indexterm" name="IT14.Printing-15"></a>
+<a class="indexterm" name="IT14.Printing-16"></a>
+<a class="indexterm" name="IT14.Printing-17"></a>
+<a class="indexterm" name="IT14.Printing-18"></a>
+<a class="indexterm" name="IT14.Printing-19"></a>
+The easiest method for printing a file of arbitrary format is to break down the printing process into small, modular steps. </p>
+<p>For example, instead of writing dozens of specialized rules to print reference pages directly for each kind of printer, you can instead convert reference pages to <tt>nroff</tt> format and then convert the <tt>nroff</tt> format to the format required for the current printer.</p>
+<p>The diagram shown in <a href="ch14.html#id5237672" title="Figure 14-1. File Conversions for Printing Standard Desktop Files">Figure 14-1</a> illustrates the steps by which some of the supported Desktop file types are converted for printing. Each box represents one or more file types; the arrows between them indicate the steps by which the file types are converted. The values associated with the arrows represent the cost of the conversion. This concept is talked about more in <a href="ch14.html#LE24707-PARENT" title="Print Costs">&#8220;Print Costs&#8221;</a> later in this chapter.</p>
+<p><div class="figure"><a name="id5237672"></a><p><a name="id5237672"></a><b>Figure 14-1. File Conversions for Printing Standard Desktop Files</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/fig14.1.gif" alt="File Conversions for Printing Standard Desktop Files" height="530" width="618"></td></tr></table></div></div><br>
+</p>
+<p>This modular approach to printing has two major advantages:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>The modular steps are reusable</b></span>. Because you can reuse each modular printing step, you write fewer rules. </p>
+</li>
+<li><p><span class="bold"><b>routeprint can pick the most efficient route for printing. </b></span>There is often more than one sequence of conversion steps to print a file. <tt>routeprint</tt> chooses the sequence of steps that provides the best possible image quality.</p>
+</li>
+</ul></div><p>This modular, multi-step conversion to printable form is called the <span class="bold"><b>print conversion pipeline</b></span>, a series of IRIX commands that process a copy of the file's data in modular increments. The print conversion rules are designed to take advantage of this method of processing printable files.</p>
+<p>In addition, applications or software packages can add new arcs to the CONVERT rule database whenever they define new types or have a better way of converting existing types. For example, Impressario includes a filter to go directly from NroffFile to PostScriptFile&#8212;this new filter has a lower cost than the default conversion, which goes from NroffFile to Ascii to PostScriptFile.</p>
+<p>The Desktop already has rules for printing a large number of file types. You can use <tt>grep</tt> to list all of these print conversions definitions by typing:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep -i convert /usr/lib/filetype/*/*.ftr</tt></b> 
+</pre></td></tr></table><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The list of print conversion definitions generated by the above command is long and unsorted.
+</td></tr></table><hr noshade="noshade"></div><br><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE24707-PARENT"></a>Print Costs</h3></div></div>
+<p>Frequently, there is more than one set of steps that <tt>routeprint</tt> can use to print your file. To compare different ways of printing a file of a particular type, <tt>routeprint</tt> associates cost numbers with each conversion, then chooses the series of conversions with the lowest total cost. The cost of a conversion represents image degradation and processing cost, and is specified by a number between 0 and 1000 inclusive. The higher the cost of a conversion, the more <tt>routeprint</tt> attempts to avoid that conversion method if it has alternative methods.</p>
+<p>The conventions for determining the cost assigned to a given conversion are described in <a href="ch14.html#id5237849" title="Table 14-1. Conversion Costs for Print Conversion Rules">Table 14-1</a>.</p>
+<div class="table"><a name="id5237849"></a><p><a name="id5237849"></a><b>Table 14-1. Conversion Costs for Print Conversion Rules</b></p>
+<table summary="Conversion Costs for Print Conversion Rules" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Cost</p>
+</th><th scope="col" valign="top"><p>Reason</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>0</p>
+</td><td valign="top"><p>Equivalent filetypes, or a SETVAR rule (described in <a href="ch14.html#LE68180-PARENT" title="The Print Conversion Rules">&#8220;The Print Conversion Rules&#8221;</a></p>
+<p>)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>50</p>
+</td><td valign="top"><p>Default conversion cost</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>125</p>
+</td><td valign="top"><p>Trivial data loss, or conversion is expensive</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>200</p>
+</td><td valign="top"><p>Minor data loss, but conversion is not expensive</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>300</p>
+</td><td valign="top"><p>Noticeable data loss and conversion is expensive</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>500</p>
+</td><td valign="top"><p>Obvious data loss (for example, color to monochrome) </p>
+</td></tr></tbody></table></div><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE68180-PARENT"></a>The Print Conversion Rules</h2></div></div>
+<p><a class="indexterm" name="IT14.Printing-20"></a>
+<a class="indexterm" name="IT14.Printing-21"></a>
+There are three parts to a complete print conversion rule:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>the CONVERT rule</p>
+</li>
+<li><p>the COST rule</p>
+</li>
+<li><p>the FILTER rule</p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5238119"></a>The CONVERT Rule</h3></div></div>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">Syntax:</span></td><td width="10"> </td><td><p><a class="indexterm" name="IT14.Printing-22"></a>
+<a class="indexterm" name="IT14.Printing-23"></a>
+CONVERT <span class="bold"><b>source-type-name</b></span> <span class="bold"><b>destination-type-name</b></span></p>
+
+</td></tr><tr valign="top"><td><span class="term">Description:</span></td><td width="10"> </td><td><p><span class="bold"><b>source-type-name</b></span> is the file type you are converting from. <span class="bold"><b>destination-type-name</b></span> is the file type you are converting to.</p>
+
+</td></tr><tr valign="top"><td><span class="term">Example:</span></td><td width="10"> </td><td><p><tt>CONVERT NroffFile PostScriptFile</tt></p>
+
+</td></tr></table></div><p>Do not use the convert rule to convert directly to a new printer type; convert to a standard Desktop file type instead. Silicon Graphics reserves the right to alter printer types, so converting to a standard file type (for example, PostScriptFile) is a more portable solution. <a href="ape.html" title="Appendix E. Predefined File Types">Appendix E, &#8220;Predefined File Types&#8221;</a>, lists some of the file types defined by Silicon Graphics. You can generate a complete list of file types installed on your system using the <tt>grep</tt>(1) command:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+% <b><tt>grep TYPE /usr/lib/filetype/*/*.ftr</tt></b> 
+</pre></td></tr></table><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>The list of file types generated by the above command is very long and unsorted.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5238262"></a>The COST Rule</h3></div></div>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p><a class="indexterm" name="IT14.Printing-24"></a>
+<a class="indexterm" name="IT14.Printing-25"></a>
+COST <span class="bold"><b>non-negative-integer</b></span></p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>The <span class="bold"><b>non-negative-integer</b></span> represents the <span class="bold"><b>arc cost</b></span>, or incremental cost of the conversion. This cost is used to reflect processing complexity or can also be used inversely to reflect the output quality. When <tt>routeprint</tt> selects a conversion sequence, it takes the arc costs into account, choosing the print conversion sequence with the least total cost. It is highly recommended that you specify a COST rule. If you omit it, <tt>routeprint</tt> assumes the cost of the conversion is zero, which may cause <tt>routeprint</tt> to return an inappropriate print conversion pipeline. The default cost is 50.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Example:</b></span></span></td><td width="10"> </td><td><p><tt>COST 50</tt></p>
+
+</td></tr></table></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5238368"></a>The FILTER Rule</h3></div></div>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>Syntax:</b></span></span></td><td width="10"> </td><td><p><a class="indexterm" name="IT14.Printing-26"></a>
+<a class="indexterm" name="IT14.Printing-27"></a>
+FILTER <span class="bold"><b>filter-expression</b></span></p>
+
+</td></tr><tr valign="top"><td><span class="term"><span class="bold"><b>Description:</b></span></span></td><td width="10"> </td><td><p>The FILTER rule represents part of an IRIX pipeline that prepares a file for printing. <span class="bold"><b>filter-expression</b></span> can be any single IRIX command line expression, and generally takes the form of one or more piped commands. In the general case, the first command within a single FILTER rule receives input from <tt>stdin</tt>; the last command in the rule sends its output to <tt>stdout</tt>. <tt>routeprint</tt> concatenates all the FILTER rules in the print conversion pipeline to form one continuous command that sends the selected file to its destination printer.</p>
+
+</td></tr></table></div><p>There are three special cases in creating FILTER rules:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>&#8220;first&#8221; case</p>
+</li>
+<li><p>&#8220;last&#8221; case</p>
+</li>
+<li><p>&#8220;setvar&#8221; case</p>
+</li>
+</ul></div><p>In a &#8220;first&#8221; case rule, the FILTER rule is the very first rule in the print conversion pipeline. In this case, <tt>routeprint</tt> passes the list of selected files to the first command in the FILTER rule as arguments. If a first case FILTER rule begins with a command that does not accept the files in this fashion, prepend the <tt>cat</tt> command to your rule:</p>
+<p>FILTER cat | tbl - | psroff -t</p>
+<p>The files will then be piped to the next command's <tt>stdin</tt>.</p>
+<p>In a &#8220;last&#8221; case rule, the FILTER rule is the very last rule in the print conversion pipeline. This rule contains a command that sends output directly to a printer (such as <tt>lp</tt>). Last-case rules are already provided for many file types. To ensure compatibility between your application and future printing software releases, you should refrain from writing your own last-case rules. Instead, write rules that convert from your file type to any of the existing file types, and let the built-in print conversion rules do the rest.</p>
+<p>In a &#8220;setvar&#8221; case rule, the FILTER rule is used to set an environment variable used later in the print conversion pipeline. The first CONVERT rule in the example below sets a variable that defines an <tt>nroff</tt> macro used in the second rule. In all setvar cases, <tt>stdin</tt> is passed to <tt>stdout</tt> transparently. Thus, you can include setvar as part of the pipeline in a single FILTER rule.</p>
+<p>CONVERT mmNroffFile NroffFIle <br>
+COST 1 <br>
+FILTER setvar MACRO=mm</p>
+<p>CONVERT NroffFile PostScriptFile <br>
+COST 50 <br>
+FILTER eqn | tbl | psroff -$MACRO -t</p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE11590-PARENT"></a>The Current Printer</h2></div></div>
+<p><a class="indexterm" name="IT14.Printing-28"></a>
+<a class="indexterm" name="IT14.Printing-29"></a>
+<a class="indexterm" name="IT14.Printing-30"></a>
+<a class="indexterm" name="IT14.Printing-31"></a>
+<a class="indexterm" name="IT14.Printing-32"></a>
+The current printer is the system default printer that the user sets with the Print Manager or, alternatively, the printer specified by the <span class="bold"><b>-p</b></span> option to <tt>routeprint</tt>. If no default is set and <span class="bold"><b>-p</b></span> is not used, an error message is returned by <tt>routeprint</tt> to either <tt>stdout</tt> or a notifier window (if the <span class="bold"><b>-g</b></span> option to <tt>routeprint</tt> was set). The Desktop environment variable $CURRENTPRINTER is set to the currently selected default printer. </p>
+</div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch13.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="apa.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 13. File Typing Rules </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix A. Example Programs for SGI Enhanced Widgets </td></tr></table></div></body></html>

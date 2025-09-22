@@ -7,10 +7,9 @@ from typing import Any, Dict, Iterable, Tuple
 
 ROOT = Path(__file__).parent
 DEFAULT_SOURCE = ROOT / "tokens.sample.json"
-DEFAULT_OUTPUT_SWIFT = ROOT / "Tokens.generated.swift"
 DEFAULT_OUTPUT_MOTIF = ROOT / "IRIXIDE.generated.ad"
+DEFAULT_OUTPUT_JSON = ROOT / "tokens.generated.json"
 
-MACOS_PROFILE = "macos"
 MOTIF_PROFILE = "motif"
 
 
@@ -19,131 +18,17 @@ def load_tokens(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
-def resolve_value(token_node: Dict[str, Any], profile: str) -> Any:
-    overrides = token_node.get("platformOverrides", {})
-    if profile == MACOS_PROFILE:
-        # macOS profile uses base value directly
-        return token_node.get("value", token_node)
-    if profile in overrides:
-        return overrides[profile]
+def resolve_value(token_node: Dict[str, Any], profile: str | None = None) -> Any:
+    if profile:
+        overrides = token_node.get("platformOverrides", {})
+        if profile in overrides:
+            return overrides[profile]
     return token_node.get("value", token_node)
-
-
-def pascal_case(name: str) -> str:
-    if not name:
-        return name
-    return name[0].upper() + name[1:]
-
-
-def generate_swift(data: Dict[str, Any]) -> str:
-    colors = data["tokens"]["color"]
-    spacing = data["tokens"].get("spacing", {})
-    radius = data["tokens"].get("radius", {})
-    typography = data["tokens"].get("typography", {})
-    icons = data["tokens"].get("icon", {})
-
-    def swift_color(value: str) -> str:
-        return f'Color(hex: "{value}")'
-
-    swift_lines = [
-        "import SwiftUI",
-        "",
-        "/// Auto-generated from tokens.sample.json (macOS profile)",
-        "struct Tokens {",
-        "    struct ColorPalette {",
-    ]
-
-    for group_name, group in colors.items():
-        for token_name, token in group.items():
-            value = resolve_value(token, MACOS_PROFILE)
-            swift_lines.append(
-                f'        static let {group_name}{pascal_case(token_name)} = {swift_color(value)}'
-            )
-
-    swift_lines.extend([
-        "    }",
-        "",
-        "    struct Spacing {",
-    ])
-
-    for name, token in spacing.items():
-        value = resolve_value(token, MACOS_PROFILE)
-        swift_lines.append(f"        static let s{name} = CGFloat({value})")
-
-    swift_lines.extend([
-        "    }",
-        "",
-        "    struct Radius {",
-    ])
-
-    for name, token in radius.items():
-        value = resolve_value(token, MACOS_PROFILE)
-        swift_lines.append(f"        static let {name} = CGFloat({value})")
-
-    swift_lines.extend([
-        "    }",
-        "",
-        "    struct Typography {",
-    ])
-
-    for group_name, group in typography.items():
-        swift_lines.append(f"        struct {pascal_case(group_name)} {{")
-        for token_name, token in group.items():
-            value = resolve_value(token, MACOS_PROFILE)
-            font_family = value.get("fontFamily", "System")
-            font_size = value.get("fontSize", 17)
-            weight = value.get("fontWeight", "regular")
-            weight_swift = weight_mapping(weight)
-            swift_lines.append(
-                f"            static let {token_name} = Font.custom(\"{font_family}\", size: {font_size}).weight(.{weight_swift})"
-            )
-        swift_lines.append("        }")
-
-    swift_lines.extend([
-        "    }",
-        "",
-        "    struct Icon {",
-    ])
-
-    for name, token in icons.items():
-        value = resolve_value(token, MACOS_PROFILE)
-        swift_lines.append(f'        static let {name} = Image(systemName: "{value}")')
-
-    swift_lines.extend([
-        "    }",
-        "}",
-    ])
-
-    swift_lines.extend([
-        "",
-        "private extension Color {",
-        "    init(hex: String) {",
-        "        self = Color(UIColor(hex: hex))",
-        "    }",
-        "}",
-        "",
-        "private extension UIColor {",
-        "    convenience init(hex: String) {",
-        "        var hexValue = hex",
-        "        if hexValue.hasPrefix(\"#\") {",
-        "            hexValue = String(hexValue.drop(1))",
-        "        }",
-        "        var int: UInt64 = 0",
-        "        Scanner(string: hexValue).scanHexInt64(&int)",
-        "        let r = CGFloat((int >> 16) & 0xFF) / 255.0",
-        "        let g = CGFloat((int >> 8) & 0xFF) / 255.0",
-        "        let b = CGFloat(int & 0xFF) / 255.0",
-        "        self.init(red: r, green: g, blue: b, alpha: 1.0)",
-        "    }",
-        "}",
-    ])
-
-    return "\n".join(swift_lines)
 
 
 def generate_motif(data: Dict[str, Any]) -> str:
     tokens = data["tokens"]
-    lines = ["! Auto-generated from tokens.sample.json (motif profile)"]
+    lines = ["! Auto-generated from tokens.sample.json (Motif profile)"]
 
     def emit_color(path: str, node: Dict[str, Any]) -> None:
         lines.append(
@@ -152,22 +37,18 @@ def generate_motif(data: Dict[str, Any]) -> str:
 
     colors = tokens.get("color", {})
     bg_group = colors.get("bg", {})
-    if "base" in bg_group:
-        emit_color("color.bg.base", bg_group["base"])
-    if "surface" in bg_group:
-        emit_color("color.bg.surface", bg_group["surface"])
-    if "panel" in bg_group:
-        emit_color("color.bg.panel", bg_group["panel"])
+    for key in ("base", "surface", "panel"):
+        if key in bg_group:
+            emit_color(f"color.bg.{key}", bg_group[key])
 
     focus_group = colors.get("focus", {})
     if "accent" in focus_group:
         emit_color("color.focus.accent", focus_group["accent"])
 
     text_group = colors.get("text", {})
-    if "primary" in text_group:
-        emit_color("color.text.primary", text_group["primary"])
-    if "secondary" in text_group:
-        emit_color("color.text.secondary", text_group["secondary"])
+    for key in ("primary", "secondary"):
+        if key in text_group:
+            emit_color(f"color.text.{key}", text_group[key])
 
     for status_name, node in colors.get("status", {}).items():
         emit_color(f"color.status.{status_name.lower()}", node)
@@ -208,17 +89,6 @@ def generate_motif(data: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def weight_mapping(weight: str) -> str:
-    mapping = {
-        "regular": "regular",
-        "semibold": "semibold",
-        "bold": "bold",
-        "medium": "medium",
-        "light": "light",
-    }
-    return mapping.get(weight.lower(), "regular")
-
-
 def validate_colors(color_items: Iterable[Tuple[str, str]]) -> None:
     for token_id, value in color_items:
         if not isinstance(value, str) or not value.startswith("#") or len(value) not in (4, 7):
@@ -229,8 +99,9 @@ def gather_color_tokens(data: Dict[str, Any]) -> Iterable[Tuple[str, str]]:
     colors = data.get("tokens", {}).get("color", {})
     for family, tokens in colors.items():
         for name, node in tokens.items():
-            value = resolve_value(node, MACOS_PROFILE)
-            yield f"color.{family}.{name}", value
+            value = resolve_value(node, MOTIF_PROFILE)
+            if isinstance(value, str):
+                yield f"color.{family}.{name}", value
 
 
 def contrast_ratio(fg_hex: str, bg_hex: str) -> float:
@@ -259,11 +130,10 @@ def contrast_ratio(fg_hex: str, bg_hex: str) -> float:
 def run_validations(data: Dict[str, Any]) -> None:
     color_items = list(gather_color_tokens(data))
     validate_colors(color_items)
-    # Contrast check for primary text on background
     colors = data.get("tokens", {}).get("color", {})
     try:
-        bg_base = resolve_value(colors["bg"]["base"], MACOS_PROFILE)
-        text_primary = resolve_value(colors["text"]["primary"], MACOS_PROFILE)
+        bg_base = resolve_value(colors["bg"]["base"], MOTIF_PROFILE)
+        text_primary = resolve_value(colors["text"]["primary"], MOTIF_PROFILE)
         ratio = contrast_ratio(text_primary, bg_base)
         if ratio < 4.5:
             print(
@@ -275,10 +145,10 @@ def run_validations(data: Dict[str, Any]) -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate platform token outputs from JSON definition")
+    parser = argparse.ArgumentParser(description="Generate Motif token outputs from JSON definition")
     parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE, help="Path to token JSON definition")
-    parser.add_argument("--swift-out", type=Path, default=DEFAULT_OUTPUT_SWIFT, help="Swift output file path")
     parser.add_argument("--motif-out", type=Path, default=DEFAULT_OUTPUT_MOTIF, help="Motif .ad output file path")
+    parser.add_argument("--json-out", type=Path, default=DEFAULT_OUTPUT_JSON, help="JSON output file path for runtime use")
     return parser.parse_args()
 
 
@@ -286,18 +156,18 @@ def main() -> None:
     args = parse_args()
     data = load_tokens(args.source)
     run_validations(data)
-    swift_output = generate_swift(data)
     motif_output = generate_motif(data)
-    args.swift_out.write_text(swift_output + "\n")
     args.motif_out.write_text(motif_output + "\n")
+    args.json_out.write_text(json.dumps(data["tokens"], indent=2) + "\n")
+
     def pretty_path(path: Path) -> str:
         try:
             return str(path.relative_to(ROOT))
         except ValueError:
             return str(path)
 
-    print(f"Generated {pretty_path(args.swift_out)}")
     print(f"Generated {pretty_path(args.motif_out)}")
+    print(f"Generated {pretty_path(args.json_out)}")
 
 
 if __name__ == "__main__":

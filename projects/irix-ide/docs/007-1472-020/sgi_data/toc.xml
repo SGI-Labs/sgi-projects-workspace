@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<toc>
+<book href="index.html" id="id5364247">
+<title>IRIS IM Programming Guide</title>
+<bookinfo href="front.html">
+<title>Front Matter</title>
+</bookinfo>
+<preface href="pr01.html" id="id5418738">
+<title>Introduction</title>
+<section href="pr01.html#id5418794" id="id5418794">
+<title>Suggestions for Further Reading</title>
+</section>
+<section href="pr01.html#id5364702" id="id5364702">
+<title>Typographical Conventions</title>
+</section>
+</preface>
+<chapter href="ch01.html" id="id5364837">
+<title>Chapter 1. X Window System and IRIS IM Programming Guidelines</title>
+<section href="ch01.html#id5362685" id="id5362685">
+<title>Programming with IRIS IM</title>
+<section href="ch01.html#id5362866" id="id5362866">
+<title>Using Shared Libraries to Maximize System Resources</title>
+</section>
+<section href="ch01.html#id5362996" id="id5362996">
+<title>Using Debugging Libraries to Troubleshoot Programs</title>
+</section>
+<section href="ch01.html#id5363028" id="id5363028">
+<title>Linking Your IRIS IM Programs</title>
+</section>
+<section href="ch01.html#id5363134" id="id5363134">
+<title>Building IRIS IM Programs with imake</title>
+</section>
+<section href="ch01.html#id5363478" id="id5363478">
+<title>Building IRIS IM Programs with Conventional Makefiles</title>
+</section>
+<section href="ch01.html#id5363577" id="id5363577">
+<title>Handling Keyboard Issues</title>
+<section href="ch01.html#id5363586" id="id5363586">
+<title>Virtual Key Bindings</title>
+</section>
+<section href="ch01.html#id5363612" id="id5363612">
+<title>Numeric Keypad Behavior</title>
+</section>
+<section href="ch01.html#id5363770" id="id5363770">
+<title>Translation Tables and the Numeric Keypad</title>
+</section>
+</section>
+<section href="ch01.html#id5363956" id="id5363956">
+<title>Widgets for GL/X Mixed-Model Programming</title>
+</section>
+<section href="ch01.html#id5364091" id="id5364091">
+<title>Using Silicon Graphics Extensions</title>
+</section>
+<section href="ch01.html#id5435586" id="id5435586">
+<title>Using the IRIS IM Sample Source Code</title>
+<section href="ch01.html#id5435723" id="id5435723">
+<title>Using the IRIS IM Demonstration Programs</title>
+</section>
+<section href="ch01.html#id5435832" id="id5435832">
+<title>Using the IRIS IM Overlay Demonstration Programs</title>
+</section>
+<section href="ch01.html#id5435964" id="id5435964">
+<title>Using the Reference Book Sample Programs</title>
+</section>
+</section>
+</section>
+<section href="ch01.html#id5436159" id="id5436159">
+<title>Rendering Considerations</title>
+<section href="ch01.html#id5436192" id="id5436192">
+<title>Hardware Configurations of Silicon Graphics Workstations</title>
+<section href="ch01.html#id5436203" id="id5436203">
+<title>Framebuffers on Silicon Graphics Workstations</title>
+</section>
+<section href="ch01.html#id5436406" id="id5436406">
+<title>Visual Classes on Silicon Graphics Workstations</title>
+</section>
+</section>
+<section href="ch01.html#id5436501" id="id5436501">
+<title>Colormaps on Silicon Graphics Workstations</title>
+<section href="ch01.html#id5362477" id="id5362477">
+<title>Colormap Size Issues</title>
+</section>
+<section href="ch01.html#id5436862" id="id5436862">
+<title>Variation across Colormaps</title>
+</section>
+<section href="ch01.html#id5436938" id="id5436938">
+<title>Multiple Colormap Issues</title>
+</section>
+</section>
+</section>
+<section href="ch01.html#id5437074" id="id5437074">
+<title>Using X11 Visuals on Silicon Graphics Workstations</title>
+</section>
+<section href="ch01.html#id5437280" id="id5437280">
+<title>Using Nondefault Visuals in the Normal Framebuffer</title>
+<section href="ch01.html#id5437341" id="id5437341">
+<title>Xlib Programming with Nondefault Visuals</title>
+<table href="ch01.html#id5437385" id="id5437385">
+<title>Table 1-1. 
+
+
+XSetWindowAttributes Structure Settings for Nondefault Visuals</title>
+</table>
+</section>
+<section href="ch01.html#id5437610" id="id5437610">
+<title>Xt Toolkit Programming with Nondefault Visuals</title>
+<section href="ch01.html#id5437625" id="id5437625">
+<title>Setting Consistent Resources for Nondefault Visuals</title>
+</section>
+<section href="ch01.html#id5437766" id="id5437766">
+<title>Resources Cannot Control Putting X Toolkit Components in Overlay Planes</title>
+</section>
+<section href="ch01.html#id5437924" id="id5437924">
+<title>Inheriting and Using Nondefault Visuals</title>
+</section>
+</section>
+<section href="ch01.html#id5438081" id="id5438081">
+<title>IRIS IM Programming with Nondefault Visuals</title>
+<section href="ch01.html#id5438096" id="id5438096">
+<title>Limited Color Range in Overlay and Popup Planes</title>
+</section>
+<section href="ch01.html#id5438189" id="id5438189">
+<title>MenuBar Uses a Common Shell for Pull-down Menus</title>
+</section>
+<section href="ch01.html#id5438206" id="id5438206">
+<title>Pixmaps in Nondefault Visuals</title>
+</section>
+<section href="ch01.html#id5438280" id="id5438280">
+<title>Beware of Visuals-related Issues in libMrm</title>
+</section>
+</section>
+<section href="ch01.html#id5438490" id="id5438490">
+<title>Using IRIS IM Interface Builders with Nondefault Visuals</title>
+</section>
+<section href="ch01.html#id5438533" id="id5438533">
+<title>Nondefault Visual Heuristic Routines</title>
+</section>
+</section>
+<section href="ch01.html#id5438869" id="id5438869">
+<title>Adding Input Devices with the X Input Extension</title>
+</section>
+</chapter>
+<index href="ix01.html" id="ix">
+<title>Index</title>
+</index>
+</book>
+</toc>

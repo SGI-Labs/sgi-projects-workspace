@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 10. Dialogs</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt02.html" title="Part II. Interface Components"><link rel="previous" href="ch09.html" title="Chapter 9. Controls"><link rel="next" href="ch11.html" title="Chapter 11. User Feedback"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 10. Dialogs</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch09.html">Prev</a> </td><th width="60%" align="center">Part II. Interface Components</th><td width="20%" align="right"> <a accesskey="n" href="ch11.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5491763"></a>Chapter 10. <a name="id30192"></a>Dialogs</h2></div></div>
+<p>Dialogs are transient windows that your application uses either to communicate something important to the user (for example, that a pending action could cause some data to be lost), or to obtain a specific piece of information from the user (for example, which file to open). Users interact quickly with dialogs and then dismiss them. This chapter covers dialogs in the following sections:<a name="idch10.dialogs1"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch10.html#id52846">&#8220;Types and Modes of Dialogs&#8221;</a> discusses the standard types of dialogs, when to use them, and whether they should be modal or not (that is, whether they should prevent the user from doing anything else until the dialog is dismissed).</p>
+</li>
+<li><p><a href="ch10.html#id27264">&#8220;Designing Dialogs&#8221;</a> discusses general dialog design issues&#8212;such as the dialog window decorations, the layout of dialog information, and what the standard actions are (in the form of push buttons). It also covers specific design and content issues for the various types of dialogs listed in the previous section.</p>
+</li>
+<li><p><a href="ch10.html#id91359">&#8220;Invoking Dialogs&#8221;</a> describes the most common situations that require dialogs and which types of dialogs to use in them. </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5491874"></a><a name="id52846"></a>Types and Modes of Dialogs</h2></div></div>
+<p>Dialogs are used to give information to the user or to get information from the user; once they've served their purpose, they go away. Dialogs that give information to the user are instigated by the application; these application-generated dialogs present important messages for the user's immediate attention. Dialogs whose purpose is to get information from the user are displayed as the result of a user action (such as pushing a button or selecting a menu entry). An example of such a user-requested dialog occurs when the user selects &#8220;Open...&#8221; from the File menu; the application should display the IRIX Interactive Desktop File Selection dialog so that the user can specify a file to open.<a name="idch10.dialogs2"></a></p>
+<p>The <i>OSF/Motif Style Guide</i> defines several types of application-generated and user-requested dialogs. The most common of these are listed in <a href="ch10.html#id43029">Table 10-1</a>, along with a brief description of when each might be used in an application and whether they should be modal or not. <a href="ch10.html#id40008">Figure 10-1</a> shows each of the standard OSF/Motif dialogs with the IRIX Interactive Desktop look, and <a href="ch10.html#id64835">Figure 10-2</a> shows the IRIX Interactive Desktop File Selection dialog. Each of these standard dialogs are discussed in more detail in the rest of this chapter and in their reference pages in Chapter 9 of the <i>OSF/Motif Style Guide</i>. Dialog modes are defined and discussed in the next section (<a href="ch10.html#id54825">&#8220;Dialog Modes&#8221;</a>). </p>
+<div class="table"><p><a name="id5492000"></a><b>Table 10-1. <a name="id43029"></a> Types of Dialogs, Their Modality, and When to Use Them</b></p>
+<table summary=" Types of Dialogs, Their Modality, and When to Use Them" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Type of Dialog</p>
+</th><th scope="col" valign="top"><p>When to Use It</p>
+</th><th scope="col" valign="top"><p>Modality</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Prompt<a name="idch10.dialogs3"></a></p>
+</td><td valign="top"><p>To ask users for specific information.</p>
+</td><td valign="top"><p>Modeless or modal</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Error <a name="idch10.dialogs4"></a></p>
+</td><td valign="top"><p>To tell users about an error they've made in interacting with your application.</p>
+</td><td valign="top"><p>Application-modal</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Warning <a name="idch10.dialogs5"></a></p>
+</td><td valign="top"><p>When there's an action pending that will cause users to lose data.</p>
+</td><td valign="top"><p>Application-modal</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Question <a name="idch10.dialogs6"></a></p>
+</td><td valign="top"><p>To ask users a specific question that they must respond to before continuing to interact 
+with the application. Note that although Warning dialogs can also ask users a question, 
+that question relates to a pending action that's destructive.</p>
+</td><td valign="top"><p>Application-modal</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Working <a name="idch10.dialogs7"></a></p>
+</td><td valign="top"><p>When an operation takes more than 5 seconds to complete. This dialog gives users the 
+chance to cancel or stop the operation. Note that you might have to choose one of several 
+different platforms as your standard for estimating times of operations. Also note that 
+the pointer shape might need to change to the watch if the Working dialog is modal; see 
+<a href="ch11.html#id74495">&#8220;Standard Pointer Shapes and Colors&#8221; in Chapter 11</a>.</p>
+</td><td valign="top"><p>Modeless or modal</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Information <a name="idch10.dialogs8"></a></p>
+</td><td valign="top"><p>To give users information that's of immediate importance. Use this type of dialog 
+sparingly; use a status area in one of your primary application windows for the less 
+important messages (see <a href="ch06.html#id30855">&#8220;Status Areas in Primary Windows&#8221; in Chapter 6</a>).</p>
+</td><td valign="top"><p>Modeless</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>File Selection<a name="idch10.dialogs9"></a></p>
+</td><td valign="top"><p>To allow users to navigate the file hierarchy and choose a file. Note that the IRIX 
+Interactive Desktop File Selection dialog, which is shown in <a href="ch10.html#id64835">Figure 10-2</a>, is slightly 
+different from the standard OSF/Motif File Selection dialog.</p>
+</td><td valign="top"><p>Modeless</p>
+</td></tr></tbody></table></div><p><div class="figure"><p><a name="id5492354"></a><b>Figure 10-1. <a name="id40008"></a>Sample Prompt, Error, Warning, Working, Question and Information Dialogs</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-9.gif" alt="Figure 10-1 Sample Prompt, Error, Warning, Working, Question and Information Dialogs" height="552" width="691"></td></tr></table></div></div><br>
+
+<div class="figure"><p><a name="id5492380"></a><b>Figure 10-2. <a name="id64835"></a>The IRIX Interactive Desktop File Selection Dialog</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-2.gif" alt="Figure 10-2 The IRIX Interactive Desktop File Selection Dialog" height="475" width="584"></td></tr></table></div></div><br>
+</p>
+<p>Both the IRIX Interactive Desktop and IRIS IM File Selection dialogs provide lists of the contents of the current directory and a text input field; the IRIX Interactive Desktop list contains both the files and the subdirectories of the current directory, while the IRIS IM list presents these in two separate lists. The IRIX Interactive Desktop File Selection dialog also allows users to navigate through the file hierarchy using the drop pocket, path navigation bar, and history button. As discussed in detail in <a href="ch09.html#id43846">&#8220;File Finder&#8221; in Chapter 9</a>, these components allow users to drop file or directory icons in the drop pocket, traverse to ancestors of the current directory, or return to any directory visited previously. In addition, the IRIX Interactive Desktop dialog presents a Filter button (rather than the IRIS IM text input field), which brings up a dialog that allows the user to enter the filter string.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5492487"></a><a name="id54825"></a>Dialog Modes</h3></div></div>
+<p>As listed in <a name="idch10.dialogs10"></a><a href="ch10.html#id43029">Table 10-1</a>, dialogs can have different modes whereby the application can require the user to respond to the dialog before continuing with other actions in the application. The following are the most commonly used modes defined by OSF/Motif:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term">Modeless<a name="idch10.dialogs11"></a></span></td><td width="10"> </td><td><p>Modeless dialogs, such as the IRIX Interactive Desktop File Selection dialog, don't require the user to respond before continuing. The user can interact with any other window associated with the application and with any other application.</p>
+
+</td></tr><tr valign="top"><td><span class="term">Primary-modal<a name="idch10.dialogs12"></a></span></td><td width="10"> </td><td><p><br>
+Primary-modal dialogs require the user to respond to the dialog before continuing to interact with the dialog's parent window or any other ancestor window. Note that these ancestor windows can't receive mouse or keyboard input until the user has responded to the dialog. </p>
+
+</td></tr><tr valign="top"><td><span class="term">Application-modal<a name="idch10.dialogs13"></a></span></td><td width="10"> </td><td><p><br>
+Application-modal dialogs require the user to respond to the dialog before continuing to interact with the application. Note that none of the application's windows (except the dialog) can receive mouse or keyboard input until the user has responded to the dialog. An example of this type is a dialog that asks the user for a root password.</p>
+
+</td></tr></table></div><p>In addition to these modes, OSF/Motif defines a system-modal dialog that requires the user to interact with the dialog before doing anything else on the system. You shouldn't use system-modal dialogs because your application should never need to restrict users' activities to this degree.<a name="idch10.dialogs14"></a></p>
+<p>Modal dialogs typically show static information, but modeless dialogs should display dynamically updated information as the current state changes. Otherwise, the dialog becomes useless. For example, the IRIX Interactive Desktop File Selection dialog dynamically updates itself if a user changes the file hierarchy while it's displayed; if it didn't, the user could select a file that no longer exists, for example.</p>
+<p>As listed in <a href="ch10.html#id43029">Table 10-1</a>, File Selection and Information dialogs are modeless. Error, Warning, and Question dialogs are application-modal. Working and Prompt dialogs can be modeless or modal, depending on what they are being used for in the application. For example, the desktop displays a Working dialog when you're copying a large directory from a remote system using a directory view, but you can still do other things in the Directory View while the copy is in progress. In other situations, you might not want to allow user input until your application has completed a particular operation. For example, when a user opens a large folder in MediaMail, no other actions can be performed in that window until the folder has been read in completely. See <a href="ch10.html#id17857">&#8220;Working Dialogs&#8221;</a> for details on the design of Working dialogs.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5492674"></a>Guidelines for Using the Various Types and Modes of Dialogs</h3></div></div>
+<p><span class="bold"><b>When choosing the type and mode of a dialog . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use a Prompt dialog to ask users for specific information. This dialog can be modeless or modal.</p>
+</li>
+<li><p>Use an application-modal Error dialog to tell users about an error they've made in interacting with your application.</p>
+</li>
+<li><p>Use an application-modal Warning dialog when there's an action pending that will cause users to lose data.</p>
+</li>
+<li><p>Use an application-modal Question dialog to ask users a specific question that they must respond to before continuing to interact with the application. </p>
+</li>
+<li><p>Use a Working dialog when an operation takes more than 5 seconds to complete. This dialog can be modeless or modal.</p>
+</li>
+<li><p>Use a modeless Information dialog to give users information that's of immediate importance. Use this type of dialog sparingly.</p>
+</li>
+<li><p>Use the modeless IRIX Interactive Desktop File Selection dialog to allow users to navigate the file hierarchy and choose a file. </p>
+</li>
+<li><p>Don't use system-modal dialogs.</p>
+</li>
+<li><p>Use modal dialogs to show static information, and update modeless dialogs dynamically as the current state changes. </p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5492759"></a><a name="id27264"></a>Designing Dialogs</h2></div></div>
+<p>This section discusses general guidelines that apply to the design of all dialogs&#8212;for example, dialog window decorations, size, information displayed when they first come up, and the layout of information. It also describes the standard actions (in the form of pushbuttons) that dialogs should contain. Finally, this section covers guidelines for the content of the specific types of dialogs.<a name="idch10.dialogs15"></a></p>
+<p>Keep in mind that as discussed in <a href="ch06.html#id71076">Chapter 6, &#8220;Application Windows,&#8221;</a> every dialog is associated with a specific primary or support window (its parent). The parent window should be visible and mapped to the screen so that dialogs work properly across Desks, as noted in <a href="ch03.html#id55393">&#8220;Desks&#8221; in Chapter 3</a>.</p>
+<p>This section covers:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch10.html#id95730">&#8220;Decorations, Initial State, and Layout of Dialogs&#8221;</a> </p>
+</li>
+<li><p><a href="ch10.html#id32754">&#8220;Standard Dialog Actions&#8221;</a> </p>
+</li>
+<li><p><a href="ch10.html#id12402">&#8220;Content of Specific Types of Dialogs&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5492894"></a><a name="id95730"></a>Decorations, Initial State, and Layout of Dialogs</h3></div></div>
+<p>All dialogs should have the window decorations and Window menu entries listed in <a name="idch10.dialogs16"></a><a name="idch10.dialogs17"></a><a href="ch03.html#id68452">Table 3-1</a> and described in <a href="ch03.html#id85826">&#8220;Window Decorations and the Window Menu&#8221; in Chapter 3</a>. These decorations and menu entries allow the user to:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Move a dialog using the title bar. Since 4Dwm doesn't guarantee that a dialog will be placed in a specific location, a user may need to move the dialog to access information in order to figure out the appropriate response to the dialog. Note that a dialog's title bar should follow the guidelines discussed in <a href="ch03.html#id15724">&#8220;Rules for Labeling the Title Bar in Windows Other Than Main&#8221; in Chapter 3</a>. A proper label allows users to quickly identify the type of dialog and the application to which it belongs.</p>
+</li>
+<li><p>Resize a dialog that contains resizable components such as text input fields and scrolling lists. See <a href="ch03.html#id85826">&#8220;Window Decorations and the Window Menu&#8221;</a> and <a href="ch03.html#id32339">&#8220;Window Size&#8221;</a> in <a href="ch03.html#id32339">Chapter 3</a> for specific guidelines on when a dialog should be resizable.</p>
+</li>
+</ul></div><p>Note that these window decorations and menu entries don't include operations either for minimizing a dialog (since dialogs can't be minimized independently of their parent window) or for exiting an application from a dialog.</p>
+<p>When a dialog is opened, its size, placement, keyboard focus, and information displayed should follow these guidelines:<a name="idch10.dialogs18"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>The default size should allow all of the components and information to be displayed in their entirety. Users shouldn't have to resize a dialog to see its contents. </p>
+</li>
+<li><p>The dialog should be placed automatically on the screen&#8212;either near (but not overlapping) any related information in the parent window, or in the center of the parent window (if the contents of the dialog aren't related to the contents of the parent window). For more information on choosing a screen location, see <a href="ch03.html#id11715">&#8220;Window Placement&#8221; in Chapter 3</a>. </p>
+</li>
+<li><p>The keyboard focus should be in the field with which the user is most likely to want to interact. For example, if there are text input fields, the focus should probably be in one of those fields. In general, dialogs should follow the keyboard focus and keyboard navigation guidelines discussed in <a name="idch10.dialogs19"></a><a href="ch07.html#id86870">&#8220;Keyboard Focus Policy and Navigation Within a Window&#8221; in Chapter 7</a>. </p>
+</li>
+<li><p>The information being displayed in the dialog should always match the current state of the application. If the dialog is modeless, this information should be dynamically updated, as described in <a href="ch10.html#id54825">&#8220;Dialog Modes&#8221;</a>. </p>
+</li>
+</ul></div><p>All dialogs you create should include a response area that contains standard dialog actions (pushbuttons) tailored to the type and purpose of the dialog. The next section (<a href="ch10.html#id32754">&#8220;Standard Dialog Actions&#8221;</a>) discusses what the appropriate buttons are for this area. In addition to the response area, Prompt dialogs should include an input area that consists of whatever controls are necessary for selecting objects or setting application parameters. Instead of this input area, Error, Warning, Question, Working, and Information dialogs should include a message area, as shown in <a href="ch10.html#id44320">Figure 10-3</a>. The message area consists of an icon and text region that displays the dialog's message. </p>
+<p><div class="figure"><p><a name="id5493258"></a><b>Figure 10-3. <a name="id44320"></a>Warning Dialog Layout</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-1.gif" alt="Figure 10-3 Warning Dialog Layout" height="151" width="582"></td></tr></table></div></div><br>
+</p>
+<p>Don't include menu bars in dialogs; they're intended for short, quick user input rather than for accessing lots of functionality. Also, dialogs don't contain secondary work areas; if you need additional work areas, use a support window instead. (See <a href="ch06.html#id30905">&#8220;Support Windows&#8221; in Chapter 6</a> for information.) Also note that the pre-designed IRIX Interactive Desktop File Selection dialog has a somewhat different set of elements and layout than the other types of dialogs. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5493304"></a><a name="id32754"></a>Standard Dialog Actions</h3></div></div>
+<p>All dialogs include a response area that contains a horizontal row of pushbuttons across the bottom of the dialog. The standard dialog pushbuttons (or actions) are Yes, No, OK, Close, Apply, Retry, Stop, Pause, Resume, Clear, Reset, Cancel, and Help, and they should appear in that order. Your dialogs will typically contain some subset of these buttons and possibly additional ones; the additional buttons should appear after the OK and Apply buttons but before the Cancel and Help buttons. <a name="idch10.dialogs20"></a><a name="idch10.dialogs21"></a></p>
+<p>All of these standard actions except Clear are defined in the reference page for DialogBox in the<i> OSF/Motif Style Guide</i>. Clear, which is used in IRIX Interactive Desktop applications, should clear all of the text input fields in the dialog. Note that this differs from the &#8220;Reset&#8221; action, which resets all controls in a dialog (not just the text fields) to default values.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493350"></a><a name="id59772"></a>Choosing Specific Actions for Your Dialogs</h4></div></div>
+<p>When choosing which of the standard actions to include in your specific dialog, use the guidelines listed in the <a name="idch10.dialogs22"></a><i>OSF/Motif Style Guide</i>, Sections 6.2.1.7 and 6.2.4.2, with the following additions and exceptions:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Most dialogs should have a Help button. If the situation is stated clearly, you might not need a Help button.</p>
+</li>
+<li><p>Avoid using both OK and Apply on the same dialog because it often confuses users. Consider using both when the number of users who will want to make one set of changes, apply them, and close the dialog is equal to the number of users who will want to make and apply multiple sets of changes before closing the dialog.</p>
+</li>
+<li><p>To decide between OK and Apply, determine whether users are more likely to use the dialog to make one set of changes at a time (if so, use OK) or whether they're more likely to want to make and apply changes repeatedly before closing the dialog (in this case, use Apply).</p>
+<p>If you can't decide which of these scenarios best describes your users, use Apply rather than OK. With Apply, users who want to make a single set of changes must press an extra button (Apply, then Close, instead of just OK), which is at most a minor annoyance. On the other hand, using OK by itself forces users who want to make several sets of changes to re-launch the dialog for each set of changes, which can be annoying. </p>
+</li>
+<li><p>Any dialog that has an Apply button should also include a Cancel/Close button. When the dialog is opened, the button is labelled &#8220;Cancel.&#8221; After the user applies some irreversible change, the label on the button changes to &#8220;Close&#8221; to inform users that the action is irreversible. This button doesn't indicate whether or not there are pending changes to be applied.</p>
+</li>
+<li><p>Working dialogs should have a Cancel button that allows users to cancel an operation and return the application to the state it was in before the operation began. If you can't return your application to the pre-operation state, you should still allow users to stop the operation at the current point in the processing. It's even better to allow the user a choice of actions&#8212;for example, Pause (with the option of later resuming) and Cancel. </p>
+</li>
+<li><p>By default, pressing the &lt;Esc&gt; key within a dialog is equivalent to clicking a Cancel button. This is true even if the dialog doesn't have an explicit Cancel button.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493500"></a>Choosing Default Actions</h4></div></div>
+<p>For many dialogs, you should choose one of the actions in the response area to be the default action. By default, the default pushbutton is visually distinguished from the other buttons (for example, the OK button in <a name="idch10.dialogs23"></a><a href="ch10.html#id44320">Figure 10-3</a>), and it's activated when the user presses the &lt;Enter&gt; key while the dialog is the active window. If other buttons in the response area can accept keyboard focus, they become the default button when they have the focus&#8212;that is, they're visually distinct from the other buttons, and pressing &lt;Enter&gt; causes them to be activated. When none of these other buttons has the keyboard focus, the default button status returns to the original default button. </p>
+<p>The following bullets describe common default actions for certain types of dialogs:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>The default action for Information dialogs, which typically have buttons only for OK and Help, is OK.</p>
+</li>
+<li><p>The default action for Question, Warning, Error, and any other dialogs that contain buttons but no text fields is the response that users are most likely to select. For example, a Warning dialog that asks, &#8220;Do you really want to do this destructive action?&#8221; should have the affirmative response as the default action. Note that as discussed in the next section, <a href="ch10.html#id98282">&#8220;Labeling Dialog Buttons,&#8221;</a> make sure that each button name clearly indicates the specific action that will occur if that button is clicked.</p>
+</li>
+<li><p>The default action for dialogs that have only one text field and no other controls than the buttons in the response area (such as the File Selection and Prompt dialogs) is the action that the user is most likely to select after entering a text string.</p>
+</li>
+</ul></div><p>Dialogs that contain multiple text fields should <i>not</i> have a default action since many applications require users to press &lt;Enter&gt; after entering data in a text field. Users tend to press &lt;Enter&gt; regardless of whether they have to, and they expect that action to ensure that their data is entered; they don't expect that action to invoke the dialog's default action.</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493662"></a><a name="id98282"></a>Labeling Dialog Buttons</h4></div></div>
+<p>When labeling dialog buttons, use the OSF/Motif standard names except in the following cases:<a name="idch10.dialogs24"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Replace the &#8220;Yes&#8221; and &#8220;No&#8221; labels in Warning and Question dialogs with button names that clearly indicate the specific action that will occur if the button is clicked. The buttons replacing Yes and No perform the action and close the dialog. As an example, consider the Warning dialog shown in <a href="ch10.html#id52310">Figure 10-4</a>. </p>
+<p><div class="figure"><p><a name="id5493710"></a><b>Figure 10-4. <a name="id52310"></a>Warning Dialog With Save, Discard, and Cancel Buttons</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-5.gif" alt="Figure 10-4 Warning Dialog With Save, Discard, and Cancel Buttons" height="186" width="338"></td></tr></table></div></div><br>
+</p>
+</li>
+<li><p>Replace the &#8220;OK&#8221; or &#8220;Apply&#8221; labels in Prompt or Warning dialogs with button names that clearly indicate the specific action that will occur if the button is clicked (for example, Open, Save, Print). Don't replace these names when the button is used for more than one purpose&#8212;for example, when the file browser is used to specify a name for a new file, the OK button can be used to both name the file and display the contents of a directory.</p>
+<p>Also don't replace either of these names on those rare instances when OK and Apply are used together in a Prompt dialog.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5493766"></a><a name="id12402"></a>Content of Specific Types of Dialogs</h3></div></div>
+<p>In addition to the general guidelines discussed in the two previous sections (<a href="ch10.html#id95730">&#8220;Decorations, Initial State, and Layout of Dialogs&#8221;</a> and <a href="ch10.html#id32754">&#8220;Standard Dialog Actions&#8221;</a>), follow the more specific guidelines for the different types of dialogs presented in this section. (The dialog types are defined in <a href="ch10.html#id43029">Table 10-1</a>.)</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493832"></a>Prompt Dialogs</h4></div></div>
+<p>Prompt dialogs use a variety of controls to collect information from the user, including text input fields, a list of all possible choices, radio buttons, checkboxes, and option menus. Try to collect this information in related chunks&#8212;that is, avoid collecting unrelated pieces of information in the same dialog, and don't launch multiple dialog boxes one right after the other to collect several pieces of information if these pieces are frequently collected at the same time.<a name="idch10.dialogs25"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493873"></a>Error Dialogs</h4></div></div>
+<p>All Error dialogs should include a description of the error, step-by-step instructions for how to recover from it (or a pointer to information on how to recover from it if the instructions are long), and a pointer to more information about why the error might have occurred. If the error involves a specific entity (for instance, a file, user, or host), name the entity in the error message, as shown in <a name="idch10.dialogs26"></a><a href="ch10.html#id17440">Figure 10-5</a>. Invoke Error dialogs only when they're directly relevant to the user; for example, don't tell the user that the printer is out of paper until the user has a job in the queue. </p>
+<p><div class="figure"><p><a name="id5493947"></a><b>Figure 10-5. <a name="id17440"></a>Error Dialog With Specific Entity</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-4.gif" alt="Figure 10-5 Error Dialog With Specific Entity" height="158" width="427"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493973"></a>Warning Dialogs</h4></div></div>
+<p>Warning dialogs should clearly state what data is likely to be lost and why, and give the user a chance to cancel the action.<a name="idch10.dialogs27"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5493988"></a>Question Dialogs</h4></div></div>
+<p>Limit your use of Question dialogs to those situations where the user couldn't have provided the information in advance. Also, don't use Question dialogs for questions that relate to a pending destructive action&#8212;for these cases, use Warning dialogs instead.<a name="idch10.dialogs28"></a></p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5494010"></a><a name="id17857"></a>Working Dialogs</h4></div></div>
+<p>For Working dialogs, use the IRIX Interactive Desktop scale to dynamically indicate the percentage of how much of the operation is complete. A Working dialog, also known as Progress dialog or Percent Done indicator, is shown in <a name="idch10.dialogs29"></a><a href="ch10.html#id82759">Figure 10-6</a>. See <a href="ch09.html#id85716">&#8220;IRIX Interactive Desktop Scales&#8221; in Chapter 9</a> for more information about these indicators. </p>
+<p><div class="figure"><p><a name="id5494072"></a><b>Figure 10-6. <a name="id82759"></a>Working Dialog with IRIX Interactive Desktop Scale</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-3.gif" alt="Figure 10-6 Working Dialog with IRIX Interactive Desktop Scale" height="181" width="238"></td></tr></table></div></div><br>
+</p>
+<p>As described earlier in this chapter in <a href="ch10.html#id59772">&#8220;Choosing Specific Actions for Your Dialogs,&#8221;</a> Working dialogs should include at least one way to interrupt the task in progress. If the dialog is modal, you should also switch from the general-purpose pointer to the watch pointer in the dialog's parent window. If for some reason you're unable to include any buttons in the Working dialog (such as Cancel, Pause, Resume, or Help), switch to the watch pointer in the Working dialog to indicate that user input will be ignored while the operation is in progress. See <a href="ch11.html#id74495">&#8220;Standard Pointer Shapes and Colors&#8221; in Chapter 11</a> for more information about the watch pointer.</p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5494137"></a>Guidelines for Designing Dialogs</h3></div></div>
+<p><span class="bold"><b>When choosing the window decorations, initial state, and layout of dialogs . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Associate every dialog with a primary or support window (its parent) that's mapped to the screen.</p>
+</li>
+<li><p>Use the window decorations and Window menu entries listed in <a href="ch03.html#id68452">Table 3-1</a> and described in <a href="ch03.html#id85826">&#8220;Window Decorations and the Window Menu&#8221;</a> and <a href="ch03.html#id15724">&#8220;Rules for Labeling the Title Bar in Windows Other Than Main&#8221; in Chapter 3</a>. </p>
+</li>
+<li><p>Have the default size large enough to allow all of the components and information to be displayed in their entirety. </p>
+</li>
+<li><p>Place the dialog on the screen either near (but not overlapping) any related information in the parent window, or in the center of the parent window if the contents of the dialog aren't related to the contents of the parent window. </p>
+</li>
+<li><p>Locate the initial keyboard focus in the field with which the user is most likely to want to interact. </p>
+</li>
+<li><p>Be sure the information being displayed in the dialog matches the current state of the application. If the dialog is modeless, update this information dynamically. </p>
+</li>
+<li><p>Include a response area that contains standard dialog actions (pushbuttons) tailored to the type and purpose of the dialog. Also include an input area that consists of whatever controls are necessary for selecting objects or setting application parameters in Prompt dialogs. Include a message area in Error, Warning, Question, Working, and Information dialogs.</p>
+</li>
+<li><p>Don't include secondary work areas; if you need additional work areas, use a support window instead.</p>
+</li>
+<li><p>Don't include menus. If the dialog includes so much functionality that menus are necessary, use a support window.</p>
+</li>
+</ul></div><p><span class="bold"><b>When choosing pushbutton actions for dialogs . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use a subset of the standard dialog actions (Yes, No, OK, Close, Apply, Retry, Stop, Pause, Resume, Clear, Reset, Cancel, and Help), and have them appear in that order. If you include additional buttons, put them after the OK and Apply buttons but before the Cancel and Help buttons. </p>
+</li>
+<li><p>Include a Help button unless the situation is explained thoroughly in the dialog.</p>
+</li>
+<li><p>Avoid using both OK and Apply on the same dialog.</p>
+</li>
+<li><p>To decide between OK and Apply, determine whether users are more likely to use the dialog to make one set of changes at a time (if so, use OK), or whether they're more likely to want to make and apply changes repeatedly before closing the dialog (in this case, use Apply).</p>
+</li>
+<li><p>Include a Cancel/Close button on any dialog that has an Apply button. </p>
+</li>
+<li><p>Include a Cancel button on Working dialogs and, if possible, a Pause button (with the option of later resuming). </p>
+</li>
+</ul></div><p><span class="bold"><b>When choosing and creating default actions . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Whenever appropriate, choose one of the actions to be the default action. </p>
+</li>
+<li><p>Have OK be the default action for Information dialogs (which typically have buttons only for OK and Help).</p>
+</li>
+<li><p>Have the response that users are most likely to select be the default action for Question, Warning, Error, and any other dialogs that contain buttons but no text fields. </p>
+</li>
+<li><p>Have the response that users are most likely to select after entering a text string be the default action for dialogs that have only one text field. Use no other controls than the buttons in the response area (such as the File Selection and Prompt dialogs).</p>
+</li>
+<li><p>Don't have a default action for dialogs that contain multiple text fields.</p>
+</li>
+</ul></div><p><span class="bold"><b>When labeling dialog buttons . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Replace the &#8220;Yes&#8221; and &#8220;No&#8221; labels in Warning and Question dialogs with button names that clearly indicate the specific action that will occur if the button is clicked. </p>
+</li>
+<li><p>Replace the &#8220;OK&#8221; or &#8220;Apply&#8221; labels in Prompt or Warning dialogs with button names that clearly indicate the specific action that will occur if the button is clicked, unless the button is used for more than one purpose, or in the rare instance that &#8220;OK&#8221; and &#8220;Apply&#8221; are used together in a Prompt dialog.</p>
+</li>
+<li><p>In all other cases, use the OSF/Motif standard names.</p>
+</li>
+</ul></div><p><span class="bold"><b>When deciding what content to include in specific types of dialogs . . .</b></span> </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use Prompt dialogs to collect information in related chunks&#8212;that is, avoid collecting unrelated pieces of information in the same dialog, and don't launch multiple dialog boxes sequentially to collect several pieces of information if these pieces are frequently collected at the same time.</p>
+</li>
+<li><p>Include a description of the error, step-by-step instructions for how to recover from it, and a pointer to more information in Error dialogs. If the error involves a specific entity (for instance, a file, user, or host), name the entity in the error message. </p>
+</li>
+<li><p>Invoke Error dialogs only when they're directly relevant to the user; for example, don't tell the user that the printer is out of paper until the user has a job in the queue. </p>
+</li>
+<li><p>State what data is likely to be lost and why, and give the user a chance to cancel the action in Warning dialogs.</p>
+</li>
+<li><p>Limit your use of Question dialogs to those situations where the user couldn't have provided the information in advance. </p>
+</li>
+<li><p>Don't use Question dialogs for questions that relate to a pending destructive action&#8212;for these cases, use Warning dialogs instead.</p>
+</li>
+<li><p>Dynamically indicate how much of the operation is complete with the IRIX Interactive Desktop scale used as a percent-done indicator in Working dialogs.</p>
+</li>
+<li><p>Switch from the general-purpose pointer to the watch pointer in the parent window of a modal Working dialog.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5494580"></a><a name="id91359"></a>Invoking Dialogs</h2></div></div>
+<p>Users expect to encounter dialogs in certain situations. This section describes the most common situations and gives an example of the dialog your application should provide if users can encounter this situation when interacting with your application. Topics include:<a name="idch10.dialogs30"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch10.html#id61823">&#8220;Invoking Dialogs When Manipulating Files&#8221;</a> </p>
+</li>
+<li><p><a href="ch10.html#id16318">&#8220;Other Situations for Invoking Dialogs&#8221;</a></p>
+</li>
+</ul></div><p>For more information about the standard menu entries referred to in this section, see <a href="ch08.html#id12088">&#8220;Standard Menus&#8221; in Chapter 8</a>.</p>
+<p>Since dialogs are designed to get the user's attention, overuse of them will be distracting to the user. Similarly, don't use application-generated dialogs to provide general status information; use a status area in the associated primary or support window instead (see <a href="ch06.html#id30855">&#8220;Status Areas in Primary Windows&#8221; in Chapter 6</a>). </p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5494686"></a><a name="id61823"></a>Invoking Dialogs When Manipulating Files</h3></div></div>
+<p>Users expect to be prompted with a dialog whenever they choose a menu entry that includes an ellipsis. These dialogs prompt the user for information that's necessary before the action can be completed, as described in the following common examples.</p>
+<div class="itemizedlist"><ul type="disc"><li><p>&#8220;Open...&#8221; from the File (or leftmost) menu should display the IRIX Interactive Desktop File Selection dialog shown in <a name="idch10.dialogs31"></a><a name="idch10.dialogs32"></a><a href="ch10.html#id64835">Figure 10-2</a>. The first time this dialog is opened for an application, it should show the current working directory and no specific file. Subsequently, it should come up in the state it was last in when the user dismissed it&#8212;that is, it shows the last directory the user traversed to, and the file that the user opened the last time is selected. (See <a href="ch10.html#id43029">Table 10-1</a> and <a href="ch10.html#id64835">Figure 10-2</a> earlier in this chapter for more information about the IRIX Interactive Desktop File Selection dialog.)</p>
+</li>
+<li><p>&#8220;Save As...&#8221; from the File (or leftmost) menu should display the IRIX Interactive Desktop File Selection dialog. If the file being saved doesn't exist yet, the dialog should show the current working directory and no specific file. If the file exists, the dialog should show that file's directory, and the current name of the file should be selected. If the user uses &#8220;Save As...&#8221; to change the name of an existing file, your application should create a copy of the existing file with the new name, close the previous file, and open the new file. (See <a name="idch10.dialogs33"></a><a href="ch08.html#id38726">&#8220;File Menu&#8221; in Chapter 8</a>.)</p>
+</li>
+</ul></div><p>When users open, close, or save changes to files, prompt them with the Warning dialog shown in <a href="ch10.html#id52310">Figure 10-4</a> whenever these actions will cause data to be lost. The standard situations in which this can arise include the following (see <a href="ch06.html#id67644">&#8220;Application Models&#8221; in Chapter 6</a> for a discussion of the single- and multiple-document application models described in the following paragraphs):</p>
+<div class="itemizedlist"><ul type="disc"><li><p>In an application that allows only one document to be open at a time, when the user chooses to open another (new or existing) document and there are unsaved changes in the currently opened document. The user can open another document by selecting &#8220;New&#8221; from the File menu, by selecting &#8220;Open...&#8221; from the File menu and using the File Selection dialog, or by choosing a file from the &#8220;Reopen&#8221; cascading menu in the File menu.<a name="idch10.dialogs34"></a></p>
+</li>
+<li><p>When the user chooses &#8220;Close&#8221; from the File menu in a co-primary window, and the co-primary window contains data that will be lost if the window is closed. This situation is especially common in applications that support multiple open documents because for these applications, closing a co-primary window is equivalent to closing a file.<a name="idch10.dialogs35"></a></p>
+</li>
+<li><p>When the user chooses &#8220;Exit&#8221; from the File menu, and at least one open co-primary window contains data that will be lost if the application is exited. For applications that support multiple open documents, prompt the user with a separate dialog box for each file that's currently open and has unsaved changes.<a name="idch10.dialogs36"></a></p>
+</li>
+</ul></div><p>Other common file-related situations that require dialogs include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>When the user chooses &#8220;Save&#8221; from the File menu, and the current file is untitled. In this situation, prompt the user with the IRIX Interactive Desktop File Selection dialog, as described above for &#8220;Save As....&#8221;<a name="idch10.dialogs37"></a></p>
+</li>
+<li><p>When the user is interacting with the File Selection dialog and chooses a filename that already exists. In this situation, prompt the user with the Warning dialog shown in <a href="ch10.html#id53895">Figure 10-7</a>. </p>
+<p><div class="figure"><p><a name="id5494996"></a><b>Figure 10-7. <a name="id53895"></a>Warning Dialog for Overwriting a File</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-7.gif" alt="Figure 10-7 Warning Dialog for Overwriting a File" height="186" width="283"></td></tr></table></div></div><br>
+</p>
+</li>
+<li><p>When the user chooses &#8220;Revert&#8221; from the File menu, and the file currently has unsaved changes. In this situation, prompt the user with the Warning dialog shown in <a name="idch10.dialogs38"></a><a href="ch10.html#id69820">Figure 10-8</a>. </p>
+<p><div class="figure"><p><a name="id5495108"></a><b>Figure 10-8. <a name="id69820"></a>Warning Dialog for Reverting to Previous Version</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-8.gif" alt="Figure 10-8 Warning Dialog for Reverting to Previous Version" height="191" width="347"></td></tr></table></div></div><br>
+</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5495138"></a><a name="id16318"></a>Other Situations for Invoking Dialogs</h3></div></div>
+<p>When the user chooses &#8220;Product Information&#8221; from the Help menu, provide an Information dialog like the one shown in <a name="idch10.dialogs39"></a><a href="ch10.html#id16543">Figure 10-9</a>. (See <a href="ch04.html#id33310">&#8220;Product Information&#8221; in Chapter 4</a> for some suggestions about what to include in Product Information dialogs.)</p>
+<p><div class="figure"><p><a name="id5495182"></a><b>Figure 10-9. <a name="id16543"></a>Product Information Dialog</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch10.dialogs-6.gif" alt="Figure 10-9 Product Information Dialog" height="204" width="379"></td></tr></table></div></div><br>
+</p>
+<p>When users initiate an operation that takes more than five seconds to complete, your application should display a Working dialog. In this situation, prompt the user with the Working dialog shown in <a name="idch10.dialogs40"></a><a href="ch10.html#id82759">Figure 10-6</a>. Note that you might have to choose one of several different platforms as your standard for estimating times of operations. See <a href="ch10.html#id17857">&#8220;Working Dialogs&#8221;</a> earlier in this chapter for more information about the content of these dialogs.</p>
+<p>When the user chooses &#8220;Paste&#8221; from the Edit menu and there's nothing currently on the clipboard to be pasted, bring up an Information dialog that says &#8220;The clipboard is empty&#8221; and that contains the single button &#8220;OK.&#8221; (See <a name="idch10.dialogs41"></a><a href="ch08.html#id94339">&#8220;Edit Menu&#8221; in Chapter 8</a>.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5495316"></a>Guidelines for Invoking Dialogs</h3></div></div>
+<p><span class="bold"><b>When determining when to display a dialog and which dialog to display . . . </b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Limit the use of dialogs to those cases when they're absolutely necessary. Don't use dialogs to provide general status information&#8212;use a status area in the associated primary or support window instead. </p>
+</li>
+<li><p>Invoke a dialog whenever users choose a menu entry that includes an ellipsis.</p>
+</li>
+<li><p>Display the IRIX Interactive Desktop File Selection dialog when the user chooses &#8220;Open...&#8221; from the File menu. The first time this dialog is opened, it should show the current working directory and no specific file. Subsequently, it should come up in the state it was last in when the user dismissed it.</p>
+</li>
+<li><p>Display the IRIX Interactive Desktop File Selection dialog when the user chooses &#8220;Save As...&#8221; from the File menu. If the file being saved doesn't exist yet, the dialog should show the current working directory and no specific file. If the file exists, the dialog should show that file's directory, and the current name of the file should be selected. </p>
+</li>
+<li><p>When users open, close, or save changes to files, prompt them with a Warning dialog whenever these actions will cause data to be lost:</p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>In an application that allows only one document to be open at a time, when the user chooses to open another (new or existing) document and there are unsaved changes in the currently opened document. (For example, the user chooses &#8220;New,&#8221; &#8220;Open,&#8221; or &#8220;Reopen&#8221; from the File menu.)</p>
+</li>
+<li><p>When the user chooses &#8220;Close&#8221; from the File menu in a co-primary window, and the co-primary window contains data that will be lost if the window is closed.</p>
+</li>
+<li><p>When the user chooses &#8220;Exit&#8221; from the File menu, and at least one open co-primary window contains data that will be lost if the application is exited. For applications that support multiple open documents, prompt the user with a separate dialog box for each file that's currently open and has unsaved changes.</p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Prompt users with the File Selection dialog when they choose Save from the File menu and the current file is untitled. The behavior is the same as the &#8220;Save As...&#8221; entry in this situation.</p>
+</li>
+<li><p>Prompt users with a Warning dialog when they're interacting with the File Selection dialog and they choose a filename that already exists. </p>
+</li>
+<li><p>Prompt users with a Warning dialog when they choose &#8220;Revert&#8221; from the File menu and the file currently has unsaved changes. </p>
+</li>
+<li><p>Display an Information dialog when a user chooses the &#8220;Product Information&#8221; entry from the Help menu.</p>
+</li>
+<li><p>Display the Working dialog when users initiate an operation that takes more than five seconds to complete. Note that you might have to choose one of several different platforms as your standard for estimating times of operations.</p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch09.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch11.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 9. Controls </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 11. User Feedback </td></tr></table></div></body></html>

@@ -1,0 +1,482 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 7. Interapplication Data Exchange</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="pt01.html" title="Part I. Getting the Right Look and Feel"><link rel="previous" href="ch06.html" title="Chapter 6. Customizing Your Application's Minimized Windows"><link rel="next" href="ch08.html" title="Chapter 8. Monitoring Changes to Files and Directories"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 7. Interapplication Data Exchange</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><th width="60%" align="center">Part I. Getting the Right Look and Feel</th><td width="20%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="LE58622-PARENT"></a>Chapter 7. Interapplication Data Exchange</h2></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-0"></a>
+<a class="indexterm" name="IT07.Data.Exchange-1"></a>
+<a class="indexterm" name="IT07.Data.Exchange-2"></a>
+<a class="indexterm" name="IT07.Data.Exchange-3"></a>
+<a class="indexterm" name="IT07.Data.Exchange-4"></a>
+This chapter describes how to implement the recommended data exchange mechanisms in your applications. <a class="indexterm" name="IT07.Data.Exchange-5"></a>
+It contains these sections:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#LE28382-PARENT" title="Data Exchange Overview">&#8220;Data Exchange Overview&#8221;</a> provides a brief description of how the Primary and Clipboard Transfer Models should work in your application. You should implement both.</p>
+</li>
+<li><p><a href="ch07.html#LE35778-PARENT" title="Implementing the Primary Transfer Model">&#8220;Implementing the Primary Transfer Model&#8221;</a> describes how to implement the Primary Transfer Model in your application.</p>
+</li>
+<li><p><a href="ch07.html#LE56716-PARENT" title="Implementing the Clipboard Transfer Model">&#8220;Implementing the Clipboard Transfer Model&#8221;</a> describes how to implement the Primary Transfer Model in your application.</p>
+</li>
+<li><p><a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a> provides tables listing the atom names of supported data formats, along with brief descriptions of what each format is used for.</p>
+</li>
+<li><p><a href="ch07.html#LE97061-PARENT" title="Data Conversion Service">&#8220;Data Conversion Service&#8221;</a> describes the service available for converting files from one data format to another. For details on the process, refer to <a href="apg.html" title="Appendix G. Using GoldenGate Data Conversion Services">Appendix G, &#8220;Using GoldenGate Data Conversion Services&#8221;</a>. </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE28382-PARENT"></a>Data Exchange Overview</h2></div></div>
+<p>As detailed in Chapter 5, &#8220;Data Exchange on the IRIX Interactive Desktop,&#8221;
+ in the <i>IRIX Interactive User Interface Guidelines</i>, Silicon Graphics recommends that your application support both the Primary and Clipboard Transfer Models. The Primary Transfer Model allows users to copy data using mouse buttons, whereas the Clipboard Transfer model allows users to use the &#8220;Cut,&#8221; &#8220;Copy,&#8221; and &#8220;Paste&#8221; options from the Edit menu (or the corresponding keyboard accelerators) to transfer data.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Silicon Graphics recommends that you not use the IRIS IM clipboard routines for handling data exchange.
+</td></tr></table><hr noshade="noshade"></div><p>The data exchange model recommended by Silicon Graphics is based on the standard mechanisms provided by the X and Xt. You can consult the O'Reilly &amp; Associates book <i>The X Window System, Volume 4: X Toolkit Intrinsics Programming Manual</i> by Adrian Nye for more information on the standard Xt data exchange methods.</p>
+<p>The following sections describe:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#LE68459-PARENT" title="Primary Transfer Model Overview">&#8220;Primary Transfer Model Overview&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE30175-PARENT" title="Clipboard Transfer Model Overview">&#8220;Clipboard Transfer Model Overview&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE69257-PARENT" title="Interaction Between the Primary and Clipboard Transfer Models">&#8220;Interaction Between the Primary and Clipboard Transfer Models&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE68459-PARENT"></a>Primary Transfer Model Overview</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-6"></a>
+<a class="indexterm" name="IT07.Data.Exchange-7"></a>
+When the user selects some data in an application, the application should highlight that data and assert ownership of the PRIMARY selection. <a class="indexterm" name="IT07.Data.Exchange-8"></a>
+<a class="indexterm" name="IT07.Data.Exchange-9"></a>
+Until the application loses the PRIMARY selection, it should then be prepared to respond to requests for the selected data in various target formats. <a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a> describes the standard target formats. <a class="indexterm" name="IT07.Data.Exchange-10"></a>
+</p>
+<p>When the user selects data in another application, your application loses ownership of the PRIMARY selection. In general, when your application loses the primary selection, it should keep its current selection highlighted. When a user has selections highlighted in more than one window at a time, the most recent selection is always the primary selection. This is consistent with the <span class="bold"><b>persistent always selection</b></span> discussed in Section 4.2, &#8220;Selection Actions,&#8221; in the <i>OSF/Motif Style Guide, Release 1.2</i>. There is an exception to this guideline: those applications that use selection only for primary transfer, for example, the <span class="bold"><b>winterm</b></span> shell window. The only reason for users to select text in a shell window is to transfer that text using the primary transfer mechanism. In this case, when the <span class="bold"><b>winterm</b></span> window loses the primary selection, the highlighting is removed. This is referred to as <span class="bold"><b>nonpersistent selection</b></span> in Section 4.2, &#8220;Selection Actions,&#8221; in the <i>OSF/Motif Style Guide, Release 1.2</i>.</p>
+<p>The <span class="bold"><b>persistent always selection</b></span> mechanism allows the user to have data selected in different applications. The user can still manipulate selected data using application controls. Furthermore, the user can reassert the selected data as the PRIMARY selection by pressing <b><tt>&lt;Alt&#8211;Insert&gt;</tt></b>.</p>
+<p>When the user clicks the middle mouse button (<b>BTransfer</b>) in your application, your application should attempt to copy the primary selection to the current location of the mouse pointer. First, your application should request a list of target formats supported by the primary selection owner. Then your application should select the most appropriate target format and request the primary selection in that format.</p>
+<p>&#8220;Supporting the Primary Transfer Model&#8221; in Chapter 5
+ of the <i>IRIX Interactive User Interface Guidelines</i> further discusses use of the Primary Transfer Model. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE30175-PARENT"></a>Clipboard Transfer Model Overview</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-11"></a>
+<a class="indexterm" name="IT07.Data.Exchange-12"></a>
+When the user selects the &#8220;Copy&#8221; option from your application's <a class="indexterm" name="IT07.Data.Exchange-13"></a>
+<a class="indexterm" name="IT07.Data.Exchange-14"></a>
+Edit menu (or uses the keyboard accelerator), your application should assert ownership of the CLIPBOARD selection. <a class="indexterm" name="IT07.Data.Exchange-15"></a>
+<a class="indexterm" name="IT07.Data.Exchange-16"></a>
+<a class="indexterm" name="IT07.Data.Exchange-17"></a>
+Until the application loses the CLIPBOARD selection, it should then be prepared to respond to requests for the data selected at the time your application took ownership of the CLIPBOARD selection. (In other words, your application must somehow store the value of the selection when the user performs the copy action; the application can then provide this value even if the user subsequently changes the application's selection.)</p>
+<p><a class="indexterm" name="IT07.Data.Exchange-18"></a>
+When the user selects the &#8220;Cut&#8221; option for your application's Edit menu (or uses the keyboard accelerator), your application should assert ownership of the CLIPBOARD selection. Your application must cut the selected data, but it should store the data and be prepared to respond to requests for the data until it loses ownership of the CLIPBOARD selection.</p>
+<p><a class="indexterm" name="IT07.Data.Exchange-19"></a>
+When the user selects the &#8220;Paste&#8221; option for your application's Edit menu (or uses the keyboard accelerator), your application should attempt to copy the clipboard selection to the current location of the location cursor. First, your application should request a list of target formats supported by the clipboard selection owner. Then your application should select the most appropriate target format and request the clipboard selection in that format.</p>
+<p>&#8220;Supporting the Clipboard Transfer Model&#8221; in Chapter 5
+ of the <i>IRIX Interactive User Interface Guidelines</i> further discusses use of the Clipboard Transfer Model.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE69257-PARENT"></a>Interaction Between the Primary and Clipboard Transfer Models</h3></div></div>
+<p>Silicon Graphics recommends that you implement the Primary and Clipboard Transfer Models so that they operate separately. The only complication is maintaining data in the PRIMARY selection when the user performs a cut action. Consider the following example:</p>
+<div class="orderedlist"><ol type="1"><li><p>The user selects data in an application. The application asserts ownership of the PRIMARY selection.</p>
+</li>
+<li><p>The user performs a cut action. The application asserts ownership of the CLIPBOARD selection and removes the selected data from the display.</p>
+</li>
+<li><p>The user goes to another application that already has data selected.</p>
+</li>
+<li><p>The user cuts the data selected in the second application. The second application asserts ownership of the CLIPBOARD selection and removes the selected data from the display.</p>
+</li>
+</ol></div><p>The clipboard actions described above should not affect the PRIMARY selection. In this example, the first application should retain ownership of the PRIMARY selection and continue to be prepared to respond to requests for the value of the PRIMARY selection. To support this, the application should somehow store the value of the PRIMARY selection until it no longer owns the PRIMARY selection.</p>
+<p>To properly handle the situation described above, your application should implement the following:</p>
+<div class="orderedlist"><ol type="1"><li><p>In the function that handles the Clipboard Transfer Model's cut action, test to see whether the application owns the PRIMARY selection. If it does, you should preserve the selected data. If selections in your application are typically small (for example, ASCII text), you might simply copy the data to a buffer. If selections in your application are typically large (for example, sound or movie clips), you might remove the data from the display but retain pointers to it.</p>
+</li>
+<li><p>In the function that handles losing the PRIMARY selection, test to see whether you have data preserved from a cut action. If so, and the application currently doesn't own the CLIPBOARD selection, you should free that data or reset the pointers to it.</p>
+</li>
+</ol></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE35778-PARENT"></a>Implementing the Primary Transfer Model</h2></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-20"></a>
+This section describes how to implement support for the Primary Transfer Model in your application. Topics covered include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#LE17379-PARENT" title="Data Selection">&#8220;Data Selection&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE83248-PARENT" title="Requests for the Primary Selection">&#8220;Requests for the Primary Selection&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE14041-PARENT" title="Loss of the Primary Selection">&#8220;Loss of the Primary Selection&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE13583-PARENT" title="Inserting the Primary Selection">&#8220;Inserting the Primary Selection&#8221;</a> </p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Silicon Graphics recommends that you don't use the IRIS IM clipboard routines, because they are not as flexible as the Xt selection routines. 
+</td></tr></table><hr noshade="noshade"></div><br></li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE17379-PARENT"></a>Data Selection</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-21"></a>
+<a class="indexterm" name="IT07.Data.Exchange-22"></a>
+When the user selects data in a window of your application, it should call <tt>XtOwnSelection(3Xt)</tt> to assert ownership of the PRIMARY selection and highlight the selected data.</p>
+<p>The code fragment in <a href="ch07.html#LE59545-PARENT" title="Example 7-1. Asserting Ownership of PRIMARY Selection">Example 7-1</a> shows a simple example of asserting ownership of the PRIMARY selection. For clarity, this example omits code for manipulating the selection itself (for example, setting up pointers to the selection).</p>
+<p>&#8220;Selection&#8221; in Chapter 7
+ of the <i>IRIX Interactive User Interface Guidelines</i> discusses guidelines for allowing users to select data and for hightlighting selected data.</p>
+<div class="example"><a name="LE59545-PARENT"></a><p><a name="LE59545-PARENT"></a><b>Example 7-1. Asserting Ownership of PRIMARY Selection</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Boolean ownPrimary;
+ 
+/*
+   w is window in which selection occurred
+   event is pointer to event that caused selection
+*/
+ 
+void dataSelected(Widget w, XButtonEvent *event)
+{
+...
+  /* 
+     Assert ownership of PRIMARY selection.
+ 
+     XA_PRIMARY is the slection.
+     event-&gt;time is timestamp of the event.
+     primaryRequestCallback is the function called
+         whenever another application requests the
+         value of the PRIMARY selection.
+     lostPrimaryCallback is the function called whenever
+         the application loses the selection.
+  */
+ 
+  ownPrimary = XtOwnSelection(w, XA_PRIMARY, event-&gt;time,
+                              primaryRequestCallback,
+                              lostPrimaryCallback,
+                              NULL);
+ 
+  /*
+     If we successfully obtained ownership, highlight
+     the data; otherwise, clean up
+  */
+ 
+  if (ownPrimary)
+    highlightSelection();
+  else
+    lostPrimaryCallback(w, XA_PRIMARY);
+...
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE83248-PARENT"></a>Requests for the Primary Selection</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-23"></a>
+<a class="indexterm" name="IT07.Data.Exchange-24"></a>
+<a class="indexterm" name="IT07.Data.Exchange-25"></a>
+When you assert ownership of the PRIMARY selection, one of the parameters you pass to <tt>XtOwnSelection()</tt> is a callback function to handle requests for the value of the PRIMARY selection. When another application requests the value of the PRIMARY selection, the Xt selection mechanism invokes your application's callback function.</p>
+<p>The requesting application indicates a desired target format. Typically, a requestor first asks for the special target format TARGETS. Your application should respond with a list of target formats it supports. The requestor then chooses an appropriate target format and requests the selection value in that format. <a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a> describes some of the common target formats your application should support.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE14041-PARENT"></a>Loss of the Primary Selection</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-26"></a>
+<a class="indexterm" name="IT07.Data.Exchange-27"></a>
+When your application loses the PRIMARY selection and your application follows the <span class="bold"><b>persistent always selection</b></span> model discussed in <a href="ch07.html#LE68459-PARENT" title="Primary Transfer Model Overview">&#8220;Primary Transfer Model Overview&#8221;</a>, don't remove the highlight from any selected data. The user should still be able to cut or copy any selected data using the Clipboard Transfer Model. If your application follows the <span class="bold"><b>nonpersistent selection</b></span> model as discussed in <a href="ch07.html#LE68459-PARENT" title="Primary Transfer Model Overview">&#8220;Primary Transfer Model Overview&#8221;</a>, you should remove the highlight.</p>
+<p>Your application should also test to see whether you have data preserved from a cut action (see <a href="ch07.html#LE63612-PARENT" title="Cut Actions">&#8220;Cut Actions&#8221;</a>). If so, and your application currently doesn't own the CLIPBOARD selection, you should free that data or reset the pointers to it. <a href="ch07.html#LE69257-PARENT" title="Interaction Between the Primary and Clipboard Transfer Models">&#8220;Interaction Between the Primary and Clipboard Transfer Models&#8221;</a> describes the rationale for this procedure.</p>
+<div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>To comply with the <i>IRIX Interactive User Interface Guidelines</i>, if the user presses <b><tt>&lt;Alt&#8211;Insert&gt;</tt></b> in your application, you should reassert ownership of PRIMARY for your application.
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE13583-PARENT"></a>Inserting the Primary Selection</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-28"></a>
+<a class="indexterm" name="IT07.Data.Exchange-29"></a>
+When the user clicks the middle mouse button in your application, it should perform the steps described below.</p>
+<div class="orderedlist"><ol type="1"><li><p>Your application should ask the owner of the PRIMARY selection for a list of its TARGETS, using <tt>XtGetSelectionValue()</tt> with selection PRIMARY and target TARGETS.</p>
+</li>
+<li><p>Your application should look through the list of supported targets, select the one that is appropriate for your application, and call <tt>XtGetSelectionValue()</tt> again with that new target.</p>
+</li>
+<li><p>If the selection owner does not support TARGETS, then your application should ask for the target STRING, if it can support that target.</p>
+<p>Silicon Graphics recommends that you support STRING, even if your application doesn't support text. For instance, a movie player could get the selection as a string and try to parse it as a filename. That way users could select a filename in a terminal emulator window and paste it into another application. </p>
+</li>
+</ol></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE56716-PARENT"></a>Implementing the Clipboard Transfer Model</h2></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-30"></a>
+This section describes how to implement support for the Clipboard Transfer Model in your application. Topics include:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#LE63612-PARENT" title="Cut Actions">&#8220;Cut Actions&#8221;</a></p>
+</li>
+<li><p><a href="ch07.html#LE37249-PARENT" title="Copy Actions">&#8220;Copy Actions&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE59533-PARENT" title="Requests for the Clipboard Selection">&#8220;Requests for the Clipboard Selection&#8221;</a> </p>
+</li>
+<li><p><a href="ch07.html#LE96161-PARENT" title="Paste Actions">&#8220;Paste Actions&#8221;</a></p>
+</li>
+<li><p><a href="ch07.html#LE10915-PARENT" title="Loss of the Clipboard Selection">&#8220;Loss of the Clipboard Selection&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE63612-PARENT"></a>Cut Actions</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-31"></a>
+<a class="indexterm" name="IT07.Data.Exchange-32"></a>
+When the user performs a cut action, your application should:</p>
+<div class="orderedlist"><ol type="1"><li><p>Call <tt>XtOwnSelection(3Xt)</tt> to assert ownership of the CLIPBOARD selection.</p>
+</li>
+<li><p>Remove the selected data from the display. Retain the selected data until your application loses ownership of the CLIPBOARD selection.</p>
+</li>
+<li><p>Test to see whether the application owns the PRIMARY selection. If it does, you should preserve the selected data, even after losing ownership of the CLIPBOARD selection. You should retain the data until your application also loses ownership of the PRIMARY selection.</p>
+<p>If selections in your application are typically small (for example, ASCII text), you might simply copy the data to a buffer. If selections in your application are typically large (for example, sound or movie clips), you might remove the data from the display but retain pointers to it.</p>
+</li>
+</ol></div><p>The code fragment in <a href="ch07.html#LE55139-PARENT" title="Example 7-2. Handling Cut Actions in the Clipboard Transfer Model">Example 7-2</a> shows a simple example of handling a cut action and asserting ownership of the CLIPBOARD selection. For clarity, this example omits code for manipulating the selection itself (for example, setting up pointers to the selection).</p>
+<div class="example"><a name="LE55139-PARENT"></a><p><a name="LE55139-PARENT"></a><b>Example 7-2. Handling Cut Actions in the Clipboard Transfer Model</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+Boolean ownPrimary;
+Boolean primaryPreserved;
+/*
+   w is window in which selection occurred
+   event is pointer to event that caused selection
+  */
+void selectionCut(Widget w, XButtonEvent *event)
+{
+...
+  /* 
+     Assert ownership of CLIPBOARD selection.
+ 
+     XA_CLIPBOARD is the selection.
+     event-&gt;time is timestamp of the event.
+     clipboardRequestCallback is the function called
+         whenever another application requests the
+         value of the CLIPBOARD selection.
+     lostClipboardCallback is the function called whenever
+         the application loses the selection.
+  */
+ 
+  ownClipboard = XtOwnSelection(w, XA_CLIPBOARD, event-&gt;time,
+                                clipboardRequestCallback,
+                                lostClipboardCallback,
+                                NULL);
+ 
+  if (ownClipboard)
+  {
+    /*
+       Retain the selected data until the application loses
+       ownership of the CLIPBOARD selection.
+    */
+ 
+    preserveClipboardSelection();
+ 
+    /*
+       If we also own the PRIMARY selection, we need to
+       preserve the selected data separately so that we can
+       continue to satisfy requests for the PRIMARY selection
+       even if we lose the CLIPBOARD selection.
+    */
+ 
+    if (ownPrimary)
+      primaryPreserved = preservePrimarySelection();
+  }
+...
+}
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE37249-PARENT"></a>Copy Actions</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-33"></a>
+<a class="indexterm" name="IT07.Data.Exchange-34"></a>
+When the user performs a copy action, your application should call <tt>XtOwnSelection(3Xt)</tt> to assert ownership of the CLIPBOARD selection. No other actions are required.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE59533-PARENT"></a>Requests for the Clipboard Selection</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-35"></a>
+<a class="indexterm" name="IT07.Data.Exchange-36"></a>
+When you assert ownership of the CLIPBOARD selection, one of the parameters you pass to <tt>XtOwnSelection()</tt> is a callback function to handle requests for the value of the CLIPBOARD selection. When another application requests the value of the CLIPBOARD selection, the Xt selection mechanism invokes your application's callback function.</p>
+<p>The requesting application indicates a desired target format. Typically, a requestor first asks for the special target format TARGETS. Your application should respond with a list of target formats it supports. The requestor then chooses an appropriate target format and requests the selection value in that format. <a href="ch07.html#LE11667-PARENT" title="Supported Target Formats">&#8220;Supported Target Formats&#8221;</a> describes some of the common target formats your application should support.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE96161-PARENT"></a>Paste Actions</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-37"></a>
+<a class="indexterm" name="IT07.Data.Exchange-38"></a>
+When the user selects &#8220;Paste&#8221; from the File menu, your application should: </p>
+<div class="orderedlist"><ol type="1"><li><p>Ask the owner of the CLIPBOARD selection for a list of its TARGETS, using <tt>XtGetSelectionValue()</tt> with selection CLIPBOARD and target TARGETS.</p>
+</li>
+<li><p>Look through the list of supported targets, select the one that is appropriate for your application, and call <tt>XtGetSelectionValue()</tt> again with that new target. </p>
+</li>
+<li><p>If the selection owner doesn't support TARGETS, then your application should ask for the target STRING, if it can support that target. </p>
+<p>Silicon Graphics recommends that you support STRING, even if your application doesn't support text. For instance, a movie player can get the selection as a string and try to parse it as a filename. That way users can select a filename in a terminal emulator window and paste it into another application. </p>
+</li>
+</ol></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="LE10915-PARENT"></a>Loss of the Clipboard Selection</h3></div></div>
+<p>When your application loses the Clipboard selection, don't remove the highlight from any selected data. <a class="indexterm" name="IT07.Data.Exchange-39"></a>
+The user should still be able to cut or copy any selected data. Your application can discard any data it had retained as a result of a cut operation (see <a href="ch07.html#LE63612-PARENT" title="Cut Actions">&#8220;Cut Actions&#8221;</a>). </p>
+</div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE11667-PARENT"></a>Supported Target Formats</h2></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-40"></a>
+<a class="indexterm" name="IT07.Data.Exchange-41"></a>
+<a class="indexterm" name="IT07.Data.Exchange-42"></a>
+<a class="indexterm" name="IT07.Data.Exchange-43"></a>
+Every application should support the TARGETS, TIMESTAMP, MULTIPLE, and STRING targets. The Xt selection functions support the MULTIPLE targets for you. <tt>XmuConvertStandardSelection()</tt> supports the TIMESTAMP target. (Silicon Graphics recommends that applications use <tt>XmuConvertStandardSelection()</tt> because it also supports HOSTNAME, NAME, CLIENT_WINDOW, and a variety of other useful targets.) <a class="indexterm" name="IT07.Data.Exchange-44"></a>
+<a class="indexterm" name="IT07.Data.Exchange-45"></a>
+<a class="indexterm" name="IT07.Data.Exchange-46"></a>
+<a class="indexterm" name="IT07.Data.Exchange-47"></a>
+Your application must support the TARGETS and STRING targets itself. In addition, Silicon Graphics has defined other targets for data types used by Silicon Graphics applications and libraries. </p>
+<p>The tables that follow list supported target formats:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch07.html#id5209535" title="Table 7-1. Audio 
+Formats ">Table 7-1</a> lists target names for audio formats</p>
+</li>
+<li><p><a href="ch07.html#id5209886" title="Table 7-2. Image 
+Formats ">Table 7-2</a> shows target names for image formats</p>
+</li>
+<li><p><a href="ch07.html#id5210400" title="Table 7-3. Movie 
+Formats ">Table 7-3</a> presents target names for movie formats</p>
+</li>
+<li><p><a href="ch07.html#id5210750" title="Table 7-4. 3D Graphics Formats ">Table 7-4</a> lists target names for 3D graphics formats</p>
+</li>
+<li><p><a href="ch07.html#id5211138" title="Table 7-5. Additional Data Types Supported by Silicon Graphics ">Table 7-5</a> shows target names for Silicon Graphics data types</p>
+</li>
+<li><p><a href="ch07.html#id5211344" title="Table 7-6. World Wide Web Targets">Table 7-6</a> shows target names for World Wide Web formats</p>
+</li>
+</ul></div><div class="table"><a name="id5209535"></a><p><a name="id5209535"></a><b>Table 7-1. Audio 
+Formats </b></p><a class="indexterm" name="IT07.Data.Exchange-48"></a><a class="indexterm" name="IT07.Data.Exchange-49"></a><a class="indexterm" name="IT07.Data.Exchange-50"></a><a class="indexterm" name="IT07.Data.Exchange-51"></a><a class="indexterm" name="IT07.Data.Exchange-52"></a>
+<table summary="Audio 
+Formats " border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Name of Atom/Target</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-53"></a>
+AIFF_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-54"></a>
+Audio Interchange Format, used on Apple systems.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>AIFF_C_FILE</p>
+</td><td valign="top"><p>Modified version of Apple's AIFF, compatible with SGI systems.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-55"></a>
+NEXT_FILE</p>
+</td><td valign="top"><p>Used on Next and Sun systems.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-56"></a>
+SD2_FILE</p>
+</td><td valign="top"><p>Sound Designer 2 format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-57"></a>
+WAVE_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-58"></a>
+Microsoft Wave format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-59"></a>
+MPEG_1_AUDIO_FILE</p>
+</td><td valign="top"><p>MPEG Audio. The name of a file that contains MPEG-1 audio data.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>MPEG_1_AUDIO</p>
+</td><td valign="top"><p>Stream of audio data, in MPEG-1 Stream format.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-60"></a>
+SGI_AUDIO_FILE</p>
+</td><td valign="top"><p>The name of a file that contains Silicon Graphics format sound data, 
+that can be read using libaudiofile. The file is the responsibility of the 
+receiver, once the selection owner has generated it.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SGI_AUDIO</p>
+</td><td valign="top"><p>Stream of audio data, readable with the SGI audio library.</p>
+</td></tr></tbody></table></div><br><div class="table"><a name="id5209886"></a><p><a name="id5209886"></a><b>Table 7-2. Image 
+Formats </b></p><a class="indexterm" name="IT07.Data.Exchange-61"></a><a class="indexterm" name="IT07.Data.Exchange-62"></a><a class="indexterm" name="IT07.Data.Exchange-63"></a><a class="indexterm" name="IT07.Data.Exchange-64"></a><a class="indexterm" name="IT07.Data.Exchange-65"></a>
+<table summary="Image 
+Formats " border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Name of Atom/Target</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-66"></a>
+FITS_FILE</p>
+</td><td valign="top"><p>Flexible Image Transport System</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-67"></a>
+GIF_89</p>
+</td><td valign="top"><p>Graphics Interchange Format (streaming bit format)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>GIF_89_FILE</p>
+</td><td valign="top"><p>Graphics Interchange Format (file format)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-68"></a>
+JFIF_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-69"></a>
+JPEG File Interchange Format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-70"></a>
+DIB_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-71"></a>
+Microsoft image format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-72"></a>
+PHOTO_CD_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-73"></a>
+Kodak photo CD</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-74"></a>
+PPM_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-75"></a>
+Portable pixmap format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>PNM_FILE</p>
+</td><td valign="top"><p>Portable anymap format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>PGM_FILE</p>
+</td><td valign="top"><p>Portable graymap format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-76"></a>
+SGI_RGBIMAGE_FILE</p>
+</td><td valign="top"><p>The name of a file that contains a Silicon Graphics format image 
+file. This is an rgb file. The file is the responsibility of the receiver, 
+once the selection owner has generated it.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SGI_RGBIMAGE</p>
+</td><td valign="top"><p>The rgb image data stream.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-77"></a>
+TIFF_FILE</p>
+</td><td valign="top"><p>Tagged Image File Format</p>
+</td></tr></tbody></table></div><br><div class="table"><a name="id5210400"></a><p><a name="id5210400"></a><b>Table 7-3. Movie 
+Formats </b></p><a class="indexterm" name="IT07.Data.Exchange-78"></a><a class="indexterm" name="IT07.Data.Exchange-79"></a><a class="indexterm" name="IT07.Data.Exchange-80"></a><a class="indexterm" name="IT07.Data.Exchange-81"></a><a class="indexterm" name="IT07.Data.Exchange-82"></a>
+<table summary="Movie 
+Formats " border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Name of Atom/Target</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-83"></a>
+APPLE_QUICKTIME_FILE</p>
+</td><td valign="top"><p>Apple Quicktime<sup>[tm]</sup> format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-84"></a>
+AVID_OMFI_FILE</p>
+</td><td valign="top"><p>AVID OMFI<sup>[tm]</sup></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>AVI_FILE</p>
+</td><td valign="top"><p>Microsoft AVI<sup>[tm]</sup> format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-85"></a>
+MPEG_1_VIDEO_FILE</p>
+</td><td valign="top"><p>Motion Picture Experts Group MPEG-1 file </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>MPEG_1_VIDEO</p>
+</td><td valign="top"><p>Stream format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>MPEG_1_SYSTEMS_FILE</p>
+</td><td valign="top"><p>Motion Picture Experts Group MPEG-1 systems file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>MPEG_1_SYSTEMS</p>
+</td><td valign="top"><p>Stream format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-86"></a>
+SGI_MOVIE_FILE</p>
+</td><td valign="top"><p>SGI movie format</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SGI_MOVIE</p>
+</td><td valign="top"><p>Stream format</p>
+</td></tr></tbody></table></div><br><div class="table"><a name="id5210750"></a><p><a name="id5210750"></a><b>Table 7-4. 3D Graphics Formats </b></p><a class="indexterm" name="IT07.Data.Exchange-87"></a><a class="indexterm" name="IT07.Data.Exchange-88"></a><a class="indexterm" name="IT07.Data.Exchange-89"></a><a class="indexterm" name="IT07.Data.Exchange-90"></a><a class="indexterm" name="IT07.Data.Exchange-91"></a>
+<table summary="3D Graphics Formats " border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Name of Atom/Target</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-92"></a>
+INVENTOR_2_1</p>
+</td><td valign="top"><p>SGI Open Inventor V2.1 data</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>INVENTOR_2_1_FILE</p>
+</td><td valign="top"><p>SGI Open Inventor V2.1 file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-93"></a>
+AUTODESK_DXF_FILE</p>
+</td><td valign="top"><p>AUTODESK DXF<sup>[tm]</sup></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>AUTODESK_3DS_FILE</p>
+</td><td valign="top"><p>AUTODESK 3DS<sup>[tm]</sup></p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-94"></a>
+ALIAS_FILE</p>
+</td><td valign="top"><p>Alias wire file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-95"></a>
+IGES_FILE</p>
+</td><td valign="top"><p>IGES file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-96"></a>
+PIXAR_RIB_FILE</p>
+</td><td valign="top"><p>Pixar Renderman .RIB file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-97"></a>
+SOFTIMAGE_HRC_FILE</p>
+</td><td valign="top"><p>Softimage .hrc file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SOFTIMAGE_DSC_FILE</p>
+</td><td valign="top"><p>Softimage .dsc file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-98"></a>
+WAVEFRONT_OBJ_FILE</p>
+</td><td valign="top"><p>Wavefront .OBJ file</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-99"></a>
+VRML_1_0_FILE</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-100"></a>
+VRML 1.0 file</p>
+</td></tr></tbody></table></div><br><div class="table"><a name="id5211138"></a><p><a name="id5211138"></a><b>Table 7-5. Additional Data Types Supported by Silicon Graphics </b></p>
+<table summary="Additional Data Types Supported by Silicon Graphics " border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Name of Atom/Target</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>INVENTOR</p>
+</td><td valign="top"><p>Synonym for INVENTOR_2_0.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_RGB_IMAGE_FILENAME</p>
+</td><td valign="top"><p>Replaced by SGI_RGBIMAGE_FILE.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_RGB_IMAGE</p>
+</td><td valign="top"><p>Replaced by SGI_RGBIMAGE.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_AUDIO_FILENAME</p>
+</td><td valign="top"><p>Replaced by SGI_AUDIO_FILE.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_AUDIO</p>
+</td><td valign="top"><p>Replaced by SGI_AUDIO.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_MOVIE_FILENAME</p>
+</td><td valign="top"><p>Replaced by SGI_MOVIE_FILE.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>_SGI_MOVIE</p>
+</td><td valign="top"><p>Replaced by SGI_MOVIE.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>SGI_SHOWCASE_FILE</p>
+</td><td valign="top"><p>Name of file containing SGI Showcase data.</p>
+</td></tr></tbody></table></div><br><div class="caution"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/caution.png" height="24" width="24"></td><td align="left" valign="top"><b>Caution: </b>Xt implements a timeout when transferring data using the selection mechanism. The default is five seconds. Often, this is inadequate for applications transferring audio, image, or movie data. Therefore, if your application supports receiving such selections, you should call <tt>XtAppSetSelectionTimeout()</tt> to change the timeout to a larger value. 
+</td></tr></table><hr noshade="noshade"></div><br><div class="table"><a name="id5211344"></a><p><a name="id5211344"></a><b>Table 7-6. World Wide Web Targets</b></p>
+<table summary="World Wide Web Targets" border="1"><colgroup><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Type of Atom/Target</p>
+</th><th scope="col" valign="top"><p>Description</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-101"></a>
+HTML</p>
+</td><td valign="top"><p><a class="indexterm" name="IT07.Data.Exchange-102"></a>
+Hypertext Markup Language as an ASCII Stream.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>HTML_FILE</p>
+</td><td valign="top"><p>Name of the file containing HTML.</p>
+</td></tr></tbody></table></div><br><div class="note"><hr noshade="noshade"><table border="0"><tr><td align="center" valign="top" width="25"><img src="figures/note.png" height="24" width="24"></td><td align="left" valign="top"><b>Note: </b>Silicon Graphics applications should also support the generic X11/ICCCM targets such as STRING and COMPOUND_TEXT. 
+</td></tr></table><hr noshade="noshade"></div><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE97061-PARENT"></a>Data Conversion Service</h2></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-103"></a>
+<a class="indexterm" name="IT07.Data.Exchange-104"></a>
+<a class="indexterm" name="IT07.Data.Exchange-105"></a>
+<a class="indexterm" name="IT07.Data.Exchange-106"></a>
+<a class="indexterm" name="IT07.Data.Exchange-107"></a>
+Silicon Graphics provides GoldenGate data conversion service to help you convert data from one format to another, offloading the responsibility for data conversion from your application. See <a href="apg.html" title="Appendix G. Using GoldenGate Data Conversion Services">Appendix G, &#8220;Using GoldenGate Data Conversion Services&#8221;</a>, for more information.</p>
+<p>The GoldenGate conversion service consists of four elements: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>the header file, <tt>/usr/include/convert/SgCvt.h</tt></p>
+</li>
+<li><p>the conversion library, <tt>libcvt.so</tt></p>
+</li>
+<li><p>the converter registry file, <tt>/etc/ConverterRegistry</tt></p>
+</li>
+<li><p>a set of pluggable converters</p>
+</li>
+</ul></div><p>The header file and library provide the Application Programmatic Interface (API) for the service. The converter registry file describes the converters available to the service. The actual code for the converters is stored in separate Dynamic Shared Objects (DSOs). When an application program tries to access a converter, the service dynamically loads the associated DSO.</p>
+<p>The GoldenGate API uses Digital Media parameter-value lists to describe data formats. See the <i>IRIS Media Libraries Programming Guide</i> for information on how to use the Digital Media library to create and manipulate digital media parameter-value lists.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5211680"></a>The Converter Registry</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-108"></a>
+<a class="indexterm" name="IT07.Data.Exchange-109"></a>
+<a class="indexterm" name="IT07.Data.Exchange-110"></a>
+<a class="indexterm" name="IT07.Data.Exchange-111"></a>
+The converter registry contains entries describing each converter available to the service. Each converter entry lists the data format that the converter takes as input, the format that the converter produces as output, and information that allows the service to locate the converter code.</p>
+<p>The converter registry can also contain entries defining<span class="bold"><b> pipelines</b></span>. A pipeline is a set of converters connected in series, with the output of one converter feeding the next. As far as application programs are concerned, a pipeline is just another converter.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5211785"></a>The GoldenGate API</h3></div></div>
+<p><a class="indexterm" name="IT07.Data.Exchange-112"></a>
+<a class="indexterm" name="IT07.Data.Exchange-113"></a>
+<a class="indexterm" name="IT07.Data.Exchange-114"></a>
+All programs using the GoldenGate API should include the <tt>libSgCvt</tt> header file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+#include &lt;convert/SgCvt.h&gt;
+</pre></td></tr></table><p>The GoldenGate API uses a fairly simple programming model. For application programs, the most complicated part of the conversion process is picking an appropriate converter. </p>
+<p>Once the application program has picked a converter, it initializes the conversion pipeline, and proceeds to send data through the pipeline. The pipeline is a &#8220;black box.&#8221; It may consist of one converter, or several converters running in series. The API for application programs using the service is described in <a href="apg.html" title="Appendix G. Using GoldenGate Data Conversion Services">Appendix G, &#8220;Using GoldenGate Data Conversion Services&#8221;</a>.</p>
+<p>Converters, on the other hand, must read data from the pipeline, convert it, and write data back to the pipeline. Again, the pipeline is a black box. A converter can't tell if its input is coming from another converter, or from an application program. Likewise, it can't tell if its output is going to another converter or back to the application program. Designing converters is discussed in <a href="apg.html" title="Appendix G. Using GoldenGate Data Conversion Services">Appendix G, &#8220;Using GoldenGate Data Conversion Services&#8221;</a>. </p>
+</div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 6. Customizing Your Application's Minimized Windows </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 8. Monitoring Changes to Files and Directories </td></tr></table></div></body></html>

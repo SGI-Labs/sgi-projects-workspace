@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix A. Example Programs for SGI Enhanced Widgets</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="ch14.html" title="Chapter 14. Printing From the Desktop"><link rel="next" href="apb.html" title="Appendix B. Desktop Variables"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix A. Example Programs for SGI Enhanced Widgets</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch14.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apb.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE67532-PARENT"></a>Appendix A. Example Programs for SGI Enhanced Widgets</h2></div></div>
+<p><a class="indexterm" name="ITA.Widgets-0"></a>
+<a class="indexterm" name="ITA.Widgets-1"></a>
+<a class="indexterm" name="ITA.Widgets-2"></a>
+This appendix contains example programs for some of the SGI extended IRIS IM widgets.</p>
+<p>Makefiles are provided for some of these examples, but to use these examples, you need to:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Link with <tt>-lXm</tt> and <tt>-lSgm</tt>, making sure to put the <tt>-lSgm</tt> before <tt>-lXm</tt>. (To replace an unenhanced widget with the enhanced version of that widget in an existing program, you need to re-link.)</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+LLDLIBS = -lSgm -lXm -lXt -lX11 -lPW
+</pre></td></tr></table><p>You must include <tt>-lSgm</tt> to get the enhanced look and the new widgets. If you do not include -lfileicon, you will get a runtime error, since the runtime loader won't be able to find needed symbols. The <tt>-lXm</tt> represents the enhanced version of <tt>libXm</tt> (IRIS IM).</p>
+</li>
+<li><p>Run the program with these resources:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+*sgiMode:        true
+*useSchemes:     all
+</pre></td></tr></table><p>Set them in your <tt>.Xdefaults</tt> file or create a file for your application in <tt>/usr/lib/X11/app-defaults</tt>.</p>
+</li>
+</ul></div><p>This appendix provides example programs for:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apa.html#LE83520-PARENT" title="Example Program for Color Chooser">&#8220;Example Program for Color Chooser&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE74701-PARENT" title="Example Program for Dial">&#8220;Example Program for Dial&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE84471-PARENT" title="Example Program for Drop Pocket">&#8220;Example Program for Drop Pocket&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE23162-PARENT" title="Example Program for Finder">&#8220;Example Program for Finder&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE98277-PARENT" title="Example Program for History Button (Dynamenu)">&#8220;Example Program for History Button (Dynamenu)&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE30790-PARENT" title="Example Program for ThumbWheel">&#8220;Example Program for ThumbWheel&#8221;</a></p>
+</li>
+<li><p><a href="apa.html#LE36380-PARENT" title="Example Program for File Selection Box">&#8220;Example Program for File Selection Box&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE96832-PARENT" title="Example Programs for Scale (Percent Done Indicator) Widget">&#8220;Example Programs for Scale (Percent Done Indicator) Widget&#8221;</a> </p>
+</li>
+<li><p><a href="apa.html#LE89093-PARENT" title="Example Program for LED Widget">&#8220;Example Program for LED Widget&#8221;</a> </p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE83520-PARENT"></a>Example Program for Color Chooser</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* <a class="indexterm" name="ITA.Widgets-3"></a>
+<a class="indexterm" name="ITA.Widgets-4"></a>
+
+ * colortest.c --
+ * demonstration of quick-and-easy use of the color
+ * chooser widget.
+ */
+
+#include &lt;stdio.h&gt;
+
+#include &lt;Xm/Xm.h&gt;
+
+#include &lt;Xm/Label.h&gt;
+#include &lt;Xm/Form.h&gt;
+#include &lt;Sgm/ColorC.h&gt;
+
+static void ColorCallback();
+Widget label, colorc;
+XtAppContext app;
+
+#if 0
+
+int sgidladd()
+{
+  return 1;
+}
+#endif
+
+main (argc, argv)
+int argc;
+char *argv[];
+{
+  Widget toplevel, form;
+  Arg args[25];
+  int ac = 0;
+
+  toplevel = XtVaAppInitialize(&amp;app, argv[0], NULL, 0, &amp;argc, argv, NULL, NULL);
+  if (toplevel == (Widget)NULL) {
+    printf(&quot;AppInitialize failed!\n&quot;);
+    exit(1);
+  }
+
+  colorc = SgCreateColorChooserDialog(toplevel, &quot;colorc&quot;, NULL, 0);
+  XtAddCallback(colorc, XmNapplyCallback, ColorCallback, (XtPointer)NULL);
+  XtManageChild(colorc);
+
+  form = XmCreateForm(toplevel, &quot;Form&quot;, NULL, 0);
+  XtManageChild(form);
+
+  label = XmCreateLabel(form, &quot;I am a color!&quot;, NULL, 0);
+  XtManageChild(label);
+  ac = 0;
+
+  XtRealizeWidget(toplevel);
+  XtAppMainLoop(app);
+}
+
+void ColorCallback(w, client_data, call_data)
+Widget w;
+XtPointer client_data, call_data;
+{
+  Pixel white;  /* fallback */
+  SgColorChooserCallbackStruct *cbs =(SgColorChooserCallbackStruct *)call_data;
+  Display *dpy = XtDisplay(label);
+  Screen *scr = XtScreen(label);
+  /*
+   * If we were willing to use private structure members,
+   * we could be sure to get the correct colormap by using
+   * label-&gt;core.colormap.  For this demo, however,
+   * the default colormap will suffice in most cases.
+   */
+  Colormap colormap = XDefaultColormapOfScreen(scr);
+  XColor mycolor;
+  Arg args[1];
+
+  white = WhitePixelOfScreen(scr);
+
+  mycolor.red = (unsigned short)(cbs-&gt;r&lt;&lt;8);
+  mycolor.green = (unsigned short)(cbs-&gt;g&lt;&lt;8);
+  mycolor.blue = (unsigned short)(cbs-&gt;b&lt;&lt;8);
+  mycolor.flags = (DoRed | DoGreen | DoBlue);
+
+  if (XAllocColor(dpy, colormap, &amp;mycolor)) {
+    XtSetArg(args[0], XmNbackground, mycolor.pixel);
+  }
+  else {
+    fprintf(stderr, &quot;No more colors!\n&quot;); fflush(stderr);
+    XtSetArg(args[0], XmNbackground, white);
+  }
+
+  XtSetValues(label, args, 1);
+}
+</pre></td></tr></table><br><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5239130"></a>Makefile for colortest.c</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<a class="indexterm" name="ITA.Widgets-5"></a>
+<a class="indexterm" name="ITA.Widgets-6"></a>
+ROOT = /
+MYLIBS =
+XLIBS = -lSgw -lSgm -lXm -lXt -lX11 -lgl
+SYSLIBS = -lPW -lm -ll -ly
+INCLUDES = -I. -I$(ROOT)usr/include
+
+LDFLAGS = -L -L. -L$(ROOT)usr/lib $(MYLIBS) $(XLIBS) $(SYSLIBS)
+
+all: colortest
+
+colortest: colortest.o
+        cc -o colortest colortest.o $(LDFLAGS)
+
+colortest.o: colortest.c
+        cc -g $(INCLUDES) -DDEBUG -D_NO_PROTO -c colortest.c
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE74701-PARENT"></a>Example Program for Dial</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* <a class="indexterm" name="ITA.Widgets-7"></a>
+<a class="indexterm" name="ITA.Widgets-8"></a>
+
+ * Mytest.c --
+ * create and manage a dial widget.
+ * Test its resource settings through menu/button actions.
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;Xm/Xm.h&gt;
+#include &lt;Xm/Form.h&gt;
+#include &lt;Xm/DialogS.h&gt;
+#include &lt;Xm/Label.h&gt;
+#include &lt;Sgm/Dial.h&gt;
+
+/*
+ * Test framework procedures and globals.
+ */
+
+#ifdef _NO_PROTO
+static void DragCallback();
+#else
+static void DragCallback(Widget w, void *client_data, void *call_data);
+#endif /* _NO_PROTO */
+
+XtAppContext app;
+
+main (argc, argv)
+int argc;
+char *argv[];
+{
+  Widget toplevel, form, dial, label;
+  Arg args[25];
+  int ac = 0;
+
+  /*
+   * Create and realize our top level window,
+   * with all the menus and buttons for user input.
+   */
+  toplevel = XtVaAppInitialize(&amp;app, &quot;Dialtest&quot;, NULL, 0, &amp;argc, argv, NULL, NULL);
+  if (toplevel == (Widget)NULL) {
+    printf(&quot;AppInitialize failed!\n&quot;);
+    exit(1);
+  }
+
+  form = XmCreateForm(toplevel, &quot;Form&quot;, NULL, 0);
+
+  /* Set up arguments for our widget. */
+  ac = 0;
+  XtSetArg(args[ac], XmNleftAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNrightAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNtopAttachment, XmATTACH_FORM); ac++;
+
+  /*
+   * We use all-default settings.
+   * Do not set any of the dial-specific resources.
+   */
+  dial = SgCreateDial(form, &quot;dial&quot;, args, ac);
+  XtManageChild(dial);
+
+  ac = 0;
+  XtSetArg(args[ac], XmNleftAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNrightAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNtopAttachment, XmATTACH_WIDGET); ac++;
+  XtSetArg(args[ac], XmNtopWidget, dial); ac++;
+  XtSetArg(args[ac], XmNbottomAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNlabelString, XmStringCreateSimple(&quot;0&quot;)); ac++;
+  label = XmCreateLabel(form, &quot;valueLabel&quot;, args, ac);
+  XtManageChild(label);
+
+  /*
+   * Set up callback for the dial.
+   */
+  XtAddCallback(dial, XmNdragCallback, DragCallback, label);
+
+  XtManageChild(form);
+  XtRealizeWidget(toplevel);
+  XtAppMainLoop(app);
+}
+
+void DragCallback(w, client_data, call_data)
+Widget w;
+XtPointer client_data, call_data;
+{
+  SgDialCallbackStruct *cbs = (SgDialCallbackStruct *) call_data;
+  Widget label = (Widget)client_data;
+  static char new_label[256];
+  Arg args[2];
+  int ac = 0;
+
+  if ((cbs != NULL) &amp;&amp; (label != (Widget)NULL)) { 
+    sprintf(new_label, &quot;%d&quot;, cbs-&gt;position);
+    XtSetArg(args[ac], XmNlabelString, XmStringCreateSimple(new_label)); ac++;
+    XtSetValues(label, args, ac);
+  }
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE84471-PARENT"></a>Example Program for Drop Pocket</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* <a class="indexterm" name="ITA.Widgets-9"></a>
+<a class="indexterm" name="ITA.Widgets-10"></a>
+
+ *  Demonstrate the use of the DropPocket
+ */
+
+#include &lt;Xm/Form.h&gt;
+#include &lt;Xm/PushB.h&gt;
+#include &lt;Sgm/DropPocket.h&gt;
+
+static void droppedCB(Widget w, XtPointer clientData, XtPointer cbs ) {
+  SgDropPocketCallbackStruct * dcbs = (SgDropPocketCallbackStruct *)cbs;
+  char * name;
+
+  if (dcbs-&gt;iconName)
+    if (!XmStringGetLtoR( dcbs-&gt;iconName, XmFONTLIST_DEFAULT_TAG, &amp;name))
+      name = NULL;
+
+  printf(&quot;Dropped file: %s\nFull Data: %s\n&quot;, name, dcbs-&gt;iconData );
+  XtFree( name );
+}
+
+main( int argc, char * argv[] ) {
+  Widget toplevel, exitB, dp, topRC;
+  XtAppContext app;
+
+  XtSetLanguageProc(NULL, (XtLanguageProc)NULL, NULL);
+  toplevel = XtVaAppInitialize( &amp;app, &quot;DropPocket&quot;, NULL, 0, &amp;argc, argv, NULL, NULL);
+  topRC = XtVaCreateManagedWidget( &quot;topRC&quot;, xmFormWidgetClass, toplevel, NULL);
+  dp = XtVaCreateManagedWidget(&quot;dp&quot;,
+                               sgDropPocketWidgetClass, topRC,
+                               XmNtopAttachment, XmATTACH_FORM,
+                               XmNbottomAttachment, XmATTACH_FORM,
+                               XmNleftAttachment, XmATTACH_FORM,
+                               XmNrightAttachment, XmATTACH_FORM,
+                               XmNheight, 100,
+                               XmNwidth, 100,
+                               NULL);
+  XtAddCallback( dp, SgNiconUpdateCallback, droppedCB, NULL);
+  XtRealizeWidget( toplevel );
+  XtAppMainLoop( app );
+}
+</pre></td></tr></table><br><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5239405"></a>Makefile for Drop Pocket Example</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#!smake <a class="indexterm" name="ITA.Widgets-11"></a>
+<a class="indexterm" name="ITA.Widgets-12"></a>
+
+#
+include /usr/include/make/commondefs
+
+HFILES = \\p        DropPocketP.h \\p        DropPocket.h 
+
+CFILES = \\p        DropPocket.c
+
+
+TARGETS = dpt
+
+CVERSION = -xansi
+MALLOC = /d2/stuff/lib/Malloc
+CVERSION = -xansi
+OPTIMIZER = -g 
+#-I$(MALLOC) -wlint,-pf -woff 813,826,828 
+
+LLDLIBS = -lSgm -lXm -lXt -lX11 -lPW
+#LLDLIBS = -u malloc -u XtRealloc -u XtMalloc -u XtCalloc -L /d2/stuff/lib
+           -ldbmalloc -lSgm -lXm -lXt -lX11
+
+LCDEFS = -DFUNCPROTO -DDEBUG
+
+targets: $(TARGETS)
+
+include $(COMMONRULES)
+
+#dpt: dpTest.o $(OBJECTS)
+#       $(CC) -o $@ dpTest.o $(OBJECTS) $(LDFLAGS)
+
+dpt: dpTest.o
+        $(CC) -o $@ dpTest.o $(LDFLAGS)
+
+#dpt2: dpTest2.o $(OBJECTS)
+#       $(CC) -o $@ dpTest2.o $(OBJECTS) $(LDFLAGS)
+
+dpt2: dpTest2.o
+        $(CC) -o $@ dpTest2.o $(LDFLAGS)
+
+#dpt3: dpTest3.o $(OBJECTS)
+#       $(CC) -o $@ dpTest3.o $(OBJECTS) $(LDFLAGS)
+
+dpt3: dpTest3.o
+        $(CC) -o $@ dpTest3.o $(LDFLAGS)
+
+#tdt: tdt.o $(OBJECTS)
+#       $(CC) -o $@ tdt.o $(OBJECTS) $(LDFLAGS)
+
+tdt: tdt.o
+        $(CC) -o $@ tdt.o $(LDFLAGS)
+
+depend:
+        makedepend -- $(CFLAGS) -- $(HFILES) $(CFILES)
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE23162-PARENT"></a>Example Program for Finder</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* <a class="indexterm" name="ITA.Widgets-13"></a>
+<a class="indexterm" name="ITA.Widgets-14"></a>
+
+ * Finder.c demonstrates the use of the SgFinder widget
+ */
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;Xm/RowColumn.h&gt;
+#include &lt;Xm/Label.h&gt;
+#include &lt;Sgm/Finder.h&gt;
+#include &lt;Sgm/DynaMenu.h&gt;
+
+static char * items[] = { &quot;Archer's favorite songs:&quot;,
+                            &quot;Draft dodger rag&quot;,
+                            &quot;Le Roi Renaud&quot;,
+                            &quot;/usr/sbin&quot;,
+                            &quot;/lib/libc.so.1&quot;,
+                            &quot;Calvinist Headgear Expressway&quot;,
+                          };
+
+static void valueChangeCB( Widget w, XtPointer clientData, XmAnyCallbackStruct * cbs) {
+  printf(&quot;App value change callback\n&quot;);
+}
+
+static void activateCB( Widget w, XtPointer clientData, XmAnyCallbackStruct * cbs) {
+  printf(&quot;App activate callback\n&quot;);
+}
+main( int argc, char * argv[] ) {
+  Widget toplevel, rc, label, finder, history;
+  XtAppContext app;
+  XmString * list;
+  int listSize, i;
+
+  XtSetLanguageProc(NULL, (XtLanguageProc)NULL, NULL);
+  toplevel = XtVaAppInitialize( &amp;app, &quot;Finder&quot;, NULL, 0, &amp;argc, argv, NULL, NULL);
+  rc = XtVaCreateWidget( &quot;rc&quot;,
+                        xmRowColumnWidgetClass, toplevel,
+                        XmNresizeWidth, False,
+                        XmNresizeHeight, True,
+                        NULL);
+
+  /* create the original list for the historyMenu */
+  listSize = XtNumber( items );
+  list = (XmString *)XtMalloc( sizeof(XmString) * listSize);
+  for (i = 0; i &lt; listSize; i++)
+    list[ i ] = XmStringCreateLocalized( items[ i ] );
+
+  label = XtVaCreateManagedWidget( &quot;Things:&quot;,
+                                  xmLabelWidgetClass, rc,
+                                  NULL);
+  finder = XtVaCreateManagedWidget(&quot;finder&quot;, sgFinderWidgetClass, rc, NULL);
+  history = SgFinderGetChild( finder, SgFINDER_HISTORY_MENUBAR );
+  if (history &amp;&amp; SgIsDynaMenu( history )) {
+    XtVaSetValues( history,
+                  SgNhistoryListItems, list,
+                  SgNhistoryListItemCount, listSize,
+                  NULL);
+  }
+
+  for (i = 0; i &lt; listSize; i++)
+    if (list[ i ])
+      XmStringFree(list[ i ]);
+  if (list)
+    XtFree( (char *)list );
+
+  XtAddCallback( finder, XmNvalueChangedCallback, (XtCallbackProc)valueChangeCB, finder);
+  XtAddCallback( finder, XmNactivateCallback, (XtCallbackProc)activateCB, finder);
+
+  XtManageChild( rc );
+  XtRealizeWidget( toplevel );
+  XtAppMainLoop( app );
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE98277-PARENT"></a>Example Program for History Button (Dynamenu)</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#include &lt;Sgm/DynaMenu.h&gt; <a class="indexterm" name="ITA.Widgets-15"></a>
+<a class="indexterm" name="ITA.Widgets-16"></a>
+<a class="indexterm" name="ITA.Widgets-17"></a>
+
+#include &lt;Xm/RowColumn.h&gt;
+
+static char * items[] = { &quot;illegal smile&quot;, &quot;/usr/people/stone&quot;,
+                          &quot;Fish and whistle&quot;, &quot;help I'm trapped in the
+                           machine&quot;, &quot;9th &amp; Hennepin&quot; };
+
+static void dynaPushCB( Widget w, XtPointer clientData, XtPointer cbd ) {
+  SgDynaMenuCallbackStruct * cbs = (SgDynaMenuCallbackStruct *) cbd;
+  int num = cbs-&gt;button_number;
+  printf(&quot;Selected item number %d\n&quot;, num);
+}
+
+main( int argc, char * argv[] ) {
+  XtAppContext app = NULL;
+  Widget toplevel, rc, dynaMenu;
+  XmString * list;
+  int listSize, i;
+
+  toplevel = XtVaAppInitialize( &amp;app, &quot;DynaMenu&quot;, NULL, 0, &amp;argc,argv, NULL, NULL);
+  rc = XtVaCreateManagedWidget( &quot;rc&quot;, xmRowColumnWidgetClass, toplevel, NULL);
+
+  /* create the original list for the dynaMenu */
+  listSize = XtNumber( items );
+  list = (XmString *)XtMalloc( sizeof(XmString) * (unsigned int)listSize);
+  for (i = 0; i &lt; listSize; i++)
+    list[ i ] = XmStringCreateLocalized( items[ i ] );
+
+  dynaMenu = XtVaCreateManagedWidget(&quot;dynaMenu&quot;,
+                                     sgDynaMenuWidgetClass, rc,
+                                     SgNhistoryListItems, list,
+                                     SgNhistoryListItemCount, listSize,
+                                     NULL);
+  XtAddCallback( dynaMenu, SgNdynaPushCallback, dynaPushCB, NULL);
+
+  for (i = 0; i &lt; listSize; i++)
+    XmStringFree( list[ i ] );
+  XtFree( (char *)list );
+
+  XtRealizeWidget( toplevel );
+  XtAppMainLoop( app );
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE30790-PARENT"></a>Example Program for ThumbWheel</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* <a class="indexterm" name="ITA.Widgets-18"></a>
+<a class="indexterm" name="ITA.Widgets-19"></a>
+
+ * Thumbwheel.c --
+ * create and manage a thumbwheel.
+ */
+
+#include &lt;stdio.h&gt;
+#include &lt;Xm/Xm.h&gt;
+#include &lt;Xm/Form.h&gt;
+#include &lt;Xm/DialogS.h&gt;
+#include &lt;Xm/Label.h&gt;
+#include &lt;Sgm/ThumbWheel.h&gt;
+
+/*
+ * Test framework procedures and globals.
+ */
+
+#ifdef _NO_PROTO
+static void DragCallback();
+#else
+static void DragCallback(Widget w, void *client_data, void *call_data);
+#endif /* _NO_PROTO */
+
+XtAppContext app;
+
+main (argc, argv)
+int argc;
+char *argv[];
+{
+  Widget toplevel, form, thumbwheel, label;
+  Arg args[25];
+  int ac = 0;
+
+  /*
+   * Create and realize our top level window,
+   * with all the menus and buttons for user input.
+   */
+  toplevel = XtVaAppInitialize( &amp;app, &quot;Thumbwheeltest&quot;, NULL, 0, &amp;argc, argv, NULL, NULL);
+  if (toplevel == (Widget)NULL) {
+    printf(&quot;AppInitialize failed!\n&quot;);
+    exit(1);
+  }
+
+  form = XmCreateForm(toplevel, &quot;Form&quot;, NULL, 0);
+
+  /* Set up arguments for our widget. */
+  ac = 0;
+  XtSetArg(args[ac], XmNleftAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNrightAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNtopAttachment, XmATTACH_FORM); ac++;
+
+  /*
+   * We use all-default settings, with the exception of orientation.
+   * Do not set any other thumbwheel-specific resources.
+   */
+  ac = 0;
+  XtSetArg(args[ac], XmNorientation, XmHORIZONTAL); ac++;
+  thumbwheel = SgCreateThumbWheel(form, &quot;thumbwheel&quot;, args, ac);
+  XtManageChild(thumbwheel);
+
+  ac = 0;
+  XtSetArg(args[ac], XmNleftAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNrightAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNtopAttachment, XmATTACH_WIDGET); ac++;
+  XtSetArg(args[ac], XmNtopWidget, thumbwheel); ac++;
+  XtSetArg(args[ac], XmNbottomAttachment, XmATTACH_FORM); ac++;
+  XtSetArg(args[ac], XmNlabelString, XmStringCreateSimple(&quot;0&quot;)); ac++;
+  label = XmCreateLabel(form, &quot;valueLabel&quot;, args, ac);
+  XtManageChild(label);
+
+  /*
+   * Set up callback for the thumbwheel.
+   */
+  XtAddCallback(thumbwheel, XmNdragCallback, DragCallback, label);
+
+  XtManageChild(form);
+  XtRealizeWidget(toplevel);
+  XtAppMainLoop(app);
+}
+
+void DragCallback(w, client_data, call_data)
+Widget w;
+XtPointer client_data, call_data;
+{
+  SgThumbWheelCallbackStruct *cbs = (SgThumbWheelCallbackStruct *) call_data;
+  Widget label = (Widget)client_data;
+  static char new_label[256];
+  Arg args[2];
+  int ac = 0;
+
+  if ((cbs != NULL) &amp;&amp; (label != (Widget)NULL)) { 
+    sprintf(new_label, &quot;%d&quot;, cbs-&gt;value);
+    XtSetArg(args[ac], XmNlabelString, XmStringCreateSimple(new_label)); ac++;
+    XtSetValues(label, args, ac);
+  }
+}
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE36380-PARENT"></a>Example Program for File Selection Box</h2></div></div>
+<p><a class="indexterm" name="ITA.Widgets-20"></a>
+<a class="indexterm" name="ITA.Widgets-21"></a>
+To run this program, add these lines to your <tt>.Xdefaults</tt> file:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+fsb*sgiMode: true
+fsb*useSchemes: all
+</pre></td></tr></table><p>then type:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="literallayout">
+<b><tt>xrdb -load</tt></b>
+</pre></td></tr></table><p>Here's the sample program:</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/*-------  fsb.c  -------*/
+#include &lt;Xm/RowColumn.h&gt;
+#include &lt;Xm/Form.h&gt;
+#include &lt;Xm/PushB.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;Xm/FileSB.h&gt;
+
+
+void printDirF( Widget w, XtPointer clientData, XmFileSelectionBoxCallbackStruct * cbs) {
+
+  char * filename = NULL, * dirname = NULL;
+
+  XmStringGetLtoR( cbs-&gt;value, XmFONTLIST_DEFAULT_TAG, &amp;filename);
+
+  XmStringGetLtoR( cbs-&gt;dir, XmFONTLIST_DEFAULT_TAG, &amp;dirname);
+
+  printf(&#8220;Filename selected: %s\n&#8221;, filename);
+
+  if (filename)
+    XtFree( filename );
+  if (dirname)
+    XtFree( dirname );
+}
+
+static void showDialog( Widget w, XtPointer clientData, XtPointer callData) {
+
+  Widget dialog = (Widget) clientData;
+  XtManageChild( dialog );
+
+}
+
+main (int argc, char *argv[]) {
+  Widget toplevel, fsb, b1, b2, rc;
+  XtAppContext app;
+  XmString textStr;
+
+  XtSetLanguageProc( NULL, (XtLanguageProc)NULL, NULL);
+
+  toplevel = XtVaAppInitialize( &amp;app, &#8220;Fsb&#8221;, NULL, 0, &amp;argc, argv, NULL, NULL);
+
+  rc = XtVaCreateManagedWidget( &#8220;rc&#8221;, xmFormWidgetClass, toplevel, NULL);
+
+  /* Set up a dialog */
+  if (argc &gt; 1) {
+
+    b1 = XtVaCreateManagedWidget( &#8220;FSB&#8221;,
+                                  xmPushButtonWidgetClass,
+                                  rc,
+                                  XmNtopAttachment,
+                                  XmATTACH_FORM,
+                                  XmNbottomAttachment,
+                                  XmATTACH_FORM,
+                                  XmNleftAttachment,
+                                  XmATTACH_FORM,
+                                  XmNrightAttachment,
+                                  XmATTACH_FORM,
+                                  NULL);
+
+    fsb = XmCreateFileSelectionDialog( b1, &#8220;FSB Dialog&#8221;, NULL, 0);
+
+    XtAddCallback( b1, XmNactivateCallback, showDialog, fsb);
+
+  } else {
+    fsb = XmCreateFileSelectionBox( rc, &#8220;Select A File&#8221;, NULL, 0);
+    XtVaSetValues( fsb,
+                   XmNtopAttachment, XmATTACH_FORM,
+                   XmNbottomAttachment, XmATTACH_FORM,
+                   XmNleftAttachment, XmATTACH_FORM,
+                   XmNrightAttachment, XmATTACH_FORM,
+                   NULL);
+    XtManageChild( fsb );
+
+  }
+
+  XtAddCallback( fsb, XmNokCallback, (XtCallbackProc)printDirF, fsb);
+  XtAddCallback( fsb, XmNcancelCallback, (XtCallbackProc)exit, NULL);
+
+  XtRealizeWidget( toplevel );
+  XtAppMainLoop( app );
+
+}
+</pre></td></tr></table><br><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5239930"></a>Makefile for File Selection Box Example Program</h3></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+#!smake <a class="indexterm" name="ITA.Widgets-22"></a>
+<a class="indexterm" name="ITA.Widgets-23"></a>
+
+#
+include /usr/include/make/commondefs
+
+CFILES =  fsb.c
+
+TARGETS = fsb
+
+CVERSION = -xansi
+OPTIMIZER = -g
+
+LLDLIBS =  -lSgm  -lXm -lXt -lX11 -lPW
+
+LCDEFS = -DFUNCPROTO -DDEBUG
+
+LCINCS = -I. -I$(MOTIF_HEADERS)
+
+targets: $(TARGETS)
+
+include $(COMMONRULES)
+
+fsb: $(OBJECTS)
+$(CC) -o $@ $(OBJECTS) $(LDFLAGS)
+</pre></td></tr></table><br></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE96832-PARENT"></a>Example Programs for Scale (Percent Done Indicator) Widget</h2></div></div>
+<p><a class="indexterm" name="ITA.Widgets-24"></a>
+<a class="indexterm" name="ITA.Widgets-25"></a>
+<a class="indexterm" name="ITA.Widgets-26"></a>
+<a class="indexterm" name="ITA.Widgets-27"></a>
+The following code produces a simple motif scale widget: </p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/* progress.c */ 
+/* cc -o progress progress.c -lXm -lXt */
+ #include &lt;Xm/Scale.h&gt;
+ void main(int argc, char** argv) {
+    Widget toplevel, scale;
+    XtAppContext app_context;
+    Arg args[5];
+    int nargs=0;
+
+    toplevel = XtAppInitialize(&amp;app_context, &#8220;Progress&#8221;, 
+                        NULL, 0, &amp;argc, argv, NULL, NULL, 0);
+ 
+    XtSetArg(args[nargs], XmNvalue, 50); nargs++;
+    XtSetArg(args[nargs], XmNorientation, XmHORIZONTAL); nargs++;
+    scale = XmCreateScale(toplevel, &#8220;scale&#8221;, args, nargs);
+    XtManageChild(scale);
+
+    XtRealizeWidget(toplevel);
+    XtAppMainLoop(app_context);
+}
+</pre></td></tr></table><p>The following resource file (named &#8220;Progress&#8221;) produces the slanted, thermometer look of the SGI percent done indicator. Also see the IRIS Viewkit VkProgressDialog class.</p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+!Progress - App-default resources for the progress sample program 
+
+*sgiMode: true
+*useSchemes: all 
+
+!Change the appearance o  the slider
+*scale.sliderVisual:  flat_foreground
+*scale.slidingMode:   thermometer
+*scale.slanted:       true
+
+!Set the correct scheme colors
+Progress*scale*foreground:    SGI_DYNAMIC BasicBackground
+Progress*scale*troughColor:   SGI_DYNAMIC TextFieldBackground
+</pre></td></tr></table><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE89093-PARENT"></a>Example Program for LED Widget</h2></div></div>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+<a class="indexterm" name="ITA.Widgets-28"></a>
+<a class="indexterm" name="ITA.Widgets-29"></a>
+/* ledbutton.c                                                 */		
+/* cc -o ledbutton ledbutton.c -lXm -lXt                        */
+/* ledbutton -xrm &#8220;*sgiMode: true&#8221; -xrm &#8220;*useSchemes: all&#8221;       */
+
+#include &lt;Xm/ToggleB.h&gt;
+
+void main(int argc, char** argv)
+{
+   Widget toplevel, toggle;
+   XtAppContext app_context;
+   Arg args[5];
+   int nargs=0;
+   
+   toplevel = XtAppInitialize(&amp;app_context, &#8220;LEDButton&#8221;, 
+		              NULL, 0, &amp;argc, argv, NULL, NULL, 0);
+
+   XtSetArg(args[nargs], XmNindicatorSize, 10);  nargs++;
+   XtSetArg(args[nargs], XmNindicatorType, Xm3D_N_OF_MANY);  nargs++;
+   toggle = XmCreateToggleButton(toplevel, &#8220;toggle&#8221;, args, nargs);
+   XtManageChild(toggle);
+
+   XtRealizeWidget(toplevel);
+   XtAppMainLoop(app_context);
+} 
+</pre></td></tr></table><br></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch14.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="apb.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 14. Printing From the Desktop </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix B. Desktop Variables </td></tr></table></div></body></html>

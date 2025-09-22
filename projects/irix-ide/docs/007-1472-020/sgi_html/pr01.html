@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Introduction</title><meta name="generator" content="DocBook XSL Stylesheets V1.49"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.0"><link rel="home" href="index.html" title="IRIS IM Programming Guide"><link rel="up" href="index.html" title="IRIS IM Programming Guide"><link rel="previous" href="index.html" title="IRIS IM Programming Guide"><link rel="next" href="ch01.html" title="Chapter 1. X Window System and IRIS IM Programming Guidelines"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Introduction</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch01.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><div class="preface"><div class="titlepage"><div><h2 class="title"><a name="id5418738"></a><a name="id59101"></a>Introduction</h2></div></div>
+<p>This guide is for all programmers interested in developing applications using IRIS IM&#8482;, Silicon Graphics' port of the industry-standard OSF/Motif&#8482; for use on Silicon Graphics IRIS workstations.<a name="idIntro1"></a><a name="idIntro2"></a><a name="idIntro3"></a></p>
+<p>This guide also contains advice for pure X and X toolkit programmers about programming in the Silicon Graphics® X environment, including how to work with nondefault visuals. The Silicon Graphics IRIX&#8482; operating system contains a fully compliant native X Window System&#8482; that provides standard X toolkits, font support, and improved X performance.</p>
+<p>X server enhancements include support for multiple visuals, overlay windows, the Display PostScript&#8482; Extension, the Shape Extension, the X Input Extension, the Shared Memory Extension, and simultaneous display on multiple graphics monitors. X applications can use high-performance GL rendering for 2D and 3D graphics.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5418794"></a><a name="id19217"></a>Suggestions for Further Reading</h2></div></div>
+<p>For comprehensive information on the X Window System, Xlib, Xt, and X protocol, see the Digital Press X series:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>X Window System: The Complete Reference to Xlib, X Protocol, ICCCM, XLFD</i>, Third Edition, X Version 11, Release 5, Scheifler, Robert W. and James Gettys, et al., Digital Press&#8212;Digital Equipment Corporation, Burlington MA, 1992. ISBN 1-55558-088-2</p>
+</li>
+<li><p><i>X Window System Toolkit: The Complete Programmer's Guide and Specification</i>, Asente, Paul J. and Ralph R. Swick, Digital Press&#8212;Digital Equipment Corporation, Burlington MA, 1992. ISBN 1-55558-051-3</p>
+</li>
+</ul></div><p>Or refer to the O'Reilly X Window System Series, Volumes 1,2, 4, and 5:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Volume One: <i>Xlib Programming Manual</i>, by Adrian Nye, published by O'Reilly &amp; Associates, Inc., Sebastopol, California.</p>
+</li>
+<li><p>Volume Two: <i>Xlib Reference Manual</i>, published by O'Reilly &amp; Associates, Inc., Sebastopol, California.</p>
+</li>
+<li><p>Volume Four: <i>X Toolkit Intrinsics Programming Manual</i>, by Adrian Nye and Tim O'Reilly, published by O'Reilly &amp; Associates, Inc., Sebastopol, California.</p>
+</li>
+<li><p>Volume Five: <i>X Toolkit Intrinsics Reference Manual</i>, published by O'Reilly &amp; Associates, Inc., Sebastopol, California.</p>
+</li>
+</ul></div><p>For detailed information about the X server and X version 11, Release 5:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>The X Window System Server: X Version 11, Release 5</i>, Elias Israel and Erik Fortune, Digital Press - Digital Equipment Corporation, Bedford MA, 1992. ISBN 1-55558-096-3</p>
+</li>
+<li><p><i>R5 Update&#8212;Programmer's Supplement for Release 5 of the X Window System, Version 11</i>, David Flanagan, O'Reilly &amp; Associates, Inc., Sebastopol CA, 1991. ISBN 0-937175-86-2</p>
+</li>
+</ul></div><p>For information on OSF/Motif:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>OSF/Motif Programmer's Guide</i>, <i>Revision 1.2</i>, Open Software Foundation, PTR Prentice-Hall, Inc., Englewood Cliffs NJ, 1993.</p>
+</li>
+<li><p><i>OSF/Motif Programmer's Reference</i>, <i>Revision 1.2</i>, Open Software Foundation, PTR Prentice-Hall, Inc., Englewood Cliffs NJ, 1993.</p>
+</li>
+<li><p><i>OSF/Motif User's Guide</i>, <i>Revision 1.2</i>, Open Software Foundation, PTR Prentice-Hall, Inc., Englewood Cliffs NJ, 1993. ISBN 0-13-643131-3</p>
+</li>
+<li><p>Volume Six: <i>Motif Programming Manual</i>, by Dan Heller, published by O'Reilly &amp; Associates, Inc., Sebastopol, California.</p>
+</li>
+</ul></div><p>These and other books in the X Window System series and OSF/Motif series are available from bookstores. They are referred to throughout this document.</p>
+<p>For more information on programming in OpenGL, refer to these manuals:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>OpenGL Reference Manual</i>, from the OpenGL Architecture Review Board, published by Addison-Wesley Publishing Company, Reading, Massachusetts, 1992. ISBN 0-201-63276-4. </p>
+</li>
+<li><p><i>OpenGL Programming Guide</i>, written by Jackie Neider, Tom Davis, and Mason Woo, published by Addison-Wesley Publishing Company, Reading, Massachusetts. ISBN 0-201-63274-8</p>
+</li>
+</ul></div><p>For more information on programming with IRIS GL, refer to these Silicon Graphics manuals:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><i>Graphics Library Programming Guide</i> </p>
+</li>
+<li><p><i>Graphics Library Programming Tools and Techniques</i> </p>
+</li>
+</ul></div><p>The Silicon Graphics book <i>OpenGL Porting Guide</i> contains information on porting IRIS GL programs to OpenGL, including information on converting GL/IRIS IM mixed-model programs.</p>
+</div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5364702"></a>Typographical Conventions</h2></div></div>
+<p>This guide uses the following typographical conventions:</p>
+<div class="variablelist"><table border="0" cellspacing="3"><tr valign="top"><td><span class="term"><span class="bold"><b>functions()</b></span></span></td><td width="10"> </td><td><p>appear in boldface font with parentheses.</p>
+
+</td></tr><tr valign="top"><td><span class="term">
+
+
+<tt>arguments</tt>
+</span></td><td width="10"> </td><td><p>
+
+
+<tt></tt>appear in italic font.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><tt>file names</tt></span></td><td width="10"> </td><td><p>appear in italic font.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><tt>code</tt></span></td><td width="10"> </td><td><p>appears in courier font.</p>
+
+</td></tr><tr valign="top"><td><span class="term">
+
+
+<tt>&lt;key&gt;</tt></span></td><td width="10"> </td><td><p>appears in boldface courier font, surrounded by angle brackets, indicating that you press the designated key on your keyboard.</p>
+
+</td></tr><tr valign="top"><td><span class="term"><b><tt>entry</tt></b></span></td><td width="10"> </td><td><p>appears in boldface courier font, indicating that you enter the information from your keyboard.</p>
+
+</td></tr></table></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="ch01.html">Next</a></td></tr><tr><td width="40%" align="left">IRIS IM Programming Guide </td><td width="20%" align="center"> </td><td width="40%" align="right">Chapter 1. X Window System and IRIS IM Programming Guidelines </td></tr></table></div></body></html>

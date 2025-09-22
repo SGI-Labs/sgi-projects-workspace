@@ -1,0 +1,1748 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Appendix C. Online Help Examples</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="up" href="index.html" title="IRIX® Interactive Desktop Integration Guide"><link rel="previous" href="apb.html" title="Appendix B. Desktop Variables"><link rel="next" href="apd.html" title="Appendix D. The Icon Description Language"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix C. Online Help Examples</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apb.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apd.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="appendix"><div class="titlepage"><div><h2 class="title"><a name="LE65110-PARENT"></a>Appendix C. Online Help Examples</h2></div></div>
+<p><a class="indexterm" name="ITC.SGIHelp-0"></a>
+<a class="indexterm" name="ITC.SGIHelp-1"></a>
+<a class="indexterm" name="ITC.SGIHelp-2"></a>
+This appendix contains listings of several online help document files. </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="apc.html#LE61401-PARENT" title="A Simple Help Document">&#8220;A Simple Help Document&#8221;</a> </p>
+</li>
+<li><p><a href="apc.html#LE13073-PARENT" title="Allowable Elements in a Help Document">&#8220;Allowable Elements in a Help Document&#8221;</a> </p>
+</li>
+<li><p><a href="apc.html#LE37036-PARENT" title="An Example of Implementing Help in an Application">&#8220;An Example of Implementing Help in an Application&#8221;</a> </p>
+</li>
+</ul></div><p><a class="indexterm" name="ITC.SGIHelp-3"></a>
+This appendix also lists the source of an example program that implements many online help features, along with its accompanying help document and helpmap file. All of these files are available online. Their locations are given before each listing. </p>
+<p>To view these examples on your system, you must install the <span class="bold"><b>insight_dev</b></span> product, which contains the SGIHelp library and include file, help generation tools, examples, and templates.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE61401-PARENT"></a>A Simple Help Document</h2></div></div>
+<p><a class="indexterm" name="ITC.SGIHelp-4"></a>
+<a href="apc.html#LE61943-PARENT" title="Example C-1. An Example of a Help Source File">Example C-1</a> lists a simple help document. It's intended as a primer for writing online help documents. You can find this file online at <tt>/usr/share/Insight/XHELP/samples/sampleDoc/sample.sgm</tt>.</p>
+<div class="example"><a name="LE61943-PARENT"></a><p><a name="LE61943-PARENT"></a><b>Example C-1. An Example of a Help Source File</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+&lt;dochelp&gt;
+ 
+&lt;!-- 
+  ==================================================================
+  This block denotes a SGML-style comment.
+ 
+  For those that are unfamiliar with SGML, this sample file
+  will try to cover the usage of a variety of the tags that
+  are used in the XHELP DTD. The examples shown in this sample
+  should be sufficient for a writer to produce a very high-quality,
+  functional help document for use with an application.
+ 
+  It is best to view this sample once it has been published,
+  and then compare what you see in the viewing software to
+  the actual tags displayed in this file. 
+ 
+  Each HelpTopic block written below displays how to use the
+  DTD to implement specific elements/constructs. It should be
+  fairly self-explanatory.
+ 
+  A couple of things to look for when constructing/editing
+  your SGML file:
+ 
+        o Make sure a starting element tag has an associated
+          end tag! If not, then the file will not compile
+          properly. This is analagous to missing a bracket
+          or paranthesis in a C program!
+ 
+        o SGML is NOT case sensitive! &quot;HELPTOPIC&quot; is the same
+          as &quot;helptopic&quot;, which is the same as &quot;HelpTopic&quot;, etc.
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;intro&quot;&gt;
+&lt;Helplabel&gt;SGI Sample SGML File&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;This file contains examples using many of the constructs used 
+in the XHELP DTD.&lt;/para&gt;
+&lt;para&gt;Notice that the general outline used for putting together 
+a help &quot;card&quot; is defined by this particular SGML block. The preceding tag
+defines the title that will be displayed for this card. The area you
+are currently reading is a description for the feature or function you
+are documenting. It is not necessary to use each of these tags, although
+the &quot;HelpTopic&quot; tag is required.&lt;/para&gt;
+ 
+&lt;para&gt;A writer of help information may also wish to include a glossary
+of terms. In that way, the documenter can tag terms within the text,
+and have them display a specified definition from within the viewer. 
+A sample of this is: &lt;glossterm&gt;sgihelp&lt;/glossterm&gt;.&lt;/para&gt;
+&lt;para&gt;The actual definition for the term is found at the end of this
+SGML sample.&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  It's important to point out that the &quot;HelpID&quot; is the glue that
+  binds the help text to the application, through the use of the
+  provided Help API (library, header file).
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;helpid_info&quot;&gt;
+&lt;Helplabel&gt;What is a HelpID?&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;The HelpID attribute is used to by your application to
+instruct the help server which help &quot;card&quot; to display. In this
+case, sending the help server an ID of &quot;helpid_info&quot; would bring up
+this particular block (or &quot;card&quot;).&lt;/para&gt;
+&lt;para&gt;The other &quot;ID&quot; is often used as an anchor point 
+(and should be used within an &quot;ANCHOR&quot; tag) for hypertext
+links within your text. If you wish to refer to a particular card
+one simply uses the ID as the anchor point for the link syntax.&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  This section illustrates the simple usage of specifying a note,
+  warning, tip, or caution within your help document.
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;note_example&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;AI003&quot;&gt;Using Notes, Warnings or Tips Within a Paragraph&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;Within the paragraph tag, there are a variety of text marking
+mechanisms. Each of these delineations must appear as part of the
+paragraph (&quot;para&quot;) element.&lt;/para&gt;
+&lt;para&gt;This area shows the documentor how a warning, note or &quot;tip&quot;
+can be used within a persons's help text.&lt;/para&gt;
+ 
+&lt;para&gt;
+&lt;warning&gt;&lt;para&gt;Be Careful. This is a warning.&lt;/para&gt;&lt;/warning&gt;
+&lt;note&gt;&lt;para&gt;For your information, this is a note.&lt;/para&gt;&lt;/note&gt;
+&lt;tip&gt;&lt;para&gt;When you prepare your help file, you may wish to include a tip.&lt;/para&gt;
+&lt;/tip&gt;
+&lt;caution&gt;&lt;para&gt;Use a caution tag when you wish to have the user use caution!&lt;/para&gt;
+&lt;/caution&gt;
+&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  This next section illustrates how to display computer output, 
+  program listings, etc. within your help document.
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;literal_example&quot;&gt;
+&lt;Helplabel&gt;Using Literals or Examples Within a Paragraph&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;
+This area shows the documentor how to implement specific examples within
+their help text. It also describes how to the &quot;literal&quot; tag.&lt;/para&gt;
+&lt;para&gt;
+When used within a paragraph, the LiteralLayout tag
+tells the viewing software to take this next block &quot;as is&quot;,
+with all accompanying new-lines and spacing left intact.&lt;/para&gt;
+&lt;Example&gt;
+&lt;Title&gt;Various Examples: ComputerOutput, LiteralLayout, ProgramListing&lt;/Title&gt;
+ 
+&lt;para&gt;
+What follows is a computer output listing from when a
+user typed &lt;userInput&gt;ls&lt;/userInput&gt; :
+&lt;ComputerOutput&gt;
+% ls -l
+total 6777
+-rwxr-xr-x  1 guest  guest   29452 Mar  8 19:12 menu*
+-rw-r--r--  1 guest  guest    2375 Mar  8 19:11 menu.c++
+% 
+&lt;/ComputerOutput&gt;
+&lt;/para&gt;
+ 
+&lt;para&gt;
+Each of the subsequent three entries should be indented and on their
+own line:
+&lt;LiteralLayout&gt;
+    Here is line one.
+    This is line two.
+    This is line three.
+&lt;/LiteralLayout&gt;
+&lt;/para&gt;
+ 
+&lt;para&gt;
+The following is a listing from a &quot;C&quot; program:
+&lt;ProgramListing&gt;
+    #include &quot;X11/Xlib.h&quot;
+    #include &quot;helpapi/HelpBroker.h&quot;
+ 
+    void main(int, char**)
+    {
+         /* default to the value of the DISPLAY env var */
+         Display *display = XOpenDisplay(NULL);
+ 
+         if( display ) {
+               /* initialize the help server */
+               SGIHelpInit(display, &quot;MyApp&quot;, &quot;.&quot;);
+         }
+         ...
+    }
+&lt;/ProgramListing&gt;
+&lt;/para&gt;
+&lt;/Example&gt;
+ 
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  This next section illustrates how to incorporate graphics within
+  your help text.
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;graphic_example&quot;&gt;
+&lt;Helplabel&gt;Using Graphics or Figures Within Your Help Text&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;
+This area displays how a graphics or figure can be used within the flow of
+your information. The following figure is in the &quot;GIF&quot; format:
+&lt;/para&gt;
+ 
+&lt;Figure ID=&quot;figure_01&quot; Float=&quot;Yes&quot;&gt;
+    &lt;title&gt;A GIF Raster Image&lt;/title&gt;
+    &lt;Graphic fileref=&quot;sample1.gif&quot; format=&quot;GIF&quot;&gt;&lt;/Graphic&gt;
+&lt;/Figure&gt;
+ 
+&lt;para&gt;
+Currently, support is provided for &lt;emphasis&gt;raster&lt;/emphasis&gt; graphics in
+the GIF and TIF formats. Support is provided for &lt;emphasis&gt;vector&lt;/emphasis&gt;
+graphics utilizing the CGM format.
+&lt;/para&gt;
+&lt;para&gt;
+This next figure in the CGM (Computer Graphics Metafile) format:
+&lt;/para&gt;
+ 
+&lt;Figure ID=&quot;figure_02&quot;&gt;
+    &lt;title&gt;A CGM Vector Image&lt;/title&gt;
+    &lt;Graphic fileref=&quot;sample2.cgm&quot; format=&quot;CGM&quot;&gt;&lt;/Graphic&gt;
+&lt;/Figure&gt;
+ 
+&lt;para&gt;
+A special note that all equations are treated as inline images, as shown
+here:
+&lt;equation&gt;
+    &lt;Graphic fileref=&quot;matrix.gif&quot; format=&quot;GIF&quot;&gt;&lt;/Graphic&gt;
+&lt;/equation&gt;
+&lt;/para&gt;
+ 
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  Hyperlinks can be a very powerful navigation mechanism!
+  Liberal usage is encouraged.
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;link_example&quot;&gt;
+&lt;Helplabel&gt;Using HyperLinks&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;One of the most powerful capabilities of the sgihelp viewer
+is the use of hyperlinks to associate like pieces of information. 
+Constructing these links in SGML is trivial.&lt;/para&gt;
+&lt;para&gt;Notice that the &quot;Link&quot; element requires an attribute called
+&quot;Linkend&quot;. This defines the area (anchor) to link to. The &quot;Linkend&quot;
+attribute points to the ID of some SGML element. In composing
+help text, it is probably best to assign an ID to each &quot;HelpTopic&quot;
+element, and use those same ID's when specifying a Link.&lt;/para&gt;
+&lt;para&gt;A link is defined below:&lt;/para&gt;
+&lt;para&gt;For more information about using Notes, refer to the area
+entitled &lt;Link Linkend=&quot;AI003&quot;&gt;&quot;Using Notes, Warnings or Tips
+Within a Paragraph&quot;&lt;/Link&gt;&lt;/para&gt;
+&lt;para&gt;Note that the &quot;Anchor&quot; tag can also be used within a
+document to point to any level of granularity the author
+wishes to link to.&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  Note that there are *many* ways to specify lists. This example
+  shows some commonly-used permutations.
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;list_example&quot;&gt;
+&lt;Helplabel&gt;Using Lists Within Your Help Text&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;This area displays how a person can author 
+various types of lists within their help text.&lt;/para&gt;
+ 
+&lt;para&gt;Here is an itemized list that uses a dash to preface each item:&lt;/para&gt;
+&lt;ItemizedList Mark=&quot;dash&quot;&gt;
+&lt;ListItem&gt;&lt;para&gt;First Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Second Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Third Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;/ItemizedList&gt;
+ 
+&lt;para&gt;Here is an itemized list that uses a bullet to preface each item:&lt;/para&gt;
+&lt;ItemizedList Mark=&quot;bullet&quot;&gt;
+&lt;ListItem&gt;&lt;para&gt;First Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Second Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;/ItemizedList&gt;
+ 
+&lt;para&gt;Here is an ordered list, using standard enumeration:&lt;/para&gt;
+&lt;OrderedList&gt;
+&lt;ListItem&gt;&lt;para&gt;First Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Second Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Third Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;/OrderedList&gt;
+ 
+&lt;para&gt;Here is another ordered list, using upper-case Roman enumeration,
+showing nesting (sub-items) within the list (outline format):&lt;/para&gt;
+&lt;OrderedList Numeration=&quot;Upperroman&quot;&gt;
+&lt;ListItem&gt;&lt;para&gt;First Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Second Entry
+    &lt;OrderedList Numeration=&quot;Upperalpha&quot; InheritNum=&quot;Inherit&quot;&gt;
+        &lt;ListItem&gt;&lt;para&gt;First SubItem&lt;/para&gt;&lt;/ListItem&gt;
+        &lt;ListItem&gt;&lt;para&gt;Second SubItem&lt;/para&gt;&lt;/ListItem&gt;
+        &lt;ListItem&gt;&lt;para&gt;Third SubItem&lt;/para&gt;&lt;/ListItem&gt;
+        &lt;ListItem&gt;&lt;para&gt;Fourth SubItem&lt;/para&gt;&lt;/ListItem&gt;
+    &lt;/OrderedList&gt;
+&lt;/para&gt;&lt;/ListItem&gt;
+&lt;ListItem&gt;&lt;para&gt;Third Entry&lt;/para&gt;&lt;/ListItem&gt;
+&lt;/OrderedList&gt;
+ 
+&lt;para&gt;Here is a variable list of terms:&lt;/para&gt;
+&lt;VariableList&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;SGI&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Silicon Graphics, Inc.&lt;/para&gt;&lt;/ListItem&gt;
+&lt;/VarListEntry&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;SGML&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;A Meta-language for defining documents.&lt;/para&gt;&lt;/ListItem&gt;
+&lt;/VarListEntry&gt;
+&lt;/VariableList&gt;
+ 
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  Some final examples...
+  ==================================================================
+--&gt;
+ 
+&lt;HelpTopic HelpID=&quot;misc_example&quot;&gt;
+&lt;Helplabel&gt;Other Miscellaneous Textual Attributes&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;This area displays some miscellaneous tags that can be used
+within the context of your help document.&lt;/para&gt;
+ 
+&lt;para&gt;
+&lt;Comment&gt;This is a comment that is not to be confused
+with the SGML-style comment! Instead, this comment will be
+parsed and carried into the text of your document. Usually it's
+used in production, for specifying to someone an area of concern,
+an area that needs editing, etc.
+&lt;/Comment&gt; 
+&lt;/para&gt;
+ 
+&lt;para&gt;Within your text, you may wish to denote a footnote.
+&lt;Footnote id=&quot;foot1&quot;&gt;&lt;para&gt;This block is a footnote!&lt;/para&gt;&lt;/Footnote&gt;
+The XHELP DTD will allow you to do that.
+&lt;/para&gt;
+ 
+&lt;para&gt;
+You may wish to add a copyright symbol to your text, such as:
+Silicon Graphics, Inc.&lt;trademark Class=&quot;Copyright&quot;&gt;&lt;/trademark&gt;
+&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+ 
+&lt;!--
+  ==================================================================
+  If you wish to use/have a glossary of terms within your help text,
+  it is advised to put it at the end of your help &quot;book&quot;, as shown 
+  here. NOTE: CR or other characters (#PCDATA) is NOT allowed 
+  between the &lt;Glossary&gt; and &lt;Title&gt; tags! (mixed content model)
+  ==================================================================
+--&gt;
+ 
+&lt;Glossary&gt;
+&lt;Title&gt;Glossary&lt;/Title&gt;
+&lt;GlossEntry&gt;
+&lt;GlossTerm&gt;help&lt;/GlossTerm&gt;
+&lt;GlossDef&gt;
+&lt;para&gt;To give assistance to; to get (oneself) out of a difficulty;
+a source of aid.&lt;/para&gt;
+&lt;/GlossDef&gt;
+&lt;/GlossEntry&gt;
+&lt;GlossEntry&gt;
+&lt;GlossTerm&gt;sgihelp&lt;/GlossTerm&gt;
+&lt;GlossDef&gt;
+&lt;para&gt;This is Silicon Graphics, Inc. version of a &quot;Xhelp&quot; compatible
+server. Through the use of an available API, and a help text
+compiler, books can be constructed that can be used to render
+help information for the given application.&lt;/para&gt;
+&lt;/GlossDef&gt;
+&lt;/GlossEntry&gt;&lt;/Glossary&gt;
+ 
+ 
+&lt;!--
+  ==================================================================
+  Don't forget the very last ending tag...!!!
+  ==================================================================
+--&gt;
+ 
+&lt;/dochelp&gt;
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE13073-PARENT"></a>Allowable Elements in a Help Document</h2></div></div>
+<p><a class="indexterm" name="ITC.SGIHelp-5"></a>
+<a class="indexterm" name="ITC.SGIHelp-6"></a>
+<a href="apc.html#LE39308-PARENT" title="Example C-2. A Description of the Elements Defined by the Help DTD">Example C-2</a> lists a help document that describes the legal structures defined by the help DTD. You can find this file online at <tt>/usr/share/Insight/XHELP/samples/XHELP_elements/XHELP_elements.sgm</tt>.</p>
+<div class="example"><a name="LE39308-PARENT"></a><p><a name="LE39308-PARENT"></a><b>Example C-2. A Description of the Elements Defined by the Help DTD</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+&lt;DOCHELP&gt;
+&lt;HELPTOPIC HelpID=&quot;&quot;&gt;
+&lt;HELPLABEL&gt;The Elements Alphabetized&lt;/HELPLABEL&gt;
+&lt;DESCRIPTION&gt;
+&lt;PARA&gt;Emphasized entries indicate block-oriented elements.&lt;/PARA&gt;
+&lt;/DESCRIPTION&gt;&lt;/HELPTOPIC&gt;
+ 
+&lt;HELPTOPIC HelpID=&quot;&quot;&gt;
+&lt;HELPLABEL&gt;Common Attributes &lt;/HELPLABEL&gt;
+&lt;DESCRIPTION&gt;
+&lt;PARA&gt;Common attributes include ID.&lt;/PARA&gt;
+ 
+&lt;PARA&gt;ID is an identifier, which must be a
+string that is unique at least within the document and
+which must begin with a letter.&lt;/PARA&gt;
+&lt;/DESCRIPTION&gt;&lt;/HELPTOPIC&gt;
+ 
+&lt;HELPTOPIC HelpID=&quot;&quot;&gt;
+&lt;HELPLABEL&gt;Other Attributes&lt;/HELPLABEL&gt;
+&lt;DESCRIPTION&gt;
+&lt;PARA&gt;Certain other attributes occur regularly.  PageNum is
+the number of the page on which a given element begins
+or occurs in a printed book.  Label holds some text 
+associated with its element that is to be output when
+the document is rendered.  
+Type is used with links,
+as it is clear that different types of links may be
+required; it duplicates the function of Role.&lt;/PARA&gt;
+ 
+&lt;PARA&gt;The Class attribute has been introduced in an attempt to
+control the number of computer-specific in-line elements.
+The elements that bear the Class attribute, such as 
+Interface, have general
+meanings that can be made more specific 
+by providing a value for Class from the delimited list
+for that element.  For example, for the Interface element
+one may specify Menu, or Button; for the MediaLabel
+element one may specify CDRom or Tape.  Each element
+has its own list of permissible values for Class, and
+no default is set, so you can ignore this attribute
+if you wish.&lt;/PARA&gt;
+ 
+&lt;PARA&gt;An attribute that has the keyword IMPLIED bears no
+processing expections if it is absent or its 
+value is null.  Application designers might wish to
+supply plausible defaults, but none is specified here.&lt;/PARA&gt;
+&lt;/DESCRIPTION&gt;&lt;/HELPTOPIC&gt;
+ 
+&lt;HELPTOPIC HelpID=&quot;&quot;&gt;
+&lt;HELPLABEL&gt;cptrphrase.gp&lt;/HELPLABEL&gt;
+&lt;DESCRIPTION&gt;
+ 
+&lt;PARA&gt;This parameter entity has been introduced to provide
+some structure for in-line elements related to computers.
+Its contents are:  plain text,
+Anchor, Comment, Link, ComputerOutput, and UserInput.&lt;/PARA&gt;
+ 
+&lt;PARA&gt;Many of these elements now have attributes 
+with delimited value lists; some former in-line elements now appear as 
+values for those attributes.&lt;/PARA&gt;
+&lt;/DESCRIPTION&gt;&lt;/HELPTOPIC&gt;
+ 
+&lt;HELPTOPIC HelpID=&quot;&quot;&gt;
+&lt;HELPLABEL&gt;&quot;In-line&quot; vs. &quot;In flow&quot;&lt;/HELPLABEL&gt;
+&lt;DESCRIPTION&gt;
+ 
+&lt;PARA&gt;In this document, &quot;in-line&quot; means &quot;occuring within a line 
+of text, like a character or character string, not causing
+a line break.&quot;  This term is sometimes used to 
+refer to objects such as an illustration around which 
+something like a paragraph is wrapped; here that circumstance
+will be called &quot;in flow.&quot;  There is no provision yet
+for indicating that an object is in flow, but one could
+make creative use of the Role attribute to do so.&lt;/PARA&gt;
+ 
+&lt;PARA&gt;A related point:  formal objects have titles; informal 
+objects do not.  That an object is informal does not mean
+that it is in-line:  these are two different 
+characteristics.&lt;/PARA&gt;
+&lt;/DESCRIPTION&gt;&lt;/HELPTOPIC&gt;
+ 
+&lt;HELPTOPIC HelpID=&quot;&quot;&gt;
+&lt;HELPLABEL&gt;List of Elements&lt;/HELPLABEL&gt;
+&lt;DESCRIPTION&gt;
+ 
+&lt;VARIABLELIST&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Actions&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A set of entries, usually in a list form, that comprise
+the appropriate set of functions or steps to perform a corrective
+action for a situation that is described as part of a help card.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Anchor&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Marks a target for a Link.  
+Anchor may appear almost anywhere, and has no content.
+Anchor has ID, Pagenum, Remap, Role, and XRefLabel attributes;
+the ID is required.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Caution&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;An admonition set off from the text;
+Tip, Warning, Important, and Note all share its model.
+Its contents may include paragraphs, lists, and so forth,
+but not another admonition.
+Caution and its sisters have common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt; 
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Comment&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A remark made within the document file that
+is intended for use during interim stages of production.
+A Comment should not be displayed to the reader of the 
+finished, published work.  It may appear almost anywhere, 
+and may contain almost anything
+below the Section level.  Note that,
+unlike an SGML comment, unless you take steps
+to suppress it, the Comment element
+will be output by an SGML parser
+or application.  You may wish to do this to display Comments
+along with text during the editorial process.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;ComputerOutput&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Data presented to the user by
+a computer.
+It may contain elements from cptrphrase.gp,
+and has common and 
+MoreInfo attributes  For the MoreInfo attribute
+see &lt;EMPHASIS&gt;Application.&lt;/EMPHASIS&gt;&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Copyright&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Copyright information about
+a document.  It consists of one or
+more Years followed by any number of Holders.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Date&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Date of publication or revision.
+It contains plain text.  (No provision
+has been made for representing eras; you could include this
+information along with the date data.)&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Description&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A part of a HelpTopic element.
+Description may contain in-line elements.
+The body may be comprised of paragraphs.
+It is used to contain the body of text that
+is used as a help card.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;DocHelp&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A collection of help document components.
+A DocHelp entry may have a series of HelpTopic(s).
+All back matter is optional, and at this time includes
+a Glossary.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;DocInfo&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Metainformation for a book
+component, in which it may appear.  Only Title and AuthorGroup
+are required.  DocInfo may contain, in order:  
+the required Title, optional TitleAbbrev and 
+Subtitle, followed by one or more 
+AuthorGroups, any number of
+Abstracts, an optional RevHistory, and any number of 
+LegalNotices.  DocInfo has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Emphasis&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Provided for use where you would 
+traditionally use italics
+or bold type to emphasize a word or phrase.
+It contains plain text and 
+has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Equation&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A titled mathematical equation displayed
+on a line by itself, rather than in-line.  It has an optional
+Title and TitleAbbrev, followed by either
+an InformalEquation or a Graphic (see 
+&lt;EMPHASIS&gt;Graphic&lt;/EMPHASIS&gt;). 
+Equation has common and Label attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Example&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Intended for sections of program source code
+that are provided as examples in the text.  
+It contains a required Title and an
+optional TitleAbbrev, followed by one or more block-oriented
+elements in any combination.  It has common and Label
+attributes.  A simple Example might contain a Title 
+and a ProgramListing.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Figure&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;An illustration.  
+It must have a Title, and may have a
+TitleAbbrev, followed by one or more of
+BlockQuote,   
+InformalEquation, Graphic,
+InformalTable, Link, LiteralLayout, 
+OLink, ProgramListing, Screen, Synopsis, and ULink,
+in any order.  Figure has common,
+Label, and Float attributes; Float indicates
+whether the Figure is supposed to be rendered 
+where convenient (yes) or at
+the place it occurs in the text (no, the default). To
+reference an external file containing graphical
+content use the Graphic element within Figure.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Footnote&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;The contents of a footnote, when
+the note occurs outside the block-oriented element in
+which the FootnoteRef occurs.  
+(Compare &lt;EMPHASIS&gt;InlineNote.&lt;/EMPHASIS&gt;)
+The point in the text where the mark for a specific 
+footnote goes is indicated by FootnoteRef.
+Footnote may contain Para, SimPara, BlockQuote, InformalEquation, InformalTable,
+Graphic, Synopsis, LiteralLayout, ProgramListing,
+Screen, and any kind of list.
+It has ID, Label, Lang, Remap, Role, and XRefLabel 
+attributes; the ID attribute is required, as 
+a FootnoteRef must point to it.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Glossary&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A glossary of terms.  Glossary
+may occur within a Chapter, Appendix, or Preface,
+or may be a book component in its own right.
+It contains in order an optional DocInfo, optional
+Title, and optional TitleAbbrev, followed by 
+any number of block-oriented elements, followed by 
+one or more GlossEntries or one or more GlossDivs.
+It has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;GlossDef&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;The definition attached to a GlossTerm
+in a GlossEntry.  It may contain Comments, GlossSeeAlsos,
+paragraphs, and other block-oriented elements, in
+any order; it has common and Subject attributes.  The Subject
+attribute may hold a list of subject areas (e.g., DCE RPC 
+General) as keywords.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;GlossEntry&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;An entry in a Glossary.  
+It contains, in order, a required
+GlossTerm, an optional Acronym,
+an optional Abbrev, and either a
+GlossSee or any number of GlossDefs.
+It has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt; 
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;GlossTerm&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A term in the text of a Chapter (for example) that is
+glossed in a Glossary; also used for those terms in GlossEntries, in the
+Glossary itself.  As you may not want to tag all occurrences
+of these words outside of Glossaries, you might consider 
+GlossTerm, when used outside of Glossaries, to be similar
+to FirstTerm, except that GlossTerm may contain other 
+in-line elements.  GlossTerm contains in-line elements
+and has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Graphic&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Encloses graphical data or 
+points via an attribute to an external file containing such data,
+and is to be rendered as an object, not in-line.
+It has Format,
+Fileref, Entityref, and ID attributes.
+The format attribute may have the value of 
+any of the formats defined at the head of the DTD,
+including CGM-CHAR, CGM-CLEAR, DITROFF, DVI, EPS, 
+EQN, FAX, FAXTILE, GIF, IGES, PIC, PS, TBL, TEX,
+TIFF.&lt;/PARA&gt;
+ 
+&lt;PARA&gt;The value of Fileref should be a filename, qualified by
+a pathname if desired; the value of Entityref should be that of an
+external data entity.  If data is given as the 
+content of Graphic, both Entityref and Fileref,
+if present at all, should
+be ignored, but a Format value should be supplied.
+if no data is given as the content of 
+Graphic and a value for Entityref
+is given, Fileref, if present, should be ignored
+but no Format value should be supplied.
+Finally, if there is no content for Graphic and
+Entityref is absent or null, Fileref must be 
+given the appropriate value, and again no
+Format value should be supplied.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;HelpTopic&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A part of a DocHelp document.
+HelpTopic contains a HelpLabel, followed in order by
+a Description, and optionally an Actions area.
+HelpTopic has common and HelpId attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;HelpLabel&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;The text of a heading or the title of the HelpTopic
+block-oriented element.  HelpLabel may contain
+in-line elements, and has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;InlineEquation&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;An untitled mathematical equation 
+occurring in-line or as the content of an Equation. 
+It contains a Graphic, and has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;InlineGraphic&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Encloses graphical data or 
+points via an attribute to an external file containing such data,
+and is to be rendered in-line.
+InlineGraphic has Format, Fileref, Entityref, and ID attributes.
+The format attribute may have the value of 
+any of the formats defined at the head of the DTD, under &quot;Notations.&quot;
+If it is desired to point to an external file, a filename may 
+be supplied as the value of the Fileref attribute, or an
+external entity name may be supplied as the value of the 
+Entityref attribute.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;ItemizedList&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A list in which each item is marked with
+a bullet, dash, or other dingbat (or no mark at all).  
+It consists of one or more ListItems.  A ListItem in an
+ItemizedList contains paragraphs and other 
+block-oriented elements, which
+may in turn contain other lists; an ItemizedList may be 
+nested within other lists, too.  It has common attributes and
+a Mark attribute.  Your application might supply the mark to be used
+for an ItemizedList, but you can use this attribute to 
+indicate the mark you desire to be used; there
+is no fixed list of these.hfill\break &lt;EMPHASIS&gt;Usage Note:&lt;/EMPHASIS&gt;  
+You might want to use one of the ISO text entities
+that designates an appropriate dingbat.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Link&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A hypertext link.  At present, all
+the link types represented in the DTD are
+provisional.  Link is less provisional than the
+others, however.  In HyTime parlance, Link is a 
+clink.  It may contain in-line elements
+and has Endterm, Linkend, and Type attributes.  The required
+Linkend attribute specifies the target of the link, 
+and the optional Endterm attribute specifies 
+text that is to be fetched from elsewhere in the document
+to appear in the Link.  You can also supply this text directly as
+the content of the Link, &lt;EMPHASIS&gt;in which case the
+Endterm attribute is to be ignored (new and tentative
+rule for this version, comments invited)&lt;/EMPHASIS&gt;.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt; 
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;ListItem&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A wrapper for the elements of
+items in an ItemizedList or OrderedList; it also
+occurs within VarListEntry in VariableList.
+It may contain just about anything except Sects and book components.
+It has common attributes and an Override attribute, which
+may have any of the values of ItemizedList's
+Mark attribute; use Override to override the mark
+set at the ItemizedList level, when you desire to create
+ItemizedLists with varying marks.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;LiteralLayout&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;The wrapper for lines set off from
+the main text that are not tagged as Screens, Examples,
+or ProgramListing, in which line breaks and leading
+white space are to be regarded as significant.
+It contains in-line elements, and has common 
+and Width attributes, for specifying a number representing
+the maximum width of the contents.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Note&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A message to the user, set off from the text.
+See &lt;EMPHASIS&gt;Caution.&lt;/EMPHASIS&gt;&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;OrderedList&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A numbered or lettered list, consisting of
+ListItems.  A ListItem in an
+OrderedList contains paragraphs and other 
+block-oriented elements, which
+may in turn contain other lists; an OrderedList may be 
+nested within other lists, too. 
+OrderedList has common attributes, along with 
+a Numeration attribute, which
+may have the value Arabic, Upperalpha, Loweralpha,
+Upperroman, or Lowerroman.  The default is Arabic (1, 2, 3, . . .).  
+It has an InheritNum attribute, for which the value Inherit specifies for a
+nested list that the numbering of ListItems should include the 
+number of the item within which they are nested (2a, 2b, etc.,
+rather than a, b, etc.); the default value is Ignore.  
+It has a Continuation attribute, with values 
+Continues or Restarts (the default), which may be used to
+indicate whether the numbering of a list begins afresh (default)
+or continues that of the immediately preceding list (Continues).  
+You need supply the Continuation attribute only
+if your list continues the numbering of the preceding list.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Para&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A paragraph.  A Para may not
+have a Title:  to attach a Title to a Para use FormalPara.  Para
+may contain any in-line element and almost
+any block-oriented element.  Abstract, AuthorBlurb, Caution, 
+Important, Note, and Warning are excluded, as are Sects and higher-level 
+elements.  Para has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;ProgramListing&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A listing of a program. 
+Line breaks and leading 
+white space are significant in a ProgramListing, which  
+may contain in-line elements, including LineAnnotations.
+(LineAnnotations are a document author's 
+comments on the code, not the comments written
+into the code itself by the code's author.)
+ProgramListing has common and Width attributes, the 
+latter for specifying a number representing the maximum 
+width of the contents.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Term&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;The hanging term attached to a ListItem 
+within a VarListEntry in a
+VariableList; visually, a VariableList 
+is a set of Terms with attached items such as paragraphs.  Each
+ListItem may be associated with a set of Terms.  Term may contain
+in-line elements. It has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt; 
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Tip&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A suggestion to the user, set off from 
+the text. See &lt;EMPHASIS&gt;Caution.&lt;/EMPHASIS&gt;&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Title&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;The text of a heading or the title of a
+block-oriented element.  Title may contain
+in-line elements, and has common and PageNum attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt; 
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;Trademark&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A trademark.  It may contain members of cptrphrase.gp,
+and has common and Class attributes.
+Class may have the values Service, Trade, Registered,
+or Copyright; the default is Trade.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;UserInput&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Data entered by the user.  
+It may contain elements from cptrphrase.gp,
+and has common and MoreInfo attributes.  For the MoreInfo attribute 
+see &lt;EMPHASIS&gt;Application.&lt;/EMPHASIS&gt;&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;VariableList&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;An optionally 
+titled list of VarListEntries, which are
+composed of sets of one or more Terms with associated
+ListItems; ListItems contain paragraphs and other block-oriented
+elements in any order.  Inclusions 
+are as for OrderedList (see &lt;EMPHASIS&gt;OrderedList&lt;/EMPHASIS&gt;).  
+VariableList has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;VarListEntry&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;A component of VariableList (see 
+&lt;EMPHASIS&gt;VariableList&lt;/EMPHASIS&gt;).  It has common attributes.&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;
+&lt;EMPHASIS&gt;Warning&lt;/EMPHASIS&gt;&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;An admonition set off from the text.
+See &lt;EMPHASIS&gt;Caution.&lt;/EMPHASIS&gt;&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;VARLISTENTRY&gt;
+&lt;TERM&gt;XRef&lt;/TERM&gt;
+&lt;LISTITEM&gt;
+ 
+&lt;PARA&gt;Cross reference link to another part of the document.  
+It has Linkend and Endterm attributes, just like Link,
+but like Anchor, it may have no content.
+XRef must have a Linkend, but the Endterm is optional.
+If it is used, the content of the element it points
+to is displayed as the text of the cross reference;
+if it is absent, the XRefLabel of the cross-referenced
+object is displayed.  To include in the cross reference
+generated text associated with the object referred to,
+use your application's style sheet.  See &lt;EMPHASIS&gt;Link.&lt;/EMPHASIS&gt;&lt;/PARA&gt;
+&lt;/LISTITEM&gt;&lt;/VARLISTENTRY&gt;
+ 
+&lt;/VARIABLELIST&gt;
+&lt;/DESCRIPTION&gt;&lt;/HELPTOPIC&gt;
+&lt;/DOCHELP&gt;
+</pre></td></tr></table><br></div><br></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="LE37036-PARENT"></a>An Example of Implementing Help in an Application</h2></div></div>
+<p><a class="indexterm" name="ITC.SGIHelp-7"></a>
+<a class="indexterm" name="ITC.SGIHelp-8"></a>
+<a class="indexterm" name="ITC.SGIHelp-9"></a>
+This section provides a complete example of help integrated with an application.</p>
+<p><a href="apc.html#LE19858-PARENT" title="Example C-3. An Example of Integrating SGIHelp With an Application">Example C-3</a> lists a C program that implements a Help menu, a <b>Help</b> button, and context-sensitive help. You can find this file online at <tt>/usr/share/Insight/XHELP/samples/exampleApp/exampleAppXm.c</tt>.</p>
+<p><a href="apc.html#LE82258-PARENT" title="Example C-4. Help Source File for Example Program">Example C-4</a> lists the help document for <tt>exampleAppXm</tt>. You can find it online at <tt>/usr/share/Insight/XHELP/samples/exampleApp/exampleAppXm.sgm</tt>.</p>
+<p><a href="apc.html#LE73698-PARENT" title="Example C-5. Helpmap for Example Program">Example C-5</a> lists the helpmap file for <tt>exampleAppXm</tt>. You can find it online at <tt>/usr/share/Insight/XHELP/samples/exampleApp/help/exampleAppXm.helpmap</tt>.</p>
+<div class="example"><a name="LE19858-PARENT"></a><p><a name="LE19858-PARENT"></a><b>Example C-3. An Example of Integrating SGIHelp With an Application</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+/*_____________________________________________________________________________
+ *
+ * File:         exampleAppXm.c
+ *
+ * Date:         3/25/94
+ *
+ * Compile with: cc -o exampleAppXm exampleAppXm.c -lhelpmsg -lXm -lXt -lX11
+ *
+ * Purpose:      An simple example program that shows how to use the SGI
+ *               Help system from a Motif application.
+ *
+ *               This program displays a few buttons on a bulletin board 
+ *               alongwith a help menu. The use of context sensitive help
+ *               is also demonstrated.
+ *_____________________________________________________________________________
+ */
+ 
+/*
+ * standard include files
+ */
+ 
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;X11/cursorfont.h&gt;
+#include &lt;Xm/Xm.h&gt;
+#include &lt;Xm/Label.h&gt;
+#include &lt;Xm/PushB.h&gt;
+#include &lt;Xm/Form.h&gt;
+#include &lt;Xm/MessageB.h&gt;
+#include &lt;Xm/MainW.h&gt;
+#include &lt;Xm/RowColumn.h&gt;
+#include &lt;Xm/CascadeB.h&gt;
+#include &lt;Xm/Separator.h&gt;
+ 
+/*
+ * include for for calling/using SGIHelp
+ */
+ 
+#include &lt;helpapi/HelpBroker.h&gt;
+ 
+ 
+/*
+ * forward declarations of functions
+ */
+ 
+Widget initMotif(int          *argcP,            /* Initializes motif and    */
+                 char         *argv[],           /* and returns the top level*/
+                 XtAppContext *app_contextP,     /* shell.                   */
+                 Display      **displayP);             
+ 
+void createInterface(Widget parent);             /*creates the main window,  */
+                                                 /*menus, and the buttons    */
+                                                 /*on the main window        */
+ 
+void clickForHelpCB();                           /*callbacks for each of     */
+void overviewCB();                               /*the help menu's           */
+void taskCB();
+void indexCB();
+void keysAndShortcutsCB();
+void productInfoCB();
+ 
+void infoDialogCB();
+ 
+ 
+Widget _mainWindow, _infoDialog=NULL;
+ 
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * main()
+ *_____________________________________________________________________________
+ */
+ 
+main(int argc, char *argv[])
+{
+    Display      *display;
+    XtAppContext app_context;
+    Widget       toplevel;
+    
+    toplevel = initMotif (&amp;argc,argv,&amp;app_context,&amp;display);
+ 
+    createInterface(toplevel);
+ 
+    XtRealizeWidget(toplevel);
+ 
+    XtAppMainLoop(app_context);
+}
+ 
+/*_____________________________________________________________________________
+ *
+ * Function: initMotif()
+ *
+ * Purpose:  Initializes Motif and creates a top level shell.
+ *           Returns the toplevel shell.
+ *
+ *           Makes the call to initialize variables for the SGIHelp
+ *           interface...note that it does not *start* the sgihelp
+ *           process. That is done when a request for help is made,
+ *           if and only if the sgihelp process is not already
+ *           running.
+ *
+ *_____________________________________________________________________________
+ */
+Widget initMotif(int *argcP,char *argv[],XtAppContext *app_contextP,
+                 Display **displayP)
+{
+    Widget toplevel;
+ 
+    XtToolkitInitialize();
+    *app_contextP = XtCreateApplicationContext();
+    *displayP     = XtOpenDisplay(*app_contextP,NULL,&quot;exampleAppXm&quot;,
+                                  &quot;exampleAppXmClass&quot;,NULL,
+                                  0,argcP, argv);
+ 
+    if (*displayP == NULL) {
+        fprintf (stderr,&quot;Could not open display.\n&quot;);
+        fprintf (stderr,&quot;Check your DISPLAY environment variable.\n&quot;);
+        fprintf (stderr,&quot;Exiting...\n&quot;);
+        exit(-1);
+    }
+    
+    toplevel = XtAppCreateShell(&quot;exampleAppXm&quot;, NULL, 
+                                applicationShellWidgetClass,
+                                *displayP, NULL,0);
+    
+/* 
+ * initialize variables for SGIHelp 
+ */
+    SGIHelpInit(*displayP, &quot;exampleAppXm&quot;, &quot;.&quot;);
+ 
+    return (toplevel);   
+}
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * Function:   createInterface()
+ *_____________________________________________________________________________
+ */
+void createInterface(Widget parent)
+{
+    Arg    args[10];
+    int    i;
+    Widget baseForm;
+    Widget menuBar;
+    Widget demoLabel, demoButton;
+    Widget pulldown1,pulldown2, cascade1, cascade2;
+    Widget menuButtons[6];   /*we will create at max 6 buttons on a menu*/
+    XmString xmStr;
+ 
+/*
+ * mainWindow is an XmMainWindow
+ * on which the whole interface is built
+ */
+    i=0;
+    _mainWindow = XmCreateMainWindow(parent,&quot;mainWindow&quot;,args,i);
+    XtManageChild(_mainWindow);
+ 
+/*
+ * baseForm is the workArea for the
+ * mainWindow above.
+ */
+    i=0;
+    XtSetArg (args[i],XmNwidth,400);i++;
+    XtSetArg (args[i],XmNheight,300);i++;
+    XtSetArg (args[i],XmNverticalSpacing,40);i++;
+    baseForm = XmCreateForm(_mainWindow,&quot;baseForm&quot;,args,i);
+    XtManageChild(baseForm);
+ 
+/*
+ * On this bulletin board, put a label and a button
+ * for demonstrating callbacks and context sensitive
+ * help.
+ */
+    i=0;
+    xmStr = XmStringCreateSimple(&quot;SGI Help!&quot;);
+    XtSetArg (args[i],XmNlabelString,xmStr);i++;
+    XtSetArg (args[i],XmNtopAttachment,XmATTACH_FORM);i++;
+    XtSetArg (args[i],XmNrightAttachment,XmATTACH_FORM);i++;
+    XtSetArg (args[i],XmNleftAttachment,XmATTACH_FORM);i++;
+    XtSetArg (args[i],XmNalignment,XmALIGNMENT_CENTER);i++;
+    demoLabel = XmCreateLabel(baseForm,&quot;sgiHelpLabel&quot;,args,i);
+    XtManageChild(demoLabel);
+    XmStringFree(xmStr);
+    
+    i=0;
+    xmStr = XmStringCreateSimple(&quot;Click Here For Help&quot;);
+    XtSetArg (args[i],XmNlabelString,xmStr);i++;
+    XtSetArg (args[i],XmNrightAttachment,XmATTACH_FORM);i++;
+    XtSetArg (args[i],XmNbottomAttachment,XmATTACH_FORM);i++;
+    demoButton = XmCreatePushButton(baseForm,&quot;sgiHelpPushButton&quot;,args,i);
+    XtManageChild(demoButton);
+    XmStringFree(xmStr);
+    XtAddCallback(demoButton,XmNactivateCallback,taskCB,NULL);
+ 
+/*
+ * build a pulldown menu system, including the &quot;help&quot; menu
+ */
+    menuBar   = XmCreateMenuBar(_mainWindow,&quot;menuBar&quot;,NULL,0);
+    XtManageChild(menuBar);
+ 
+    pulldown1 = XmCreatePulldownMenu(menuBar,&quot;pulldown1&quot;,NULL,0);
+    pulldown2 = XmCreatePulldownMenu(menuBar,&quot;pulldown2&quot;,NULL,0);
+ 
+    i=0;
+    XtSetArg (args[i],XmNsubMenuId,pulldown1);i++;
+    cascade1 = XmCreateCascadeButton(menuBar,&quot;File&quot;,args,i);
+    XtManageChild(cascade1);
+ 
+    i=0;
+    XtSetArg (args[i],XmNsubMenuId,pulldown2);i++;
+    cascade2 = XmCreateCascadeButton(menuBar,&quot;Help&quot;,args,i);
+    XtManageChild(cascade2);
+ 
+/*
+ * Declare this to be the Help menu
+ */
+    i=0;
+    XtSetArg (args[i],XmNmenuHelpWidget,cascade2);i++;
+    XtSetValues(menuBar,args,i);
+ 
+    menuButtons[0] = XmCreatePushButton(pulldown1,&quot;Exit&quot;,NULL,0);
+    XtManageChildren(menuButtons,1);
+    XtAddCallback(menuButtons[0],XmNactivateCallback,(XtCallbackProc)exit,0);
+ 
+    menuButtons[0] = XmCreatePushButton(pulldown2,&quot;Click for Help&quot;,NULL,0);
+    menuButtons[1] = XmCreatePushButton(pulldown2,&quot;Overview&quot;,NULL,0);
+    XtManageChild( XmCreateSeparator(pulldown2, &quot;separator1&quot;,NULL,0) );
+    menuButtons[2] = XmCreatePushButton(pulldown2,&quot;Sample Help Task&quot;,NULL,0);
+    XtManageChild( XmCreateSeparator(pulldown2, &quot;separator2&quot;,NULL,0) );
+    menuButtons[3] = XmCreatePushButton(pulldown2,&quot;Index&quot;,NULL,0);
+    menuButtons[4] = XmCreatePushButton(pulldown2,&quot;Keys and Shortcuts&quot;,NULL,0);
+    XtManageChild( XmCreateSeparator(pulldown2, &quot;separator3&quot;,NULL,0) );
+    menuButtons[5] = XmCreatePushButton(pulldown2,&quot;Product Information&quot;,NULL,0);
+ 
+    XtManageChildren(menuButtons,6);
+ 
+/*
+ * add callbacks to each of the help menu buttons
+ */
+    XtAddCallback(menuButtons[0],XmNactivateCallback,clickForHelpCB,NULL);
+    XtAddCallback(menuButtons[1],XmNactivateCallback,overviewCB,NULL);
+    XtAddCallback(menuButtons[2],XmNactivateCallback,taskCB,NULL);
+    XtAddCallback(menuButtons[3],XmNactivateCallback,indexCB,NULL);
+    XtAddCallback(menuButtons[4],XmNactivateCallback,keysAndShortcutsCB,NULL);
+    XtAddCallback(menuButtons[5],XmNactivateCallback,productInfoCB,NULL);
+ 
+/*
+ * set the bulletin board and menubar into
+ * the main Window.
+ */
+    XmMainWindowSetAreas(_mainWindow,menuBar,NULL,NULL,NULL,baseForm);
+}
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * void clickForHelpCB()
+ *
+ * Purpose:  Provides context-sensitivity within an application;
+ *           makes a request to the sgihelp process.
+ *
+ *_____________________________________________________________________________
+ */
+ 
+void clickForHelpCB(Widget wid, XtPointer clientData, XtPointer callData)
+{
+     static Cursor cursor = NULL;
+     static char path[512], tmp[512];
+     Widget shell, result, w;
+  
+     strcpy(path, &quot;&quot;);
+     strcpy(tmp,  &quot;&quot;);
+ 
+/* 
+ * create a question-mark cursor 
+ */
+     if(!cursor)
+         cursor = XCreateFontCursor(XtDisplay(wid), XC_question_arrow);
+ 
+     XmUpdateDisplay(_mainWindow);
+ 
+/* 
+ * get the top-level shell for the window 
+ */
+     shell = _mainWindow;
+     while (shell &amp;&amp; !XtIsShell(shell)) {
+            shell = XtParent(shell);
+     }
+ 
+/*
+ * modal interface for selection of a component;
+ * returns the widget or gadget that contains the pointer
+ */
+     result = XmTrackingLocate(shell, cursor, FALSE);
+ 
+     if( result ) {
+         w = result;
+ 
+/* 
+ * get the widget hierarchy; separate with a '.';
+ * this also puts them in top-down vs. bottom-up order.
+ */
+         do {
+              if( XtName(w) ) {
+                  strcpy(path, XtName(w));
+ 
+                  if( strlen(tmp) &gt; 0 ) {
+                      strcat(path, &quot;.&quot;);
+                      strcat(path, tmp);
+                  }
+ 
+                  strcpy(tmp, path);
+              }
+ 
+              w = XtParent(w);
+         } while (w != NULL &amp;&amp; w != shell);
+ 
+         /*
+          * send msg to the help server-widget hierarchy;
+          *      OR
+          * provide a mapping to produce the key to be used
+          *
+          * In this case, we'll let the sgihelp process do
+          * the mapping for us, with the use of a helpmap file
+          *
+          * Note that parameter 2, the book name, can be found
+          * from the helpmap file as well. The developer need
+          * not hard-code it, if a helpmap file is present for
+          * the application. 
+          *
+          */
+          if( strlen(path) &gt; 0 ) {
+                SGIHelpMsg(path, NULL, NULL);
+          }
+     }
+}
+  
+ 
+/*_____________________________________________________________________________
+ *
+ * void overviewCB()
+ *_____________________________________________________________________________
+ */
+void overviewCB()
+{
+ 
+/*
+ * Using the mapping file allows us to specify
+ * a &quot;Overview&quot; help card for each window in
+ * our application. In this case, we will point
+ * to a specific one. Note that the book name is
+ * specified, but not necessary if a helpmap file
+ * exists for this application.
+ */
+        SGIHelpMsg(&quot;overview&quot;, &quot;exampleAppXmHelp&quot;, NULL);
+}
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * void indexCB()
+ *_____________________________________________________________________________
+ */
+void indexCB()
+{
+ 
+/*
+ * For the index window to work for this application,
+ * a helpmap file MUST be present!
+ */
+        SGIHelpIndexMsg(&quot;index&quot;, NULL);
+}
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * void taskCB()
+ *_____________________________________________________________________________
+ */
+void taskCB()
+{
+ 
+/*
+ * For the task found in the help menu or a pushbutton, we
+ * use a specific key/book combination.
+ */
+        SGIHelpMsg(&quot;help_task&quot;, &quot;exampleAppXmHelp&quot;, NULL);
+}
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * void keysAndShortcutsCB()
+ *_____________________________________________________________________________
+ */
+void keysAndShortcutsCB()
+{
+ 
+/*
+ * This would point to the help card that contains
+ * information about the use of keys/accelerators, etc.
+ * for your application.
+ */
+        SGIHelpMsg(&quot;keys&quot;, &quot;exampleAppXmHelp&quot;, NULL);
+}
+ 
+ 
+/*_____________________________________________________________________________
+ *
+ * void productInfoCB()
+ *_____________________________________________________________________________
+ */
+void productInfoCB()
+{
+ 
+/*
+ * Pops up a dialog showing product version information.
+ *
+ * This area has nothing to do with SGIHelp, but is included
+ * for completeness.
+ */
+ 
+  void     buildInfoDialog();
+ 
+  XmString xmStr;
+  Arg      args[10];
+  int      i;
+ 
+    if( _infoDialog == NULL ) {
+        buildInfoDialog();
+        XtRealizeWidget( _infoDialog );
+    }
+ 
+    xmStr=XmStringCreateSimple(&quot;Example Motif App Using SGIHelp version 1.0&quot;);
+    i=0;
+    XtSetArg (args[i],XmNmessageString,xmStr);i++;
+    XtSetValues(_infoDialog, args, i);
+    XmStringFree(xmStr);
+ 
+    XtManageChild(_infoDialog);
+}
+ 
+ 
+void buildInfoDialog()
+{
+  Arg    args[10];
+  int    i;
+ 
+/*
+ * Build the informational dialog to display the version info
+ */
+    i=0;
+    XtSetArg (args[i],XmNautoUnmanage,True);i++;
+    XtSetArg (args[i],XmNdialogType,XmDIALOG_WORKING);i++;
+    XtSetArg (args[i],XmNdialogStyle,XmDIALOG_APPLICATION_MODAL);i++;
+    _infoDialog = XmCreateInformationDialog(_mainWindow,&quot;infoDialog&quot;,args,i);
+ 
+    XtAddCallback(_infoDialog, XmNokCallback, infoDialogCB, NULL);
+ 
+    XtUnmanageChild(XmMessageBoxGetChild(_infoDialog, XmDIALOG_CANCEL_BUTTON));
+    XtUnmanageChild(XmMessageBoxGetChild(_infoDialog, XmDIALOG_HELP_BUTTON));
+}
+ 
+ 
+void infoDialogCB()
+{
+    if ( _infoDialog ) {
+         XtUnmanageChild(_infoDialog);
+ 
+         /* Explicitly set the input focus */
+         XSetInputFocus(XtDisplay(_mainWindow), PointerRoot, 
+                        RevertToParent, CurrentTime);
+    }
+}
+</pre></td></tr></table><br></div><br><div class="example"><a name="LE82258-PARENT"></a><p><a name="LE82258-PARENT"></a><b>Example C-4. Help Source File for Example Program</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+&lt;dochelp&gt;
+ 
+&lt;HelpTopic HelpID=&quot;overview&quot;&gt;
+&lt;Helplabel&gt;Example Motif Application Using SGIHelp&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;
+This application is intended to show the developer how
+the &lt;glossterm&gt;SGIHelp&lt;/glossterm&gt; system can work for you. 
+It displays (in the included
+sample code, exampleAppXm.c) usage of various widgets, a sample 
+help menu, full-context-sensitivity, and calls to 
+the &lt;glossterm&gt;SGIHelp&lt;/glossterm&gt; server process via the API.
+&lt;/para&gt;
+ 
+&lt;Figure ID=&quot;figure_01&quot;&gt;
+    &lt;title&gt;exampleAppXm Main Window&lt;/title&gt;
+    &lt;Graphic fileref=&quot;mainwnd.gif&quot; format=&quot;GIF&quot;&gt;&lt;/Graphic&gt;
+&lt;/Figure&gt;
+ 
+&lt;para&gt;
+The application itself is very simple, composed of
+a &lt;Link Linkend=&quot;ID002&quot;&gt;File menu,&lt;/Link&gt; 
+a &lt;Link Linkend=&quot;ID003&quot;&gt;Help menu,&lt;/Link&gt; 
+a &lt;Link Linkend=&quot;ID005&quot;&gt;Pushbutton,&lt;/Link&gt; 
+and a &lt;Link Linkend=&quot;ID004&quot;&gt;Label&lt;/Link&gt;.
+The user can choose items from the 
+&lt;Link Linkend=&quot;ID003&quot;&gt;Help menu&lt;/Link&gt; to
+contact the &lt;glossterm&gt;SGIHelp&lt;/glossterm&gt; server process to 
+cause different help cards to be rendered.
+&lt;/para&gt;
+&lt;para&gt;To quit the application, use the &quot;Exit&quot; command
+found under the &lt;Link Linkend=&quot;ID002&quot;&gt;File menu&lt;/Link&gt;.
+&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;HelpTopic HelpID=&quot;file_menu&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;ID002&quot;&gt;The File Menu&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;The following items (and their functions) are part of 
+the File menu:&lt;/para&gt;
+&lt;VariableList&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;Exit&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Used to quit the exampleAppXm application.&lt;/para&gt;&lt;/listitem&gt;
+&lt;/VarListEntry&gt;
+&lt;/VariableList&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;HelpTopic HelpID=&quot;help_menu&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;ID003&quot;&gt;The Help Menu&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;The following items (and their functions) are part of 
+the Help menu:&lt;/para&gt;
+&lt;VariableList&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;Click for Help&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Used to put the application in context sensitive mode.
+Will cause the cursor to turn into a &quot;?&quot; at which point the user can
+click on any entry in the application's window to obtain help.&lt;/para&gt;&lt;/listitem&gt;
+&lt;/VarListEntry&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;Overview&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Used to display a help overview card for the current 
+window.&lt;/para&gt;&lt;/listitem&gt;
+&lt;/VarListEntry&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;Index&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Used to display from SGIHelp an Index of help topics for 
+the given application.&lt;/para&gt;&lt;/listitem&gt;
+&lt;/VarListEntry&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;Keys &amp; Shortcuts&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Used to display a help card that describes any special
+key combinations this application uses.&lt;/para&gt;&lt;/listitem&gt;
+&lt;/VarListEntry&gt;
+&lt;VarListEntry&gt;
+&lt;term&gt;Product Info&lt;/term&gt;
+&lt;ListItem&gt;&lt;para&gt;Pops up a dialog that displays to the user any version or
+copyright information for this application.&lt;/para&gt;&lt;/listitem&gt;
+&lt;/VarListEntry&gt;
+&lt;/VariableList&gt;
+&lt;para&gt;To access any menu items, click on the menu item
+that is a part of the menubar. When the menu pops-up,
+highlight the desired item, and release the mouse button.
+&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;HelpTopic HelpID=&quot;help_label&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;ID004&quot;&gt;A Label&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;You have clicked on a Label. It simply displays information
+to the user and serves no other useful pourpose.&lt;/para&gt;
+&lt;tip&gt;&lt;para&gt;Basically, a label is useless. For information only.&lt;/para&gt;&lt;/tip&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;HelpTopic HelpID=&quot;help_button&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;ID005&quot;&gt;A Pushbutton&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;You have clicked on a Pushbutton. A pushbutton, when
+clicked, will activate some type of command within the application.&lt;/para&gt; 
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;HelpTopic HelpID=&quot;keys&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;ID006&quot;&gt;Keys and Shortcuts&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;This card displays all known keys and shortcuts for this
+application.&lt;/para&gt; 
+&lt;warning&gt;&lt;para&gt;This application has no shortcuts.&lt;/para&gt;&lt;/warning&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;HelpTopic HelpID=&quot;help_task&quot;&gt;
+&lt;Helplabel&gt;&lt;Anchor Id=&quot;ID007&quot;&gt;A Sample Help Task&lt;/Helplabel&gt;
+&lt;Description&gt;
+&lt;para&gt;
+When creating your application and help text, you may wish
+to highlight certain common tasks. This help card was
+displayed from either a menu item or a pushbutton.
+&lt;/para&gt;
+&lt;para&gt;
+To perform such an operation within your code, the
+associated callback that contacts the &lt;glossterm&gt;SGIHelp&lt;/glossterm&gt; server 
+can be constructed as shown below.&lt;/para&gt;
+&lt;Example&gt;
+&lt;Title&gt;Sample Help Task Callback&lt;/Title&gt;
+ 
+&lt;para&gt;
+The following is a listing derived from a &quot;C&quot; program:
+&lt;ProgramListing&gt;
+    /* create menu items, pushbuttons, etc. */
+ 
+    void taskCB()
+    {
+ 
+    /*
+     * For the task found in the help menu,
+     * we'll use a specific key/book 
+     * combination.
+     */
+        SGIHelpMsg(&quot;key&quot;, &quot;myBook&quot;, NULL);
+    }
+&lt;/ProgramListing&gt;
+&lt;/para&gt;
+&lt;/Example&gt;
+&lt;para&gt;It's relatively simple process to integrate help
+into your application. In fact, the &lt;glossterm&gt;SGIHelp&lt;/glossterm&gt;
+process only requires &lt;emphasis&gt;two&lt;/emphasis&gt; function calls.
+&lt;/para&gt;
+&lt;/Description&gt;
+&lt;/HelpTopic&gt;
+ 
+ 
+&lt;Glossary&gt;
+&lt;Title&gt;Glossary&lt;/Title&gt;
+ 
+&lt;GlossEntry&gt;
+&lt;GlossTerm&gt;SGIHelp&lt;/GlossTerm&gt;
+&lt;GlossDef&gt;
+&lt;para&gt;This is Silicon Graphics, Inc. version of a &quot;Xhelp&quot; compatible
+server. Through the use of an available API, and a help text
+compiler, books can be constructed that can be used to render
+help information for the given application.&lt;/para&gt;
+&lt;/GlossDef&gt;
+&lt;/GlossEntry&gt;
+ 
+&lt;/Glossary&gt;
+ 
+ 
+&lt;/dochelp&gt;
+</pre></td></tr></table><br></div><br><div class="example"><a name="LE73698-PARENT"></a><p><a name="LE73698-PARENT"></a><b>Example C-5. Helpmap for Example Program</b></p>
+<table bgcolor="#E0E0E0" width="90%" border="1" cellpadding="10"><tr><td><pre class="programlisting">
+1;exampleAppXmHelp;Example Motif App Overview;0;overview;exampleAppXm.overview;exampleAppXm.mainWindow.baseForm;exampleAppXm.mainWindow.menuBar;exampleAppXm.mainWindow
+2;exampleAppXmHelp;File Menu;1;file_menu;exampleAppXm.mainWindow.menuBar.File
+2;exampleAppXmHelp;Help Menu;1;help_menu;exampleAppXm.mainWindow.menuBar.Help
+2;exampleAppXmHelp;A Label Entry;1;help_label;exampleAppXm.mainWindow.baseForm.sgiHelpLabel
+2;exampleAppXmHelp;A Pushbutton Entry;1;help_button;exampleAppXm.mainWindow.baseForm.sgiHelpPushButton
+2;exampleAppXmHelp;Keys and Shortcuts;0;keys;exampleAppXm.keys
+2;exampleAppXmHelp;A Sample Help Task;0;help_task;exampleAppXm.exampleAppXm
+</pre></td></tr></table><br></div><br></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apb.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="apd.html">Next</a></td></tr><tr><td width="40%" align="left">Appendix B. Desktop Variables </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix D. The Icon Description Language </td></tr></table></div></body></html>

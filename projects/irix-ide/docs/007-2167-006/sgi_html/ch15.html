@@ -1,0 +1,858 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"><title>Chapter 15. Manipulating 3D Objects</title><meta name="generator" content="DocBook XSL Stylesheets V1.51.1"><meta name="generator" content="SGI XSL DocBook Customization Stylesheets V1.1"><link rel="home" href="index.html" title="IRIX® Interactive Desktop
+User Interface Guidelines"><link rel="up" href="pt03.html" title="Part III. 3D Style Guidelines"><link rel="previous" href="ch14.html" title="Chapter 14. Selection in 3D Applications"><link rel="next" href="apa.html" title="Appendix A. Summary of Guidelines"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 15. Manipulating 3D Objects</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch14.html">Prev</a> </td><th width="60%" align="center">Part III. 3D Style Guidelines</th><td width="20%" align="right"> <a accesskey="n" href="apa.html">Next</a></td></tr></table><hr></div><!--CONTENT_BEGIN--><a name="sgi_start_content"></a><div class="chapter"><div class="titlepage"><div><h2 class="title"><a name="id5505554"></a>Chapter 15. <a name="id24672"></a>Manipulating 3D Objects</h2></div></div>
+<p>Users of 3D applications typically need to change the position, orientation, and scale of objects. Users of 3D editing applications are especially in need of fine control and power in manipulating objects. Applications such as games that don't allow editing may need less control. </p>
+<p>This chapter provides guidelines for three basic manipulation techniques: translation, rotation, and scaling, and their variations. It also discusses the special case of moving the center of rotation and scaling, which applications can optionally add to the basic techniques. It includes these topics:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id73235">&#8220;Basic 3D Manipulation Techniques&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id67048">&#8220;Rotating 3D Objects&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id78136">&#8220;Scaling 3D Objects&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id22521">&#8220;Changing the Center of Rotation and Scaling for 3D Objects&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id78376">&#8220;Object Manipulation for Multiple Selected 3D Objects&#8221;</a></p>
+</li>
+</ul></div><p>Note that the focus of this chapter is manipulating complete objects; it doesn't address manipulating vertices, faces, or edges.</p>
+<div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5505711"></a><a name="id73235"></a>Basic 3D Manipulation Techniques</h2></div></div>
+<p>This section introduces the general paradigm for 3D object manipulation. It first describes the different phases of each manipulation process (for example, approach phase and drag phase) and then lists the decisions you have to make to provide a consistent user interface. It discusses these topics: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id43710">&#8220;Phases of 3D Manipulation&#8221;</a> </p>
+</li>
+<li><p><a href="ch15.html#id68038">&#8220;Free and Constrained 3D Manipulation&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id84948">&#8220;Basic 3D Manipulation Guidelines&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id74236">&#8220;Manipulator Presentation and Selection&#8221;</a></p>
+</li>
+</ul></div><p>Note that because users are accustomed to manipulating objects directly, direct manipulation of 3D objects is usually preferable. In some cases, manipulating objects with the help of an intermediary like a separate dialog box can be useful, either as a secondary method or to make more precise manipulation possible. An example is a dialog box that lets users type in percentages for scaling or precise degree values for rotation.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5505800"></a><a name="id43710"></a>Phases of 3D Manipulation</h3></div></div>
+<p>The general paradigm for 3D object manipulation consists of several phases: manipulator display, approach, grab, drag, and release. In each of these phases, the manipulator uses certain feedback styles&#8212;neutral, locate highlight, selected, choice, and guide&#8212;to indicate the actions currently available to the user. These feedback styles are discussed in detail in <a name="idch15.3Dmanip1"></a><a href="ch15.html#id85498">&#8220;3D Manipulation Feedback&#8221;</a>.</p>
+<p>The phases of 3D manipulation are used throughout the rest of this chapter to illustrate how users perform the different manipulation operations. The phases can be summarized as follows:</p>
+<div class="orderedlist"><ol type="1"><li><p><span class="bold"><b>Manipulator Display Phase.</b></span> The user performs an action and the manipulator is displayed in its neutral state on the selected object. As discussed in <a href="ch14.html#id91268">&#8220;Selection Feedback for 3D Objects&#8221; in Chapter 14</a>, manipulators usually appear when users select an object. Some applications may, however, require an additional step to have the manipulators appear. Silicon Graphics provides standard manipulators for translation, rotation, and scaling. </p>
+</li>
+<li><p><span class="bold"><b>Approach phase<a name="idch15.3Dmanip2"></a></b></span>. As the user moves the pointer over a control on the manipulator, the control changes to locate highlight style (for example, by changing color) to indicate that it's an active control that can be selected. </p>
+</li>
+<li><p><span class="bold"><b>Grab phase<a name="idch15.3Dmanip3"></a></b></span>. The user selects the control on the manipulator by positioning the pointer over it and pressing the left mouse button. </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the selection can result in only one action, the application provides selected feedback and, if necessary, guide feedback. For example, if the user selects a scaling handle (see <a href="ch15.html#id26531">Figure 15-9</a>), the handle is displayed in the selected style and lines in the guide style appear to indicate the direction of dragging for the drag phase.</p>
+</li>
+<li><p>If more than one action is possible, the application provides selected feedback, choice feedback and, if necessary, guide feedback. For example, if the user selects a rotation handle (see <a href="ch15.html#id80094">Figure 15-6</a>), the handle is displayed in the selected style, and two arrows in choice style are displayed to indicate that the user has to clarify the direction of the rotation. In addition, two rings appear in the guide style to indicate the direction of dragging for the drag phase.</p>
+</li>
+</ul></div></li>
+<li><p><span class="bold"><b>Drag phase<a name="idch15.3Dmanip4"></a></b></span>. The user drags the selected control to manipulate the object. During the drag, the object changes in response to the user's actions. If choice feedback was provided in the grab phase, the user has to first resolve the choice by dragging the pointer in one of the choice directions. Once the choice is made, the application replaces the choice style with the selected style to indicate the choice was made. </p>
+</li>
+<li><p><span class="bold"><b>Release phase<a name="idch15.3Dmanip5"></a></b></span>. The user releases the mouse button. The manipulator is returned to its original displayed state. </p>
+</li>
+</ol></div><p>For translation, rotation, and scaling, use the standard manipulators provided by Silicon Graphics. If you design your own manipulator and controls for actions other than translation, rotation, and scaling, be sure to include in your design:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>nonambiguous controls</p>
+</li>
+<li><p>precise control </p>
+</li>
+<li><p>nonambiguous gestures</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5506111"></a><a name="id85498"></a>3D Manipulation Feedback</h3></div></div>
+<p>Provide immediate feedback about available functionality of the manipulator at all times. Applications need to use consistent design schemes across manipulators and controls to provide this feedback and indicate the current state of the manipulator. Experience has shown that the following feedback styles, which use a design scheme based on colors, are useful: <a name="idch15.3Dmanip6"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><span class="bold"><b>Neutral<a name="idch15.3Dmanip7"></a></b></span>. Indicates that the user isn't interacting with the controls on the manipulator. Manipulators in neutral style (often green or white) stand out from the other elements in the scene.</p>
+</li>
+<li><p><span class="bold"><b>Locate highlight<a name="idch15.3Dmanip8"></a></b></span>. Indicates that the pointer is over a control on the manipulator that can be selected. The control brightens (often to an orange color) as the pointer passes over it to indicate that it's a live, functional control. </p>
+</li>
+<li><p><span class="bold"><b>Selected feedback<a name="idch15.3Dmanip9"></a></b></span>. Indicates that the control has been selected. Controls in selected style (often rendered in yellow) stand out strongly.<a name="idch15.3Dmanip10"></a></p>
+</li>
+<li><p><span class="bold"><b>Choice feedback<a name="idch15.3Dmanip11"></a></b></span>. Indicates the user has selected a control but has to make an additional selection. For example, if the user wants to constrain translation to just one axis of a translation plane, the user first selects the plane for translation, then two arrows prompt the user to choose which of the two axes to translate along. Feedback in choice style (often rendered in orange) stands out but not as strongly as the selected style. <a name="idch15.3Dmanip12"></a></p>
+</li>
+<li><p><span class="bold"><b>Guide feedback<a name="idch15.3Dmanip13"></a></b></span>. Provides supplementary information to guide the user during object manipulation. For example, when the user chooses to rotate an object, two (or three) rings indicating the rotation sphere appear to guide the user. Feedback in the guide style (often rendered in purple) recedes but is distinct from the object and the manipulator.</p>
+</li>
+</ul></div><p>In addition to the immediate feedback, continuous feedback on the state of the object is important while the user is manipulating objects. For example, as the user translates an object, the object moves in the scene in a smooth and continuous fashion so the user always knows the location of the object and can decide exactly where to position it. If the user manipulates objects in a complex scene, it may be difficult to maintain an acceptable frame rate during the manipulation, so adaptive rendering may be necessary. (See <a href="ch13.html#id30380">&#8220;3D Viewing Performance and Scene Fidelity&#8221; in Chapter 13</a> for recommended frame rates and information on adaptive rendering.)</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5506370"></a><a name="id68038"></a>Free and Constrained 3D Manipulation</h3></div></div>
+<p>Depending on how complex a given operation is and how often it's used, the default manipulation is either free (in all three dimensions) or constrained. Users always perform the default operations by directly interacting with the manipulator. Users perform nondefault operations by holding down a modifier key while interacting with the manipulator. Choice of a modifier key follows the guidelines outlined in <a href="ch12.html#id14985">Table 12-1, &#8220;Use of Modifier Keys in a 3D Application,&#8221;</a>.</p>
+<p><a href="ch15.html#id59460">Table 15-1</a> provides an overview of the available manipulations and their associated modifier keys. <a name="idch15.3Dmanip14"></a></p>
+<div class="table"><p><a name="id5506419"></a><b>Table 15-1. <a name="id59460"></a> Overview of Manipulation Techniques</b></p>
+<table summary=" Overview of Manipulation Techniques" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Manipulation</p>
+</th><th scope="col" valign="top"><p>Default?</p>
+</th><th scope="col" valign="top"><p>Modifier Key</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id19214">Simple (Planar) 3D Translation</a></p>
+</td><td valign="top"><p>Yes</p>
+</td><td valign="top"><p>none</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id27158">Translation Constrained to One Axis of the Plane</a></p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Shift&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id57819">Translation Constrained to the Normal of the Selected Plane</a></p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Ctrl&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id35063">Constrained 3D Rotation</a> (rotation around one axis)</p>
+</td><td valign="top"><p>Yes</p>
+</td><td valign="top"><p>none</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id26561">Free 3D Rotation</a> (rotation around a point, by default center of object)</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Shift&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id31320">Uniform 3D Scaling</a></p>
+</td><td valign="top"><p>Yes</p>
+</td><td valign="top"><p>none</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Uniform Scaling Around a Corner</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Ctrl&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p><a href="ch15.html#id40806">Axial 3D Scaling (Stretching)</a> </p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Shift&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Axial Scaling Around a Side </p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Shift&gt;-&lt;Ctrl&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Changing the Center of Rotation and Scaling Along a Plane</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Ctrl&gt;</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Changing the Center of Rotation and Scaling Along an Axis</p>
+</td><td valign="top"><p> </p>
+</td><td valign="top"><p>&lt;Shift&gt;-&lt;Ctrl&gt;</p>
+</td></tr></tbody></table></div><br></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5506930"></a><a name="id74236"></a>Manipulator Presentation and Selection</h3></div></div>
+<p>Your application needs to provide default manipulators that are appropriate for the functional requirements of the users and for the tasks they most commonly perform. For example, if users commonly move objects through a scene but rarely scale or rotate them, only a translation manipulator is expected. If users commonly perform all three basic manipulation techniques, display translation, rotation, and scaling manipulators by default.</p>
+<p>Once you've defined default manipulators, consider allowing users to change the set of manipulators that's displayed. At a minimum, allow users to make this change by choosing commands in the View menu. For example, if rotation is not a default manipulation but rarely used, allow users to add the rotation manipulator when they need it. </p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5506962"></a><a name="id84948"></a>Basic 3D Manipulation Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing a user interface for object manipulation in a 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Let users manipulate objects directly whenever possible. </p>
+</li>
+<li><p>If an intermediary, such as a dialog box, yields more precise results for an action and your users need precise manipulations, provide an intermediary method in addition to direct manipulation.</p>
+</li>
+<li><p>Provide manipulators to allow users to use direct manipulation when editing objects. </p>
+</li>
+<li><p>Use the standard manipulators provided by Silicon Graphics for translation, rotation, and scaling. </p>
+</li>
+<li><p>Make sure users can readily identify a manipulator's controls and how to interact with those controls. Also, make sure the controls allow users to precisely manipulate an object.</p>
+</li>
+<li><p>Provide immediate feedback on available actions during the different stages of manipulation as follows: </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Display phase&#8212;Display the manipulator in its neutral state. </p>
+</li>
+<li><p>Approach phase&#8212;As the pointer passes over a control on the manipulator, locate highlight the control to show that it's a live, functional control. </p>
+</li>
+<li><p>Grab phase&#8212;Provide selected feedback if there is no additional choice to make; otherwise provide choice feedback. Provide guide feedback as appropriate to facilitate user interaction. </p>
+</li>
+<li><p>Drag phase&#8212;If the user was presented with a choice in the grab phase, resolve it when the user begins the drag, and replace the choice feedback with selected feedback. </p>
+</li>
+<li><p>Release phase&#8212;Return the manipulator to its neutral state. </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Use clearly distinguishable feedback styles as follows: </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Provide neutral feedback using a style that stands out from the scene; for example, use the color green or white.</p>
+</li>
+<li><p>Provide locate highlight for manipulator controls. That is, the controls brighten (often to an orange color) as the pointer passes over them.</p>
+</li>
+<li><p>Provide selected feedback using a style that stands out strongly; for example, use the color yellow. </p>
+</li>
+<li><p>Provide choice feedback using a style that stands out, but not as strongly as selection feedback; for example, use the color orange.</p>
+</li>
+<li><p>Provide guide feedback using a style that recedes but is distinct from the other styles; for example, use the color purple. </p>
+</li>
+</ul></div><div class="itemizedlist"><ul type="disc"><li><p>Provide continuous feedback on the status of an object while the user is manipulating it. For example, as the user translates an object, the object should move in the scene in a smooth and continuous fashion to keep the user updated on the location of the object. Use adaptive rendering if necessary. </p>
+</li>
+<li><p>Make commonly used and critical manipulation techniques immediately available on the manipulator via the left mouse button. Make less commonly used techniques available on a secondary level, for example, through modifier keys used in conjunction with the left mouse button.</p>
+</li>
+</ul></div><p><span class="bold"><b>When displaying manipulators in your 3D application...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Decide which manipulators to display by default based on the functional requirements of your users and their most common tasks. </p>
+</li>
+<li><p>Consider allowing users to change which subset of manipulators are currently displayed. At a minimum, allow users to specify this subset using entries in the View menu. </p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5507248"></a><a name="id74214"></a>Translating 3D Objects</h2></div></div>
+<p>Translating an object means moving it and positioning it at a desired location within the scene. This section discusses and provides guidelines for the basic translation behavior users expect in 3D applications. It includes the following topics: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id86356">&#8220;3D Translation Basics&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id19214">&#8220;Simple (Planar) 3D Translation&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id22885">&#8220;Constrained 3D Translation&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5507309"></a><a name="id86356"></a>3D Translation Basics</h3></div></div>
+<p>In most cases, the intuitive manipulator for translation is a bounding volume (see <a name="idch15.3Dmanip15"></a><a href="ch15.html#id46740">Figure 15-1</a>), usually a bounding box. The bounding box defines a local coordinate space for the object and lets the user perform translation in the object's coordinate space, which may or may not be aligned with world (scene) coordinate space. See <a href="ch14.html#id82501">&#8220;Bounding Box Selection Feedback&#8221;</a> for more detail on bounding boxes. </p>
+<p><div class="figure"><p><a name="id5507372"></a><b>Figure 15-1. <a name="id46740"></a>Object With Translation Manipulator (Bounding Box)</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/transmanip.gif" alt="Figure 15-1 Object With Translation Manipulator (Bounding Box)" height="191" width="213"></td></tr></table></div></div><br>
+</p>
+<p>Provide access to both simple (planar) and constrained (axial) translation: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Planar translation moves objects along a 2D plane. It's discussed in detail in <a href="ch15.html#id19214">&#8220;Simple (Planar) 3D Translation.&#8221;</a></p>
+</li>
+<li><p>Constrained translation moves objects either:</p>
+<div class="itemizedlist"><ul type="round"><li><p>along only one of the axes that define the plane of translation or </p>
+</li>
+<li><p>along the normal to these axes </p>
+</li>
+</ul></div><p>Constrained translation techniques are discussed in detail in <a href="ch15.html#id22885">&#8220;Constrained 3D Translation.&#8221;</a></p>
+</li>
+</ul></div><p>Note that translation in all three dimensions isn't a recommended technique and therefore isn't discussed in this guide. This is because even for experienced users, 3D translation is difficult to perform. </p>
+<p>In the process of translating, the user could push an object so far away from the camera (along the z-axis) that it's no longer visible. While users may intend to position the object as far away as possible, they almost never want it to disappear from view. Your application should check whether users move objects beyond the vanishing point and either warn them or prevent them from doing so.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5507509"></a><a name="id19214"></a>Simple (Planar) 3D Translation</h3></div></div>
+<p>Planar translation moves objects along a 2D plane. It's the most common type of translation and is therefore the default translation behavior. <a name="idch15.3Dmanip16"></a></p>
+<p><a href="ch15.html#id39338">Table 15-2</a> illustrates user input and the resulting application behavior for planar translation:</p>
+<div class="table"><p><a name="id5507541"></a><b>Table 15-2. <a name="id39338"></a><a name="idch15.3Dmanip17"></a> Phases of Planar Translation</b></p>
+<table summary=" Phases of Planar Translation" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase<sup>[<a name="id5507596" href="#ftn.id5507596">a</a>]</sup></p>
+</th><th scope="col" valign="top"><p>User Action </p>
+</th><th scope="col" valign="top"><p>Application Response<sup>[<a name="id5507614" href="#ftn.id5507614">b</a>]</sup></p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach<a name="idch15.3Dmanip18"></a></p>
+</td><td valign="top"><p>User moves pointer 
+over plane of 
+interest.</p>
+</td><td valign="top"><p>Plane locate highlights when pointer is within its boundaries. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip19"></a></p>
+</td><td valign="top"><p>User presses and 
+holds left mouse 
+button while 
+pointer is over the 
+plane of interest.</p>
+</td><td valign="top"><p>User interface controls on the object, including other 
+manipulators, are removed except for the bounding box 
+(translation planes). Selected plane is displayed in selected 
+style. Other planes of the bounding box are displayed in guide 
+style. </p>
+
+Standard translation feedback is displayed at the location of the 
+pointer. Feedback consists of a perpendicular set of arrows in 
+the selected style; the arrows represent the two main axes 
+defining the translation plane (see <p><a href="ch15.html#id53317">Figure 15-2</a>). Pointer shape 
+remains the upper left pointing arrow.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip20"></a></p>
+</td><td valign="top"><p>User drags plane of 
+interest to translate 
+object. </p>
+</td><td valign="top"><p>Object, bounding box (translation planes), and translation 
+feedback (arrows) move along plane of interest based on user 
+input (see <a href="ch15.html#id53317">Figure 15-2</a>). </p>
+
+All user input is interpreted to follow the plane of interest. As 
+the object is translated, it's continuously displayed in its current 
+state, using adaptive rendering if necessary (see <p><a href="ch13.html#id30380">&#8220;3D Viewing 
+Performance and Scene Fidelity&#8221; in Chapter 13</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release<a name="idch15.3Dmanip21"></a></p>
+</td><td valign="top"><p>User releases 
+mouse button to 
+stop translation 
+motion. </p>
+</td><td valign="top"><p>Translation feedback (arrows) disappears. The user interface 
+controls on the object that were removed in the grab phase are 
+redisplayed in their original state. </p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a name="ftn.id5507596" href="#id5507596">a</a>] </sup>See &#8220;Phases of 3D Manipulation.&#8221;</p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5507614" href="#id5507614">b</a>] </sup>See &#8220;3D Manipulation Feedback.&#8221;</p>
+</div></td></tr></tbody></table></div><p><div class="figure"><p><a name="id5507882"></a><b>Figure 15-2. <a name="id53317"></a><a name="idch15.3Dmanip22"></a>Simple Planar Translation Sequence</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-14.gif" alt="Figure 15-2 Simple Planar Translation Sequence" height="207" width="554"></td></tr></table></div></div><br>
+</p>
+<p>Dragging any side of the bounding box translates the object along that plane. <a href="ch15.html#id53317">Figure 15-2</a> shows translating an object to the right and down. The user has dragged the facing plane of the bounding box, enabling translation in the xy plane. Therefore, the object can move left and right as well as up and down. The object moves in the coordinate space defined by the bounding box and is independent of the scene coordinate space.</p>
+<p>Make sure it's not possible to select through the translation planes. For example, in <a href="ch15.html#id53317">Figure 15-2</a> the left side of the bounding box, which represents the xz plane, is behind the front panel, which represents the xy plane. As the user moves the pointer over the front panel, this front xy plane locate highlights indicating that the user can select it. As the user moves the pointer over both the front xy plane and the side xz plane behind it, only the front xy plane locate highlights because the side xz panel cannot be selected through the front xy plane.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5507983"></a><a name="id22885"></a>Constrained 3D Translation</h3></div></div>
+<p>Constrained translation gives users finer control over the position of an object. The two recommended types, discussed in this section, are:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id27158">&#8220;Translation Constrained to One Axis of the Plane&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id57819">&#8220;Translation Constrained to the Normal of the Selected Plane&#8221;</a></p>
+</li>
+</ul></div><p>The user indicates one of these nondefault translations by holding down a modifier key while performing the standard translation action of dragging one of the translation planes in the manipulator (see <a href="ch15.html#id68038">&#8220;Free and Constrained 3D Manipulation&#8221;</a>). Users expect to be able to switch from unconstrained translation to constrained translation and back at any point in the translation by pressing the appropriate modifer key, and expect to continue performing constrained translation until the modifier key is released.</p>
+<div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5508053"></a><a name="id27158"></a>Translation Constrained to One Axis of the Plane</h4></div></div>
+<p>Performing translation constrained to only one of the axes that define a translation plane is similar to planar translation (see <a href="ch15.html#id39338">Table 15-2</a>). However, as shown in <a href="ch15.html#id61221">Table 15-3</a>, the grab phase changes to allow selection of a single axis, and the drag phase has a single axis as the feedback. The user presses the &lt;Shift&gt; modifier key to indicate constrained translation along only one axis of the selected plane. </p>
+<div class="table"><p><a name="id5508093"></a><b>Table 15-3. <a name="id61221"></a><a name="idch15.3Dmanip23"></a>Phases of Translation Along One Axis of the Selected Plane</b></p>
+<table summary="Phases of Translation Along One Axis of the Selected Plane" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach<a name="idch15.3Dmanip24"></a></p>
+</td><td valign="top"><p>Same as for planar translation 
+(see <a href="ch15.html#id39338">Table 15-2</a>).</p>
+</td><td valign="top"><p>Same as for planar translation. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip25"></a></p>
+</td><td valign="top"><p>User presses and holds the 
+&lt;Shift&gt; key and left mouse 
+button while pointer is over 
+plane of interest. </p>
+</td><td valign="top"><p>Same as for planar translation with this exception: 
+Translation feedback is displayed in the choice style 
+(see <a href="ch15.html#id66928">Figure 15-3</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag</p>
+</td><td valign="top"><p>User continues to press the 
+&lt;Shift&gt; key and drags in the 
+direction of one of the two 
+choice arrows to identify the 
+desired translation axis.</p>
+</td><td valign="top"><p>When the user has moved the pointer far enough to 
+clearly indicate the axis for translation, the arrow 
+representing that axis changes to selected style and 
+the other arrow disappears (see <a href="ch15.html#id66928">Figure 15-3</a>). </p>
+<p>Remainder of this phase is the same as for planar 
+translation with this exception: translation is along 
+the selected axis, not along the selected plane, so all 
+user input is interpreted to follow the selected axis.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release<a name="idch15.3Dmanip26"></a></p>
+</td><td valign="top"><p>Same as for planar translation. </p>
+</td><td valign="top"><p>Same as for planar translation. </p>
+</td></tr></tbody></table></div><p><a href="ch15.html#id66928">Figure 15-3</a> illustrates this type of constrained translation. The user simultaneously presses the &lt;Shift&gt; key and the left mouse button. In response, the application displays the translation feedback arrows in choice style. The user then selects one of the two axes indicated by these choice arrows. After the user has dragged slightly to the right, only the arrow representing the user's choice of the left-right axis (x) remains, and translation is restricted to this axis until the user releases the &lt;Shift&gt; key. <a name="idch15.3Dmanip27"></a></p>
+<p><div class="figure"><p><a name="id5508400"></a><b>Figure 15-3. <a name="id66928"></a><a name="idch15.3Dmanip28"></a>Constrained Translation Along One Axis of the Selected Plane</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/transC123.gif" alt="Figure 15-3 Constrained Translation Along One Axis of the Selected Plane" height="128" width="478"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h4 class="title"><a name="id5508461"></a><a name="id57819"></a>Translation Constrained to the Normal of the Selected Plane</h4></div></div>
+<p>Users want to perform translation along a path perpendicular to a plane primarily for these two reasons: <a name="idch15.3Dmanip29"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Other planes of the bounding box that are orthogonal to the current plane aren't always visible or accessible.   </p>
+</li>
+<li><p>Some users need to rapidly translate objects along all three axes.</p>
+</li>
+</ul></div><p>Performing translation constrained to the axis that's normal to the selected translation plane is similar to planar translation (see <a href="ch15.html#id39338">Table 15-2</a>). However, as shown in <a href="ch15.html#id54269">Table 15-4</a>, the grab phase changes to show the axis that's normal to the selected plane, and the drag phase translates the object along this normal axis. The user presses the &lt;Ctrl&gt; modifier key to indicate translation constrained along the normal. </p>
+<div class="table"><p><a name="id5508531"></a><b>Table 15-4. <a name="id54269"></a><a name="idch15.3Dmanip30"></a>  Phases of Translation Along the Normal to the Selected Plane</b></p>
+<table summary="  Phases of Translation Along the Normal to the Selected Plane" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approa
+ch<a name="idch15.3Dmanip31"></a></p>
+</td><td valign="top"><p>Same as for planar 
+translation. (see 
+<a href="ch15.html#id39338">Table 15-2</a>).</p>
+</td><td valign="top"><p>Same as for planar translation. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab</p>
+</td><td valign="top"><p>User presses and holds 
+&lt;Ctrl&gt; key and left 
+mouse button while 
+pointer is over plane of 
+interest.</p>
+</td><td valign="top"><p>Same as for planar translation with this exception: 
+Translation feedback consists of an arrow representing the 
+normal to the selected plane and a small pair of axes 
+representing the main axes of the selected translation plane 
+(see <a href="ch15.html#id19062">Figure 15-4</a>). This feedback is displayed in selected style.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag</p>
+</td><td valign="top"><p>User continues to press 
+&lt;Ctrl&gt; key and drags 
+plane of interest to 
+translate object.</p>
+</td><td valign="top"><p>Same as for planar translation except that object, bounding 
+box (translation planes), and translation feedback (axes and 
+arrow) move along the normal to plane of interest (see 
+<a href="ch15.html#id19062">Figure 15-4</a>), so all user input is interpreted to follow this 
+normal.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release<a name="idch15.3Dmanip32"></a></p>
+</td><td valign="top"><p>Same as for planar 
+translation. </p>
+</td><td valign="top"><p>Same as for planar translation. </p>
+</td></tr></tbody></table></div><p><div class="figure"><p><a name="id5508808"></a><b>Figure 15-4. <a name="id19062"></a>Constrained Translation Along the Normal to the Selected Plane</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-3.gif" alt="Figure 15-4 Constrained Translation Along the Normal to the Selected Plane" height="165" width="641"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch15.html#id19062">Figure 15-4</a> shows this type of constrained translation. The user simultaneously presses the &lt;Ctrl&gt; key and the left mouse button. In response, the application displays the translation feedback arrow and axes in the selected style. As the user drags the frontmost plane of the bounding box in this example (the xy plane), translation is restricted to the axis normal to this selected plane (z) until the user releases the &lt;Ctrl&gt; key. <a name="idch15.3Dmanip33"></a></p>
+</div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5508891"></a><a name="id16461"></a>3D Translation User Interface Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing a user interface for 3D translation...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard translation manipulator either alone or in combination with the other standard manipulators. This manipulator is a set of translation planes arranged to define a bounding box around the object. </p>
+</li>
+<li><p>Allow users to perform translation in the planes of the object's bounding box. These planes may or may not be aligned with the world (scene) coordinate space. </p>
+</li>
+<li><p>Don't allow users to translate objects that are part of a scene into unusable locations, such as behind the camera or so far back along the z axis that they vanish from view. </p>
+</li>
+<li><p>Provide planar translation as the default translation method (see <a href="ch15.html#id39338">Table 15-2</a>).</p>
+</li>
+<li><p>Provide access to constrained translation along only one axis of a plane (see <a href="ch15.html#id61221">Table 15-3</a>).</p>
+</li>
+<li><p>Provide access to axial (constrained) translation along the normal to a plane (see <a href="ch15.html#id54269">Table 15-4</a>).</p>
+</li>
+<li><p>Allow users to switch from planar translation to constrained translation and back at any point in a translation. For example, if the user is performing planar translation by dragging a translation plane and then presses the &lt;Shift&gt; key, switch to axial translation along the plane until the &lt;Shift&gt; key is released.</p>
+</li>
+<li><p>Display the appropriate translation feedback as the user switches between unconstrained and constrained translation.</p>
+</li>
+<li><p>Don't allow users to select objects or controls through the translation planes.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5509046"></a><a name="id67048"></a>Rotating 3D Objects</h2></div></div>
+<p>Rotating an object means turning it around an axis or around a point. Rotating objects is important in most 3D applications because users need access to all sides of the object. This section discusses and provides guidelines for the basic rotation behavior users expect in 3D applications. It discusses these topics: </p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id44083">&#8220;3D Rotation Basics&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id35063">&#8220;Constrained 3D Rotation&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id26561">&#8220;Free 3D Rotation&#8221;</a></p>
+</li>
+</ul></div><p>Some applications may also find it useful to allow users to change the center of rotation. This is discussed in <a href="ch15.html#id22521">&#8220;Changing the Center of Rotation and Scaling for 3D Objects&#8221;</a>.</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5509144"></a><a name="id44083"></a>3D Rotation Basics</h3></div></div>
+<p>Provide access to both constrained rotation and free rotation in your application; both are critical in providing users access to rotation functionality:</p>
+<div class="itemizedlist"><ul type="disc"><li><p>Constrained rotation is rotation around an axis. Because free rotation makes the object difficult to control, constrained rotation is the appropriate default behavior. It's discussed in <a href="ch15.html#id35063">&#8220;Constrained 3D Rotation.&#8221;</a></p>
+</li>
+<li><p>Free rotation is rotation around a point. It's discussed in <a href="ch15.html#id26561">&#8220;Free 3D Rotation.&#8221;</a></p>
+</li>
+</ul></div><p>When users rotate an object, the default center of rotation for free rotation is the center of the object itself (the center of the object's bounding box); for constrained rotation, it's an axis that runs through the center of the object. There are situations where users need to change the center of rotation; see <a href="ch15.html#id22521">&#8220;Changing the Center of Rotation and Scaling for 3D Objects&#8221;</a> for a detailed discussion of this special case. </p>
+<p>The standard rotation manipulator, shown in <a name="idch15.3Dmanip34"></a><a href="ch15.html#id38769">Figure 15-5</a>, is a set of rotation handles, at most one per side, that emanate from the object's center of rotation. The length of each handle is the length of the bounding box plus one-eighth of it on each side.</p>
+<p><div class="figure"><p><a name="id5509264"></a><b>Figure 15-5. <a name="id38769"></a>Object With Rotation Manipulator (Rotation Handles)</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/fig.15-5.gif" alt="Figure 15-5 Object With Rotation Manipulator (Rotation Handles)" height="148" width="174"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5509291"></a><a name="id35063"></a>Constrained 3D Rotation</h3></div></div>
+<p>Constrained rotation is rotation around an axis. Because it's much easier to control than free rotation, it's the default rotation behavior. <a href="ch15.html#id48709">Table 15-5</a> illustrates user input and the resulting application behavior for constrained rotation.</p>
+<div class="table"><p><a name="id5509317"></a><b>Table 15-5. <a name="id48709"></a><a name="idch15.3Dmanip35"></a>  Phases of Constrained Rotation</b></p>
+<table summary="  Phases of Constrained Rotation" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase<sup>[<a name="id5509362" href="#ftn.id5509362">a</a>]</sup></p>
+</th><th scope="col" valign="top"><p>User Action </p>
+</th><th scope="col" valign="top"><p>Application Response<sup>[<a name="id5509380" href="#ftn.id5509380">b</a>]</sup></p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approac
+h<a name="idch15.3Dmanip36"></a></p>
+</td><td valign="top"><p>User moves pointer over a 
+rotation handle. </p>
+</td><td valign="top"><p>Rotation handle of interest locate highlights. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip37"></a></p>
+</td><td valign="top"><p>User presses and holds left 
+mouse button while 
+pointer is over rotation 
+handle of interest.</p>
+</td><td valign="top"><p>User interface controls on the object, including other 
+manipulators, are removed except for rotation handles. 
+Rotation handle of interest is displayed in selected style, 
+and other handles are displayed in neutral style. </p>
+
+Standard rotation feedback is displayed at the location of 
+the selected handle. Feedback consists of a 
+perpendicular set of arrows in the choice style and two 
+rings in guide style to indicate available rotation 
+directions (see <p><a href="ch15.html#id80094">Figure 15-6</a>). Pointer shape remains the 
+upper left pointing arrow.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip38"></a></p>
+</td><td valign="top"><p>User drags rotation handle 
+to rotate object around the 
+selected axis. </p>
+</td><td valign="top"><p>When user has moved the pointer far enough to clearly 
+indicate direction and axis for rotation, the 
+corresponding arrow changes to selected style, and the 
+other arrow and its associated guide ring disappear (see 
+<a href="ch15.html#id80094">Figure 15-6</a>).</p>
+
+Object, rotation handles, and rotation feedback (ring and 
+arrow) rotate around the selected axis based on user 
+input. All user input is interpreted to follow the ring. As 
+the object is rotated, it's continuously displayed in its 
+current state, using adaptive rendering if necessary (see 
+<p><a href="ch13.html#id30380">&#8220;3D Viewing Performance and Scene Fidelity&#8221; in 
+Chapter 13</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release<a name="idch15.3Dmanip39"></a></p>
+</td><td valign="top"><p>User releases mouse button 
+to stop rotation motion.</p>
+</td><td valign="top"><p>Rotation feedback (arrow and ring) disappears. User 
+interface controls on object that were removed in grab 
+phase are redisplayed in their original state. </p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a name="ftn.id5509362" href="#id5509362">a</a>] </sup>See &#8220;Phases of 3D Manipulation.&#8221;</p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5509380" href="#id5509380">b</a>] </sup>See &#8220;3D Manipulation Feedback.&#8221;</p>
+</div></td></tr></tbody></table></div><p><div class="figure"><p><a name="id5509611"></a><b>Figure 15-6. <a name="id80094"></a>Constrained Rotation Sequence</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/fig.15-6.gif" alt="Figure 15-6 Constrained Rotation Sequence" height="144" width="369"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch15.html#id80094">Figure 15-6</a> shows the sequence of events for constrained rotation. When the user grabs a rotation handle, the rotation feedback appears indicating that the user must choose one of two axes for the rotation. The user chooses a direction and an axis for rotation by dragging along one of the two arrows. Once the axis has been chosen, all user input is interpreted to rotate the object around the selected axis in the given direction.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5509656"></a><a name="id26561"></a>Free 3D Rotation</h3></div></div>
+<p>In free rotation, the object rotates around a point rather than an axis; that is, the object can rotate around all three axes simultaneously. Typically, the default center of rotation is at the center of the object's bounding box. The user presses the &lt;Shift&gt; modifier key to indicate free rotation. <a name="idch15.3Dmanip40"></a></p>
+<p>Free rotation is similar to constrained rotation (see <a href="ch15.html#id48709">Table 15-5</a>). However, as shown in <a href="ch15.html#id41574">Table 15-6</a>, the grab phase displays a virtual trackball as the rotation feedback, and the drag phase rotates the object around the center of rotation. </p>
+<div class="table"><p><a name="id5509777"></a><b>Table 15-6. <a name="id41574"></a><a name="idch15.3Dmanip41"></a>  Phases of Free Rotation</b></p>
+<table summary="  Phases of Free Rotation" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach<a name="idch15.3Dmanip42"></a></p>
+</td><td valign="top"><p>Same as for constrained rotation 
+(see <a href="ch15.html#id48709">Table 15-5</a>).</p>
+</td><td valign="top"><p>Same as for constrained rotation. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip43"></a></p>
+</td><td valign="top"><p>User presses and holds &lt;Shift&gt; 
+key and left mouse button while 
+pointer is over rotation handle of 
+interest.</p>
+</td><td valign="top"><p>Same as for constrained rotation with this 
+exception: Rotation feedback consists of three 
+rings representing a virtual trackball (see 
+<a href="ch15.html#id87889">Figure 15-7</a>). This feedback is displayed in guide 
+style. No choice arrows are provided.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip44"></a></p>
+</td><td valign="top"><p>User continues to press &lt;Shift&gt; 
+key and drags rotation handle to 
+rotate object simultaneously in all 
+three dimensions around the 
+center of rotation. </p>
+</td><td valign="top"><p>Same as for constrained rotation except that 
+object, rotation handles, and rotation feedback 
+(three rings) rotate around the center of rotation 
+(see <a href="ch15.html#id87889">Figure 15-7</a>). All user input is interpreted to 
+follow the virtual trackball.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release<a name="idch15.3Dmanip45"></a></p>
+</td><td valign="top"><p>Same as for constrained rotation.</p>
+</td><td valign="top"><p>Same as for constrained rotation. </p>
+</td></tr></tbody></table></div><p><div class="figure"><p><a name="id5510024"></a><b>Figure 15-7. <a name="id87889"></a><a name="idch15.3Dmanip46"></a>Free Rotation Sequence</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-10.gif" alt="Figure 15-7 Free Rotation Sequence" height="172" width="407"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch15.html#id87889">Figure 15-7</a> illustrates free rotation. The user simultaneously presses the &lt;Shift&gt; key and the left mouse button. In response, the application displays the virtual trackball rotation feedback. As the user drags the pointer, the object is rotated around the point at the center of the virtual trackball.</p>
+<p>Users expect to be able to switch between free rotation and constrained rotation at any time during a rotation operation: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the user is performing constrained rotation, pressing the &lt;Shift&gt; key immediately puts the object into free rotation. The pointer starts following a virtual trackball path.<a name="idch15.3Dmanip47"></a></p>
+</li>
+<li><p>If the user is performing free rotation, releasing the &lt;Shift&gt; key immediately puts the object into constrained rotation. The object rotates around the axis the pointer is moving around. </p>
+</li>
+<li><p>Users can continually press and release the &lt;Shift&gt; key to switch to and from free rotation as long as they continue to press the left mouse button while the pointer is over a rotation handle.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5510159"></a><a name="id17157"></a>3D Rotation User Interface Guidelines </h3></div></div>
+<p><span class="bold"><b>When designing a user interface for 3D rotation...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard rotation manipulator either alone or in combination with the other standard manipulators. This manipulator is a set of handles that emanate from the center of rotation. Typically, the default center of rotation is the center of the object (the center of the object's bounding box).</p>
+</li>
+<li><p>Provide constrained rotation around an axis as the default rotation method (see <a href="ch15.html#id48709">Table 15-5</a>).</p>
+</li>
+<li><p>Provide access to free rotation around a point (see <a href="ch15.html#id41574">Table 15-6</a>). </p>
+</li>
+<li><p>Allow users to switch between constrained and free rotation at any point in a rotation. For example, if the user is performing constrained rotation by dragging along a ring and then presses the &lt;Shift&gt; key, switch to free rotation and interpret pointer movements as following the virtual trackball until the &lt;Shift&gt; key is released.</p>
+</li>
+<li><p>As the user switches between constrained and free rotation, display the appropriate rotation feedback. For example, if the user is performing free rotation and then releases the &lt;Shift&gt; key, switch to constrained rotation and display the appropriate rotation feedback. Determine the direction and axis for rotation based on the next pointer movement. Once the direction and axis have been determined, display the appropriate arrow and ring feedback for this direction and remove the virtual trackball.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5510267"></a><a name="id78136"></a>Scaling 3D Objects</h2></div></div>
+<p>Scaling an object means enlarging or reducing it without changing its position or orientation. This section discusses and provides guidelines for the basic scaling behavior users expect in 3D applications. It includes these topics: <a name="idch15.3Dmanip48"></a></p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id80059">&#8220;3D Scaling Basics&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id31320">&#8220;Uniform 3D Scaling&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id40806">&#8220;Axial 3D Scaling (Stretching)&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id22869">&#8220;Scaling Around the Opposite Corner or Side&#8221;</a></p>
+</li>
+</ul></div><p>Some applications may find it useful to allow users to change the center of scaling. This is discussed in <a href="ch15.html#id22521">&#8220;Changing the Center of Rotation and Scaling for 3D Objects.&#8221;</a></p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5510412"></a><a name="id80059"></a>3D Scaling Basics</h3></div></div>
+<p>There are two scaling operations, uniform scaling and axial scaling: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>Uniform scaling preserves proportions, and is the most common type of scaling so it's the default scaling behavior. Uniform scaling is discussed in detail in <a name="idch15.3Dmanip49"></a><a href="ch15.html#id31320">&#8220;Uniform 3D Scaling&#8221;</a>.</p>
+</li>
+<li><p>In axial scaling (also referred to as stretching), the object is scaled or stretched in only one of the three dimensions at a time. Because axial scaling is less commonly used than uniform scaling, it's the non-default scaling operation. Axial scaling is discussed in detail in <a name="idch15.3Dmanip50"></a><a name="idch15.3Dmanip51"></a><a href="ch15.html#id40806">&#8220;Axial 3D Scaling (Stretching).&#8221;</a></p>
+</li>
+</ul></div><p>Objects are scaled with respect to a fixed anchor point, which is, by default, the center of the object (the center of the object's bounding box). Users also need to occasionally scale an object around a corner or side of the object's bounding box, as discussed in <a href="ch15.html#id22869">&#8220;Scaling Around the Opposite Corner or Side.&#8221;</a> Some applications may find it necessary to allow users to change the center of scaling. This is discussed in <a href="ch15.html#id22521">&#8220;Changing the Center of Rotation and Scaling for 3D Objects.&#8221;</a></p>
+<p>The standard scaling manipulator, shown in <a name="idch15.3Dmanip52"></a><a href="ch15.html#id34282">Figure 15-8</a>, is a set of cube-shaped handles located at the vertices of the object's bounding box. To scale an object, the user drags one of these cube-shaped handles. Dragging toward the center of scaling shrinks the object, dragging away from the center of scaling enlarges the object.</p>
+<p><div class="figure"><p><a name="id5510596"></a><b>Figure 15-8. <a name="id34282"></a>Object With Scaling Manipulator (Scaling Handles)</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/scalemanip.gif" alt="Figure 15-8 Object With Scaling Manipulator (Scaling Handles)" height="184" width="208"></td></tr></table></div></div><br>
+</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5510643"></a><a name="id31320"></a>Uniform 3D Scaling</h3></div></div>
+<p>Uniform scaling preserves proportions; that is, all axes of the object are uniformly enlarged or reduced during the operation. It's the most common type of scaling so it's the default scaling behavior. Typically, the default center of scaling is at the center of the object (the center of the object's bounding box). <a href="ch15.html#id13801">Table 15-7</a> illustrates user input and the resulting application behavior for uniform scaling.</p>
+<div class="table"><p><a name="id5510672"></a><b>Table 15-7. <a name="id13801"></a>   Phases of Uniform Scaling</b></p>
+<table summary="   Phases of Uniform Scaling" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase<sup>[<a name="id5510694" href="#ftn.id5510694">a</a>]</sup></p>
+</th><th scope="col" valign="top"><p>User Action </p>
+</th><th scope="col" valign="top"><p>Application Response<sup>[<a name="id5510711" href="#ftn.id5510711">b</a>]</sup></p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approac
+h<a name="idch15.3Dmanip53"></a></p>
+</td><td valign="top"><p>User moves pointer 
+over a scaling handle. </p>
+</td><td valign="top"><p>Scaling handle of interest locate highlights. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip54"></a></p>
+</td><td valign="top"><p>User presses and holds 
+left mouse button while 
+pointer is over scaling 
+handle of interest.</p>
+</td><td valign="top"><p>User interface controls on the object, including other 
+manipulators, are removed except for the scaling handles. 
+Scaling handle of interest is displayed in selected style. 
+Other handles are displayed in neutral style.</p>
+
+Standard scaling feedback is displayed: a set of arrows in 
+guide style that emanate from the center of scaling and go 
+through each of the scaling handles and rotation handles 
+displayed in neutral style (see <p><a href="ch15.html#id26531">Figure 15-9</a>). The rotation 
+handles provide feedback on the current location of the 
+center of rotation and scaling. Pointer shape remains the 
+upper left pointing arrow.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip55"></a></p>
+</td><td valign="top"><p>User drags scaling 
+handle to scale object in 
+all three dimensions 
+around center of 
+scaling. </p>
+</td><td valign="top"><p>Object, scaling handles, and scaling feedback are uniformly 
+scaled in all three dimensions around the center of scaling 
+based on user input (see <a href="ch15.html#id26531">Figure 15-9</a>). All user input is 
+interpreted to move either closer to or farther away from the 
+center of scaling. As the user drags closer to the center of 
+scaling, object, scaling handles, and scaling feedback shrink. 
+As the user drags farther away from the center of scaling, the 
+object, and so on, are enlarged.</p>
+
+As the object is scaled it's continuously displayed in its 
+current state, using adaptive rendering if necessary (see <p><a href="ch13.html#id30380">&#8220;3D 
+Viewing Performance and Scene Fidelity&#8221;</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release<a name="idch15.3Dmanip56"></a></p>
+</td><td valign="top"><p>User releases mouse 
+button to stop scaling.</p>
+</td><td valign="top"><p>Scaling feedback consisting of guide arrows and rotation 
+handles disappears. User interface controls on the object that 
+were removed in the grab phase are redisplayed in their 
+original state. </p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a name="ftn.id5510694" href="#id5510694">a</a>] </sup>See &#8220;Phases of 3D Manipulation.&#8221;</p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5510711" href="#id5510711">b</a>] </sup>See &#8220;3D Manipulation Feedback.&#8221;</p>
+</div></td></tr></tbody></table></div><p><div class="figure"><p><a name="id5510945"></a><b>Figure 15-9. <a name="id26531"></a>Uniform Scaling Sequence</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-12.gif" alt="Figure 15-9 Uniform Scaling Sequence" height="305" width="741"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch15.html#id26531">Figure 15-9</a> shows the sequence of events for uniform scaling. When the user grabs the scaling handle, scaling feedback is displayed. It serves as a guide to the user in dragging to make the object smaller or larger. As the user drags the pointer toward the center of scaling, the object shrinks uniformly in all three dimensions.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5510994"></a><a name="id40806"></a>Axial 3D Scaling (Stretching)</h3></div></div>
+<p>In addition to uniform scaling, users expect to be able to perform axial scaling (stretching) where the object is scaled or stretched in only one of the three dimensions at a time. Axial scaling is similar to uniform scaling (see <a href="ch15.html#id13801">Table 15-7</a>). However, as shown in <a href="ch15.html#id86593">Table 15-8</a>, the grab phase changes to allow selection of a single dimension (axis) for scaling, and the drag phase scales the object only along this single dimension. The user presses the &lt;Shift&gt; modifier key to indicate axial scaling.</p>
+<p> </p>
+<div class="table"><p><a name="id5511068"></a><b>Table 15-8. <a name="id86593"></a><a name="idch15.3Dmanip57"></a>  Phases of Axial Scaling (Stretching)</b></p>
+<table summary="  Phases of Axial Scaling (Stretching)" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach<a name="idch15.3Dmanip58"></a></p>
+</td><td valign="top"><p>Same as for uniform scaling 
+(see <a href="ch15.html#id13801">Table 15-7</a>). </p>
+</td><td valign="top"><p>Same as for uniform scaling. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip59"></a></p>
+</td><td valign="top"><p>User presses and holds 
+&lt;Shift&gt; key and left mouse 
+button while pointer is over 
+the scaling handle of interest.</p>
+</td><td valign="top"><p>Same as for uniform scaling with this exception: 
+Scaling feedback consists of the object's bounding 
+box displayed in guide style, and three arrows 
+emanating from the selected scaling handle that 
+represent the three possible axes (dimensions) for 
+stretching (see <a href="ch15.html#id98948">Figure 15-10</a>). Arrows are displayed 
+in choice style at the location of the selected handle. 
+Feedback also includes rotation handles in neutral 
+style, which provide feedback on the current 
+location of the center of rotation and scaling. 
+(Rotation handles are also part of scaling feedback 
+for uniform scaling.)</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip60"></a></p>
+</td><td valign="top"><p>User continues to press 
+&lt;Shift&gt; key and drags scaling 
+handle in the direction of one 
+of the three choice arrows to 
+identify the desired scaling 
+dimension. After the user 
+makes this choice, further 
+dragging scales the object 
+along this single axis. </p>
+</td><td valign="top"><p>When user has moved pointer far enough to clearly 
+indicate the axis (dimension) for scaling, the arrow 
+representing this axis changes to selected style and 
+the other two arrows disappear (see <a href="ch15.html#id98948">Figure 15-10</a>). 
+The remainder of this phase is the same as for 
+uniform scaling with this exception: Scaling is 
+along the selected dimension, not uniformly along 
+all three dimensions. All user input is interpreted 
+to enlarge or shrink the object along the selected 
+dimension.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release</p>
+</td><td valign="top"><p>Same as for uniform scaling. </p>
+</td><td valign="top"><p>Same as for uniform scaling. </p>
+</td></tr></tbody></table></div><p><a href="ch15.html#id98948">Figure 15-10</a> illustrates axial scaling. The user simultaneously presses the &lt;Shift&gt; key and the left mouse button. In response, the application displays the bounding box and choice arrows for axial scaling. As the user drags the pointer, the x axis is selected for scaling. As the user drags the pointer farther away from the center of scaling, the object is enlarged along this single dimension.</p>
+<p><div class="figure"><p><a name="id5511375"></a><b>Figure 15-10. <a name="id98948"></a>Axial Scaling Sequence</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-13.gif" alt="Figure 15-10 Axial Scaling Sequence" height="304" width="732"></td></tr></table></div></div><br>
+</p>
+<p>Users expect to be able to switch between uniform scaling and axial scaling at any time during a scaling operation: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the user is performing uniform scaling and presses the &lt;Shift&gt; key, the application immediately prompts the user to choose a dimension for axial scaling. Once the dimension (axis) has been selected, dragging scales the object only along this single dimension.</p>
+</li>
+<li><p>If the user is performing axial scaling and releases the &lt;Shift&gt; key, the application immediately allows the user to uniformly scale the object. Dragging scales the object uniformly along all three dimensions. </p>
+</li>
+<li><p>Users can continually press and release the &lt;Shift&gt; key to switch between uniform and axial scaling as long as they continue pressing the left mouse button while the pointer is over a scaling handle.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5511459"></a><a name="id22869"></a>Scaling Around the Opposite Corner or Side</h3></div></div>
+<p>Users occasionally want to scale an object around a specific corner (scaling handle) for uniform scaling and around a specific plane for axial scaling. To indicate this alternate behavior for scaling, the user presses the &lt;Ctrl&gt; modifier key. </p>
+<p><a href="ch15.html#id41997">Table 15-9</a> illustrates user input and resulting application behavior for uniform scaling around a corner. Note that it's similar to uniform scaling around the center of scaling (see <a href="ch15.html#id13801">Table 15-7</a>).</p>
+<div class="table"><p><a name="id5511505"></a><b>Table 15-9. <a name="id41997"></a><a name="idch15.3Dmanip61"></a>  Phases of Uniform Scaling Around a Corner</b></p>
+<table summary="  Phases of Uniform Scaling Around a Corner" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach<a name="idch15.3Dmanip62"></a></p>
+</td><td valign="top"><p>Same as for uniform scaling 
+(see <a href="ch15.html#id13801">Table 15-7</a>).</p>
+</td><td valign="top"><p>Same as for uniform scaling. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip63"></a></p>
+</td><td valign="top"><p>User presses and holds &lt;Ctrl&gt; 
+key and left mouse button 
+while pointer is over scaling 
+handle of interest.</p>
+</td><td valign="top"><p>Same as for uniform scaling with these exceptions: 
+The set of arrows in the guide style emanate from 
+the scaling handle directly opposite the selected 
+handle (<a href="ch15.html#id94341">Figure 15-11</a>). Rotation handles aren't 
+shown because scaling isn't around the center of 
+rotation and scaling.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip64"></a></p>
+</td><td valign="top"><p>User continues to press &lt;Ctrl&gt; 
+key and drags scaling handle 
+to scale object in all three 
+dimensions around the corner 
+opposite the selected handle. </p>
+</td><td valign="top"><p>Same as for uniform scaling with this exception: 
+Scaling is done around the handle opposite the 
+selected handle, not around the center of scaling (see 
+<a href="ch15.html#id94341">Figure 15-11</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release</p>
+</td><td valign="top"><p>Same as for uniform scaling. </p>
+</td><td valign="top"><p>Same as for uniform scaling. </p>
+</td></tr></tbody></table></div><p><div class="figure"><p><a name="id5511788"></a><b>Figure 15-11. <a name="id94341"></a>Uniform Scaling Around a Corner</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-5.gif" alt="Figure 15-11 Uniform Scaling Around a Corner" height="304" width="720"></td></tr></table></div></div><br>
+</p>
+<p><a href="ch15.html#id51446">Table 15-10</a> illustrates the same information for axial scaling around a specific side of the object's bounding box. Note that this is similar to axial scaling around the center of scaling (see <a href="ch15.html#id86593">Table 15-8</a>). </p>
+<div class="table"><p><a name="id5511886"></a><b>Table 15-10. <a name="id51446"></a><a name="idch15.3Dmanip65"></a> Phases of Axial Scaling Around a Side</b></p>
+<table summary=" Phases of Axial Scaling Around a Side" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach<a name="idch15.3Dmanip66"></a></p>
+</td><td valign="top"><p>Same as for axial scaling (see <a href="ch15.html#id86593">Table 15-8</a>). </p>
+</td><td valign="top"><p>Same as for axial scaling. </p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab<a name="idch15.3Dmanip67"></a></p>
+</td><td valign="top"><p>User presses and holds &lt;Ctrl&gt; and &lt;Shift&gt; keys and 
+left mouse button while pointer is over the scaling 
+handle of interest.</p>
+</td><td valign="top"><p>Same as for axial scaling with this exception: Rotation 
+handles aren't shown because scaling isn't around the 
+center of rotation and scaling (see <a href="ch15.html#id40842">Figure 15-12</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag<a name="idch15.3Dmanip68"></a></p>
+</td><td valign="top"><p>User continues to press &lt;Ctrl&gt; and &lt;Shift&gt; keys and 
+drags scaling handle to indicate the desired scaling 
+dimension. After the user makes this choice, further 
+dragging scales object in this dimension around the 
+plane normal to the selected axis and on the opposite 
+side of the bounding box from the selected handle. </p>
+</td><td valign="top"><p>Same as for axial scaling with this exception: Scaling occurs 
+around the side of the bounding box that's normal to the 
+selected axis and on the opposite side of the bounding box 
+from the selected handle (see <a href="ch15.html#id40842">Figure 15-12</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release</p>
+</td><td valign="top"><p>Same as for axial scaling. </p>
+</td><td valign="top"><p>Same as for axial scaling. </p>
+</td></tr></tbody></table></div><p><div class="figure"><p><a name="id5512132"></a><b>Figure 15-12. <a name="id40842"></a>Axial Scaling Around a Side</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-6.gif" alt="Figure 15-12 Axial Scaling Around a Side" height="303" width="727"></td></tr></table></div></div><br>
+</p>
+<p>When performing uniform or axial scaling, users expect to be able to change the point of scaling to the opposite corner or opposite side at any point during a scaling operation: </p>
+<div class="itemizedlist"><ul type="disc"><li><p>If the user is performing uniform scaling, pressing the &lt;Ctrl&gt; key immediately starts uniformly scaling the object around the corner opposite to the selected handle. Releasing the &lt;Ctrl&gt; key immediately returns to uniform scaling around the center of scaling.</p>
+</li>
+<li><p>If the user is performing axial scaling, pressing the &lt;Ctrl&gt; key immediately starts scaling the object around the plane normal to the selected axis and on the opposite side of the bounding box from the selected handle. Releasing the &lt;Ctrl&gt; key immediately returns to axial scaling around the center of scaling. </p>
+</li>
+<li><p>Users can continually press and release the &lt;Ctrl&gt; key to switch between scaling around a corner or side and scaling around the center of scaling as long as they continue pressing the left mouse button while the pointer is over a scaling handle.</p>
+</li>
+</ul></div></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5512218"></a><a name="id39370"></a>3D Scaling User Interface Guidelines</h3></div></div>
+<p><span class="bold"><b>When designing a user interface for 3D scaling...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Use the standard scaling manipulator either alone or in combination with the other standard manipulators. The manipulator consists of cube-shaped handles at the vertices of the bounding box.</p>
+</li>
+<li><p>Scale objects around the center of scaling. Typically this is the center of the object (the center of the object's bounding box).</p>
+</li>
+<li><p>Provide uniform scaling as the default scaling method (see <a href="ch15.html#id13801">Table 15-7</a>).</p>
+</li>
+<li><p>Provide access to axial scaling (stretching) as defined in <a href="ch15.html#id86593">Table 15-8</a>.</p>
+</li>
+<li><p>Allow the user to switch between uniform and axial scaling at any point in a scaling operation. For example, if the user is performing axial scaling, then releases the &lt;Shift&gt; key, switch to uniform scaling. </p>
+</li>
+<li><p>As the user switches between uniform and axial scaling, display the appropriate scaling feedback. For example, if the user is performing uniform scaling, then presses the &lt;Shift&gt; key, switch to axial scaling and display the appropriate scaling feedback. Determine the single axis for stretching based on the next pointer movement. Once this axis has been determined, remove the two axes that were not selected and display the selected axis until the &lt;Shift&gt; key is released.</p>
+</li>
+<li><p>Allow users to perform uniform scaling around a specific corner as an alternative to scaling around the center of scaling (see <a href="ch15.html#id41997">Table 15-9</a>).</p>
+</li>
+<li><p>Allow users to perform axial scaling around a specific side of the object's bounding box as an alternative to axial scaling around the center of scaling (see <a href="ch15.html#id51446">Table 15-10</a>).</p>
+</li>
+<li><p>Allow the user to switch between scaling around a corner or side and scaling around the center of scaling at any time during a scaling operation. For example, if the user is performing uniform scaling around the center of scaling, then presses the &lt;Ctrl&gt; key, switch to scaling around the corner opposite to the selected handle.</p>
+</li>
+<li><p>As the user switches between scaling around a corner or side and scaling around the center of scaling, display the appropriate feedback. For example, if the user is performing uniform scaling around a corner, then releases the &lt;Ctrl&gt; key, switch to scaling around the center of scaling and display the appropriate guide feedback for this type of scaling.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5512410"></a><a name="id22521"></a>Changing the Center of Rotation and Scaling for 3D Objects</h2></div></div>
+<p>At times, users may want to explicitly choose a center for rotation or scaling. For example,  you have a graphic object that's a stick figure. An arm is part of the stick figure; its natural centers of rotation are the elbow and the wrists, not the center of the arm.<a name="idch15.3Dmanip69"></a></p>
+<p>Typically, the center of rotation and the center of scaling are defined to be the same point. Table 15-11 illustrates user input and the resulting application behavior for changing the center of rotation (along a plane). The user presses the &lt;Ctrl&gt; key while dragging on a rotation handle to change this point. Note that for the standard manipulators recommended by Silicon Graphics, a change in the center of rotation also changes the center of scaling. If your users need to have separate centers of rotation and scaling, you need to provide a separate mechanism for changing the center of scaling. </p>
+<div class="table"><p><a name="id5512469"></a><b>Table 15-11. <a name="id51316"></a><a name="idch15.3Dmanip70"></a>  Phases of Changing the Center of Rotation and Scaling Along a Plane</b></p>
+<table summary="  Phases of Changing the Center of Rotation and Scaling Along a Plane" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase<sup>[<a name="id5512546" href="#ftn.id5512546">a</a>]</sup></p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response<sup>[<a name="id5512564" href="#ftn.id5512564">b</a>]</sup></p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach</p>
+</td><td valign="top"><p>User moves pointer over a 
+rotation handle. </p>
+</td><td valign="top"><p>Rotation handle of interest locate highlights.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab</p>
+</td><td valign="top"><p>User presses and holds &lt;Ctrl&gt; 
+key and left mouse button while 
+pointer is over rotation handle. </p>
+</td><td valign="top"><p>User interface controls on the object, including other manipulators, are 
+removed except for rotation handles. Rotation handle of interest is displayed 
+in selected style. Other handles are displayed in neutral style. </p>
+
+Feedback is displayed at the location of the selected handle. Feedback consists 
+of a perpendicular set of arrows in selected style representing the two axes of 
+the plane in which the user can move the point of rotation, and three rings in 
+guide style representing a virtual trackball around the center of rotation (see 
+<p><a href="ch15.html#id95344">Figure 15-13</a>). In addition, the object's bounding box is displayed in neutral 
+style to further guide the user in placing the center of rotation. Pointer shape 
+remains upper left pointing arrow.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag</p>
+</td><td valign="top"><p>User continues to press &lt;Ctrl&gt; 
+key and drags rotation handle to 
+move center of rotation and 
+scaling along selected plane.</p>
+</td><td valign="top"><p>Feedback assembly (two arrows and three rings), rotation handles, and center 
+of rotation and scaling move along plane based on user input. All input is 
+interpreted to follow the plane represented by the two arrows. Object and 
+bounding box don't move.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release</p>
+</td><td valign="top"><p>User releases mouse button to 
+stop movement of the center of 
+rotation and scaling. </p>
+</td><td valign="top"><p>Feedback consisting of the arrows, rings, and bounding box disappears, and 
+the user interface controls on the object that were removed in the grab phase 
+are again displayed in their original state.</p>
+</td></tr></tbody><tbody class="footnotes"><tr><td colspan="3"><div class="footnote"><p><sup>[<a name="ftn.id5512546" href="#id5512546">a</a>] </sup>See &#8220;Phases of 3D Manipulation.&#8221;</p>
+</div><div class="footnote"><p><sup>[<a name="ftn.id5512564" href="#id5512564">b</a>] </sup>See &#8220;3D Manipulation Feedback.&#8221;</p>
+</div></td></tr></tbody></table></div><p><div class="figure"><p><a name="id5512742"></a><b>Figure 15-13. <a name="id95344"></a>Changing the Center of Rotation and Scaling</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-7.gif" alt="Figure 15-13 Changing the Center of Rotation and Scaling" height="304" width="724"></td></tr></table></div></div><br>
+</p>
+<p>In addition to moving the center of rotation and scaling along a plane, users may want to constrain the movement to a single axis. This is similar to moving the center along a plane (see <a href="ch15.html#id51316">Table 15-11</a>). However, as shown in <a href="ch15.html#id31860">Table 15-12</a>, the grab phase changes to indicate that the user must choose an axis for movement, and the drag phase changes to restrict movement to the selected axis. The user presses the &lt;Ctrl&gt; key while dragging on a rotation handle to change the center of rotation and scaling and also presses the &lt;Shift&gt; key to constrain this movement to a single axis of the plane. </p>
+<div class="table"><p><a name="id5512829"></a><b>Table 15-12. <a name="id31860"></a><a name="idch15.3Dmanip71"></a>  Phases of Changing the Center of Rotation and Scaling Along an Axis</b></p>
+<table summary="  Phases of Changing the Center of Rotation and Scaling Along an Axis" border="1"><colgroup><col><col><col></colgroup><thead><tr valign="top"><th scope="col" valign="top"><p>Phase</p>
+</th><th scope="col" valign="top"><p>User Action</p>
+</th><th scope="col" valign="top"><p>Application Response</p>
+</th></tr></thead><tbody><tr valign="top"><td scope="row" valign="top"><p>Approach</p>
+</td><td valign="top"><p>User moves pointer over a 
+rotation handle. </p>
+</td><td valign="top"><p>Same as for changing center of rotation and scaling 
+along a plane (see <a href="ch15.html#id51316">Table 15-11</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Grab</p>
+</td><td valign="top"><p>User presses and holds &lt;Shift&gt; 
+and &lt;Ctrl&gt; keys and left 
+mouse button while pointer is 
+over rotation handle. </p>
+</td><td valign="top"><p>Same as for changing center of rotation and scaling 
+along a plane with this exception: The perpendicular 
+arrows included in the feedback are displayed in 
+choice style indicating that user must choose an axis 
+for movement (see <a href="ch15.html#id69178">Figure 15-14</a>).</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Drag</p>
+</td><td valign="top"><p>User continues to press &lt;Shift&gt; 
+and &lt;Ctrl&gt; keys and drags 
+rotation handle to move center 
+of rotation and scaling along 
+selected axis.</p>
+</td><td valign="top"><p>When user has moved the pointer far enough to 
+clearly indicate the axis for movement, arrow 
+representing this axis changes to selected style and 
+the other arrow disappears (see <a href="ch15.html#id69178">Figure 15-14</a>). The 
+remainder of this phase is the same as for changing 
+the center of rotation and scaling along a plane with 
+this exception: Movement is restricted to the selected 
+axis. All user input is interpreted to follow it.</p>
+</td></tr><tr valign="top"><td scope="row" valign="top"><p>Release</p>
+</td><td valign="top"><p>User releases mouse button to 
+stop movement of the center of 
+rotation and scaling. </p>
+</td><td valign="top"><p>Same as for changing the center of rotation and 
+scaling along a plane.</p>
+</td></tr></tbody></table></div><p>When users are interacting with a rotation handle, they expect at any point to be able to switch among constrained rotation, free rotation, changing the point of rotation along a plane, and changing the point of rotation along an axis.</p>
+<p><div class="figure"><p><a name="id5513095"></a><b>Figure 15-14. <a name="id69178"></a>Changing the Center of Rotation and Scaling Along An Axis</b></p>
+<div class="mediaobject"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0"><tr><td><img src="figures/ch15.3Dmanip-8.gif" alt="Figure 15-14 Changing the Center of Rotation and Scaling Along An Axis" height="304" width="743"></td></tr></table></div></div><br>
+</p>
+<div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5513142"></a>Guidelines for Changing the Center of 3D Rotation</h3></div></div>
+<p><span class="bold"><b>When designing a user interface for changing the center of rotation and scaling...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>If necessary, allow users to change the center of rotation and scaling using the standard rotation manipulator.</p>
+</li>
+<li><p>As users move the center of rotation and scaling, make sure that they can always identify the current center.</p>
+</li>
+<li><p>Allow users to change the center of rotation and scaling along a plane (see <a href="ch15.html#id51316">Table 15-11</a>).</p>
+</li>
+<li><p>Allow users to change the center of rotation and scaling along an axis (see <a href="ch15.html#id31860">Table 15-12</a>).</p>
+</li>
+<li><p>At any time while dragging a rotation handle, allow users to switch among constrained rotation, free rotation, changing the center of rotation and scaling along a plane, and changing the center of rotation and scaling along an axis. For example, if the user is performing constrained rotation then presses the &lt;Ctrl&gt; and &lt;Shift&gt; keys, switch to changing the center of rotation and scaling along an axis. </p>
+</li>
+<li><p>As the user switches among constrained rotation, free rotation, changing the center of rotation and scaling along a plane, and changing the center of rotation and scaling along an axis, display the appropriate feedback. For example, if the user is moving the center of rotation and scaling along a plane then presses the &lt;Shift&gt; key, switch to moving this center along an axis and display the appropriate feedback. Determine the single axis for movement based on the next pointer movement. Once this axis has been determined, remove the axis that wasn't selected and display the selected axis until the &lt;Shift&gt; key is released.</p>
+</li>
+</ul></div></div></div><div class="section"><div class="titlepage"><div><h2 class="title"><a name="id5513242"></a><a name="id78376"></a>Object Manipulation for Multiple Selected 3D Objects</h2></div></div>
+<p>When the current selection consists of more than one object, the standard manipulations of translation, rotation, and scaling affect the selected objects somewhat differently than if each object was manipulated by itself. To perform these manipulations, one of the objects in the selection is assigned as the &#8220;key&#8221; object; manipulations on all of the objects in the selection are done with respect to the manipulation controls of the key object. For example, all selected objects are translated along the selected plane of the key object.</p>
+<p>If your application supports the concept of a lead object and uses the manipulator as the selection feedback only on this object as described in <a href="ch14.html#id53761">&#8220;Manipulator Selection Feedback&#8221; in Chapter 14</a>, the lead object is always also the key object because it's the only object displaying the manipulators. Otherwise, the key object is the one that the user is currently interacting with via its manipulators.</p>
+<p>The remainder of this section discusses the specific manipulations as follows:</p>
+<div class="itemizedlist"><ul type="disc"><li><p><a href="ch15.html#id75877">&#8220;Translation of Multiple Selected 3D Objects&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id73400">&#8220;Rotation of Multiple Selected 3D Objects&#8221;</a></p>
+</li>
+<li><p><a href="ch15.html#id86589">&#8220;Scaling of Multiple Selected 3D Objects&#8221;</a></p>
+</li>
+</ul></div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5513388"></a><a name="id75877"></a>Translation of Multiple Selected 3D Objects</h3></div></div>
+<p>When users perform translation on a selection consisting of several objects, all selected objects move in the selected translation plane of the key object, regardless of their own orientations. The relative positional relationships of the selected objects don't change as a result of translation. The same behavior applies to constrained translation and translation along the normal. That is, translation is done with respect to the selected axis of the key object.<a name="idch15.3Dmanip72"></a></p>
+<p>Translation of a single object is discussed in detail in <a href="ch15.html#id74214">&#8220;Translating 3D Objects.&#8221;</a></p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5513430"></a><a name="id73400"></a>Rotation of Multiple Selected 3D Objects</h3></div></div>
+<p>When the user selects more than one object and starts a rotation operation, all selected objects rotate around the center of rotation for the key object.<a name="idch15.3Dmanip73"></a></p>
+<p>Rotation of a single object is discussed in detail in <a href="ch15.html#id67048">&#8220;Rotating 3D Objects.&#8221;</a></p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5513486"></a><a name="id86589"></a>Scaling of Multiple Selected 3D Objects</h3></div></div>
+<p>When the user selects more than one object and starts a uniform scaling operation, all objects scale proportionally with the key object and scale about the same center of scaling as the key object.<a name="idch15.3Dmanip74"></a></p>
+<p>Axial scaling (stretching) is treated quite differently when the user selects more than one object. In this case, only the key object is scaled; other selected objects don't change. While this may seem like an inconsistency in light of applying other manipulations to all selected objects, it's the safest default approach. Applying stretching to objects that are not aligned with the master object can lead to shearing, which is an undesirable outcome.</p>
+</div><div class="section"><div class="titlepage"><div><h3 class="title"><a name="id5513520"></a><a name="id82639"></a>Guidelines for Manipulating More Than One 3D Object</h3></div></div>
+<p><span class="bold"><b>When users manipulate more than one object at a time...</b></span></p>
+<div class="itemizedlist"><ul type="disc"><li><p>Assign one object as the key object for the manipulations. Typically, only the lead object displays the manipulators so this object is by default the key object. If your application instead displays manipulators on all selected objects, the object associated with the manipulator the user is currently interacting with is the key object.</p>
+</li>
+<li><p>For translation, translate all selected objects along the chosen translation plane for the key object, regardless of the orientation of the other selected objects. Don't change the relative positional relationships of the selected objects. </p>
+</li>
+<li><p>For rotation, rotate all selected objects around the center of rotation for the key object. </p>
+</li>
+<li><p>For uniform scaling, scale all selected objects the same amount as the key object and about the same center of scaling as the key object. </p>
+</li>
+<li><p>For axial scaling (stretching), scale only the key object (the object being manipulated) rather than all selected objects. This prevents shearing of objects that are not aligned with the key object. </p>
+</li>
+</ul></div></div></div></div><!--CONTENT_END--><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch14.html">Prev</a> </td><td width="20%" align="center"><a accesskey="h" href="index.html">Table of Contents</a></td><td width="40%" align="right"> <a accesskey="n" href="apa.html">Next</a></td></tr><tr><td width="40%" align="left">Chapter 14. Selection in 3D Applications </td><td width="20%" align="center"> </td><td width="40%" align="right">Appendix A. Summary of Guidelines </td></tr></table></div></body></html>
